@@ -19,9 +19,9 @@ int	main(int argc, char** argv) {
       std::cerr << "Cannot open file: " << argv[i] << std::endl;
       continue;
     }
-    Serializer::CfgLoader	loader(input);
+    Serializer::Loader	loader(input);
 
-    loader.parser();
+    loader.unpack();
   }
   return 0;
 }
