@@ -4,6 +4,8 @@
  * 3 mai 2012
  */
 
+#include "Loader.hpp"
+
 #include <iostream>
 #include <fstream>
 
@@ -17,6 +19,9 @@ int	main(int argc, char** argv) {
       std::cerr << "Cannot open file: " << argv[i] << std::endl;
       continue;
     }
+    Serializer::CfgLoader	loader(input);
+
+    loader.parser();
   }
   return 0;
 }
