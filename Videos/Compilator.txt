@@ -1,0 +1,3 @@
+g++ VideoTexture.cpp -lGL -lGLU -lglut -I/usr/include/opencv `pkg-config --libs opencv`
+
+mencoder .avi -ovc raw -vf format=i420 -oac copy -o out.avi
