@@ -1,0 +1,79 @@
+/***********************************************************************
+ * Module:  Bonus.cpp
+ * Author:  Fiahil
+ * Modified: Monday, May 07, 2012 5:35:00 PM
+ * Purpose: Implementation of the class Bonus
+ ***********************************************************************/
+
+#include "Bonus.h"
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Bonus::get_type()
+// Purpose:    Implementation of Bonus::get_type()
+// Return:     eBonus
+////////////////////////////////////////////////////////////////////////
+
+eBonus Bonus::get_type(void)
+{
+   return _type;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Bonus::Bonus(eBomb t)
+// Purpose:    Implementation of Bonus::Bonus()
+// Parameters:
+// - t
+// Return:     
+////////////////////////////////////////////////////////////////////////
+
+Bonus::Bonus(eBomb t)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Bonus::~Bonus()
+// Purpose:    Implementation of Bonus::~Bonus()
+// Return:     
+////////////////////////////////////////////////////////////////////////
+
+Bonus::~Bonus()
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Bonus::initialize()
+// Purpose:    Implementation of Bonus::initialize()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Bonus::initialize(void)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Bonus::draw(gdl::GameClock const& clock, gdl::Input& input)
+// Purpose:    Implementation of Bonus::draw()
+// Parameters:
+// - clock
+// - input
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Bonus::draw(gdl::GameClock const& clock, gdl::Input& input)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Bonus::update()
+// Purpose:    Implementation of Bonus::update()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Bonus::update(void)
+{
+   // TODO : implement
+}

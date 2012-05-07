@@ -1,0 +1,113 @@
+/***********************************************************************
+ * Module:  Map.cpp
+ * Author:  Fiahil
+ * Modified: Monday, May 07, 2012 6:23:26 PM
+ * Purpose: Implementation of the class Map
+ ***********************************************************************/
+
+#include "Map.h"
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Map::break(Pattern origin, std::list<Bonus>& bonus)
+// Purpose:    Implementation of Map::break()
+// Parameters:
+// - origin
+// - bonus
+// Return:     Pattern
+////////////////////////////////////////////////////////////////////////
+
+Pattern Map::break(Pattern origin, std::list<Bonus>& bonus)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Map::Map(std::string map, size_t x, size_t y)
+// Purpose:    Implementation of Map::Map()
+// Parameters:
+// - map
+// - x
+// - y
+// Return:     
+////////////////////////////////////////////////////////////////////////
+
+Map::Map(std::string map, size_t x, size_t y)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Map::Map(std::string file)
+// Purpose:    Implementation of Map::Map()
+// Parameters:
+// - file
+// Return:     
+////////////////////////////////////////////////////////////////////////
+
+Map::Map(std::string file)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Map::~Map()
+// Purpose:    Implementation of Map::~Map()
+// Return:     
+////////////////////////////////////////////////////////////////////////
+
+Map::~Map()
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Map::Map(const Map& oldMap)
+// Purpose:    Implementation of Map::Map()
+// Parameters:
+// - oldMap
+// Return:     
+////////////////////////////////////////////////////////////////////////
+
+Map::Map(const Map& oldMap)
+{
+   _map = oldMap._map;
+   _x = oldMap._x;
+   _y = oldMap._y;
+   Attribut_4 = oldMap.Attribut_4;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Map::initialize()
+// Purpose:    Implementation of Map::initialize()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Map::initialize(void)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Map::draw(gdl::GameClock const& clock, gdl::Input& input)
+// Purpose:    Implementation of Map::draw()
+// Parameters:
+// - clock
+// - input
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Map::draw(gdl::GameClock const& clock, gdl::Input& input)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Map::update()
+// Purpose:    Implementation of Map::update()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Map::update(void)
+{
+   // TODO : implement
+}

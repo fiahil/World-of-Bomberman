@@ -1,0 +1,79 @@
+/***********************************************************************
+ * Module:  Bomb.cpp
+ * Author:  Fiahil
+ * Modified: Monday, May 07, 2012 5:27:47 PM
+ * Purpose: Implementation of the class Bomb
+ ***********************************************************************/
+
+#include "Bomb.h"
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Bomb::get_type()
+// Purpose:    Implementation of Bomb::get_type()
+// Return:     eBomb
+////////////////////////////////////////////////////////////////////////
+
+eBomb Bomb::get_type(void)
+{
+   return _type;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Bomb::Bomb(eBomb t)
+// Purpose:    Implementation of Bomb::Bomb()
+// Parameters:
+// - t
+// Return:     
+////////////////////////////////////////////////////////////////////////
+
+Bomb::Bomb(eBomb t)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Bomb::~Bomb()
+// Purpose:    Implementation of Bomb::~Bomb()
+// Return:     
+////////////////////////////////////////////////////////////////////////
+
+Bomb::~Bomb()
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Bomb::initialize()
+// Purpose:    Implementation of Bomb::initialize()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Bomb::initialize(void)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Bomb::draw(gdl::GameClock const& clock, gdl::Input& input)
+// Purpose:    Implementation of Bomb::draw()
+// Parameters:
+// - clock
+// - input
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Bomb::draw(gdl::GameClock const& clock, gdl::Input& input)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Bomb::update()
+// Purpose:    Implementation of Bomb::update()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Bomb::update(void)
+{
+   // TODO : implement
+}
