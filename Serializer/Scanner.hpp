@@ -24,6 +24,7 @@ namespace Serializer {
     Scanner(std::istream& in) : yyFlexLexer(&in, 0) { }
 
     inline int	yylex(Parser::semantic_type* lval, Parser::location_type* lloc);
+
   private:
     Parser::semantic_type*	yylval;
     Parser::location_type*	yylloc;

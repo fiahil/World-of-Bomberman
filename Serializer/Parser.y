@@ -10,15 +10,14 @@
 %locations
 %define namespace Serializer
 %define parser_class_name "Parser"
-%parse-param { Serializer::Scanner &scanner }
-%parse-param { std::string currentSection }
-%lex-param   { Serializer::Scanner &scanner }
+%parse-param	{ Serializer::Scanner &scanner }
+%lex-param	{ Serializer::Scanner &scanner }
+%destructor	{ delete $$.sval; } "identifier"
 
 %code requires {
 #include <string>
+#include <stdexcept>
 #include <sstream>
-
-#define YYSTYPE	std::string
 
   namespace Serializer {
     class Scanner;
@@ -31,22 +30,45 @@
 		   Serializer::Scanner &scanner);
  }
 
-%token FOOBAR EOL
+%union
+ {
+   int		ival;
+   std::string*	sval;
+};
+
+%token <sval> INFO STAT SKILLS ACHIEVEMENTS SAVES
+%token <sval> CONFIG ENDCONFIG
+%token <sval> WORD
+%token <ival> NUMBER
+%token EOL SEP
 
 %%
 
-input :
-| input line
+input
+: input line
 | line
 ;
 
-line :
-| value
+line
+: value
 | eol
+| all
 ;
 
-value	: FOOBAR { std::cout << "Foobar" << std::endl; }
+
+value	: INFO { std::cout << *$1 << std::endl; }
 eol	: EOL { std::cout << "New Line!" << std::endl; }
+all
+: NUMBER
+| WORD
+| CONFIG
+| ENDCONFIG
+| SEP
+| STAT
+| SKILLS
+| ACHIEVEMENTS
+| SAVES
+{ std::cout << *$1 << std::endl; }
 
 %%
 
@@ -55,8 +77,9 @@ namespace Serializer {
 			      std::string const& msg) {
     std::ostringstream	ret;
 
-    ret << "Parser Error at " << loc << ": " << msg;
-    throw ret.str();
+    ret << "- Parse error at line " << loc.begin.line
+	<< " column " << loc.begin.column << ":\n-- " << msg;
+    throw std::runtime_error(ret.str());
   }
 }
 

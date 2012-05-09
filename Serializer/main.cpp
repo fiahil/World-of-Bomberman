@@ -10,22 +10,19 @@
 #include <fstream>
 
 int	main(int argc, char** argv) {
-  // std::cout << "Serializer loaded." << std::endl;
+  std::cout << "Serializer loaded." << std::endl;
 
-  // for (int i = 1; i < argc; ++i) {
-  //   std::ifstream	input(argv[i]);
+  for (int i = 1; i < argc; ++i) {
+    std::ifstream	input(argv[i]);
 
-  //   if (!input.good()) {
-  //     std::cerr << "Cannot open file: " << argv[i] << std::endl;
-  //     continue;
-  //   }
-  Serializer::Scanner	loader(std::cin);
+    if (!input.good()) {
+      std::cerr << "Cannot open file: " << argv[i] << std::endl;
+      continue;
+    }
+    Serializer::Scanner	loader(input);
+    Serializer::Parser	parser(loader);
 
-  Serializer::Parser	parser(loader, "");
-
-  parser.parse();
-
-  //   loader.unpack();
-  // }
+    parser.parse();
+  }
   return 0;
 }
