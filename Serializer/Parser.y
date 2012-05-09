@@ -32,7 +32,7 @@
 
 %union
  {
-   int		ival;
+   size_t	ival;
    std::string*	sval;
 };
 
@@ -50,25 +50,66 @@ input
 ;
 
 line
-: value
-| eol
-| all
+: EOL	{}
+| info
 ;
 
+info
+: INFO SEP NUMBER SEP WORD SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL
+{
+  std::cout << *$1 << ":"
+	    << "\n- id: " << $3
+	    << "\n- nick: " << *$5
+	    << "\n- lvl: " << $7
+	    << "\n- xp: " << $9
+	    << "\n- tutorial: " << $11
+	    << "\n- skin: " << $13
+	    << std::endl << std::endl;
+}
+| STAT SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL
+{
+  std::cout << *$1 << ":"
+	    << "\n- Stamina: " << $3
+	    << "\n- Strength: " << $5
+	    << "\n- Agility: " << $7
+	    << "\n- Intellect: " << $9
+	    << "\n- Spirit: " << $11
+	    << std::endl << std::endl;
+}
+| SKILLS SEP NUMBER SEP NUMBER SEP NUMBER EOL
+{
+  std::cout << *$1 << ":"
+	    << "\n- DPS: " << $3
+	    << "\n- Tank: " << $5
+	    << "\n- Heal: " << $7
+	    << std::endl << std::endl;
+}
+| ACHIEVEMENTS SEP NUMBER SEP NUMBER SEP NUMBER EOL
+{
+  std::cout << *$1 << ":"
+	    << "\n- First blood: " << $3
+	    << "\n- Last one standing: " << $5
+	    << "\n- Immortal: " << $7
+	    << std::endl << std::endl;
+}
+| SAVES sequence
+| CONFIG EOL config
+;
 
-value	: INFO { std::cout << *$1 << std::endl; }
-eol	: EOL { std::cout << "New Line!" << std::endl; }
-all
-: NUMBER
-| WORD
-| CONFIG
-| ENDCONFIG
-| SEP
-| STAT
-| SKILLS
-| ACHIEVEMENTS
-| SAVES
-{ std::cout << *$1 << std::endl; }
+sequence
+: EOL
+| SEP NUMBER sequence
+{
+  std::cout << "- Slot: " << $2 << std::endl;
+}
+
+config
+: ENDCONFIG
+| WORD SEP NUMBER SEP WORD EOL config
+{
+  std::cout << *$1 << ":\t" << $3 << " ; " << *$5 << std::endl;
+}
+
 
 %%
 

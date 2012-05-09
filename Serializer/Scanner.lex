@@ -6,6 +6,7 @@
 
 %{
 #include <string>
+#include <sstream>
 #include "Scanner.hpp"
 
 #define YY_USER_ACTION yylloc->columns(yyleng);
@@ -20,16 +21,64 @@
    yylloc->step();
 %}
 
-"#INFO"		{ yylval->sval = new std::string(yytext, yyleng); return Serializer::Parser::token::INFO; }
-"#STAT"		{ return Serializer::Parser::token::STAT; }
-"#SKILLS"	{ return Serializer::Parser::token::SKILLS; }
-"#ACHIEVEMENTS"	{ return Serializer::Parser::token::ACHIEVEMENTS; }
-"#SAVES"	{ return Serializer::Parser::token::SAVES; }
-"#CONFIG"	{ return Serializer::Parser::token::CONFIG; }
-"#ENDCONFIG"	{ return Serializer::Parser::token::ENDCONFIG; }
-"\n"		{ return Serializer::Parser::token::EOL; }
-":"		{ return Serializer::Parser::token::SEP; }
-[0-9]+		{ return Serializer::Parser::token::NUMBER; }
-[A-Za-z_-]+	{ return Serializer::Parser::token::WORD; }
+"#INFO"		{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Parser::token::INFO;
+}
 
-[ \t\r]+	{ yylloc->step(); }
+"#STAT"		{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Parser::token::STAT;
+}
+
+"#SKILLS"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Parser::token::SKILLS;
+}
+
+"#ACHIEVEMENTS"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Parser::token::ACHIEVEMENTS;
+}
+
+"#SAVES"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Parser::token::SAVES;
+}
+
+"#CONFIG"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Parser::token::CONFIG;
+}
+
+"#ENDCONFIG"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Parser::token::ENDCONFIG;
+}
+
+"\n"		{
+  yylval->sval = new std::string(yytext, yyleng);
+  yylloc->lines(1);
+  return Serializer::Parser::token::EOL;
+}
+
+":"		{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Parser::token::SEP;
+}
+
+[0-9]+		{
+  std::istringstream	ss(yytext);
+
+  ss >> yylval->ival;
+  return Serializer::Parser::token::NUMBER;
+}
+
+[A-Za-z_-]+	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Parser::token::WORD;
+}
+
+[ \t\r]+	{
+  yylloc->step();
+}
