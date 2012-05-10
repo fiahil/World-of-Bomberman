@@ -6,23 +6,20 @@
 
 #include <fstream>
 
-#ifndef __SAVESCANNER_HPP__
-#define __SAVESCANNER_HPP__
-
-#undef yyFlexLexer
-#define yyFlexLexer yysave_FlexLexer
+#ifndef __PROFILESCANNER_HPP__
+#define __PROFILESCANNER_HPP__
 
 #ifndef yyFlexLexerOnce
 #include <FlexLexer.h>
 #endif
 
 #undef YY_DECL
-#define YY_DECL int	Serializer::Save::Scanner::yylex()
+#define YY_DECL int	Serializer::Profile::Scanner::yylex()
 
-#include "SaveLoader.tab.hpp"
+#include "Loader.tab.hpp"
 
 namespace Serializer {
-  namespace Save {
+  namespace Profile {
     class Scanner : public yyFlexLexer {
     public:
       Scanner(std::istream& in) : yyFlexLexer(&in, 0) { }

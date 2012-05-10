@@ -7,13 +7,13 @@
 %{
 #include <string>
 #include <sstream>
-#include "ProfileScanner.hpp"
+#include "Scanner.hpp"
 
 #define YY_USER_ACTION yylloc->columns(yyleng);
 
 %}
 
-%option yyclass="Scanner" noyywrap c++ prefix="yyprofile_"
+%option yyclass="Scanner" noyywrap c++
 
 %%
 

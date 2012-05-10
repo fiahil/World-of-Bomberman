@@ -6,11 +6,12 @@
 
 NAME	=	serializer
 
-SRCXX	=	main.cpp	\
-		lex.yy.cpp	\
+SRCXX	=	main.cpp
+
+OBJXX	=	$(SRCXX:.cpp=.o)	\
+		lex.yy.cpp		\
 		Loader.tab.cpp
 
-OBJXX	=	$(SRCXX:.cpp=.o)
 
 CXXFLAGS=	-Wall -Wextra -O3 -I./
 
@@ -19,14 +20,14 @@ CXX	=	g++
 %.o: %.cpp
 	$(CXX) -o $@	-c $<	$(CXXFLAGS)
 
-all:		gen $(NAME)
+all:		$(NAME)
 
 gen:
 	@bison Loader.ypp &&			\
 	flex -o lex.yy.cpp Scanner.lex &&	\
 	echo "Loader OK"
 
-$(NAME):	$(OBJXX)
+$(NAME):	gen $(OBJXX)
 	$(CXX) -o $(NAME) $(OBJXX)
 
 debug:		CXXFLAGS = -Wall -Wextra -g
@@ -39,6 +40,7 @@ clean:
 
 fclean:		clean
 	rm -f $(NAME)
-	@rm -f Loader.tab.cpp lex.yy.cpp location.hh position.hh stack.hh
+	@rm -f Loader.tab.cpp Loader.tab.hpp
+	@rm -f lex.yy.cpp location.hh position.hh stack.hh
 
 re:		fclean all
