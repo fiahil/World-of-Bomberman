@@ -10,25 +10,27 @@
 
 #include <AObj.h>
 
+#define POS(px, py) ((((this->_y * (py)) - 1)) + (px) + 1)
+
 class Map : public AObj
 {
 public:
-   Pattern break(Pattern origin, std::list<Bonus>& bonus);
-   Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity);
-   Map(std::string file);
-   ~Map();
-   void initialize(void);
-   void draw(void);
-   void update(gdl::GameClock const& clock, gdl::Input& input);
+  Pattern break(Pattern origin, std::list<Bonus>& bonus);
+  Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity);
+  Map(std::string file);
+  Map(size_t x, size_t y, std::string map);
+  ~Map();
+  void initialize(void);
+  void draw(void);
+  void update(gdl::GameClock const& clock, gdl::Input& input);
 
 protected:
 private:
-   Map(const Map& oldMap);
+  Map(const Map& oldMap);
 
-   std::string _map;
-   size_t _x;
-   size_t _y;
-
+  size_t _x;
+  size_t _y;
+  std::string _map;
 
 };
 
