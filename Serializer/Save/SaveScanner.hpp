@@ -6,8 +6,11 @@
 
 #include <fstream>
 
-#ifndef __SCANNER_HPP__
-#define __SCANNER_HPP__
+#ifndef __SAVESCANNER_HPP__
+#define __SAVESCANNER_HPP__
+
+#undef yyFlexLexer
+#define yyFlexLexer yysave_FlexLexer
 
 #ifndef yyFlexLexerOnce
 #include <FlexLexer.h>

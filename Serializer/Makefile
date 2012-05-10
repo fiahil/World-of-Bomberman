@@ -6,15 +6,13 @@
 
 NAME	=	serializer
 
-SRCXX	=	main.cpp			\
-		./Profile/lex.yy.cpp		\
-		./Profile/ProfileLoader.tab.cpp	\
-		./Save/lex.yy.cpp		\
-		./Save/SaveLoader.tab.cpp
+SRCXX	=	main.cpp	\
+		lex.yy.cpp	\
+		Loader.tab.cpp
 
 OBJXX	=	$(SRCXX:.cpp=.o)
 
-CXXFLAGS=	-Wall -Wextra -O3 -I./Save -I./Profile -I ./
+CXXFLAGS=	-Wall -Wextra -O3 -I./
 
 CXX	=	g++
 
@@ -24,17 +22,9 @@ CXX	=	g++
 all:		gen $(NAME)
 
 gen:
-	@cd ./Profile &&		\
-	bison ProfileLoader.ypp &&	\
-	flex -o lex.yy.cpp ProfileScanner.lex &&	\
-	echo "Profile Loader OK" &&	\
-	echo "Profile Scanner OK"
-
-	@cd ./Save &&			\
-	bison SaveLoader.ypp &&		\
-	flex -o lex.yy.cpp SaveScanner.lex &&	\
-	echo "Save Loader OK" &&	\
-	echo "Save Scanner OK"
+	@bison Loader.ypp &&			\
+	flex -o lex.yy.cpp Scanner.lex &&	\
+	echo "Loader OK"
 
 $(NAME):	$(OBJXX)
 	$(CXX) -o $(NAME) $(OBJXX)
@@ -49,5 +39,6 @@ clean:
 
 fclean:		clean
 	rm -f $(NAME)
+	@rm -f Loader.tab.cpp lex.yy.cpp location.hh position.hh stack.hh
 
 re:		fclean all

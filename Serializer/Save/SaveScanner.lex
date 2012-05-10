@@ -13,7 +13,7 @@
 
 %}
 
-%option yyclass="Scanner" noyywrap c++
+%option yyclass="Scanner" noyywrap c++ prefix="yysave_"
 
 %%
 

@@ -4,8 +4,7 @@
  * 3 mai 2012
  */
 
-#include "ProfileScanner.hpp"
-#include "SaveScanner.hpp"
+#include "Scanner.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -27,10 +26,10 @@ int	main(int argc, char** argv) {
       loader.parse();
     }
     {
-      Serializer::Save::Scanner		scanner(input);
-      Serializer::Save::Loader		loader(scanner);
+      // Serializer::Save::Scanner		scanner(input);
+      // Serializer::Save::Loader		loader(scanner);
 
-      loader.parse();
+      // loader.parse();
     }
   }
   return 0;
