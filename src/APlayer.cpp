@@ -33,26 +33,26 @@ void APlayer::initialize(void)
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       APlayer::draw(gdl::GameClock const& clock, gdl::Input& input)
+// Name:       APlayer::draw()
 // Purpose:    Implementation of APlayer::draw()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void APlayer::draw(void)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
+// Purpose:    Implementation of APlayer::update()
 // Parameters:
 // - clock
 // - input
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void APlayer::draw(gdl::GameClock const& clock, gdl::Input& input)
-{
-   // TODO : implement
-}
-
-////////////////////////////////////////////////////////////////////////
-// Name:       APlayer::update()
-// Purpose:    Implementation of APlayer::update()
-// Return:     void
-////////////////////////////////////////////////////////////////////////
-
-void APlayer::update(void)
+void APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
    // TODO : implement
 }

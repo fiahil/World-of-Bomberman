@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{4FE865AA-9C75-46DD-88A8-716EFD5385C1}" Label="" LastModificationDate="1336407227" Name="Bomberman" Objects="120" Symbols="14" Target="C++" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{4FE865AA-9C75-46DD-88A8-716EFD5385C1}" Label="" LastModificationDate="1336638615" Name="Bomberman" Objects="120" Symbols="14" Target="C++" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -12,7 +12,7 @@
 <a:Code>Bomberman</a:Code>
 <a:CreationDate>1336393137</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336407023</a:ModificationDate>
+<a:ModificationDate>1336407872</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:PackageOptionsText>[FolderOptions]
 
@@ -22,7 +22,1098 @@ GenerationPath=
 GenerationOptions=
 GenerationTasks=
 GenerationTargets=
-GenerationSelections=</a:PackageOptionsText>
+GenerationSelections=
+
+[FolderOptions\CheckModel]
+
+[FolderOptions\CheckModel\Package]
+
+[FolderOptions\CheckModel\Package\Circular inheritance]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Package\Circular dependency]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Package\ShortcutUniqCode]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=No
+
+[FolderOptions\CheckModel\Package\ChildShortcut]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe]
+
+[FolderOptions\CheckModel\Classe\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\Empty classifier]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\Persistent class]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\Association Identifier]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\Visibility]
+CheckSeverity=Yes
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\Constructor return type]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\Constructor modifier]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\Method implementation]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\Role name assignment]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\Role name unicity]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\BeanInfo]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\JavaBean]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\Inheritance on Enum Type (Java)]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\BeanClassDefinition]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\BeanClassBusinessImpl]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\BeanClassHomeImpl]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\BeanClassEjbCreate]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\BeanClassEjbPostCreate]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\BeanClassEjbFind]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\BeanClassEjbHome]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\BeanClassEjbSelect]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\PKClassDefinition]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\PKClassAttributes]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\PKClassExistence]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\Mapping]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\MappingSFMap]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\CsfrWrongBound]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe\ClssInvalidGenMode]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface]
+
+[FolderOptions\CheckModel\Interface\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface\Empty classifier]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface\Visibility]
+CheckSeverity=Yes
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface\Interface constructor]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface\Association navigability]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface\HomeCreateMethods]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface\HomeFindMethods]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface\HomeMethods]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface\ObjectBusinessMethods]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface\CsfrWrongBound]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Attribut]
+
+[FolderOptions\CheckModel\Classe.Attribut\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Attribut\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Attribut\CheckNumParam]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Attribut\Datatype assignment]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Attribut\Extend final class]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Attribut\DomainDivergence]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Identifiant]
+
+[FolderOptions\CheckModel\Classe.Identifiant\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Identifiant\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Identifiant\EmptyColl - ATTR]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Identifiant\CheckIncludeColl - Clss]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface.Attribut]
+
+[FolderOptions\CheckModel\Interface.Attribut\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface.Attribut\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface.Attribut\CheckNumParam]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface.Attribut\Datatype assignment]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface.Attribut\Extend final class]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface.Attribut\DomainDivergence]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface.Attribut\Event parameter datatype]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Opération]
+
+[FolderOptions\CheckModel\Classe.Opération\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Opération\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Opération\Return type assignment]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Opération\Parameter datatype]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Opération\Abstract operation&#39;s body]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Opération\Abstract operation]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Opération\Operation signature]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Opération\Overriding operation]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Opération\Enum Abstract Methods]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Port]
+
+[FolderOptions\CheckModel\Classe.Port\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Port\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Port\PortIsolated]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=No
+
+[FolderOptions\CheckModel\Classe.Partie]
+
+[FolderOptions\CheckModel\Classe.Partie\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Partie\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Partie\PartLink]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=No
+
+[FolderOptions\CheckModel\Classe.Partie\PartComposition]
+CheckSeverity=Yes
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Connecteur d&#39;assemblage]
+
+[FolderOptions\CheckModel\Classe.Connecteur d&#39;assemblage\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Connecteur d&#39;assemblage\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Classe.Connecteur d&#39;assemblage\AscnNull]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=No
+
+[FolderOptions\CheckModel\Classe.Connecteur d&#39;assemblage\AscnIntf]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=No
+
+[FolderOptions\CheckModel\Interface.Opération]
+
+[FolderOptions\CheckModel\Interface.Opération\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface.Opération\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface.Opération\Return type assignment]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Interface.Opération\Parameter datatype]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Association]
+
+[FolderOptions\CheckModel\Association\Generic links]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Association\Bound links]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Généralisation]
+
+[FolderOptions\CheckModel\Généralisation\Redundant Generalizations]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Généralisation\Multiple inheritance (Java)]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Généralisation\Final datatype with initial value]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Généralisation\Non-Persistent Specifying Attribute]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Généralisation\Generic links]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Généralisation\Bound links]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Réalisation]
+
+[FolderOptions\CheckModel\Réalisation\Redundant Realizations]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Réalisation\Generic links]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Réalisation\Bound links]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Domaine]
+
+[FolderOptions\CheckModel\Domaine\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Domaine\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Domaine\CheckNumParam]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Acteur]
+
+[FolderOptions\CheckModel\Acteur\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Acteur\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Acteur\Single]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Cas d&#39;utilisation]
+
+[FolderOptions\CheckModel\Cas d&#39;utilisation\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Cas d&#39;utilisation\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Cas d&#39;utilisation\Single]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Objet]
+
+[FolderOptions\CheckModel\Objet\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Objet\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Objet\Single]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Lien entre objets]
+
+[FolderOptions\CheckModel\Lien entre objets\Redundant Instance links]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Référence d&#39;interaction]
+
+[FolderOptions\CheckModel\Référence d&#39;interaction\IRefDiagram]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Référence d&#39;interaction\IRefLifelines]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Référence d&#39;interaction\IRefInpMsg]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Référence d&#39;interaction\IRefOutMsg]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Message]
+
+[FolderOptions\CheckModel\Message\MessageNoNumber]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=No
+
+[FolderOptions\CheckModel\Message\MessageManyLinks]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Message\Actor-Message]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Activité]
+
+[FolderOptions\CheckModel\Activité\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Activité\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Activité\CheckActvTrns]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Activité\CheckNoStart]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Activité\CheckActvReuse]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Noeud d&#39;objet]
+
+[FolderOptions\CheckModel\Noeud d&#39;objet\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Noeud d&#39;objet\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Noeud d&#39;objet\CheckObndDttp]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Décision]
+
+[FolderOptions\CheckModel\Décision\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Décision\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Décision\CheckDcsnCompl]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Synchronisation]
+
+[FolderOptions\CheckModel\Synchronisation\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Synchronisation\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Synchronisation\CheckSyncCompl]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Unité d&#39;organisation]
+
+[FolderOptions\CheckModel\Unité d&#39;organisation\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Unité d&#39;organisation\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Unité d&#39;organisation\CheckPrntOrgnLoop]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Début]
+
+[FolderOptions\CheckModel\Début\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Début\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Début\CheckStrtTrns]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Fin]
+
+[FolderOptions\CheckModel\Fin\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Fin\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Fin\CheckStrtTrns]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Transition]
+
+[FolderOptions\CheckModel\Transition\CheckTrnsSrc]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Transition\CheckTrnsCond]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Transition\TrnsDuplSTAT]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Flux]
+
+[FolderOptions\CheckModel\Flux\CheckFlowSrc]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Flux\CheckFlowNoCond]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Flux\CheckFlowCond]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Flux\FlowDuplOOMACTV]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Evénement]
+
+[FolderOptions\CheckModel\Evénement\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Evénement\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Evénement\EvntUnused]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Etat]
+
+[FolderOptions\CheckModel\Etat\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Etat\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Etat\StatTrns]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Etat\StatNoStart]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Etat\ActnOrder]
+CheckSeverity=Yes
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Etat.Action]
+
+[FolderOptions\CheckModel\Etat.Action\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Etat.Action\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Etat.Action\ActnEvent]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Etat.Action\ActnDupl]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Point de jonction]
+
+[FolderOptions\CheckModel\Point de jonction\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Point de jonction\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Point de jonction\JnPtCompl]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Composant]
+
+[FolderOptions\CheckModel\Composant\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Composant\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Composant\Single]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Composant\EJBClassifiers]
+CheckSeverity=No
+FixRequested=Yes
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Composant\Method Soap Message redefinition]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Composant.Port]
+
+[FolderOptions\CheckModel\Composant.Port\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Composant.Port\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Composant.Port\PortIsolated]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=No
+
+[FolderOptions\CheckModel\Composant.Connecteur d&#39;assemblage]
+
+[FolderOptions\CheckModel\Composant.Connecteur d&#39;assemblage\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Composant.Connecteur d&#39;assemblage\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Composant.Connecteur d&#39;assemblage\AscnNull]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=No
+
+[FolderOptions\CheckModel\Composant.Connecteur d&#39;assemblage\AscnIntf]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=No
+
+[FolderOptions\CheckModel\Noeud]
+
+[FolderOptions\CheckModel\Noeud\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Noeud\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Noeud\Empty Node]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Instance de composant]
+
+[FolderOptions\CheckModel\Instance de composant\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Instance de composant\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Instance de composant\Component Instance with null Component]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Instance de composant\Duplicate Component Instance]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Instance de composant\Isolated Component Instance]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Source de données]
+
+[FolderOptions\CheckModel\Source de données\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Source de données\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Source de données\EmptyColl - MODLSRC]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Source de données\Data Source Target Consistency]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Activité.Paramètre d&#39;entrée]
+
+[FolderOptions\CheckModel\Activité.Paramètre d&#39;entrée\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Activité.Paramètre d&#39;entrée\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Activité.Paramètre de sortie]
+
+[FolderOptions\CheckModel\Activité.Paramètre de sortie\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Activité.Paramètre de sortie\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Réplication]
+
+[FolderOptions\CheckModel\Réplication\PartialReplication]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Règle de gestion]
+
+[FolderOptions\CheckModel\Règle de gestion\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Règle de gestion\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Règle de gestion\EmptyColl - OBJCOL]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Objet étendu]
+
+[FolderOptions\CheckModel\Objet étendu\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Objet étendu\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Lien étendu]
+
+[FolderOptions\CheckModel\Lien étendu\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Lien étendu\UniqueCode]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Fichier]
+
+[FolderOptions\CheckModel\Fichier\UniqueNom]
+CheckSeverity=No
+FixRequested=No
+CheckRequested=Yes
+
+[FolderOptions\CheckModel\Fichier\CheckPathExists]
+CheckSeverity=Yes
+FixRequested=No
+CheckRequested=Yes</a:PackageOptionsText>
 <a:ModelOptionsText>[ModelOptions]
 
 [ModelOptions\Cld]
@@ -968,7 +2059,7 @@ NameToCode=No</a:ModelOptionsText>
 <a:Code>jeu</a:Code>
 <a:CreationDate>1336393137</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336407023</a:ModificationDate>
+<a:ModificationDate>1336407872</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:DisplayPreferences>[DisplayPreferences]
 
@@ -1382,9 +2473,9 @@ Shadow=0</a:DisplayPreferences>
 <c:Symbols>
 <o:GeneralizationSymbol Id="o5">
 <a:CreationDate>1336403708</a:CreationDate>
-<a:ModificationDate>1336404662</a:ModificationDate>
-<a:Rect>((-1012,-13624), (3787,12657))</a:Rect>
-<a:ListOfPoints>((3787,-13624),(3787,1334),(-1012,1334),(-1012,12657))</a:ListOfPoints>
+<a:ModificationDate>1336638615</a:ModificationDate>
+<a:Rect>((-5365,-13624), (3787,12257))</a:Rect>
+<a:ListOfPoints>((3787,-13624),(3787,1334),(-5365,1334),(-5365,12257))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>7</a:ArrowStyle>
 <a:LineColor>4194432</a:LineColor>
@@ -1402,9 +2493,9 @@ Shadow=0</a:DisplayPreferences>
 </o:GeneralizationSymbol>
 <o:GeneralizationSymbol Id="o9">
 <a:CreationDate>1336404356</a:CreationDate>
-<a:ModificationDate>1336404912</a:ModificationDate>
-<a:Rect>((-1012,12657), (20663,33225))</a:Rect>
-<a:ListOfPoints>((20663,33225),(20663,12657),(-1012,12657))</a:ListOfPoints>
+<a:ModificationDate>1336638594</a:ModificationDate>
+<a:Rect>((-5365,12257), (20663,33225))</a:Rect>
+<a:ListOfPoints>((20663,33225),(20663,12257),(-5365,12257))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>7</a:ArrowStyle>
 <a:LineColor>4194432</a:LineColor>
@@ -1422,9 +2513,9 @@ Shadow=0</a:DisplayPreferences>
 </o:GeneralizationSymbol>
 <o:GeneralizationSymbol Id="o12">
 <a:CreationDate>1336404847</a:CreationDate>
-<a:ModificationDate>1336404900</a:ModificationDate>
-<a:Rect>((-12634,12657), (-1012,33337))</a:Rect>
-<a:ListOfPoints>((-12634,33337),(-12634,23909),(-1012,23909),(-1012,12657))</a:ListOfPoints>
+<a:ModificationDate>1336638615</a:ModificationDate>
+<a:Rect>((-12634,12257), (-5365,33337))</a:Rect>
+<a:ListOfPoints>((-12634,33337),(-12634,23909),(-5365,23909),(-5365,12257))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>7</a:ArrowStyle>
 <a:LineColor>4194432</a:LineColor>
@@ -1442,9 +2533,9 @@ Shadow=0</a:DisplayPreferences>
 </o:GeneralizationSymbol>
 <o:GeneralizationSymbol Id="o15">
 <a:CreationDate>1336405083</a:CreationDate>
-<a:ModificationDate>1336406260</a:ModificationDate>
-<a:Rect>((-1173,9897), (57049,30150))</a:Rect>
-<a:ListOfPoints>((57049,30150),(57049,9897),(-1173,9897))</a:ListOfPoints>
+<a:ModificationDate>1336638594</a:ModificationDate>
+<a:Rect>((-5586,9497), (57049,30150))</a:Rect>
+<a:ListOfPoints>((57049,30150),(57049,9497),(-5586,9497))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>7</a:ArrowStyle>
 <a:LineColor>4194432</a:LineColor>
@@ -1502,9 +2593,9 @@ Shadow=0</a:DisplayPreferences>
 </o:GeneralizationSymbol>
 <o:ClassSymbol Id="o7">
 <a:CreationDate>1336401814</a:CreationDate>
-<a:ModificationDate>1336404108</a:ModificationDate>
+<a:ModificationDate>1336638615</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((-12712,6489), (10688,18825))</a:Rect>
+<a:Rect>((-21418,6089), (10688,18425))</a:Rect>
 <a:AutoAdjustToText>0</a:AutoAdjustToText>
 <a:LineColor>128</a:LineColor>
 <a:FillColor>8637161</a:FillColor>
@@ -1554,7 +2645,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:CreationDate>1336404353</a:CreationDate>
 <a:ModificationDate>1336404912</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((5124,28881), (36202,37569))</a:Rect>
+<a:Rect>((4699,28881), (36627,37569))</a:Rect>
 <a:LineColor>128</a:LineColor>
 <a:FillColor>8637161</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -1600,7 +2691,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:CreationDate>1336405060</a:CreationDate>
 <a:ModificationDate>1336406250</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((40549,22885), (73557,37417))</a:Rect>
+<a:Rect>((39004,23858), (75102,36444))</a:Rect>
 <a:LineColor>128</a:LineColor>
 <a:FillColor>8637161</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -1665,9 +2756,32 @@ LABL 0 Arial,8,N</a:FontList>
 <o:Class Ref="o30"/>
 </c:Object>
 </o:ClassSymbol>
+<o:ClassSymbol Id="o31">
+<a:CreationDate>1336407872</a:CreationDate>
+<a:ModificationDate>1336408240</a:ModificationDate>
+<a:IconMode>-1</a:IconMode>
+<a:Rect>((27250,-5570), (54102,2144))</a:Rect>
+<a:LineColor>128</a:LineColor>
+<a:FillColor>8637161</a:FillColor>
+<a:ShadowColor>12632256</a:ShadowColor>
+<a:FontList>STRN 0 Arial,8,N
+DISPNAME 0 Arial,8,N
+CNTR 0 Arial,8,N
+Attributes 0 Arial,8,N
+ClassPrimaryAttribute 0 Arial,8,U
+Operations 0 Arial,8,N
+InnerClassifiers 0 Arial,8,N
+LABL 0 Arial,8,N</a:FontList>
+<a:BrushStyle>6</a:BrushStyle>
+<a:GradientFillMode>65</a:GradientFillMode>
+<a:GradientEndColor>16777215</a:GradientEndColor>
+<c:Object>
+<o:Class Ref="o32"/>
+</c:Object>
+</o:ClassSymbol>
 </c:Symbols>
 </o:ClassDiagram>
-<o:ClassDiagram Id="o31">
+<o:ClassDiagram Id="o33">
 <a:ObjectID>DA12F656-39C2-4EFF-88C8-84D86B1D436E</a:ObjectID>
 <a:Name>Menu</a:Name>
 <a:Code>Menu</a:Code>
@@ -2096,12 +3210,12 @@ Shadow=0</a:DisplayPreferences>
 <a:Code>AObj</a:Code>
 <a:CreationDate>1336401814</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405090</a:ModificationDate>
+<a:ModificationDate>1336407828</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <a:Classifier.Abstract>1</a:Classifier.Abstract>
 <c:Attributes>
-<o:Attribute Id="o32">
+<o:Attribute Id="o34">
 <a:ObjectID>434AA632-B8F3-441B-9A8E-9A23B8E22B33</a:ObjectID>
 <a:Name>_pos</a:Name>
 <a:Code>_pos</a:Code>
@@ -2114,7 +3228,7 @@ Shadow=0</a:DisplayPreferences>
 </o:Attribute>
 </c:Attributes>
 <c:Operations>
-<o:Operation Id="o33">
+<o:Operation Id="o35">
 <a:ObjectID>8AA67C3B-3A48-489E-AE65-9C76AE8B66CF</a:ObjectID>
 <a:Name>initialize</a:Name>
 <a:Code>initialize</a:Code>
@@ -2126,41 +3240,17 @@ Shadow=0</a:DisplayPreferences>
 <a:Operation.Abstract>1</a:Operation.Abstract>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 </o:Operation>
-<o:Operation Id="o34">
+<o:Operation Id="o36">
 <a:ObjectID>5F70F530-F314-4664-9A93-6AF2B5845AE4</a:ObjectID>
 <a:Name>draw</a:Name>
 <a:Code>draw</a:Code>
 <a:CreationDate>1336402667</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336407227</a:ModificationDate>
+<a:ModificationDate>1336638592</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:ReturnType>void</a:ReturnType>
 <a:Operation.Abstract>1</a:Operation.Abstract>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
-<c:Parameters>
-<o:Parameter Id="o35">
-<a:ObjectID>EA301541-7899-4CDB-8CC3-951D1C36AEAE</a:ObjectID>
-<a:Name>clock</a:Name>
-<a:Code>clock</a:Code>
-<a:CreationDate>1336402752</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336402833</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Parameter.DataType>gdl::GameClock const&amp;</a:Parameter.DataType>
-<a:ParameterType>I</a:ParameterType>
-</o:Parameter>
-<o:Parameter Id="o36">
-<a:ObjectID>E0CCE4CB-BFBB-4639-846F-5D6D223997FB</a:ObjectID>
-<a:Name>input</a:Name>
-<a:Code>input</a:Code>
-<a:CreationDate>1336402796</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336402833</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Parameter.DataType>gdl::Input&amp;</a:Parameter.DataType>
-<a:ParameterType>I</a:ParameterType>
-</o:Parameter>
-</c:Parameters>
 </o:Operation>
 <o:Operation Id="o37">
 <a:ObjectID>05CDE8E2-36CF-4E50-BBA7-7B7685978BC6</a:ObjectID>
@@ -2168,13 +3258,37 @@ Shadow=0</a:DisplayPreferences>
 <a:Code>update</a:Code>
 <a:CreationDate>1336402685</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336407227</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:ReturnType>void</a:ReturnType>
 <a:Operation.Abstract>1</a:Operation.Abstract>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
+<c:Parameters>
+<o:Parameter Id="o38">
+<a:ObjectID>A81DF53D-9B22-47D6-83F8-038A23CE7926</a:ObjectID>
+<a:Name>clock</a:Name>
+<a:Code>clock</a:Code>
+<a:CreationDate>1336638596</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638601</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>gdl::GameClock const&amp;</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o39">
+<a:ObjectID>D5B56D5E-1EB7-4B20-8BC0-AB2E9A83E565</a:ObjectID>
+<a:Name>input</a:Name>
+<a:Code>input</a:Code>
+<a:CreationDate>1336638596</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638601</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>gdl::Input&amp;</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+</c:Parameters>
 </o:Operation>
-<o:Operation Id="o38">
+<o:Operation Id="o40">
 <a:ObjectID>BBFEF89C-DD50-4E62-9E52-BDA806A426FC</a:ObjectID>
 <a:Name>AObj</a:Name>
 <a:Code>AObj</a:Code>
@@ -2189,7 +3303,7 @@ Shadow=0</a:DisplayPreferences>
 <o:Class Ref="o24"/>
 </c:InfluentObject>
 </o:Operation>
-<o:Operation Id="o39">
+<o:Operation Id="o41">
 <a:ObjectID>48305C97-2DB8-4969-B64D-9E879DB9D1FD</a:ObjectID>
 <a:Name>~AObj</a:Name>
 <a:Code>~AObj</a:Code>
@@ -2204,7 +3318,7 @@ Shadow=0</a:DisplayPreferences>
 <o:Class Ref="o24"/>
 </c:InfluentObject>
 </o:Operation>
-<o:Operation Id="o40">
+<o:Operation Id="o42">
 <a:ObjectID>0267D17C-ACF7-4ED1-AC18-D16CF570B6E7</a:ObjectID>
 <a:Name>AObj</a:Name>
 <a:Code>AObj</a:Code>
@@ -2217,7 +3331,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o41">
+<o:Parameter Id="o43">
 <a:ObjectID>CBCFF57B-95D4-418A-A02C-E4660DC03EB6</a:ObjectID>
 <a:Name>oldAObj</a:Name>
 <a:Code>oldAObj</a:Code>
@@ -2236,26 +3350,6 @@ Shadow=0</a:DisplayPreferences>
 <o:Class Ref="o24"/>
 </c:InfluentObject>
 </o:Operation>
-<o:Operation Id="o42">
-<a:ObjectID>B33C9A97-B075-4D38-A037-407BBE9534C3</a:ObjectID>
-<a:Name>Duplicate</a:Name>
-<a:Code>Duplicate</a:Code>
-<a:CreationDate>1336403982</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336403991</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Stereotype>Duplicate</a:Stereotype>
-<a:ReturnType>AObj</a:ReturnType>
-<a:Operation.Visibility>-</a:Operation.Visibility>
-<a:Automatic>1</a:Automatic>
-<a:TemplateBody>%DefaultBody%</a:TemplateBody>
-<c:ObjectReturnType>
-<o:Class Ref="o24"/>
-</c:ObjectReturnType>
-<c:InfluentObject>
-<o:Class Ref="o24"/>
-</c:InfluentObject>
-</o:Operation>
 </c:Operations>
 </o:Class>
 <o:Class Id="o25">
@@ -2264,12 +3358,12 @@ Shadow=0</a:DisplayPreferences>
 <a:Code>APlayer</a:Code>
 <a:CreationDate>1336403160</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336407023</a:ModificationDate>
+<a:ModificationDate>1336407797</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <a:Classifier.Abstract>1</a:Classifier.Abstract>
 <c:Attributes>
-<o:Attribute Id="o43">
+<o:Attribute Id="o44">
 <a:ObjectID>04BE58D5-8F2F-4BFC-A145-F4148AA2133F</a:ObjectID>
 <a:Name>_pv</a:Name>
 <a:Code>_pv</a:Code>
@@ -2280,7 +3374,7 @@ Shadow=0</a:DisplayPreferences>
 <a:DataType>int</a:DataType>
 <a:Attribute.Visibility>#</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o44">
+<o:Attribute Id="o45">
 <a:ObjectID>999B5C6A-38DF-45D8-A3D2-BA9E7E033C91</a:ObjectID>
 <a:Name>_weapon</a:Name>
 <a:Code>_weapon</a:Code>
@@ -2291,7 +3385,7 @@ Shadow=0</a:DisplayPreferences>
 <a:DataType>eBomb</a:DataType>
 <a:Attribute.Visibility>#</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o45">
+<o:Attribute Id="o46">
 <a:ObjectID>F4CD9DD3-E5CB-4345-B9B5-C34EC091858A</a:ObjectID>
 <a:Name>_skin</a:Name>
 <a:Code>_skin</a:Code>
@@ -2302,7 +3396,7 @@ Shadow=0</a:DisplayPreferences>
 <a:DataType>eSkin</a:DataType>
 <a:Attribute.Visibility>#</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o46">
+<o:Attribute Id="o47">
 <a:ObjectID>D6DAD55B-4A93-45B2-82DB-5FCCEF4D8A4A</a:ObjectID>
 <a:Name>_team</a:Name>
 <a:Code>_team</a:Code>
@@ -2313,7 +3407,7 @@ Shadow=0</a:DisplayPreferences>
 <a:DataType>size_t</a:DataType>
 <a:Attribute.Visibility>#</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o47">
+<o:Attribute Id="o48">
 <a:ObjectID>DE929DCB-89FB-434D-B2D1-995D09F7417F</a:ObjectID>
 <a:Name>_id</a:Name>
 <a:Code>_id</a:Code>
@@ -2324,7 +3418,7 @@ Shadow=0</a:DisplayPreferences>
 <a:DataType>size_t</a:DataType>
 <a:Attribute.Visibility>#</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o48">
+<o:Attribute Id="o49">
 <a:ObjectID>16EC61A5-9C2C-4E6A-BE0C-B0AA0F7729E8</a:ObjectID>
 <a:Name>_state</a:Name>
 <a:Code>_state</a:Code>
@@ -2335,7 +3429,7 @@ Shadow=0</a:DisplayPreferences>
 <a:DataType>eState</a:DataType>
 <a:Attribute.Visibility>#</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o49">
+<o:Attribute Id="o50">
 <a:ObjectID>88C90B62-23D4-4E4E-B5C6-7308DA38E349</a:ObjectID>
 <a:Name>_bombEffect</a:Name>
 <a:Code>_bombEffect</a:Code>
@@ -2346,7 +3440,7 @@ Shadow=0</a:DisplayPreferences>
 <a:DataType>std::map&lt;eBomb, fBomb&gt;</a:DataType>
 <a:Attribute.Visibility>#</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o50">
+<o:Attribute Id="o51">
 <a:ObjectID>C2CA0B98-AA9D-402A-9951-DC2819E43B4D</a:ObjectID>
 <a:Name>_bonusEffect</a:Name>
 <a:Code>_bonusEffect</a:Code>
@@ -2357,7 +3451,7 @@ Shadow=0</a:DisplayPreferences>
 <a:DataType>std::map&lt;eBonus, fBonus&gt;</a:DataType>
 <a:Attribute.Visibility>#</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o51">
+<o:Attribute Id="o52">
 <a:ObjectID>9A0C3E98-B9DA-4A69-99AA-A89652C2FECA</a:ObjectID>
 <a:Name>_model</a:Name>
 <a:Code>_model</a:Code>
@@ -2368,7 +3462,7 @@ Shadow=0</a:DisplayPreferences>
 <a:DataType>gdl::Model</a:DataType>
 <a:Attribute.Visibility>#</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o52">
+<o:Attribute Id="o53">
 <a:ObjectID>F8244F17-BEC7-41B3-BB15-497672E26F9D</a:ObjectID>
 <a:Name>_name</a:Name>
 <a:Code>_name</a:Code>
@@ -2381,7 +3475,7 @@ Shadow=0</a:DisplayPreferences>
 </o:Attribute>
 </c:Attributes>
 <c:Operations>
-<o:Operation Id="o53">
+<o:Operation Id="o54">
 <a:ObjectID>87441A85-4E62-42E2-8B09-6880D60FB0E4</a:ObjectID>
 <a:Name>play</a:Name>
 <a:Code>play</a:Code>
@@ -2393,7 +3487,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Operation.Abstract>1</a:Operation.Abstract>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 </o:Operation>
-<o:Operation Id="o54">
+<o:Operation Id="o55">
 <a:ObjectID>019ACC73-19AA-448B-AEAC-04A68990D33C</a:ObjectID>
 <a:Name>takeDamage</a:Name>
 <a:Code>takeDamage</a:Code>
@@ -2404,7 +3498,7 @@ Shadow=0</a:DisplayPreferences>
 <a:ReturnType>void</a:ReturnType>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o55">
+<o:Parameter Id="o56">
 <a:ObjectID>1B1907BD-DF44-43BF-A447-074DEBEA4A9D</a:ObjectID>
 <a:Name>origin</a:Name>
 <a:Code>origin</a:Code>
@@ -2415,7 +3509,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Parameter.DataType>Point</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
-<o:Parameter Id="o56">
+<o:Parameter Id="o57">
 <a:ObjectID>BB98B7B3-D395-4CED-8175-C963B7EFC6AF</a:ObjectID>
 <a:Name>pattern</a:Name>
 <a:Code>pattern</a:Code>
@@ -2428,7 +3522,7 @@ Shadow=0</a:DisplayPreferences>
 </o:Parameter>
 </c:Parameters>
 </o:Operation>
-<o:Operation Id="o57">
+<o:Operation Id="o58">
 <a:ObjectID>FB7A95C3-C367-4C5E-8CA9-94883FEE9543</a:ObjectID>
 <a:Name>initialize</a:Name>
 <a:Code>initialize</a:Code>
@@ -2441,66 +3535,66 @@ Shadow=0</a:DisplayPreferences>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:InfluentObject>
-<o:Operation Ref="o33"/>
+<o:Operation Ref="o35"/>
 </c:InfluentObject>
 </o:Operation>
-<o:Operation Id="o58">
+<o:Operation Id="o59">
 <a:ObjectID>337C80F8-7959-412D-A99D-84CE2491B395</a:ObjectID>
 <a:Name>draw</a:Name>
 <a:Code>draw</a:Code>
 <a:CreationDate>1336403797</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336403797</a:ModificationDate>
+<a:ModificationDate>1336638592</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Stereotype>Override</a:Stereotype>
+<a:ReturnType>void</a:ReturnType>
+<a:Automatic>1</a:Automatic>
+<a:TemplateBody>%DefaultBody%</a:TemplateBody>
+<c:InfluentObject>
+<o:Operation Ref="o36"/>
+</c:InfluentObject>
+</o:Operation>
+<o:Operation Id="o60">
+<a:ObjectID>42101384-C9BA-436F-93C1-AE2DA95655A1</a:ObjectID>
+<a:Name>update</a:Name>
+<a:Code>update</a:Code>
+<a:CreationDate>1336403797</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Stereotype>Override</a:Stereotype>
 <a:ReturnType>void</a:ReturnType>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o59">
-<a:ObjectID>E7E811FB-39E2-4865-AF68-6509422254E3</a:ObjectID>
+<o:Parameter Id="o61">
+<a:ObjectID>B17DAD47-4205-4643-9035-B661787F7C3B</a:ObjectID>
 <a:Name>clock</a:Name>
 <a:Code>clock</a:Code>
-<a:CreationDate>1336403797</a:CreationDate>
+<a:CreationDate>1336638600</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336403797</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>gdl::GameClock const&amp;</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
-<o:Parameter Id="o60">
-<a:ObjectID>120B367D-6A89-4E2D-ADC4-4B89F232E0BB</a:ObjectID>
+<o:Parameter Id="o62">
+<a:ObjectID>EBEFC5CD-B719-4998-BB7B-F346335CB187</a:ObjectID>
 <a:Name>input</a:Name>
 <a:Code>input</a:Code>
-<a:CreationDate>1336403797</a:CreationDate>
+<a:CreationDate>1336638600</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336403797</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>gdl::Input&amp;</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
 </c:Parameters>
 <c:InfluentObject>
-<o:Operation Ref="o34"/>
-</c:InfluentObject>
-</o:Operation>
-<o:Operation Id="o61">
-<a:ObjectID>42101384-C9BA-436F-93C1-AE2DA95655A1</a:ObjectID>
-<a:Name>update</a:Name>
-<a:Code>update</a:Code>
-<a:CreationDate>1336403797</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336403797</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Stereotype>Override</a:Stereotype>
-<a:ReturnType>void</a:ReturnType>
-<a:Automatic>1</a:Automatic>
-<a:TemplateBody>%DefaultBody%</a:TemplateBody>
-<c:InfluentObject>
 <o:Operation Ref="o37"/>
 </c:InfluentObject>
 </o:Operation>
-<o:Operation Id="o62">
+<o:Operation Id="o63">
 <a:ObjectID>04E98B52-AABF-408B-86DE-DEEB6268B188</a:ObjectID>
 <a:Name>APlayer</a:Name>
 <a:Code>APlayer</a:Code>
@@ -2512,7 +3606,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o63">
+<o:Parameter Id="o64">
 <a:ObjectID>8D9EF38A-051B-4F05-BB67-173307838ACF</a:ObjectID>
 <a:Name>name</a:Name>
 <a:Code>name</a:Code>
@@ -2525,7 +3619,7 @@ Shadow=0</a:DisplayPreferences>
 </o:Parameter>
 </c:Parameters>
 </o:Operation>
-<o:Operation Id="o64">
+<o:Operation Id="o65">
 <a:ObjectID>7967567E-D360-45CF-991E-8B4318211CB8</a:ObjectID>
 <a:Name>~APlayer</a:Name>
 <a:Code>~APlayer</a:Code>
@@ -2537,7 +3631,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 </o:Operation>
-<o:Operation Id="o65">
+<o:Operation Id="o66">
 <a:ObjectID>69CF89BE-EDEA-4C8F-87CB-38BBC0745BFA</a:ObjectID>
 <a:Name>APlayer</a:Name>
 <a:Code>APlayer</a:Code>
@@ -2550,7 +3644,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o66">
+<o:Parameter Id="o67">
 <a:ObjectID>0EC5C461-86E1-4360-A35B-BE22542B8C86</a:ObjectID>
 <a:Name>oldAPlayer</a:Name>
 <a:Code>oldAPlayer</a:Code>
@@ -2565,23 +3659,6 @@ Shadow=0</a:DisplayPreferences>
 </c:ObjectDataType>
 </o:Parameter>
 </c:Parameters>
-</o:Operation>
-<o:Operation Id="o67">
-<a:ObjectID>622985EF-F075-4F3C-A4F6-01F6C26C973D</a:ObjectID>
-<a:Name>Duplicate</a:Name>
-<a:Code>Duplicate</a:Code>
-<a:CreationDate>1336404083</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336404093</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Stereotype>Duplicate</a:Stereotype>
-<a:ReturnType>APlayer</a:ReturnType>
-<a:Operation.Visibility>-</a:Operation.Visibility>
-<a:Automatic>1</a:Automatic>
-<a:TemplateBody>%DefaultBody%</a:TemplateBody>
-<c:ObjectReturnType>
-<o:Class Ref="o25"/>
-</c:ObjectReturnType>
 </o:Operation>
 </c:Operations>
 </o:Class>
@@ -2681,7 +3758,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:InfluentObject>
-<o:Operation Ref="o33"/>
+<o:Operation Ref="o35"/>
 </c:InfluentObject>
 </o:Operation>
 <o:Operation Id="o74">
@@ -2690,52 +3767,52 @@ Shadow=0</a:DisplayPreferences>
 <a:Code>draw</a:Code>
 <a:CreationDate>1336404453</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336404453</a:ModificationDate>
+<a:ModificationDate>1336638592</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Stereotype>Override</a:Stereotype>
+<a:ReturnType>void</a:ReturnType>
+<a:Automatic>1</a:Automatic>
+<a:TemplateBody>%DefaultBody%</a:TemplateBody>
+<c:InfluentObject>
+<o:Operation Ref="o36"/>
+</c:InfluentObject>
+</o:Operation>
+<o:Operation Id="o75">
+<a:ObjectID>A88F56DF-28E4-435C-8C1D-0769D329F749</a:ObjectID>
+<a:Name>update</a:Name>
+<a:Code>update</a:Code>
+<a:CreationDate>1336404453</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Stereotype>Override</a:Stereotype>
 <a:ReturnType>void</a:ReturnType>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o75">
-<a:ObjectID>C43D2BD3-E685-437D-93B5-A3B9B4EA601B</a:ObjectID>
+<o:Parameter Id="o76">
+<a:ObjectID>668DBCC1-A2C1-46A5-915F-6B0F973380EB</a:ObjectID>
 <a:Name>clock</a:Name>
 <a:Code>clock</a:Code>
-<a:CreationDate>1336404453</a:CreationDate>
+<a:CreationDate>1336638600</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336404453</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>gdl::GameClock const&amp;</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
-<o:Parameter Id="o76">
-<a:ObjectID>0E256832-7AB4-42E0-BED4-FA25592A191E</a:ObjectID>
+<o:Parameter Id="o77">
+<a:ObjectID>FB89A9D6-09A9-4EE6-94B9-A40D37EC028A</a:ObjectID>
 <a:Name>input</a:Name>
 <a:Code>input</a:Code>
-<a:CreationDate>1336404453</a:CreationDate>
+<a:CreationDate>1336638600</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336404453</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>gdl::Input&amp;</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
 </c:Parameters>
-<c:InfluentObject>
-<o:Operation Ref="o34"/>
-</c:InfluentObject>
-</o:Operation>
-<o:Operation Id="o77">
-<a:ObjectID>A88F56DF-28E4-435C-8C1D-0769D329F749</a:ObjectID>
-<a:Name>update</a:Name>
-<a:Code>update</a:Code>
-<a:CreationDate>1336404453</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336404453</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Stereotype>Override</a:Stereotype>
-<a:ReturnType>void</a:ReturnType>
-<a:Automatic>1</a:Automatic>
-<a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:InfluentObject>
 <o:Operation Ref="o37"/>
 </c:InfluentObject>
@@ -2896,7 +3973,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Code>Map</a:Code>
 <a:CreationDate>1336405060</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336406248</a:ModificationDate>
+<a:ModificationDate>1336638534</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <c:Attributes>
@@ -2933,20 +4010,9 @@ Shadow=0</a:DisplayPreferences>
 <a:DataType>size_t</a:DataType>
 <a:Attribute.Visibility>-</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o91">
-<a:ObjectID>D4BC3D55-D61E-45D5-AEE1-58796D681831</a:ObjectID>
-<a:Name>Attribut_4</a:Name>
-<a:Code>Attribut_4</a:Code>
-<a:CreationDate>1336405967</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336406248</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:DataType>int</a:DataType>
-<a:Attribute.Visibility>-</a:Attribute.Visibility>
-</o:Attribute>
 </c:Attributes>
 <c:Operations>
-<o:Operation Id="o92">
+<o:Operation Id="o91">
 <a:ObjectID>E99E9C99-A47A-436B-B7A9-14792971783D</a:ObjectID>
 <a:Name>break</a:Name>
 <a:Code>break</a:Code>
@@ -2957,7 +4023,7 @@ Shadow=0</a:DisplayPreferences>
 <a:ReturnType>Pattern</a:ReturnType>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o93">
+<o:Parameter Id="o92">
 <a:ObjectID>6F268F6C-E32D-457D-BAD4-A8475AC5DAA0</a:ObjectID>
 <a:Name>origin</a:Name>
 <a:Code>origin</a:Code>
@@ -2968,7 +4034,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Parameter.DataType>Pattern</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
-<o:Parameter Id="o94">
+<o:Parameter Id="o93">
 <a:ObjectID>72E34776-45AD-4BBA-9986-85A58589D3DA</a:ObjectID>
 <a:Name>bonus</a:Name>
 <a:Code>bonus</a:Code>
@@ -2981,30 +4047,19 @@ Shadow=0</a:DisplayPreferences>
 </o:Parameter>
 </c:Parameters>
 </o:Operation>
-<o:Operation Id="o95">
+<o:Operation Id="o94">
 <a:ObjectID>96199847-BBD1-49F6-8925-CF1C61FB2CAA</a:ObjectID>
 <a:Name>Map</a:Name>
 <a:Code>Map</a:Code>
 <a:CreationDate>1336405233</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405954</a:ModificationDate>
+<a:ModificationDate>1336638513</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Stereotype>Constructor</a:Stereotype>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o96">
-<a:ObjectID>A251D28E-33DA-4E52-A87E-B1CF496900B3</a:ObjectID>
-<a:Name>map</a:Name>
-<a:Code>map</a:Code>
-<a:CreationDate>1336405917</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405927</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Parameter.DataType>std::string</a:Parameter.DataType>
-<a:ParameterType>I</a:ParameterType>
-</o:Parameter>
-<o:Parameter Id="o97">
+<o:Parameter Id="o95">
 <a:ObjectID>4DEC2ECD-A702-4C60-B3E2-AB163B8400EA</a:ObjectID>
 <a:Name>x</a:Name>
 <a:Code>x</a:Code>
@@ -3015,13 +4070,35 @@ Shadow=0</a:DisplayPreferences>
 <a:Parameter.DataType>size_t</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
-<o:Parameter Id="o98">
+<o:Parameter Id="o96">
 <a:ObjectID>C21CEBBD-A84C-434C-AE56-BCAA42E6B531</a:ObjectID>
 <a:Name>y</a:Name>
 <a:Code>y</a:Code>
 <a:CreationDate>1336405933</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
 <a:ModificationDate>1336405954</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>size_t</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o97">
+<a:ObjectID>70662174-6CAD-4EB2-9F15-8B6A8DB12D0C</a:ObjectID>
+<a:Name>dwallDensity</a:Name>
+<a:Code>dwallDensity</a:Code>
+<a:CreationDate>1336638451</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638513</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>size_t</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o98">
+<a:ObjectID>143844E0-61E7-4B32-82D9-AE21111D8263</a:ObjectID>
+<a:Name>iwallDensity</a:Name>
+<a:Code>iwallDensity</a:Code>
+<a:CreationDate>1336638451</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638513</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>size_t</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
@@ -3070,26 +4147,6 @@ Shadow=0</a:DisplayPreferences>
 </c:InfluentObject>
 </o:Operation>
 <o:Operation Id="o102">
-<a:ObjectID>E8077D5C-0F25-48CE-8FFC-FBF0721A5B28</a:ObjectID>
-<a:Name>Duplicate</a:Name>
-<a:Code>Duplicate</a:Code>
-<a:CreationDate>1336405237</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405345</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Stereotype>Duplicate</a:Stereotype>
-<a:ReturnType>Map</a:ReturnType>
-<a:Operation.Visibility>-</a:Operation.Visibility>
-<a:Automatic>1</a:Automatic>
-<a:TemplateBody>%DefaultBody%</a:TemplateBody>
-<c:ObjectReturnType>
-<o:Class Ref="o28"/>
-</c:ObjectReturnType>
-<c:InfluentObject>
-<o:Class Ref="o28"/>
-</c:InfluentObject>
-</o:Operation>
-<o:Operation Id="o103">
 <a:ObjectID>877A689D-B9AA-4F0B-9247-0CDBE45C27D2</a:ObjectID>
 <a:Name>Map</a:Name>
 <a:Code>Map</a:Code>
@@ -3102,7 +4159,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o104">
+<o:Parameter Id="o103">
 <a:ObjectID>2D4FA9B1-97F9-4794-A122-56D08921976B</a:ObjectID>
 <a:Name>oldMap</a:Name>
 <a:Code>oldMap</a:Code>
@@ -3121,7 +4178,7 @@ Shadow=0</a:DisplayPreferences>
 <o:Class Ref="o28"/>
 </c:InfluentObject>
 </o:Operation>
-<o:Operation Id="o105">
+<o:Operation Id="o104">
 <a:ObjectID>96F89179-C314-4295-8E1E-E5E8BC949BD2</a:ObjectID>
 <a:Name>initialize</a:Name>
 <a:Code>initialize</a:Code>
@@ -3134,16 +4191,32 @@ Shadow=0</a:DisplayPreferences>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:InfluentObject>
-<o:Operation Ref="o33"/>
+<o:Operation Ref="o35"/>
 </c:InfluentObject>
 </o:Operation>
-<o:Operation Id="o106">
+<o:Operation Id="o105">
 <a:ObjectID>87D85D53-DAEF-47FD-AB05-E739F30B54BD</a:ObjectID>
 <a:Name>draw</a:Name>
 <a:Code>draw</a:Code>
 <a:CreationDate>1336405340</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405340</a:ModificationDate>
+<a:ModificationDate>1336638592</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Stereotype>Override</a:Stereotype>
+<a:ReturnType>void</a:ReturnType>
+<a:Automatic>1</a:Automatic>
+<a:TemplateBody>%DefaultBody%</a:TemplateBody>
+<c:InfluentObject>
+<o:Operation Ref="o36"/>
+</c:InfluentObject>
+</o:Operation>
+<o:Operation Id="o106">
+<a:ObjectID>74C68EF5-6E37-4464-AD6A-15096297D4BA</a:ObjectID>
+<a:Name>update</a:Name>
+<a:Code>update</a:Code>
+<a:CreationDate>1336405342</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Stereotype>Override</a:Stereotype>
 <a:ReturnType>void</a:ReturnType>
@@ -3151,44 +4224,28 @@ Shadow=0</a:DisplayPreferences>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
 <o:Parameter Id="o107">
-<a:ObjectID>B4B3D681-B1E0-4247-B01F-9CF40C89F8FD</a:ObjectID>
+<a:ObjectID>A939CDBB-E609-43D3-B561-7260257FC8CD</a:ObjectID>
 <a:Name>clock</a:Name>
 <a:Code>clock</a:Code>
-<a:CreationDate>1336405340</a:CreationDate>
+<a:CreationDate>1336638600</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405340</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>gdl::GameClock const&amp;</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
 <o:Parameter Id="o108">
-<a:ObjectID>D8F60491-E393-4119-A418-38363E2A4E17</a:ObjectID>
+<a:ObjectID>1F5727CC-84CA-4D3E-9BFB-D842DCC05A5A</a:ObjectID>
 <a:Name>input</a:Name>
 <a:Code>input</a:Code>
-<a:CreationDate>1336405340</a:CreationDate>
+<a:CreationDate>1336638600</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405340</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>gdl::Input&amp;</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
 </c:Parameters>
-<c:InfluentObject>
-<o:Operation Ref="o34"/>
-</c:InfluentObject>
-</o:Operation>
-<o:Operation Id="o109">
-<a:ObjectID>74C68EF5-6E37-4464-AD6A-15096297D4BA</a:ObjectID>
-<a:Name>update</a:Name>
-<a:Code>update</a:Code>
-<a:CreationDate>1336405342</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405342</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Stereotype>Override</a:Stereotype>
-<a:ReturnType>void</a:ReturnType>
-<a:Automatic>1</a:Automatic>
-<a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:InfluentObject>
 <o:Operation Ref="o37"/>
 </c:InfluentObject>
@@ -3205,7 +4262,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Modifier>Fiahil</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <c:Operations>
-<o:Operation Id="o110">
+<o:Operation Id="o109">
 <a:ObjectID>9805ECF0-C524-43ED-8A0C-981D8C662B55</a:ObjectID>
 <a:Name>play</a:Name>
 <a:Code>play</a:Code>
@@ -3218,7 +4275,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:InfluentObject>
-<o:Operation Ref="o53"/>
+<o:Operation Ref="o54"/>
 </c:InfluentObject>
 </o:Operation>
 </c:Operations>
@@ -3233,7 +4290,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Modifier>Fiahil</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <c:Operations>
-<o:Operation Id="o111">
+<o:Operation Id="o110">
 <a:ObjectID>EEC8C180-5A87-4911-99F9-C096F2157B88</a:ObjectID>
 <a:Name>play</a:Name>
 <a:Code>play</a:Code>
@@ -3246,7 +4303,181 @@ Shadow=0</a:DisplayPreferences>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:InfluentObject>
-<o:Operation Ref="o53"/>
+<o:Operation Ref="o54"/>
+</c:InfluentObject>
+</o:Operation>
+</c:Operations>
+</o:Class>
+<o:Class Id="o32">
+<a:ObjectID>DF38DFED-380E-407A-91B9-8C9BD0E72F13</a:ObjectID>
+<a:Name>Point</a:Name>
+<a:Code>Point</a:Code>
+<a:CreationDate>1336407872</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408160</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:UseParentNamespace>0</a:UseParentNamespace>
+<c:Attributes>
+<o:Attribute Id="o111">
+<a:ObjectID>0C660DDD-4BA3-41B0-BB0D-CD759A8E86E8</a:ObjectID>
+<a:Name>_x</a:Name>
+<a:Code>_x</a:Code>
+<a:CreationDate>1336407880</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408116</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:DataType>int</a:DataType>
+</o:Attribute>
+<o:Attribute Id="o112">
+<a:ObjectID>BA7EC354-3411-46EA-89FC-23589E551121</a:ObjectID>
+<a:Name>_y</a:Name>
+<a:Code>_y</a:Code>
+<a:CreationDate>1336407880</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408116</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:DataType>int</a:DataType>
+</o:Attribute>
+<o:Attribute Id="o113">
+<a:ObjectID>5C3FFB52-94E5-4157-B53E-FBA50FC0F231</a:ObjectID>
+<a:Name>_pos</a:Name>
+<a:Code>_pos</a:Code>
+<a:CreationDate>1336407880</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408116</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:DataType>Vector</a:DataType>
+</o:Attribute>
+<o:Attribute Id="o114">
+<a:ObjectID>FCC1F501-FFE3-4BED-BE67-03B28A91A23A</a:ObjectID>
+<a:Name>_rot</a:Name>
+<a:Code>_rot</a:Code>
+<a:CreationDate>1336407909</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408116</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:DataType>Vector</a:DataType>
+</o:Attribute>
+</c:Attributes>
+<c:Operations>
+<o:Operation Id="o115">
+<a:ObjectID>9E3FDCC6-8F8A-4563-9436-DA7EDF5C53FF</a:ObjectID>
+<a:Name>Point</a:Name>
+<a:Code>Point</a:Code>
+<a:CreationDate>1336408153</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408204</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Stereotype>Constructor</a:Stereotype>
+<a:Automatic>1</a:Automatic>
+<a:TemplateBody>%DefaultBody%</a:TemplateBody>
+<c:Parameters>
+<o:Parameter Id="o116">
+<a:ObjectID>DE5491E2-AC8D-470E-B523-C659AF85FC9D</a:ObjectID>
+<a:Name>i</a:Name>
+<a:Code>i</a:Code>
+<a:CreationDate>1336408160</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408204</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o117">
+<a:ObjectID>9DEA6A92-589B-4A71-9FC3-F2BF2FE1B48A</a:ObjectID>
+<a:Name>j</a:Name>
+<a:Code>j</a:Code>
+<a:CreationDate>1336408160</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408204</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o118">
+<a:ObjectID>2F37E95E-DEB2-48A7-95F6-01604D93F64E</a:ObjectID>
+<a:Name>x</a:Name>
+<a:Code>x</a:Code>
+<a:CreationDate>1336408160</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408204</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o119">
+<a:ObjectID>5C5B0FCC-7121-49E4-845F-9B7BC3150380</a:ObjectID>
+<a:Name>y</a:Name>
+<a:Code>y</a:Code>
+<a:CreationDate>1336408160</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408204</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o120">
+<a:ObjectID>AB8612B2-FB18-4414-8B2F-0E0AA3356CE7</a:ObjectID>
+<a:Name>z</a:Name>
+<a:Code>z</a:Code>
+<a:CreationDate>1336408160</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408204</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o121">
+<a:ObjectID>920369C0-0B01-4098-A816-58481488DFF2</a:ObjectID>
+<a:Name>rx</a:Name>
+<a:Code>rx</a:Code>
+<a:CreationDate>1336408160</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408204</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o122">
+<a:ObjectID>C13F5EF1-1862-435F-900A-E6C92096B348</a:ObjectID>
+<a:Name>ry</a:Name>
+<a:Code>ry</a:Code>
+<a:CreationDate>1336408160</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408204</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o123">
+<a:ObjectID>6D3DFAC4-0085-4B0C-B27C-EDBC39617173</a:ObjectID>
+<a:Name>rz</a:Name>
+<a:Code>rz</a:Code>
+<a:CreationDate>1336408160</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408204</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+</c:Parameters>
+<c:InfluentObject>
+<o:Class Ref="o32"/>
+</c:InfluentObject>
+</o:Operation>
+<o:Operation Id="o124">
+<a:ObjectID>1D692DF3-3794-467F-AA91-08413AC7F408</a:ObjectID>
+<a:Name>~Point</a:Name>
+<a:Code>~Point</a:Code>
+<a:CreationDate>1336408153</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336408160</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Stereotype>Destructor</a:Stereotype>
+<a:Automatic>1</a:Automatic>
+<a:TemplateBody>%DefaultBody%</a:TemplateBody>
+<c:InfluentObject>
+<o:Class Ref="o32"/>
 </c:InfluentObject>
 </o:Operation>
 </c:Operations>
@@ -3345,13 +4576,13 @@ Shadow=0</a:DisplayPreferences>
 </o:Generalization>
 </c:Generalizations>
 <c:TargetModels>
-<o:TargetModel Id="o112">
+<o:TargetModel Id="o125">
 <a:ObjectID>1E09A698-04F1-49CA-A912-339F201A7FBB</a:ObjectID>
 <a:Name>C++</a:Name>
 <a:Code>C++</a:Code>
 <a:CreationDate>1336393137</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336393137</a:ModificationDate>
+<a:ModificationDate>1336638407</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:TargetModelURL>file:///%_OBJLANG%/C++.xol</a:TargetModelURL>
 <a:TargetModelID>22FB523D-7E45-430F-8069-3A702CF3BE3C</a:TargetModelID>

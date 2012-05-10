@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{4FE865AA-9C75-46DD-88A8-716EFD5385C1}" Label="" LastModificationDate="1336408240" Name="Bomberman" Objects="137" Symbols="15" Target="C++" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{4FE865AA-9C75-46DD-88A8-716EFD5385C1}" Label="" LastModificationDate="1336638664" Name="Bomberman" Objects="120" Symbols="14" Target="C++" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -12,13 +12,13 @@
 <a:Code>Bomberman</a:Code>
 <a:CreationDate>1336393137</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336407872</a:ModificationDate>
+<a:ModificationDate>1336638664</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:PackageOptionsText>[FolderOptions]
 
 [FolderOptions\Class Diagram Objects]
 GenerationCheckModel=Yes
-GenerationPath=
+GenerationPath=C:\Users\Fiahil\Bomberman\src\
 GenerationOptions=
 GenerationTasks=
 GenerationTargets=
@@ -2473,9 +2473,9 @@ Shadow=0</a:DisplayPreferences>
 <c:Symbols>
 <o:GeneralizationSymbol Id="o5">
 <a:CreationDate>1336403708</a:CreationDate>
-<a:ModificationDate>1336404662</a:ModificationDate>
-<a:Rect>((-1012,-13624), (3787,12657))</a:Rect>
-<a:ListOfPoints>((3787,-13624),(3787,1334),(-1012,1334),(-1012,12657))</a:ListOfPoints>
+<a:ModificationDate>1336638615</a:ModificationDate>
+<a:Rect>((-5365,-13624), (3787,12257))</a:Rect>
+<a:ListOfPoints>((3787,-13624),(3787,1334),(-5365,1334),(-5365,12257))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>7</a:ArrowStyle>
 <a:LineColor>4194432</a:LineColor>
@@ -2493,9 +2493,9 @@ Shadow=0</a:DisplayPreferences>
 </o:GeneralizationSymbol>
 <o:GeneralizationSymbol Id="o9">
 <a:CreationDate>1336404356</a:CreationDate>
-<a:ModificationDate>1336404912</a:ModificationDate>
-<a:Rect>((-1012,12657), (20663,33225))</a:Rect>
-<a:ListOfPoints>((20663,33225),(20663,12657),(-1012,12657))</a:ListOfPoints>
+<a:ModificationDate>1336638594</a:ModificationDate>
+<a:Rect>((-5365,12257), (20663,33225))</a:Rect>
+<a:ListOfPoints>((20663,33225),(20663,12257),(-5365,12257))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>7</a:ArrowStyle>
 <a:LineColor>4194432</a:LineColor>
@@ -2513,9 +2513,9 @@ Shadow=0</a:DisplayPreferences>
 </o:GeneralizationSymbol>
 <o:GeneralizationSymbol Id="o12">
 <a:CreationDate>1336404847</a:CreationDate>
-<a:ModificationDate>1336404900</a:ModificationDate>
-<a:Rect>((-12634,12657), (-1012,33337))</a:Rect>
-<a:ListOfPoints>((-12634,33337),(-12634,23909),(-1012,23909),(-1012,12657))</a:ListOfPoints>
+<a:ModificationDate>1336638615</a:ModificationDate>
+<a:Rect>((-12634,12257), (-5365,33337))</a:Rect>
+<a:ListOfPoints>((-12634,33337),(-12634,23909),(-5365,23909),(-5365,12257))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>7</a:ArrowStyle>
 <a:LineColor>4194432</a:LineColor>
@@ -2533,9 +2533,9 @@ Shadow=0</a:DisplayPreferences>
 </o:GeneralizationSymbol>
 <o:GeneralizationSymbol Id="o15">
 <a:CreationDate>1336405083</a:CreationDate>
-<a:ModificationDate>1336406260</a:ModificationDate>
-<a:Rect>((-1173,9897), (57049,30150))</a:Rect>
-<a:ListOfPoints>((57049,30150),(57049,9897),(-1173,9897))</a:ListOfPoints>
+<a:ModificationDate>1336638594</a:ModificationDate>
+<a:Rect>((-5586,9497), (57049,30150))</a:Rect>
+<a:ListOfPoints>((57049,30150),(57049,9497),(-5586,9497))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>7</a:ArrowStyle>
 <a:LineColor>4194432</a:LineColor>
@@ -2593,9 +2593,9 @@ Shadow=0</a:DisplayPreferences>
 </o:GeneralizationSymbol>
 <o:ClassSymbol Id="o7">
 <a:CreationDate>1336401814</a:CreationDate>
-<a:ModificationDate>1336404108</a:ModificationDate>
+<a:ModificationDate>1336638615</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((-12712,6489), (10688,18825))</a:Rect>
+<a:Rect>((-21418,6089), (10688,18425))</a:Rect>
 <a:AutoAdjustToText>0</a:AutoAdjustToText>
 <a:LineColor>128</a:LineColor>
 <a:FillColor>8637161</a:FillColor>
@@ -2645,7 +2645,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:CreationDate>1336404353</a:CreationDate>
 <a:ModificationDate>1336404912</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((5124,28881), (36202,37569))</a:Rect>
+<a:Rect>((4699,28881), (36627,37569))</a:Rect>
 <a:LineColor>128</a:LineColor>
 <a:FillColor>8637161</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -2691,7 +2691,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:CreationDate>1336405060</a:CreationDate>
 <a:ModificationDate>1336406250</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((40549,23371), (73557,36931))</a:Rect>
+<a:Rect>((39004,23858), (75102,36444))</a:Rect>
 <a:LineColor>128</a:LineColor>
 <a:FillColor>8637161</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -3246,47 +3246,47 @@ Shadow=0</a:DisplayPreferences>
 <a:Code>draw</a:Code>
 <a:CreationDate>1336402667</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336407227</a:ModificationDate>
+<a:ModificationDate>1336638592</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:ReturnType>void</a:ReturnType>
 <a:Operation.Abstract>1</a:Operation.Abstract>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
-<c:Parameters>
-<o:Parameter Id="o37">
-<a:ObjectID>EA301541-7899-4CDB-8CC3-951D1C36AEAE</a:ObjectID>
-<a:Name>clock</a:Name>
-<a:Code>clock</a:Code>
-<a:CreationDate>1336402752</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336402833</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Parameter.DataType>gdl::GameClock const&amp;</a:Parameter.DataType>
-<a:ParameterType>I</a:ParameterType>
-</o:Parameter>
-<o:Parameter Id="o38">
-<a:ObjectID>E0CCE4CB-BFBB-4639-846F-5D6D223997FB</a:ObjectID>
-<a:Name>input</a:Name>
-<a:Code>input</a:Code>
-<a:CreationDate>1336402796</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336402833</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Parameter.DataType>gdl::Input&amp;</a:Parameter.DataType>
-<a:ParameterType>I</a:ParameterType>
-</o:Parameter>
-</c:Parameters>
 </o:Operation>
-<o:Operation Id="o39">
+<o:Operation Id="o37">
 <a:ObjectID>05CDE8E2-36CF-4E50-BBA7-7B7685978BC6</a:ObjectID>
 <a:Name>update</a:Name>
 <a:Code>update</a:Code>
 <a:CreationDate>1336402685</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336407227</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:ReturnType>void</a:ReturnType>
 <a:Operation.Abstract>1</a:Operation.Abstract>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
+<c:Parameters>
+<o:Parameter Id="o38">
+<a:ObjectID>A81DF53D-9B22-47D6-83F8-038A23CE7926</a:ObjectID>
+<a:Name>clock</a:Name>
+<a:Code>clock</a:Code>
+<a:CreationDate>1336638596</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638601</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>gdl::GameClock const&amp;</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o39">
+<a:ObjectID>D5B56D5E-1EB7-4B20-8BC0-AB2E9A83E565</a:ObjectID>
+<a:Name>input</a:Name>
+<a:Code>input</a:Code>
+<a:CreationDate>1336638596</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638601</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>gdl::Input&amp;</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+</c:Parameters>
 </o:Operation>
 <o:Operation Id="o40">
 <a:ObjectID>BBFEF89C-DD50-4E62-9E52-BDA806A426FC</a:ObjectID>
@@ -3544,54 +3544,54 @@ Shadow=0</a:DisplayPreferences>
 <a:Code>draw</a:Code>
 <a:CreationDate>1336403797</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336403797</a:ModificationDate>
+<a:ModificationDate>1336638592</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Stereotype>Override</a:Stereotype>
+<a:ReturnType>void</a:ReturnType>
+<a:Automatic>1</a:Automatic>
+<a:TemplateBody>%DefaultBody%</a:TemplateBody>
+<c:InfluentObject>
+<o:Operation Ref="o36"/>
+</c:InfluentObject>
+</o:Operation>
+<o:Operation Id="o60">
+<a:ObjectID>42101384-C9BA-436F-93C1-AE2DA95655A1</a:ObjectID>
+<a:Name>update</a:Name>
+<a:Code>update</a:Code>
+<a:CreationDate>1336403797</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Stereotype>Override</a:Stereotype>
 <a:ReturnType>void</a:ReturnType>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o60">
-<a:ObjectID>E7E811FB-39E2-4865-AF68-6509422254E3</a:ObjectID>
+<o:Parameter Id="o61">
+<a:ObjectID>B17DAD47-4205-4643-9035-B661787F7C3B</a:ObjectID>
 <a:Name>clock</a:Name>
 <a:Code>clock</a:Code>
-<a:CreationDate>1336403797</a:CreationDate>
+<a:CreationDate>1336638600</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336403797</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>gdl::GameClock const&amp;</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
-<o:Parameter Id="o61">
-<a:ObjectID>120B367D-6A89-4E2D-ADC4-4B89F232E0BB</a:ObjectID>
+<o:Parameter Id="o62">
+<a:ObjectID>EBEFC5CD-B719-4998-BB7B-F346335CB187</a:ObjectID>
 <a:Name>input</a:Name>
 <a:Code>input</a:Code>
-<a:CreationDate>1336403797</a:CreationDate>
+<a:CreationDate>1336638600</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336403797</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>gdl::Input&amp;</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
 </c:Parameters>
 <c:InfluentObject>
-<o:Operation Ref="o36"/>
-</c:InfluentObject>
-</o:Operation>
-<o:Operation Id="o62">
-<a:ObjectID>42101384-C9BA-436F-93C1-AE2DA95655A1</a:ObjectID>
-<a:Name>update</a:Name>
-<a:Code>update</a:Code>
-<a:CreationDate>1336403797</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336403797</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Stereotype>Override</a:Stereotype>
-<a:ReturnType>void</a:ReturnType>
-<a:Automatic>1</a:Automatic>
-<a:TemplateBody>%DefaultBody%</a:TemplateBody>
-<c:InfluentObject>
-<o:Operation Ref="o39"/>
+<o:Operation Ref="o37"/>
 </c:InfluentObject>
 </o:Operation>
 <o:Operation Id="o63">
@@ -3767,54 +3767,54 @@ Shadow=0</a:DisplayPreferences>
 <a:Code>draw</a:Code>
 <a:CreationDate>1336404453</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336404453</a:ModificationDate>
+<a:ModificationDate>1336638592</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Stereotype>Override</a:Stereotype>
+<a:ReturnType>void</a:ReturnType>
+<a:Automatic>1</a:Automatic>
+<a:TemplateBody>%DefaultBody%</a:TemplateBody>
+<c:InfluentObject>
+<o:Operation Ref="o36"/>
+</c:InfluentObject>
+</o:Operation>
+<o:Operation Id="o75">
+<a:ObjectID>A88F56DF-28E4-435C-8C1D-0769D329F749</a:ObjectID>
+<a:Name>update</a:Name>
+<a:Code>update</a:Code>
+<a:CreationDate>1336404453</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Stereotype>Override</a:Stereotype>
 <a:ReturnType>void</a:ReturnType>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o75">
-<a:ObjectID>C43D2BD3-E685-437D-93B5-A3B9B4EA601B</a:ObjectID>
+<o:Parameter Id="o76">
+<a:ObjectID>668DBCC1-A2C1-46A5-915F-6B0F973380EB</a:ObjectID>
 <a:Name>clock</a:Name>
 <a:Code>clock</a:Code>
-<a:CreationDate>1336404453</a:CreationDate>
+<a:CreationDate>1336638600</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336404453</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>gdl::GameClock const&amp;</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
-<o:Parameter Id="o76">
-<a:ObjectID>0E256832-7AB4-42E0-BED4-FA25592A191E</a:ObjectID>
+<o:Parameter Id="o77">
+<a:ObjectID>FB89A9D6-09A9-4EE6-94B9-A40D37EC028A</a:ObjectID>
 <a:Name>input</a:Name>
 <a:Code>input</a:Code>
-<a:CreationDate>1336404453</a:CreationDate>
+<a:CreationDate>1336638600</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336404453</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>gdl::Input&amp;</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
 </c:Parameters>
 <c:InfluentObject>
-<o:Operation Ref="o36"/>
-</c:InfluentObject>
-</o:Operation>
-<o:Operation Id="o77">
-<a:ObjectID>A88F56DF-28E4-435C-8C1D-0769D329F749</a:ObjectID>
-<a:Name>update</a:Name>
-<a:Code>update</a:Code>
-<a:CreationDate>1336404453</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336404453</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Stereotype>Override</a:Stereotype>
-<a:ReturnType>void</a:ReturnType>
-<a:Automatic>1</a:Automatic>
-<a:TemplateBody>%DefaultBody%</a:TemplateBody>
-<c:InfluentObject>
-<o:Operation Ref="o39"/>
+<o:Operation Ref="o37"/>
 </c:InfluentObject>
 </o:Operation>
 </c:Operations>
@@ -3973,7 +3973,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Code>Map</a:Code>
 <a:CreationDate>1336405060</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336407806</a:ModificationDate>
+<a:ModificationDate>1336638534</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <c:Attributes>
@@ -4010,20 +4010,9 @@ Shadow=0</a:DisplayPreferences>
 <a:DataType>size_t</a:DataType>
 <a:Attribute.Visibility>-</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o91">
-<a:ObjectID>D4BC3D55-D61E-45D5-AEE1-58796D681831</a:ObjectID>
-<a:Name>Attribut_4</a:Name>
-<a:Code>Attribut_4</a:Code>
-<a:CreationDate>1336405967</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336406248</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:DataType>int</a:DataType>
-<a:Attribute.Visibility>-</a:Attribute.Visibility>
-</o:Attribute>
 </c:Attributes>
 <c:Operations>
-<o:Operation Id="o92">
+<o:Operation Id="o91">
 <a:ObjectID>E99E9C99-A47A-436B-B7A9-14792971783D</a:ObjectID>
 <a:Name>break</a:Name>
 <a:Code>break</a:Code>
@@ -4034,7 +4023,7 @@ Shadow=0</a:DisplayPreferences>
 <a:ReturnType>Pattern</a:ReturnType>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o93">
+<o:Parameter Id="o92">
 <a:ObjectID>6F268F6C-E32D-457D-BAD4-A8475AC5DAA0</a:ObjectID>
 <a:Name>origin</a:Name>
 <a:Code>origin</a:Code>
@@ -4045,7 +4034,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Parameter.DataType>Pattern</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
-<o:Parameter Id="o94">
+<o:Parameter Id="o93">
 <a:ObjectID>72E34776-45AD-4BBA-9986-85A58589D3DA</a:ObjectID>
 <a:Name>bonus</a:Name>
 <a:Code>bonus</a:Code>
@@ -4058,30 +4047,19 @@ Shadow=0</a:DisplayPreferences>
 </o:Parameter>
 </c:Parameters>
 </o:Operation>
-<o:Operation Id="o95">
+<o:Operation Id="o94">
 <a:ObjectID>96199847-BBD1-49F6-8925-CF1C61FB2CAA</a:ObjectID>
 <a:Name>Map</a:Name>
 <a:Code>Map</a:Code>
 <a:CreationDate>1336405233</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405954</a:ModificationDate>
+<a:ModificationDate>1336638513</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Stereotype>Constructor</a:Stereotype>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o96">
-<a:ObjectID>A251D28E-33DA-4E52-A87E-B1CF496900B3</a:ObjectID>
-<a:Name>map</a:Name>
-<a:Code>map</a:Code>
-<a:CreationDate>1336405917</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405927</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Parameter.DataType>std::string</a:Parameter.DataType>
-<a:ParameterType>I</a:ParameterType>
-</o:Parameter>
-<o:Parameter Id="o97">
+<o:Parameter Id="o95">
 <a:ObjectID>4DEC2ECD-A702-4C60-B3E2-AB163B8400EA</a:ObjectID>
 <a:Name>x</a:Name>
 <a:Code>x</a:Code>
@@ -4092,13 +4070,35 @@ Shadow=0</a:DisplayPreferences>
 <a:Parameter.DataType>size_t</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
-<o:Parameter Id="o98">
+<o:Parameter Id="o96">
 <a:ObjectID>C21CEBBD-A84C-434C-AE56-BCAA42E6B531</a:ObjectID>
 <a:Name>y</a:Name>
 <a:Code>y</a:Code>
 <a:CreationDate>1336405933</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
 <a:ModificationDate>1336405954</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>size_t</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o97">
+<a:ObjectID>70662174-6CAD-4EB2-9F15-8B6A8DB12D0C</a:ObjectID>
+<a:Name>dwallDensity</a:Name>
+<a:Code>dwallDensity</a:Code>
+<a:CreationDate>1336638451</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638513</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Parameter.DataType>size_t</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o98">
+<a:ObjectID>143844E0-61E7-4B32-82D9-AE21111D8263</a:ObjectID>
+<a:Name>iwallDensity</a:Name>
+<a:Code>iwallDensity</a:Code>
+<a:CreationDate>1336638451</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638513</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>size_t</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
@@ -4200,54 +4200,54 @@ Shadow=0</a:DisplayPreferences>
 <a:Code>draw</a:Code>
 <a:CreationDate>1336405340</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405340</a:ModificationDate>
+<a:ModificationDate>1336638592</a:ModificationDate>
+<a:Modifier>Fiahil</a:Modifier>
+<a:Stereotype>Override</a:Stereotype>
+<a:ReturnType>void</a:ReturnType>
+<a:Automatic>1</a:Automatic>
+<a:TemplateBody>%DefaultBody%</a:TemplateBody>
+<c:InfluentObject>
+<o:Operation Ref="o36"/>
+</c:InfluentObject>
+</o:Operation>
+<o:Operation Id="o106">
+<a:ObjectID>74C68EF5-6E37-4464-AD6A-15096297D4BA</a:ObjectID>
+<a:Name>update</a:Name>
+<a:Code>update</a:Code>
+<a:CreationDate>1336405342</a:CreationDate>
+<a:Creator>Fiahil</a:Creator>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Stereotype>Override</a:Stereotype>
 <a:ReturnType>void</a:ReturnType>
 <a:Automatic>1</a:Automatic>
 <a:TemplateBody>%DefaultBody%</a:TemplateBody>
 <c:Parameters>
-<o:Parameter Id="o106">
-<a:ObjectID>B4B3D681-B1E0-4247-B01F-9CF40C89F8FD</a:ObjectID>
+<o:Parameter Id="o107">
+<a:ObjectID>A939CDBB-E609-43D3-B561-7260257FC8CD</a:ObjectID>
 <a:Name>clock</a:Name>
 <a:Code>clock</a:Code>
-<a:CreationDate>1336405340</a:CreationDate>
+<a:CreationDate>1336638600</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405340</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>gdl::GameClock const&amp;</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
-<o:Parameter Id="o107">
-<a:ObjectID>D8F60491-E393-4119-A418-38363E2A4E17</a:ObjectID>
+<o:Parameter Id="o108">
+<a:ObjectID>1F5727CC-84CA-4D3E-9BFB-D842DCC05A5A</a:ObjectID>
 <a:Name>input</a:Name>
 <a:Code>input</a:Code>
-<a:CreationDate>1336405340</a:CreationDate>
+<a:CreationDate>1336638600</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405340</a:ModificationDate>
+<a:ModificationDate>1336638601</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:Parameter.DataType>gdl::Input&amp;</a:Parameter.DataType>
 <a:ParameterType>I</a:ParameterType>
 </o:Parameter>
 </c:Parameters>
 <c:InfluentObject>
-<o:Operation Ref="o36"/>
-</c:InfluentObject>
-</o:Operation>
-<o:Operation Id="o108">
-<a:ObjectID>74C68EF5-6E37-4464-AD6A-15096297D4BA</a:ObjectID>
-<a:Name>update</a:Name>
-<a:Code>update</a:Code>
-<a:CreationDate>1336405342</a:CreationDate>
-<a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336405342</a:ModificationDate>
-<a:Modifier>Fiahil</a:Modifier>
-<a:Stereotype>Override</a:Stereotype>
-<a:ReturnType>void</a:ReturnType>
-<a:Automatic>1</a:Automatic>
-<a:TemplateBody>%DefaultBody%</a:TemplateBody>
-<c:InfluentObject>
-<o:Operation Ref="o39"/>
+<o:Operation Ref="o37"/>
 </c:InfluentObject>
 </o:Operation>
 </c:Operations>
@@ -4582,7 +4582,7 @@ Shadow=0</a:DisplayPreferences>
 <a:Code>C++</a:Code>
 <a:CreationDate>1336393137</a:CreationDate>
 <a:Creator>Fiahil</a:Creator>
-<a:ModificationDate>1336393137</a:ModificationDate>
+<a:ModificationDate>1336638407</a:ModificationDate>
 <a:Modifier>Fiahil</a:Modifier>
 <a:TargetModelURL>file:///%_OBJLANG%/C++.xol</a:TargetModelURL>
 <a:TargetModelID>22FB523D-7E45-430F-8069-3A702CF3BE3C</a:TargetModelID>

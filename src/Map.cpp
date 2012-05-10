@@ -1,7 +1,7 @@
 /***********************************************************************
  * Module:  Map.cpp
  * Author:  Fiahil
- * Modified: Monday, May 07, 2012 6:23:26 PM
+ * Modified: Thursday, May 10, 2012 10:28:54 AM
  * Purpose: Implementation of the class Map
  ***********************************************************************/
 
@@ -22,16 +22,17 @@ Pattern Map::break(Pattern origin, std::list<Bonus>& bonus)
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Map::Map(std::string map, size_t x, size_t y)
+// Name:       Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
 // Purpose:    Implementation of Map::Map()
 // Parameters:
-// - map
 // - x
 // - y
+// - dwallDensity
+// - iwallDensity
 // Return:     
 ////////////////////////////////////////////////////////////////////////
 
-Map::Map(std::string map, size_t x, size_t y)
+Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
 {
    // TODO : implement
 }
@@ -73,7 +74,6 @@ Map::Map(const Map& oldMap)
    _map = oldMap._map;
    _x = oldMap._x;
    _y = oldMap._y;
-   Attribut_4 = oldMap.Attribut_4;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -88,26 +88,26 @@ void Map::initialize(void)
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Map::draw(gdl::GameClock const& clock, gdl::Input& input)
+// Name:       Map::draw()
 // Purpose:    Implementation of Map::draw()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Map::draw(void)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Map::update(gdl::GameClock const& clock, gdl::Input& input)
+// Purpose:    Implementation of Map::update()
 // Parameters:
 // - clock
 // - input
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Map::draw(gdl::GameClock const& clock, gdl::Input& input)
-{
-   // TODO : implement
-}
-
-////////////////////////////////////////////////////////////////////////
-// Name:       Map::update()
-// Purpose:    Implementation of Map::update()
-// Return:     void
-////////////////////////////////////////////////////////////////////////
-
-void Map::update(void)
+void Map::update(gdl::GameClock const& clock, gdl::Input& input)
 {
    // TODO : implement
 }

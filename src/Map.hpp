@@ -1,7 +1,7 @@
 /***********************************************************************
  * Module:  Map.h
  * Author:  Fiahil
- * Modified: Monday, May 07, 2012 6:23:26 PM
+ * Modified: Thursday, May 10, 2012 10:28:54 AM
  * Purpose: Declaration of the class Map
  ***********************************************************************/
 
@@ -14,12 +14,12 @@ class Map : public AObj
 {
 public:
    Pattern break(Pattern origin, std::list<Bonus>& bonus);
-   Map(std::string map, size_t x, size_t y);
+   Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity);
    Map(std::string file);
    ~Map();
    void initialize(void);
-   void draw(gdl::GameClock const& clock, gdl::Input& input);
-   void update(void);
+   void draw(void);
+   void update(gdl::GameClock const& clock, gdl::Input& input);
 
 protected:
 private:
@@ -28,7 +28,6 @@ private:
    std::string _map;
    size_t _x;
    size_t _y;
-   int Attribut_4;
 
 
 };

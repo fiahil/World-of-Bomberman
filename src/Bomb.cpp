@@ -54,26 +54,26 @@ void Bomb::initialize(void)
 }
 
 ////////////////////////////////////////////////////////////////////////
-// Name:       Bomb::draw(gdl::GameClock const& clock, gdl::Input& input)
+// Name:       Bomb::draw()
 // Purpose:    Implementation of Bomb::draw()
+// Return:     void
+////////////////////////////////////////////////////////////////////////
+
+void Bomb::draw(void)
+{
+   // TODO : implement
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Bomb::update(gdl::GameClock const& clock, gdl::Input& input)
+// Purpose:    Implementation of Bomb::update()
 // Parameters:
 // - clock
 // - input
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Bomb::draw(gdl::GameClock const& clock, gdl::Input& input)
-{
-   // TODO : implement
-}
-
-////////////////////////////////////////////////////////////////////////
-// Name:       Bomb::update()
-// Purpose:    Implementation of Bomb::update()
-// Return:     void
-////////////////////////////////////////////////////////////////////////
-
-void Bomb::update(void)
+void Bomb::update(gdl::GameClock const& clock, gdl::Input& input)
 {
    // TODO : implement
 }

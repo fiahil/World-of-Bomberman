@@ -17,8 +17,8 @@ public:
    Bomb(eBomb t);
    ~Bomb();
    void initialize(void);
-   void draw(gdl::GameClock const& clock, gdl::Input& input);
-   void update(void);
+   void draw(void);
+   void update(gdl::GameClock const& clock, gdl::Input& input);
 
 protected:
 private:

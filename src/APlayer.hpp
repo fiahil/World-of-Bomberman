@@ -16,8 +16,8 @@ public:
    virtual void play(void)=0;
    void takeDamage(Point origin, Pattern pattern);
    void initialize(void);
-   void draw(gdl::GameClock const& clock, gdl::Input& input);
-   void update(void);
+   void draw(void);
+   void update(gdl::GameClock const& clock, gdl::Input& input);
    APlayer(std::string const& name);
    ~APlayer();
 
