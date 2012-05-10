@@ -6,7 +6,7 @@
 
 NAME	=	serializer
 
-SRCXX	=	$(wildcard ./*.cpp)
+SRCXX	=	main.cpp
 
 OBJXX	=	$(SRCXX:.cpp=.o)
 
@@ -20,13 +20,13 @@ CXX	=	g++
 all:		gen $(NAME)
 
 gen:
-	bison Parser.y
-	flex Scanner.lex
+	bison -b Profile ProfileLoader.yxx
+	bison -b Save SaveLoader.yxx
+	flex ProfileScanner.lex
+	flex SaveScanner.lex
 
 $(NAME):	$(OBJXX)
-	$(CXX) -o parser.o	-c Parser.tab.c $(CXXFLAGS)
-	$(CXX) -o scanner.o	-c lex.yy.cc $(CXXFLAGS)
-	$(CXX) -o $(NAME) parser.o scanner.o $(OBJXX)
+	$(CXX) -o $(NAME) $(OBJXX)
 
 debug:		CXXFLAGS = -Wall -Wextra -g -I./include
 debug:		clean $(OBJXX)
@@ -37,7 +37,6 @@ clean:
 	rm -Rf *~ *.o
 
 fclean:		clean
-	@rm -f Parser.tab.c Parser.tab.h location.hh position.hh stack.hh lex.yy.cc
 	rm -f $(NAME)
 
 re:		fclean all
