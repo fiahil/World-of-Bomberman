@@ -11,8 +11,8 @@
 class Cube
 {
 private:
-  Image*	_txt;
-  double	scale;
+  gdl::Image*	_txt;
+  double	_scale;
 
 private:
   Cube(Cube const&);

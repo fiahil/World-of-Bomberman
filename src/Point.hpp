@@ -12,14 +12,12 @@ class Point
 {
 public:
   Point(double scale, int x, int y)
-  Point(double scale, int i, int j, Vector const& rot);
   ~Point();
   
   int _x;
   int _y;
   double _scale;
   Vector _pos;
-  Vector _rot;
 
 protected:
 private:

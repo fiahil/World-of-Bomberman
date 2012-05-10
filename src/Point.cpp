@@ -31,17 +31,6 @@ Point::Point(double scale, int x, int y) : _x(x), _y(y), _scale(scale), _rot(0.0
 // Return:     
 ////////////////////////////////////////////////////////////////////////
 
-Point::Point(double scale, int x, int y, Vector const& rot) : _x(x), _y(y), _scale(scale), _rot(rot)
-{
-  this->calcRealpos();
-}
-
-////////////////////////////////////////////////////////////////////////
-// Name:       Point::~Point()
-// Purpose:    Implementation of Point::~Point()
-// Return:     
-////////////////////////////////////////////////////////////////////////
-
 Point::~Point()
 {
 }
