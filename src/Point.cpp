@@ -16,7 +16,7 @@
 // Return:     
 ////////////////////////////////////////////////////////////////////////
 
-Point::Point(double scale, int x, int y) : _x(x), _y(y), _scale(scale), _rot(0.0f, 0.0f, 0.0f)
+Point::Point(double scale, int x, int y) : _x(x), _y(y), _scale(scale)
 {
   this->calcRealpos();
 }
@@ -33,6 +33,21 @@ Point::Point(double scale, int x, int y) : _x(x), _y(y), _scale(scale), _rot(0.0
 
 Point::~Point()
 {
+}
+
+////////////////////////////////////////////////////////////////////////
+// Name:       Point::setPos()
+// Purpose:    Implementation of Point::setPos()
+// - x
+// - y
+// Return:     
+////////////////////////////////////////////////////////////////////////
+
+void	Point::setPos(int x, int y)
+{
+  this->_x = x;
+  this->_y = y;
+  this->calcRealpos();
 }
 
 ////////////////////////////////////////////////////////////////////////

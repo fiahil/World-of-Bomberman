@@ -5,7 +5,7 @@
 // Login   <lemonn_v@epitech.net>
 // 
 // Started on  Mon May  7 11:56:59 2012 vincent lemonnier
-// Last update Mon May  7 14:27:23 2012 vincent lemonnier
+// Last update Thu May 10 22:14:47 2012 vincent lemonnier
 //
 
 #ifndef __CAMERA_HPP__

@@ -5,14 +5,16 @@
  * Purpose: Declaration of the class Cube
  ***********************************************************************/
 
+#include <GL/gl.h>
+#include <iostream>
 #include "Cube.hpp"
 
-Cube::Cube(Point const& p) : _pos(p), _txt(0), _scale(1.0f)
+/*Cube::Cube() : _p(0), _txt(0), _scale(1.0f)
 {
   
-}
+}*/
 
-Cube::Cube(Point const& p, gdl::Image* txt, double scale) : _pos(p), _txt(txt), _scale(scale)
+Cube::Cube(gdl::Image& txt, double scale) : _p(0), _txt(txt), _scale(scale)
 {
   
 }
@@ -30,10 +32,13 @@ void	Cube::initialize()
 void	Cube::draw()
 {
   glPushMatrix();
-  glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
-  glColor3ub(255, 255, 255);
+  std::cout << "x = " << this->_p->_pos.x << " "
+	    << "y = " << this->_p->_pos.y << " "
+	    << "z = " << this->_p->_pos.z << " " << std::endl;
+  glTranslatef(this->_p->_pos.x, this->_p->_pos.y, this->_p->_pos.z);
+  glColor3ub(255, 0, 255);
   glEnable(GL_TEXTURE_2D);
-  this->_txt->bind();
+  this->_txt.bind();
   glBegin(GL_QUADS);
 
   // Front
@@ -107,7 +112,13 @@ void	Cube::draw()
   glPopMatrix();
 }
 
-void	Cube::update(gdl::GameClock const& clock, gdl::Input& input)
+void	Cube::draw(Point& p)
+{
+  this->_p = &p;
+  this->draw();
+}
+
+void	Cube::update(gdl::GameClock const&, gdl::Input&)
 {
 
 }

@@ -8,23 +8,31 @@
 #ifndef __CUBE_HPP__
 #define __CUBE_HPP__
 
-class Cube
+#include <Image.hpp>
+#include <Input.hpp>
+#include <GameClock.hpp>
+#include "AObj.hpp"
+#include "Point.hpp"
+
+class Cube : public AObj
 {
 private:
-  gdl::Image*	_txt;
+  Point*	_p;
+  gdl::Image&	_txt;
   double	_scale;
 
 private:
   Cube(Cube const&);
   Cube&	operator=(Cube const&);
+  virtual void	draw();
   
 public:
-  Cube(Point const&);
-  Cube(Point const&, gdl::Image*, double scale = 1.0f);
+  //Cube();
+  Cube(gdl::Image&, double scale = 1.0f);
   ~Cube();
   virtual void	initialize();
-  virtual void	draw();
   virtual void	update(gdl::GameClock const& clock, gdl::Input& input);
+  void	draw(Point&);
 };
 
 #else

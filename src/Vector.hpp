@@ -19,7 +19,7 @@ public:
   Vector();
   Vector(double, double, double);
   Vector(Vector const&);
-  Vector&	operator=(Vector cosnt&);
+  Vector&	operator=(Vector const&);
   ~Vector();
 };
 
