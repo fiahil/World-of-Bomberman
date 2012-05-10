@@ -8,10 +8,10 @@
 %skeleton "lalr1.cc"
 %defines
 %locations
-%define namespace Serializer
-%define parser_class_name "Parser"
-%parse-param	{ Serializer::Scanner &scanner }
-%lex-param	{ Serializer::Scanner &scanner }
+%define namespace "Serializer::Profile"
+%define parser_class_name "Loader"
+%parse-param	{ Serializer::Profile::Scanner &scanner }
+%lex-param	{ Serializer::Profile::Scanner &scanner }
 %destructor	{ delete $$.sval; } "identifier"
 
 %code requires {
@@ -20,18 +20,19 @@
 #include <sstream>
 
   namespace Serializer {
-    class Scanner;
+    namespace Profile {
+      class Scanner;
+    }
   }
- }
+}
 
 %code {
-  static int yylex(Serializer::Parser::semantic_type* yylval,
-		   Serializer::Parser::location_type* yylloc,
-		   Serializer::Scanner &scanner);
- }
+  static int yylex(Serializer::Profile::Loader::semantic_type* yylval,
+		   Serializer::Profile::Loader::location_type* yylloc,
+		   Serializer::Profile::Scanner &scanner);
+}
 
-%union
- {
+%union {
    size_t	ival;
    std::string*	sval;
 };
@@ -114,7 +115,8 @@ config
 %%
 
 namespace Serializer {
-  void		Parser::error(Parser::location_type const& loc,
+namespace Profile {
+  void		Loader::error(Loader::location_type const& loc,
 			      std::string const& msg) {
     std::ostringstream	ret;
 
@@ -122,11 +124,12 @@ namespace Serializer {
 	<< " column " << loc.begin.column << ":\n-- " << msg;
     throw std::runtime_error(ret.str());
   }
+ }
 }
 
-#include "Scanner.hpp"
-static int	yylex(Serializer::Parser::semantic_type* yylval,
-		      Serializer::Parser::location_type* yylloc,
-		      Serializer::Scanner &scanner) {
+#include "ProfileScanner.hpp"
+static int	yylex(Serializer::Profile::Loader::semantic_type* yylval,
+		      Serializer::Profile::Loader::location_type* yylloc,
+		      Serializer::Profile::Scanner &scanner) {
   return scanner.yylex(yylval, yylloc);
 }

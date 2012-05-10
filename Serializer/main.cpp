@@ -4,7 +4,8 @@
  * 3 mai 2012
  */
 
-#include "Scanner.hpp"
+#include "ProfileScanner.hpp"
+#include "SaveScanner.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -19,10 +20,18 @@ int	main(int argc, char** argv) {
       std::cerr << "Cannot open file: " << argv[i] << std::endl;
       continue;
     }
-    Serializer::Scanner	loader(input);
-    Serializer::Parser	parser(loader);
+    {
+      Serializer::Profile::Scanner	scanner(input);
+      Serializer::Profile::Loader	loader(scanner);
 
-    parser.parse();
+      loader.parse();
+    }
+    {
+      Serializer::Save::Scanner		scanner(input);
+      Serializer::Save::Loader		loader(scanner);
+
+      loader.parse();
+    }
   }
   return 0;
 }

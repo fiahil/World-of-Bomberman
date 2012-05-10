@@ -6,11 +6,15 @@
 
 NAME	=	serializer
 
-SRCXX	=	main.cpp
+SRCXX	=	main.cpp			\
+		./Profile/lex.yy.cpp		\
+		./Profile/ProfileLoader.tab.cpp	\
+		./Save/lex.yy.cpp		\
+		./Save/SaveLoader.tab.cpp
 
 OBJXX	=	$(SRCXX:.cpp=.o)
 
-CXXFLAGS=	-Wall -Wextra -O3 -I./include
+CXXFLAGS=	-Wall -Wextra -O3 -I./Save -I./Profile -I ./
 
 CXX	=	g++
 
@@ -20,15 +24,22 @@ CXX	=	g++
 all:		gen $(NAME)
 
 gen:
-	bison -b Profile ProfileLoader.yxx
-	bison -b Save SaveLoader.yxx
-	flex ProfileScanner.lex
-	flex SaveScanner.lex
+	@cd ./Profile &&		\
+	bison ProfileLoader.ypp &&	\
+	flex -o lex.yy.cpp ProfileScanner.lex &&	\
+	echo "Profile Loader OK" &&	\
+	echo "Profile Scanner OK"
+
+	@cd ./Save &&			\
+	bison SaveLoader.ypp &&		\
+	flex -o lex.yy.cpp SaveScanner.lex &&	\
+	echo "Save Loader OK" &&	\
+	echo "Save Scanner OK"
 
 $(NAME):	$(OBJXX)
 	$(CXX) -o $(NAME) $(OBJXX)
 
-debug:		CXXFLAGS = -Wall -Wextra -g -I./include
+debug:		CXXFLAGS = -Wall -Wextra -g
 debug:		clean $(OBJXX)
 	$(CXX) -o $(NAME) $(OBJXX)
 
