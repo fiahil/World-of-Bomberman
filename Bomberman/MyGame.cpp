@@ -5,7 +5,7 @@
 // Login   <lemonn_v@epitech.net>
 // 
 // Started on  Mon Apr 23 18:10:08 2012 vincent lemonnier
-// Last update Mon May  7 14:54:28 2012 vincent lemonnier
+// Last update Thu May 10 12:08:42 2012 vincent lemonnier
 //
 
 #include <GL/gl.h>
@@ -27,11 +27,12 @@ void	MyGame::initialize()
   this->window_.setTitle("Bomberman v1.0");
   this->window_.create();
   this->_camera.initialize();
-  this->_test = gdl::Model::load("test.fbx");
+  this->_test = gdl::Model::load("marvin.fbx");
 }
 
 void	MyGame::update()
 {
+  this->_camera.update(this->gameClock_, this->input_);
   this->_test.update(this->gameClock_);
 }
 

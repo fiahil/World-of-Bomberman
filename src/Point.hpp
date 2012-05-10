@@ -11,16 +11,19 @@
 class Point
 {
 public:
-   Point(int i, int j, int x, int y, int z, int rx, int ry, int rz);
-   ~Point();
-
-   int _x;
-   int _y;
-   Vector _pos;
-   Vector _rot;
+  Point(double scale, int x, int y)
+  Point(double scale, int i, int j, Vector const& rot);
+  ~Point();
+  
+  int _x;
+  int _y;
+  double _scale;
+  Vector _pos;
+  Vector _rot;
 
 protected:
 private:
+  void	calcRealpos();
 
 };
 
