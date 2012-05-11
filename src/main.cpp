@@ -5,15 +5,15 @@
 // Login   <lemonn_v@epitech.net>
 // 
 // Started on  Thu May 10 22:24:44 2012 vincent lemonnier
-// Last update Thu May 10 22:26:35 2012 vincent lemonnier
+// Last update Fri May 11 20:24:19 2012 vincent lemonnier
 //
 
-#include "GamePlay.hpp"
+#include "Menu.hpp"
 
 int	main()
 {
-  GamePlay	game;
+  Menu	bomberman;
 
-  game.run();
+  bomberman.run();
   return 0;
 }

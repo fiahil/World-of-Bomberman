@@ -15,11 +15,13 @@
 class AObj
 {
 public:
-   virtual void initialize(void)=0;
-   virtual void draw(void)=0;
-   virtual void update(gdl::GameClock const& clock, gdl::Input& input)=0;
-   AObj();
-   ~AObj();
+  virtual void initialize(void) = 0;
+  virtual void draw(void) = 0;
+  virtual void update(gdl::GameClock const& clock, gdl::Input& input) = 0;
+  AObj();
+  ~AObj();
+  void	setPos(int, int);
+  Point const&	getPos() const;
 
 protected:
    Point _pos;

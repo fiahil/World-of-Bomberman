@@ -5,7 +5,7 @@
  * Purpose: Implementation of the class AI
  ***********************************************************************/
 
-#include "AI.h"
+#include "AI.hpp"
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       AI::play()
@@ -13,7 +13,7 @@
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void AI::play(void)
+void AI::play(gdl::GameClock const&, gdl::Input&)
 {
    // TODO : implement
 }
