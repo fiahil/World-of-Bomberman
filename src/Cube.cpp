@@ -32,9 +32,6 @@ void	Cube::initialize()
 void	Cube::draw()
 {
   glPushMatrix();
-  std::cout << "x = " << this->_p->_pos.x << " "
-	    << "y = " << this->_p->_pos.y << " "
-	    << "z = " << this->_p->_pos.z << " " << std::endl;
   glTranslatef(this->_p->_pos.x, this->_p->_pos.y, this->_p->_pos.z);
   glColor3ub(255, 0, 255);
   glEnable(GL_TEXTURE_2D);

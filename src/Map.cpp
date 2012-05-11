@@ -166,15 +166,9 @@ void Map::draw(void)
       {
 	p.setPos(x, y);
 	if (this->_map[POS(x, y)] == '1')
-	  {
-	    std::cout << "unbreak" << std::endl;
-	    w_unbreak.draw(p);
-	  }
+	  w_unbreak.draw(p);
 	else if (this->_map[POS(x, y)] == '2')
-	  {
-	    std::cout << "break" << std::endl;
-	    w_break.draw(p);
-	  }
+	  w_break.draw(p);
       }
 }
 
