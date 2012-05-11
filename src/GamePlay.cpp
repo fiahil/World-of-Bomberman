@@ -9,7 +9,7 @@
 #include <iostream>
 #include "GamePlay.hpp"
 
-GamePlay::GamePlay() : _camera(800, 600), _map(20, 20, 1, 2)
+GamePlay::GamePlay() : _camera(800, 600), _map(100, 100, 2, 2)
 {
   this->setContentRoot("./Ressources");
 }
