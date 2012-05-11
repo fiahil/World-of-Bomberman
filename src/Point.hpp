@@ -8,19 +8,23 @@
 #if !defined(__Bomberman_Point_h)
 #define __Bomberman_Point_h
 
+#include "Vector.hpp"
+
 class Point
 {
 public:
-   Point(int i, int j, int x, int y, int z, int rx, int ry, int rz);
-   ~Point();
-
-   int _x;
-   int _y;
-   Vector _pos;
-   Vector _rot;
+  Point(double scale, int x, int y);
+  ~Point();
+  void	setPos(int x, int y);
+  
+  int _x;
+  int _y;
+  double _scale;
+  Vector _pos;
 
 protected:
 private:
+  void	calcRealpos();
 
 };
 

@@ -8,6 +8,10 @@
 #if !defined(__Bomberman_AObj_h)
 #define __Bomberman_AObj_h
 
+#include <GameClock.hpp>
+#include <Input.hpp>
+#include "Point.hpp"
+
 class AObj
 {
 public:
