@@ -28,6 +28,8 @@
 #include <string.h>
 #include <GL/glut.h>
 
+#include "Sound.hpp"
+
 #define VIEWPORT_WIDTH              640
 #define VIEWPORT_HEIGHT             480
 #define KEY_ESCAPE                  27
@@ -45,6 +47,9 @@ GLvoid OnIdle();
 int main(int argc, char* argv[])
 {
 
+  //Sound	player(1);
+
+  //player.loadSound("VideoGetting.mp3", 0);
 	// Create GLUT Window
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
@@ -56,10 +61,10 @@ int main(int argc, char* argv[])
 	// If multiple cameras are installed, please choose correct index
 	g_Capture = cvCaptureFromAVI(argv[1]);
 	assert(g_Capture);
-
 	// Initialize OpenGL
 	InitGL();
 
+	//player.playSound(0);
 	glutMainLoop();
 
 	return 0;
@@ -125,18 +130,14 @@ GLvoid OnKeyPress(unsigned char key, int x, int y)
 
 GLvoid OnIdle()
 {
-  std::cout << "ICI " << std::endl;
 	// Capture next frame
 	IplImage *image = cvQueryFrame(g_Capture);
-  std::cout << "ICI 1" << std::endl;
 
 	// Convert to RGB
 	cvCvtColor(image, image, CV_BGR2RGB);
- std::cout << "ICI 2" << std::endl;
 
 	// Create Texture
 	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, image->width, image->height, GL_RGB, GL_UNSIGNED_BYTE, image->imageData);
- std::cout << "ICI 3" << std::endl;
 
 	// Update View port
 	glutPostRedisplay();

@@ -9,7 +9,10 @@
 #include <time.h>
 #include <fstream>
 #include <sstream>
-#include "Map.h"
+#include <iostream>
+#include "Cube.hpp"
+#include "Plane.hpp"
+#include "Map.hpp"
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       Map::break(Pattern origin, std::list<Bonus>& bonus)
@@ -20,10 +23,10 @@
 // Return:     Pattern
 ////////////////////////////////////////////////////////////////////////
 
-Pattern Map::break(Pattern origin, std::list<Bonus>& bonus)
+/*Pattern Map::explode(Pattern origin, std::list<Bonus>& bonus)
 {
    // TODO : implement
-}
+   }*/
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
@@ -71,14 +74,14 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
 // - file
 ////////////////////////////////////////////////////////////////////////
 
-Map::Map(std::string file)
+Map::Map(std::string const& file)
   : _x(0), _y(0), _map("")
 {
   std::string swap;
   std::ifstream infile;
   std::stringstream ss;
 
-  infile.open (file, std::ifstream::in);
+  infile.open (file.c_str(), std::ifstream::in);
   if (!infile)
     throw std::exception(); /* TODO BETTER */
   std::getline(infile, swap);
@@ -102,7 +105,7 @@ Map::Map(std::string file)
 // - map
 ////////////////////////////////////////////////////////////////////////
 
-Map::Map(size_t x, size_t y, std::string map)
+Map::Map(size_t x, size_t y, std::string const& map)
   : _x(x), _y(y), _map(map)
 {
 }
@@ -124,12 +127,12 @@ Map::~Map()
 // - oldMap
 ////////////////////////////////////////////////////////////////////////
 
-Map::Map(const Map& oldMap)
+/*Map::Map(Map const& oldMap)
 {
    _map = oldMap._map;
    _x = oldMap._x;
    _y = oldMap._y;
-}
+   }*/
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       Map::initialize()
@@ -139,7 +142,9 @@ Map::Map(const Map& oldMap)
 
 void Map::initialize(void)
 {
-   // TODO : implement
+  this->_break = gdl::Image::load("textures/break.jpg");
+  this->_unbreak = gdl::Image::load("textures/unbreak.jpg");
+  this->_background = gdl::Image::load("textures/background.jpg");
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -150,7 +155,21 @@ void Map::initialize(void)
 
 void Map::draw(void)
 {
-   // TODO : implement
+  Point	p(2.0f, 0, 0);
+  Cube	w_break(this->_break);
+  Cube	w_unbreak(this->_unbreak);
+  Plane	background(this->_x, this->_y, p, this->_background);
+
+  background.draw();
+  for (size_t y = 0; y < this->_y; ++y)
+    for (size_t x = 0; x < this->_x; ++x)
+      {
+	p.setPos(x, y);
+	if (this->_map[POS(x, y)] == '1')
+	  w_unbreak.draw(p);
+	else if (this->_map[POS(x, y)] == '2')
+	  w_break.draw(p);
+      }
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -162,7 +181,7 @@ void Map::draw(void)
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Map::update(gdl::GameClock const& clock, gdl::Input& input)
+void Map::update(gdl::GameClock const&, gdl::Input&)
 {
    // TODO : implement
 }

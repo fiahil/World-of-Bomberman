@@ -5,7 +5,7 @@
  * Purpose: Implementation of the class AObj
  ***********************************************************************/
 
-#include "AObj.h"
+#include "AObj.hpp"
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       AObj::AObj()
@@ -13,7 +13,7 @@
 // Return:     
 ////////////////////////////////////////////////////////////////////////
 
-AObj::AObj()
+AObj::AObj() : _pos(1.0f, 0, 0)
 {
 }
 
@@ -36,7 +36,6 @@ AObj::~AObj()
 // Return:     
 ////////////////////////////////////////////////////////////////////////
 
-AObj::AObj(const AObj& oldAObj)
+AObj::AObj(AObj const& oldAObj) : _pos(oldAObj._pos)
 {
-   _pos = oldAObj._pos;
 }

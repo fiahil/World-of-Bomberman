@@ -13,8 +13,10 @@
 class Human : public APlayer
 {
 public:
-   void play(void);
-
+  Human(std::string const&);
+  virtual ~Human();
+  virtual void play(void);
+  
 protected:
 private:
 

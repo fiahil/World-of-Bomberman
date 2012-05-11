@@ -54,20 +54,23 @@ void APlayer::draw(void)
 
 void APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-   // TODO : implement
+  
 }
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       APlayer::APlayer(std::string const& name)
 // Purpose:    Implementation of APlayer::APlayer()
+  
+
 // Parameters:
 // - name
 // Return:     
 ////////////////////////////////////////////////////////////////////////
 
-APlayer::APlayer(std::string const& name)
+APlayer::APlayer()
+  : _pv(100), _weapon(), _skin(), _team(0), _id(0), _state(), _name("")
 {
-   // TODO : implement
+ 
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -101,4 +104,64 @@ APlayer::APlayer(const APlayer& oldAPlayer)
    _bonusEffect = oldAPlayer._bonusEffect;
    _model = oldAPlayer._model;
    _name = oldAPlayer._name;
+}
+
+void	APlayer::setPv(int pv)
+{
+  this->_pv = pv;
+}
+
+int	APlayer::getPv() const
+{
+  return this->_pv;
+}
+
+void	APlayer::setWeapon(eBomb weapon)
+{
+  this->_weapon = weapon;
+}
+
+eBomb	APlayer::getWeapon() const
+{
+  return this->_weapon;
+}
+
+void	APlayer::setTeam(size_t team)
+{
+  this->_team = team;
+}
+
+size_t	APlayer::getTeam() const
+{
+  return this->_team;
+}
+
+void	APlayer::setId(size_t id)
+{
+  this->_id = id;
+}
+
+size_t	APlayer::getId() const
+{
+  return this->_id;
+}
+
+void	APlayer::setState(eState state)
+{
+  this->_state = state;
+}
+
+eState	APlayer::getState() const
+{
+  return this->_state;
+}
+
+void	APlayer::setName(std::string const& name)
+{
+  this->_name = name;
+}
+
+std::string const&	APlayer::getName() const
+{
+  return this->_name;
 }

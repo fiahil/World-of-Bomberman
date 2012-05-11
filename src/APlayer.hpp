@@ -13,14 +13,26 @@
 class APlayer : public AObj
 {
 public:
-   virtual void play(void)=0;
-   void takeDamage(Point origin, Pattern pattern);
-   void initialize(void);
-   void draw(void);
-   void update(gdl::GameClock const& clock, gdl::Input& input);
-   APlayer(std::string const& name);
-   ~APlayer();
-
+  APlayer();
+  virtual ~APlayer();
+  virtual void play(void)=0;
+  void takeDamage(Point origin, Pattern pattern);
+  virtual void initialize(void);
+  virtual void draw(void);
+  virtual void update(gdl::GameClock const& clock, gdl::Input& input);
+  void		setPv(int);
+  int		getPv() const;
+  void		setWeapon(eBomb);
+  eBomb		getWeapon() const;
+  void		setTeam(size_t);
+  size_t	getTeam() const;
+  void		setId(size_t);
+  size_t	getId() const;
+  void		setState(eState);
+  eState	getState() const;
+  void		setName(std::string const&);
+  std::string const&	getName() const;
+  
 protected:
    int _pv;
    eBomb _weapon;
