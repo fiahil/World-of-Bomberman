@@ -5,7 +5,7 @@
  * Purpose: Implementation of the class Human
  ***********************************************************************/
 
-#include "Human.h"
+#include "Human.hpp"
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       Human::play()
@@ -13,7 +13,7 @@
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void Human::play(void)
+void Human::play(gdl::GameClock const&, gdl::Input&)
 {
    // TODO : implement
 }
