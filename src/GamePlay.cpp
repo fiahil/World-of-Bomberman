@@ -9,7 +9,7 @@
 #include <iostream>
 #include "GamePlay.hpp"
 
-GamePlay::GamePlay() : _camera(800, 600), _map(10, 10, 5, 5)
+GamePlay::GamePlay() : _camera(800, 600), _map(20, 20, 1, 2)
 {
 }
 
