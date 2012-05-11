@@ -29,6 +29,13 @@ void	Plane::initialize()
 
 void	Plane::draw()
 {
+  double x = static_cast<double>(this->_txt.getWidth()) / this->_w;
+  double y = static_cast<double>(this->_txt.getHeight()) / this->_h;
+
+  if (x > 1.0f)
+    x = 1.0f;
+  if (y > 1.0f)
+  y = 1.0f;
   glPushMatrix();
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
   glScalef(this->_pos._scale, this->_pos._scale, this->_pos._scale);
@@ -40,11 +47,11 @@ void	Plane::draw()
   glNormal3f(0.0f, 1.0f, 0.0f);
   glTexCoord2d(0, 0);
   glVertex3f(0.0f, 0.0f, 0.0f);
-  glTexCoord2d(0, 1);
+  glTexCoord2d(0, y);
   glVertex3f(0.0f, 0.0f, this->_h);
-  glTexCoord2d(1, 1);
+  glTexCoord2d(x, y);
   glVertex3f(this->_w, 0.0f, this->_h);
-  glTexCoord2d(1, 0);
+  glTexCoord2d(x, 0);
   glVertex3f(this->_w, 0.0f, 0.0f);
 
   glEnd();
