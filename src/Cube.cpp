@@ -14,7 +14,7 @@
   
 }*/
 
-Cube::Cube(gdl::Image& txt, double scale) : _p(0), _txt(txt), _scale(scale)
+Cube::Cube(gdl::Image& txt) : _p(0), _txt(txt)
 {
   
 }
@@ -33,75 +33,76 @@ void	Cube::draw()
 {
   glPushMatrix();
   glTranslatef(this->_p->_pos.x, this->_p->_pos.y, this->_p->_pos.z);
-  glColor3ub(255, 0, 255);
+  glScalef(this->_p->_scale, this->_p->_scale, this->_p->_scale);
+  glColor3ub(255, 255, 255);
   glEnable(GL_TEXTURE_2D);
   this->_txt.bind();
   glBegin(GL_QUADS);
 
   // Front
   glNormal3f(0.0f, 0.0f, 1.0f);
-  glTexCoord2d(0, 0);
-  glVertex3f(-0.5f, -0.5f, 0.5f);
   glTexCoord2d(0, 1);
+  glVertex3f(-0.5f, -0.5f, 0.5f);
+  glTexCoord2d(0, 0);
   glVertex3f(-0.5f, 0.5f, 0.5f);
-  glTexCoord2d(1, 1);
-  glVertex3f(0.5f, 0.5f, 0.5f);
   glTexCoord2d(1, 0);
+  glVertex3f(0.5f, 0.5f, 0.5f);
+  glTexCoord2d(1, 1);
   glVertex3f(0.5f, -0.5f, 0.5f);
 
   //Right
   glNormal3f(1.0f, 0.0f, 0.0f);
-  glTexCoord2d(0, 0);
-  glVertex3f(0.5f, -0.5f, 0.5f);
   glTexCoord2d(0, 1);
+  glVertex3f(0.5f, -0.5f, 0.5f);
+  glTexCoord2d(0, 0);
   glVertex3f(0.5f, 0.5f, 0.5f);
-  glTexCoord2d(1, 1);
-  glVertex3f(0.5f, 0.5f, -0.5f);
   glTexCoord2d(1, 0);
+  glVertex3f(0.5f, 0.5f, -0.5f);
+  glTexCoord2d(1, 1);
   glVertex3f(0.5f, -0.5f, -0.5f);
   
   //Left
   glNormal3f(-1.0f, 0.0f, 0.0f);
-  glTexCoord2d(0, 0);
-  glVertex3f(-0.5f, -0.5f, -0.5f);
   glTexCoord2d(0, 1);
+  glVertex3f(-0.5f, -0.5f, -0.5f);
+  glTexCoord2d(0, 0);
   glVertex3f(-0.5f, 0.5f, -0.5f);
-  glTexCoord2d(1, 1);
-  glVertex3f(-0.5f, 0.5f, 0.5f);
   glTexCoord2d(1, 0);
+  glVertex3f(-0.5f, 0.5f, 0.5f);
+  glTexCoord2d(1, 1);
   glVertex3f(-0.5f, -0.5f, 0.5f);
   
   //Back
   glNormal3f(0.0f, 0.0f, -1.0f);
-  glTexCoord2d(0, 0);
-  glVertex3f(0.5f, -0.5f, -0.5f);
   glTexCoord2d(0, 1);
+  glVertex3f(0.5f, -0.5f, -0.5f);
+  glTexCoord2d(0, 0);
   glVertex3f(0.5f, 0.5f, -0.5f);
-  glTexCoord2d(1, 1);
-  glVertex3f(-0.5f, 0.5f, -0.5f);
   glTexCoord2d(1, 0);
+  glVertex3f(-0.5f, 0.5f, -0.5f);
+  glTexCoord2d(1, 1);
   glVertex3f(-0.5f, -0.5f, -0.5f);
 
   //Top
   glNormal3f(0.0f, 1.0f, 0.0f);
-  glTexCoord2d(0, 0);
-  glVertex3f(-0.5f, 0.5f, 0.5f);
   glTexCoord2d(0, 1);
+  glVertex3f(-0.5f, 0.5f, 0.5f);
+  glTexCoord2d(0, 0);
   glVertex3f(-0.5f, 0.5f, -0.5f);
-  glTexCoord2d(1, 1);
-  glVertex3f(0.5f, 0.5f, -0.5f);
   glTexCoord2d(1, 0);
+  glVertex3f(0.5f, 0.5f, -0.5f);
+  glTexCoord2d(1, 1);
   glVertex3f(0.5f, 0.5f, 0.5f);
 
   //Bottom
   glNormal3f(0.0f, -1.0f, 0.0f);
-  glTexCoord2d(0, 0);
-  glVertex3f(0.5f, -0.5f, 0.5f);
   glTexCoord2d(0, 1);
+  glVertex3f(0.5f, -0.5f, 0.5f);
+  glTexCoord2d(0, 0);
   glVertex3f(0.5f, -0.5f, -0.5f);
-  glTexCoord2d(1, 1);
-  glVertex3f(-0.5f, -0.5f, -0.5f);
   glTexCoord2d(1, 0);
+  glVertex3f(-0.5f, -0.5f, -0.5f);
+  glTexCoord2d(1, 1);
   glVertex3f(-0.5f, -0.5f, 0.5f);
 
   glEnd();
