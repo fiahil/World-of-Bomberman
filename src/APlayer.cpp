@@ -5,7 +5,7 @@
  * Purpose: Implementation of the class APlayer
  ***********************************************************************/
 
-#include "APlayer.h"
+#include "APlayer.hpp"
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       APlayer::takeDamage(Point origin, Pattern pattern)
@@ -16,10 +16,10 @@
 // Return:     void
 ////////////////////////////////////////////////////////////////////////
 
-void APlayer::takeDamage(Point origin, Pattern pattern)
+/*void APlayer::takeDamage(Point origin, Pattern pattern)
 {
    // TODO : implement
-}
+   }*/
 
 ////////////////////////////////////////////////////////////////////////
 // Name:       APlayer::initialize()
@@ -29,7 +29,10 @@ void APlayer::takeDamage(Point origin, Pattern pattern)
 
 void APlayer::initialize(void)
 {
-   // TODO : implement
+  std::vector<std::string>	refModel(Skin::LAST, "");
+  
+  refModel[Skin::NORMAL] = "models/player.fbx";
+  this->_model = gdl::Model::load(refModel[this->_skin]);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -40,7 +43,7 @@ void APlayer::initialize(void)
 
 void APlayer::draw(void)
 {
-   // TODO : implement
+  this->_model.draw();
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -54,7 +57,8 @@ void APlayer::draw(void)
 
 void APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-  
+  this->play(clock, input);
+  this->_model.update(clock);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -68,7 +72,8 @@ void APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 ////////////////////////////////////////////////////////////////////////
 
 APlayer::APlayer()
-  : _pv(100), _weapon(), _skin(), _team(0), _id(0), _state(), _name("")
+  : _pv(100), _weapon(Bomb::NORMAL), _skin(Skin::NORMAL),
+    _team(0), _id(0), _state(State::STATIC), _dir(Dir::EAST), _name("")
 {
  
 }
@@ -92,7 +97,7 @@ APlayer::~APlayer()
 // Return:     
 ////////////////////////////////////////////////////////////////////////
 
-APlayer::APlayer(const APlayer& oldAPlayer)
+/*APlayer::APlayer(const APlayer& oldAPlayer)
 {
    _pv = oldAPlayer._pv;
    _weapon = oldAPlayer._weapon;
@@ -104,7 +109,7 @@ APlayer::APlayer(const APlayer& oldAPlayer)
    _bonusEffect = oldAPlayer._bonusEffect;
    _model = oldAPlayer._model;
    _name = oldAPlayer._name;
-}
+   }*/
 
 void	APlayer::setPv(int pv)
 {
@@ -116,12 +121,12 @@ int	APlayer::getPv() const
   return this->_pv;
 }
 
-void	APlayer::setWeapon(eBomb weapon)
+void	APlayer::setWeapon(Bomb::eBomb weapon)
 {
   this->_weapon = weapon;
 }
 
-eBomb	APlayer::getWeapon() const
+Bomb::eBomb	APlayer::getWeapon() const
 {
   return this->_weapon;
 }
@@ -146,14 +151,24 @@ size_t	APlayer::getId() const
   return this->_id;
 }
 
-void	APlayer::setState(eState state)
+void	APlayer::setState(State::eState state)
 {
   this->_state = state;
 }
 
-eState	APlayer::getState() const
+State::eState	APlayer::getState() const
 {
   return this->_state;
+}
+
+void	APlayer::setDir(Dir::eDir dir)
+{
+  this->_dir = dir;
+}
+
+Dir::eDir	APlayer::getDir() const
+{
+  return this->_dir;
 }
 
 void	APlayer::setName(std::string const& name)
