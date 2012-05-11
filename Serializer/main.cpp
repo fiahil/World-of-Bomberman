@@ -4,6 +4,8 @@
  * 3 mai 2012
  */
 
+#include "Scanner.hpp"
+
 #include <iostream>
 #include <fstream>
 
@@ -17,6 +19,10 @@ int	main(int argc, char** argv) {
       std::cerr << "Cannot open file: " << argv[i] << std::endl;
       continue;
     }
+    Serializer::Scanner	scanner(input);
+    Serializer::Loader	loader(scanner);
+
+    loader.parse();
   }
   return 0;
 }

@@ -11,6 +11,7 @@
 
 GamePlay::GamePlay() : _camera(800, 600), _map(20, 20, 1, 2)
 {
+  this->setContentRoot("./Ressources");
 }
 
 GamePlay::~GamePlay()

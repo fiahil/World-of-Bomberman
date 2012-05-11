@@ -142,9 +142,9 @@ Map::~Map()
 
 void Map::initialize(void)
 {
-  this->_break = gdl::Image::load("break.jpg");
-  this->_unbreak = gdl::Image::load("unbreak.jpg");
-  this->_background = gdl::Image::load("background.jpg");
+  this->_break = gdl::Image::load("textures/break.jpg");
+  this->_unbreak = gdl::Image::load("textures/unbreak.jpg");
+  this->_background = gdl::Image::load("textures/background.jpg");
 }
 
 ////////////////////////////////////////////////////////////////////////
