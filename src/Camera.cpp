@@ -14,7 +14,7 @@ Camera::Camera() : _pos(0.0f, 50.0f, 50.0f), _target(0.0f, 0.0f, 0.0f), _height(
   
 }
 
-Camera::Camera(int w, int h) : _pos(10.0f, 10.0f, 10.0f), _target(0.0f, 0.0f, 0.0f), _height(h), _width(w)
+Camera::Camera(int w, int h) : _pos(2.5f, 1.0f, 3.0f), _target(3.0f, 1.0f, 3.0f), _height(h), _width(w)
 {
   
 }

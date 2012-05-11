@@ -155,9 +155,9 @@ void Map::initialize(void)
 
 void Map::draw(void)
 {
-  Point	p(1.0f, 0, 0);
-  Cube	w_break(this->_break, 1.0f);
-  Cube	w_unbreak(this->_unbreak, 1.0f);
+  Point	p(2.0f, 0, 0);
+  Cube	w_break(this->_break);
+  Cube	w_unbreak(this->_unbreak);
   Plane	background(this->_x, this->_y, p, this->_background);
 
   background.draw();

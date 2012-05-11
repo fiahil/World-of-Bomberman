@@ -19,7 +19,6 @@ class Cube : public AObj
 private:
   Point*	_p;
   gdl::Image&	_txt;
-  double	_scale;
 
 private:
   Cube(Cube const&);
@@ -28,7 +27,7 @@ private:
   
 public:
   //Cube();
-  Cube(gdl::Image&, double scale = 1.0f);
+  Cube(gdl::Image&);
   ~Cube();
   virtual void	initialize();
   virtual void	update(gdl::GameClock const& clock, gdl::Input& input);
