@@ -20,7 +20,7 @@ public:
   APlayer();
   virtual ~APlayer();
   virtual void play(gdl::GameClock const&, gdl::Input&)=0;
-  //void takeDamage(Point origin, Pattern pattern);
+  // void takeDamage(Point origin, Pattern pattern);
   virtual void initialize(void);
   virtual void draw(void);
   virtual void update(gdl::GameClock const& clock, gdl::Input& input);
