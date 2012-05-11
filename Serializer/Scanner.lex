@@ -23,60 +23,100 @@
 
 "#INFO"		{
   yylval->sval = new std::string(yytext, yyleng);
-  return Serializer::Profile::Loader::token::INFO;
+  return Serializer::Loader::token::INFO;
 }
 
 "#STAT"		{
   yylval->sval = new std::string(yytext, yyleng);
-  return Serializer::Profile::Loader::token::STAT;
+  return Serializer::Loader::token::STAT;
 }
 
 "#SKILLS"	{
   yylval->sval = new std::string(yytext, yyleng);
-  return Serializer::Profile::Loader::token::SKILLS;
+  return Serializer::Loader::token::SKILLS;
 }
 
 "#ACHIEVEMENTS"	{
   yylval->sval = new std::string(yytext, yyleng);
-  return Serializer::Profile::Loader::token::ACHIEVEMENTS;
+  return Serializer::Loader::token::ACHIEVEMENTS;
 }
 
 "#SAVES"	{
   yylval->sval = new std::string(yytext, yyleng);
-  return Serializer::Profile::Loader::token::SAVES;
+  return Serializer::Loader::token::SAVES;
 }
 
 "#CONFIG"	{
   yylval->sval = new std::string(yytext, yyleng);
-  return Serializer::Profile::Loader::token::CONFIG;
+  return Serializer::Loader::token::CONFIG;
 }
 
 "#ENDCONFIG"	{
   yylval->sval = new std::string(yytext, yyleng);
-  return Serializer::Profile::Loader::token::ENDCONFIG;
+  return Serializer::Loader::token::ENDCONFIG;
+}
+
+"#MAP"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Loader::token::MAP;
+}
+
+"#ENDMAP"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Loader::token::ENDMAP;
+}
+
+"#HEADER"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Loader::token::HEADER;
+}
+
+"#TEAMS"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Loader::token::TEAMS;
+}
+
+"#ENDTEAMS"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Loader::token::ENDTEAMS;
+}
+
+"#PLAYERS"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Loader::token::PLAYERS;
+}
+
+"#ENDPLAYERS"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Loader::token::ENDPLAYERS;
 }
 
 "\n"		{
   yylval->sval = new std::string(yytext, yyleng);
   yylloc->lines(1);
-  return Serializer::Profile::Loader::token::EOL;
+  return Serializer::Loader::token::EOL;
 }
 
 ":"		{
   yylval->sval = new std::string(yytext, yyleng);
-  return Serializer::Profile::Loader::token::SEP;
+  return Serializer::Loader::token::SEP;
 }
 
 [0-9]+		{
   std::istringstream	ss(yytext);
 
   ss >> yylval->ival;
-  return Serializer::Profile::Loader::token::NUMBER;
+  return Serializer::Loader::token::NUMBER;
 }
 
 [A-Za-z_-]+	{
   yylval->sval = new std::string(yytext, yyleng);
-  return Serializer::Profile::Loader::token::WORD;
+  return Serializer::Loader::token::WORD;
+}
+
+\[[A-Za-z0-9_-]+\]	{
+  yylval->sval = new std::string(yytext + 1, yyleng - 2);
+  return Serializer::Loader::token::MIXTE;
 }
 
 [ \t\r]+	{

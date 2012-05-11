@@ -1,11 +1,12 @@
 
 #MAP:3:3
-111101111
+[111101111]
 #ENDMAP
-#INFO:5:0:0
+#HEADER:5:0:0
 #TEAMS
-0:Ponies:ff00ff:0 1 2 3
-1:Rangers:00ff00:4 5
+1:Rangers:3::4:5
+0:Ponies:1::0:1:2:3
+2:HOP:5::7:8:9
 #ENDTEAMS
 
 #PLAYERS
@@ -15,5 +16,8 @@
 3:Eric:1:6:8
 4:Frank:1:3:3
 5:Fiahil:0:1:0
+7:Marty:6:8:1
+8:Buzina:0:0:0
+9:R-D:6:6:6
 #ENDPLAYERS
 

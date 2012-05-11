@@ -23,9 +23,8 @@ CXX	=	g++
 all:		$(NAME)
 
 gen:
-	@bison Loader.ypp &&			\
-	flex -o lex.yy.cpp Scanner.lex &&	\
-	echo "Loader OK"
+	bison Loader.ypp
+	flex -o lex.yy.cpp Scanner.lex
 
 $(NAME):	gen $(OBJXX)
 	$(CXX) -o $(NAME) $(OBJXX)

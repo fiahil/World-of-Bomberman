@@ -19,18 +19,10 @@ int	main(int argc, char** argv) {
       std::cerr << "Cannot open file: " << argv[i] << std::endl;
       continue;
     }
-    {
-      Serializer::Profile::Scanner	scanner(input);
-      Serializer::Profile::Loader	loader(scanner);
+    Serializer::Scanner	scanner(input);
+    Serializer::Loader	loader(scanner);
 
-      loader.parse();
-    }
-    {
-      // Serializer::Save::Scanner		scanner(input);
-      // Serializer::Save::Loader		loader(scanner);
-
-      // loader.parse();
-    }
+    loader.parse();
   }
   return 0;
 }

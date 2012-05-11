@@ -8,10 +8,10 @@
 %skeleton "lalr1.cc"
 %defines
 %locations
-%define namespace "Serializer::Profile"
+%define namespace "Serializer"
 %define parser_class_name "Loader"
-%parse-param	{ Serializer::Profile::Scanner &scanner }
-%lex-param	{ Serializer::Profile::Scanner &scanner }
+%parse-param	{ Serializer::Scanner &scanner }
+%lex-param	{ Serializer::Scanner &scanner }
 %destructor	{ delete $$.sval; } "identifier"
 
 %code requires {
@@ -20,16 +20,14 @@
 #include <sstream>
 
   namespace Serializer {
-    namespace Profile {
-      class Scanner;
-    }
+    class Scanner;
   }
 }
 
 %code {
-  static int yylex(Serializer::Profile::Loader::semantic_type* yylval,
-		   Serializer::Profile::Loader::location_type* yylloc,
-		   Serializer::Profile::Scanner &scanner);
+  static int yylex(Serializer::Loader::semantic_type* yylval,
+		   Serializer::Loader::location_type* yylloc,
+		   Serializer::Scanner &scanner);
 }
 
 %union {
@@ -37,8 +35,9 @@
    std::string*	sval;
 };
 
-%token <sval> INFO STAT SKILLS ACHIEVEMENTS SAVES
-%token <sval> CONFIG ENDCONFIG
+%token <sval> INFO STAT SKILLS ACHIEVEMENTS SAVES HEADER
+%token <sval> CONFIG ENDCONFIG MAP ENDMAP TEAMS ENDTEAMS PLAYERS ENDPLAYERS
+%token <sval> MIXTE
 %token <sval> WORD
 %token <ival> NUMBER
 %token EOL SEP
@@ -93,15 +92,59 @@ info
 	    << "\n- Immortal: " << $7
 	    << std::endl << std::endl;
 }
+| HEADER SEP NUMBER SEP NUMBER SEP NUMBER EOL
+{
+  std::cout << *$1 << ":"
+  	    << "\n- id: " << $3
+	    << "\n- mode: " << $5
+	    << "\n- cheats: " << $7
+	    << std::endl << std::endl;
+}
+| MAP SEP NUMBER SEP NUMBER EOL map
+{
+  std::cout << *$1 << " x = " << $3 << "; y = " << $5 << std::endl << std::endl;
+}
 | SAVES sequence
+| TEAMS EOL teams
+| PLAYERS EOL players
 | CONFIG EOL config
 ;
+
+map
+: MIXTE EOL ENDMAP
+{
+  std::cout << *$1 << std::endl;
+}
 
 sequence
 : EOL
 | SEP NUMBER sequence
 {
   std::cout << "- Slot: " << $2 << std::endl;
+}
+
+teams
+: ENDTEAMS
+| NUMBER SEP WORD SEP NUMBER SEP p_id teams
+{
+  std::cout << "- Team: " << $1 << " " << *$3 << " color: " << $5
+  	    << std::endl << std::endl;
+}
+
+p_id
+: EOL
+| SEP NUMBER p_id
+{
+  std::cout << "  -> " << $2 << std::endl;
+}
+
+players
+: ENDPLAYERS
+| NUMBER SEP WORD SEP NUMBER SEP NUMBER SEP NUMBER EOL players
+{
+  std::cout << "- Player: " << $1 << " " << *$3
+  	    << ($5 > 0 ? " HUMAN" : " AI")
+  	    << " x = " << $7 << " y = " << $9 << std::endl;
 }
 
 config
@@ -115,7 +158,6 @@ config
 %%
 
 namespace Serializer {
-namespace Profile {
   void		Loader::error(Loader::location_type const& loc,
 			      std::string const& msg) {
     std::ostringstream	ret;
@@ -124,12 +166,11 @@ namespace Profile {
 	<< " column " << loc.begin.column << ":\n-- " << msg;
     throw std::runtime_error(ret.str());
   }
- }
 }
 
 #include "Scanner.hpp"
-static int	yylex(Serializer::Profile::Loader::semantic_type* yylval,
-		      Serializer::Profile::Loader::location_type* yylloc,
-		      Serializer::Profile::Scanner &scanner) {
+static int	yylex(Serializer::Loader::semantic_type* yylval,
+		      Serializer::Loader::location_type* yylloc,
+		      Serializer::Scanner &scanner) {
   return scanner.yylex(yylval, yylloc);
 }
