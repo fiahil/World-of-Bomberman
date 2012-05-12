@@ -1,31 +1,28 @@
-/***********************************************************************
- * Module:  Point.h
- * Author:  Fiahil
- * Modified: Monday, May 07, 2012 6:29:20 PM
- * Purpose: Declaration of the class Point
- ***********************************************************************/
+/*
+ * Fiahil
+ * 07.05.12
+ */
 
-#if !defined(__Bomberman_Point_h)
+#ifndef	__Bomberman_Point_h
 #define __Bomberman_Point_h
 
 #include "Vector.hpp"
 
-class Point
+class	Point
 {
 public:
-  Point(double scale, int x, int y);
+  Point(double, int, int);
   ~Point();
-  void	setPos(int x, int y);
-  
-  int _x;
-  int _y;
-  double _scale;
-  Vector _pos;
 
-protected:
-private:
-  void	calcRealpos();
+public:
+  int		_x;
+  int		_y;
+  double	_scale;
+  Vector	_pos;
 
+public:
+  void		setPos(int, int);
+  void		calcRealpos(void);
 };
 
-#endif
+#endif /* __Bomberman_Point_h */

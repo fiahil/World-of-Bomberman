@@ -1,3 +1,7 @@
+/*
+ * NicoW
+ * 03.05.12
+ */
 
 #include <vector>
 #include <iostream>
@@ -5,47 +9,12 @@
 
 Profile::Profile()
 {
-  /**/std::cout << "Construction Profile" << std::endl;
   this->_tuto = false;
   this->_name = "Default_Player";
 }
 
 Profile::~Profile()
 {
-  /**/std::cout << "Destruction Profile" << std::endl;
-}
-
-Profile::Profile(const Profile & oth)
-{
-  /**/std::cout << "Construction Profile" << std::endl;
-  this->_id = oth.getId();
-  this->_lvl = oth.getLvl();
-  this->_xp = oth.getXp();
-  this->_tuto = oth.getTuto();
-  this->_skin = oth.getSkin();
-  this->_name = oth.getName();
-  this->_skill = oth.getSkill();
-  this->_achivement = oth.getAchivement();
-  this->_save = oth.getSave();
-  this->_config = oth.getConfig();
-}
-
-const Profile & Profile::operator=(const Profile & oth)
-{
-  if (this != &oth)
-    {
-      this->_id = oth.getId();
-      this->_lvl = oth.getLvl();
-      this->_xp = oth.getXp();
-      this->_tuto = oth.getTuto();
-      this->_skin = oth.getSkin();
-      this->_name = oth.getName();
-      this->_skill = oth.getSkill();
-      this->_achivement = oth.getAchivement();
-      this->_save = oth.getSave();
-      this->_config = oth.getConfig();
-    }
-  return *this;
 }
 
 size_t		Profile::getId(void) const
@@ -68,17 +37,17 @@ bool		Profile::getTuto(void) const
   return this->_tuto;
 }
 
-Skin::eSkin		Profile::getSkin(void) const
+Skin::eSkin	Profile::getSkin(void) const
 {
   return this->_skin;
 }
 
-const Config &			Profile::getConfig(void) const
+const Config &	Profile::getConfig(void) const
 {
   return this->_config;
 }
 
-const std::string &	Profile::getName(void) const
+const std::string &		Profile::getName(void) const
 {
   return this->_name;
 }
@@ -86,6 +55,11 @@ const std::string &	Profile::getName(void) const
 const std::vector<size_t> &	Profile::getSkill(void) const
 {
   return this->_skill;
+}
+
+const std::vector<size_t> &	Profile::getStat(void) const
+{
+  return this->_stat;
 }
 
 const std::vector<size_t> &	Profile::getAchivement(void) const
@@ -143,6 +117,16 @@ void		Profile::addSkill(size_t value)
   this->_skill.push_back(value);
 }
 
+void		Profile::setStat(const std::vector<size_t> & value)
+{
+  this->_stat = value;
+}
+
+void		Profile::addStat(size_t value)
+{
+  this->_stat.push_back(value);
+}
+
 void		Profile::setAchivement(const std::vector<size_t> & value)
 {
   this->_achivement = value;
@@ -163,14 +147,14 @@ void		Profile::addSave(size_t value)
   this->_save.push_back(value);
 }
 
-
 void		Profile::setAllProfile(size_t id, size_t lvl, size_t xp,
-				       bool tuto, Skin::eSkin skin,
-				       const Config & config,
-				       const std::string & name,
-				       const std::vector<size_t> & skill,
-				       const std::vector<size_t> & achivement,
-				       const std::vector<size_t> & save)
+			       bool tuto, Skin::eSkin skin,
+			       const Config & config,
+			       const std::string & name,
+			       const std::vector<size_t> & skill,
+			       const std::vector<size_t> & stat,
+			       const std::vector<size_t> & achivement,
+			       const std::vector<size_t> & save)
 {
   this->_id = id;
   this->_lvl = lvl;
@@ -179,6 +163,7 @@ void		Profile::setAllProfile(size_t id, size_t lvl, size_t xp,
   this->_skin = skin;
   this->_name = name;
   this->_skill = skill;
+  this->_stat = stat;
   this->_achivement = achivement;
   this->_save = save;
   this->_config = config;

@@ -21,7 +21,8 @@ file.hpp
     #ifndef __FILE_HPP_
     #define __FILE_HPP_
 
-    class File : public IFile {
+    class File : public IFile
+    {
       public: /* Ctor */
         File();
         ~File();
@@ -51,10 +52,12 @@ file.cpp
      
      #include "user.hpp"
      
-     File::File() : _myVar(0), _myObject(0) {
+     File::File() : _myVar(0), _myObject(0)
+     {
      }
      
-     File::print(const string & str) {
+     File::print(const string & str)
+     {
         int   i = 0;
         
         for (int i = 0; i < 5; ++i) {
@@ -62,7 +65,8 @@ file.cpp
         }
      }
      
-     File::moveObj(string const& str) const {
+     File::moveObj(string const& str) const
+     {
         try {
             str += "Toto";
         }

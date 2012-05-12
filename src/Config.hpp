@@ -14,7 +14,6 @@ public:
 
 private:
   Config(const Config &);
-  const Config & operator=(const Config &);
 
 private:
   size_t	_idEvent;
@@ -33,4 +32,3 @@ public:
 };
 
 #endif		/* __CONFIG_HPP__ */
-
