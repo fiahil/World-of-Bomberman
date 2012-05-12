@@ -1,12 +1,3 @@
-##
-## Makefile for Bomberman in /home/lemonn_v/Projects/C++/Bomberman
-## 
-## Made by vincent lemonnier
-## Login   <lemonn_v@epitech.net>
-## 
-## Started on  Mon Apr 23 18:20:16 2012 vincent lemonnier
-## Last update Fri May 11 20:54:58 2012 vincent lemonnier
-##
 
 NAME=		bomberman
 

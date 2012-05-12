@@ -5,13 +5,13 @@
 // Login   <magere_n@epitech.net>
 // 
 // Started on  Thu May 10 16:32:20 2012 nicolas magere
-// Last update Thu May 10 16:46:32 2012 nicolas magere
+// Last update Thu May 10 17:47:31 2012 nicolas magere
 //
 
 #ifndef		__CONFIG_HPP__
 #define		__CONFIG_HPP__
 
-class		Config
+class	Config
 {
 private:
   size_t	_idEvent;
@@ -31,6 +31,7 @@ public:
   void		setIdEvent(size_t);
   void		setIdKey(size_t);
   void		setIdJoystick(size_t);
+  void		setAllConfig(size_t, size_t, size_t);
 };
 
 #endif		/* __CONFIG_HPP__ */

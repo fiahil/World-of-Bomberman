@@ -59,4 +59,17 @@ struct Bonus
     };
 };
 
+struct GameMode
+{
+  enum eGameMode
+    {
+      HISTORY,
+      ARCADE,
+      DEATH,
+      CAPT_FLAG,
+      NETWORK,
+      LAST
+    };
+};
+
 #endif
