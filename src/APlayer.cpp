@@ -30,7 +30,7 @@
 void APlayer::initialize(void)
 {
   std::vector<std::string>	refModel(Skin::LAST, "");
-  
+
   refModel[Skin::NORMAL] = "models/player.fbx";
   this->_model = gdl::Model::load(refModel[this->_skin]);
 }
@@ -72,8 +72,8 @@ void APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 ////////////////////////////////////////////////////////////////////////
 
 APlayer::APlayer()
-  : _pv(100), _weapon(Bomb::NORMAL), _skin(Skin::NORMAL),
-    _team(0), _id(0), _state(State::STATIC), _dir(Dir::EAST), _name("")
+  : _pv(100), _team(0), _id(0),  _weapon(Bomb::NORMAL), _skin(Skin::NORMAL),
+    _state(State::STATIC), _dir(Dir::EAST)
 {
  
 }
