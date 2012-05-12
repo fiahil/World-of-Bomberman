@@ -1,9 +1,7 @@
-/***********************************************************************
- * Module:  Plane.hpp
- * Author:  lemonn_v
- * Modified: Monday, May 07, 2012 6:23:48 PM
- * Purpose: Declaration of the class Plane
- ***********************************************************************/
+/*
+ * lemonn_v
+ * 07.05.12
+ */
 
 #ifndef __PLANE_HPP__
 #define __PLANE_HPP__
@@ -13,14 +11,16 @@
 
 class Plane : public AObj
 {
+public:
+  Plane(double, double, Point const&, gdl::Image&);
+  ~Plane();
+
 private:
   double	_w;
   double	_h;
   gdl::Image&	_txt;
-  
+
 public:
-  Plane(double, double, Point const&, gdl::Image&);
-  ~Plane();
   virtual void	initialize();
   virtual void	draw();
   virtual void	update(gdl::GameClock const&, gdl::Input&);
@@ -30,4 +30,4 @@ public:
 
 class Plane;
 
-#endif
+#endif /* __PLANE_HPP__ */

@@ -1,9 +1,7 @@
-/***********************************************************************
- * Module:  Menu.hpp
- * Author:  lemonn_v
- * Modified: Monday, May 07, 2012 6:23:48 PM
- * Purpose: Declaration of the class Menu
- ***********************************************************************/
+/*
+ * lemonn_v
+ * 07.05.12
+ */
 
 #ifndef __MENU_HPP__
 #define __MENU_HPP__
@@ -13,22 +11,22 @@
 
 class Menu : public gdl::Game
 {
-private:
-  MyGame*	_game;
-
 public:
   Menu();
   virtual ~Menu();
 
 private:
-  virtual void	initialize();
-  virtual void	update();
-  virtual void	draw();
-  virtual void	unload();
+  MyGame*	_game;
+
+private:
+  virtual void		initialize(void);
+  virtual void		update(void);
+  virtual void		draw(void);
+  virtual void		unload(void);
 };
 
 #else
 
 class Menu;
 
-#endif
+#endif /* __MENU_HPP__ */

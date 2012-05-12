@@ -1,30 +1,28 @@
-/***********************************************************************
- * Module:  Vector.hpp
- * Author:  lemonn_v
- * Modified: Monday, May 07, 2012 6:23:48 PM
- * Purpose: Declaration of the class Vector
- ***********************************************************************/
+/*
+ * lemonn_v
+ * 07.05.12
+ */
 
 #ifndef __VECTOR_HPP__
 #define __VECTOR_HPP__
 
-class Vector
+class	Vector
 {
-public:
-  double	x;
-  double	y;
-  double	z;
-
 public:
   Vector();
   Vector(double, double, double);
   Vector(Vector const&);
   Vector&	operator=(Vector const&);
   ~Vector();
+
+public:
+  double	x;
+  double	y;
+  double	z;
 };
 
 #else
 
 class Vector;
 
-#endif
+#endif /* __VECTOR_HPP__ */

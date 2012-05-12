@@ -1,20 +1,22 @@
-/***********************************************************************
- * Module:  Vector.cpp
- * Author:  lemonn_v
- * Modified: Monday, May 07, 2012 6:23:48 PM
- * Purpose: Declaration of the class Vector
- ***********************************************************************/
+/*
+ * lemonn_v
+ * 07.05.12
+ */
 
 #include "Vector.hpp"
 
-Vector::Vector() : x(0.0f), y(0.0f), z(0.0f)
+Vector::Vector()
+  : x(0.0f),
+    y(0.0f),
+    z(0.0f)
 {
-  
 }
 
-Vector::Vector(double x, double y, double z) : x(x), y(y), z(z)
+Vector::Vector(double x, double y, double z)
+  : x(x),
+    y(y),
+    z(z)
 {
-  
 }
 
 Vector::Vector(Vector const& rhs)
@@ -40,5 +42,4 @@ Vector&	Vector::operator=(Vector const& rhs)
 
 Vector::~Vector()
 {
-
 }

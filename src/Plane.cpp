@@ -1,15 +1,16 @@
-/***********************************************************************
- * Module:  Plane.cpp
- * Author:  lemonn_v
- * Modified: Thursday, May 10, 2012 10:28:54 AM
- * Purpose: Declaration of the class Plane
- ***********************************************************************/
+/*
+ * lemonn_v
+ * 07.05.12
+ */
 
 #include <GL/gl.h>
 #include <iostream>
 #include "Plane.hpp"
 
-Plane::Plane(double w, double h, Point const& p, gdl::Image& img) : _w(w), _h(h), _txt(img)
+Plane::Plane(double w, double h, Point const& p, gdl::Image& img)
+  : _w(w),
+    _h(h),
+    _txt(img)
 {
   this->_pos = p;
   this->_pos._pos.x -= this->_pos._scale / 2;
@@ -19,12 +20,10 @@ Plane::Plane(double w, double h, Point const& p, gdl::Image& img) : _w(w), _h(h)
 
 Plane::~Plane()
 {
-
 }
 
 void	Plane::initialize()
 {
-
 }
 
 void	Plane::draw()
@@ -61,5 +60,4 @@ void	Plane::draw()
 
 void	Plane::update(gdl::GameClock const&, gdl::Input&)
 {
-
 }

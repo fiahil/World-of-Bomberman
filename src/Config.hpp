@@ -1,12 +1,7 @@
-//
-// Config.hpp for Bomberman in /home/magere_n/work/projets_tek2/bomberman/Git/Bomberman/Profile
-// 
-// Made by nicolas magere
-// Login   <magere_n@epitech.net>
-// 
-// Started on  Thu May 10 16:32:20 2012 nicolas magere
-// Last update Thu May 10 17:47:31 2012 nicolas magere
-//
+/*
+ * NicoW
+ * 03.05.12
+ */
 
 #ifndef		__CONFIG_HPP__
 #define		__CONFIG_HPP__

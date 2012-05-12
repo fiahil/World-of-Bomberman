@@ -1,12 +1,7 @@
-//
-// Config.cpp for Bomberman in /home/magere_n/work/projets_tek2/bomberman/Git/Bomberman/Config
-// 
-// Made by nicolas magere
-// Login   <magere_n@epitech.net>
-// 
-// Started on  Thu May 10 16:45:06 2012 nicolas magere
-// Last update Thu May 10 17:39:10 2012 nicolas magere
-//
+/*
+ * NicoW
+ * 03.05.12
+ */
 
 #include <iostream>
 #include "Config.hpp"

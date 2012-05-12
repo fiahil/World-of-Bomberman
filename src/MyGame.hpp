@@ -1,9 +1,7 @@
-/***********************************************************************
- * Module:  MyGame.hpp
- * Author:  lemonn_v
- * Modified: Monday, May 07, 2012 6:23:48 PM
- * Purpose: Declaration of the class MyGame
- ***********************************************************************/
+/*
+ * lemonn_v
+ * 07.05.12
+ */
 
 #ifndef __MYGAME_HPP__
 #define __MYGAME_HPP__
@@ -13,27 +11,29 @@
 #include "Camera.hpp"
 #include "Map.hpp"
 
-class MyGame
+class	MyGame
 {
-private:
-  gdl::GameClock&	_clock;
-  gdl::Input&		_input;
-  Camera	_camera;
-  //std::vector<AObj*>	_obj;
-  Map		_map;
-
 public:
   MyGame(gdl::GameClock&, gdl::Input&);
   ~MyGame();
-  void	initialize();
-  void	update();
-  void	draw();
-  void	unload();
-  bool	isEOG() const;
+
+private:
+  gdl::GameClock&	_clock;
+  gdl::Input&		_input;
+  Camera		_camera;
+  //std::vector<AObj*>	_obj;
+  Map			_map;
+
+public:
+  void		initialize(void);
+  void		update(void);
+  void		draw(void);
+  void		unload(void);
+  bool		isEOG(void) const;
 };
 
 #else
 
 class MyGame;
 
-#endif
+#endif /* __MYGAME_HPP__ */
