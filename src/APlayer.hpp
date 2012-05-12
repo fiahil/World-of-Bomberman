@@ -44,7 +44,7 @@ public:
 private:
   typedef void	(*fBomb)();
   typedef void	(*fBonus)();
-  
+
 protected:
   int _pv;
   Bomb::eBomb _weapon;
