@@ -1,12 +1,3 @@
-//
-// Profile.hpp for Bomberman in /home/magere_n/work/projets_tek2/bomberman/Git/Bomberman/Profile
-// 
-// Made by nicolas magere
-// Login   <magere_n@epitech.net>
-// 
-// Started on  Thu May 10 11:19:00 2012 nicolas magere
-// Last update Sat May 12 15:34:11 2012 nicolas magere
-//
 
 #ifndef		__PROFILE_HPP__
 #define		__PROFILE_HPP__
@@ -40,7 +31,7 @@ public:
   size_t			getLvl(void) const;
   size_t			getXp(void) const;
   bool				getTuto(void) const;
-  eSkin			getSkin(void) const;
+  Skin::eSkin			getSkin(void) const;
   const Config &		getConfig(void) const;
   const std::string &		getName(void) const;
   const std::vector<size_t> &	getSkill(void) const;
@@ -51,7 +42,7 @@ public:
   void		setLvl(size_t);
   void		setXp(size_t);
   void		setTuto(bool);
-  void		setSkin(eSkin);
+  void		setSkin(Skin::eSkin);
   void		setConfig(const Config &);
   void		setName(const std::string &);
   void		setSkill(const std::vector<size_t> &);
@@ -61,7 +52,7 @@ public:
   void		setSave(const std::vector<size_t> &);
   void		addSave(size_t);
   void		setAllProfile(size_t, size_t, size_t, // modfifie
-			      bool, eSkin,
+			      bool, Skin::eSkin,
 			      const Config &,
 			      const std::string &,
 			      const std::vector<size_t> &,

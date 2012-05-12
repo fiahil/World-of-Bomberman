@@ -5,7 +5,7 @@
 ## Login   <lemonn_v@epitech.net>
 ## 
 ## Started on  Mon Apr 23 18:20:16 2012 vincent lemonnier
-## Last update Fri May 11 20:24:48 2012 vincent lemonnier
+## Last update Sat May 12 15:52:54 2012 nicolas magere
 ##
 
 NAME=		bomberman
@@ -22,7 +22,10 @@ SRC=		./src/main.cpp		\
 		./src/Map.cpp		\
 		./src/APlayer.cpp	\
 		./src/Human.cpp		\
-		./src/AI.cpp
+		./src/AI.cpp		\
+		./src/Config.cpp	\
+		./src/Profile.cpp	\
+		./src/Match.cpp
 
 OBJ=		$(SRC:.cpp=.o)
 
