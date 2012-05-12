@@ -5,7 +5,7 @@
 // Login   <magere_n@epitech.net>
 // 
 // Started on  Thu May 10 16:45:06 2012 nicolas magere
-// Last update Thu May 10 16:50:50 2012 nicolas magere
+// Last update Thu May 10 17:39:10 2012 nicolas magere
 //
 
 #include <iostream>
@@ -67,5 +67,12 @@ void		Config::setIdKey(size_t idKey)
 
 void		Config::setIdJoystick(size_t idJoystick)
 {
+  this->_idJoystick = idJoystick;
+}
+
+void		Config::setAllConfig(size_t idEvent, size_t idKey, size_t idJoystick)
+{
+  this->_idEvent = idEvent;
+  this->_idKey = idKey;
   this->_idJoystick = idJoystick;
 }

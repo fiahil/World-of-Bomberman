@@ -5,7 +5,7 @@
 ## Login   <lemonn_v@epitech.net>
 ## 
 ## Started on  Mon Apr 23 18:20:16 2012 vincent lemonnier
-## Last update Mon May  7 14:25:07 2012 vincent lemonnier
+## Last update Fri May 11 19:19:11 2012 nicolas magere
 ##
 
 NAME=		bomberman

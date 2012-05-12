@@ -5,7 +5,7 @@
 // Login   <magere_n@epitech.net>
 // 
 // Started on  Thu May 10 11:54:48 2012 nicolas magere
-// Last update Thu May 10 17:01:10 2012 nicolas magere
+// Last update Thu May 10 17:33:09 2012 nicolas magere
 //
 
 #include <vector>
@@ -207,12 +207,54 @@ void		Profile::setSkill(const std::vector<size_t> & value)
   this->_skill = value;
 }
 
+void		Profile::addSkill(size_t value)
+{
+  this->_skill.push_back(value);
+}
+
 void		Profile::setAchivement(const std::vector<size_t> & value)
 {
   this->_achivement = value;
 }
 
+void		Profile::addAchivement(size_t value)
+{
+  this->_achivement.push_back(value);
+}
+
 void		Profile::setSave(const std::vector<size_t> & value)
 {
   this->_save = value;
+}
+
+void		Profile::addSave(size_t value)
+{
+  this->_save.push_back(value);
+}
+
+
+void		Profile::setAllProfile(size_t id, size_t lvl, size_t xp, size_t strength,
+				       size_t endurance, size_t agility, size_t intelligence, size_t spirit,
+				       bool tuto, t_skin skin,
+				       const Config & config,
+				       const std::string & name,
+				       const std::vector<size_t> & skill,
+				       const std::vector<size_t> & achivement,
+				       const std::vector<size_t> & save)
+{
+  this->_id = id;
+  this->_lvl = lvl;
+  this->_xp = xp;
+  this->_strength = strength;
+  this->_endurance = endurance;
+  this->_agility = agility;
+  this->_intelligence = intelligence;
+  this->_spirit = spirit;
+  this->_tuto = tuto;
+  this->_skin = skin;
+  this->_name = name;
+  this->_skill = skill;
+  this->_achivement = achivement;
+  this->_save = save;
+  this->_config = config;
 }

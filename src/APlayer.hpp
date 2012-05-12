@@ -32,18 +32,22 @@ public:
   eState	getState() const;
   void		setName(std::string const&);
   std::string const&	getName() const;
-  
+
 protected:
-   int _pv;
-   eBomb _weapon;
-   eSkin _skin;
-   size_t _team;
-   size_t _id;
-   eState _state;
-   std::map<eBomb, fBomb> _bombEffect;
-   std::map<eBonus, fBonus> _bonusEffect;
-   gdl::Model _model;
-   std::string _name;
+  int _pv;
+  eBomb _weapon;
+  eSkin _skin;
+  size_t _team;
+  size_t _id;
+  eState _state;
+  std::map<eBomb, fBomb> _bombEffect;
+  std::map<eBonus, fBonus> _bonusEffect;
+  gdl::Model _model;
+  std::string _name;
+  std::vector<size_t> *	_achivement; // modified : implement
+  const std::vector<size_t>	_skill;	// modified : implement
+  Config		_config;
+  std::string		_name;
 
 private:
    APlayer(const APlayer& oldAPlayer);
