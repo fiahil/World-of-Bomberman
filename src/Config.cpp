@@ -1,43 +1,19 @@
-//
-// Config.cpp for Bomberman in /home/magere_n/work/projets_tek2/bomberman/Git/Bomberman/Config
-// 
-// Made by nicolas magere
-// Login   <magere_n@epitech.net>
-// 
-// Started on  Thu May 10 16:45:06 2012 nicolas magere
-// Last update Thu May 10 17:39:10 2012 nicolas magere
-//
+/*
+ * Fiahil
+ * 12.05.2012
+ */
 
 #include <iostream>
 #include "Config.hpp"
 
 Config::Config()
 {
-  /**/std::cout << "Construction Config" << std::endl;
+  /* TODO: IMPLEMENT */std::cout << "Construction Config" << std::endl;
 }
 
 Config::~Config()
 {
-  /**/std::cout << "Destruction Config" << std::endl;
-}
-
-Config::Config(const Config & oth)
-{
-  /**/std::cout << "Construction Config" << std::endl;
-  this->_idEvent = oth.getIdEvent();
-  this->_idKey = oth.getIdKey();
-  this->_idJoystick = oth.getIdJoystick();
-}
-
-const Config & Config::operator=(const Config & oth)
-{
-  if (this != &oth)
-    {
-      this->_idEvent = oth.getIdEvent();
-      this->_idKey = oth.getIdKey();
-      this->_idJoystick = oth.getIdJoystick();
-    }
-  return *this;
+  /* TODO: IMPLEMENT */std::cout << "Destruction Config" << std::endl;
 }
 
 size_t		Config::getIdEvent(void) const

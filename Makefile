@@ -33,7 +33,7 @@ INCLUDES=	-I./lib/libgdl_gl-2012.3/include
 
 CXX=		g++
 
-CXXFLAGS=	-Wall -W -Werror -Wextra $(INCLUDES)
+CXXFLAGS=	-Wall -Wextra $(INCLUDES)
 
 LDFLAGS=	-lGL -lGLU -L./lib/libgdl_gl-2012.3/lib -lgdl_gl -Wl,--rpath=./lib/libgdl_gl-2012.3/lib,--rpath=./lib/SFML-1.6/lib
 

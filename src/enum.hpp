@@ -1,9 +1,7 @@
-/***********************************************************************
- * Module:  enum.hpp
- * Author:  lemonn_v
- * Modified: Monday, May 07, 2012 6:23:17 PM
- * Purpose: Declaration of the class enum
- ***********************************************************************/
+/*
+ * Fiahil
+ * 12.05.2012
+ */
 
 #ifndef __ENUM_HPP__
 #define __ENUM_HPP__

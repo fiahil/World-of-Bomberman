@@ -1,34 +1,37 @@
-/***********************************************************************
- * Module:  Camera.cpp
- * Author:  lemonn_v
- * Modified: Monday, May 07, 2012 6:23:48 PM
- * Purpose: Declaration of the class Camera
- ***********************************************************************/
+/*
+ * Fiahil
+ * 12.05.2012
+ */
 
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include "Camera.hpp"
 
-Camera::Camera() : _pos(0.0f, 50.0f, 50.0f), _target(0.0f, 0.0f, 0.0f), _height(600.0f), _width(800.0f)
+Camera::Camera()
+  : _pos(0.0f, 50.0f, 50.0f),
+    _target(0.0f, 0.0f, 0.0f),
+    _height(600.0f),
+    _width(800.0f)
 {
-  
 }
 
-Camera::Camera(int w, int h) : _pos(2.5f, 20.0f, 20.0f), _target(3.0f, 1.0f, 3.0f), _height(h), _width(w)
+Camera::Camera(int w, int h)
+  : _pos(2.5f, 20.0f, 20.0f),
+    _target(3.0f, 1.0f, 3.0f),
+    _height(h),
+    _width(w)
 {
-  
 }
 
 Camera::~Camera()
 {
-  
 }
 
-void	Camera::initialize()
+void		Camera::initialize()
 {
 }
 
-void	Camera::update(gdl::GameClock const&, gdl::Input&)
+void		Camera::update(gdl::GameClock const&, gdl::Input&)
 {
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();

@@ -1,9 +1,7 @@
-/***********************************************************************
- * Module:  AI.h
- * Author:  Fiahil
- * Modified: Monday, May 07, 2012 6:13:47 PM
- * Purpose: Declaration of the class AI
- ***********************************************************************/
+/*
+ * Fiahil
+ * 12.05.2012
+ */
 
 #if !defined(__Bomberman_AI_h)
 #define __Bomberman_AI_h
@@ -14,10 +12,6 @@ class AI : public APlayer
 {
 public:
   void play(gdl::GameClock const&, gdl::Input&);
-
-protected:
-private:
-
 };
 
 #endif

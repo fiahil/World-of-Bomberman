@@ -1,19 +1,11 @@
-/***********************************************************************
- * Module:  Human.cpp
- * Author:  Fiahil
- * Modified: Monday, May 07, 2012 6:13:39 PM
- * Purpose: Implementation of the class Human
- ***********************************************************************/
+/*
+ * Fiahil
+ * 12.05.2012
+ */
 
 #include "Human.hpp"
 
-////////////////////////////////////////////////////////////////////////
-// Name:       Human::play()
-// Purpose:    Implementation of Human::play()
-// Return:     void
-////////////////////////////////////////////////////////////////////////
-
-void Human::play(gdl::GameClock const&, gdl::Input&)
+void		Human::play(gdl::GameClock const&, gdl::Input&)
 {
    // TODO : implement
 }

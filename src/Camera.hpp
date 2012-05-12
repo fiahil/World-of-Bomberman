@@ -1,19 +1,22 @@
-/***********************************************************************
- * Module:  Camera.hpp
- * Author:  lemonn_v
- * Modified: Monday, May 07, 2012 6:23:48 PM
- * Purpose: Declaration of the class Camera
- ***********************************************************************/
+/*
+ * Fiahil
+ * 12.05.2012
+ */
 
 #ifndef __CAMERA_HPP__
 #define __CAMERA_HPP__
 
-#include <GameClock.hpp>
-#include <Input.hpp>
+#include "GameClock.hpp"
+#include "Input.hpp"
 #include "Vector.hpp"
 
 class Camera
 {
+public:
+  Camera();
+  Camera(int, int);
+  ~Camera();
+
 private:
   Vector	_pos;
   Vector	_target;
@@ -21,9 +24,6 @@ private:
   int		_width;
 
 public:
-  Camera();
-  Camera(int, int);
-  ~Camera();
   void	initialize();
   void	update(gdl::GameClock const&, gdl::Input&);
 };
