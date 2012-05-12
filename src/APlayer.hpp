@@ -47,18 +47,19 @@ private:
 
 protected:
   int _pv;
-  Bomb::eBomb _weapon;
-  Skin::eSkin _skin;
   size_t _team;
   size_t _id;
+  std::string _name;
+  std::string	_teamName;		// modified : implement
+  Bomb::eBomb _weapon;
+  Skin::eSkin _skin;
   State::eState _state;
   Dir::eDir	_dir;
+  std::vector<size_t> *	_achivement;	// modified : implement
+  const std::vector<size_t>	_skill;	// modified : implement
   std::map<Bomb::eBomb, fBomb> _bombEffect;
   std::map<Bonus::eBonus, fBonus> _bonusEffect;
   gdl::Model _model;
-  std::string _name;
-  std::vector<size_t> *	_achivement;	// modified : implement
-  const std::vector<size_t>	_skill;	// modified : implement
 
 private:
   APlayer(const APlayer& oldAPlayer);
