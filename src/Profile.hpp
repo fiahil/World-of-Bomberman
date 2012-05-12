@@ -5,7 +5,7 @@
 // Login   <magere_n@epitech.net>
 // 
 // Started on  Thu May 10 11:19:00 2012 nicolas magere
-// Last update Sat May 12 15:29:17 2012 nicolas magere
+// Last update Sat May 12 15:34:11 2012 nicolas magere
 //
 
 #ifndef		__PROFILE_HPP__
@@ -13,7 +13,7 @@
 
 #include <vector>
 #include "Config.hpp"
-#include "APlayer.hpp"
+#include "enum.hpp"
 
 class	Profile
 {
@@ -22,7 +22,7 @@ private:
   size_t		_lvl;
   size_t		_xp;
   bool			_tuto;
-  eSkin		_skin;
+  Skin::eSkin		_skin;
   Config		_config;
   std::string		_name;
   std::vector<size_t>	_skill;

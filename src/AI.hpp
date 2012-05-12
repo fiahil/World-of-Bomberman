@@ -8,12 +8,12 @@
 #if !defined(__Bomberman_AI_h)
 #define __Bomberman_AI_h
 
-#include <APlayer.h>
+#include "APlayer.hpp"
 
 class AI : public APlayer
 {
 public:
-   void play(void);
+  void play(gdl::GameClock const&, gdl::Input&);
 
 protected:
 private:

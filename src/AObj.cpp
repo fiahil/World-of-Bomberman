@@ -39,3 +39,13 @@ AObj::~AObj()
 AObj::AObj(AObj const& oldAObj) : _pos(oldAObj._pos)
 {
 }
+
+void	AObj::setPos(int x, int y)
+{
+  this->_pos.setPos(x, y);
+}
+
+Point const&	AObj::getPos() const
+{
+  return this->_pos;
+}
