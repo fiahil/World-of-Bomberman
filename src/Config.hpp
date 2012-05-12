@@ -6,6 +6,9 @@
 #ifndef		__CONFIG_HPP__
 #define		__CONFIG_HPP__
 
+/*
+ * TODO: Refaire objet config
+ */
 class	Config
 {
 public:

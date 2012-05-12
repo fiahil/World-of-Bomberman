@@ -38,7 +38,6 @@ CXXFLAGS	= -Wall -Wextra $(INCLUDES)
 LDFLAGS		= -lGL -lGLU -L./lib/libgdl_gl-2012.3/lib -lgdl_gl -Wl,--rpath=./lib/libgdl_gl-2012.3/lib,--rpath=./lib/SFML-1.6/lib
 
 RM		= rm -rf
-DUST		= ./*~ Gameplay/*~ lib/*~ Ressources/*~ Serializer/*~ src/*~ TestEvent/*~ Tests/*~ Videos/*~
 
 $(NAME):	$(OBJ)
 		$(CXX) -o $(NAME) $(OBJ) $(LDFLAGS)
@@ -47,7 +46,7 @@ all:		$(NAME)
 
 clean:
 		$(RM) $(OBJ)
-		$(RM) $(DUST)
+		$(RM)
 
 fclean:		clean
 		$(RM) $(NAME)
