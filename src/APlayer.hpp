@@ -31,6 +31,7 @@ protected:
   int			_pv;
   size_t		_id;
   size_t		_teamId;
+  size_t		_color;
   std::string		_name;
   std::string		_teamName;
   Bomb::eBomb		_weapon;
@@ -39,8 +40,6 @@ protected:
   Dir::eDir		_dir;
   gdl::Model		_model;
 
-  std::vector<size_t>*			_achivement;	// modified : implement
-  std::vector<size_t> const		_skill;		// modified : implement
   std::map<Bomb::eBomb, fBomb>		_bombEffect;
   std::map<Bonus::eBonus, fBonus>	_bonusEffect;
 
@@ -57,8 +56,9 @@ public:
   int		getPv() const;
   Bomb::eBomb	getWeapon() const;
   Skin::eSkin	getSkin() const;
-  size_t	getTeam() const;
   size_t	getId() const;
+  size_t	getTeamId() const;
+  size_t	getColor() const;
   State::eState	getState() const;
   Dir::eDir	getDir() const;
 
@@ -68,8 +68,9 @@ public:
   void		setPv(int);
   void		setWeapon(Bomb::eBomb);
   void		setSkin(Skin::eSkin);
-  void		setTeam(size_t);
   void		setId(size_t);
+  void		setTeamId(size_t);
+  void		setColor(size_t);
   void		setState(State::eState);
   void		setDir(Dir::eDir);
   void		setName(std::string const&);

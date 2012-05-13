@@ -42,6 +42,7 @@ private:
     QUIT,
     PAUSE,
     SELECT,
+    SPACE,
     OTHER,
     ActionCount
   };
@@ -83,6 +84,7 @@ private :
   void QUITFunction();
   void PAUSEFunction();
   void SELECTFunction();
+  void SPACEFunction();
   MyGame::eventSt initStruct(gdl::Keys::Key, Action, actionFunc) const;
   inputMode	_mode;
   inputMap	_event;

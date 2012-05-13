@@ -10,6 +10,7 @@ APlayer::APlayer()
   : _pv(100),
     _id(0),
     _teamId(0),
+    _color(0),
     _weapon(Bomb::NORMAL),
     _skin(Skin::NORMAL),
     _state(State::STATIC),
@@ -69,12 +70,12 @@ Bomb::eBomb	APlayer::getWeapon() const
   return this->_weapon;
 }
 
-void		APlayer::setTeam(size_t team)
+void		APlayer::setTeamId(size_t team)
 {
   this->_teamId = team;
 }
 
-size_t		APlayer::getTeam() const
+size_t		APlayer::getTeamId() const
 {
   return this->_teamId;
 }
@@ -87,6 +88,16 @@ void		APlayer::setId(size_t id)
 size_t		APlayer::getId() const
 {
   return this->_id;
+}
+
+size_t		APlayer::getColor() const
+{
+  return this->_color;
+}
+
+void		APlayer::setColor(size_t val)
+{
+  this->_color = val;
 }
 
 void		APlayer::setState(State::eState state)
@@ -128,3 +139,4 @@ std::string const&	APlayer::getTeamName() const
 {
   return this->_teamName;
 }
+
