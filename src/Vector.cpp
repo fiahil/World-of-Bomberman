@@ -24,8 +24,8 @@ Vector::Vector(Vector const& rhs)
   if (&rhs != this)
     {
       this->x = rhs.x;
-      this->x = rhs.y;
-      this->x = rhs.z;
+      this->y = rhs.y;
+      this->z = rhs.z;
     }
 }
 
@@ -34,8 +34,8 @@ Vector&	Vector::operator=(Vector const& rhs)
   if (&rhs != this)
     {
       this->x = rhs.x;
-      this->x = rhs.y;
-      this->x = rhs.z;
+      this->y = rhs.y;
+      this->z = rhs.z;
     }
   return *this;
 }
