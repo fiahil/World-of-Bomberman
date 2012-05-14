@@ -8,6 +8,8 @@
 
 #include <string>
 #include <fstream>
+#include "Match.hpp"
+#include "Profile.hpp"
 
 namespace Serializer
 {
@@ -20,7 +22,8 @@ namespace Serializer
       std::ofstream	_os;
 
     public:
-      void	pack();
+      void	packProfile(Profile const&);
+      void	packMatch(Match const&);
   };
 }
 

@@ -7,14 +7,17 @@
 NAME	=	serializer
 
 SRCXX	=	main.cpp		\
-		Packman.cpp
+		Packman.cpp		\
+		../src/Profile.cpp	\
+		../src/Config.cpp	\
+		../src/Match.cpp
 
 OBJXX	=	$(SRCXX:.cpp=.o)	\
 		lex.yy.cpp		\
 		Loader.tab.cpp
 
 
-CXXFLAGS=	-Wall -Wextra -O3 -I./
+CXXFLAGS=	-Wall -Wextra -O3 -I./ -I../src -I../lib/libgdl_gl-2012.3/include
 
 CXX	=	g++
 
