@@ -6,7 +6,8 @@
 
 NAME	=	serializer
 
-SRCXX	=	main.cpp
+SRCXX	=	main.cpp		\
+		Packman.cpp
 
 OBJXX	=	$(SRCXX:.cpp=.o)	\
 		lex.yy.cpp		\
