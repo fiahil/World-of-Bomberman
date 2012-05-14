@@ -43,7 +43,11 @@ void		APlayer::initialize(void)
 
 void		APlayer::draw(void)
 {
+  glPushMatrix();
+  glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
+  glScalef(0.005f, 0.005f, 0.005f);
   this->_model.draw();
+  glPopMatrix();
 }
 
 void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)

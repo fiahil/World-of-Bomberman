@@ -38,7 +38,7 @@ struct HumGame {
 class Human : public APlayer
 {
 public:
-  Human(Map &, const Config&, std::vector<size_t>&, std::vector<size_t> const&);
+  Human(Map &);//, const Config&, std::vector<size_t>&, std::vector<size_t> const&);
   virtual ~Human();
   virtual void play(gdl::GameClock const&, gdl::Input&);
 

@@ -12,8 +12,8 @@
 MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match)
   : _clock(clock),
     _input(input),
-    _camera(800, 600),
-    _match(match)
+    _match(match),
+    _camera(800, 600)
 {
 }
 
@@ -46,9 +46,6 @@ void		MyGame::draw(void)
 
 void		MyGame::unload(void)
 {
-  this->_match._map->unload();
-  for (unsigned int i = 0; i < this->_match._players.size(); ++i)
-    this->_match._players[i]->unload(); 
 }
 
 bool		MyGame::isEOG(void) const

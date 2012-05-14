@@ -12,7 +12,7 @@ Human::eventSt Human::initStruct(gdl::Keys::Key key, HumGame::eAction action, ac
 }
 
 
-Human::Human(Map & map, const Config&, std::vector<size_t>&, std::vector<size_t> const&)
+Human::Human(Map & map)//, const Config&, std::vector<size_t>&, std::vector<size_t> const&)
   : APlayer(map), _mode(Input::GAME)
 {
   this->_event[Input::GAME]._freq = 2; // TODO TMP
