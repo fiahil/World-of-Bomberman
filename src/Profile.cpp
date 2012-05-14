@@ -62,9 +62,9 @@ const std::vector<size_t> &	Profile::getStat(void) const
   return this->_stat;
 }
 
-const std::vector<size_t> &	Profile::getAchivement(void) const
+const std::vector<size_t> &	Profile::getAchievement(void) const
 {
-  return this->_achivement;
+  return this->_achievement;
 }
 
 const std::vector<size_t> &	Profile::getSave(void) const
@@ -127,14 +127,14 @@ void		Profile::addStat(size_t value)
   this->_stat.push_back(value);
 }
 
-void		Profile::setAchivement(const std::vector<size_t> & value)
+void		Profile::setAchievement(const std::vector<size_t> & value)
 {
-  this->_achivement = value;
+  this->_achievement = value;
 }
 
-void		Profile::addAchivement(size_t value)
+void		Profile::addAchievement(size_t value)
 {
-  this->_achivement.push_back(value);
+  this->_achievement.push_back(value);
 }
 
 void		Profile::setSave(const std::vector<size_t> & value)
@@ -153,7 +153,7 @@ void		Profile::setAllProfile(size_t id, size_t lvl, size_t xp,
 			       const std::string & name,
 			       const std::vector<size_t> & skill,
 			       const std::vector<size_t> & stat,
-			       const std::vector<size_t> & achivement,
+			       const std::vector<size_t> & achievement,
 			       const std::vector<size_t> & save)
 {
   this->_id = id;
@@ -164,7 +164,7 @@ void		Profile::setAllProfile(size_t id, size_t lvl, size_t xp,
   this->_name = name;
   this->_skill = skill;
   this->_stat = stat;
-  this->_achivement = achivement;
+  this->_achievement = achievement;
   this->_save = save;
   this->_config = config;
 }

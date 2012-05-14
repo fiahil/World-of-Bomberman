@@ -11,8 +11,8 @@
 
 #define POS(px, py) ((((this->_y * (py)) - 1)) + (px) + 1)
 
-class Pattern; // TO REMOVE
-class Bonus; // TO REMOVE
+class Pattern; //TODO: TO REMOVE
+class Bonus; //TODO: TO REMOVE
 
 class Map : public AObj
 {

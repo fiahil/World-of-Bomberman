@@ -31,7 +31,7 @@ private:
 
   std::vector<size_t>	_skill;
   std::vector<size_t>	_stat;
-  std::vector<size_t>	_achivement;
+  std::vector<size_t>	_achievement;
   std::vector<size_t>	_save;
 
 public:
@@ -44,7 +44,7 @@ public:
   const std::string &		getName(void) const;
   const std::vector<size_t> &	getSkill(void) const;
   const std::vector<size_t> &	getStat(void) const;
-  const std::vector<size_t> &	getAchivement(void) const;
+  const std::vector<size_t> &	getAchievement(void) const;
   const std::vector<size_t> &	getSave(void) const;
 
 public:
@@ -59,8 +59,8 @@ public:
   void		addSkill(size_t);
   void		setStat(const std::vector<size_t> &);
   void		addStat(size_t);
-  void		setAchivement(const std::vector<size_t> &);
-  void		addAchivement(size_t);
+  void		setAchievement(const std::vector<size_t> &);
+  void		addAchievement(size_t);
   void		setSave(const std::vector<size_t> &);
   void		addSave(size_t);
   void		setAllProfile(size_t, size_t, size_t,
