@@ -37,6 +37,7 @@ public:
   void initialize(void);
   void draw(void);
   void update(gdl::GameClock const& clock, gdl::Input& input);
+  bool canMoveAt(size_t x, size_t y);
   //  Pattern explode(Pattern origin, std::list<Bonus>& bonus);
 };
 

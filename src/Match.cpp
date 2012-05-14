@@ -17,7 +17,7 @@ Match::Match(Map * map, bool cheat, GameMode::eGameMode game_mode, const std::ve
     _gameMode(game_mode),
     _players(players)
 {
-  /**/std::cout << "Creation Match" << std::endl;
+   /**/std::cout << "Creation Match" << std::endl;
 }
 
 Match::~Match()

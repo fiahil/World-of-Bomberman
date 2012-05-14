@@ -34,7 +34,7 @@ void	Plane::draw()
   if (x > 1.0f)
     x = 1.0f;
   if (y > 1.0f)
-  y = 1.0f;
+    y = 1.0f;
   glPushMatrix();
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
   glScalef(this->_pos._scale, this->_pos._scale, this->_pos._scale);

@@ -6,8 +6,9 @@
 #include <vector>
 #include "APlayer.hpp"
 
-APlayer::APlayer()
-  : _pv(100),
+APlayer::APlayer(Map & map)
+  : _map(map),
+    _pv(100),
     _id(0),
     _teamId(0),
     _color(0),
@@ -16,6 +17,7 @@ APlayer::APlayer()
     _state(State::STATIC),
     _dir(Dir::EAST)
 {
+  this->setPos(1, 1);
 }
 
 APlayer::~APlayer()
@@ -35,13 +37,17 @@ void		APlayer::initialize(void)
 {
   std::vector<std::string>	refModel(Skin::LAST, "");
 
-  refModel[Skin::NORMAL] = "models/player.fbx";
+  refModel[Skin::NORMAL] = "models/marvin.fbx";
   this->_model = gdl::Model::load(refModel[this->_skin]);
 }
 
 void		APlayer::draw(void)
 {
+  glPushMatrix();
+  glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
+  glScalef(0.005f, 0.005f, 0.005f);
   this->_model.draw();
+  glPopMatrix();
 }
 
 void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
@@ -140,3 +146,32 @@ std::string const&	APlayer::getTeamName() const
   return this->_teamName;
 }
 
+void		APlayer::UPFunction()
+{
+  if (this->_map.canMoveAt(this->_pos._x, this->_pos._y - 1))
+    this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
+}
+
+void		APlayer::LEFTFunction()
+{
+  if (this->_map.canMoveAt(this->_pos._x - 1, this->_pos._y))
+    this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
+}
+
+void		APlayer::RIGHTFunction()
+{
+  if (this->_map.canMoveAt(this->_pos._x + 1, this->_pos._y))
+    this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
+}
+
+void		APlayer::DOWNFunction()
+{
+  if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
+    this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
+}
+
+void		APlayer::ATTACKFunction()
+{
+
+
+}
