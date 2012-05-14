@@ -3,6 +3,7 @@
  * 12.05.2012
  */
 
+#include <iostream>
 #include <vector>
 #include "APlayer.hpp"
 
@@ -17,6 +18,7 @@ APlayer::APlayer(Map & map)
     _state(State::STATIC),
     _dir(Dir::EAST)
 {
+  this->_pos._scale = 2.0f;
   this->setPos(1, 1);
 }
 

@@ -5,21 +5,22 @@
 
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <iostream>
 #include "Camera.hpp"
 
 Camera::Camera()
-  : _pos(0.0f, 50.0f, 50.0f),
-    _target(0.0f, 0.0f, 0.0f),
-    _height(600.0f),
-    _width(800.0f)
+  : _height(600.0f),
+    _width(800.0f),
+    _pl1(0),
+    _pl2(0)
 {
 }
 
-Camera::Camera(int w, int h)
-  : _pos(0.0f, 10.0f, 10.0f),
-    _target(0.0f, 0.0f, 0.0f),
-    _height(h),
-    _width(w)
+Camera::Camera(int w, int h,  APlayer const* pl1,  APlayer const* pl2)
+  : _height(h),
+    _width(w),
+    _pl1(pl1),
+    _pl2(pl2)
 {
 }
 
@@ -33,12 +34,22 @@ void		Camera::initialize()
 
 void		Camera::update(gdl::GameClock const&, gdl::Input&)
 {
+  Vector	pos;
+  Vector	target;
+
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluPerspective(70.0f, static_cast<double>(this->_width) / static_cast<double>(this->_height),
 		 1.0f, 10000.0f);
-  gluLookAt(this->_pos.x, this->_pos.y, this->_pos.z,
-	    this->_target.x, this->_target.y, this->_target.z,
+  if (this->_pl1 && !this->_pl2)
+    {
+      pos = this->_pl1->getPos()._pos;
+      pos.y += 20.0f;
+      pos.z += 10.0f;
+      target = this->_pl1->getPos()._pos;
+    }
+  gluLookAt(pos.x, pos.y, pos.z,
+	    target.x, target.y, target.z,
 	    0.0f, 1.0f, 0.0f);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
