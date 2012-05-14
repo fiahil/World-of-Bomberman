@@ -56,6 +56,14 @@ protected:
   // virtual dans APlayer and specialise dans Human
   // TODO implementer + rajouter a la liste des bind a catch
 
+private:
+  typedef void	(APlayer::*t_rotFunc)();
+  void	NORTHFunction();
+  void	SOUTHFunction();
+  void	WESTFunction();
+  void	EASTFunction();
+  std::vector<t_rotFunc>	_rotFuncMap;
+
 public:
   /*
    * TODO : IMPLEMENT PATTERN

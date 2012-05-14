@@ -16,8 +16,13 @@ APlayer::APlayer(Map & map)
     _weapon(Bomb::NORMAL),
     _skin(Skin::NORMAL),
     _state(State::STATIC),
-    _dir(Dir::EAST)
+    _dir(Dir::SOUTH),
+    _rotFuncMap(Dir::LAST, 0)
 {
+  this->_rotFuncMap[Dir::NORTH] = &APlayer::NORTHFunction;
+  this->_rotFuncMap[Dir::SOUTH] = &APlayer::SOUTHFunction;
+  this->_rotFuncMap[Dir::WEST] = &APlayer::WESTFunction;
+  this->_rotFuncMap[Dir::EAST] = &APlayer::EASTFunction;
   this->_pos._scale = 2.0f;
   this->setPos(1, 1);
 }
@@ -47,6 +52,7 @@ void		APlayer::draw(void)
 {
   glPushMatrix();
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
+  (this->*_rotFuncMap[this->_dir])();
   glScalef(0.005f, 0.005f, 0.005f);
   this->_model.draw();
   glPopMatrix();
@@ -150,24 +156,28 @@ std::string const&	APlayer::getTeamName() const
 
 void		APlayer::UPFunction()
 {
+  this->_dir = Dir::NORTH;
   if (this->_map.canMoveAt(this->_pos._x, this->_pos._y - 1))
     this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
 }
 
 void		APlayer::LEFTFunction()
 {
+  this->_dir = Dir::WEST;
   if (this->_map.canMoveAt(this->_pos._x - 1, this->_pos._y))
     this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
 }
 
 void		APlayer::RIGHTFunction()
 {
+  this->_dir = Dir::EAST;
   if (this->_map.canMoveAt(this->_pos._x + 1, this->_pos._y))
     this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
 }
 
 void		APlayer::DOWNFunction()
 {
+  this->_dir = Dir::SOUTH;
   if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
     this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
 }
@@ -176,4 +186,24 @@ void		APlayer::ATTACKFunction()
 {
 
 
+}
+
+void		APlayer::NORTHFunction()
+{
+  glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+}
+
+void		APlayer::SOUTHFunction()
+{
+
+}
+
+void		APlayer::WESTFunction()
+{
+  glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
+}
+
+void		APlayer::EASTFunction()
+{
+  glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
 }
