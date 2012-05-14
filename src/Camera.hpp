@@ -8,20 +8,21 @@
 
 #include "GameClock.hpp"
 #include "Input.hpp"
+#include "APlayer.hpp"
 #include "Vector.hpp"
 
 class Camera
 {
 public:
   Camera();
-  Camera(int, int);
+  Camera(int, int,  APlayer const*,  APlayer const* pl2 = 0);
   ~Camera();
 
 private:
-  Vector	_pos;
-  Vector	_target;
-  int		_height;
-  int		_width;
+  int			_height;
+  int			_width;
+  APlayer const*	_pl1;
+  APlayer const*	_pl2;
 
 public:
   void	initialize();

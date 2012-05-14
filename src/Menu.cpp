@@ -26,7 +26,7 @@ void		Menu::initialize(void)
   std::vector<APlayer*>	players;
   players.push_back(new Human(*map));
   Match*	m = new Match(map, false, GameMode::ARCADE, players);
-  this->_game = new MyGame(this->gameClock_, this->input_, *m);
+  this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0]); // TODO
   this->_game->initialize();
 }
 

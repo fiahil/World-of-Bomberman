@@ -14,7 +14,7 @@
 class	MyGame
 {
 public:
-  MyGame(gdl::GameClock&, gdl::Input&, Match&);
+  MyGame(gdl::GameClock&, gdl::Input&, Match&, APlayer const*, APlayer const* pl2 = 0);
   ~MyGame();
 
 private:
