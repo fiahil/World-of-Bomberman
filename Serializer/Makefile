@@ -6,16 +6,15 @@
 
 NAME	=	serializer
 
-SRCXX	=	main.cpp		\
+SRCXX	=	Loader.tab.cpp		\
+		lex.yy.cpp		\
+		main.cpp		\
 		Packman.cpp		\
 		../src/Profile.cpp	\
 		../src/Config.cpp	\
 		../src/Match.cpp
 
-OBJXX	=	$(SRCXX:.cpp=.o)	\
-		lex.yy.cpp		\
-		Loader.tab.cpp
-
+OBJXX	=	$(SRCXX:.cpp=.o)
 
 CXXFLAGS=	-Wall -Wextra -O3 -I./ -I../src -I../lib/libgdl_gl-2012.3/include
 
@@ -26,11 +25,7 @@ CXX	=	g++
 
 all:		$(NAME)
 
-gen:
-	bison Loader.ypp
-	flex -o lex.yy.cpp Scanner.lex
-
-$(NAME):	gen $(OBJXX)
+$(NAME):	$(OBJXX)
 	$(CXX) -o $(NAME) $(OBJXX)
 
 debug:		CXXFLAGS = -Wall -Wextra -g
@@ -47,3 +42,15 @@ fclean:		clean
 	@rm -f lex.yy.cpp location.hh position.hh stack.hh
 
 re:		fclean all
+
+lex.yy.o:	lex.yy.cpp
+	$(CXX) -o $@	-c $<	$(CXXFLAGS)
+
+Loader.tab.o:	Loader.tab.cpp
+	$(CXX) -o $@	-c $<	$(CXXFLAGS)
+
+lex.yy.cpp:	Scanner.lex Loader.tab.cpp
+	flex -o lex.yy.cpp Scanner.lex
+
+Loader.tab.cpp:	Loader.ypp
+	bison Loader.ypp
