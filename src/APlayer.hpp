@@ -8,6 +8,7 @@
 
 #include <map>
 #include <string>
+#include "Map.hpp"
 #include "Model.hpp"
 #include "enum.hpp"
 #include "AObj.hpp"
@@ -15,7 +16,7 @@
 class APlayer : public AObj
 {
 public:
-  APlayer();
+  APlayer(Map &);
   virtual ~APlayer();
 
 private:
@@ -28,6 +29,7 @@ private:
   typedef void	(*fBonus)();
 
 protected:
+  Map &			_map;
   int			_pv;
   size_t		_id;
   size_t		_teamId;
@@ -42,6 +44,17 @@ protected:
 
   std::map<Bomb::eBomb, fBomb>		_bombEffect;
   std::map<Bonus::eBonus, fBonus>	_bonusEffect;
+
+protected:
+  void UPFunction();
+  void LEFTFunction();
+  void RIGHTFunction();
+  void DOWNFunction();
+  void ATTACKFunction();
+  // cheat
+  // pause/menu
+  // virtual dans APlayer and specialise dans Human
+  // TODO implementer + rajouter a la liste des bind a catch
 
 public:
   /*

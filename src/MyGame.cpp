@@ -11,7 +11,7 @@ MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input)
   : _clock(clock),
     _input(input),
     _camera(800, 600),
-    _map(100, 100, 2, 2)
+    _map(100, 100, 1, 2)
 {
 }
 
