@@ -16,6 +16,7 @@ APlayer::APlayer()
     _state(State::STATIC),
     _dir(Dir::EAST)
 {
+  this->setPos(1, 1);
 }
 
 APlayer::~APlayer()
@@ -35,7 +36,7 @@ void		APlayer::initialize(void)
 {
   std::vector<std::string>	refModel(Skin::LAST, "");
 
-  refModel[Skin::NORMAL] = "models/player.fbx";
+  refModel[Skin::NORMAL] = "models/marvin.fbx";
   this->_model = gdl::Model::load(refModel[this->_skin]);
 }
 
