@@ -24,7 +24,7 @@ Human::Human(Map & map)//, const Config&, std::vector<size_t>&, std::vector<size
   this->_event[Input::GAME].
     _event.push_back(initStruct(gdl::Keys::Left, HumGame::LEFT, &Human::LEFTFunction));
   this->_event[Input::GAME].
-    _event.push_back(initStruct(gdl::Keys::Right, HumGame::RIGHT, &Human::DOWNFunction));
+    _event.push_back(initStruct(gdl::Keys::Right, HumGame::RIGHT, &Human::RIGHTFunction));
   this->_event[Input::GAME].
     _event.push_back(initStruct(gdl::Keys::Space, HumGame::ATTACK, &Human::ATTACKFunction));
   // TODO implement other mode
