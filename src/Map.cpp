@@ -121,3 +121,8 @@ void		Map::update(gdl::GameClock const&, gdl::Input&)
 {
   // TODO : implement
 }
+
+bool Map::canMoveAt(size_t x, size_t y)
+{
+  return (this->_map[POS(x, y)] == '0');
+}

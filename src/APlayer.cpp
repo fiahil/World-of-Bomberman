@@ -6,8 +6,9 @@
 #include <vector>
 #include "APlayer.hpp"
 
-APlayer::APlayer()
-  : _pv(100),
+APlayer::APlayer(Map & map)
+  : _map(map),
+    _pv(100),
     _id(0),
     _teamId(0),
     _color(0),
@@ -141,3 +142,32 @@ std::string const&	APlayer::getTeamName() const
   return this->_teamName;
 }
 
+void		APlayer::UPFunction()
+{
+  if (this->_map.canMoveAt(this->_pos._x, this->_pos._y - 1))
+    this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
+}
+
+void		APlayer::LEFTFunction()
+{
+  if (this->_map.canMoveAt(this->_pos._x - 1, this->_pos._y))
+    this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
+}
+
+void		APlayer::RIGHTFunction()
+{
+  if (this->_map.canMoveAt(this->_pos._x + 1, this->_pos._y))
+    this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
+}
+
+void		APlayer::DOWNFunction()
+{
+  if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
+    this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
+}
+
+void		APlayer::ATTACKFunction()
+{
+
+
+}
