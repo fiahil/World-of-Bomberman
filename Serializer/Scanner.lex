@@ -71,16 +71,6 @@
   return Serializer::Loader::token::HEADER;
 }
 
-"#TEAMS"	{
-  yylval->sval = new std::string(yytext, yyleng);
-  return Serializer::Loader::token::TEAMS;
-}
-
-"#ENDTEAMS"	{
-  yylval->sval = new std::string(yytext, yyleng);
-  return Serializer::Loader::token::ENDTEAMS;
-}
-
 "#PLAYERS"	{
   yylval->sval = new std::string(yytext, yyleng);
   return Serializer::Loader::token::PLAYERS;
