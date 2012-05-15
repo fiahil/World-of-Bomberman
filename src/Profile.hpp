@@ -63,7 +63,7 @@ public:
   void		addAchievement(size_t);
   void		setSave(const std::vector<size_t> &);
   void		addSave(size_t);
-  void		setAllProfile(size_t, size_t, size_t,
+  void		setAllProfile(size_t, size_t,
 			      bool, Skin::eSkin,
 			      const Config &,
 			      const std::string &,

@@ -124,6 +124,16 @@ State::eState	APlayer::getState() const
   return this->_state;
 }
 
+void		APlayer::setSkin(Skin::eSkin skin)
+{
+  this->_skin = skin;
+}
+
+Skin::eSkin	APlayer::getSkin(void) const
+{
+  return this->_skin;
+}
+
 void		APlayer::setDir(Dir::eDir dir)
 {
   this->_dir = dir;

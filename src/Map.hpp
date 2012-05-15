@@ -38,6 +38,7 @@ public:
   void draw(void);
   void update(gdl::GameClock const& clock, gdl::Input& input);
   bool canMoveAt(size_t x, size_t y);
+  std::string const&	getMap(void) const;
   //  Pattern explode(Pattern origin, std::list<Bonus>& bonus);
 };
 
