@@ -3,11 +3,28 @@
  * 15.05.12
  */
 
-#indef		__MENU_MANAGER_HPP__
+#ifndef		__MENU_MANAGER_HPP__
 #define		__MENU_MANAGER_HPP__
 
 #include <vector>
 #include "AMenu.hpp"
+// #include "enum.hpp"
+
+struct Menu			// Move dans enum.hpp dans src quand pret
+{
+  enum eMenu
+    {
+      MAINMENU,
+      NEWPROFILE,
+      PROFILE,
+      SLIDING,
+      GAMECHOOSE,
+      SETTINGS,
+      BACK,
+      QUIT,
+      LAST
+    };
+};
 
 class	MenuManager
 {
@@ -20,9 +37,19 @@ private:
   const MenuManager & operator=(const MenuManager &);
 
 private:
-  std::vector<AMenu>		_menus;
-}
+  std::vector<AMenu>	_menus;
+  Menu::eMenu		_curMenu;
 
+public:
+  void		run();
 
+private:
+  void		buildMainMenu(void);
+  void 		buildNewProfileMenu(void);
+  void 		buildProfileMenu(void);
+  void 		buildSlidingMenu(void);
+  void 		buildGameChooseMenu(void);
+  void 		buildSettingsMenu(void);
+};
 
 #endif		/* __MENU_MANAGEMENT_HPP__ */
