@@ -24,7 +24,7 @@ private:
   Cube(Cube const&);
   Cube&	operator=(Cube const&);
   virtual void	draw();
-  
+
 public:
   //Cube();
   Cube(gdl::Image&);
