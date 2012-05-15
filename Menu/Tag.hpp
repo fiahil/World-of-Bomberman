@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include "Menu.hpp"
+#include "Image.hpp"
 
 enum	eSprite
   {

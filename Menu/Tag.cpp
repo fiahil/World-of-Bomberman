@@ -45,12 +45,12 @@ void	Tag::draw(void) const
     this->_normal.bind();
 
   /* A checker */
-  Primitive::glTexCoord2f(0.0, 0.0);
-  Primitive::glVertex3f(this->_squareCoord[0], this->_squareCoord[1], this->_squareCoord[2]);
-  Primitive::glTexCoord2f(0.0, 1.0);
-  Primitive::glVertex3f(this->_squareCoord[0], this->_squareCoord[1], this->_squareCoord[2]);
-  Primitive::glTexCoord2f(1.0, 1.0);
-  Primitive::glVertex3f(this->_squareCoord[0], this->_squareCoord[1], this->_squareCoord[2]);
-  Primitive::glTexCoord2f(1.0, 0.0);
-  Primitive::glVertex3f(this->_squareCoord[0], this->_squareCoord[1], this->_squareCoord[2]);
+  glTexCoord2f(0.0, 0.0);
+  glVertex3f(this->_squareCoord[0], this->_squareCoord[1], this->_squareCoord[2]);
+  glTexCoord2f(0.0, 1.0);
+  glVertex3f(this->_squareCoord[0], this->_squareCoord[1], this->_squareCoord[2]);
+  glTexCoord2f(1.0, 1.0);
+  glVertex3f(this->_squareCoord[0], this->_squareCoord[1], this->_squareCoord[2]);
+  glTexCoord2f(1.0, 0.0);
+  glVertex3f(this->_squareCoord[0], this->_squareCoord[1], this->_squareCoord[2]);
 }
