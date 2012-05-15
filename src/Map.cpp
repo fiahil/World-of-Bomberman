@@ -150,3 +150,8 @@ void		Map::setOptimization(Point const* p)
 {
   this->_opti = p;
 }
+
+std::string const&	Map::getMap(void) const
+{
+  return this->_map;
+}

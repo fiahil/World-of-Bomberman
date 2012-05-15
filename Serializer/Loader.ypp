@@ -11,6 +11,7 @@
 %define namespace "Serializer"
 %define parser_class_name "Loader"
 %parse-param	{ Serializer::Scanner &scanner }
+%parse-param	{ Serializer::Unpackman &up }
 %lex-param	{ Serializer::Scanner &scanner }
 %destructor	{ delete $$.sval; } "identifier"
 
@@ -18,10 +19,16 @@
 #include <string>
 #include <stdexcept>
 #include <sstream>
+#include <cassert>
+#include "APlayer.hpp"
+#include "AI.hpp"
+#include "Human.hpp"
+#include "Unpackman.hpp"
 
   namespace Serializer {
     class Scanner;
   }
+  class Map;
 }
 
 %code {
@@ -55,90 +62,92 @@ line
 ;
 
 info
-: INFO SEP NUMBER SEP WORD SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL
+: INFO SEP NUMBER SEP WORD SEP NUMBER SEP NUMBER SEP NUMBER EOL
 {
-  std::cout << *$1 << ":"
-	    << "\n- id: " << $3
-	    << "\n- nick: " << *$5
-	    << "\n- lvl: " << $7
-	    << "\n- xp: " << $9
-	    << "\n- tutorial: " << $11
-	    << "\n- skin: " << $13
-	    << std::endl << std::endl;
+  up.pf.setId($3);
+  up.pf.setName(*$5);
+  up.pf.setXp($7);
+  up.pf.setTuto($9);
+  up.pf.setSkin(static_cast<Skin::eSkin>($11));
 }
 | STAT SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL
 {
-  std::cout << *$1 << ":"
-	    << "\n- Kills: " << $3
-	    << "\n- Deaths: " << $5
-	    << "\n- Score_max: " << $7
-	    << "\n- Defeats: " << $9
-	    << "\n- Victory: " << $11
-	    << "\n- consecutive_victory: " << $13
-	    << std::endl << std::endl;
+  up.pf.addStat($3);
+  up.pf.addStat($5);
+  up.pf.addStat($7);
+  up.pf.addStat($9);
+  up.pf.addStat($11);
+  up.pf.addStat($13);
 }
 | SKILLS SEP NUMBER SEP NUMBER SEP NUMBER EOL
 {
-  std::cout << *$1 << ":"
-	    << "\n- DPS: " << $3
-	    << "\n- Tank: " << $5
-	    << "\n- Heal: " << $7
-	    << std::endl << std::endl;
+  up.pf.addSkill($3);
+  up.pf.addSkill($5);
+  up.pf.addSkill($7);
 }
 | ACHIEVEMENTS SEP NUMBER SEP NUMBER SEP NUMBER EOL
 {
-  std::cout << *$1 << ":"
-	    << "\n- First blood: " << $3
-	    << "\n- Last one standing: " << $5
-	    << "\n- Immortal: " << $7
-	    << std::endl << std::endl;
+  up.pf.addAchievement($3);
+  up.pf.addAchievement($5);
+  up.pf.addAchievement($7);
 }
-| HEADER SEP NUMBER SEP NUMBER SEP NUMBER EOL
+| HEADER SEP NUMBER SEP NUMBER EOL
 {
-  std::cout << *$1 << ":"
-  	    << "\n- id: " << $3
-	    << "\n- mode: " << $5
-	    << "\n- cheats: " << $7
-	    << std::endl << std::endl;
+  up.ma.setGameMode(static_cast<GameMode::eGameMode>($3));
+  up.ma.setCheat($5);
 }
-| MAP SEP NUMBER SEP NUMBER EOL map
+| MAP SEP NUMBER SEP NUMBER EOL MIXTE EOL ENDMAP
 {
-  std::cout << *$1 << " x = " << $3 << "; y = " << $5 << std::endl << std::endl;
+  Map*		m = new Map($3, $5, *$7);
+
+  up.ma.setMap(m);
 }
 | SAVES sequence
 | PLAYERS EOL players
 | CONFIG EOL config
 ;
 
-map
-: MIXTE EOL ENDMAP
-{
-  std::cout << *$1 << std::endl;
-}
-
 sequence
 : EOL
 | SEP NUMBER sequence
 {
-  std::cout << "- Slot: " << $2 << std::endl;
+  up.pf.addSave($2);
 }
 
 players
 : ENDPLAYERS
 | NUMBER SEP NUMBER SEP NUMBER SEP WORD SEP WORD SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL players
 {
+  assert(up.ma._map != 0);
+
+  APlayer*	p = 0;
+
+  if ($11 > 0)
+    p = new Human(*up.ma._map);
+  else
+    p = new Human(*up.ma._map); //TODO:AI
+
+  p->setName(*$7);
+  p->setTeamName(*$9);
+  p->setColor($13);
+  p->setSkin(static_cast<Skin::eSkin>($15));
+  p->setState(static_cast<State::eState>($17));
+  p->setDir(static_cast<Dir::eDir>($19));
+  p->setWeapon(static_cast<Bomb::eBomb>($21));
+
+  up.ma._players.push_back(p);
   std::cout << "- Player: "
   	    << "\n-> id profil: " << $1
   	    << "\n-> id player " << $3
   	    << "\n-> id team: " << $5
-  	    << "\n-> nick: " << *$7
-  	    << "\n-> team name: " << *$9
+  	    //<< "\n-> nick: " << *$7
+  	    //<< "\n-> team name: " << *$9
   	    << "\n-> type: " << ($11 > 0 ? "HUMAN" : "AI")
-  	    << "\n-> color: " << $13
-  	    << "\n-> skin: " << $15
-  	    << "\n-> state: " << $17
-  	    << "\n-> dir: " << $19
-  	    << "\n-> weapon: " << $21
+  	    //<< "\n-> color: " << $13
+  	    //<< "\n-> skin: " << $15
+  	    //<< "\n-> state: " << $17
+  	    //<< "\n-> dir: " << $19
+  	    //<< "\n-> weapon: " << $21
   	    << "\n-> x: " << $23
   	    << "\n-> y: " << $25
 	    << std::endl << std::endl;
