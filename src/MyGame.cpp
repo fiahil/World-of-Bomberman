@@ -45,7 +45,7 @@ void		MyGame::draw(void)
 {
   this->_match._map->draw();
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
-    this->_match._players[i]->draw(); 
+    this->_match._players[i]->draw();
 }
 
 void		MyGame::unload(void)
