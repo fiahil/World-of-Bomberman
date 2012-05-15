@@ -105,10 +105,29 @@ void		Map::draw(void)
   Cube		w_break(this->_break);
   Cube		w_unbreak(this->_unbreak);
   Plane		background(this->_x, this->_y, p, this->_background);
+  size_t	x0 = 0;
+  size_t	y0 = 0;
+  size_t	xf = this->_x;
+  size_t	yf = this->_y;
 
   background.draw();
-  for (size_t y = 0; y < this->_y; ++y)
-    for (size_t x = 0; x < this->_x; ++x) {
+  if (this->_opti)
+    {
+      x0 = this->_opti->_x - 45;
+      if (static_cast<int>(x0) < 0)
+	x0 = 0;
+      y0 = this->_opti->_y - 50;
+      if (static_cast<int>(y0) < 0)
+     	y0 = 0;
+      xf = this->_opti->_x + 45;
+      if (xf > this->_x)
+	xf = this->_x;
+      yf = this->_opti->_y + 10;
+      if (yf > this->_y)
+	yf = this->_y;
+    }
+  for (size_t y = y0; y < yf; ++y)
+    for (size_t x = x0; x < xf; ++x) {
       p.setPos(x, y);
       if (this->_map[POS(x, y)] == '1')
 	w_unbreak.draw(p);
@@ -125,4 +144,14 @@ void		Map::update(gdl::GameClock const&, gdl::Input&)
 bool Map::canMoveAt(size_t x, size_t y)
 {
   return (this->_map[POS(x, y)] == '0');
+}
+
+void		Map::setOptimization(Point const* p)
+{
+  this->_opti = p;
+}
+
+std::string const&	Map::getMap(void) const
+{
+  return this->_map;
 }

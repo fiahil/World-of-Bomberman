@@ -22,9 +22,10 @@ void		Menu::initialize(void)
 {
   this->window_.setTitle("Bomberman v1.0");
   this->window_.create();
-  Map*	map = new Map(100, 100, 100, 100);
+  Map*	map = new Map(100, 100, 50, 50);
   std::vector<APlayer*>	players;
   players.push_back(new Human(*map));
+  map->setOptimization(&players[0]->getPos());
   Match*	m = new Match(map, false, GameMode::ARCADE, players);
   this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0]); // TODO
   this->_game->initialize();

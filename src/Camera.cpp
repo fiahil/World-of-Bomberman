@@ -5,6 +5,7 @@
 
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <cmath>
 #include <iostream>
 #include "Camera.hpp"
 
@@ -41,13 +42,10 @@ void		Camera::update(gdl::GameClock const&, gdl::Input&)
   glLoadIdentity();
   gluPerspective(70.0f, static_cast<double>(this->_width) / static_cast<double>(this->_height),
 		 1.0f, 10000.0f);
-  if (this->_pl1 && !this->_pl2)
-    {
-      pos = this->_pl1->getPos()._pos;
-      pos.y += 20.0f;
-      pos.z += 10.0f;
-      target = this->_pl1->getPos()._pos;
-    }
+  pos = this->_pl1->getPos()._pos;
+  pos.y += 10.0f * this->_pl1->getPos()._scale;
+  pos.z += 10.0f * this->_pl1->getPos()._scale;;
+  target = this->_pl1->getPos()._pos;
   gluLookAt(pos.x, pos.y, pos.z,
 	    target.x, target.y, target.z,
 	    0.0f, 1.0f, 0.0f);

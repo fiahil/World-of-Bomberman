@@ -32,12 +32,15 @@ private:
   gdl::Image	_unbreak;
   gdl::Image	_break;
   gdl::Image	_background;
+  Point const*	_opti;
 
 public:
   void initialize(void);
   void draw(void);
   void update(gdl::GameClock const& clock, gdl::Input& input);
   bool canMoveAt(size_t x, size_t y);
+  void setOptimization(Point const*);
+  std::string const&	getMap(void) const;
   //  Pattern explode(Pattern origin, std::list<Bonus>& bonus);
 };
 
