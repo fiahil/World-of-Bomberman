@@ -129,5 +129,4 @@ void		Cube::draw(Point& p)
 
 void		Cube::update(gdl::GameClock const&, gdl::Input&)
 {
-
 }

@@ -3,12 +3,10 @@
  * 03.05.12
  */
 
-#include <iostream>
 #include "Match.hpp"
 
 Match::Match()
 {
-  std::cout << "Creation Match" << std::endl;
 }
 
 Match::Match(Map * map, bool cheat, GameMode::eGameMode game_mode, const std::vector<APlayer *> & players)
@@ -17,13 +15,10 @@ Match::Match(Map * map, bool cheat, GameMode::eGameMode game_mode, const std::ve
     _gameMode(game_mode),
     _players(players)
 {
-   /**/std::cout << "Creation Match" << std::endl;
 }
 
 Match::~Match()
 {
-  /**/std::cout << "Destruction Match" << std::endl;
-  /**/std::cout << "/!\\ : Penser a delete tous les pointeurs APlayer / Team S'ILS ONT ETE NEW" << std::endl;
 }
 
 void		Match::setMap(Map * value)

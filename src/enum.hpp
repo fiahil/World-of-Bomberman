@@ -70,4 +70,30 @@ struct GameMode
     };
 };
 
+struct TokenMenu
+{
+  enum eMenu
+    {
+      MAINMENU,
+      NEWPROFILE,
+      PROFILE,
+      SLIDING,
+      GAMECHOOSE,
+      SETTINGS,
+      BACK,
+      QUIT,
+      LAST
+    };
+};
+
+struct Sprite
+{
+  enum	eSprite
+    {
+      SELECTED,
+      DESELECTED
+    };
+};
+
+
 #endif

@@ -5,7 +5,7 @@
 ## Login   <lemonn_v@epitech.net>
 ## 
 ## Started on  Mon Apr 23 18:20:16 2012 vincent lemonnier
-## Last update Sat May 12 17:38:44 2012 nicolas magere
+## Last update Tue May 15 19:48:36 2012 nicolas magere
 ##
 
 NAME		= bomberman
@@ -25,7 +25,11 @@ SRC		= ./src/main.cpp	\
 		./src/AI.cpp		\
 		./src/Config.cpp	\
 		./src/Profile.cpp	\
-		./src/Match.cpp
+		./src/Match.cpp		\
+		./src/AMenu.cpp		\
+		./src/MenuManager.cpp	\
+		./src/Rectangle.cpp	\
+		./src/Tag.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 
@@ -46,7 +50,6 @@ all:		$(NAME)
 
 clean:
 		$(RM) $(OBJ)
-		$(RM)
 
 fclean:		clean
 		$(RM) $(NAME)
