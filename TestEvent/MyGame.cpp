@@ -48,6 +48,10 @@ void MyGame::SELECTFunction() {
   std::cout << "-- SELECT --" << std::endl;
 }
 
+void MyGame::SPACEFunction() {
+  std::cout << "-- SPACE --" << std::endl;
+}
+
 MyGame::eventSt	MyGame::initStruct(gdl::Keys::Key key, Action action, actionFunc f) const
 {
  MyGame::eventSt nwEl = { key, action, f };
@@ -57,7 +61,7 @@ MyGame::eventSt	MyGame::initStruct(gdl::Keys::Key key, Action action, actionFunc
 MyGame::MyGame() : _mode(MENU)
 {
   this->_event[MENU]._freq = 2;
-  this->_event[MENU]._nb = 5;
+  this->_event[MENU]._nb = 6;
   this->_event[MENU].
     _event.push_back(initStruct(gdl::Keys::Up, UP, &MyGame::UPFunction));
   this->_event[MENU].
@@ -65,9 +69,11 @@ MyGame::MyGame() : _mode(MENU)
   this->_event[MENU].
     _event.push_back(initStruct(gdl::Keys::Left, LEFT, &MyGame::LEFTFunction));
   this->_event[MENU].
-    _event.push_back(initStruct(gdl::Keys::Right, RIGHT, &MyGame::DOWNFunction));
+    _event.push_back(initStruct(gdl::Keys::Right, RIGHT, &MyGame::RIGHTFunction));
   this->_event[MENU].
     _event.push_back(initStruct(gdl::Keys::Return, SELECT, &MyGame::SELECTFunction));
+  this->_event[MENU].
+    _event.push_back(initStruct(gdl::Keys::Space, SPACE, &MyGame::SPACEFunction));
 }
 
 MyGame::~MyGame()

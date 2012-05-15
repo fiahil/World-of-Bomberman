@@ -11,8 +11,8 @@
 
 #define POS(px, py) ((((this->_y * (py)) - 1)) + (px) + 1)
 
-class Pattern; // TO REMOVE
-class Bonus; // TO REMOVE
+class Pattern; //TODO: TO REMOVE
+class Bonus; //TODO: TO REMOVE
 
 class Map : public AObj
 {
@@ -37,6 +37,7 @@ public:
   void initialize(void);
   void draw(void);
   void update(gdl::GameClock const& clock, gdl::Input& input);
+  bool canMoveAt(size_t x, size_t y);
   //  Pattern explode(Pattern origin, std::list<Bonus>& bonus);
 };
 

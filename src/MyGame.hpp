@@ -9,20 +9,19 @@
 #include <GameClock.hpp>
 #include <Input.hpp>
 #include "Camera.hpp"
-#include "Map.hpp"
+#include "Match.hpp"
 
 class	MyGame
 {
 public:
-  MyGame(gdl::GameClock&, gdl::Input&);
+  MyGame(gdl::GameClock&, gdl::Input&, Match&, APlayer const*, APlayer const* pl2 = 0);
   ~MyGame();
 
 private:
   gdl::GameClock&	_clock;
   gdl::Input&		_input;
+  Match&		_match;
   Camera		_camera;
-  //std::vector<AObj*>	_obj;
-  Map			_map;
 
 public:
   void		initialize(void);

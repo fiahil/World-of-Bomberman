@@ -12,8 +12,6 @@
 #include "APlayer.hpp"
 #include "enum.hpp"
 
-// Ajouter color et nom team et id team dans APlayer
-
 class	Match
 {
 public:

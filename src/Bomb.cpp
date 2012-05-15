@@ -1,79 +1,36 @@
-/***********************************************************************
- * Module:  Bomb.cpp
- * Author:  Fiahil
- * Modified: Monday, May 07, 2012 5:27:47 PM
- * Purpose: Implementation of the class Bomb
- ***********************************************************************/
+/*
+ * Fiahil
+ * 12.05.2012
+ */
 
-#include "Bomb.h"
+#include "Bomb.hpp"
 
-////////////////////////////////////////////////////////////////////////
-// Name:       Bomb::get_type()
-// Purpose:    Implementation of Bomb::get_type()
-// Return:     eBomb
-////////////////////////////////////////////////////////////////////////
+Bomb::Bomb(eBomb t)
+{
+  // TODO : implement
+}
 
-eBomb Bomb::get_type(void)
+Bomb::~Bomb()
+{
+  // TODO : implement
+}
+
+eBomb		Bomb::get_type(void) const
 {
    return _type;
 }
 
-////////////////////////////////////////////////////////////////////////
-// Name:       Bomb::Bomb(eBomb t)
-// Purpose:    Implementation of Bomb::Bomb()
-// Parameters:
-// - t
-// Return:     
-////////////////////////////////////////////////////////////////////////
-
-Bomb::Bomb(eBomb t)
+void		Bomb::initialize(void)
 {
-   // TODO : implement
+  // TODO : implement
 }
 
-////////////////////////////////////////////////////////////////////////
-// Name:       Bomb::~Bomb()
-// Purpose:    Implementation of Bomb::~Bomb()
-// Return:     
-////////////////////////////////////////////////////////////////////////
-
-Bomb::~Bomb()
+void		Bomb::draw(void)
 {
-   // TODO : implement
+  // TODO : implement
 }
 
-////////////////////////////////////////////////////////////////////////
-// Name:       Bomb::initialize()
-// Purpose:    Implementation of Bomb::initialize()
-// Return:     void
-////////////////////////////////////////////////////////////////////////
-
-void Bomb::initialize(void)
+void		Bomb::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-   // TODO : implement
-}
-
-////////////////////////////////////////////////////////////////////////
-// Name:       Bomb::draw()
-// Purpose:    Implementation of Bomb::draw()
-// Return:     void
-////////////////////////////////////////////////////////////////////////
-
-void Bomb::draw(void)
-{
-   // TODO : implement
-}
-
-////////////////////////////////////////////////////////////////////////
-// Name:       Bomb::update(gdl::GameClock const& clock, gdl::Input& input)
-// Purpose:    Implementation of Bomb::update()
-// Parameters:
-// - clock
-// - input
-// Return:     void
-////////////////////////////////////////////////////////////////////////
-
-void Bomb::update(gdl::GameClock const& clock, gdl::Input& input)
-{
-   // TODO : implement
+  // TODO : implement
 }

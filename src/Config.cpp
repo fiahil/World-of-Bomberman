@@ -1,6 +1,6 @@
 /*
- * NicoW
- * 03.05.12
+ * Fiahil
+ * 12.05.2012
  */
 
 #include <iostream>
@@ -8,31 +8,12 @@
 
 Config::Config()
 {
-  /**/std::cout << "Construction Config" << std::endl;
+  /* TODO: IMPLEMENT */std::cout << "Construction Config" << std::endl;
 }
 
 Config::~Config()
 {
-  /**/std::cout << "Destruction Config" << std::endl;
-}
-
-Config::Config(const Config & oth)
-{
-  /**/std::cout << "Construction Config" << std::endl;
-  this->_idEvent = oth.getIdEvent();
-  this->_idKey = oth.getIdKey();
-  this->_idJoystick = oth.getIdJoystick();
-}
-
-const Config & Config::operator=(const Config & oth)
-{
-  if (this != &oth)
-    {
-      this->_idEvent = oth.getIdEvent();
-      this->_idKey = oth.getIdKey();
-      this->_idJoystick = oth.getIdJoystick();
-    }
-  return *this;
+  /* TODO: IMPLEMENT */std::cout << "Destruction Config" << std::endl;
 }
 
 size_t		Config::getIdEvent(void) const

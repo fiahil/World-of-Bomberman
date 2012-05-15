@@ -1,24 +1,29 @@
 /*
- * NicoW
- * 03.05.12
+ * Fiahil
+ * 12.05.2012
  */
 
 #ifndef		__CONFIG_HPP__
 #define		__CONFIG_HPP__
 
+/*
+ * TODO: Refaire objet config
+ */
 class	Config
 {
+public:
+  Config();
+  ~Config();
+
+private:
+  Config(const Config &);
+
 private:
   size_t	_idEvent;
   size_t	_idKey;
   size_t	_idJoystick;
 
 public:
-  Config();
-  ~Config();
-  Config(const Config &);
-  const Config & operator=(const Config &);
-
   size_t	getIdEvent(void) const;
   size_t	getIdKey(void) const;
   size_t	getIdJoystick(void) const;
@@ -30,4 +35,3 @@ public:
 };
 
 #endif		/* __CONFIG_HPP__ */
-

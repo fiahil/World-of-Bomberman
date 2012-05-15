@@ -1,35 +1,34 @@
-/***********************************************************************
- * Module:  Cube.cpp
- * Author:  lemonn_v
- * Modified: Monday, May 07, 2012 6:23:48 PM
- * Purpose: Declaration of the class Cube
- ***********************************************************************/
+/*
+ * Fiahil
+ * 12.05.2012
+ */
 
 #include <GL/gl.h>
 #include <iostream>
 #include "Cube.hpp"
 
-/*Cube::Cube() : _p(0), _txt(0), _scale(1.0f)
-{
-  
-}*/
+/*
+ * Cube::Cube() : _p(0), _txt(0), _scale(1.0f)
+ * {
+ *
+ * }
+ */
 
-Cube::Cube(gdl::Image& txt) : _p(0), _txt(txt)
+Cube::Cube(gdl::Image& txt)
+  : _p(0),
+    _txt(txt)
 {
-  
 }
 
 Cube::~Cube()
 {
-
 }
 
-void	Cube::initialize()
+void		Cube::initialize()
 {
-  
 }
 
-void	Cube::draw()
+void		Cube::draw()
 {
   glPushMatrix();
   glTranslatef(this->_p->_pos.x, this->_p->_pos.y, this->_p->_pos.z);
@@ -39,7 +38,9 @@ void	Cube::draw()
   this->_txt.bind();
   glBegin(GL_QUADS);
 
-  // Front
+  /*
+   * Front
+   */
   glNormal3f(0.0f, 0.0f, 1.0f);
   glTexCoord2d(0, 1);
   glVertex3f(-0.5f, -0.5f, 0.5f);
@@ -50,7 +51,9 @@ void	Cube::draw()
   glTexCoord2d(1, 1);
   glVertex3f(0.5f, -0.5f, 0.5f);
 
-  //Right
+  /*
+   * Right
+   */
   glNormal3f(1.0f, 0.0f, 0.0f);
   glTexCoord2d(0, 1);
   glVertex3f(0.5f, -0.5f, 0.5f);
@@ -60,8 +63,10 @@ void	Cube::draw()
   glVertex3f(0.5f, 0.5f, -0.5f);
   glTexCoord2d(1, 1);
   glVertex3f(0.5f, -0.5f, -0.5f);
-  
-  //Left
+
+  /*
+   * Left
+   */
   glNormal3f(-1.0f, 0.0f, 0.0f);
   glTexCoord2d(0, 1);
   glVertex3f(-0.5f, -0.5f, -0.5f);
@@ -71,8 +76,10 @@ void	Cube::draw()
   glVertex3f(-0.5f, 0.5f, 0.5f);
   glTexCoord2d(1, 1);
   glVertex3f(-0.5f, -0.5f, 0.5f);
-  
-  //Back
+
+  /*
+   * Back
+   */
   glNormal3f(0.0f, 0.0f, -1.0f);
   glTexCoord2d(0, 1);
   glVertex3f(0.5f, -0.5f, -0.5f);
@@ -83,7 +90,9 @@ void	Cube::draw()
   glTexCoord2d(1, 1);
   glVertex3f(-0.5f, -0.5f, -0.5f);
 
-  //Top
+  /*
+   * Top
+   */
   glNormal3f(0.0f, 1.0f, 0.0f);
   glTexCoord2d(0, 1);
   glVertex3f(-0.5f, 0.5f, 0.5f);
@@ -94,7 +103,9 @@ void	Cube::draw()
   glTexCoord2d(1, 1);
   glVertex3f(0.5f, 0.5f, 0.5f);
 
-  //Bottom
+  /*
+   * Bottom
+   */
   glNormal3f(0.0f, -1.0f, 0.0f);
   glTexCoord2d(0, 1);
   glVertex3f(0.5f, -0.5f, 0.5f);
@@ -110,13 +121,13 @@ void	Cube::draw()
   glPopMatrix();
 }
 
-void	Cube::draw(Point& p)
+void		Cube::draw(Point& p)
 {
   this->_p = &p;
   this->draw();
 }
 
-void	Cube::update(gdl::GameClock const&, gdl::Input&)
+void		Cube::update(gdl::GameClock const&, gdl::Input&)
 {
 
 }

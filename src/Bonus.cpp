@@ -1,79 +1,36 @@
-/***********************************************************************
- * Module:  Bonus.cpp
- * Author:  Fiahil
- * Modified: Monday, May 07, 2012 5:35:00 PM
- * Purpose: Implementation of the class Bonus
- ***********************************************************************/
+/*
+ * Fiahil
+ * 12.05.2012
+ */
 
-#include "Bonus.h"
-
-////////////////////////////////////////////////////////////////////////
-// Name:       Bonus::get_type()
-// Purpose:    Implementation of Bonus::get_type()
-// Return:     eBonus
-////////////////////////////////////////////////////////////////////////
-
-eBonus Bonus::get_type(void)
-{
-   return _type;
-}
-
-////////////////////////////////////////////////////////////////////////
-// Name:       Bonus::Bonus(eBomb t)
-// Purpose:    Implementation of Bonus::Bonus()
-// Parameters:
-// - t
-// Return:     
-////////////////////////////////////////////////////////////////////////
+#include "Bonus.hpp"
 
 Bonus::Bonus(eBomb t)
 {
-   // TODO : implement
+  // TODO : implement
 }
-
-////////////////////////////////////////////////////////////////////////
-// Name:       Bonus::~Bonus()
-// Purpose:    Implementation of Bonus::~Bonus()
-// Return:     
-////////////////////////////////////////////////////////////////////////
 
 Bonus::~Bonus()
 {
-   // TODO : implement
+  // TODO : implement
 }
 
-////////////////////////////////////////////////////////////////////////
-// Name:       Bonus::initialize()
-// Purpose:    Implementation of Bonus::initialize()
-// Return:     void
-////////////////////////////////////////////////////////////////////////
-
-void Bonus::initialize(void)
+eBonus		Bonus::get_type(void) const
 {
-   // TODO : implement
+  return _type;
 }
 
-////////////////////////////////////////////////////////////////////////
-// Name:       Bonus::draw(gdl::GameClock const& clock, gdl::Input& input)
-// Purpose:    Implementation of Bonus::draw()
-// Parameters:
-// - clock
-// - input
-// Return:     void
-////////////////////////////////////////////////////////////////////////
-
-void Bonus::draw(gdl::GameClock const& clock, gdl::Input& input)
+void		Bonus::initialize(void)
 {
-   // TODO : implement
+  // TODO : implement
 }
 
-////////////////////////////////////////////////////////////////////////
-// Name:       Bonus::update()
-// Purpose:    Implementation of Bonus::update()
-// Return:     void
-////////////////////////////////////////////////////////////////////////
-
-void Bonus::update(void)
+void		Bonus::draw(gdl::GameClock const& clock, gdl::Input& input)
 {
-   // TODO : implement
+  // TODO : implement
+}
+
+void		Bonus::update(void)
+{
+  // TODO : implement
 }

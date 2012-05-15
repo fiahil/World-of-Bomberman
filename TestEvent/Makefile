@@ -17,11 +17,11 @@ OBJ=		$(SRC:.cpp=.o)
 
 INCLUDES=	-I./libgdl_gl-2012.1/include
 
-CXX=		g++
+CXX=		g++ -g
 
 CXXFLAGS=	-Wall -W -Werror -Wextra $(INCLUDES)
 
-LDFLAGS=	-lGL -lGLU -L./libgdl_gl-2012.1/lib -lgdl_gl -Wl,--rpath=./libgdl_gl-2012.1/lib,--rpath=./SFML-1.6/lib
+LDFLAGS=	-lGL -lGLU -L./libgdl_gl-2012.1/lib -lgdl_gl-d -Wl,--rpath=./libgdl_gl-2012.1/lib,--rpath=./SFML-1.6/lib
 
 RM=		rm -f
 

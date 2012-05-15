@@ -4,6 +4,8 @@
  */
 
 #include <GL/gl.h>
+#include "Map.hpp"
+#include "Human.hpp"
 #include "Menu.hpp"
 
 Menu::Menu()
@@ -20,7 +22,11 @@ void		Menu::initialize(void)
 {
   this->window_.setTitle("Bomberman v1.0");
   this->window_.create();
-  this->_game = new MyGame(this->gameClock_, this->input_);
+  Map*	map = new Map(100, 100, 100, 100);
+  std::vector<APlayer*>	players;
+  players.push_back(new Human(*map));
+  Match*	m = new Match(map, false, GameMode::ARCADE, players);
+  this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0]); // TODO
   this->_game->initialize();
 }
 
