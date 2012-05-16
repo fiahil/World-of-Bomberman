@@ -5,7 +5,7 @@
 // Login   <lemonn_v@epitech.net>
 // 
 // Started on  Thu May 10 22:24:44 2012 vincent lemonnier
-// Last update Fri May 11 20:24:19 2012 vincent lemonnier
+// Last update Wed May 16 15:10:04 2012 nicolas magere
 //
 
 #include "Menu.hpp"
@@ -13,6 +13,8 @@
 int	main()
 {
   Menu	bomberman;
+
+  /* REMOVE  */
 
   bomberman.run();
   return 0;
