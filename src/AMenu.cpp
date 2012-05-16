@@ -38,7 +38,11 @@ TokenMenu::eMenu	AMenu::run(void)
 
 void			AMenu::draw(void)
 {
+  std::vector<Tag *>::iterator	it = _tags.begin();
+
   std::cout << "DRAW AMenu" << std::endl;
+  for (; it != _tags.end() ; ++it)
+    (*it)->draw();
 }
 
 void			AMenu::initialize(void)

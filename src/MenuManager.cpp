@@ -37,14 +37,19 @@ MenuManager::~MenuManager()
 void		MenuManager::run(void)
 {
   std::cout << "RUN Menu Manager" << std::endl;
+
+  /*
+    Afficherle menu Courant et ses differentes Balises
+  */
+  /**/sleep(3);
 }
 
 void		MenuManager::buildMainMenu(void)
 {
   AMenu	*	newMenu = new AMenu;
-  Tag	*	newProfile = new Tag("menu/NewProfileNormal.png", "menu/NewProfileHighlit.png", true, TokenMenu::NEWPROFILE);
-  Tag	*	loadProfile = new Tag("menu/LoadProfileNormal.png", "menu/LoadProfileHighlit.png", true, TokenMenu::SLIDING);
-  Tag	*	quit = new Tag("menu/QuitNormal.png", "menu/QuitHighlit.png", true, TokenMenu::QUIT);
+  Tag	*	newProfile = new Tag("Ressources/menu/NewProfileNormal.png", "Ressources/menu/NewProfileHighlit.png", true, TokenMenu::NEWPROFILE);
+  Tag	*	loadProfile = new Tag("Ressources/menu/LoadProfileNormal.png", "Ressources/menu/LoadProfileHighlit.png", true, TokenMenu::SLIDING);
+  Tag	*	quit = new Tag("Ressources/menu/QuitNormal.png", "Ressources/menu/QuitHighlit.png", true, TokenMenu::QUIT);
 
   newMenu->addTag(newProfile);
   newMenu->addTag(loadProfile);
@@ -90,6 +95,8 @@ void 		MenuManager::buildSettingsMenu(void)
 void			MenuManager::draw(void)
 {
   std::cout << "DRAW MenuManager" << std::endl;
+
+  this->_menus[_curMenu]->draw();
 }
 
 void			MenuManager::initialize(void)

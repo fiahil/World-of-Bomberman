@@ -11,7 +11,7 @@
 
 Menu::Menu()
   : _game(0),
-    _menu(1600, 900)
+    _menu(600, 800)
 {
   this->setContentRoot("./Ressources/");
 }
@@ -38,6 +38,7 @@ void		Menu::update(void)
 {
   if (this->_game)
     {
+      this->_menu.run();
       if (this->_game->isEOG())
 	{
 	  this->_game->unload();
@@ -47,8 +48,6 @@ void		Menu::update(void)
       else
 	this->_game->update();
     }
-  // else
-  //   ; // Menu
 }
 
 void		Menu::draw(void)
