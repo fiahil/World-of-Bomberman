@@ -59,16 +59,16 @@ bool	Config::isAllSet() const
 
 bool	Config::operator==(Config const & other) const
 {
-  for (int i = 0; (HumGame::eAction)i < HumGame::LAST; ++i)
-    if (other.getConfig((HumGame::eAction)i) != this->getConfig((HumGame::eAction)i))
+  for (int i = 0; static_cast<HumGame::eAction>(i) < HumGame::LAST; ++i)
+    if (other.getConfig(static_cast<HumGame::eAction>(i)) != this->getConfig(static_cast<HumGame::eAction>(i)))
       return false;
   return true;
 }
 
 bool	Config::operator!=(Config const & other) const
 {
-  for (int i = 0; (HumGame::eAction)i < HumGame::LAST; ++i)
-    if (other.getConfig((HumGame::eAction)i) == this->getConfig((HumGame::eAction)i))
+  for (int i = 0; static_cast<HumGame::eAction>(i) < HumGame::LAST; ++i)
+    if (other.getConfig(static_cast<HumGame::eAction>(i)) == this->getConfig(static_cast<HumGame::eAction>(i)))
       return false;
   return true;
 }
