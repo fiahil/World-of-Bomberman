@@ -6,6 +6,32 @@
 #ifndef __ENUM_HPP__
 #define __ENUM_HPP__
 
+struct Input
+{
+  enum eMode {
+    CHEAT,
+    GAME,
+    MENU,
+    LAST
+  };
+
+};
+
+struct HumGame {
+
+  enum eAction {
+    UP,
+    LEFT,
+    RIGHT,
+    DOWN,
+    ATTACK,
+    PAUSE,
+    CHEAT,
+    LAST
+  };
+
+};
+
 struct Bomb
 {
   enum eBomb
