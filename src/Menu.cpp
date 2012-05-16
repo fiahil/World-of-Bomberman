@@ -22,7 +22,7 @@ void		Menu::initialize(void)
 {
   this->window_.setTitle("Bomberman v1.0");
   this->window_.create();
-  Map*	map = new Map(100, 100, 50, 50);
+  Map*	map = new Map(20, 20, 2, 100);
   std::vector<APlayer*>	players;
   players.push_back(new Human(*map));
   map->setOptimization(&players[0]->getPos());
