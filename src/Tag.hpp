@@ -34,8 +34,8 @@ private:
 public:
   void		setStatus(bool);
   virtual void	draw(void);
-  // virtual void	initialize(void);
-  // virtual void	update(gdl::GameClock const&, gdl::Input&);
+  virtual void	initialize(void);
+  virtual void	update(gdl::GameClock const&, gdl::Input&);
 };
 
 #endif

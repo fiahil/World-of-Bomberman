@@ -38,3 +38,11 @@ Tag::~Tag()
 {
   std::cout << "Destruction Tag" << std::endl;
 }
+
+void		Tag::initialize(void)
+{
+}
+
+void		Tag::update(gdl::GameClock const&, gdl::Input&)
+{
+}
