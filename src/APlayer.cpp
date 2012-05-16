@@ -120,6 +120,7 @@ size_t		APlayer::getColor() const
 void		APlayer::setColor(size_t val)
 {
   this->_color = val;
+  this->_indic.setColor(val);
 }
 
 void		APlayer::setState(State::eState state)

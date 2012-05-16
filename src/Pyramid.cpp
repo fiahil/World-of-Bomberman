@@ -72,3 +72,8 @@ void	Pyramid::draw()
 void	Pyramid::update(gdl::GameClock const&, gdl::Input&)
 {
 }
+
+void	Pyramid::setColor(size_t id)
+{
+  this->_color = id;
+}
