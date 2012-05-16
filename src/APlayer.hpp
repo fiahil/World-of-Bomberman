@@ -35,6 +35,7 @@ protected:
   size_t		_id;
   size_t		_teamId;
   size_t		_color;
+  size_t		_type;
   std::string		_name;
   std::string		_teamName;
   Bomb::eBomb		_weapon;
@@ -84,6 +85,7 @@ public:
   size_t	getColor() const;
   State::eState	getState() const;
   Dir::eDir	getDir() const;
+  size_t	getType() const;
 
   std::string const&	getName() const;
   std::string const&	getTeamName() const;
@@ -98,6 +100,7 @@ public:
   void		setDir(Dir::eDir);
   void		setName(std::string const&);
   void		setTeamName(std::string const&);
+  void		setType(size_t);
 };
 
 #endif

@@ -127,6 +127,8 @@ players
   else
     p = new Human(*up.ma._map); //TODO:AI
 
+  p->setId($1);
+  p->setTeamId($3);
   p->setName(*$5);
   p->setTeamName(*$7);
   p->setColor($11);
@@ -135,6 +137,8 @@ players
   p->setDir(static_cast<Dir::eDir>($17));
   p->setWeapon(static_cast<Bomb::eBomb>($19));
   p->setPv($25);
+  p->setType($9);
+  p->setPos($21, $23);
 
   up.ma._players.push_back(p);
   std::cout << "- Player: "
@@ -142,14 +146,14 @@ players
   	    << "\n-> id team: " << $3
   	    //<< "\n-> nick: " << *$5
   	    //<< "\n-> team name: " << *$7
-  	    << "\n-> type: " << ($9 > 0 ? "HUMAN" : "AI")
+  	    //<< "\n-> type: " << ($9 > 0 ? "HUMAN" : "AI")
   	    //<< "\n-> color: " << $11
   	    //<< "\n-> skin: " << $13
   	    //<< "\n-> state: " << $15
   	    //<< "\n-> dir: " << $17
   	    //<< "\n-> weapon: " << $19
-  	    << "\n-> x: " << $21
-  	    << "\n-> y: " << $23
+  	    //<< "\n-> x: " << $21
+  	    //<< "\n-> y: " << $23
 	    << std::endl << std::endl;
 }
 

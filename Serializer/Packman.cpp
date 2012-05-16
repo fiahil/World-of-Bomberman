@@ -83,8 +83,8 @@ namespace Serializer
 		<< "\t:" << m._players[i]->getState()
 		<< "\t:" << m._players[i]->getDir()
 		<< "\t:" << m._players[i]->getWeapon()
-		<< "\t:" << m._players[i]->getX()
-		<< "\t:" << m._players[i]->getY()
+		<< "\t:" << m._players[i]->getPos()._x
+		<< "\t:" << m._players[i]->getPos()._y
 		<< "\t:" << m._players[i]->getPv()
 		<< std::endl;
     }
