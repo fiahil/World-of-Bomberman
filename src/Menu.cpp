@@ -25,8 +25,15 @@ void		Menu::initialize(void)
   this->window_.create();
   Map*	map = new Map(20, 20, 2, 100);
   std::vector<APlayer*>	players;
-  Config player1_conf;
-  players.push_back(new Human(*map, player1_conf));
+  Config conf;
+  players.push_back(new Human(*map, conf));
+  conf.setConfig(HumGame::UP, gdl::Keys::W);
+  conf.setConfig(HumGame::LEFT, gdl::Keys::A);
+  conf.setConfig(HumGame::DOWN, gdl::Keys::S);
+  conf.setConfig(HumGame::RIGHT, gdl::Keys::D);
+  APlayer *newHum = new Human(*map, conf);
+  newHum->setColor(6);
+  players.push_back(newHum);
   map->setOptimization(&players[0]->getPos());
   Match*	m = new Match(map, false, GameMode::ARCADE, players);
   this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0]); // TODO

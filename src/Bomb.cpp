@@ -5,14 +5,12 @@
 
 #include "Bomb.hpp"
 
-Bomb::Bomb(eBomb t)
+Bomb::Bomb(eBomb t) : _type(t)
 {
-  // TODO : implement
 }
 
 Bomb::~Bomb()
 {
-  // TODO : implement
 }
 
 eBomb		Bomb::get_type(void) const
@@ -22,15 +20,12 @@ eBomb		Bomb::get_type(void) const
 
 void		Bomb::initialize(void)
 {
-  // TODO : implement
 }
 
 void		Bomb::draw(void)
 {
-  // TODO : implement
 }
 
 void		Bomb::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-  // TODO : implement
 }
