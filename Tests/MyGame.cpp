@@ -27,7 +27,7 @@ void	MyGame::initialize()
   this->window_.setTitle("Bomberman v1.0");
   this->window_.create();
   this->_camera.initialize();
-  this->_test = gdl::Model::load("marvin.fbx");
+  this->_test = gdl::Model::load("cube.fbx");
 }
 
 void	MyGame::update()

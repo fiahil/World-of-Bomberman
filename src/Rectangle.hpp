@@ -19,18 +19,20 @@ public:
   ~Rectangle();
 
 private:
-  Rectangle();
-  Rectangle(const Rectangle&);
-  Rectangle&	operator=(const Rectangle&);
+  Rectangle(Rectangle const&);
+  Rectangle&	operator=(Rectangle const&);
 
 private:
   Point*	_p;
   gdl::Image&	_txt;
 
+private:
+  virtual void	draw();
+
 public:
-  virtual void initialize(void);
-  virtual void draw(void);
-  virtual void update(const gdl::GameClock& clock, gdl::Input& input);
+  virtual void	initialize();
+  virtual void	update(gdl::GameClock const&, gdl::Input&);
+  void		draw(Point&);
 };
 
 #endif		/* __RECTANGLE_HPP__ */
