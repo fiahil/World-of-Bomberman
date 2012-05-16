@@ -9,23 +9,30 @@
 #include <vector>
 #include "AMenu.hpp"
 #include "enum.hpp"
+#include "AObj.hpp"
+#include "Camera.hpp"
 
-class	MenuManager
+class	MenuManager : public AObj
 {
 public:
-  MenuManager();
+  MenuManager(int, int);
   ~MenuManager();
 
 private:
+  MenuManager();
   MenuManager(const MenuManager &);
   const MenuManager & operator=(const MenuManager &);
 
 private:
   std::vector<AMenu *>	_menus;
   TokenMenu::eMenu	_curMenu;
+  Camera		_camera;
 
 public:
-  void		run();
+  void			run();
+  virtual void		draw(void);
+  virtual void		initialize(void);
+  virtual void		update(gdl::GameClock const&, gdl::Input&);
 
 private:
   void		buildMainMenu(void);

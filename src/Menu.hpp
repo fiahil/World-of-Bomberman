@@ -8,6 +8,7 @@
 
 #include <Game.hpp>
 #include "MyGame.hpp"
+#include "MenuManager.hpp"
 
 class Menu : public gdl::Game
 {
@@ -17,6 +18,7 @@ public:
 
 private:
   MyGame*	_game;
+  MenuManager	_menu;
 
 private:
   virtual void		initialize(void);
