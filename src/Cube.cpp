@@ -7,13 +7,6 @@
 #include <iostream>
 #include "Cube.hpp"
 
-/*
- * Cube::Cube() : _p(0), _txt(0), _scale(1.0f)
- * {
- *
- * }
- */
-
 Cube::Cube(gdl::Image& txt)
   : _p(0),
     _txt(txt)

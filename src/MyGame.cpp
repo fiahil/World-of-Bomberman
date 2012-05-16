@@ -38,7 +38,6 @@ void		MyGame::update(void)
   this->_match._map->update(this->_clock, this->_input);
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->update(this->_clock, this->_input);
-  usleep(50000); //TODO
 }
 
 void		MyGame::draw(void)

@@ -27,8 +27,9 @@ public:
   virtual void	draw(void) = 0;
   virtual void	update(gdl::GameClock const& clock, gdl::Input& input) = 0;
 
-  virtual void		setPos(int, int);
-  virtual Point const&	getPos() const;
+  void		setPos(int, int);
+  void		setScale(double);
+  Point const&	getPos() const;
 };
 
 #endif
