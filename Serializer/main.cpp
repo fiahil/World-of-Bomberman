@@ -35,13 +35,13 @@ int	main(int argc, char** argv) {
 
   std::cout << "=============================" << std::endl << std::endl;
 
-  //Serializer::Packman	p("log");
+  Serializer::Packman	p("log");
 
-  //p.packProfile(pp);
+  p.packProfile(pp);
 
-  Serializer::Packman	k("slog");
-  std::vector<APlayer*>	ap;
+  //Serializer::Packman	k("slog");
+  //std::vector<APlayer*>	ap;
 
-  k.packMatch(ma);
+  //k.packMatch(ma);
   return 0;
 }

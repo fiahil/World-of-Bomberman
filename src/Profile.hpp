@@ -54,6 +54,7 @@ public:
   void		setTuto(bool);
   void		setSkin(Skin::eSkin);
   void		setConfig(const Config &);
+  void		addConfig(HumGame::eAction, gdl::Keys::Key);
   void		setName(const std::string &);
   void		setSkill(const std::vector<size_t> &);
   void		addSkill(size_t);

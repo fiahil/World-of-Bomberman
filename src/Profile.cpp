@@ -103,6 +103,11 @@ void		Profile::setConfig(const Config & value)
   this->_config = value;
 }
 
+void		Profile::addConfig(HumGame::eAction a, gdl::Keys::Key k)
+{
+  this->_config.setConfig(a, k);
+}
+
 void		Profile::setName(const std::string & value)
 {
   this->_name = value;
