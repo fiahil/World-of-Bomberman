@@ -10,7 +10,8 @@
 #include "Menu.hpp"
 
 Menu::Menu()
-  : _game(0)
+  : _game(0),
+    _menu(1600, 900)
 {
   this->setContentRoot("./Ressources/");
 }
@@ -46,6 +47,8 @@ void		Menu::update(void)
       else
 	this->_game->update();
     }
+  // else
+  //   ; // Menu
 }
 
 void		Menu::draw(void)

@@ -12,7 +12,7 @@ AMenu::AMenu()
   std::cout << "Construction AMenu" << std::endl;
 }
 
-void		deleteTags(Tag * obj)
+static void		deleteTags(Tag * obj)
 {
   delete obj;
 }
@@ -22,9 +22,11 @@ AMenu::~AMenu()
   std::cout << "Destruction AMenu" << std::endl;
 
   for_each(this->_tags.begin(), this->_tags.end(), deleteTags);
-  /*
-    segfault ? :)
-  */
+}
+
+void			AMenu::addTag(Tag * obj)
+{
+  this->_tags.push_back(obj);
 }
 
 TokenMenu::eMenu	AMenu::run(void)
@@ -34,7 +36,15 @@ TokenMenu::eMenu	AMenu::run(void)
   return TokenMenu::QUIT;
 }
 
-void			AMenu::refresh(void)
+void			AMenu::draw(void)
 {
-  std::cout << "REFRESH AMenu" << std::endl;
+  std::cout << "DRAW AMenu" << std::endl;
+}
+
+void			AMenu::initialize(void)
+{
+}
+
+void			AMenu::update(gdl::GameClock const&, gdl::Input&)
+{
 }

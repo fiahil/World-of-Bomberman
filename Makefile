@@ -5,7 +5,7 @@
 ## Login   <lemonn_v@epitech.net>
 ## 
 ## Started on  Mon Apr 23 18:20:16 2012 vincent lemonnier
-## Last update Wed May 16 15:32:56 2012 nicolas magere
+## Last update Wed May 16 17:35:35 2012 nicolas magere
 ##
 
 NAME		= bomberman
@@ -38,7 +38,7 @@ INCLUDES	= -I./lib/libgdl_gl-2012.3/include
 
 CXX		= g++
 
-CXXFLAGS	= -Wall -Wextra $(INCLUDES)
+CXXFLAGS	= -Wall -Wextra -Werror $(INCLUDES)
 
 LDFLAGS		= -lGL -lGLU -L./lib/libgdl_gl-2012.3/lib -lgdl_gl -Wl,--rpath=./lib/libgdl_gl-2012.3/lib,--rpath=./lib/SFML-1.6/lib
 
