@@ -3,6 +3,7 @@
  * 07.05.12
  */
 
+#include <iostream>
 #include <GL/gl.h>
 #include "Map.hpp"
 #include "Human.hpp"
