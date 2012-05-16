@@ -34,10 +34,10 @@ public:
    **     et reassigne gdl::Keys::Count (unset) a l'ancienne
    ***********************************************************************/
   HumGame::eAction	setConfig(HumGame::eAction, gdl::Keys::Key);
-  gdl::Keys::Key	getConfig(HumGame::eAction);
-  bool			isAllSet();
-  bool			operator==(Config& );
-  bool			operator!=(Config& );
+  gdl::Keys::Key	getConfig(HumGame::eAction) const;
+  bool			isAllSet() const;
+  bool			operator==(Config const & ) const;
+  bool			operator!=(Config const & ) const;
 };
 
 #endif		/* __CONFIG_HPP__ */

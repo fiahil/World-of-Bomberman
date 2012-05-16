@@ -40,15 +40,15 @@ HumGame::eAction	Config::setConfig(HumGame::eAction key, gdl::Keys::Key val)
   return HumGame::LAST;
 }
 
-gdl::Keys::Key		Config::getConfig(HumGame::eAction key)
+gdl::Keys::Key		Config::getConfig(HumGame::eAction key) const
 {
-  std::map<HumGame::eAction, gdl::Keys::Key>::iterator it;
+  std::map<HumGame::eAction, gdl::Keys::Key>::const_iterator it;
   if ((it = this->_conf.find(key)) != this->_conf.end())
     return it->second;
   return gdl::Keys::Count;
 }
 
-bool	Config::isAllSet()
+bool	Config::isAllSet() const
 {
   std::map<HumGame::eAction, gdl::Keys::Key>::const_iterator it2;
   for (it2 = this->_conf.begin(); it2 != this->_conf.end(); ++it2)
@@ -57,7 +57,7 @@ bool	Config::isAllSet()
   return true;
 }
 
-bool	Config::operator==(Config & other)
+bool	Config::operator==(Config const & other) const
 {
   for (int i = 0; (HumGame::eAction)i < HumGame::LAST; ++i)
     if (other.getConfig((HumGame::eAction)i) != this->getConfig((HumGame::eAction)i))
@@ -65,7 +65,7 @@ bool	Config::operator==(Config & other)
   return true;
 }
 
-bool	Config::operator!=(Config & other)
+bool	Config::operator!=(Config const & other) const
 {
   for (int i = 0; (HumGame::eAction)i < HumGame::LAST; ++i)
     if (other.getConfig((HumGame::eAction)i) == this->getConfig((HumGame::eAction)i))
