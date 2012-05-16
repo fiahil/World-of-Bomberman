@@ -123,9 +123,9 @@ players
   APlayer*	p = 0;
 
   if ($11 > 0)
-    p = new Human(*up.ma._map);
+    p = new Human(*up.ma._map, Config()); //TODO CONFIG
   else
-    p = new Human(*up.ma._map); //TODO:AI
+    p = new Human(*up.ma._map, Config()); //TODO:AI
 
   p->setId($1);
   p->setTeamId($3);
@@ -142,8 +142,8 @@ players
 
   up.ma._players.push_back(p);
   std::cout << "- Player: "
-  	    << "\n-> id player " << $1
-  	    << "\n-> id team: " << $3
+  	    //<< "\n-> id player " << $1
+  	    //<< "\n-> id team: " << $3
   	    //<< "\n-> nick: " << *$5
   	    //<< "\n-> team name: " << *$7
   	    //<< "\n-> type: " << ($9 > 0 ? "HUMAN" : "AI")

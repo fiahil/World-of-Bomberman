@@ -39,9 +39,8 @@ int	main(int argc, char** argv) {
 
   p.packProfile(pp);
 
-  //Serializer::Packman	k("slog");
-  //std::vector<APlayer*>	ap;
+  Serializer::Packman	k("slog");
 
-  //k.packMatch(ma);
+  k.packMatch(ma);
   return 0;
 }
