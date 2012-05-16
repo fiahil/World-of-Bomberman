@@ -24,6 +24,7 @@ public:
   virtual void	initialize();
   virtual void	draw();
   virtual void	update(gdl::GameClock const&, gdl::Input&);
+  void	setColor(size_t);
 };
 
 #else
