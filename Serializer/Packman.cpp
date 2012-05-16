@@ -5,6 +5,7 @@
 
 #include <string>
 #include <fstream>
+#include <cassert>
 #include "Profile.hpp"
 #include "Match.hpp"
 #include "Packman.hpp"
@@ -53,9 +54,11 @@ namespace Serializer
 
   void		Packman::packMatch(Match const& m)
   {
+    assert(m._map != 0);
+
     this->_os	<< "#MAP" << std::endl;
     this->_os	<< "[";
-    //TODO: Getters coordonees
+    this->_os	<< m._map->getMap();
     this->_os	<< "]" << std::endl;
     this->_os	<< "#ENDMAP" << std::endl << std::endl;
     this->_os	<< "#HEADER"

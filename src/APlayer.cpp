@@ -51,7 +51,7 @@ void		APlayer::initialize(void)
 void		APlayer::draw(void)
 {
   glPushMatrix();
-  glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
+  glTranslatef(this->_pos._pos.x, this->_pos._pos.y - 1.0f, this->_pos._pos.z);
   (this->*_rotFuncMap[this->_dir])();
   glScalef(0.005f, 0.005f, 0.005f);
   this->_model.draw();
@@ -122,6 +122,16 @@ void		APlayer::setState(State::eState state)
 State::eState	APlayer::getState() const
 {
   return this->_state;
+}
+
+void		APlayer::setSkin(Skin::eSkin skin)
+{
+  this->_skin = skin;
+}
+
+Skin::eSkin	APlayer::getSkin(void) const
+{
+  return this->_skin;
 }
 
 void		APlayer::setDir(Dir::eDir dir)

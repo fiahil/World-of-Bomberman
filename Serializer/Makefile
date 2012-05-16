@@ -9,14 +9,26 @@ NAME	=	serializer
 SRCXX	=	Loader.tab.cpp		\
 		lex.yy.cpp		\
 		main.cpp		\
+		Unpackman.cpp		\
 		Packman.cpp		\
 		../src/Profile.cpp	\
 		../src/Config.cpp	\
+		../src/Map.cpp		\
+		../src/Cube.cpp		\
+		../src/AObj.cpp		\
+		../src/APlayer.cpp	\
+		../src/Human.cpp	\
+		../src/Plane.cpp	\
+		../src/Point.cpp	\
+		../src/Vector.cpp	\
 		../src/Match.cpp
 
 OBJXX	=	$(SRCXX:.cpp=.o)
 
 CXXFLAGS=	-Wall -Wextra -O3 -I./ -I../src -I../lib/libgdl_gl-2012.3/include
+
+LDFLAGS =	-lGL -lGLU -L../lib/libgdl_gl-2012.3/lib -lgdl_gl -Wl,--rpath=../lib/lib
+gdl_gl-2012.3/lib,--rpath=../lib/SFML-1.6/lib
 
 CXX	=	g++
 
@@ -26,11 +38,11 @@ CXX	=	g++
 all:		$(NAME)
 
 $(NAME):	$(OBJXX)
-	$(CXX) -o $(NAME) $(OBJXX)
+	$(CXX) -o $(NAME) $(OBJXX) $(LDFLAGS)
 
 debug:		CXXFLAGS = -Wall -Wextra -g
 debug:		clean $(OBJXX)
-	$(CXX) -o $(NAME) $(OBJXX)
+	$(CXX) -o $(NAME) $(OBJXX) $(LDFLAGS)
 
 clean:
 	rm -f $(OBJXX)

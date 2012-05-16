@@ -85,6 +85,7 @@ void		Profile::setLvl(size_t value)
 void		Profile::setXp(size_t value)
 {
   this->_xp = value;
+  this->_lvl = value / 100; //TODO: curve
 }
 
 void		Profile::setTuto(bool value)
@@ -147,7 +148,7 @@ void		Profile::addSave(size_t value)
   this->_save.push_back(value);
 }
 
-void		Profile::setAllProfile(size_t id, size_t lvl, size_t xp,
+void		Profile::setAllProfile(size_t id, size_t xp,
 			       bool tuto, Skin::eSkin skin,
 			       const Config & config,
 			       const std::string & name,
@@ -157,7 +158,7 @@ void		Profile::setAllProfile(size_t id, size_t lvl, size_t xp,
 			       const std::vector<size_t> & save)
 {
   this->_id = id;
-  this->_lvl = lvl;
+  this->_lvl = xp / 100; //TODO: curve
   this->_xp = xp;
   this->_tuto = tuto;
   this->_skin = skin;
