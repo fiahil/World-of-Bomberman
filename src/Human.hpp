@@ -8,32 +8,7 @@
 
 #include "APlayer.hpp"
 #include "Config.hpp"
-
-struct Input
-{
-  enum eMode {
-    CHEAT,
-    GAME,
-    MENU,
-    LAST
-  };
-
-};
-
-struct HumGame {
-
-  enum eAction {
-    UP,
-    LEFT,
-    RIGHT,
-    DOWN,
-    ATTACK,
-    PAUSE,
-    CHEAT,
-    LAST
-  };
-
-};
+#include "enum.hpp"
 
 class Human : public APlayer
 {

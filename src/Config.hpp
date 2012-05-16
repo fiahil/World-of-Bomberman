@@ -6,6 +6,11 @@
 #ifndef		__CONFIG_HPP__
 #define		__CONFIG_HPP__
 
+#include <map>
+#include <GL/gl.h>
+#include <Input.hpp>
+#include "enum.hpp"
+
 /*
  * TODO: Refaire objet config
  */
@@ -16,22 +21,23 @@ public:
   ~Config();
 
 private:
-  Config(const Config &);
+  Config(Config &);
 
 private:
-  size_t	_idEvent;
-  size_t	_idKey;
-  size_t	_idJoystick;
-
+  std::map<HumGame::eAction, gdl::Keys::Key> _conf;
 public:
-  size_t	getIdEvent(void) const;
-  size_t	getIdKey(void) const;
-  size_t	getIdJoystick(void) const;
-
-  void		setIdEvent(size_t);
-  void		setIdKey(size_t);
-  void		setIdJoystick(size_t);
-  void		setAllConfig(size_t, size_t, size_t);
+  /***********************************************************************
+   ** Function : setConfig
+   ** Comment  :
+   **   - return HumGame::LAST si aucun problem rencontre
+   **   - return l'action a laquelle la touche etait deja assigne si problem
+   **     et reassigne gdl::Keys::Count (unset) a l'ancienne
+   ***********************************************************************/
+  HumGame::eAction	setConfig(HumGame::eAction, gdl::Keys::Key);
+  gdl::Keys::Key	getConfig(HumGame::eAction);
+  bool			isAllSet();
+  bool			operator==(Config& );
+  bool			operator!=(Config& );
 };
 
 #endif		/* __CONFIG_HPP__ */
