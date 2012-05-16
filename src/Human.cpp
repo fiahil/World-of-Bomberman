@@ -1,4 +1,4 @@
-/*
+ /*
  * Fiahil
  * 12.05.2012
  */
@@ -12,21 +12,26 @@ Human::eventSt Human::initStruct(gdl::Keys::Key key, HumGame::eAction action, ac
 }
 
 
-Human::Human(Map & map)//, const Config&, std::vector<size_t>&, std::vector<size_t> const&)
+Human::Human(Map & map, const Config& conf)//, std::vector<size_t>&, std::vector<size_t> const&)
   : APlayer(map), _mode(Input::GAME)
 {
   this->_event[Input::GAME]._freq = 2; // TODO TMP
   this->_event[Input::GAME]._nb = 5;
   this->_event[Input::GAME].
-    _event.push_back(initStruct(gdl::Keys::Up, HumGame::UP, &Human::UPFunction));
+    _event.push_back(initStruct(conf.getConfig(HumGame::UP),
+				HumGame::UP, &Human::UPFunction));
   this->_event[Input::GAME].
-    _event.push_back(initStruct(gdl::Keys::Down, HumGame::DOWN, &Human::DOWNFunction));
+    _event.push_back(initStruct(conf.getConfig(HumGame::DOWN),
+				HumGame::DOWN, &Human::DOWNFunction));
   this->_event[Input::GAME].
-    _event.push_back(initStruct(gdl::Keys::Left, HumGame::LEFT, &Human::LEFTFunction));
+    _event.push_back(initStruct(conf.getConfig(HumGame::LEFT),
+				HumGame::LEFT, &Human::LEFTFunction));
   this->_event[Input::GAME].
-    _event.push_back(initStruct(gdl::Keys::Right, HumGame::RIGHT, &Human::RIGHTFunction));
+    _event.push_back(initStruct(conf.getConfig(HumGame::RIGHT),
+				HumGame::RIGHT, &Human::RIGHTFunction));
   this->_event[Input::GAME].
-    _event.push_back(initStruct(gdl::Keys::Space, HumGame::ATTACK, &Human::ATTACKFunction));
+    _event.push_back(initStruct(conf.getConfig(HumGame::ATTACK),
+				HumGame::ATTACK, &Human::ATTACKFunction));
   // TODO implement other mode
 }
 
