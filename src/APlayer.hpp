@@ -11,6 +11,7 @@
 #include "Map.hpp"
 #include "Model.hpp"
 #include "enum.hpp"
+#include "Pyramid.hpp"
 #include "AObj.hpp"
 
 class APlayer : public AObj
@@ -41,6 +42,7 @@ protected:
   State::eState		_state;
   Dir::eDir		_dir;
   gdl::Model		_model;
+  Pyramid		_indic;
 
   std::map<Bomb::eBomb, fBomb>		_bombEffect;
   std::map<Bonus::eBonus, fBonus>	_bonusEffect;

@@ -24,6 +24,11 @@ void		AObj::setPos(int x, int y)
   this->_pos.setPos(x, y);
 }
 
+void		AObj::setScale(double scale)
+{
+  this->_pos._scale = scale;
+}
+
 Point const&	AObj::getPos() const
 {
   return this->_pos;
