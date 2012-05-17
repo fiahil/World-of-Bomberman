@@ -43,12 +43,17 @@ namespace Serializer
     }
     this->_os	<< std::endl << std::endl;
     this->_os	<< "#SAVES";
-    for (size_t i = 0; i < 5; ++i) {
+    for (size_t i = 0; i < p.getSave().size(); ++i) {
       this->_os << "\t:" << p.getSave().at(i);
     }
     this->_os	<< std::endl << std::endl;
     this->_os	<< "#CONFIG" << std::endl;
-    //TODO: Implement config serialization
+    for (size_t i = 0; i < HumGame::LAST; ++i) {
+      this->_os	<< i
+		<< "\t:"
+		<< p.getConfig().getConfig(static_cast<HumGame::eAction>(i))
+		<< std::endl;
+    }
     this->_os	<< "#ENDCONFIG" << std::endl;
   }
 
@@ -68,8 +73,20 @@ namespace Serializer
 		<< std::endl << std::endl;
     this->_os	<< "#PLAYERS" << std::endl;
     for (size_t i = 0; i < m._players.size(); ++i) {
-      //TODO: Implement Player serialization
-      m._players[i];
+      this->_os	<< m._players[i]->getId()
+		<< "\t:" << m._players[i]->getTeamId()
+		<< "\t:" << m._players[i]->getName()
+		<< "\t:" << m._players[i]->getTeamName()
+		<< "\t:" << m._players[i]->getType()
+		<< "\t:" << m._players[i]->getColor()
+		<< "\t:" << m._players[i]->getSkin()
+		<< "\t:" << m._players[i]->getState()
+		<< "\t:" << m._players[i]->getDir()
+		<< "\t:" << m._players[i]->getWeapon()
+		<< "\t:" << m._players[i]->getPos()._x
+		<< "\t:" << m._players[i]->getPos()._y
+		<< "\t:" << m._players[i]->getPv()
+		<< std::endl;
     }
     this->_os	<< "#ENDPLAYERS" << std::endl;
   }

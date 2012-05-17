@@ -6,7 +6,7 @@
 #ifndef __CONTENTCOLOR_HPP__
 #define __CONTENTCOLOR_HPP__
 
-#include <unistd.h>
+#include <string>
 
 class ContentColor
 {

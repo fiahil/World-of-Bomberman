@@ -32,7 +32,6 @@ APlayer::APlayer(Map & map)
 
 APlayer::~APlayer()
 {
-   // TODO : implement
 }
 
 /*
@@ -151,6 +150,16 @@ void		APlayer::setDir(Dir::eDir dir)
 Dir::eDir	APlayer::getDir() const
 {
   return this->_dir;
+}
+
+size_t		APlayer::getType() const
+{
+  return this->_type;
+}
+
+void		APlayer::setType(size_t t)
+{
+  this->_type = t;
 }
 
 void		APlayer::setName(std::string const& name)
