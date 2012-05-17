@@ -5,7 +5,7 @@
 // Login   <lemonn_v@epitech.net>
 // 
 // Started on  Mon May  7 13:48:17 2012 vincent lemonnier
-// Last update Thu May 10 22:14:03 2012 vincent lemonnier
+// Last update Wed May 16 18:19:14 2012 vincent lemonnier
 //
 
 #include <GL/gl.h>
@@ -27,7 +27,7 @@ Camera::Camera() : _pos(0.0f, 100.0f, 800.0f), _target(0.0f, 0.0f, 0.0f), _heigh
   
 }
 
-Camera::Camera(int w, int h) : _pos(0.0f, 100.0f, 800.0f), _target(0.0f, 100.0f, 0.0f), _height(h), _width(w)
+Camera::Camera(int w, int h) : _pos(0.0f, 10.0f, 10.0f), _target(0.0f, 0.0f, 0.0f), _height(h), _width(w)
 {
   
 }
