@@ -13,7 +13,7 @@ APlayer::APlayer(Map & map)
     _id(0),
     _teamId(0),
     _color(0),
-    _weapon(Bomb::NORMAL),
+    _weapon(MappedBomb::NORMAL),
     _skin(Skin::NORMAL),
     _state(State::STATIC),
     _dir(Dir::SOUTH),
@@ -83,12 +83,12 @@ int		APlayer::getPv() const
   return this->_pv;
 }
 
-void		APlayer::setWeapon(Bomb::eBomb weapon)
+void		APlayer::setWeapon(MappedBomb::eBomb weapon)
 {
   this->_weapon = weapon;
 }
 
-Bomb::eBomb	APlayer::getWeapon() const
+MappedBomb::eBomb	APlayer::getWeapon() const
 {
   return this->_weapon;
 }

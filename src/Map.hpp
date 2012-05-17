@@ -7,12 +7,10 @@
 #define __Bomberman_Map_h
 
 #include <Image.hpp>
+#include "Bomb.hpp"
 #include "AObj.hpp"
 
 #define POS(px, py) ((((this->_y * (py)) - 1)) + (px) + 1)
-
-class Pattern; //TODO: TO REMOVE
-class Bonus; //TODO: TO REMOVE
 
 class Map : public AObj
 {
@@ -41,7 +39,7 @@ public:
   bool canMoveAt(size_t x, size_t y);
   void setOptimization(Point const*);
   std::string const&	getMap(void) const;
-  //  Pattern explode(Pattern origin, std::list<Bonus>& bonus);
+  void explode(Bomb::Pattern&);
 };
 
 #endif /* __Bomberman_Map_h */
