@@ -4,51 +4,71 @@
  */
 
 #include <iostream>
+#include <algorithm>
 #include "Config.hpp"
 
 Config::Config()
 {
-  /* TODO: IMPLEMENT */std::cout << "Construction Config" << std::endl;
+  this->_conf[HumGame::UP] = gdl::Keys::Up;
+  this->_conf[HumGame::LEFT] = gdl::Keys::Left;
+  this->_conf[HumGame::RIGHT] = gdl::Keys::Right;
+  this->_conf[HumGame::DOWN] = gdl::Keys::Down;
+  this->_conf[HumGame::ATTACK] = gdl::Keys::Space;
+  this->_conf[HumGame::PAUSE] = gdl::Keys::Escape;
+  this->_conf[HumGame::CHEAT] = gdl::Keys::Tab;
 }
 
 Config::~Config()
 {
-  /* TODO: IMPLEMENT */std::cout << "Destruction Config" << std::endl;
 }
 
-size_t		Config::getIdEvent(void) const
+HumGame::eAction	Config::setConfig(HumGame::eAction key, gdl::Keys::Key val)
 {
-  return this->_idEvent;
+  std::map<HumGame::eAction, gdl::Keys::Key>::iterator it;
+  if ((it = this->_conf.find(key)) != this->_conf.end())
+    {
+      std::map<HumGame::eAction, gdl::Keys::Key>::iterator it2;
+      for (it2 = this->_conf.begin(); it2 != this->_conf.end(); ++it2)
+	if (it2->second == val)
+	  {
+	    it2->second = gdl::Keys::Count;
+	    it->second = val;
+	    return it2->first;
+	  }
+    }
+  it->second = val;
+  return HumGame::LAST;
 }
 
-size_t		Config::getIdKey(void) const
+gdl::Keys::Key		Config::getConfig(HumGame::eAction key) const
 {
-  return this->_idKey;
+  std::map<HumGame::eAction, gdl::Keys::Key>::const_iterator it;
+  if ((it = this->_conf.find(key)) != this->_conf.end())
+    return it->second;
+  return gdl::Keys::Count;
 }
 
-size_t		Config::getIdJoystick(void) const
+bool	Config::isAllSet() const
 {
-  return this->_idJoystick;
+  std::map<HumGame::eAction, gdl::Keys::Key>::const_iterator it2;
+  for (it2 = this->_conf.begin(); it2 != this->_conf.end(); ++it2)
+    if (it2->second == gdl::Keys::Count)
+      return false;
+  return true;
 }
 
-void		Config::setIdEvent(size_t idEvent)
+bool	Config::operator==(Config const & other) const
 {
-  this->_idEvent = idEvent;
+  for (int i = 0; static_cast<HumGame::eAction>(i) < HumGame::LAST; ++i)
+    if (other.getConfig(static_cast<HumGame::eAction>(i)) != this->getConfig(static_cast<HumGame::eAction>(i)))
+      return false;
+  return true;
 }
 
-void		Config::setIdKey(size_t idKey)
+bool	Config::operator!=(Config const & other) const
 {
-  this->_idKey = idKey;
-}
-
-void		Config::setIdJoystick(size_t idJoystick)
-{
-  this->_idJoystick = idJoystick;
-}
-
-void		Config::setAllConfig(size_t idEvent, size_t idKey, size_t idJoystick)
-{
-  this->_idEvent = idEvent;
-  this->_idKey = idKey;
-  this->_idJoystick = idJoystick;
+  for (int i = 0; static_cast<HumGame::eAction>(i) < HumGame::LAST; ++i)
+    if (other.getConfig(static_cast<HumGame::eAction>(i)) == this->getConfig(static_cast<HumGame::eAction>(i)))
+      return false;
+  return true;
 }

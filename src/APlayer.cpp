@@ -17,6 +17,7 @@ APlayer::APlayer(Map & map)
     _skin(Skin::NORMAL),
     _state(State::STATIC),
     _dir(Dir::SOUTH),
+    _indic(0.5f, 0.5f, 0.8f, _color),
     _rotFuncMap(Dir::LAST, 0)
 {
   this->_rotFuncMap[Dir::NORTH] = &APlayer::NORTHFunction;
@@ -25,11 +26,12 @@ APlayer::APlayer(Map & map)
   this->_rotFuncMap[Dir::EAST] = &APlayer::EASTFunction;
   this->_pos._scale = 2.0f;
   this->setPos(1, 1);
+  this->_indic.setScale(2.0f);
+  this->_indic.setPos(1, 1);
 }
 
 APlayer::~APlayer()
 {
-   // TODO : implement
 }
 
 /*
@@ -56,12 +58,17 @@ void		APlayer::draw(void)
   glScalef(0.005f, 0.005f, 0.005f);
   this->_model.draw();
   glPopMatrix();
+  glPushMatrix();
+  glTranslatef(0.0f, 3.0f, 0.0f);
+  this->_indic.draw();
+  glPopMatrix();
 }
 
 void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   this->play(clock, input);
   this->_model.update(clock);
+  this->_indic.setPos(this->_pos._x, this->_pos._y);
 }
 
 void		APlayer::setPv(int pv)
@@ -112,6 +119,7 @@ size_t		APlayer::getColor() const
 void		APlayer::setColor(size_t val)
 {
   this->_color = val;
+  this->_indic.setColor(val);
 }
 
 void		APlayer::setState(State::eState state)
@@ -142,6 +150,16 @@ void		APlayer::setDir(Dir::eDir dir)
 Dir::eDir	APlayer::getDir() const
 {
   return this->_dir;
+}
+
+size_t		APlayer::getType() const
+{
+  return this->_type;
+}
+
+void		APlayer::setType(size_t t)
+{
+  this->_type = t;
 }
 
 void		APlayer::setName(std::string const& name)

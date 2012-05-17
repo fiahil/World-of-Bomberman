@@ -20,6 +20,8 @@ SRCXX	=	Loader.tab.cpp		\
 		../src/Human.cpp	\
 		../src/Plane.cpp	\
 		../src/Point.cpp	\
+		../src/Pyramid.cpp	\
+		../src/ContentColor.cpp	\
 		../src/Vector.cpp	\
 		../src/Match.cpp
 
@@ -40,7 +42,7 @@ all:		$(NAME)
 $(NAME):	$(OBJXX)
 	$(CXX) -o $(NAME) $(OBJXX) $(LDFLAGS)
 
-debug:		CXXFLAGS = -Wall -Wextra -g
+debug:		CXXFLAGS = -g -Wall -Wextra -I./ -I../src -I../lib/libgdl_gl-2012.3/include
 debug:		clean $(OBJXX)
 	$(CXX) -o $(NAME) $(OBJXX) $(LDFLAGS)
 

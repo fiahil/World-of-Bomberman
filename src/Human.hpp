@@ -8,37 +8,12 @@
 
 #include "APlayer.hpp"
 #include "Config.hpp"
-
-struct Input
-{
-  enum eMode {
-    CHEAT,
-    GAME,
-    MENU,
-    LAST
-  };
-
-};
-
-struct HumGame {
-
-  enum eAction {
-    UP,
-    LEFT,
-    RIGHT,
-    DOWN,
-    ATTACK,
-    PAUSE,
-    CHEAT,
-    LAST
-  };
-
-};
+#include "enum.hpp"
 
 class Human : public APlayer
 {
 public:
-  Human(Map &);//, const Config&, std::vector<size_t>&, std::vector<size_t> const&);
+  Human(Map &, const Config&);//, std::vector<size_t>&, std::vector<size_t> const&);
   virtual ~Human();
   virtual void play(gdl::GameClock const&, gdl::Input&);
 
@@ -65,7 +40,6 @@ private:
   inputMap		_event;
 
 private:
-  // Config			_config;
   // std::vector<size_t>&	_achievements;
   // std::vector<size_t> const	_skill;
 };

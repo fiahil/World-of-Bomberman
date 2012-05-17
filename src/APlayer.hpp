@@ -11,6 +11,7 @@
 #include "Map.hpp"
 #include "Model.hpp"
 #include "enum.hpp"
+#include "Pyramid.hpp"
 #include "AObj.hpp"
 
 class APlayer : public AObj
@@ -34,6 +35,7 @@ protected:
   size_t		_id;
   size_t		_teamId;
   size_t		_color;
+  size_t		_type;
   std::string		_name;
   std::string		_teamName;
   Bomb::eBomb		_weapon;
@@ -41,6 +43,7 @@ protected:
   State::eState		_state;
   Dir::eDir		_dir;
   gdl::Model		_model;
+  Pyramid		_indic;
 
   std::map<Bomb::eBomb, fBomb>		_bombEffect;
   std::map<Bonus::eBonus, fBonus>	_bonusEffect;
@@ -82,6 +85,7 @@ public:
   size_t	getColor() const;
   State::eState	getState() const;
   Dir::eDir	getDir() const;
+  size_t	getType() const;
 
   std::string const&	getName() const;
   std::string const&	getTeamName() const;
@@ -96,6 +100,7 @@ public:
   void		setDir(Dir::eDir);
   void		setName(std::string const&);
   void		setTeamName(std::string const&);
+  void		setType(size_t);
 };
 
 #endif

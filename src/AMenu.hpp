@@ -9,8 +9,9 @@
 #include <vector>
 #include "Tag.hpp"
 #include "enum.hpp"
+#include "AObj.hpp"
 
-class		AMenu
+class		AMenu : public AObj
 {
 public:
   AMenu();
@@ -20,6 +21,7 @@ protected:
   std::vector<Tag *>	_tags;
 
 public:
+  void		addTag(Tag *);
 
   /*
     Boucle principale du Menu :
@@ -27,15 +29,16 @@ public:
     - analyser le mvt
     - action (quitter, changer de Menu, etc)
   */
-  virtual TokenMenu::eMenu	run(void); // RETURN Menu::eMenu apres
-
+  virtual TokenMenu::eMenu	run(void);
 
   /*
     Refresh : display le Menu
     - iteration sur chaque Tag du vector
     - faire un Tag.draw()
   */
-  virtual void			refresh(void);
+  virtual void		draw(void);
+  virtual void		initialize(void);
+  virtual void		update(gdl::GameClock const&, gdl::Input&);
 };
 
 #endif		/* __AMENU_HPP__ */
