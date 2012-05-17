@@ -29,19 +29,19 @@ void		deleteMenus(AMenu * obj)
 
 MenuManager::~MenuManager()
 {
-  std::cout << "Destruction Menu Manager" << std::endl;
+  //  std::cout << "Destruction Menu Manager" << std::endl;
 
   for_each(this->_menus.begin(), this->_menus.end(), deleteMenus);
 }
 
 void		MenuManager::run(void)
 {
-  std::cout << "RUN Menu Manager" << std::endl;
+  //  std::cout << "RUN Menu Manager" << std::endl;
 
   /*
     Afficherle menu Courant et ses differentes Balises
   */
-  /**/sleep(3);
+  //  /**/sleep(3);
 }
 
 void		MenuManager::buildMainMenu(void)
@@ -94,7 +94,7 @@ void 		MenuManager::buildSettingsMenu(void)
 
 void			MenuManager::draw(void)
 {
-  std::cout << "DRAW MenuManager" << std::endl;
+  //  std::cout << "DRAW MenuManager" << std::endl;
 
   this->_menus[_curMenu]->draw();
 }
