@@ -12,12 +12,11 @@
 #include "Plane.hpp"
 #include "Map.hpp"
 
-/*
-  Pattern Map::explode(Pattern origin, std::list<Bonus>& bonus)
-  {
-  // TODO : implement
-  }
-*/
+
+  // Pattern Map::explode(Pattern origin, std::list<Bonus>&)
+  // {
+  // // TODO : implement
+  // }
 
 Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
   : _x(x),

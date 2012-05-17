@@ -25,6 +25,7 @@ private:
     gdl::Keys::Key _key;
     HumGame::eAction         _action;
     actionFunc     _f;
+    double	_timer;
   };
 
   struct eventModeSt {
