@@ -85,12 +85,12 @@ int		APlayer::getPv() const
   return this->_pv;
 }
 
-void		APlayer::setWeapon(Bomb::eBomb weapon)
+void		APlayer::setWeapon(MappedBomb::eBomb weapon)
 {
   this->_weapon = weapon;
 }
 
-Bomb::eBomb	APlayer::getWeapon() const
+MappedBomb::eBomb	APlayer::getWeapon() const
 {
   return this->_weapon;
 }

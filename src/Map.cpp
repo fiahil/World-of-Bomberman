@@ -13,11 +13,6 @@
 #include "Map.hpp"
 
 
-  // Pattern Map::explode(Pattern origin, std::list<Bonus>&)
-  // {
-  // // TODO : implement
-  // }
-
 Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
   : _x(x),
     _y(y)
@@ -153,4 +148,9 @@ void		Map::setOptimization(Point const* p)
 std::string const&	Map::getMap(void) const
 {
   return this->_map;
+}
+
+void		Map::explode(Bomb::Pattern&)
+{
+
 }

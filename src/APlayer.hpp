@@ -47,7 +47,7 @@ protected:
   gdl::Model		_model;
   Pyramid		_indic;
 
-  std::map<Bomb::eBomb, fBomb>		_bombEffect;
+  std::map<BombType::eBomb, fBomb>		_bombEffect;
   std::map<Bonus::eBonus, fBonus>	_bonusEffect;
 
 protected:
@@ -79,10 +79,10 @@ public:
   virtual void	draw(void);
   virtual void	update(gdl::GameClock const& clock, gdl::Input& input);
 
-  MappedBomb*	isAttack();
+  Bomb*	isAttack();
 
   int		getPv() const;
-  Bomb::eBomb	getWeapon() const;
+  BombType::eBomb	getWeapon() const;
   Skin::eSkin	getSkin() const;
   size_t	getId() const;
   size_t	getTeamId() const;
@@ -95,7 +95,7 @@ public:
   std::string const&	getTeamName() const;
 
   void		setPv(int);
-  void		setWeapon(Bomb::eBomb);
+  void		setWeapon(MappedBomb::eBomb);
   void		setSkin(Skin::eSkin);
   void		setId(size_t);
   void		setTeamId(size_t);

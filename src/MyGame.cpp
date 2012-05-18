@@ -36,6 +36,19 @@ void		MyGame::update(void)
 {
   this->_camera.update(this->_clock, this->_input);
   this->_match._map->update(this->_clock, this->_input);
+  for (std::list<Bomb>::iterator it = this->_match._bombs.begin(); it != this->_match._bombs.end();)
+    {
+      if ((*it).explode())
+	{
+	  Bomb::Pattern	origin = (*it).getPattern();
+
+	  this->_match._map->explode(origin);
+	  this->_match._explodedBombs.push_back((*it).createExplodedBomb(origin));
+	  it = this->_match._bombs.erase(it);
+	}
+      else
+	++it;
+    }
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->update(this->_clock, this->_input);
 }

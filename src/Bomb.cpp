@@ -24,8 +24,8 @@ static const size_t g_bombRange [] =
   };
 
 
-Bomb::Bomb(eBomb t, Point const & pos, size_t id) : \
-  _type(t), _playerd(id), _timer(-1.0), _exploded(false)
+Bomb::Bomb(MappedBomb::eBomb t, Point const & pos, size_t id) :	\
+  _type(t), _player(id), _timer(-1.0), _exploded(false)
 {
   this->_pos = pos;
   this->_pattern._x = this->_pos._pos.x;
@@ -40,9 +40,9 @@ Bomb::~Bomb()
 {
 }
 
-eBomb		Bomb::get_type(void) const
+MappedBomb::eBomb		Bomb::get_type(void) const
 {
-   return _type;
+  return _type;
 }
 
 void		Bomb::initialize(void)
@@ -56,7 +56,7 @@ void		Bomb::draw(void)
     {
       glPushMatrix();
       glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
-      glScalef(this->_pos.scale, this->_pos.scale, this->_pos.scale);
+      glScalef(this->_pos._scale, this->_pos._scale, this->_pos._scale);
       this->_model.draw();
       glPopMatrix();
     }
@@ -71,12 +71,27 @@ void		Bomb::update(gdl::GameClock const& clock, gdl::Input&)
       this->_exploded = true;
 }
 
-Pattern	Bomb::getPattern() const
+Bomb::Pattern	Bomb::getPattern() const
 {
-  return this->Pattern;
+  return this->_pattern;
 }
 
 bool		Bomb::explode() const
 {
   return this->_exploded;
+}
+
+Bomb::ExplodedBomb	Bomb::createExplodedBomb(Bomb::Pattern const& final)
+{
+  ExplodedBomb	ret;
+
+  ret._final = final;
+  ret._real = final;
+  ret._real._coefN = 0;
+  ret._real._coefS = 0;
+  ret._real._coefW = 0;
+  ret._real._coefE = 0;
+  ret._player = this->_player;
+  ret._timer = this->_timer;
+  return ret;
 }
