@@ -6,11 +6,12 @@
 #ifndef __Bomberman_Map_h
 #define __Bomberman_Map_h
 
+#include <map>
 #include <Image.hpp>
 #include "Pattern.hpp"
 #include "AObj.hpp"
 
-#define POS(px, py) ((((this->_y * (py)) - 1)) + (px) + 1)
+#define POS(px, py) (((this->_x * (py))) + (px))
 
 class Map : public AObj
 {
@@ -31,6 +32,15 @@ private:
   gdl::Image	_break;
   gdl::Image	_background;
   Point const*	_opti;
+
+private:
+
+  typedef void(Map::*explodeFunc)(size_t&, size_t&, size_t);
+
+  void		explodeUnBreakable(size_t &, size_t &, size_t);
+  void		explodeBreakable(size_t &, size_t &, size_t);
+
+  std::map<char, explodeFunc> _expFunc;
 
 public:
   void initialize(void);

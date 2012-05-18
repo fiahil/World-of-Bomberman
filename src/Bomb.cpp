@@ -35,8 +35,8 @@ Bomb::Bomb(BombType::eBomb t, Point const & pos, size_t id)
   : _type(t), _player(id), _timer(-1.0), _exploded(false)
 {
   this->_pos = pos;
-  this->_pattern._x = this->_pos._pos.x;
-  this->_pattern._y = this->_pos._pos.y;
+  this->_pattern._x = this->_pos._x;
+  this->_pattern._y = this->_pos._y;
   this->_pattern._coefN = g_bombRange[t];
   this->_pattern._coefS = g_bombRange[t];
   this->_pattern._coefE = g_bombRange[t];
@@ -88,16 +88,16 @@ bool		Bomb::explode() const
   return this->_exploded;
 }
 
-ExplodedBomb*	Bomb::createExplodedBomb(Pattern const& final)
+ExplodedBomb*	Bomb::createExplodedBomb()
 {
   ExplodedBomb	*ret;
-  Pattern	tmp(final);
+  Pattern	tmp(this->_pattern);
 
   tmp._coefN = 0;
   tmp._coefS = 0;
   tmp._coefW = 0;
   tmp._coefE = 0;
-  ret = new ExplodedBomb(this->_pos, tmp, final, this->_player, 0.2f);
+  ret = new ExplodedBomb(this->_pos, tmp, this->_pattern, this->_player, 0.2f);
   ret->initialize();
   return ret;
 }

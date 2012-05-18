@@ -24,6 +24,9 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
   srandom(now);
   /* TODO Move */
 
+  this->_expFunc['1'] = &Map::explodeUnBreakable;
+  this->_expFunc['2'] = &Map::explodeBreakable;
+
   for (size_t i = 0; i < (x * y); ++i)
     this->_map += "0";
   for (size_t ty = 0; ty < y; ++ty) {
@@ -41,6 +44,7 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
 	this->_map[POS(tx, ty)] = '2';
     }
   }
+  this->_map[POS(1, 1)] = '0'; //TODO
 }
 
 Map::Map(std::string const& file)
@@ -50,6 +54,9 @@ Map::Map(std::string const& file)
   std::string swap;
   std::ifstream infile;
   std::stringstream ss;
+
+  this->_expFunc['1'] = &Map::explodeUnBreakable;
+  this->_expFunc['2'] = &Map::explodeBreakable;
 
   infile.open (file.c_str(), std::ifstream::in);
   if (!infile)
@@ -64,6 +71,7 @@ Map::Map(std::string const& file)
   }
   if (this->_map.size() != (this->_x * this->_y))
     throw std::exception(); /* TODO BETTER */
+  this->_map[POS(1, 1)] = '0'; //TODO
 }
 
 Map::Map(size_t x, size_t y, std::string const& map)
@@ -71,6 +79,9 @@ Map::Map(size_t x, size_t y, std::string const& map)
     _y(y),
     _map(map)
 {
+  this->_expFunc['1'] = &Map::explodeUnBreakable;
+  this->_expFunc['2'] = &Map::explodeBreakable;
+  this->_map[POS(1, 1)] = '0'; //TODO
 }
 
 Map::~Map()
@@ -150,27 +161,46 @@ std::string const&	Map::getMap(void) const
   return this->_map;
 }
 
+// TODO : bonus list en param supplementaire + pour en rajouter en rand dans Breakable
+
+void		Map::explodeUnBreakable(size_t &r, size_t &f, size_t)
+{
+  --r;
+  f = r;
+}
+
+void		Map::explodeBreakable(size_t &r, size_t &f, size_t pos)
+{
+  f = r;
+  this->_map[pos] = '0';
+}
+
 void		Map::explode(Pattern& real, Pattern& final)
 {
-  if (this->_map[POS(final._x, (final._y - real._coefN))] != '0')
-    final._coefN = real._coefN;
-  if (this->_map[POS(final._x, (final._y + real._coefS))] != '0')
-    final._coefS = real._coefS;
-  if (this->_map[POS((final._x - real._coefE), final._y)] != '0')
-    final._coefE = real._coefE;
-  if (this->_map[POS((final._x + real._coefW), final._y)] != '0')
-    final._coefW = real._coefW;
-  // for (size_t cy = 0; cy < this->_y; ++cy)
-  //   {
-  //     for (size_t cx = 0; cx < this->_x; ++cx)
-  // 	{
-  // 	  std::cout << this->_map[POS(cx, cy)];
-  // 	}
-  //     std::cout << std::endl;
-  //   }
-  std::cout << ".:: Explode MAP ::." << std::endl;
-  std::cout << "coef N : real = " << real._coefN << " | final = " << final._coefN << std::endl;
-  std::cout << "coef S : real = " << real._coefS << " | final = " << final._coefS << std::endl;
-  std::cout << "coef E : real = " << real._coefE << " | final = " << final._coefE << std::endl;
-  std::cout << "coef W : real = " << real._coefW << " | final = " << final._coefW << std::endl;
+  char elem;
+
+  if ((elem = this->_map[POS(final._x, final._y - real._coefN)]) != '0')
+    (this->*(this->_expFunc[elem]))(
+				    real._coefN,
+				    final._coefN,
+				    POS(final._x, final._y - real._coefN)
+				    );
+  if ((elem = this->_map[POS(final._x, final._y + real._coefS)]) != '0')
+    (this->*(this->_expFunc[elem]))(
+				    real._coefS,
+				    final._coefS,
+				    POS(final._x, final._y + real._coefS)
+				    );
+  if ((elem = this->_map[POS(final._x + real._coefE, final._y)]) != '0')
+    (this->*(this->_expFunc[elem]))(
+				    real._coefE,
+				    final._coefE,
+				    POS(final._x + real._coefE, final._y)
+				    );
+  if ((elem = this->_map[POS(final._x - real._coefW, final._y)]) != '0')
+    (this->*(this->_expFunc[elem]))(
+				    real._coefW,
+				    final._coefW,
+				    POS(final._x - real._coefW, final._y)
+				    );
 }
