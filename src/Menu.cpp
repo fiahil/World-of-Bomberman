@@ -31,6 +31,7 @@ void		Menu::initialize(void)
   conf.setConfig(HumGame::LEFT, gdl::Keys::A);
   conf.setConfig(HumGame::DOWN, gdl::Keys::S);
   conf.setConfig(HumGame::RIGHT, gdl::Keys::D);
+  conf.setConfig(HumGame::ATTACK, gdl::Keys::R);
   APlayer *newHum = new Human(*map, conf);
   newHum->setColor(6);
   players.push_back(newHum);
