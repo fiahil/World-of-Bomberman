@@ -71,6 +71,7 @@ void	ExplodedBomb::draw()
   Point		pos(this->_pos);
   size_t	i;
 
+  std::cout << "Draw Exploded" << std::endl;
   this->drawPattern(pos);
   for (i = 1; i <= this->_real._coefN; ++i)
     {

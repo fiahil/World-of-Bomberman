@@ -10,7 +10,7 @@
 #include "Pattern.hpp"
 #include "AObj.hpp"
 
-#define POS(px, py) ((((this->_y * (py)) - 1)) + (px) + 1)
+#define POS(px, py) (((this->_x * (py))) + (px))
 
 class Map : public AObj
 {

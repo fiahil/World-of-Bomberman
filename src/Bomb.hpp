@@ -33,7 +33,7 @@ public:
   void		draw(void);
   bool		explode() const;
   Pattern const&	getPattern() const;
-  ExplodedBomb*	createExplodedBomb(Pattern const&);
+  ExplodedBomb*	createExplodedBomb();
   void		update(gdl::GameClock const& clock, gdl::Input& input);
 };
 
