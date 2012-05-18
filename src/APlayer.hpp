@@ -8,6 +8,7 @@
 
 #include <map>
 #include <string>
+#include "Bomb.hpp"
 #include "Map.hpp"
 #include "Model.hpp"
 #include "enum.hpp"
@@ -74,14 +75,10 @@ public:
   virtual void	initialize(void);
   virtual void	draw(void);
   virtual void	update(gdl::GameClock const& clock, gdl::Input& input);
-<<<<<<< HEAD
 
   Bomb*	isAttack();
 
-=======
-  
   void		takeDamage(Pattern const&);
->>>>>>> e804913c0c9ae030c53ce0e7e6fbe7048b2cb228
   int		getPv() const;
   BombType::eBomb	getWeapon() const;
   Skin::eSkin	getSkin() const;

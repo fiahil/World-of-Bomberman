@@ -13,9 +13,9 @@ APlayer::APlayer(Map & map)
     _id(0),
     _teamId(0),
     _color(0),
-    _attack(false);
+    _attack(false),
     _timers(5, -1.0),
-    _weapon(Bomb::NORMAL),
+    _weapon(BombType::NORMAL),
     _skin(Skin::NORMAL),
     _state(State::STATIC),
     _dir(Dir::SOUTH),
@@ -255,7 +255,8 @@ Bomb*		APlayer::isAttack()
 {
   if (!this->_attack)
     return 0;
-  return (new MappedBomb(this->_weapon, this->_pos, this->_id));
+  this->_attack(false);
+  return (new Bomb(this->_weapon, this->_pos, this->_id));
 }
 
 
