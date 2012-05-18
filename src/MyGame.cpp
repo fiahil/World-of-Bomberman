@@ -34,6 +34,8 @@ void		MyGame::initialize(void)
 
 void		MyGame::update(void)
 {
+  Bomb*	newBomb;
+  
   this->_camera.update(this->_clock, this->_input);
   this->_match._map->update(this->_clock, this->_input);
   for (std::list<Bomb*>::iterator it = this->_match._bombs.begin(); it != this->_match._bombs.end();)
@@ -41,16 +43,20 @@ void		MyGame::update(void)
       if ((*it)->explode())
 	{
 	  Pattern	origin = (*it)->getPattern();
-
+	  
 	  this->_match._map->explode(origin);
 	  this->_match._explodedBombs.push_back((*it)->createExplodedBomb(origin));
 	  delete (*it);
 	  it = this->_match._bombs.erase(it);
 	}
       else
-	++it;
+	{
+	  (*it)->update(this->_clock, this->_input);
+	  ++it;
+	}
     }
-  for (std::list<ExplodedBomb*>::iterator it = this->_match._explodedBombs.begin(); it != this->_match._explodedBombs.end();)
+  for (std::list<ExplodedBomb*>::iterator it = this->_match._explodedBombs.begin();
+       it != this->_match._explodedBombs.end();)
     {
       if ((*it)->isEOE())
 	{
@@ -66,12 +72,22 @@ void		MyGame::update(void)
 	}
     }
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
-    this->_match._players[i]->update(this->_clock, this->_input);
+    {
+      this->_match._players[i]->update(this->_clock, this->_input);
+      if ((newBomb = this->_match._players[i]->isAttack()))
+	this->_match._bombs.push_back(newBomb);
+    }
 }
 
 void		MyGame::draw(void)
 {
   this->_match._map->draw();
+  for (std::list<Bomb*>::iterator it = this->_match._bombs.begin();
+       it != this->_match._bombs.end(); ++it)
+    (*it)->draw();
+  for (std::list<ExplodedBomb*>::iterator it = this->_match._explodedBombs.begin();
+       it != this->_match._explodedBombs.end(); ++it)
+    (*it)->draw();
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->draw();
 }

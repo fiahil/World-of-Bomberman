@@ -255,8 +255,10 @@ Bomb*		APlayer::isAttack()
 {
   if (!this->_attack)
     return 0;
+  Bomb	*ret = new Bomb(this->_weapon, this->_pos, this->_id);
+  ret->initialize();
   this->_attack = false;
-  return (new Bomb(this->_weapon, this->_pos, this->_id));
+  return ret;
 }
 
 

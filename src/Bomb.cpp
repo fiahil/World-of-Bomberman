@@ -3,6 +3,7 @@
  * 12.05.2012
  */
 
+#include <iostream>
 #include "Bomb.hpp"
 
 static const std::string g_bombModel [] =
@@ -13,14 +14,20 @@ static const std::string g_bombModel [] =
 
 static const double g_bombTimer [] =
   {
-    5.0,
-    7.0
+    2.0,
+    3.0
   };
 
 static const size_t g_bombRange [] =
   {
     2,
     4
+  };
+
+static const double g_bombScale [] =
+  {
+    0.005f,
+    0.005f
   };
 
 
@@ -56,7 +63,7 @@ void		Bomb::draw(void)
     {
       glPushMatrix();
       glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
-      glScalef(this->_pos._scale, this->_pos._scale, this->_pos._scale);
+      glScalef(g_bombScale[this->_type], g_bombScale[this->_type], g_bombScale[this->_type]);
       this->_model.draw();
       glPopMatrix();
     }
@@ -83,11 +90,14 @@ bool		Bomb::explode() const
 
 ExplodedBomb*	Bomb::createExplodedBomb(Pattern const& final)
 {
+  ExplodedBomb	*ret;
   Pattern	tmp(final);
 
   tmp._coefN = 0;
   tmp._coefS = 0;
   tmp._coefW = 0;
   tmp._coefE = 0;
-  return new ExplodedBomb(tmp, final, this->_player, this->_timer);
+  ret = new ExplodedBomb(this->_pos, tmp, final, this->_player, 0.2f);
+  ret->initialize();
+  return ret;
 }

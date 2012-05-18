@@ -2,6 +2,7 @@
 #ifndef __EXPLODEDBOMB_HPP__
 #define __EXPLODEDBOMB_HPP__
 
+#include <Model.hpp>
 #include "Bomb.hpp"
 #include "AObj.hpp"
 
@@ -14,9 +15,13 @@ private:
   double		_timer;
   double		_lastTime;
   bool			_EOE;
+  gdl::Model		_model;
   
+private:
+  void	drawPattern(Point const&);
+
 public:
-  ExplodedBomb(Pattern const&, Pattern const&, size_t, double);
+  ExplodedBomb(Point const&, Pattern const&, Pattern const&, size_t, double);
   virtual ~ExplodedBomb();
   virtual void	initialize();
   virtual void	update(gdl::GameClock const&, gdl::Input&);
