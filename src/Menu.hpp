@@ -18,7 +18,6 @@ public:
 
 private:
   MyGame*	_game;
-  MenuManager	_menu;
 
 private:
   virtual void		initialize(void);

@@ -8,6 +8,7 @@
 
 #include <map>
 #include <string>
+#include "Bomb.hpp"
 #include "Map.hpp"
 #include "Model.hpp"
 #include "enum.hpp"
@@ -26,8 +27,8 @@ private:
   /*
    * TODO : IMPLEMENT FUNCTION
    */
-  typedef void	(*fBomb)();
-  typedef void	(*fBonus)();
+  typedef void	(APlayer::*fBomb)();
+  typedef void	(APlayer::*fBonus)();
 
 protected:
   Map &			_map;
@@ -36,24 +37,29 @@ protected:
   size_t		_teamId;
   size_t		_color;
   size_t		_type;
+  bool			_attack;
+  std::vector<double>   _timers;
   std::string		_name;
   std::string		_teamName;
-  Bomb::eBomb		_weapon;
+  BombType::eBomb	_weapon;
   Skin::eSkin		_skin;
   State::eState		_state;
   Dir::eDir		_dir;
   gdl::Model		_model;
   Pyramid		_indic;
 
-  std::map<Bomb::eBomb, fBomb>		_bombEffect;
+private:
+  void	normalBombEffect();
+  void	megaBombEffect();
+  std::map<BombType::eBomb, fBomb>	_bombEffect;
   std::map<Bonus::eBonus, fBonus>	_bonusEffect;
 
 protected:
-  void UPFunction();
-  void LEFTFunction();
-  void RIGHTFunction();
-  void DOWNFunction();
-  void ATTACKFunction();
+  void UPFunction(gdl::GameClock const&);
+  void LEFTFunction(gdl::GameClock const&);
+  void RIGHTFunction(gdl::GameClock const&);
+  void DOWNFunction(gdl::GameClock const&);
+  void ATTACKFunction(gdl::GameClock const&);
   // cheat
   // pause/menu
   // virtual dans APlayer and specialise dans Human
@@ -68,17 +74,16 @@ private:
   std::vector<t_rotFunc>	_rotFuncMap;
 
 public:
-  /*
-   * TODO : IMPLEMENT PATTERN
-   * virtual void	takeDamage(Point, Pattern);
-   */
   virtual void	play(gdl::GameClock const&, gdl::Input&) = 0;
   virtual void	initialize(void);
   virtual void	draw(void);
   virtual void	update(gdl::GameClock const& clock, gdl::Input& input);
 
+  Bomb*	isAttack();
+
+  void		takeDamage(Pattern const&, BombType::eBomb);
   int		getPv() const;
-  Bomb::eBomb	getWeapon() const;
+  BombType::eBomb	getWeapon() const;
   Skin::eSkin	getSkin() const;
   size_t	getId() const;
   size_t	getTeamId() const;
@@ -91,7 +96,7 @@ public:
   std::string const&	getTeamName() const;
 
   void		setPv(int);
-  void		setWeapon(Bomb::eBomb);
+  void		setWeapon(BombType::eBomb);
   void		setSkin(Skin::eSkin);
   void		setId(size_t);
   void		setTeamId(size_t);

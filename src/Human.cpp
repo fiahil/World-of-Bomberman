@@ -39,11 +39,12 @@ Human::~Human() {
 
 }
 
-void Human::play(gdl::GameClock const&, gdl::Input& key)
+void Human::play(gdl::GameClock const& clock, gdl::Input& key)
 {
+  // for each ?
+
   for (size_t i = 0; i < this->_event[this->_mode]._nb; ++i) {
-    if (key.isKeyDown(this->_event[this->_mode]._event[i]._key)) {
-      (this->*(_event[this->_mode]._event[i]._f))();
-    }
+    if (key.isKeyDown(this->_event[this->_mode]._event[i]._key))
+      (this->*(_event[this->_mode]._event[i]._f))(clock);
   }
 }

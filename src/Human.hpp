@@ -19,7 +19,7 @@ public:
 
 private:
 
-  typedef void (APlayer::*actionFunc)();
+  typedef void (APlayer::*actionFunc)(gdl::GameClock const&);
 
   struct eventSt {
     gdl::Keys::Key _key;

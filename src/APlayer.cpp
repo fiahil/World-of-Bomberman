@@ -13,7 +13,9 @@ APlayer::APlayer(Map & map)
     _id(0),
     _teamId(0),
     _color(0),
-    _weapon(Bomb::NORMAL),
+    _attack(false),
+    _timers(5, -1.0),
+    _weapon(BombType::NORMAL),
     _skin(Skin::NORMAL),
     _state(State::STATIC),
     _dir(Dir::SOUTH),
@@ -24,6 +26,8 @@ APlayer::APlayer(Map & map)
   this->_rotFuncMap[Dir::SOUTH] = &APlayer::SOUTHFunction;
   this->_rotFuncMap[Dir::WEST] = &APlayer::WESTFunction;
   this->_rotFuncMap[Dir::EAST] = &APlayer::EASTFunction;
+  this->_bombEffect[BombType::NORMAL] = &APlayer::normalBombEffect;
+  this->_bombEffect[BombType::MEGABOMB] = &APlayer::megaBombEffect;
   this->_pos._scale = 2.0f;
   this->setPos(1, 1);
   this->_indic.setScale(2.0f);
@@ -34,19 +38,11 @@ APlayer::~APlayer()
 {
 }
 
-/*
- * void		APlayer::takeDamage(Point origin, Pattern pattern)
- * {
- *   // TODO : implement
- * }
- *
- */
-
 void		APlayer::initialize(void)
 {
   std::vector<std::string>	refModel(Skin::LAST, "");
 
-  refModel[Skin::NORMAL] = "models/pf.fbx";
+  refModel[Skin::NORMAL] = "models/Man.fbx";
   this->_model = gdl::Model::load(refModel[this->_skin]);
   this->_model.infos();
 }
@@ -56,7 +52,7 @@ void		APlayer::draw(void)
   glPushMatrix();
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y - 1.0f, this->_pos._pos.z);
   (this->*_rotFuncMap[this->_dir])();
-  glScalef(0.005f, 0.005f, 0.005f);
+  glScalef(0.05f, 0.05f, 0.05f);
   this->_model.draw();
   glPopMatrix();
   glPushMatrix();
@@ -72,6 +68,29 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
   this->_indic.setPos(this->_pos._x, this->_pos._y);
 }
 
+void		APlayer::normalBombEffect()
+{
+  this->_pv -= 10;
+  if (this->_pv < 0)
+    this->_pv = 0;
+}
+
+void		APlayer::megaBombEffect()
+{
+  this->_pv -= 30;
+  if (this->_pv < 0)
+    this->_pv = 0;
+}
+
+void		APlayer::takeDamage(Pattern const& pattern, BombType::eBomb type)
+{
+  if (this->_pos._x >= (pattern._x - pattern._coefW) &&
+      this->_pos._x <= (pattern._x + pattern._coefE) &&
+      this->_pos._y >= (pattern._y - pattern._coefN) &&
+      this->_pos._y <= (pattern._y + pattern._coefS))
+    (this->*_bombEffect[type])();
+}
+
 void		APlayer::setPv(int pv)
 {
   this->_pv = pv;
@@ -82,12 +101,12 @@ int		APlayer::getPv() const
   return this->_pv;
 }
 
-void		APlayer::setWeapon(Bomb::eBomb weapon)
+void		APlayer::setWeapon(BombType::eBomb weapon)
 {
   this->_weapon = weapon;
 }
 
-Bomb::eBomb	APlayer::getWeapon() const
+BombType::eBomb	APlayer::getWeapon() const
 {
   return this->_weapon;
 }
@@ -183,56 +202,105 @@ std::string const&	APlayer::getTeamName() const
   return this->_teamName;
 }
 
-void		APlayer::UPFunction()
+void		APlayer::UPFunction(gdl::GameClock const& clock)
 {
-  this->_dir = Dir::NORTH;
-  if (this->_map.canMoveAt(this->_pos._x, this->_pos._y - 1))
-    this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
+  double	current;
+
+  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
+      this->_timers[HumGame::UP])
+    {
+      this->_timers[HumGame::UP] = current + 0.15;
+      this->_dir = Dir::NORTH;
+      if (this->_map.canMoveAt(this->_pos._x, this->_pos._y - 1))
+	this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
+      this->_model.play("Take 001");
+    }
 }
 
-void		APlayer::LEFTFunction()
+void		APlayer::LEFTFunction(gdl::GameClock const& clock)
 {
-  this->_dir = Dir::WEST;
-  if (this->_map.canMoveAt(this->_pos._x - 1, this->_pos._y))
-    this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
+  double	current;
+
+  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
+      this->_timers[HumGame::LEFT])
+    {
+      this->_timers[HumGame::LEFT] = current + 0.15;
+      this->_dir = Dir::WEST;
+      if (this->_map.canMoveAt(this->_pos._x - 1, this->_pos._y))
+	this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
+      this->_model.play("Take 001");
+    }
 }
 
-void		APlayer::RIGHTFunction()
+void		APlayer::RIGHTFunction(gdl::GameClock const& clock)
 {
-  this->_dir = Dir::EAST;
-  if (this->_map.canMoveAt(this->_pos._x + 1, this->_pos._y))
-    this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
+   double	current;
+
+  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
+      this->_timers[HumGame::RIGHT])
+    {
+      this->_timers[HumGame::RIGHT] = current + 0.15;
+      this->_dir = Dir::EAST;
+      if (this->_map.canMoveAt(this->_pos._x + 1, this->_pos._y))
+	this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
+      this->_model.play("Take 001");
+    }
 }
 
-void		APlayer::DOWNFunction()
+void		APlayer::DOWNFunction(gdl::GameClock const& clock)
 {
-  this->_dir = Dir::SOUTH;
-  if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
-    this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
+   double	current;
+
+  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
+      this->_timers[HumGame::DOWN])
+    {
+      this->_timers[HumGame::DOWN] = current + 0.15;
+      this->_dir = Dir::SOUTH;
+      if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
+	this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
+      this->_model.play("Take 001");
+    }
 }
 
-void		APlayer::ATTACKFunction()
+void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
 {
+   double	current;
 
-
+  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
+      this->_timers[HumGame::ATTACK])
+    {
+      this->_timers[HumGame::ATTACK] = current + 1.5;
+      this->_attack = true;
+    }
 }
+
+Bomb*		APlayer::isAttack()
+{
+  if (!this->_attack)
+    return 0;
+  Bomb	*ret = new Bomb(this->_weapon, this->_pos, this->_id);
+  ret->initialize();
+  this->_attack = false;
+  return ret;
+}
+
 
 void		APlayer::NORTHFunction()
 {
-  glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+  glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
 }
 
 void		APlayer::SOUTHFunction()
 {
+ glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
 
 }
 
 void		APlayer::WESTFunction()
 {
-  glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
-}
+  glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
+ }
 
 void		APlayer::EASTFunction()
 {
-  glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
 }

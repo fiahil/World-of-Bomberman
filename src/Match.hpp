@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include "Map.hpp"
+#include "Bomb.hpp"
 #include "APlayer.hpp"
 #include "enum.hpp"
 
@@ -28,6 +29,9 @@ public:
   bool				_cheat;
   GameMode::eGameMode		_gameMode;
   std::vector<APlayer *>	_players;
+  std::list<Bomb*>		_bombs;
+  //std::list<Bonus>		_bonus;
+  std::list<ExplodedBomb*>	_explodedBombs;
 
 public:
   void		setMap(Map *);

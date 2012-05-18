@@ -6,13 +6,12 @@
 #ifndef __Bomberman_Map_h
 #define __Bomberman_Map_h
 
+#include <map>
 #include <Image.hpp>
+#include "Pattern.hpp"
 #include "AObj.hpp"
 
-#define POS(px, py) ((((this->_y * (py)) - 1)) + (px) + 1)
-
-class Pattern; //TODO: TO REMOVE
-class Bonus; //TODO: TO REMOVE
+#define POS(px, py) (((this->_x * (py))) + (px))
 
 class Map : public AObj
 {
@@ -34,6 +33,15 @@ private:
   gdl::Image	_background;
   Point const*	_opti;
 
+private:
+
+  typedef void(Map::*explodeFunc)(size_t&, size_t&, size_t);
+
+  void		explodeUnBreakable(size_t &, size_t &, size_t);
+  void		explodeBreakable(size_t &, size_t &, size_t);
+
+  std::map<char, explodeFunc> _expFunc;
+
 public:
   void initialize(void);
   void draw(void);
@@ -41,7 +49,7 @@ public:
   bool canMoveAt(size_t x, size_t y);
   void setOptimization(Point const*);
   std::string const&	getMap(void) const;
-  //  Pattern explode(Pattern origin, std::list<Bonus>& bonus);
+  void explode(Pattern&, Pattern&);
 };
 
 #endif /* __Bomberman_Map_h */

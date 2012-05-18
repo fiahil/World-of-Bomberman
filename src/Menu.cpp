@@ -10,8 +10,7 @@
 #include "Menu.hpp"
 
 Menu::Menu()
-  : _game(0),
-    _menu(600, 800)
+  : _game(0)
 {
   this->setContentRoot("./Ressources/");
 }
@@ -24,10 +23,18 @@ void		Menu::initialize(void)
 {
   this->window_.setTitle("Bomberman v1.0");
   this->window_.create();
-  Map*	map = new Map(20, 20, 2, 100);
+  Map*	map = new Map(20, 20, 1, 5);
   std::vector<APlayer*>	players;
-  Config player1_conf;
-  players.push_back(new Human(*map, player1_conf));
+  Config conf;
+  players.push_back(new Human(*map, conf));
+  conf.setConfig(HumGame::UP, gdl::Keys::W);
+  conf.setConfig(HumGame::LEFT, gdl::Keys::A);
+  conf.setConfig(HumGame::DOWN, gdl::Keys::S);
+  conf.setConfig(HumGame::RIGHT, gdl::Keys::D);
+  conf.setConfig(HumGame::ATTACK, gdl::Keys::R);
+  APlayer *newHum = new Human(*map, conf);
+  newHum->setColor(6);
+  players.push_back(newHum);
   map->setOptimization(&players[0]->getPos());
   Match*	m = new Match(map, false, GameMode::ARCADE, players);
   this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0]); // TODO
@@ -38,7 +45,6 @@ void		Menu::update(void)
 {
   if (this->_game)
     {
-      this->_menu.run();
       if (this->_game->isEOG())
 	{
 	  this->_game->unload();
