@@ -152,26 +152,25 @@ std::string const&	Map::getMap(void) const
 
 void		Map::explode(Pattern& real, Pattern& final)
 {
-  // if (this->_map[POS(final._x, final._y + real._coefN)] != '0')
-  //   {
-  //     --real._coefN;
-  //     final._coefN = real._coefN;
-  //   }
-  // if (this->_map[POS(final._x, final._y - real._coefS)] != '0')
-  //   {
-  //     --real._coefS;
-  //     final._coefS = real._coefS;
-  //   }
-  // if (this->_map[POS(final._x + real._coefE, final._y)] != '0')
-  //   {
-  //     --real._coefE;
-  //    final._coefE = real._coefE;
-  //   }
-  // if (this->_map[POS(final._x - real._coefW, final._y)] != '0')
-  //   {
-  //     --real._coefW;
-  //     final._coefW = real._coefW;
-  //   }
+  if (this->_map[POS(final._x, final._y + real._coefN)] != '0')
+    {
+      final._coefN = real._coefN;
+    }
+  if (this->_map[POS(final._x, final._y - real._coefS)] != '0')
+    {
+      // --real._coefS;
+      final._coefS = real._coefS;
+    }
+  if (this->_map[POS(final._x + real._coefE, final._y)] != '0')
+    {
+      // --real._coefE;
+     final._coefE = real._coefE;
+    }
+  if (this->_map[POS(final._x - real._coefW, final._y)] != '0')
+    {
+      // --real._coefW;
+      final._coefW = real._coefW;
+    }
   std::cout << ".:: Explode MAP ::." << std::endl;
   std::cout << "coef N : real = " << real._coefN << " | final = " << final._coefN << std::endl;
   std::cout << "coef S : real = " << real._coefS << " | final = " << final._coefS << std::endl;
