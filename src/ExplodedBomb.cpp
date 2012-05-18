@@ -2,8 +2,9 @@
 #include <iostream>
 #include "ExplodedBomb.hpp"
 
-ExplodedBomb::ExplodedBomb(Point const& pos, Pattern const& real, Pattern const& final, size_t player, double timer)
-  : _final(final),
+ExplodedBomb::ExplodedBomb(BombType::eBomb type, Point const& pos, Pattern const& real, Pattern const& final, size_t player, double timer)
+  : _type(type),
+    _final(final),
     _real(real),
     _player(player),
     _timer(timer),
@@ -71,7 +72,6 @@ void	ExplodedBomb::draw()
   Point		pos(this->_pos);
   size_t	i;
 
-  std::cout << "Draw Exploded" << std::endl;
   this->drawPattern(pos);
   for (i = 1; i <= this->_real._coefN; ++i)
     {
@@ -98,6 +98,11 @@ void	ExplodedBomb::draw()
 bool	ExplodedBomb::isEOE() const
 {
   return this->_EOE;
+}
+
+BombType::eBomb	ExplodedBomb::getType() const
+{
+  return this->_type;
 }
 
 Pattern&	ExplodedBomb::getPatternReal()

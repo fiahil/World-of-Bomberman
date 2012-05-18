@@ -26,6 +26,8 @@ APlayer::APlayer(Map & map)
   this->_rotFuncMap[Dir::SOUTH] = &APlayer::SOUTHFunction;
   this->_rotFuncMap[Dir::WEST] = &APlayer::WESTFunction;
   this->_rotFuncMap[Dir::EAST] = &APlayer::EASTFunction;
+  this->_bombEffect[BombType::NORMAL] = &APlayer::normalBombEffect;
+  this->_bombEffect[BombType::MEGABOMB] = &APlayer::megaBombEffect;
   this->_pos._scale = 2.0f;
   this->setPos(1, 1);
   this->_indic.setScale(2.0f);
@@ -67,9 +69,27 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
   this->_indic.setPos(this->_pos._x, this->_pos._y);
 }
 
-void		APlayer::takeDamage(Pattern const&)
+void		APlayer::normalBombEffect()
 {
+  this->_pv -= 10;
+  if (this->_pv < 0)
+    this->_pv = 0;
+}
 
+void		APlayer::megaBombEffect()
+{
+  this->_pv -= 30;
+  if (this->_pv < 0)
+    this->_pv = 0;
+}
+
+void		APlayer::takeDamage(Pattern const& pattern, BombType::eBomb type)
+{
+  if (this->_pos._x >= (pattern._x - pattern._coefW) &&
+      this->_pos._x <= (pattern._x + pattern._coefE) &&
+      this->_pos._y >= (pattern._y - pattern._coefN) &&
+      this->_pos._y <= (pattern._y + pattern._coefS))
+    (this->*_bombEffect[type])();
 }
 
 void		APlayer::setPv(int pv)
