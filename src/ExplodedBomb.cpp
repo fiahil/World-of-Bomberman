@@ -99,7 +99,12 @@ bool	ExplodedBomb::isEOE() const
   return this->_EOE;
 }
 
-Pattern const&	ExplodedBomb::getPattern() const
+Pattern&	ExplodedBomb::getPatternReal()
 {
   return this->_real;
+}
+
+Pattern&	ExplodedBomb::getPatternFinal()
+{
+  return this->_final;
 }

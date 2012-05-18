@@ -42,10 +42,7 @@ void		MyGame::update(void)
     {
       if ((*it)->explode())
 	{
-	  Pattern	origin = (*it)->getPattern();
-	  
-	  this->_match._map->explode(origin);
-	  this->_match._explodedBombs.push_back((*it)->createExplodedBomb(origin));
+	  this->_match._explodedBombs.push_back((*it)->createExplodedBomb((*it)->getPattern()));
 	  delete (*it);
 	  it = this->_match._bombs.erase(it);
 	}
@@ -65,9 +62,10 @@ void		MyGame::update(void)
 	}
       else
 	{
+	  this->_match._map->explode((*it)->getPatternReal(), (*it)->getPatternFinal());
 	  (*it)->update(this->_clock, this->_input);
 	  for (unsigned int i = 0; i < this->_match._players.size(); ++i)
-	    this->_match._players[i]->takeDamage((*it)->getPattern());
+	    this->_match._players[i]->takeDamage((*it)->getPatternReal());
 	  ++it;
 	}
     }

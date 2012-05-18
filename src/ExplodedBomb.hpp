@@ -27,7 +27,8 @@ public:
   virtual void	update(gdl::GameClock const&, gdl::Input&);
   virtual void	draw();
   bool	isEOE() const;
-  Pattern const&	getPattern() const;
+  Pattern&	getPatternReal();
+  Pattern&	getPatternFinal();
 };
 
 #else

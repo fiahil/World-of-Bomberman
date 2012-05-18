@@ -39,7 +39,7 @@ public:
   bool canMoveAt(size_t x, size_t y);
   void setOptimization(Point const*);
   std::string const&	getMap(void) const;
-  void explode(Pattern&);
+  void explode(Pattern&, Pattern&);
 };
 
 #endif /* __Bomberman_Map_h */
