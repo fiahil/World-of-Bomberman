@@ -36,14 +36,6 @@ APlayer::~APlayer()
 {
 }
 
-/*
- * void		APlayer::takeDamage(Point origin, Pattern pattern)
- * {
- *   // TODO : implement
- * }
- *
- */
-
 void		APlayer::initialize(void)
 {
   std::vector<std::string>	refModel(Skin::LAST, "");
@@ -75,6 +67,11 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
   this->_indic.setPos(this->_pos._x, this->_pos._y);
 }
 
+void		APlayer::takeDamage(Pattern const&)
+{
+
+}
+
 void		APlayer::setPv(int pv)
 {
   this->_pv = pv;
@@ -85,12 +82,12 @@ int		APlayer::getPv() const
   return this->_pv;
 }
 
-void		APlayer::setWeapon(MappedBomb::eBomb weapon)
+void		APlayer::setWeapon(BombType::eBomb weapon)
 {
   this->_weapon = weapon;
 }
 
-MappedBomb::eBomb	APlayer::getWeapon() const
+BombType::eBomb	APlayer::getWeapon() const
 {
   return this->_weapon;
 }

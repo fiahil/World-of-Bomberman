@@ -7,7 +7,7 @@
 #define __Bomberman_Map_h
 
 #include <Image.hpp>
-#include "Bomb.hpp"
+#include "Pattern.hpp"
 #include "AObj.hpp"
 
 #define POS(px, py) ((((this->_y * (py)) - 1)) + (px) + 1)
@@ -39,7 +39,7 @@ public:
   bool canMoveAt(size_t x, size_t y);
   void setOptimization(Point const*);
   std::string const&	getMap(void) const;
-  void explode(Bomb::Pattern&);
+  void explode(Pattern&);
 };
 
 #endif /* __Bomberman_Map_h */

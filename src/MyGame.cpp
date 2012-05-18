@@ -36,18 +36,34 @@ void		MyGame::update(void)
 {
   this->_camera.update(this->_clock, this->_input);
   this->_match._map->update(this->_clock, this->_input);
-  for (std::list<Bomb>::iterator it = this->_match._bombs.begin(); it != this->_match._bombs.end();)
+  for (std::list<Bomb*>::iterator it = this->_match._bombs.begin(); it != this->_match._bombs.end();)
     {
-      if ((*it).explode())
+      if ((*it)->explode())
 	{
-	  Bomb::Pattern	origin = (*it).getPattern();
+	  Pattern	origin = (*it)->getPattern();
 
 	  this->_match._map->explode(origin);
-	  this->_match._explodedBombs.push_back((*it).createExplodedBomb(origin));
+	  this->_match._explodedBombs.push_back((*it)->createExplodedBomb(origin));
+	  delete (*it);
 	  it = this->_match._bombs.erase(it);
 	}
       else
 	++it;
+    }
+  for (std::list<ExplodedBomb*>::iterator it = this->_match._explodedBombs.begin(); it != this->_match._explodedBombs.end();)
+    {
+      if ((*it)->isEOE())
+	{
+	  delete (*it);
+	  it = this->_match._explodedBombs.erase(it);
+	}
+      else
+	{
+	  (*it)->update(this->_clock, this->_input);
+	  for (unsigned int i = 0; i < this->_match._players.size(); ++i)
+	    this->_match._players[i]->takeDamage((*it)->getPattern());
+	  ++it;
+	}
     }
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->update(this->_clock, this->_input);

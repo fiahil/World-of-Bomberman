@@ -32,7 +32,7 @@ struct HumGame {
 
 };
 
-struct MappedBomb
+struct BombType
 {
   enum eBomb
     {

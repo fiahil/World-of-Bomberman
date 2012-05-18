@@ -150,7 +150,7 @@ std::string const&	Map::getMap(void) const
   return this->_map;
 }
 
-void		Map::explode(Bomb::Pattern&)
+void		Map::explode(Pattern&)
 {
 
 }

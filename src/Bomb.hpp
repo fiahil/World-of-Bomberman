@@ -8,35 +8,18 @@
 
 #include <Model.hpp>
 #include "enum.hpp"
+#include "Pattern.hpp"
+#include "ExplodedBomb.hpp"
 #include "AObj.hpp"
 
 class Bomb : public AObj
 {
 public:
-  struct Pattern
-  {
-    size_t	_x;
-    size_t	_y;
-    size_t	_coefN;
-    size_t	_coefS;
-    size_t	_coefW;
-    size_t	_coefE;
-  };
-  
-  struct ExplodedBomb
-  {
-    Pattern		_final;
-    Pattern		_real;
-    size_t		_player;
-    double		_timer;
-  };
-  
-public:
-  Bomb(MappedBomb::eBomb t, Point const &, size_t id);
+  Bomb(BombType::eBomb t, Point const &, size_t id);
   ~Bomb();
   
 private:
-  MappedBomb::eBomb	_type;
+  BombType::eBomb	_type;
   size_t	_player;
   double	_timer;
   bool		_exploded;
@@ -44,15 +27,19 @@ private:
   Pattern	_pattern;
   
 public:
-  MappedBomb::eBomb	get_type(void) const;
+  BombType::eBomb	get_type(void) const;
   
   void		initialize(void);
   void		draw(void);
   bool		explode() const;
-  Pattern	getPattern() const;
-  ExplodedBomb	createExplodedBomb(Pattern const&);
+  Pattern const&	getPattern() const;
+  ExplodedBomb*	createExplodedBomb(Pattern const&);
   void		update(gdl::GameClock const& clock, gdl::Input& input);
 };
+
+#else
+
+class Bomb;
 
 #endif
 
