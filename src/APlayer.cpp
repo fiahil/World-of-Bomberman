@@ -209,10 +209,11 @@ void		APlayer::UPFunction(gdl::GameClock const& clock)
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::UP])
     {
-      this->_timers[HumGame::UP] = current + 0.1;
+      this->_timers[HumGame::UP] = current + 0.15;
       this->_dir = Dir::NORTH;
       if (this->_map.canMoveAt(this->_pos._x, this->_pos._y - 1))
 	this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
+      this->_model.play("Take 001");
     }
 }
 
@@ -223,10 +224,11 @@ void		APlayer::LEFTFunction(gdl::GameClock const& clock)
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::LEFT])
     {
-      this->_timers[HumGame::LEFT] = current + 0.1;
+      this->_timers[HumGame::LEFT] = current + 0.15;
       this->_dir = Dir::WEST;
       if (this->_map.canMoveAt(this->_pos._x - 1, this->_pos._y))
 	this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
+      this->_model.play("Take 001");
     }
 }
 
@@ -237,10 +239,11 @@ void		APlayer::RIGHTFunction(gdl::GameClock const& clock)
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::RIGHT])
     {
-      this->_timers[HumGame::RIGHT] = current + 0.1;
+      this->_timers[HumGame::RIGHT] = current + 0.15;
       this->_dir = Dir::EAST;
       if (this->_map.canMoveAt(this->_pos._x + 1, this->_pos._y))
 	this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
+      this->_model.play("Take 001");
     }
 }
 
@@ -251,10 +254,11 @@ void		APlayer::DOWNFunction(gdl::GameClock const& clock)
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::DOWN])
     {
-      this->_timers[HumGame::DOWN] = current + 0.1;
+      this->_timers[HumGame::DOWN] = current + 0.15;
       this->_dir = Dir::SOUTH;
       if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
 	this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
+      this->_model.play("Take 001");
     }
 }
 
