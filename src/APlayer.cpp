@@ -255,7 +255,7 @@ Bomb*		APlayer::isAttack()
 {
   if (!this->_attack)
     return 0;
-  this->_attack(false);
+  this->_attack = false;
   return (new Bomb(this->_weapon, this->_pos, this->_id));
 }
 
