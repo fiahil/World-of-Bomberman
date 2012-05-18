@@ -7,7 +7,7 @@
 
 Human::eventSt Human::initStruct(gdl::Keys::Key key, HumGame::eAction action, actionFunc f) const
 {
-  Human::eventSt nwEl = { key, action, f , (-1.0)};
+  Human::eventSt nwEl = { key, action, f };
   return nwEl;
 }
 
@@ -43,15 +43,8 @@ void Human::play(gdl::GameClock const& clock, gdl::Input& key)
 {
   // for each ?
 
-  double current;
-
   for (size_t i = 0; i < this->_event[this->_mode]._nb; ++i) {
-    if (key.isKeyDown(this->_event[this->_mode]._event[i]._key) &&
-	((current = static_cast<double>(clock.getTotalGameTime())) >=
-	 this->_event[this->_mode]._event[i]._timer))
-      {
-	this->_event[this->_mode]._event[i]._timer = current + 0.2;
-	(this->*(_event[this->_mode]._event[i]._f))();
-      }
+    if (key.isKeyDown(this->_event[this->_mode]._event[i]._key))
+	(this->*(_event[this->_mode]._event[i]._f))(clock);
   }
 }

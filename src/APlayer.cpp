@@ -13,6 +13,8 @@ APlayer::APlayer(Map & map)
     _id(0),
     _teamId(0),
     _color(0),
+    _attack(false);
+    _timers(5, -1.0),
     _weapon(Bomb::NORMAL),
     _skin(Skin::NORMAL),
     _state(State::STATIC),
@@ -184,39 +186,76 @@ std::string const&	APlayer::getTeamName() const
   return this->_teamName;
 }
 
-void		APlayer::UPFunction()
+void		APlayer::UPFunction(gdl::GameClock const& clock)
 {
-  this->_dir = Dir::NORTH;
-  if (this->_map.canMoveAt(this->_pos._x, this->_pos._y - 1))
-    this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
+  double	current;
+
+  if (((current = static_cast<double>(clock.getTotalGameTime())) >= this->_timers[HumGame::UP]))
+    {
+      this->_timers[HumGame::UP] = current + 0.1;
+      this->_dir = Dir::NORTH;
+      if (this->_map.canMoveAt(this->_pos._x, this->_pos._y - 1))
+	this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
+    }
 }
 
-void		APlayer::LEFTFunction()
+void		APlayer::LEFTFunction(gdl::GameClock const& clock)
 {
-  this->_dir = Dir::WEST;
-  if (this->_map.canMoveAt(this->_pos._x - 1, this->_pos._y))
-    this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
+  double	current;
+
+  if (((current = static_cast<double>(clock.getTotalGameTime())) >= this->_timers[HumGame::LEFT]))
+    {
+      this->_timers[HumGame::LEFT] = current + 0.1;
+      this->_dir = Dir::WEST;
+      if (this->_map.canMoveAt(this->_pos._x - 1, this->_pos._y))
+	this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
+    }
 }
 
-void		APlayer::RIGHTFunction()
+void		APlayer::RIGHTFunction(gdl::GameClock const& clock)
 {
-  this->_dir = Dir::EAST;
-  if (this->_map.canMoveAt(this->_pos._x + 1, this->_pos._y))
-    this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
+   double	current;
+
+  if (((current = static_cast<double>(clock.getTotalGameTime())) >= this->_timers[HumGame::RIGHT]))
+    {
+      this->_timers[HumGame::RIGHT] = current + 0.1;
+      this->_dir = Dir::EAST;
+      if (this->_map.canMoveAt(this->_pos._x + 1, this->_pos._y))
+	this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
+    }
 }
 
-void		APlayer::DOWNFunction()
+void		APlayer::DOWNFunction(gdl::GameClock const& clock)
 {
-  this->_dir = Dir::SOUTH;
-  if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
-    this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
+   double	current;
+
+  if (((current = static_cast<double>(clock.getTotalGameTime())) >= this->_timers[HumGame::DOWN]))
+    {
+      this->_timers[HumGame::DOWN] = current + 0.1;
+      this->_dir = Dir::SOUTH;
+      if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
+	this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
+    }
 }
 
-void		APlayer::ATTACKFunction()
+void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
 {
+   double	current;
 
-
+  if (((current = static_cast<double>(clock.getTotalGameTime())) >= this->_timers[HumGame::ATTACK]))
+    {
+      this->_timers[HumGame::ATTACK] = current + 1.5;
+      this->_attack = true;
+    }
 }
+
+Bomb*		APlayer::isAttack()
+{
+  if (!this->_attack)
+    return 0;
+  return (new MappedBomb(this->_weapon, this->_pos, this->_id));
+}
+
 
 void		APlayer::NORTHFunction()
 {

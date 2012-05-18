@@ -36,9 +36,11 @@ protected:
   size_t		_teamId;
   size_t		_color;
   size_t		_type;
+  bool			_attack;
+  std::vector<double>   _timers;
   std::string		_name;
   std::string		_teamName;
-  Bomb::eBomb		_weapon;
+  BombType::eBomb		_weapon;
   Skin::eSkin		_skin;
   State::eState		_state;
   Dir::eDir		_dir;
@@ -49,11 +51,11 @@ protected:
   std::map<Bonus::eBonus, fBonus>	_bonusEffect;
 
 protected:
-  void UPFunction();
-  void LEFTFunction();
-  void RIGHTFunction();
-  void DOWNFunction();
-  void ATTACKFunction();
+  void UPFunction(gdl::GameClock const&);
+  void LEFTFunction(gdl::GameClock const&);
+  void RIGHTFunction(gdl::GameClock const&);
+  void DOWNFunction(gdl::GameClock const&);
+  void ATTACKFunction(gdl::GameClock const&);
   // cheat
   // pause/menu
   // virtual dans APlayer and specialise dans Human
@@ -76,6 +78,8 @@ public:
   virtual void	initialize(void);
   virtual void	draw(void);
   virtual void	update(gdl::GameClock const& clock, gdl::Input& input);
+
+  MappedBomb*	isAttack();
 
   int		getPv() const;
   Bomb::eBomb	getWeapon() const;
