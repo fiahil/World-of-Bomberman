@@ -29,9 +29,9 @@ public:
   bool				_cheat;
   GameMode::eGameMode		_gameMode;
   std::vector<APlayer *>	_players;
-  std::list<Bomb>		_bombs;
+  std::list<Bomb*>		_bombs;
   //std::list<Bonus>		_bonus;
-  std::list<Bomb::ExplodedBomb>	_explodedBombs;
+  std::list<ExplodedBomb*>	_explodedBombs;
 
 public:
   void		setMap(Map *);

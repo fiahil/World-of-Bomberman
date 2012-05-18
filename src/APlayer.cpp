@@ -13,7 +13,7 @@ APlayer::APlayer(Map & map)
     _id(0),
     _teamId(0),
     _color(0),
-    _weapon(MappedBomb::NORMAL),
+    _weapon(BombType::NORMAL),
     _skin(Skin::NORMAL),
     _state(State::STATIC),
     _dir(Dir::SOUTH),
@@ -33,14 +33,6 @@ APlayer::APlayer(Map & map)
 APlayer::~APlayer()
 {
 }
-
-/*
- * void		APlayer::takeDamage(Point origin, Pattern pattern)
- * {
- *   // TODO : implement
- * }
- *
- */
 
 void		APlayer::initialize(void)
 {
@@ -73,6 +65,11 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
   this->_indic.setPos(this->_pos._x, this->_pos._y);
 }
 
+void		APlayer::takeDamage(Pattern const&)
+{
+
+}
+
 void		APlayer::setPv(int pv)
 {
   this->_pv = pv;
@@ -83,12 +80,12 @@ int		APlayer::getPv() const
   return this->_pv;
 }
 
-void		APlayer::setWeapon(MappedBomb::eBomb weapon)
+void		APlayer::setWeapon(BombType::eBomb weapon)
 {
   this->_weapon = weapon;
 }
 
-MappedBomb::eBomb	APlayer::getWeapon() const
+BombType::eBomb	APlayer::getWeapon() const
 {
   return this->_weapon;
 }
