@@ -190,7 +190,8 @@ void		APlayer::UPFunction(gdl::GameClock const& clock)
 {
   double	current;
 
-  if (((current = static_cast<double>(clock.getTotalGameTime())) >= this->_timers[HumGame::UP]))
+  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
+      this->_timers[HumGame::UP])
     {
       this->_timers[HumGame::UP] = current + 0.1;
       this->_dir = Dir::NORTH;
@@ -203,7 +204,8 @@ void		APlayer::LEFTFunction(gdl::GameClock const& clock)
 {
   double	current;
 
-  if (((current = static_cast<double>(clock.getTotalGameTime())) >= this->_timers[HumGame::LEFT]))
+  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
+      this->_timers[HumGame::LEFT])
     {
       this->_timers[HumGame::LEFT] = current + 0.1;
       this->_dir = Dir::WEST;
@@ -216,7 +218,8 @@ void		APlayer::RIGHTFunction(gdl::GameClock const& clock)
 {
    double	current;
 
-  if (((current = static_cast<double>(clock.getTotalGameTime())) >= this->_timers[HumGame::RIGHT]))
+  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
+      this->_timers[HumGame::RIGHT])
     {
       this->_timers[HumGame::RIGHT] = current + 0.1;
       this->_dir = Dir::EAST;
@@ -229,7 +232,8 @@ void		APlayer::DOWNFunction(gdl::GameClock const& clock)
 {
    double	current;
 
-  if (((current = static_cast<double>(clock.getTotalGameTime())) >= this->_timers[HumGame::DOWN]))
+  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
+      this->_timers[HumGame::DOWN])
     {
       this->_timers[HumGame::DOWN] = current + 0.1;
       this->_dir = Dir::SOUTH;
@@ -242,7 +246,8 @@ void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
 {
    double	current;
 
-  if (((current = static_cast<double>(clock.getTotalGameTime())) >= this->_timers[HumGame::ATTACK]))
+  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
+      this->_timers[HumGame::ATTACK])
     {
       this->_timers[HumGame::ATTACK] = current + 1.5;
       this->_attack = true;

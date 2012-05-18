@@ -45,6 +45,6 @@ void Human::play(gdl::GameClock const& clock, gdl::Input& key)
 
   for (size_t i = 0; i < this->_event[this->_mode]._nb; ++i) {
     if (key.isKeyDown(this->_event[this->_mode]._event[i]._key))
-	(this->*(_event[this->_mode]._event[i]._f))(clock);
+      (this->*(_event[this->_mode]._event[i]._f))(clock);
   }
 }
