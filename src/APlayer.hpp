@@ -27,8 +27,8 @@ private:
   /*
    * TODO : IMPLEMENT FUNCTION
    */
-  typedef void	(*fBomb)();
-  typedef void	(*fBonus)();
+  typedef void	(APlayer::*fBomb)();
+  typedef void	(APlayer::*fBonus)();
 
 protected:
   Map &			_map;
@@ -48,7 +48,10 @@ protected:
   gdl::Model		_model;
   Pyramid		_indic;
 
-  std::map<BombType::eBomb, fBomb>		_bombEffect;
+private:
+  void	normalBombEffect();
+  void	megaBombEffect();
+  std::map<BombType::eBomb, fBomb>	_bombEffect;
   std::map<Bonus::eBonus, fBonus>	_bonusEffect;
 
 protected:
@@ -78,7 +81,7 @@ public:
 
   Bomb*	isAttack();
 
-  void		takeDamage(Pattern const&);
+  void		takeDamage(Pattern const&, BombType::eBomb);
   int		getPv() const;
   BombType::eBomb	getWeapon() const;
   Skin::eSkin	getSkin() const;

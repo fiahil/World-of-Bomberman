@@ -65,7 +65,7 @@ void		MyGame::update(void)
 	  this->_match._map->explode((*it)->getPatternReal(), (*it)->getPatternFinal());
 	  (*it)->update(this->_clock, this->_input);
 	  for (unsigned int i = 0; i < this->_match._players.size(); ++i)
-	    this->_match._players[i]->takeDamage((*it)->getPatternReal());
+	    this->_match._players[i]->takeDamage((*it)->getPatternReal(), (*it)->getType());
 	  ++it;
 	}
     }

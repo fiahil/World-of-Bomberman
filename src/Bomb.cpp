@@ -97,7 +97,7 @@ ExplodedBomb*	Bomb::createExplodedBomb()
   tmp._coefS = 0;
   tmp._coefW = 0;
   tmp._coefE = 0;
-  ret = new ExplodedBomb(this->_pos, tmp, this->_pattern, this->_player, 0.2f);
+  ret = new ExplodedBomb(this->_type, this->_pos, tmp, this->_pattern, this->_player, 0.2f);
   ret->initialize();
   return ret;
 }
