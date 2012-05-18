@@ -42,7 +42,7 @@ void		MyGame::update(void)
     {
       if ((*it)->explode())
 	{
-	  this->_match._explodedBombs.push_back((*it)->createExplodedBomb((*it)->getPattern()));
+	  this->_match._explodedBombs.push_back((*it)->createExplodedBomb());
 	  delete (*it);
 	  it = this->_match._bombs.erase(it);
 	}
