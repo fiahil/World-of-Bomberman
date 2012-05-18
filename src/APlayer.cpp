@@ -42,7 +42,7 @@ void		APlayer::initialize(void)
 {
   std::vector<std::string>	refModel(Skin::LAST, "");
 
-  refModel[Skin::NORMAL] = "models/fifi.fbx";
+  refModel[Skin::NORMAL] = "models/Man.fbx";
   this->_model = gdl::Model::load(refModel[this->_skin]);
   this->_model.infos();
 }
@@ -52,8 +52,7 @@ void		APlayer::draw(void)
   glPushMatrix();
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y - 1.0f, this->_pos._pos.z);
   (this->*_rotFuncMap[this->_dir])();
-  //  glScalef(0.005f, 0.005f, 0.005f);
-  glScalef(0.040f, 0.040f, 0.040f);
+  glScalef(0.05f, 0.05f, 0.05f);
   this->_model.draw();
   glPopMatrix();
   glPushMatrix();
