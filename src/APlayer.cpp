@@ -46,8 +46,9 @@ void		APlayer::initialize(void)
 {
   std::vector<std::string>	refModel(Skin::LAST, "");
 
-  refModel[Skin::NORMAL] = "models/marvin.fbx";
+  refModel[Skin::NORMAL] = "models/pf.fbx";
   this->_model = gdl::Model::load(refModel[this->_skin]);
+  this->_model.infos();
 }
 
 void		APlayer::draw(void)
