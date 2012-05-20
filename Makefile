@@ -32,7 +32,8 @@ SRC		= ./src/main.cpp	\
 		./src/ContentColor.cpp	\
 		./src/Bomb.cpp		\
 		./src/ExplodedBomb.cpp	\
-		./src/Tag.cpp
+		./src/Tag.cpp		\
+		./src/DirWalker.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 

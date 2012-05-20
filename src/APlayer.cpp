@@ -53,6 +53,7 @@ void		APlayer::draw(void)
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y - 1.0f, this->_pos._pos.z);
   (this->*_rotFuncMap[this->_dir])();
   glScalef(0.05f, 0.05f, 0.05f);
+  //glScalef(2.0f, 2.0f, 2.0f);
   this->_model.draw();
   glPopMatrix();
   glPushMatrix();
