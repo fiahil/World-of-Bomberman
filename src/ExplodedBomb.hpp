@@ -30,6 +30,7 @@ public:
   bool	isEOE() const;
   BombType::eBomb	getType() const;
   Pattern&	getPatternReal();
+  Pattern const&	getPatternReal() const;
   Pattern&	getPatternFinal();
 };
 

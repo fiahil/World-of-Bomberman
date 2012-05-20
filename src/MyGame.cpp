@@ -64,8 +64,18 @@ void		MyGame::update(void)
 	{
 	  this->_match._map->explode((*it)->getPatternReal(), (*it)->getPatternFinal());
 	  (*it)->update(this->_clock, this->_input);
-	  for (unsigned int i = 0; i < this->_match._players.size(); ++i)
-	    this->_match._players[i]->takeDamage((*it)->getPatternReal(), (*it)->getType());
+	  for (std::vector<APlayer*>::iterator i = this->_match._players.begin();
+	       i != this->_match._players.end();)
+	    {
+	      (*i)->takeDamage((*it));
+	      if ((*i)->getPv() == 0)
+		{
+		  delete (*i);
+		  i = this->_match._players.erase(i);
+		}
+	      else
+		++i;
+	    }
 	  ++it;
 	}
     }
