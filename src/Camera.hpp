@@ -15,18 +15,27 @@ class Camera
 {
 public:
   Camera();
-  Camera(int, int,  APlayer const*,  APlayer const* pl2 = 0);
-  ~Camera();
+  Camera(int, int,  APlayer const* = 0, APlayer const* = 0);
+  virtual ~Camera();
 
 private:
   int			_height;
   int			_width;
+  int			_h;
+  int			_w;
+  Vector		_pos;
+  Vector		_target;
   APlayer const*	_pl1;
   APlayer const*	_pl2;
 
+private:
+  void	draw() const;
+
 public:
-  void	initialize();
-  void	update(gdl::GameClock const&, gdl::Input&);
+  void	setPos(double, double, double);
+  void	setSplitScreenLeft();
+  void	setSplitScreenRight();
+  void	setNormalScreen();
 };
 
 #else

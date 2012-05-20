@@ -11,7 +11,7 @@
 
 MenuManager::MenuManager(int w, int h)
   : _curMenu(TokenMenu::MAINMENU),
-    _camera(w, h, 0, 0)
+    _camera(w, h, 0)
 {
   std::cout << "Creation Menu Manager" << std::endl;
   buildMainMenu();
