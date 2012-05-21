@@ -6,7 +6,9 @@
 #if !defined(__Bomberman_Human_h)
 #define __Bomberman_Human_h
 
+#include <Image.hpp>
 #include "APlayer.hpp"
+#include "Surface.hpp"
 #include "Config.hpp"
 #include "enum.hpp"
 
@@ -16,6 +18,7 @@ public:
   Human(Map &, const Config&);//, std::vector<size_t>&, std::vector<size_t> const&);
   virtual ~Human();
   virtual void play(gdl::GameClock const&, gdl::Input&);
+  virtual void drawHUD(std::vector<gdl::Image>&, size_t);
 
 private:
 
@@ -40,6 +43,7 @@ private:
   inputMap		_event;
 
 private:
+  std::vector<Surface*>	_HUD;
   // std::vector<size_t>&	_achievements;
   // std::vector<size_t> const	_skill;
 };

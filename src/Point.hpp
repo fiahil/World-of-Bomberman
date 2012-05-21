@@ -12,6 +12,7 @@ class	Point
 {
 public:
   Point(double, int, int);
+  Point(double, double, double); // Pour MenuManager
   ~Point();
 
 public:
@@ -22,6 +23,7 @@ public:
 
 public:
   void		setPos(int, int);
+  void		setPos(double, double, double);
   void		calcRealpos(void);
 };
 

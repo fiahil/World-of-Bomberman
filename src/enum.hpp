@@ -121,5 +121,17 @@ struct Sprite
     };
 };
 
+struct HUD
+{
+  enum eHUD {
+    LIFE_BAR,
+    SHIELD,
+    POWER,
+    LUST,
+    BOMB_OK,
+    BOMB_KO,
+    LAST
+  };
+};
 
 #endif

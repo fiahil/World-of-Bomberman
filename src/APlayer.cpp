@@ -64,30 +64,13 @@ void		APlayer::draw(void)
   glPopMatrix();
 }
 
-struct HUD
+void		APlayer::drawHUD(std::vector<gdl::Image>&, size_t)
 {
-
-  enum eHUD {
-    LIFE_ELEM,
-    LIFE_BAR,
-    SHIELD,
-    POWER,
-    LUST,
-    BOMB_OK,
-    BOMB_KO
-  };
-
-};
-
-// void	APlayer::drawHUD(std::vector<gdl::Image>& image, size_t height)
-// {
-//   if (this->_canAttack)
-//     std::cout << "Bomb OK !!" << std::endl;
-//   else
-//     std::cout << "." << std::endl;
-
-
-// }
+  if (this->_canAttack)
+    std::cout << "Bomb OK !!" << std::endl;
+  else
+    std::cout << "." << std::endl;
+}
 
 void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {

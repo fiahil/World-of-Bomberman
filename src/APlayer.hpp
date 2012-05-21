@@ -8,6 +8,7 @@
 
 #include <map>
 #include <string>
+#include <Image.hpp>
 #include "Bomb.hpp"
 #include "Map.hpp"
 #include "Model.hpp"
@@ -80,6 +81,7 @@ public:
   virtual void	initialize(void);
   virtual void	draw(void);
   virtual void	update(gdl::GameClock const& clock, gdl::Input& input);
+  virtual void	drawHUD(std::vector<gdl::Image>&, size_t);
 
   Bomb*	isAttack();
 

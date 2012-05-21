@@ -13,7 +13,7 @@ Human::eventSt Human::initStruct(gdl::Keys::Key key, HumGame::eAction action, ac
 
 
 Human::Human(Map & map, const Config& conf)//, std::vector<size_t>&, std::vector<size_t> const&)
-  : APlayer(map), _mode(Input::GAME)
+  : APlayer(map), _mode(Input::GAME), _HUD(HUD::LAST, 0)
 {
   this->_event[Input::GAME]._freq = 2; // TODO TMP
   this->_event[Input::GAME]._nb = 5;
@@ -47,4 +47,13 @@ void Human::play(gdl::GameClock const& clock, gdl::Input& key)
     if (key.isKeyDown(this->_event[this->_mode]._event[i]._key))
       (this->*(_event[this->_mode]._event[i]._f))(clock);
   }
+}
+
+void Human::drawHUD(std::vector<gdl::Image>& img, size_t)
+{
+  if (!this->_HUD[0])
+    {
+      this->_HUD[HUD::LIFE_BAR] = new Surface(80.0f, 80.0f, 10.0f, 10.0f, img[HUD::BOMB_OK]);
+    }
+  this->_HUD[HUD::LIFE_BAR]->draw();
 }

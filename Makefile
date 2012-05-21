@@ -5,12 +5,12 @@
 ## Login   <lemonn_v@epitech.net>
 ## 
 ## Started on  Mon Apr 23 18:20:16 2012 vincent lemonnier
-## Last update Fri May 18 13:47:55 2012 vincent lemonnier
+## Last update Mon May 21 16:55:15 2012 vincent lemonnier
 ##
 
 NAME		= bomberman
 
-SRC		= ./main.cpp	\
+SRC		= ./src/main.cpp	\
 		./src/Camera.cpp	\
 		./src/Menu.cpp		\
 		./src/MyGame.cpp	\
@@ -18,6 +18,7 @@ SRC		= ./main.cpp	\
 		./src/Point.cpp		\
 		./src/Vector.cpp	\
 		./src/Cube.cpp		\
+		./src/Surface.cpp	\
 		./src/Plane.cpp		\
 		./src/Map.cpp		\
 		./src/APlayer.cpp	\

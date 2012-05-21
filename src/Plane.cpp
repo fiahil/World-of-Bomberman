@@ -4,7 +4,6 @@
  */
 
 #include <GL/gl.h>
-#include <iostream>
 #include "Plane.hpp"
 
 Plane::Plane(double w, double h, Point const& p, gdl::Image& img)
