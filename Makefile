@@ -43,7 +43,7 @@ INCLUDES	= -I./lib/libgdl_gl-2012.3/include -I./src -I./Serializer
 
 CXX		= g++
 
-CXXFLAGS	= -Wall -Wextra $(INCLUDES)
+CXXFLAGS	= -Wall -Wextra -O3 -g $(INCLUDES)
 
 LDFLAGS		= -lGL -lGLU -lgdl_gl -lserial			\
 		-L./lib/libgdl_gl-2012.3/lib -L./lib/libserial	\
@@ -51,13 +51,13 @@ LDFLAGS		= -lGL -lGLU -lgdl_gl -lserial			\
 
 RM		= rm -rf
 
+all:		gen $(NAME)
+
 $(NAME):	$(OBJ)
 		$(CXX) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 gen:
 		make all -C ./Serializer
-
-all:		gen $(NAME)
 
 clean:
 		$(RM) $(OBJ)

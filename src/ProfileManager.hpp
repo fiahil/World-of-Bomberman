@@ -15,6 +15,7 @@ class ProfileManager
 
   public:
   static bool		isHere(size_t);
+  static size_t		getMax(void);
   static Profile*	getProfile(size_t);
   static void		setProfile(size_t, Profile const&);
 };
