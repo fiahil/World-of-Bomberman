@@ -21,7 +21,7 @@ ExplodedBomb::~ExplodedBomb()
 
 void	ExplodedBomb::initialize()
 {
-  this->_model = gdl::Model::load("models/normalBomb.fbx");
+  this->_model = gdl::Model::load("models/tuskarr.fbx");
 }
 
 void	ExplodedBomb::update(gdl::GameClock const& clock, gdl::Input&)
@@ -62,7 +62,8 @@ void	ExplodedBomb::drawPattern(Point const& pos)
 {
   glPushMatrix();
   glTranslatef(pos._pos.x, pos._pos.y, pos._pos.z);
-  glScalef(0.005f, 0.005f, 0.005f);
+  glScalef(0.5f, 0.5f, 0.5f);
+  // glScalef(0.005f, 0.005f, 0.005f);
   this->_model.draw();
   glPopMatrix();
 }

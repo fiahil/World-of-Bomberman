@@ -38,6 +38,7 @@ protected:
   size_t		_color;
   size_t		_type;
   bool			_attack;
+  bool			_canAttack;
   std::vector<double>   _timers;
   std::string		_name;
   std::string		_teamName;

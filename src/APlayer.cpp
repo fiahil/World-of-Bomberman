@@ -14,6 +14,7 @@ APlayer::APlayer(Map & map)
     _teamId(0),
     _color(0),
     _attack(false),
+    _canAttack(true),
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
     _skin(Skin::NORMAL),
@@ -54,6 +55,7 @@ void		APlayer::draw(void)
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y - 1.0f, this->_pos._pos.z);
   (this->*_rotFuncMap[this->_dir])();
   glScalef(0.05f, 0.05f, 0.05f);
+ // glScalef(1.5f, 1.5f, 1.5f);
   this->_model.draw();
   glPopMatrix();
   glPushMatrix();
@@ -62,11 +64,41 @@ void		APlayer::draw(void)
   glPopMatrix();
 }
 
+struct HUD
+{
+
+  enum eHUD {
+    LIFE_ELEM,
+    LIFE_BAR,
+    SHIELD,
+    POWER,
+    LUST,
+    BOMB_OK,
+    BOMB_KO
+  };
+
+};
+
+void	APlayer::drawHUD(std::vector<gdl::Image>& image, size_t height)
+{
+  if (this->_canAttack)
+    std::cout << "Bomb OK !!" << std::endl;
+  else
+    std::cout << "." << std::endl;
+
+
+}
+
 void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   this->play(clock, input);
   this->_model.update(clock);
   this->_indic.setPos(this->_pos._x, this->_pos._y);
+  if ((static_cast<double>(clock.getTotalGameTime())) >=
+      this->_timers[HumGame::ATTACK])
+    this->_canAttack = true;
+  else
+    this->_canAttack = false;
 }
 
 void		APlayer::normalBombEffect(ExplodedBomb const* cur)
@@ -280,7 +312,7 @@ void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::ATTACK])
     {
-      this->_timers[HumGame::ATTACK] = current + 1.5;
+      this->_timers[HumGame::ATTACK] = current + 3;
       this->_attack = true;
     }
 }
