@@ -33,7 +33,8 @@ SRC		= ./src/main.cpp	\
 		./src/Bomb.cpp		\
 		./src/ExplodedBomb.cpp	\
 		./src/Tag.cpp		\
-		./src/DirWalker.cpp
+		./src/DirWalker.cpp	\
+		./src/ProfileManager.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 
@@ -41,7 +42,7 @@ INCLUDES	= -I./lib/libgdl_gl-2012.3/include
 
 CXX		= g++
 
-CXXFLAGS	= -Wall -Wextra -Werror $(INCLUDES)
+CXXFLAGS	= -Wall -Wextra $(INCLUDES)
 
 LDFLAGS		= -lGL -lGLU -L./lib/libgdl_gl-2012.3/lib -lgdl_gl -Wl,--rpath=./lib/libgdl_gl-2012.3/lib,--rpath=./lib/SFML-1.6/lib
 

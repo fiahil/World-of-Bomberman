@@ -57,12 +57,6 @@ DirWalker&	DirWalker::operator++()
   return *this;
 }
 
-DirWalker&	DirWalker::operator++(int)
-{
-  this->next();
-  return *this;
-}
-
 std::string*	DirWalker::operator*() const
 {
   return this->current();

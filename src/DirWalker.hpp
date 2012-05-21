@@ -7,6 +7,7 @@
 #define __DIRWALKER_HPP__
 
 #include <string>
+#include <dirent.h>
 #include <sys/types.h>
 
 class DirWalker
@@ -28,7 +29,6 @@ class DirWalker
   void		next();
   void		clean();
   bool		isEnd() const;
-  DirWalker&	operator++(int);
   DirWalker&	operator++();
   std::string*	operator*() const;
 };
