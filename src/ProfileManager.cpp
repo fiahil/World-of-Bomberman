@@ -53,6 +53,8 @@ Profile*	ProfileManager::getProfile(size_t id)
       ranger.clean();
       return profile;
     }
+    ranger.clean();
+    ++ranger;
   }
   return 0;
 }
