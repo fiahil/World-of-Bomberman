@@ -51,13 +51,13 @@ LDFLAGS		= -lGL -lGLU -lgdl_gl -lserial			\
 
 RM		= rm -rf
 
+all:		gen $(NAME)
+
 $(NAME):	$(OBJ)
 		$(CXX) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 gen:
 		make all -C ./Serializer
-
-all:		gen $(NAME)
 
 clean:
 		$(RM) $(OBJ)
