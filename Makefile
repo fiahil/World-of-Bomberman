@@ -5,7 +5,7 @@
 ## Login   <lemonn_v@epitech.net>
 ## 
 ## Started on  Mon Apr 23 18:20:16 2012 vincent lemonnier
-## Last update Mon May 21 16:50:44 2012 vincent lemonnier
+## Last update Mon May 21 16:55:15 2012 vincent lemonnier
 ##
 
 NAME		= bomberman
@@ -33,29 +33,40 @@ SRC		= ./src/main.cpp	\
 		./src/ContentColor.cpp	\
 		./src/Bomb.cpp		\
 		./src/ExplodedBomb.cpp	\
-		./src/Tag.cpp
+		./src/Tag.cpp		\
+		./src/DirWalker.cpp	\
+		./src/ProfileManager.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 
-INCLUDES	= -I./lib/libgdl_gl-2012.3/include
+INCLUDES	= -I./lib/libgdl_gl-2012.3/include -I./src -I./Serializer
 
 CXX		= g++
 
-CXXFLAGS	= -Wall -Wextra -Werror $(INCLUDES)
+CXXFLAGS	= -Wall -Wextra $(INCLUDES)
 
-LDFLAGS		= -lGL -lGLU -L./lib/libgdl_gl-2012.3/lib -lgdl_gl -Wl,--rpath=./lib/libgdl_gl-2012.3/lib,--rpath=./lib/SFML-1.6/lib
+LDFLAGS		= -lGL -lGLU -lgdl_gl -lserial			\
+		-L./lib/libgdl_gl-2012.3/lib -L./lib/libserial	\
+		-Wl,--rpath=./lib/libgdl_gl-2012.3/lib,--rpath=./lib/SFML-1.6/lib
 
 RM		= rm -rf
 
 $(NAME):	$(OBJ)
 		$(CXX) -o $(NAME) $(OBJ) $(LDFLAGS)
 
-all:		$(NAME)
+gen:
+		make all -C ./Serializer
+
+all:		gen $(NAME)
 
 clean:
 		$(RM) $(OBJ)
+		make clean -C ./Serializer
 
 fclean:		clean
 		$(RM) $(NAME)
 
 re:		fclean all
+
+libclean:
+		make fclean -C ./Serializer

@@ -55,7 +55,7 @@ void		APlayer::draw(void)
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y - 1.0f, this->_pos._pos.z);
   (this->*_rotFuncMap[this->_dir])();
   glScalef(0.05f, 0.05f, 0.05f);
- // glScalef(1.5f, 1.5f, 1.5f);
+  //glScalef(2.0f, 2.0f, 2.0f);
   this->_model.draw();
   glPopMatrix();
   glPushMatrix();
@@ -64,7 +64,7 @@ void		APlayer::draw(void)
   glPopMatrix();
 }
 
-void	APlayer::drawHUD(std::vector<gdl::Image>&, size_t)
+void		APlayer::drawHUD(std::vector<gdl::Image>&, size_t)
 {
   if (this->_canAttack)
     std::cout << "Bomb OK !!" << std::endl;
