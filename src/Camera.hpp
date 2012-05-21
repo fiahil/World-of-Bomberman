@@ -36,6 +36,7 @@ public:
   void	setSplitScreenLeft();
   void	setSplitScreenRight();
   void	setNormalScreen();
+  void	setViewHUD() const;
 };
 
 #else

@@ -100,3 +100,14 @@ void		Camera::setNormalScreen()
       this->draw();
   }
 }
+
+void		Camera::setViewHUD() const
+{
+  glMatrixMode(GL_PROJECTION);
+  glPushMatrix();
+  glLoadIdentity();
+  gluOrtho2D(0, this->_w, 0, this->_h);
+  glScalef(1, -1, 1);
+  glTranslatef(0, -this->_h, 0);
+  glMatrixMode(GL_MODELVIEW);
+}
