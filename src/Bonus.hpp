@@ -6,23 +6,23 @@
 #if !defined(__Bomberman_Bonus_h)
 #define __Bomberman_Bonus_h
 
-#include "AObj.h"
+#include "AObj.hpp"
 
 class Bonus : public AObj
 {
 public:
-   Bonus(eBomb t);
-   ~Bonus();
-
+  Bonus(eBomb t);
+  ~Bonus();
+  
 private:
-   eBonus _type;
-
+  eBonus _type;
+  
 public:
-   eBonus	get_type(void) const;
-
-   void		initialize(void);
-   void		draw(gdl::GameClock const& clock, gdl::Input& input);
-   void		update(void);
+  eBonus	get_type(void) const;
+  
+  void		initialize(void);
+  void		draw(gdl::GameClock const&, gdl::Input&);
+  void		update(void);
 };
 
 #endif

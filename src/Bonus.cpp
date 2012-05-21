@@ -6,31 +6,27 @@
 #include "Bonus.hpp"
 
 Bonus::Bonus(eBomb t)
+  : _type(t)
 {
-  // TODO : implement
 }
 
 Bonus::~Bonus()
 {
-  // TODO : implement
 }
 
 eBonus		Bonus::get_type(void) const
 {
-  return _type;
+  return this->_type;
 }
 
 void		Bonus::initialize(void)
 {
-  // TODO : implement
 }
 
 void		Bonus::draw(gdl::GameClock const& clock, gdl::Input& input)
 {
-  // TODO : implement
 }
 
 void		Bonus::update(void)
 {
-  // TODO : implement
 }
