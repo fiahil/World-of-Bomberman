@@ -22,6 +22,7 @@
 #include <cassert>
 #include "APlayer.hpp"
 #include "AI.hpp"
+#include "enum.hpp"
 #include "Human.hpp"
 #include "Unpackman.hpp"
 
@@ -135,7 +136,7 @@ players
   p->setSkin(static_cast<Skin::eSkin>($13));
   p->setState(static_cast<State::eState>($15));
   p->setDir(static_cast<Dir::eDir>($17));
-  p->setWeapon(static_cast<Bomb::eBomb>($19));
+  p->setWeapon(static_cast<BombType::eBomb>($19));
   p->setPv($25);
   p->setType($9);
   p->setPos($21, $23);

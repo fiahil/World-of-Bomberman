@@ -34,7 +34,7 @@ void		MyGame::initialize(void)
 void		MyGame::update(void)
 {
   Bomb*	newBomb;
-  
+
   this->_match._map->update(this->_clock, this->_input);
   for (std::list<Bomb*>::iterator it = this->_match._bombs.begin(); it != this->_match._bombs.end();)
     {

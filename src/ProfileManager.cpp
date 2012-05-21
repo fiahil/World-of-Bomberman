@@ -3,8 +3,11 @@
  * 21 Mai 2012
  */
 
+#include <fstream>
 #include <sstream>
+#include "Unpackman.hpp"
 #include "Packman.hpp"
+#include "Scanner.hpp"
 #include "DirWalker.hpp"
 #include "ProfileManager.hpp"
 
@@ -18,7 +21,7 @@ bool		ProfileManager::isHere(size_t id)
 
   while (!ranger.isEnd())
   {
-    if (*ranger.current() == ss.str())
+    if (ranger.current() != 0 && *ranger.current() == ss.str())
     {
       ranger.clean();
       return true;
@@ -34,7 +37,24 @@ Profile*	ProfileManager::getProfile(size_t id)
   std::stringstream	ss;
   ss << id;
   DirWalker		ranger("./Ressources/profiles/");
-  return new Profile();
+
+  while (!ranger.isEnd())
+  {
+    if (ranger.current() != 0 && *ranger.current() == ss.str())
+    {
+      Profile*			profile = new Profile();
+      Match			ma;
+      std::ifstream		input(ss.str().c_str());
+      Serializer::Unpackman	unpackman(*profile, ma);
+      Serializer::Scanner	scanner(input);
+      Serializer::Loader	loader(scanner, unpackman);
+
+      loader.parse();
+      ranger.clean();
+      return profile;
+    }
+  }
+  return 0;
 }
 
 void		ProfileManager::setProfile(size_t id, Profile const& p)

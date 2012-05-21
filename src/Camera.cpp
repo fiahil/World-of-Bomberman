@@ -51,7 +51,7 @@ void		Camera::setPos(double x, double y, double z)
   this->_pos.z = z;
   this->_target.x = x;
   this->_target.y = 0.0f;
-  this->_target.z = z;
+  this->_target.z = z + 0.1f;
   this->_w = this->_width;
   this->_h = this->_height;
   this->draw();
@@ -99,4 +99,15 @@ void		Camera::setNormalScreen()
       this->_target = this->_pl2->getPos()._pos;
       this->draw();
   }
+}
+
+void		Camera::setViewHUD() const
+{
+  glMatrixMode(GL_PROJECTION);
+  glPushMatrix();
+  glLoadIdentity();
+  gluOrtho2D(0, this->_w, 0, this->_h);
+  glScalef(1, -1, 1);
+  glTranslatef(0, -this->_h, 0);
+  glMatrixMode(GL_MODELVIEW);
 }

@@ -10,7 +10,7 @@
 
 NAME		= bomberman
 
-SRC		= ./src/main.cpp	\
+SRC		= ./main.cpp	\
 		./src/Camera.cpp	\
 		./src/Menu.cpp		\
 		./src/MyGame.cpp	\
@@ -38,25 +38,32 @@ SRC		= ./src/main.cpp	\
 
 OBJ		= $(SRC:.cpp=.o)
 
-INCLUDES	= -I./lib/libgdl_gl-2012.3/include
+INCLUDES	= -I./lib/libgdl_gl-2012.3/include -I./src -I./Serializer
 
 CXX		= g++
 
 CXXFLAGS	= -Wall -Wextra $(INCLUDES)
 
-LDFLAGS		= -lGL -lGLU -L./lib/libgdl_gl-2012.3/lib -lgdl_gl -Wl,--rpath=./lib/libgdl_gl-2012.3/lib,--rpath=./lib/SFML-1.6/lib
+LDFLAGS		= -lGL -lGLU -lgdl_gl -lserial			\
+		-L./lib/libgdl_gl-2012.3/lib -L./lib/libserial	\
+		-Wl,--rpath=./lib/libgdl_gl-2012.3/lib,--rpath=./lib/SFML-1.6/lib
 
 RM		= rm -rf
 
 $(NAME):	$(OBJ)
+		make all -C ./Serializer
 		$(CXX) -o $(NAME) $(OBJ) $(LDFLAGS)
 
 all:		$(NAME)
 
 clean:
 		$(RM) $(OBJ)
+		make clean -C ./Serializer
 
 fclean:		clean
 		$(RM) $(NAME)
 
 re:		fclean all
+
+libclean:
+		make fclean -C ./Serializer
