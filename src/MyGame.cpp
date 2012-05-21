@@ -17,7 +17,7 @@ MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
     _input(input),
     _match(match),
     _camera(800, 600, pl1, pl2),
-    _HUD(HUD::LAST)
+    _HUD(HUD::LAST + 1)
 {
 }
 
@@ -36,6 +36,7 @@ void		MyGame::initialize(void)
   this->_HUD[HUD::LUST] = gdl::Image::load("textures/fury.png");
   this->_HUD[HUD::BOMB_OK] = gdl::Image::load("textures/bombActive.png");
   this->_HUD[HUD::BOMB_KO] = gdl::Image::load("textures/bombInactive.png");
+  this->_HUD[HUD::LAST] = gdl::Image::load("textures/pv.png");
 }
 
 void		MyGame::update(void)
@@ -119,6 +120,8 @@ void		MyGame::draw(void)
     (*it)->draw();
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->draw();
+  this->_camera.setViewHUD();
+  this->_match._players[1]->drawHUD(this->_HUD, 600);
 }
 
 void		MyGame::unload(void)

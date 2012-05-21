@@ -13,7 +13,7 @@ SRCXX	=	Loader.tab.cpp		\
 
 OBJXX	=	$(SRCXX:.cpp=.o)
 
-CXXFLAGS=	-Wall -Wextra -O3 -I./ -I../src -I../lib/libgdl_gl-2012.3/include
+CXXFLAGS=	-Wall -Wextra -O3 -g -I./ -I../src -I../lib/libgdl_gl-2012.3/include
 
 LDFLAGS =
 
