@@ -4,8 +4,8 @@
 
 struct Pattern
 {
-  size_t	_x;
-  size_t	_y;
+  int		_x;
+  int		_y;
   size_t	_coefN;
   size_t	_coefS;
   size_t	_coefW;

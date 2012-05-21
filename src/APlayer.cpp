@@ -109,11 +109,13 @@ void		APlayer::megaBombEffect(ExplodedBomb const* cur)
 void		APlayer::takeDamage(ExplodedBomb const* cur)
 {
   Pattern	pattern = cur->getPatternReal();
-
-  if (this->_pos._x >= (pattern._x - pattern._coefW) &&
-      this->_pos._x <= (pattern._x + pattern._coefE) &&
-      this->_pos._y >= (pattern._y - pattern._coefN) &&
-      this->_pos._y <= (pattern._y + pattern._coefS))
+  
+  if ((this->_pos._x >= (pattern._x - pattern._coefW) &&
+       this->_pos._x <= (pattern._x + pattern._coefE) &&
+       this->_pos._y == pattern._y) ||
+      (this->_pos._y >= (pattern._y - pattern._coefN) &&
+       this->_pos._y <= (pattern._y + pattern._coefS) &&
+       this->_pos._x == pattern._x))
     (this->*_bombEffect[cur->getType()])(cur);
 }
 
