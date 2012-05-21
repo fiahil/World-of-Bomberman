@@ -51,7 +51,7 @@ void		Camera::setPos(double x, double y, double z)
   this->_pos.z = z;
   this->_target.x = x;
   this->_target.y = 0.0f;
-  this->_target.z = z;
+  this->_target.z = z + 0.1f;
   this->_w = this->_width;
   this->_h = this->_height;
   this->draw();
