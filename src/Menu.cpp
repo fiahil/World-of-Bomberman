@@ -35,9 +35,8 @@ void		Menu::initialize(void)
   APlayer *newHum = new Human(*map, conf);
   newHum->setColor(6);
   players.push_back(newHum);
-  map->setOptimization(&players[0]->getPos());
   Match*	m = new Match(map, false, GameMode::ARCADE, players);
-  this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0]); // TODO
+  this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0], players[1]); // TODO
   this->_game->initialize();
 }
 

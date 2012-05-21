@@ -20,6 +20,7 @@ APlayer::APlayer(Map & map)
     _state(State::STATIC),
     _dir(Dir::SOUTH),
     _indic(0.5f, 0.5f, 0.8f, _color),
+    _curEffect(0),
     _rotFuncMap(Dir::LAST, 0)
 {
   this->_rotFuncMap[Dir::NORTH] = &APlayer::NORTHFunction;
@@ -69,27 +70,37 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
   this->_indic.setPos(this->_pos._x, this->_pos._y);
 }
 
-void		APlayer::normalBombEffect()
+void		APlayer::normalBombEffect(ExplodedBomb const* cur)
 {
-  this->_pv -= 10;
-  if (this->_pv < 0)
-    this->_pv = 0;
+  if (this->_curEffect != cur)
+    {
+      this->_pv -= 40;
+      if (this->_pv < 0)
+	this->_pv = 0;
+      this->_curEffect = cur;
+    }
 }
 
-void		APlayer::megaBombEffect()
+void		APlayer::megaBombEffect(ExplodedBomb const* cur)
 {
-  this->_pv -= 30;
-  if (this->_pv < 0)
-    this->_pv = 0;
+  if (this->_curEffect != cur)
+    {
+      this->_pv -= 70;
+      if (this->_pv < 0)
+	this->_pv = 0;
+      this->_curEffect = cur;
+    }
 }
 
-void		APlayer::takeDamage(Pattern const& pattern, BombType::eBomb type)
+void		APlayer::takeDamage(ExplodedBomb const* cur)
 {
+  Pattern	pattern = cur->getPatternReal();
+
   if (this->_pos._x >= (pattern._x - pattern._coefW) &&
       this->_pos._x <= (pattern._x + pattern._coefE) &&
       this->_pos._y >= (pattern._y - pattern._coefN) &&
       this->_pos._y <= (pattern._y + pattern._coefS))
-    (this->*_bombEffect[type])();
+    (this->*_bombEffect[cur->getType()])(cur);
 }
 
 void		APlayer::setPv(int pv)

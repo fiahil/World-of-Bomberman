@@ -26,7 +26,6 @@ MyGame::~MyGame()
 
 void		MyGame::initialize(void)
 {
-  this->_camera.initialize();
   this->_match._map->initialize();
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->initialize();
@@ -36,7 +35,6 @@ void		MyGame::update(void)
 {
   Bomb*	newBomb;
   
-  this->_camera.update(this->_clock, this->_input);
   this->_match._map->update(this->_clock, this->_input);
   for (std::list<Bomb*>::iterator it = this->_match._bombs.begin(); it != this->_match._bombs.end();)
     {
@@ -64,8 +62,18 @@ void		MyGame::update(void)
 	{
 	  this->_match._map->explode((*it)->getPatternReal(), (*it)->getPatternFinal());
 	  (*it)->update(this->_clock, this->_input);
-	  for (unsigned int i = 0; i < this->_match._players.size(); ++i)
-	    this->_match._players[i]->takeDamage((*it)->getPatternReal(), (*it)->getType());
+	  for (std::vector<APlayer*>::iterator i = this->_match._players.begin();
+	       i != this->_match._players.end();)
+	    {
+	      (*i)->takeDamage((*it));
+	      if ((*i)->getPv() == 0)
+		{
+		  delete (*i);
+		  i = this->_match._players.erase(i);
+		}
+	      else
+		++i;
+	    }
 	  ++it;
 	}
     }
@@ -79,6 +87,20 @@ void		MyGame::update(void)
 
 void		MyGame::draw(void)
 {
+  this->_camera.setSplitScreenLeft();
+  this->_match._map->setOptimization(&this->_match._players[0]->getPos());
+  this->_match._map->draw();
+  for (std::list<Bomb*>::iterator it = this->_match._bombs.begin();
+       it != this->_match._bombs.end(); ++it)
+    (*it)->draw();
+  for (std::list<ExplodedBomb*>::iterator it = this->_match._explodedBombs.begin();
+       it != this->_match._explodedBombs.end(); ++it)
+    (*it)->draw();
+  for (unsigned int i = 0; i < this->_match._players.size(); ++i)
+    this->_match._players[i]->draw();
+
+  this->_camera.setSplitScreenRight();
+  this->_match._map->setOptimization(&this->_match._players[1]->getPos());
   this->_match._map->draw();
   for (std::list<Bomb*>::iterator it = this->_match._bombs.begin();
        it != this->_match._bombs.end(); ++it)

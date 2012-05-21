@@ -27,7 +27,7 @@ private:
   /*
    * TODO : IMPLEMENT FUNCTION
    */
-  typedef void	(APlayer::*fBomb)();
+  typedef void	(APlayer::*fBomb)(ExplodedBomb const*);
   typedef void	(APlayer::*fBonus)();
 
 protected:
@@ -49,10 +49,11 @@ protected:
   Pyramid		_indic;
 
 private:
-  void	normalBombEffect();
-  void	megaBombEffect();
+  void	normalBombEffect(ExplodedBomb const*);
+  void	megaBombEffect(ExplodedBomb const*);
   std::map<BombType::eBomb, fBomb>	_bombEffect;
   std::map<Bonus::eBonus, fBonus>	_bonusEffect;
+  ExplodedBomb const*			_curEffect;
 
 protected:
   void UPFunction(gdl::GameClock const&);
@@ -81,7 +82,7 @@ public:
 
   Bomb*	isAttack();
 
-  void		takeDamage(Pattern const&, BombType::eBomb);
+  void		takeDamage(ExplodedBomb const*);
   int		getPv() const;
   BombType::eBomb	getWeapon() const;
   Skin::eSkin	getSkin() const;

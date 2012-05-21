@@ -110,6 +110,11 @@ Pattern&	ExplodedBomb::getPatternReal()
   return this->_real;
 }
 
+Pattern const&	ExplodedBomb::getPatternReal() const
+{
+  return this->_real;
+}
+
 Pattern&	ExplodedBomb::getPatternFinal()
 {
   return this->_final;
