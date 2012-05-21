@@ -79,15 +79,15 @@ struct HUD
 
 };
 
-void	APlayer::drawHUD(std::vector<gdl::Image>& image, size_t height)
-{
-  if (this->_canAttack)
-    std::cout << "Bomb OK !!" << std::endl;
-  else
-    std::cout << "." << std::endl;
+// void	APlayer::drawHUD(std::vector<gdl::Image>& image, size_t height)
+// {
+//   if (this->_canAttack)
+//     std::cout << "Bomb OK !!" << std::endl;
+//   else
+//     std::cout << "." << std::endl;
 
 
-}
+// }
 
 void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {

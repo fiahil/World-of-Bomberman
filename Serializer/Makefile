@@ -4,33 +4,18 @@
 ## Fiahil
 ## Fri May  4 2012
 
-NAME	=	serializer
+NAME	=	../lib/libserial/libserial.a
 
 SRCXX	=	Loader.tab.cpp		\
 		lex.yy.cpp		\
-		main.cpp		\
 		Unpackman.cpp		\
-		Packman.cpp		\
-		../src/Profile.cpp	\
-		../src/Config.cpp	\
-		../src/Map.cpp		\
-		../src/Cube.cpp		\
-		../src/AObj.cpp		\
-		../src/APlayer.cpp	\
-		../src/Human.cpp	\
-		../src/Plane.cpp	\
-		../src/Point.cpp	\
-		../src/Pyramid.cpp	\
-		../src/ContentColor.cpp	\
-		../src/Vector.cpp	\
-		../src/Match.cpp
+		Packman.cpp
 
 OBJXX	=	$(SRCXX:.cpp=.o)
 
 CXXFLAGS=	-Wall -Wextra -O3 -I./ -I../src -I../lib/libgdl_gl-2012.3/include
 
-LDFLAGS =	-lGL -lGLU -L../lib/libgdl_gl-2012.3/lib -lgdl_gl -Wl,--rpath=../lib/lib
-gdl_gl-2012.3/lib,--rpath=../lib/SFML-1.6/lib
+LDFLAGS =
 
 CXX	=	g++
 
@@ -40,11 +25,8 @@ CXX	=	g++
 all:		$(NAME)
 
 $(NAME):	$(OBJXX)
-	$(CXX) -o $(NAME) $(OBJXX) $(LDFLAGS)
-
-debug:		CXXFLAGS = -g -Wall -Wextra -I./ -I../src -I../lib/libgdl_gl-2012.3/include
-debug:		clean $(OBJXX)
-	$(CXX) -o $(NAME) $(OBJXX) $(LDFLAGS)
+	ar rc $(NAME) $(OBJXX)
+	ranlib $(NAME)
 
 clean:
 	rm -f $(OBJXX)
