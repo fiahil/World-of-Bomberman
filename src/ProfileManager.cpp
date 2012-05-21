@@ -3,15 +3,40 @@
  * 21 Mai 2012
  */
 
+#include <string>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 #include "Unpackman.hpp"
 #include "Packman.hpp"
 #include "Scanner.hpp"
 #include "DirWalker.hpp"
 #include "ProfileManager.hpp"
 
-size_t		ProfileManager::maxId;
+size_t		ProfileManager::maxId = ProfileManager::getMax();
+
+size_t		ProfileManager::getMax()
+{
+  size_t	max = 0;
+
+  DirWalker	ranger("./Ressources/profiles/");
+  while (!ranger.isEnd())
+  {
+    if (ranger.current() != 0)
+    {
+      std::stringstream	ss;
+      size_t		tmp;
+
+      ss << *ranger.current();
+      ss >> tmp;
+      if (max < tmp)
+	max = tmp;
+    }
+    ranger.clean();
+    ++ranger;
+  }
+  return max;
+}
 
 bool		ProfileManager::isHere(size_t id)
 {
