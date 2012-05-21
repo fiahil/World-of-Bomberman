@@ -2,14 +2,15 @@
 #include <iostream>
 #include "ExplodedBomb.hpp"
 
-ExplodedBomb::ExplodedBomb(BombType::eBomb type, Point const& pos, Pattern const& real, Pattern const& final, size_t player, double timer)
+ExplodedBomb::ExplodedBomb(BombType::eBomb type, Point const& pos, Pattern const& real, Pattern const& final, size_t player, double timer, gdl::Model& model)
   : _type(type),
     _final(final),
     _real(real),
     _player(player),
     _timer(timer),
     _lastTime(-1.0),
-    _EOE(false)
+    _EOE(false),
+    _model(model)
 {
   this->_pos = pos;
 }
@@ -21,7 +22,6 @@ ExplodedBomb::~ExplodedBomb()
 
 void	ExplodedBomb::initialize()
 {
-  this->_model = gdl::Model::load("models/tuskarr.fbx");
 }
 
 void	ExplodedBomb::update(gdl::GameClock const& clock, gdl::Input&)
@@ -62,8 +62,8 @@ void	ExplodedBomb::drawPattern(Point const& pos)
 {
   glPushMatrix();
   glTranslatef(pos._pos.x, pos._pos.y, pos._pos.z);
-  glScalef(0.5f, 0.5f, 0.5f);
-  // glScalef(0.005f, 0.005f, 0.005f);
+  //glScalef(0.5f, 0.5f, 0.5f);
+  glScalef(0.005f, 0.005f, 0.005f);
   this->_model.draw();
   glPopMatrix();
 }

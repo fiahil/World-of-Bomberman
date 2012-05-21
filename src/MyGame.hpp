@@ -25,6 +25,8 @@ private:
 
 private:
   std::vector<gdl::Image>	_HUD;
+  gdl::Model			_Mbomb;
+  gdl::Model			_MExplodedBomb;
 
 public:
   void		initialize(void);

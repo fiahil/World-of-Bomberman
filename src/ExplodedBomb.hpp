@@ -16,13 +16,13 @@ private:
   double		_timer;
   double		_lastTime;
   bool			_EOE;
-  gdl::Model		_model;
+  gdl::Model&		_model;
   
 private:
   void	drawPattern(Point const&);
 
 public:
-  ExplodedBomb(BombType::eBomb, Point const&, Pattern const&, Pattern const&, size_t, double);
+  ExplodedBomb(BombType::eBomb, Point const&, Pattern const&, Pattern const&, size_t, double, gdl::Model&);
   virtual ~ExplodedBomb();
   virtual void	initialize();
   virtual void	update(gdl::GameClock const&, gdl::Input&);

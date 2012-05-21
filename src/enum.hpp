@@ -74,11 +74,12 @@ struct Dir
     };
 };
 
-struct Bonus
+struct BonusType
 {
   enum eBonus
     {
-      SOMETHING,
+      LIFE,
+      WEAPON,
       LAST
     };
 };

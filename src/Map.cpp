@@ -15,7 +15,8 @@
 
 Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
   : _x(x),
-    _y(y)
+    _y(y),
+    _modelBonus(BonusType::LAST)
 {
   /* TODO Move */
   time_t now;
@@ -49,7 +50,8 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
 
 Map::Map(std::string const& file)
   : _x(0),
-    _y(0)
+    _y(0),
+    _modelBonus(BonusType::LAST)
 {
   std::string swap;
   std::ifstream infile;
@@ -77,7 +79,8 @@ Map::Map(std::string const& file)
 Map::Map(size_t x, size_t y, std::string const& map)
   : _x(x),
     _y(y),
-    _map(map)
+    _map(map),
+    _modelBonus(BonusType::LAST)
 {
   this->_expFunc['1'] = &Map::explodeUnBreakable;
   this->_expFunc['2'] = &Map::explodeBreakable;
@@ -102,6 +105,8 @@ void		Map::initialize(void)
   this->_break = gdl::Image::load("textures/break.jpg");
   this->_unbreak = gdl::Image::load("textures/unbreak.jpg");
   this->_background = gdl::Image::load("textures/background.jpg");
+  this->_modelBonus[BonusType::LIFE] = gdl::Model::load("models/rock.fbx");
+  this->_modelBonus[BonusType::WEAPON] = gdl::Model::load("models/stump.fbx");
 }
 
 void		Map::draw(void)
@@ -161,21 +166,26 @@ std::string const&	Map::getMap(void) const
   return this->_map;
 }
 
-// TODO : bonus list en param supplementaire + pour en rajouter en rand dans Breakable
-
-void		Map::explodeUnBreakable(size_t &r, size_t &f, size_t)
+void		Map::explodeUnBreakable(size_t &r, size_t &f, size_t, std::list<Bonus*>&)
 {
   --r;
   f = r;
 }
 
-void		Map::explodeBreakable(size_t &r, size_t &f, size_t pos)
+void		Map::explodeBreakable(size_t &r, size_t &f, size_t pos, std::list<Bonus*>& bonus)
 {
   f = r;
   this->_map[pos] = '0';
+  int rand = random() % (BonusType::LAST + 3);
+  if (rand < BonusType::LAST)
+    {
+      Point	p(*this->_opti);
+      p.setPos(pos % this->_y, pos / this->_y);
+      bonus.push_back(new Bonus(static_cast<BonusType::eBonus>(rand), p, this->_modelBonus[rand]));
+    }
 }
 
-void		Map::explode(Pattern& real, Pattern& final)
+void		Map::explode(Pattern& real, Pattern& final, std::list<Bonus*>& bonus)
 {
   char elem;
 
@@ -183,24 +193,28 @@ void		Map::explode(Pattern& real, Pattern& final)
     (this->*(this->_expFunc[elem]))(
 				    real._coefN,
 				    final._coefN,
-				    POS(final._x, final._y - real._coefN)
+				    POS(final._x, final._y - real._coefN),
+				    bonus
 				    );
   if ((elem = this->_map[POS(final._x, final._y + real._coefS)]) != '0')
     (this->*(this->_expFunc[elem]))(
 				    real._coefS,
 				    final._coefS,
-				    POS(final._x, final._y + real._coefS)
+				    POS(final._x, final._y + real._coefS),
+				    bonus
 				    );
   if ((elem = this->_map[POS(final._x + real._coefE, final._y)]) != '0')
     (this->*(this->_expFunc[elem]))(
 				    real._coefE,
 				    final._coefE,
-				    POS(final._x + real._coefE, final._y)
+				    POS(final._x + real._coefE, final._y),
+				    bonus
 				    );
   if ((elem = this->_map[POS(final._x - real._coefW, final._y)]) != '0')
     (this->*(this->_expFunc[elem]))(
 				    real._coefW,
 				    final._coefW,
-				    POS(final._x - real._coefW, final._y)
+				    POS(final._x - real._coefW, final._y),
+				    bonus
 				    );
 }

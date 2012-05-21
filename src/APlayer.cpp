@@ -30,6 +30,8 @@ APlayer::APlayer(Map & map)
   this->_rotFuncMap[Dir::EAST] = &APlayer::EASTFunction;
   this->_bombEffect[BombType::NORMAL] = &APlayer::normalBombEffect;
   this->_bombEffect[BombType::MEGABOMB] = &APlayer::megaBombEffect;
+  this->_bonusEffect[BonusType::LIFE] = &APlayer::lifeBonusEffect;
+  this->_bonusEffect[BonusType::WEAPON] = &APlayer::weaponBonusEffect;
   this->_pos._scale = 2.0f;
   this->setPos(1, 1);
   this->_indic.setScale(2.0f);
@@ -42,11 +44,14 @@ APlayer::~APlayer()
 
 void		APlayer::initialize(void)
 {
-  std::vector<std::string>	refModel(Skin::LAST, "");
+  std::vector<std::string>	refSkin(Skin::LAST, "");
+  std::vector<std::string>	refBomb(BombType::LAST, "");
 
-  refModel[Skin::NORMAL] = "models/Man.fbx";
-  this->_model = gdl::Model::load(refModel[this->_skin]);
-  this->_model.infos();
+  refSkin[Skin::NORMAL] = "models/Man.fbx";
+  refBomb[BombType::NORMAL] = "models/normalBomb.fbx";
+  this->_model = gdl::Model::load(refSkin[this->_skin]);
+  this->_Mbomb = gdl::Model::load(refBomb[this->_weapon]);
+  this->_MExplodedBomb = gdl::Model::load("models/normalBomb.fbx");
 }
 
 void		APlayer::draw(void)
@@ -102,6 +107,16 @@ void		APlayer::megaBombEffect(ExplodedBomb const* cur)
     }
 }
 
+void		APlayer::lifeBonusEffect()
+{
+  this->_pv += 50;
+}
+
+void		APlayer::weaponBonusEffect()
+{
+  
+}
+
 void		APlayer::takeDamage(ExplodedBomb const* cur)
 {
   Pattern	pattern = cur->getPatternReal();
@@ -113,6 +128,16 @@ void		APlayer::takeDamage(ExplodedBomb const* cur)
        this->_pos._y <= (pattern._y + pattern._coefS) &&
        this->_pos._x == pattern._x))
     (this->*_bombEffect[cur->getType()])(cur);
+}
+
+bool		APlayer::takeBonus(Bonus const* cur)
+{
+  if (this->_pos._x == cur->getPos()._x && this->_pos._y == cur->getPos()._y)
+    {
+      (this->*_bonusEffect[cur->getType()])();
+      return true;
+    }
+  return false;
 }
 
 void		APlayer::setPv(int pv)
@@ -302,8 +327,7 @@ Bomb*		APlayer::isAttack()
 {
   if (!this->_attack)
     return 0;
-  Bomb	*ret = new Bomb(this->_weapon, this->_pos, this->_id);
-  ret->initialize();
+  Bomb	*ret = new Bomb(this->_weapon, this->_pos, this->_id, this->_Mbomb, this->_MExplodedBomb);
   this->_attack = false;
   return ret;
 }

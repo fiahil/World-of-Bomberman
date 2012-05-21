@@ -5,16 +5,18 @@
 
 #include "Bonus.hpp"
 
-Bonus::Bonus(eBomb t)
-  : _type(t)
+Bonus::Bonus(BonusType::eBonus t, Point const& p, gdl::Model& model)
+  : _type(t),
+    _model(model)
 {
+  this->_pos = p;
 }
 
 Bonus::~Bonus()
 {
 }
 
-eBonus		Bonus::get_type(void) const
+BonusType::eBonus		Bonus::getType(void) const
 {
   return this->_type;
 }
@@ -23,10 +25,15 @@ void		Bonus::initialize(void)
 {
 }
 
-void		Bonus::draw(gdl::GameClock const& clock, gdl::Input& input)
+void		Bonus::draw()
 {
+  glPushMatrix();
+  glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
+  glScalef(0.05f, 0.05f, 0.05f);
+  this->_model.draw();
+  glPopMatrix();
 }
 
-void		Bonus::update(void)
+void		Bonus::update(gdl::GameClock const&, gdl::Input&)
 {
 }
