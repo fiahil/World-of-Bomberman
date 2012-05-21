@@ -8,6 +8,7 @@
 
 #include <Image.hpp>
 #include "APlayer.hpp"
+#include "Surface.hpp"
 #include "Config.hpp"
 #include "enum.hpp"
 
@@ -42,7 +43,7 @@ private:
   inputMap		_event;
 
 private:
-  std::vector<Plane*>	_HUD;
+  std::vector<Surface*>	_HUD;
   // std::vector<size_t>&	_achievements;
   // std::vector<size_t> const	_skill;
 };

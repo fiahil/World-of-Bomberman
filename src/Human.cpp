@@ -49,10 +49,11 @@ void Human::play(gdl::GameClock const& clock, gdl::Input& key)
   }
 }
 
-void Human::drawHUD(std::vector<gdl::Image>& img, size_t height)
+void Human::drawHUD(std::vector<gdl::Image>& img, size_t)
 {
   if (!this->_HUD[0])
     {
-      this->_HUD[HUD::LIFE_BAR] = new Plane();
+      this->_HUD[HUD::LIFE_BAR] = new Surface(80.0f, 80.0f, 10.0f, 10.0f, img[HUD::BOMB_OK]);
     }
+  this->_HUD[HUD::LIFE_BAR]->draw();
 }

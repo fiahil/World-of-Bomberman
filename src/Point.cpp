@@ -13,6 +13,13 @@ Point::Point(double scale, int x, int y)
   this->calcRealpos();
 }
 
+Point::Point(double x, double y, double z) // Pour MenuManager
+  : _scale(1.0),
+    _pos(x, y, z)
+
+{
+}
+
 Point::~Point()
 {
 }
@@ -22,6 +29,13 @@ void		Point::setPos(int x, int y)
   this->_x = x;
   this->_y = y;
   this->calcRealpos();
+}
+
+void		Point::setPos(double x, double y, double z)
+{
+  this->_pos.x = x;
+  this->_pos.y = y;
+  this->_pos.z = z;
 }
 
 void		Point::calcRealpos(void)
