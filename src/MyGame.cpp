@@ -16,7 +16,8 @@ MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
   : _clock(clock),
     _input(input),
     _match(match),
-    _camera(800, 600, pl1, pl2)
+    _camera(800, 600, pl1, pl2),
+    _HUD(HUD::LAST)
 {
 }
 
@@ -29,6 +30,12 @@ void		MyGame::initialize(void)
   this->_match._map->initialize();
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->initialize();
+  this->_HUD[HUD::LIFE_BAR] = gdl::Image::load("textures/life.png");
+  this->_HUD[HUD::SHIELD] = gdl::Image::load("textures/shield.png");
+  this->_HUD[HUD::POWER] = gdl::Image::load("textures/power.png");
+  this->_HUD[HUD::LUST] = gdl::Image::load("textures/fury.png");
+  this->_HUD[HUD::BOMB_OK] = gdl::Image::load("textures/bombActive.png");
+  this->_HUD[HUD::BOMB_KO] = gdl::Image::load("textures/bombInactive.png");
 }
 
 void		MyGame::update(void)
@@ -98,6 +105,8 @@ void		MyGame::draw(void)
     (*it)->draw();
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->draw();
+  this->_camera.setViewHUD();
+  this->_match._players[0]->drawHUD(this->_HUD, 600);
 
   this->_camera.setSplitScreenRight();
   this->_match._map->setOptimization(&this->_match._players[1]->getPos());

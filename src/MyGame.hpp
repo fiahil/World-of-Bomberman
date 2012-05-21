@@ -23,6 +23,9 @@ private:
   Match&		_match;
   Camera		_camera;
 
+private:
+  std::vector<gdl::Image>	_HUD;
+
 public:
   void		initialize(void);
   void		update(void);
