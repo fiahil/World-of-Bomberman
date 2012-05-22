@@ -50,7 +50,7 @@ void Human::play(gdl::GameClock const& clock, gdl::Input& key)
   }
 }
 
-void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi)
+void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag)
 {
   gdl::Text text("Ressources/Police/DejaVuSansMono.ttf");
   if (!this->_HUD[0])
@@ -81,21 +81,20 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi)
   else
     this->_HUD[HUD::BOMB_KO]->draw();
 
-  glColor3ub(30, 30, 30);
   text.setSize(30);
   // TODO si buff
   text.setText("3");
-  text.setPosition(85, 65);
+  text.setPosition(85 + lag, 65);
   text.draw();
   // TODO si buff
   text.setText("2");
-  text.setPosition(135, 65);
+  text.setPosition(135 + lag, 65);
   text.draw();
   text.setText("10");
-  text.setPosition(10.0f, hi - 120.0f);
+  text.setPosition(10.0f + lag, hi - 120.0f);
   text.draw();
   text.setSize(10);
   text.setText("kill");
-  text.setPosition(55.0f, hi - 100.0f);
+  text.setPosition(55.0f + lag, hi - 100.0f);
   text.draw();
 }

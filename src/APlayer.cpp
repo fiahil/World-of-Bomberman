@@ -47,7 +47,7 @@ void		APlayer::initialize(void)
   std::vector<std::string>	refSkin(Skin::LAST, "");
   std::vector<std::string>	refBomb(BombType::LAST, "");
 
-  refSkin[Skin::NORMAL] = "models/Man.fbx";
+  refSkin[Skin::NORMAL] = "models/sylvanas.fbx";
   refBomb[BombType::NORMAL] = "models/normalBomb.fbx";
   this->_model = gdl::Model::load(refSkin[this->_skin]);
   this->_Mbomb = gdl::Model::load(refBomb[this->_weapon]);
@@ -59,8 +59,13 @@ void		APlayer::draw(void)
   glPushMatrix();
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y - 1.0f, this->_pos._pos.z);
   (this->*_rotFuncMap[this->_dir])();
+<<<<<<< HEAD
    glScalef(0.05f, 0.05f, 0.05f);
   // glScalef(2.0f, 2.0f, 2.0f);
+=======
+  //glScalef(0.05f, 0.05f, 0.05f);
+  glScalef(1.5f, 1.5f, 1.5f);
+>>>>>>> 5df04060e26d8259710e7cabf6cf3a5e67cc06f1
   this->_model.draw();
   glPopMatrix();
   glPushMatrix();
@@ -69,7 +74,7 @@ void		APlayer::draw(void)
   glPopMatrix();
 }
 
-void		APlayer::drawHUD(std::vector<gdl::Image>&, size_t)
+void		APlayer::drawHUD(std::vector<gdl::Image>&, size_t, size_t)
 {
 }
 
