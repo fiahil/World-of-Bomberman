@@ -15,10 +15,10 @@ private:
   AIType::eAI	_type;
 
 private:
-  typedef void	(AI::*fDifficulty)();
-  void	AIEasy();
-  void	AIMedium();
-  void	AIHard();
+  typedef void	(AI::*fDifficulty)(gdl::GameClock const&);
+  void	AIEasy(gdl::GameClock const&);
+  void	AIMedium(gdl::GameClock const&);
+  void	AIHard(gdl::GameClock const&);
   std::map<AIType::eAI, fDifficulty>	_AIDifficulty;
   
 public:

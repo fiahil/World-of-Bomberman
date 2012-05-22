@@ -19,7 +19,7 @@ AI::~AI()
 
 }
 
-void	AI::AIEasy()
+void	AI::AIEasy(gdl::GameClock const& clock)
 {
   int	pos = 0;
   std::vector<Dir::eDir>	ref(static_cast<int>(Dir::LAST), Dir::LAST);
@@ -36,27 +36,27 @@ void	AI::AIEasy()
     {
       pos = random() % pos;
       if (ref[pos] == Dir::NORTH)
-	this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
+	this->UPFunction(clock);
       else if (ref[pos] == Dir::SOUTH)
-	this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
+	this->DOWNFunction(clock);
       else if (ref[pos] == Dir::WEST)
-	this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
+	this->LEFTFunction(clock);
       else
-	this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
+	this->RIGHTFunction(clock);
     }
 }
 
-void	AI::AIMedium()
+void	AI::AIMedium(gdl::GameClock const&)
 {
 
 }
 
-void	AI::AIHard()
+void	AI::AIHard(gdl::GameClock const&)
 {
 
 }
 
-void AI::play(gdl::GameClock const&, gdl::Input&)
+void AI::play(gdl::GameClock const& clock, gdl::Input&)
 {
-  (this->*_AIDifficulty[this->_type])();
+  (this->*_AIDifficulty[this->_type])(clock);
 }

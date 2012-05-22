@@ -70,8 +70,8 @@ void		MyGame::update(void)
 	}
       else
 	{
-	  this->_match._map->explode((*it)->getPatternReal(), (*it)->getPatternFinal(), this->_match._bonus);
 	  (*it)->update(this->_clock, this->_input);
+	  this->_match._map->explode((*it)->getPatternReal(), (*it)->getPatternFinal(), this->_match._bonus);
 	  for (std::vector<APlayer*>::iterator i = this->_match._players.begin();
 	       i != this->_match._players.end();)
 	    {
