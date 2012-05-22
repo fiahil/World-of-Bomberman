@@ -3,6 +3,7 @@
  * 12.05.2012
  */
 
+#include <sstream>
 #include "Text.hpp"
 #include "Human.hpp"
 
@@ -52,6 +53,8 @@ void Human::play(gdl::GameClock const& clock, gdl::Input& key)
 
 void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag)
 {
+  std::stringstream ss;
+
   gdl::Text text("Ressources/Police/DejaVuSansMono.ttf");
   if (!this->_HUD[0])
     {

@@ -6,32 +6,15 @@
 #include <iostream>
 #include "Bomb.hpp"
 
-static const std::string g_bombModel [] =
-  {
-    "models/normalBomb.fbx",
-    "models/megaBomb.fbx"
-  };
-
-static const double g_bombTimer [] =
-  {
-    2.0,
-    3.0
-  };
-
-static const size_t g_bombRange [] =
-  {
-    2,
-    4
-  };
-
 static const double g_bombScale [] =
   {
-    0.005f,
-    0.005f
+    0.3f,
+    0.3f,
+    0.3f
   };
 
 
-Bomb::Bomb(BombType::eBomb t, Point const & pos, size_t id, gdl::Model& model, gdl::Model& modelE)
+Bomb::Bomb(BombType::eBomb t, Point const & pos, size_t id, gdl::Model& model, gdl::Model& modelE, size_t power)
   : _type(t),
     _player(id),
     _timer(-1.0),
@@ -42,10 +25,10 @@ Bomb::Bomb(BombType::eBomb t, Point const & pos, size_t id, gdl::Model& model, g
   this->_pos = pos;
   this->_pattern._x = this->_pos._x;
   this->_pattern._y = this->_pos._y;
-  this->_pattern._coefN = g_bombRange[t];
-  this->_pattern._coefS = g_bombRange[t];
-  this->_pattern._coefE = g_bombRange[t];
-  this->_pattern._coefW = g_bombRange[t];
+  this->_pattern._coefN = 1 + power;
+  this->_pattern._coefS = 1 + power;
+  this->_pattern._coefE = 1 + power;
+  this->_pattern._coefW = 1 + power;
 }
 
 Bomb::~Bomb()
@@ -76,10 +59,9 @@ void		Bomb::draw(void)
 void		Bomb::update(gdl::GameClock const& clock, gdl::Input&)
 {
   if (!this->_exploded && this->_timer == (-1.0))
-    this->_timer = static_cast<double>(clock.getTotalGameTime()) +
-      g_bombTimer[this->_type];
+    this->_timer = static_cast<double>(clock.getTotalGameTime()) + 2.0f;
   else if (!this->_exploded && static_cast<double>(clock.getTotalGameTime()) >= this->_timer)
-      this->_exploded = true;
+    this->_exploded = true;
 }
 
 Pattern const&	Bomb::getPattern() const

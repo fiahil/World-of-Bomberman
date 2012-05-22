@@ -62,8 +62,8 @@ void	ExplodedBomb::drawPattern(Point const& pos)
 {
   glPushMatrix();
   glTranslatef(pos._pos.x, pos._pos.y, pos._pos.z);
-  //glScalef(0.5f, 0.5f, 0.5f);
-  glScalef(0.005f, 0.005f, 0.005f);
+  glScalef(0.3f, 0.3f, 0.3f);
+  // glScalef(0.005f, 0.005f, 0.005f);
   this->_model.draw();
   glPopMatrix();
 }
