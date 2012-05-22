@@ -14,7 +14,7 @@
 class	MyGame
 {
 public:
-  MyGame(gdl::GameClock&, gdl::Input&, Match&, APlayer const*, APlayer const* pl2 = 0);
+  MyGame(gdl::GameClock&, gdl::Input&, Match&, APlayer*, APlayer* pl2 = 0);
   ~MyGame();
 
 private:
@@ -22,7 +22,9 @@ private:
   gdl::Input&		_input;
   Match&		_match;
   Camera		_camera;
-
+  APlayer*		_pl1;
+  APlayer*		_pl2;
+  
 private:
   std::vector<gdl::Image>	_HUD;
   gdl::Model			_Mbomb;
