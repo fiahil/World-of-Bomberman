@@ -6,6 +6,7 @@
 #if !defined(__Bomberman_Human_h)
 #define __Bomberman_Human_h
 
+#include <Text.hpp>
 #include <Image.hpp>
 #include "APlayer.hpp"
 #include "Surface.hpp"
@@ -18,7 +19,7 @@ public:
   Human(Map &, const Config&);//, std::vector<size_t>&, std::vector<size_t> const&);
   virtual ~Human();
   virtual void play(gdl::GameClock const&, gdl::Input&);
-  virtual void drawHUD(std::vector<gdl::Image>&, size_t, size_t);
+  virtual void drawHUD(std::vector<gdl::Image>&, size_t, size_t, bool);
 
 private:
 
@@ -41,6 +42,12 @@ private:
   Human::eventSt initStruct(gdl::Keys::Key, HumGame::eAction, actionFunc) const;
   Input::eMode		_mode;
   inputMap		_event;
+  
+  int		_start;
+  double	_startTimer;
+  gdl::Text	_text;
+  void		drawStart(size_t, size_t);
+  void		drawEnd(size_t, size_t);
 
 private:
   std::vector<Surface*>	_HUD;
