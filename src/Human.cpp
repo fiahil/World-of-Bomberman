@@ -73,11 +73,14 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag)
   pvIndic.draw();
 
   // TODO si buff
+  //  if (this->shiel)
   this->_HUD[HUD::SHIELD]->draw();
   // TODO si buff
-  this->_HUD[HUD::LUST]->draw();
+  if (this->_lustStack)
+    this->_HUD[HUD::LUST]->draw();
   // TODO si buff
-  this->_HUD[HUD::POWER]->draw();
+  if (this->_powerStack)
+    this->_HUD[HUD::POWER]->draw();
 
   if (this->_canAttack)
     this->_HUD[HUD::BOMB_OK]->draw();
@@ -86,13 +89,28 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag)
 
   text.setSize(30);
   // TODO si buff
-  text.setText("3");
-  text.setPosition(85 + lag, 65);
-  text.draw();
+  if (this->_lustStack)
+    {
+      ss << this->_lustStack;
+      text.setText(ss.str());
+      ss.str("");
+      ss.clear();
+      text.setPosition(85 + lag, 65);
+      text.draw();
+    }
+
   // TODO si buff
-  text.setText("2");
-  text.setPosition(135 + lag, 65);
-  text.draw();
+  if (this->_powerStack)
+    {
+      ss << this->_powerStack;
+      text.setText(ss.str());
+      ss.str("");
+      ss.clear();
+      text.setPosition(135 + lag, 65);
+      text.draw();
+    }
+
+  // TODO nb kill
   text.setText("10");
   text.setPosition(10.0f + lag, hi - 120.0f);
   text.draw();
