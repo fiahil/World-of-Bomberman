@@ -69,7 +69,11 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag)
     }
   this->_HUD[HUD::LIFE_BAR]->draw();
 
-  Surface pvIndic((this->_pv / 100.0f * 250.0f), 20.0f, 40.0f, 20.0f, img[HUD::LAST]);
+  double	size = (this->_pv / 100.0f * 250.0f);
+  
+  if (size > 250.0f)
+    size = 250.0f;
+  Surface pvIndic(size, 20.0f, 40.0f, 20.0f, img[HUD::LAST]);
   pvIndic.draw();
 
   // TODO si buff
