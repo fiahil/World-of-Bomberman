@@ -136,4 +136,14 @@ struct HUD
   };
 };
 
+struct AIType
+{
+  enum eAI {
+    EASY,
+    MEDIUM,
+    HARD,
+    LAST
+  };
+};
+
 #endif
