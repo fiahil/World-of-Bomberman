@@ -12,11 +12,13 @@
 #include "MyGame.hpp"
 
 MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
-	       APlayer const* pl1,  APlayer const* pl2)
+	       APlayer* pl1,  APlayer* pl2)
   : _clock(clock),
     _input(input),
     _match(match),
     _camera(800, 600, pl1, pl2),
+    _pl1(pl1),
+    _pl2(pl2),
     _HUD(HUD::LAST + 1)
 {
 }
@@ -104,7 +106,7 @@ void		MyGame::update(void)
 void		MyGame::draw(void)
 {
   this->_camera.setSplitScreenLeft();
-  this->_match._map->setOptimization(&this->_match._players[0]->getPos());
+  this->_match._map->setOptimization(&this->_pl1->getPos());
   this->_match._map->draw();
   for (std::list<Bomb*>::iterator it = this->_match._bombs.begin();
        it != this->_match._bombs.end(); ++it)
@@ -118,10 +120,10 @@ void		MyGame::draw(void)
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->draw();
   this->_camera.setViewHUD();
-  this->_match._players[0]->drawHUD(this->_HUD, 600);
+  this->_pl1->drawHUD(this->_HUD, 600, 0);
 
   this->_camera.setSplitScreenRight();
-  this->_match._map->setOptimization(&this->_match._players[1]->getPos());
+  this->_match._map->setOptimization(&this->_pl2->getPos());
   this->_match._map->draw();
   for (std::list<Bomb*>::iterator it = this->_match._bombs.begin();
        it != this->_match._bombs.end(); ++it)
@@ -135,7 +137,7 @@ void		MyGame::draw(void)
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->draw();
   this->_camera.setViewHUD();
-  this->_match._players[1]->drawHUD(this->_HUD, 600);
+  this->_pl2->drawHUD(this->_HUD, 600, 410);
 }
 
 void		MyGame::unload(void)
