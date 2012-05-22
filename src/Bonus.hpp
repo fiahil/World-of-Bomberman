@@ -6,23 +6,26 @@
 #if !defined(__Bomberman_Bonus_h)
 #define __Bomberman_Bonus_h
 
+#include <Model.hpp>
+#include "enum.hpp"
 #include "AObj.hpp"
 
 class Bonus : public AObj
 {
 public:
-  Bonus(eBomb t);
+  Bonus(BonusType::eBonus t, Point const&, gdl::Model&);
   ~Bonus();
   
 private:
-  eBonus _type;
+  BonusType::eBonus	_type;
+  gdl::Model&	_model;
   
 public:
-  eBonus	get_type(void) const;
+  BonusType::eBonus	getType(void) const;
   
   void		initialize(void);
-  void		draw(gdl::GameClock const&, gdl::Input&);
-  void		update(void);
+  void		draw();
+  void		update(gdl::GameClock const&, gdl::Input&);
 };
 
 #endif

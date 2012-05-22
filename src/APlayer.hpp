@@ -51,10 +51,14 @@ protected:
   Pyramid		_indic;
 
 private:
+  gdl::Model		_Mbomb;
+  gdl::Model		_MExplodedBomb;
   void	normalBombEffect(ExplodedBomb const*);
   void	megaBombEffect(ExplodedBomb const*);
+  void	lifeBonusEffect();
+  void	weaponBonusEffect();
   std::map<BombType::eBomb, fBomb>	_bombEffect;
-  std::map<Bonus::eBonus, fBonus>	_bonusEffect;
+  std::map<BonusType::eBonus, fBonus>	_bonusEffect;
   ExplodedBomb const*			_curEffect;
 
 protected:
@@ -83,9 +87,10 @@ public:
   virtual void	update(gdl::GameClock const& clock, gdl::Input& input);
   virtual void	drawHUD(std::vector<gdl::Image>&, size_t);
 
-  Bomb*	isAttack();
-
+  Bomb*		isAttack();
   void		takeDamage(ExplodedBomb const*);
+  bool		takeBonus(Bonus const*);
+
   int		getPv() const;
   BombType::eBomb	getWeapon() const;
   Skin::eSkin	getSkin() const;
@@ -95,7 +100,6 @@ public:
   State::eState	getState() const;
   Dir::eDir	getDir() const;
   size_t	getType() const;
-
   std::string const&	getName() const;
   std::string const&	getTeamName() const;
 

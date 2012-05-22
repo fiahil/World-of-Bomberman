@@ -5,7 +5,7 @@
 ## Login   <lemonn_v@epitech.net>
 ## 
 ## Started on  Mon Apr 23 18:20:16 2012 vincent lemonnier
-## Last update Mon May 21 17:13:43 2012 vincent lemonnier
+## Last update Mon May 21 22:50:43 2012 vincent lemonnier
 ##
 
 NAME		= bomberman
@@ -32,6 +32,7 @@ SRC		= ./src/main.cpp	\
 		./src/MenuManager.cpp	\
 		./src/ContentColor.cpp	\
 		./src/Bomb.cpp		\
+		./src/Bonus.cpp		\
 		./src/ExplodedBomb.cpp	\
 		./src/Tag.cpp		\
 		./src/DirWalker.cpp	\
@@ -43,7 +44,7 @@ INCLUDES	= -I./lib/libgdl_gl-2012.3/include -I./src -I./Serializer
 
 CXX		= g++
 
-CXXFLAGS	= -Wall -Wextra -O3 -g $(INCLUDES)
+CXXFLAGS	= -Wall -Wextra -O3 $(INCLUDES)
 
 LDFLAGS		= -lGL -lGLU -lgdl_gl -lserial			\
 		-L./lib/libgdl_gl-2012.3/lib -L./lib/libserial	\

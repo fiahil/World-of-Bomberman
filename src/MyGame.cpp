@@ -68,7 +68,7 @@ void		MyGame::update(void)
 	}
       else
 	{
-	  this->_match._map->explode((*it)->getPatternReal(), (*it)->getPatternFinal());
+	  this->_match._map->explode((*it)->getPatternReal(), (*it)->getPatternFinal(), this->_match._bonus);
 	  (*it)->update(this->_clock, this->_input);
 	  for (std::vector<APlayer*>::iterator i = this->_match._players.begin();
 	       i != this->_match._players.end();)
@@ -87,6 +87,14 @@ void		MyGame::update(void)
     }
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     {
+      for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
+	   it != this->_match._bonus.end(); ++it)
+	if (this->_match._players[i]->takeBonus((*it)))
+	  {
+	    delete (*it);
+	    this->_match._bonus.erase(it);
+	    break;
+	  }
       this->_match._players[i]->update(this->_clock, this->_input);
       if ((newBomb = this->_match._players[i]->isAttack()))
 	this->_match._bombs.push_back(newBomb);
@@ -104,6 +112,9 @@ void		MyGame::draw(void)
   for (std::list<ExplodedBomb*>::iterator it = this->_match._explodedBombs.begin();
        it != this->_match._explodedBombs.end(); ++it)
     (*it)->draw();
+  for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
+       it != this->_match._bonus.end(); ++it)
+    (*it)->draw();
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->draw();
   this->_camera.setViewHUD();
@@ -117,6 +128,9 @@ void		MyGame::draw(void)
     (*it)->draw();
   for (std::list<ExplodedBomb*>::iterator it = this->_match._explodedBombs.begin();
        it != this->_match._explodedBombs.end(); ++it)
+    (*it)->draw();
+  for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
+       it != this->_match._bonus.end(); ++it)
     (*it)->draw();
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->draw();

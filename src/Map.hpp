@@ -8,6 +8,7 @@
 
 #include <map>
 #include <Image.hpp>
+#include "Bonus.hpp"
 #include "Pattern.hpp"
 #include "AObj.hpp"
 
@@ -32,13 +33,14 @@ private:
   gdl::Image	_break;
   gdl::Image	_background;
   Point const*	_opti;
+  std::vector<gdl::Model>	_modelBonus;
 
 private:
 
-  typedef void(Map::*explodeFunc)(size_t&, size_t&, size_t);
+  typedef void(Map::*explodeFunc)(size_t&, size_t&, size_t, std::list<Bonus*>&);
 
-  void		explodeUnBreakable(size_t &, size_t &, size_t);
-  void		explodeBreakable(size_t &, size_t &, size_t);
+  void		explodeUnBreakable(size_t &, size_t &, size_t, std::list<Bonus*>&);
+  void		explodeBreakable(size_t &, size_t &, size_t, std::list<Bonus*>&);
 
   std::map<char, explodeFunc> _expFunc;
 
@@ -49,7 +51,7 @@ public:
   bool canMoveAt(size_t x, size_t y);
   void setOptimization(Point const*);
   std::string const&	getMap(void) const;
-  void explode(Pattern&, Pattern&);
+  void explode(Pattern&, Pattern&, std::list<Bonus*>&);
 };
 
 #endif /* __Bomberman_Map_h */

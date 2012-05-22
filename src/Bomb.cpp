@@ -31,8 +31,13 @@ static const double g_bombScale [] =
   };
 
 
-Bomb::Bomb(BombType::eBomb t, Point const & pos, size_t id)
-  : _type(t), _player(id), _timer(-1.0), _exploded(false)
+Bomb::Bomb(BombType::eBomb t, Point const & pos, size_t id, gdl::Model& model, gdl::Model& modelE)
+  : _type(t),
+    _player(id),
+    _timer(-1.0),
+    _exploded(false),
+    _model(model),
+    _modelExploded(modelE)
 {
   this->_pos = pos;
   this->_pattern._x = this->_pos._x;
@@ -54,7 +59,6 @@ BombType::eBomb		Bomb::get_type(void) const
 
 void		Bomb::initialize(void)
 {
-  this->_model = gdl::Model::load(g_bombModel[this->_type]);
 }
 
 void		Bomb::draw(void)
@@ -97,7 +101,7 @@ ExplodedBomb*	Bomb::createExplodedBomb()
   tmp._coefS = 0;
   tmp._coefW = 0;
   tmp._coefE = 0;
-  ret = new ExplodedBomb(this->_type, this->_pos, tmp, this->_pattern, this->_player, 0.2f);
-  ret->initialize();
+  ret = new ExplodedBomb(this->_type, this->_pos, tmp,
+			 this->_pattern, this->_player, 0.2f, this->_modelExploded);
   return ret;
 }
