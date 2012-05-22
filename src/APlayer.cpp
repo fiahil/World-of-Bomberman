@@ -15,6 +15,10 @@ APlayer::APlayer(Map & map)
     _color(0),
     _attack(false),
     _canAttack(true),
+    _shield(false),
+    _shieldTimer(-1.0f),
+    _lustStack(0),
+    _powerStack(0),
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
     _skin(Skin::NORMAL),
@@ -59,13 +63,8 @@ void		APlayer::draw(void)
   glPushMatrix();
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y - 1.0f, this->_pos._pos.z);
   (this->*_rotFuncMap[this->_dir])();
-<<<<<<< HEAD
-   glScalef(0.05f, 0.05f, 0.05f);
-  // glScalef(2.0f, 2.0f, 2.0f);
-=======
-  //glScalef(0.05f, 0.05f, 0.05f);
-  glScalef(1.5f, 1.5f, 1.5f);
->>>>>>> 5df04060e26d8259710e7cabf6cf3a5e67cc06f1
+   // glScalef(0.05f, 0.05f, 0.05f);
+  glScalef(2.0f, 2.0f, 2.0f);
   this->_model.draw();
   glPopMatrix();
   glPushMatrix();
@@ -319,11 +318,13 @@ void		APlayer::DOWNFunction(gdl::GameClock const& clock)
 void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
 {
    double	current;
-
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::ATTACK])
     {
-      this->_timers[HumGame::ATTACK] = current + 3;
+      double	addTimer = 3.0 - (0.2 * this->_lustStack);
+      if (addTimer < 0.00001)
+	addTimer = 0.0;
+      this->_timers[HumGame::ATTACK] = current + addTimer;
       this->_attack = true;
     }
 }
@@ -332,7 +333,9 @@ Bomb*		APlayer::isAttack()
 {
   if (!this->_attack)
     return 0;
-  Bomb	*ret = new Bomb(this->_weapon, this->_pos, this->_id, this->_Mbomb, this->_MExplodedBomb);
+
+  Bomb	*ret = new Bomb(this->_weapon, this->_pos,
+			this->_id, this->_Mbomb, this->_MExplodedBomb, this->_powerStack);
   this->_attack = false;
   return ret;
 }

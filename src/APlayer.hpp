@@ -40,6 +40,9 @@ protected:
   size_t		_type;
   bool			_attack;
   bool			_canAttack;
+  bool			_shield;
+  size_t		_lustStack;
+  size_t		_powerStack;
   std::vector<double>   _timers;
   std::string		_name;
   std::string		_teamName;
