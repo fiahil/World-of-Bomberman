@@ -162,6 +162,14 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EO
       this->_text.draw();
     }
 
+  ss << this->_pv << "%";
+  this->_text.setText(ss.str());
+  ss.str("");
+  ss.clear();
+  this->_text.setSize(18);
+  this->_text.setPosition(45 + lag, 18);
+  this->_text.draw();
+
   // TODO nb kill
   this->_text.setText("10");
   this->_text.setPosition(10.0f + lag, hi - 120.0f);

@@ -113,7 +113,10 @@ void		APlayer::normalBombEffect(ExplodedBomb const* cur)
 {
   if (this->_curEffect != cur)
     {
-      this->_pv -= 30;
+      if (this->_shield)
+	this->_pv -= 15;
+      else
+	this->_pv -= 30;
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
@@ -124,7 +127,10 @@ void		APlayer::bigBombEffect(ExplodedBomb const* cur)
 {
   if (this->_curEffect != cur)
     {
-      this->_pv -= 45;
+      if (this->_shield)
+	this->_pv -= 22;
+      else
+	this->_pv -= 45;
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
@@ -135,7 +141,10 @@ void		APlayer::megaBombEffect(ExplodedBomb const* cur)
 {
   if (this->_curEffect != cur)
     {
-      this->_pv -= 60;
+      if (this->_shield)
+	this->_pv -= 30;
+      else
+	this->_pv -= 60;
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
@@ -144,10 +153,9 @@ void		APlayer::megaBombEffect(ExplodedBomb const* cur)
 
 void		APlayer::lifeBonusEffect()
 {
-  if (this->_pv + 25 > 100)
+  this->_pv += 25;
+  if (this->_pv >= 100)
     this->_pv = 100;
-  else
-    this->_pv += 100;
 }
 
 void		APlayer::BigBombBonusEffect()
