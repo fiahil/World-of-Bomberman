@@ -57,6 +57,7 @@ private:
   gdl::Model		_Mbomb;
   gdl::Model		_MExplodedBomb;
   void	normalBombEffect(ExplodedBomb const*);
+  void	bigBombEffect(ExplodedBomb const*);
   void	megaBombEffect(ExplodedBomb const*);
   void	lifeBonusEffect();
   void	weaponBonusEffect();

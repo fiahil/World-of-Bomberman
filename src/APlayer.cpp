@@ -7,6 +7,16 @@
 #include <vector>
 #include "APlayer.hpp"
 
+static const char*	g_refSkin[Skin::LAST] = {
+  "models/sylvanas.fbx"
+};
+
+static const char*	g_refBomb[BombType::LAST] = {
+  "models/normalBomb.fbx",
+  "models/bigBomb.fbx",
+  "models/megaBomb.fbx"
+};
+
 APlayer::APlayer(Map & map)
   : _map(map),
     _pv(100),
@@ -33,6 +43,7 @@ APlayer::APlayer(Map & map)
   this->_rotFuncMap[Dir::WEST] = &APlayer::WESTFunction;
   this->_rotFuncMap[Dir::EAST] = &APlayer::EASTFunction;
   this->_bombEffect[BombType::NORMAL] = &APlayer::normalBombEffect;
+  this->_bombEffect[BombType::BIGBOMB] = &APlayer::bigBombEffect;
   this->_bombEffect[BombType::MEGABOMB] = &APlayer::megaBombEffect;
   this->_bonusEffect[BonusType::LIFE] = &APlayer::lifeBonusEffect;
   this->_bonusEffect[BonusType::WEAPON] = &APlayer::weaponBonusEffect;
@@ -48,13 +59,8 @@ APlayer::~APlayer()
 
 void		APlayer::initialize(void)
 {
-  std::vector<std::string>	refSkin(Skin::LAST, "");
-  std::vector<std::string>	refBomb(BombType::LAST, "");
-
-  refSkin[Skin::NORMAL] = "models/sylvanas.fbx";
-  refBomb[BombType::NORMAL] = "models/normalBomb.fbx";
-  this->_model = gdl::Model::load(refSkin[this->_skin]);
-  this->_Mbomb = gdl::Model::load(refBomb[this->_weapon]);
+  this->_model = gdl::Model::load(g_refSkin[this->_skin]);
+  this->_Mbomb = gdl::Model::load(g_refBomb[this->_weapon]);
   this->_MExplodedBomb = gdl::Model::load("models/normalBomb.fbx");
 }
 
@@ -93,7 +99,18 @@ void		APlayer::normalBombEffect(ExplodedBomb const* cur)
 {
   if (this->_curEffect != cur)
     {
-      this->_pv -= 40;
+      this->_pv -= 30;
+      if (this->_pv < 0)
+	this->_pv = 0;
+      this->_curEffect = cur;
+    }
+}
+
+void		APlayer::bigBombEffect(ExplodedBomb const* cur)
+{
+  if (this->_curEffect != cur)
+    {
+      this->_pv -= 45;
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
@@ -104,7 +121,7 @@ void		APlayer::megaBombEffect(ExplodedBomb const* cur)
 {
   if (this->_curEffect != cur)
     {
-      this->_pv -= 70;
+      this->_pv -= 60;
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
