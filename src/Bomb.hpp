@@ -15,7 +15,7 @@
 class Bomb : public AObj
 {
 public:
-  Bomb(BombType::eBomb t, Point const &, size_t id, gdl::Model&, gdl::Model&);
+  Bomb(BombType::eBomb t, Point const &, size_t id, gdl::Model&, gdl::Model&, size_t = 0);
   ~Bomb();
   
 private:

@@ -37,6 +37,7 @@ struct BombType
   enum eBomb
     {
       NORMAL,
+      BIGBOMB,
       MEGABOMB,
       LAST
     };
