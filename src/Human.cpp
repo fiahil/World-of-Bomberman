@@ -4,7 +4,6 @@
  */
 
 #include <sstream>
-#include "Text.hpp"
 #include "Human.hpp"
 
 Human::eventSt Human::initStruct(gdl::Keys::Key key, HumGame::eAction action, actionFunc f) const
@@ -15,7 +14,12 @@ Human::eventSt Human::initStruct(gdl::Keys::Key key, HumGame::eAction action, ac
 
 
 Human::Human(Map & map, const Config& conf)//, std::vector<size_t>&, std::vector<size_t> const&)
-  : APlayer(map), _mode(Input::GAME), _HUD(HUD::LAST, 0)
+  : APlayer(map),
+    _mode(Input::GAME),
+    _start(4),
+    _startTimer(-1.0f),
+    _text("Ressources/Police/DejaVuSansMono.ttf"),
+    _HUD(HUD::LAST, 0)
 {
   this->_event[Input::GAME]._freq = 2; // TODO TMP
   this->_event[Input::GAME]._nb = 5;
@@ -41,21 +45,65 @@ Human::~Human() {
 
 }
 
+#include <iostream>
+
 void Human::play(gdl::GameClock const& clock, gdl::Input& key)
 {
   // for each ?
 
-  for (size_t i = 0; i < this->_event[this->_mode]._nb; ++i) {
-    if (key.isKeyDown(this->_event[this->_mode]._event[i]._key))
-      (this->*(_event[this->_mode]._event[i]._f))(clock);
-  }
+  if (this->_start >= 0 && clock.getTotalGameTime() >= this->_startTimer)
+    {
+      --this->_start;
+      this->_startTimer = clock.getTotalGameTime() + 1.0f;
+    }
+  else if (this->_start < 0)
+    for (size_t i = 0; i < this->_event[this->_mode]._nb; ++i) {
+      if (key.isKeyDown(this->_event[this->_mode]._event[i]._key))
+	(this->*(_event[this->_mode]._event[i]._f))(clock);
+    }
 }
 
-void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag)
+void Human::drawStart(size_t h, size_t lag)
+{
+  std::stringstream	ss;
+  
+  this->_text.setSize(70);
+  if (this->_start > 0)
+    {
+      ss << this->_start;
+      this->_text.setText(ss.str());
+      this->_text.setPosition(lag + 160, h / 2);
+      this->_text.draw();
+    }
+  else if (!this->_start)
+    {
+      this->_text.setText("Start");
+      this->_text.setPosition(lag + 90, h / 2);
+      this->_text.draw();
+    }
+}
+
+void Human::drawEnd(size_t h, size_t lag)
+{
+  this->_text.setSize(70);
+  if (this->_pv)
+    {
+      this->_text.setText("You Win !");
+      this->_text.setPosition(lag + 90, h / 2);
+      this->_text.draw();
+    }
+  else
+    {
+      this->_text.setText("You Loose !");
+      this->_text.setPosition(lag + 90, h / 2);
+      this->_text.draw();
+    }
+}
+
+void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EOG)
 {
   std::stringstream ss;
 
-  gdl::Text text("Ressources/Police/DejaVuSansMono.ttf");
   if (!this->_HUD[0])
     {
       this->_HUD[HUD::LIFE_BAR] = new Surface(310.0f, 40.0f, 10.0f, 10.0f, img[HUD::LIFE_BAR]);
@@ -91,35 +139,46 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag)
   else
     this->_HUD[HUD::BOMB_KO]->draw();
   
-  text.setSize(30);
+  this->_text.setSize(30);
   // TODO si buff
   if (this->_lustStack)
     {
       ss << this->_lustStack;
-      text.setText(ss.str());
+      this->_text.setText(ss.str());
       ss.str("");
       ss.clear();
-      text.setPosition(85 + lag, 65);
-      text.draw();
+      this->_text.setPosition(85 + lag, 65);
+      this->_text.draw();
     }
 
   // TODO si buff
   if (this->_powerStack)
     {
       ss << this->_powerStack;
-      text.setText(ss.str());
+      this->_text.setText(ss.str());
       ss.str("");
       ss.clear();
-      text.setPosition(135 + lag, 65);
-      text.draw();
+      this->_text.setPosition(135 + lag, 65);
+      this->_text.draw();
     }
 
+  ss << this->_pv << "%";
+  this->_text.setText(ss.str());
+  ss.str("");
+  ss.clear();
+  this->_text.setSize(18);
+  this->_text.setPosition(45 + lag, 18);
+  this->_text.draw();
+
   // TODO nb kill
-  text.setText("10");
-  text.setPosition(10.0f + lag, hi - 120.0f);
-  text.draw();
-  text.setSize(10);
-  text.setText("kill");
-  text.setPosition(55.0f + lag, hi - 100.0f);
-  text.draw();
+  this->_text.setText("10");
+  this->_text.setPosition(10.0f + lag, hi - 120.0f);
+  this->_text.draw();
+  this->_text.setSize(10);
+  this->_text.setText("kill");
+  this->_text.setPosition(55.0f + lag, hi - 100.0f);
+  this->_text.draw();
+  this->drawStart(hi, lag);
+  if (EOG)
+    this->drawEnd(hi, lag);
 }

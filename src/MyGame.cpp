@@ -120,7 +120,7 @@ void		MyGame::draw(void)
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->draw();
   this->_camera.setViewHUD();
-  this->_pl1->drawHUD(this->_HUD, 600, 0);
+  this->_pl1->drawHUD(this->_HUD, 600, 0, this->isEOG());
 
   this->_camera.setSplitScreenRight();
   this->_match._map->setOptimization(&this->_pl2->getPos());
@@ -137,7 +137,7 @@ void		MyGame::draw(void)
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->draw();
   this->_camera.setViewHUD();
-  this->_pl2->drawHUD(this->_HUD, 600, 410);
+  this->_pl2->drawHUD(this->_HUD, 600, 410, this->isEOG());
 }
 
 void		MyGame::unload(void)
