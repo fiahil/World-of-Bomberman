@@ -73,20 +73,20 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag)
   pvIndic.draw();
 
   // TODO si buff
-  //  if (this->shiel)
-  this->_HUD[HUD::SHIELD]->draw();
+  if (this->_shield)
+    this->_HUD[HUD::SHIELD]->draw();
   // TODO si buff
   if (this->_lustStack)
     this->_HUD[HUD::LUST]->draw();
   // TODO si buff
   if (this->_powerStack)
     this->_HUD[HUD::POWER]->draw();
-
+  
   if (this->_canAttack)
     this->_HUD[HUD::BOMB_OK]->draw();
   else
     this->_HUD[HUD::BOMB_KO]->draw();
-
+  
   text.setSize(30);
   // TODO si buff
   if (this->_lustStack)

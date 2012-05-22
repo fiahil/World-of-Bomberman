@@ -107,10 +107,10 @@ void		Map::initialize(void)
   this->_background = gdl::Image::load("textures/background.jpg");
   this->_modelBonus[BonusType::LIFE] = gdl::Model::load("models/rock.fbx");
   this->_modelBonus[BonusType::BIGBOMB] = gdl::Model::load("models/stump.fbx");
-  this->_modelBonus[BonusType::MEGABOMB] = gdl::Model::load("models/stump.fbx");
-  this->_modelBonus[BonusType::LUST] = gdl::Model::load("models/stump.fbx");
-  this->_modelBonus[BonusType::POWER] = gdl::Model::load("models/stump.fbx");
-  this->_modelBonus[BonusType::SHIELD] = gdl::Model::load("models/stump.fbx");
+  this->_modelBonus[BonusType::MEGABOMB] = gdl::Model::load("models/Bonus_shield.fbx");
+  this->_modelBonus[BonusType::LUST] = gdl::Model::load("models/Bonus_shield.fbx");
+  this->_modelBonus[BonusType::POWER] = gdl::Model::load("models/Bonus_shield.fbx");
+  this->_modelBonus[BonusType::SHIELD] = gdl::Model::load("models/Bonus_shield.fbx");
 }
 
 void		Map::draw(void)

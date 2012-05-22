@@ -92,6 +92,17 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
   this->play(clock, input);
   this->_model.update(clock);
   this->_indic.setPos(this->_pos._x, this->_pos._y);
+  if (this->_shield)
+    {
+      std::cout << "Timer = " << this->_shieldTimer << " Timecur = " << clock.getTotalGameTime() << std::endl;
+      if (this->_shieldTimer < 0.0f)
+	this->_shieldTimer = static_cast<double>(clock.getTotalGameTime() + 10.0f);
+      else if (this->_shieldTimer >= static_cast<double>(clock.getTotalGameTime()))
+	{
+	  this->_shield = false;
+	  this->_shieldTimer = -1.0f;
+	}
+    }
   if ((static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::ATTACK])
     this->_canAttack = true;
@@ -169,7 +180,7 @@ void		APlayer::PowerBonusEffect()
 void		APlayer::ShieldBonusEffect()
 {
   this->_shield = true;
-  // TODO init timer dans update
+  this->_shieldTimer = -1.0f;
 }
 
 void		APlayer::takeDamage(ExplodedBomb const* cur)
