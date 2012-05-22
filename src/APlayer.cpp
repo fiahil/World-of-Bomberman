@@ -8,13 +8,13 @@
 #include "APlayer.hpp"
 
 static const char*	g_refSkin[Skin::LAST] = {
-  "models/sylvanas.fbx"
+  "models/Character_ennemy.FBX"
 };
 
 static const char*	g_refBomb[BombType::LAST] = {
-  "models/normalBomb.fbx",
-  "models/bigBomb.fbx",
-  "models/megaBomb.fbx"
+  "models/Bomb_blue.FBX",
+  "models/Bomb_red.FBX",
+  "models/Bomb_orange.FBX"
 };
 
 APlayer::APlayer(Map & map)
@@ -25,6 +25,10 @@ APlayer::APlayer(Map & map)
     _color(0),
     _attack(false),
     _canAttack(true),
+    _shield(false),
+    _shieldTimer(-1.0f),
+    _lustStack(0),
+    _powerStack(0),
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
     _skin(Skin::NORMAL),
@@ -42,7 +46,11 @@ APlayer::APlayer(Map & map)
   this->_bombEffect[BombType::BIGBOMB] = &APlayer::bigBombEffect;
   this->_bombEffect[BombType::MEGABOMB] = &APlayer::megaBombEffect;
   this->_bonusEffect[BonusType::LIFE] = &APlayer::lifeBonusEffect;
-  this->_bonusEffect[BonusType::WEAPON] = &APlayer::weaponBonusEffect;
+  this->_bonusEffect[BonusType::BIGBOMB] = &APlayer::BigBombBonusEffect;
+  this->_bonusEffect[BonusType::MEGABOMB] = &APlayer::MegaBombBonusEffect;
+  this->_bonusEffect[BonusType::LUST] = &APlayer::LustBonusEffect;
+  this->_bonusEffect[BonusType::POWER] = &APlayer::PowerBonusEffect;
+  this->_bonusEffect[BonusType::SHIELD] = &APlayer::ShieldBonusEffect;
   this->_pos._scale = 2.0f;
   this->setPos(1, 1);
   this->_indic.setScale(2.0f);
@@ -57,7 +65,7 @@ void		APlayer::initialize(void)
 {
   this->_model = gdl::Model::load(g_refSkin[this->_skin]);
   this->_Mbomb = gdl::Model::load(g_refBomb[this->_weapon]);
-  this->_MExplodedBomb = gdl::Model::load("models/normalBomb.fbx");
+  this->_MExplodedBomb = gdl::Model::load("models/Bomb_orange.FBX");
 }
 
 void		APlayer::draw(void)
@@ -65,7 +73,7 @@ void		APlayer::draw(void)
   glPushMatrix();
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y - 1.0f, this->_pos._pos.z);
   (this->*_rotFuncMap[this->_dir])();
-  //glScalef(0.05f, 0.05f, 0.05f);
+   // glScalef(0.05f, 0.05f, 0.05f);
   glScalef(1.5f, 1.5f, 1.5f);
   this->_model.draw();
   glPopMatrix();
@@ -126,18 +134,48 @@ void		APlayer::megaBombEffect(ExplodedBomb const* cur)
 
 void		APlayer::lifeBonusEffect()
 {
-  this->_pv += 50;
+  if (this->_pv + 25 > 100)
+    this->_pv = 100;
+  else
+    this->_pv += 100;
 }
 
-void		APlayer::weaponBonusEffect()
+void		APlayer::BigBombBonusEffect()
 {
-  
+  if (this->_weapon < BombType::BIGBOMB)
+    this->_weapon = BombType::BIGBOMB;
+  this->_Mbomb = gdl::Model::load(g_refBomb[BombType::BIGBOMB]);
+  // TODO change explode
+}
+
+void		APlayer::MegaBombBonusEffect()
+{
+  if (this->_weapon < BombType::MEGABOMB)
+    this->_weapon = BombType::MEGABOMB;
+  this->_Mbomb = gdl::Model::load(g_refBomb[BombType::MEGABOMB]);
+  // TODO change explode
+}
+
+void		APlayer::LustBonusEffect()
+{
+  ++this->_lustStack;
+}
+
+void		APlayer::PowerBonusEffect()
+{
+  ++this->_powerStack;
+}
+
+void		APlayer::ShieldBonusEffect()
+{
+  this->_shield = true;
+  // TODO init timer dans update
 }
 
 void		APlayer::takeDamage(ExplodedBomb const* cur)
 {
   Pattern	pattern = cur->getPatternReal();
-  
+
   if ((this->_pos._x >= (pattern._x - pattern._coefW) &&
        this->_pos._x <= (pattern._x + pattern._coefE) &&
        this->_pos._y == pattern._y) ||
@@ -331,11 +369,13 @@ void		APlayer::DOWNFunction(gdl::GameClock const& clock)
 void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
 {
    double	current;
-
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::ATTACK])
     {
-      this->_timers[HumGame::ATTACK] = current + 3;
+      double	addTimer = 3.0 - (0.2 * this->_lustStack);
+      if (addTimer < 0.00001)
+	addTimer = 0.0;
+      this->_timers[HumGame::ATTACK] = current + addTimer;
       this->_attack = true;
     }
 }
@@ -344,7 +384,9 @@ Bomb*		APlayer::isAttack()
 {
   if (!this->_attack)
     return 0;
-  Bomb	*ret = new Bomb(this->_weapon, this->_pos, this->_id, this->_Mbomb, this->_MExplodedBomb);
+
+  Bomb	*ret = new Bomb(this->_weapon, this->_pos,
+			this->_id, this->_Mbomb, this->_MExplodedBomb, this->_powerStack);
   this->_attack = false;
   return ret;
 }
