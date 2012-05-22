@@ -106,7 +106,11 @@ void		Map::initialize(void)
   this->_unbreak = gdl::Image::load("textures/unbreak.jpg");
   this->_background = gdl::Image::load("textures/background.jpg");
   this->_modelBonus[BonusType::LIFE] = gdl::Model::load("models/rock.fbx");
-  this->_modelBonus[BonusType::WEAPON] = gdl::Model::load("models/stump.fbx");
+  this->_modelBonus[BonusType::BIGBOMB] = gdl::Model::load("models/stump.fbx");
+  this->_modelBonus[BonusType::MEGABOMB] = gdl::Model::load("models/stump.fbx");
+  this->_modelBonus[BonusType::LUST] = gdl::Model::load("models/stump.fbx");
+  this->_modelBonus[BonusType::POWER] = gdl::Model::load("models/stump.fbx");
+  this->_modelBonus[BonusType::SHIELD] = gdl::Model::load("models/stump.fbx");
 }
 
 void		Map::draw(void)

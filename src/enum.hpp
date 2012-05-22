@@ -80,7 +80,11 @@ struct BonusType
   enum eBonus
     {
       LIFE,
-      WEAPON,
+      BIGBOMB,
+      MEGABOMB,
+      LUST,
+      POWER,
+      SHIELD,
       LAST
     };
 };

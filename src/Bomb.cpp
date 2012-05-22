@@ -8,9 +8,9 @@
 
 static const double g_bombScale [] =
   {
-    0.005f,
-    0.005f,
-    0.005f
+    0.3f,
+    0.3f,
+    0.3f
   };
 
 

@@ -41,6 +41,7 @@ protected:
   bool			_attack;
   bool			_canAttack;
   bool			_shield;
+  double		_shieldTimer;
   size_t		_lustStack;
   size_t		_powerStack;
   std::vector<double>   _timers;
@@ -60,7 +61,11 @@ private:
   void	bigBombEffect(ExplodedBomb const*);
   void	megaBombEffect(ExplodedBomb const*);
   void	lifeBonusEffect();
-  void	weaponBonusEffect();
+  void		BigBombBonusEffect();
+  void		MegaBombBonusEffect();
+  void		LustBonusEffect();
+  void		PowerBonusEffect();
+  void		ShieldBonusEffect();
   std::map<BombType::eBomb, fBomb>	_bombEffect;
   std::map<BonusType::eBonus, fBonus>	_bonusEffect;
   ExplodedBomb const*			_curEffect;
