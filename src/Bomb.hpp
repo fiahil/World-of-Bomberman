@@ -9,18 +9,19 @@
 #include <Model.hpp>
 #include "enum.hpp"
 #include "Pattern.hpp"
+#include "APlayer.hpp"
 #include "ExplodedBomb.hpp"
 #include "AObj.hpp"
 
 class Bomb : public AObj
 {
 public:
-  Bomb(BombType::eBomb t, Point const &, size_t id, gdl::Model&, gdl::Model&, size_t = 0);
+  Bomb(BombType::eBomb, Point const &, APlayer*, gdl::Model&, gdl::Model&, size_t = 0);
   ~Bomb();
   
 private:
   BombType::eBomb	_type;
-  size_t	_player;
+  APlayer*	_player;
   double	_timer;
   bool		_exploded;
   gdl::Model&	_model;

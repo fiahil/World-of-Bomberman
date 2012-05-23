@@ -14,9 +14,9 @@ static const double g_bombScale [] =
   };
 
 
-Bomb::Bomb(BombType::eBomb t, Point const & pos, size_t id, gdl::Model& model, gdl::Model& modelE, size_t power)
+Bomb::Bomb(BombType::eBomb t, Point const & pos, APlayer* p, gdl::Model& model, gdl::Model& modelE, size_t power)
   : _type(t),
-    _player(id),
+    _player(p),
     _timer(-1.0),
     _exploded(false),
     _model(model),

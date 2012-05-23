@@ -8,6 +8,9 @@
 #include "APlayer.hpp"
 
 static const char*	g_refSkin[Skin::LAST] = {
+  "models/Character_thrall.FBX",
+  "models/Character_sylvanas.FBX",
+  "models/Character_variant.FBX",
   "models/Character_ennemy.FBX"
 };
 
@@ -29,9 +32,10 @@ APlayer::APlayer(Map & map)
     _shieldTimer(-1.0f),
     _lustStack(0),
     _powerStack(0),
+    _nbKills(0),
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
-    _skin(Skin::NORMAL),
+    _skin(Skin::ENNEMY),
     _state(State::STATIC),
     _dir(Dir::SOUTH),
     _indic(0.5f, 0.5f, 0.8f, _color),
@@ -46,8 +50,7 @@ APlayer::APlayer(Map & map)
   this->_bombEffect[BombType::BIGBOMB] = &APlayer::bigBombEffect;
   this->_bombEffect[BombType::MEGABOMB] = &APlayer::megaBombEffect;
   this->_bonusEffect[BonusType::LIFE] = &APlayer::lifeBonusEffect;
-  this->_bonusEffect[BonusType::BIGBOMB] = &APlayer::BigBombBonusEffect;
-  this->_bonusEffect[BonusType::MEGABOMB] = &APlayer::MegaBombBonusEffect;
+  this->_bonusEffect[BonusType::BOMB] = &APlayer::BombBonusEffect;
   this->_bonusEffect[BonusType::LUST] = &APlayer::LustBonusEffect;
   this->_bonusEffect[BonusType::POWER] = &APlayer::PowerBonusEffect;
   this->_bonusEffect[BonusType::SHIELD] = &APlayer::ShieldBonusEffect;
@@ -64,6 +67,9 @@ APlayer::~APlayer()
 void		APlayer::initialize(void)
 {
   this->_model = gdl::Model::load(g_refSkin[this->_skin]);
+  this->_model.infos();
+  gdl::Model::cut_animation(this->_model, "Take 001", 0, 1, "run");
+  this->_model.infos();
   this->_Mbomb = gdl::Model::load(g_refBomb[this->_weapon]);
   this->_MExplodedBomb = gdl::Model::load("models/Bomb_orange.FBX");
 }
@@ -89,7 +95,8 @@ void		APlayer::drawHUD(std::vector<gdl::Image>&, size_t, size_t, bool)
 
 void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-  this->play(clock, input);
+  if (this->_pv)
+    this->play(clock, input);
   this->_model.update(clock);
   this->_indic.setPos(this->_pos._x, this->_pos._y);
   if (this->_shield)
@@ -158,20 +165,13 @@ void		APlayer::lifeBonusEffect()
     this->_pv = 100;
 }
 
-void		APlayer::BigBombBonusEffect()
-{
-  if (this->_weapon < BombType::BIGBOMB)
-    this->_weapon = BombType::BIGBOMB;
-  this->_Mbomb = gdl::Model::load(g_refBomb[BombType::BIGBOMB]);
-  // TODO change explode
-}
-
-void		APlayer::MegaBombBonusEffect()
+void		APlayer::BombBonusEffect()
 {
   if (this->_weapon < BombType::MEGABOMB)
-    this->_weapon = BombType::MEGABOMB;
-  this->_Mbomb = gdl::Model::load(g_refBomb[BombType::MEGABOMB]);
-  // TODO change explode
+    {
+      this->_weapon = static_cast<BombType::eBomb>(this->_weapon + 1);
+      this->_Mbomb = gdl::Model::load(g_refBomb[this->_weapon]);
+    }
 }
 
 void		APlayer::LustBonusEffect()
@@ -324,6 +324,11 @@ std::string const&	APlayer::getTeamName() const
   return this->_teamName;
 }
 
+void		APlayer::incNbKills()
+{
+  ++this->_nbKills;
+}
+
 void		APlayer::UPFunction(gdl::GameClock const& clock)
 {
   double	current;
@@ -390,7 +395,7 @@ void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::ATTACK])
     {
-      double	addTimer = 3.0 - (0.2 * this->_lustStack);
+      double	addTimer = 3.0 - (0.3 * this->_lustStack);
       if (addTimer < 0.00001)
 	addTimer = 0.0;
       this->_timers[HumGame::ATTACK] = current + addTimer;
@@ -404,7 +409,7 @@ Bomb*		APlayer::isAttack()
     return 0;
 
   Bomb	*ret = new Bomb(this->_weapon, this->_pos,
-			this->_id, this->_Mbomb, this->_MExplodedBomb, this->_powerStack);
+			this, this->_Mbomb, this->_MExplodedBomb, this->_powerStack);
   this->_attack = false;
   return ret;
 }
@@ -412,20 +417,19 @@ Bomb*		APlayer::isAttack()
 
 void		APlayer::NORTHFunction()
 {
-  glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+  glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
 }
 
 void		APlayer::SOUTHFunction()
 {
- glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
-
 }
 
 void		APlayer::WESTFunction()
 {
-  glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
- }
+ glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
+}
 
 void		APlayer::EASTFunction()
 {
+  glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
 }

@@ -24,11 +24,17 @@ private:
   Camera		_camera;
   APlayer*		_pl1;
   APlayer*		_pl2;
+  std::list<APlayer*>	_dead;
+  bool			_EOG;
+  double		_EOGTimer;
   
 private:
   std::vector<gdl::Image>	_HUD;
   gdl::Model			_Mbomb;
   gdl::Model			_MExplodedBomb;
+
+private:
+  void		drawGame(APlayer*, size_t);
 
 public:
   void		initialize(void);

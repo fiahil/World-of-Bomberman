@@ -19,7 +19,8 @@ Human::Human(Map & map, const Config& conf)//, std::vector<size_t>&, std::vector
     _start(4),
     _startTimer(-1.0f),
     _text("Ressources/Police/DejaVuSansMono.ttf"),
-    _HUD(HUD::LAST, 0)
+    _HUD(HUD::LAST, 0),
+    _bombAff(BombType::LAST, 0)
 {
   this->_event[Input::GAME]._freq = 2; // TODO TMP
   this->_event[Input::GAME]._nb = 5;
@@ -38,6 +39,9 @@ Human::Human(Map & map, const Config& conf)//, std::vector<size_t>&, std::vector
   this->_event[Input::GAME].
     _event.push_back(initStruct(conf.getConfig(HumGame::ATTACK),
 				HumGame::ATTACK, &Human::ATTACKFunction));
+  this->_bombAff[BombType::NORMAL] = &Human::affNormalBomb;
+  this->_bombAff[BombType::BIGBOMB] = &Human::affBigBomb;
+  this->_bombAff[BombType::MEGABOMB] = &Human::affMegaBomb;
   // TODO implement other mode
 }
 
@@ -83,25 +87,49 @@ void Human::drawStart(size_t h, size_t lag)
     }
 }
 
-void Human::drawEnd(size_t h, size_t lag)
+void Human::drawEnd(size_t h, size_t lag, bool EOG)
 {
-  this->_text.setSize(70);
-  if (this->_pv)
+  this->_text.setSize(40);
+  if (!this->_pv)
+    {
+      this->_text.setText("You Lose !");
+      this->_text.setPosition(lag + 90, h / 2);
+      this->_text.draw();
+    }
+  else if (EOG)
     {
       this->_text.setText("You Win !");
       this->_text.setPosition(lag + 90, h / 2);
       this->_text.draw();
     }
-  else
-    {
-      this->_text.setText("You Loose !");
-      this->_text.setPosition(lag + 90, h / 2);
-      this->_text.draw();
-    }
 }
 
-void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EOG)
+void Human::affNormalBomb()
 {
+  if (this->_canAttack)
+    this->_HUD[HUD::BOMB_OK]->draw();
+  else
+    this->_HUD[HUD::BOMB_KO]->draw();
+}
+
+void  Human::affBigBomb()
+{
+  if (this->_canAttack)
+    this->_HUD[HUD::BIGBOMB_OK]->draw();
+  else
+    this->_HUD[HUD::BIGBOMB_KO]->draw();
+}
+
+void  Human::affMegaBomb()
+{
+  if (this->_canAttack)
+    this->_HUD[HUD::MEGABOMB_OK]->draw();
+  else
+    this->_HUD[HUD::MEGABOMB_KO]->draw();
+}
+
+void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EOG) {
+
   std::stringstream ss;
 
   if (!this->_HUD[0])
@@ -114,33 +142,34 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EO
 	new Surface(70.0f, 70.0f, 10.0f, hi - 80.0f, img[HUD::BOMB_OK]);
       this->_HUD[HUD::BOMB_KO] =
 	new Surface(70.0f, 70.0f, 10.0f, hi - 80.0f, img[HUD::BOMB_KO]);
+      this->_HUD[HUD::BIGBOMB_OK] =
+	new Surface(70.0f, 70.0f, 10.0f, hi - 80.0f, img[HUD::BIGBOMB_OK]);
+      this->_HUD[HUD::BIGBOMB_KO] =
+	new Surface(70.0f, 70.0f, 10.0f, hi - 80.0f, img[HUD::BIGBOMB_KO]);
+      this->_HUD[HUD::MEGABOMB_OK] =
+	new Surface(70.0f, 70.0f, 10.0f, hi - 80.0f, img[HUD::MEGABOMB_OK]);
+      this->_HUD[HUD::MEGABOMB_KO] =
+	new Surface(70.0f, 70.0f, 10.0f, hi - 80.0f, img[HUD::MEGABOMB_KO]);
     }
   this->_HUD[HUD::LIFE_BAR]->draw();
 
   double	size = (this->_pv / 100.0f * 250.0f);
-  
+
+  (this->*(this->_bombAff[this->_weapon]))();
+
   if (size > 250.0f)
     size = 250.0f;
-  Surface pvIndic(size, 20.0f, 40.0f, 20.0f, img[HUD::LAST]);
+  Surface pvIndic(size, 20.0f, 40.0f, 20.0f, img[HUD::LIFE]);
   pvIndic.draw();
 
-  // TODO si buff
   if (this->_shield)
     this->_HUD[HUD::SHIELD]->draw();
-  // TODO si buff
   if (this->_lustStack)
     this->_HUD[HUD::LUST]->draw();
-  // TODO si buff
   if (this->_powerStack)
     this->_HUD[HUD::POWER]->draw();
-  
-  if (this->_canAttack)
-    this->_HUD[HUD::BOMB_OK]->draw();
-  else
-    this->_HUD[HUD::BOMB_KO]->draw();
-  
+
   this->_text.setSize(30);
-  // TODO si buff
   if (this->_lustStack)
     {
       ss << this->_lustStack;
@@ -151,7 +180,6 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EO
       this->_text.draw();
     }
 
-  // TODO si buff
   if (this->_powerStack)
     {
       ss << this->_powerStack;
@@ -171,14 +199,15 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EO
   this->_text.draw();
 
   // TODO nb kill
-  this->_text.setText("10");
+  this->_text.setSize(30);
+  ss << this->_nbKills;
+  this->_text.setText(ss.str());
   this->_text.setPosition(10.0f + lag, hi - 120.0f);
   this->_text.draw();
   this->_text.setSize(10);
-  this->_text.setText("kill");
+  this->_text.setText("kills");
   this->_text.setPosition(55.0f + lag, hi - 100.0f);
   this->_text.draw();
   this->drawStart(hi, lag);
-  if (EOG)
-    this->drawEnd(hi, lag);
+  this->drawEnd(hi, lag, EOG);
 }

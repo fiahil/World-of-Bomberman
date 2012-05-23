@@ -29,12 +29,13 @@ void		Bonus::draw()
 {
   glPushMatrix();
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
-  glScalef(0.05f, 0.05f, 0.05f);
+  glScalef(0.5f, 0.5f, 0.5f);
   this->_model.draw();
   glPopMatrix();
 }
 
 void		Bonus::update(gdl::GameClock const& clock, gdl::Input&)
 {
+  this->_model.play("Take 001");
   this->_model.update(clock);
 }

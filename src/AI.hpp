@@ -13,6 +13,8 @@ class AI : public APlayer
 {
 private:
   AIType::eAI	_type;
+  int		_start;
+  double	_startTimer;
 
 private:
   typedef void	(AI::*fDifficulty)(gdl::GameClock const&);
