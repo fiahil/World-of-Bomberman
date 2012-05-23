@@ -67,6 +67,9 @@ APlayer::~APlayer()
 void		APlayer::initialize(void)
 {
   this->_model = gdl::Model::load(g_refSkin[this->_skin]);
+  this->_model.infos();
+  gdl::Model::cut_animation(this->_model, "Take 001", 0, 1, "run");
+  this->_model.infos();
   this->_Mbomb = gdl::Model::load(g_refBomb[this->_weapon]);
   this->_MExplodedBomb = gdl::Model::load("models/Bomb_orange.FBX");
 }

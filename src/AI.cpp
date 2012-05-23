@@ -7,7 +7,7 @@
 #include "AI.hpp"
 
 AI::AI(AIType::eAI type, Map& map)
-  : APlayer(map), _type(type)
+  : APlayer(map), _type(type), _start(4), _startTimer(-1.0f)
 {
   this->_AIDifficulty[AIType::EASY] = &AI::AIEasy;
   this->_AIDifficulty[AIType::MEDIUM] = &AI::AIMedium;
@@ -58,5 +58,11 @@ void	AI::AIHard(gdl::GameClock const&)
 
 void AI::play(gdl::GameClock const& clock, gdl::Input&)
 {
-  (this->*_AIDifficulty[this->_type])(clock);
+  if (this->_start >= 0 && this->_startTimer <= clock.getTotalGameTime())
+    {
+      --this->_start;
+      this->_startTimer = clock.getTotalGameTime() + 1.0f;
+    }
+  else if (this->_start < 0)
+    (this->*_AIDifficulty[this->_type])(clock);
 }
