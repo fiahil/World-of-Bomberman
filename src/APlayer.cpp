@@ -8,6 +8,9 @@
 #include "APlayer.hpp"
 
 static const char*	g_refSkin[Skin::LAST] = {
+  "models/Character_thrall.FBX",
+  "models/Character_sylvanas.FBX",
+  "models/Character_variant.FBX",
   "models/Character_ennemy.FBX"
 };
 
@@ -32,7 +35,7 @@ APlayer::APlayer(Map & map)
     _nbKills(0),
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
-    _skin(Skin::NORMAL),
+    _skin(Skin::ENNEMY),
     _state(State::STATIC),
     _dir(Dir::SOUTH),
     _indic(0.5f, 0.5f, 0.8f, _color),
@@ -388,7 +391,7 @@ void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::ATTACK])
     {
-      double	addTimer = 3.0 - (0.2 * this->_lustStack);
+      double	addTimer = 3.0 - (0.3 * this->_lustStack);
       if (addTimer < 0.00001)
 	addTimer = 0.0;
       this->_timers[HumGame::ATTACK] = current + addTimer;
@@ -410,20 +413,19 @@ Bomb*		APlayer::isAttack()
 
 void		APlayer::NORTHFunction()
 {
-  glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
+  glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
 }
 
 void		APlayer::SOUTHFunction()
 {
- glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
-
 }
 
 void		APlayer::WESTFunction()
 {
-  glRotatef(180.0f, 0.0f, 1.0f, 0.0f);
- }
+ glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
+}
 
 void		APlayer::EASTFunction()
 {
+  glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
 }

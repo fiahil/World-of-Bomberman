@@ -29,7 +29,7 @@ void		Bonus::draw()
 {
   glPushMatrix();
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
-  glScalef(1.0f, 1.0f, 1.0f);
+  glScalef(0.5f, 0.5f, 0.5f);
   this->_model.draw();
   glPopMatrix();
 }
