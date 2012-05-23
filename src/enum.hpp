@@ -130,11 +130,16 @@ struct HUD
 {
   enum eHUD {
     LIFE_BAR,
+    LIFE,
     SHIELD,
     POWER,
     LUST,
     BOMB_OK,
     BOMB_KO,
+    BIGBOMB_OK,
+    BIGBOMB_KO,
+    MEGABOMB_OK,
+    MEGABOMB_KO,
     LAST
   };
 };

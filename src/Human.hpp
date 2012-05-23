@@ -24,6 +24,7 @@ public:
 private:
 
   typedef void (APlayer::*actionFunc)(gdl::GameClock const&);
+  typedef void (Human::*bombAffFunc)(void);
 
   struct eventSt {
     gdl::Keys::Key _key;
@@ -42,15 +43,20 @@ private:
   Human::eventSt initStruct(gdl::Keys::Key, HumGame::eAction, actionFunc) const;
   Input::eMode		_mode;
   inputMap		_event;
-  
+
   int		_start;
   double	_startTimer;
   gdl::Text	_text;
   void		drawStart(size_t, size_t);
   void		drawEnd(size_t, size_t);
 
+  void affNormalBomb();
+  void affBigBomb();
+  void affMegaBomb();
+
 private:
-  std::vector<Surface*>	_HUD;
+  std::vector<Surface*>		_HUD;
+  std::vector<bombAffFunc>	_bombAff;
   // std::vector<size_t>&	_achievements;
   // std::vector<size_t> const	_skill;
 };
