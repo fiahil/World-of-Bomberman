@@ -80,8 +80,7 @@ struct BonusType
   enum eBonus
     {
       LIFE,
-      BIGBOMB,
-      MEGABOMB,
+      BOMB,
       LUST,
       POWER,
       SHIELD,

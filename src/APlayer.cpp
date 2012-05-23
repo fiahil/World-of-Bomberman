@@ -46,8 +46,7 @@ APlayer::APlayer(Map & map)
   this->_bombEffect[BombType::BIGBOMB] = &APlayer::bigBombEffect;
   this->_bombEffect[BombType::MEGABOMB] = &APlayer::megaBombEffect;
   this->_bonusEffect[BonusType::LIFE] = &APlayer::lifeBonusEffect;
-  this->_bonusEffect[BonusType::BIGBOMB] = &APlayer::BigBombBonusEffect;
-  this->_bonusEffect[BonusType::MEGABOMB] = &APlayer::MegaBombBonusEffect;
+  this->_bonusEffect[BonusType::BOMB] = &APlayer::BombBonusEffect;
   this->_bonusEffect[BonusType::LUST] = &APlayer::LustBonusEffect;
   this->_bonusEffect[BonusType::POWER] = &APlayer::PowerBonusEffect;
   this->_bonusEffect[BonusType::SHIELD] = &APlayer::ShieldBonusEffect;
@@ -158,20 +157,13 @@ void		APlayer::lifeBonusEffect()
     this->_pv = 100;
 }
 
-void		APlayer::BigBombBonusEffect()
-{
-  if (this->_weapon < BombType::BIGBOMB)
-    this->_weapon = BombType::BIGBOMB;
-  this->_Mbomb = gdl::Model::load(g_refBomb[BombType::BIGBOMB]);
-  // TODO change explode
-}
-
-void		APlayer::MegaBombBonusEffect()
+void		APlayer::BombBonusEffect()
 {
   if (this->_weapon < BombType::MEGABOMB)
-    this->_weapon = BombType::MEGABOMB;
-  this->_Mbomb = gdl::Model::load(g_refBomb[BombType::MEGABOMB]);
-  // TODO change explode
+    {
+      this->_weapon = static_cast<BombType::eBomb>(this->_weapon + 1);
+      this->_Mbomb = gdl::Model::load(g_refBomb[this->_weapon]);
+    }
 }
 
 void		APlayer::LustBonusEffect()
