@@ -199,7 +199,9 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EO
   this->_text.draw();
 
   // TODO nb kill
-  this->_text.setText("10");
+  this->_text.setSize(30);
+  ss << this->_nbKills;
+  this->_text.setText(ss.str());
   this->_text.setPosition(10.0f + lag, hi - 120.0f);
   this->_text.draw();
   this->_text.setSize(10);
