@@ -47,7 +47,10 @@ struct Skin
 {
   enum eSkin
     {
-      NORMAL,
+      THRALL,
+      SYLVANAS,
+      VARIANT,
+      ENNEMY,
       LAST
     };
 };
