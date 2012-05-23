@@ -48,7 +48,7 @@ private:
   double	_startTimer;
   gdl::Text	_text;
   void		drawStart(size_t, size_t);
-  void		drawEnd(size_t, size_t);
+  void		drawEnd(size_t, size_t, bool);
 
   void affNormalBomb();
   void affBigBomb();

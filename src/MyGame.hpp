@@ -26,6 +26,7 @@ private:
   APlayer*		_pl2;
   std::list<APlayer*>	_dead;
   bool			_EOG;
+  double		_EOGTimer;
   
 private:
   std::vector<gdl::Image>	_HUD;

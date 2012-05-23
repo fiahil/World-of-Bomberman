@@ -20,6 +20,7 @@ MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
     _pl1(pl1),
     _pl2(pl2),
     _EOG(false),
+    _EOGTimer(-1.0f),
     _HUD(HUD::LAST)
 {
 }
@@ -97,6 +98,7 @@ void		MyGame::update(void)
        it != this->_match._bonus.end(); ++it)
     (*it)->update(this->_clock, this->_input);
 
+  int	nb = 0;
   this->_EOG = true;
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     {
@@ -110,13 +112,19 @@ void		MyGame::update(void)
 	  }
       if (this->_match._players[i]->getTeamId() != this->_match._players[0]->getTeamId())
 	this->_EOG = false;
+      if (this->_pl1 == this->_match._players[i] || this->_pl2 == this->_match._players[i])
+	++nb;
       this->_match._players[i]->update(this->_clock, this->_input);
       if ((newBomb = this->_match._players[i]->isAttack()))
 	this->_match._bombs.push_back(newBomb);
     }
+  if (!nb)
+    this->_EOG = true;
   for (std::list<APlayer*>::iterator it = this->_dead.begin();
        it != this->_dead.end(); ++it)
     (*it)->update(this->_clock, this->_input);
+  if (this->_EOG && this->_EOGTimer < 0.0f)
+    this->_EOGTimer = this->_clock.getTotalGameTime() + 3.0f;
 }
 
 void		MyGame::drawGame(APlayer* p, size_t lag)
@@ -134,17 +142,11 @@ void		MyGame::drawGame(APlayer* p, size_t lag)
     (*it)->draw();
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->draw();
-
-  bool	flag = false;
   for (std::list<APlayer*>::iterator it = this->_dead.begin();
        it != this->_dead.end(); ++it)
-    {
-      if ((*it) == p)
-	flag = true;
-      (*it)->draw();
-    }
+    (*it)->draw();
   this->_camera.setViewHUD();
-  p->drawHUD(this->_HUD, 600, lag, flag);
+  p->drawHUD(this->_HUD, 600, lag, this->_EOG);
 }
 
 void		MyGame::draw(void)
@@ -162,5 +164,5 @@ void		MyGame::unload(void)
 
 bool		MyGame::isEOG(void) const
 {
-  return this->_EOG;
+  return (this->_EOG && this->_clock.getTotalGameTime() >= this->_EOGTimer);
 }

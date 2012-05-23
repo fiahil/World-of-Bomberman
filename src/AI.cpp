@@ -58,6 +58,5 @@ void	AI::AIHard(gdl::GameClock const&)
 
 void AI::play(gdl::GameClock const& clock, gdl::Input&)
 {
-  if (this->_pv)
-    (this->*_AIDifficulty[this->_type])(clock);
+  (this->*_AIDifficulty[this->_type])(clock);
 }

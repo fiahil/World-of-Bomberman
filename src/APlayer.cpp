@@ -89,7 +89,8 @@ void		APlayer::drawHUD(std::vector<gdl::Image>&, size_t, size_t, bool)
 
 void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-  this->play(clock, input);
+  if (this->_pv)
+    this->play(clock, input);
   this->_model.update(clock);
   this->_indic.setPos(this->_pos._x, this->_pos._y);
   if (this->_shield)

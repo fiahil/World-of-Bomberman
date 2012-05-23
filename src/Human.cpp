@@ -87,18 +87,18 @@ void Human::drawStart(size_t h, size_t lag)
     }
 }
 
-void Human::drawEnd(size_t h, size_t lag)
+void Human::drawEnd(size_t h, size_t lag, bool EOG)
 {
   this->_text.setSize(40);
-  if (this->_pv)
+  if (!this->_pv)
     {
-      this->_text.setText("You Win !");
+      this->_text.setText("You Lose !");
       this->_text.setPosition(lag + 90, h / 2);
       this->_text.draw();
     }
-  else
+  else if (EOG)
     {
-      this->_text.setText("You Lose !");
+      this->_text.setText("You Win !");
       this->_text.setPosition(lag + 90, h / 2);
       this->_text.draw();
     }
@@ -209,6 +209,5 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EO
   this->_text.setPosition(55.0f + lag, hi - 100.0f);
   this->_text.draw();
   this->drawStart(hi, lag);
-  if (EOG)
-    this->drawEnd(hi, lag);
+  this->drawEnd(hi, lag, EOG);
 }
