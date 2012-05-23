@@ -3,7 +3,9 @@
 #define __EXPLODEDBOMB_HPP__
 
 #include <Model.hpp>
-#include "Bomb.hpp"
+#include "APlayer.hpp"
+#include "enum.hpp"
+#include "Pattern.hpp"
 #include "AObj.hpp"
 
 class ExplodedBomb : public AObj
@@ -12,7 +14,7 @@ private:
   BombType::eBomb	_type;		
   Pattern		_final;
   Pattern		_real;
-  size_t		_player;
+  APlayer*		_player;
   double		_timer;
   double		_lastTime;
   bool			_EOE;
@@ -22,7 +24,7 @@ private:
   void	drawPattern(Point const&);
 
 public:
-  ExplodedBomb(BombType::eBomb, Point const&, Pattern const&, Pattern const&, size_t, double, gdl::Model&);
+  ExplodedBomb(BombType::eBomb, Point const&, Pattern const&, Pattern const&, APlayer*, double, gdl::Model&);
   virtual ~ExplodedBomb();
   virtual void	initialize();
   virtual void	update(gdl::GameClock const&, gdl::Input&);
@@ -32,6 +34,7 @@ public:
   Pattern&	getPatternReal();
   Pattern const&	getPatternReal() const;
   Pattern&	getPatternFinal();
+  APlayer*	getPlayer() const;
 };
 
 #else

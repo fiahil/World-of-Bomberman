@@ -35,10 +35,12 @@ void		Menu::initialize(void)
   conf.setConfig(HumGame::ATTACK, gdl::Keys::R);
   APlayer *newHum = new Human(*map, conf);
   newHum->setColor(6);
+  newHum->setTeamId(6);
   players.push_back(newHum);
-  /*  APlayer *newAI = new AI(AIType::EASY, *map);
+  APlayer *newAI = new AI(AIType::EASY, *map);
   newAI->setColor(7);
-  players.push_back(newAI);*/
+  newAI->setTeamId(7);
+  players.push_back(newAI);
   Match*	m = new Match(map, false, GameMode::ARCADE, players);
   this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0], players[1]); // TODO
   this->_game->initialize();

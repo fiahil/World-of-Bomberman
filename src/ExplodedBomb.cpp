@@ -2,7 +2,7 @@
 #include <iostream>
 #include "ExplodedBomb.hpp"
 
-ExplodedBomb::ExplodedBomb(BombType::eBomb type, Point const& pos, Pattern const& real, Pattern const& final, size_t player, double timer, gdl::Model& model)
+ExplodedBomb::ExplodedBomb(BombType::eBomb type, Point const& pos, Pattern const& real, Pattern const& final, APlayer* player, double timer, gdl::Model& model)
   : _type(type),
     _final(final),
     _real(real),
@@ -119,4 +119,9 @@ Pattern const&	ExplodedBomb::getPatternReal() const
 Pattern&	ExplodedBomb::getPatternFinal()
 {
   return this->_final;
+}
+
+APlayer*	ExplodedBomb::getPlayer() const
+{
+  return this->_player;
 }
