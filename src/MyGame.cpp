@@ -84,7 +84,7 @@ void		MyGame::update(void)
 	      if ((*i)->getPv() == 0)
 		{
 		  (*it)->getPlayer()->incNbKills();
-		  delete (*i);
+		  this->_dead.push_back((*i));
 		  i = this->_match._players.erase(i);
 		}
 	      else
@@ -114,6 +114,9 @@ void		MyGame::update(void)
       if ((newBomb = this->_match._players[i]->isAttack()))
 	this->_match._bombs.push_back(newBomb);
     }
+  for (std::list<APlayer*>::iterator it = this->_dead.begin();
+       it != this->_dead.end(); ++it)
+    (*it)->update(this->_clock, this->_input);
 }
 
 void		MyGame::drawGame(APlayer* p, size_t lag)
@@ -131,8 +134,17 @@ void		MyGame::drawGame(APlayer* p, size_t lag)
     (*it)->draw();
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->draw();
+
+  bool	flag = false;
+  for (std::list<APlayer*>::iterator it = this->_dead.begin();
+       it != this->_dead.end(); ++it)
+    {
+      if ((*it) == p)
+	flag = true;
+      (*it)->draw();
+    }
   this->_camera.setViewHUD();
-  p->drawHUD(this->_HUD, 600, lag, this->isEOG());
+  p->drawHUD(this->_HUD, 600, lag, flag);
 }
 
 void		MyGame::draw(void)

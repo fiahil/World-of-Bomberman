@@ -24,6 +24,7 @@ private:
   Camera		_camera;
   APlayer*		_pl1;
   APlayer*		_pl2;
+  std::list<APlayer*>	_dead;
   bool			_EOG;
   
 private:
