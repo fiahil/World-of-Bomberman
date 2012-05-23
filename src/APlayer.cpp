@@ -29,6 +29,7 @@ APlayer::APlayer(Map & map)
     _shieldTimer(-1.0f),
     _lustStack(0),
     _powerStack(0),
+    _nbKills(0),
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
     _skin(Skin::NORMAL),
@@ -316,6 +317,11 @@ std::string const&	APlayer::getTeamName() const
   return this->_teamName;
 }
 
+void		APlayer::incNbKills()
+{
+  ++this->_nbKills;
+}
+
 void		APlayer::UPFunction(gdl::GameClock const& clock)
 {
   double	current;
@@ -396,7 +402,7 @@ Bomb*		APlayer::isAttack()
     return 0;
 
   Bomb	*ret = new Bomb(this->_weapon, this->_pos,
-			this->_id, this->_Mbomb, this->_MExplodedBomb, this->_powerStack);
+			this, this->_Mbomb, this->_MExplodedBomb, this->_powerStack);
   this->_attack = false;
   return ret;
 }

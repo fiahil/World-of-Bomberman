@@ -9,6 +9,7 @@
 #include <map>
 #include <string>
 #include <Image.hpp>
+#include "ExplodedBomb.hpp"
 #include "Bomb.hpp"
 #include "Map.hpp"
 #include "Model.hpp"
@@ -44,6 +45,7 @@ protected:
   double		_shieldTimer;
   size_t		_lustStack;
   size_t		_powerStack;
+  size_t		_nbKills;
   std::vector<double>   _timers;
   std::string		_name;
   std::string		_teamName;
@@ -122,6 +124,11 @@ public:
   void		setName(std::string const&);
   void		setTeamName(std::string const&);
   void		setType(size_t);
+  void		incNbKills();
 };
+
+#else
+
+class APlayer;
 
 #endif

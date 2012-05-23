@@ -78,6 +78,7 @@ void		MyGame::update(void)
 	      (*i)->takeDamage((*it));
 	      if ((*i)->getPv() == 0)
 		{
+		  (*i)->incNbKills();
 		  delete (*i);
 		  i = this->_match._players.erase(i);
 		}
