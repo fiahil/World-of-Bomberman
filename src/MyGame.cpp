@@ -19,7 +19,7 @@ MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
     _camera(800, 600, pl1, pl2),
     _pl1(pl1),
     _pl2(pl2),
-    _HUD(HUD::LAST + 1)
+    _HUD(HUD::LAST)
 {
 }
 
@@ -38,7 +38,11 @@ void		MyGame::initialize(void)
   this->_HUD[HUD::LUST] = gdl::Image::load("textures/fury.png");
   this->_HUD[HUD::BOMB_OK] = gdl::Image::load("textures/bombActive.png");
   this->_HUD[HUD::BOMB_KO] = gdl::Image::load("textures/bombInactive.png");
-  this->_HUD[HUD::LAST] = gdl::Image::load("textures/pv.png");
+  this->_HUD[HUD::BIGBOMB_OK] = gdl::Image::load("textures/bigbombActive.png");
+  this->_HUD[HUD::BIGBOMB_KO] = gdl::Image::load("textures/bigbombInactive.png");
+  this->_HUD[HUD::MEGABOMB_OK] = gdl::Image::load("textures/megabombActive.png");
+  this->_HUD[HUD::MEGABOMB_KO] = gdl::Image::load("textures/megabombInactive.png");
+  this->_HUD[HUD::LIFE] = gdl::Image::load("textures/pv.png");
 }
 
 void		MyGame::update(void)
