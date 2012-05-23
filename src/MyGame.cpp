@@ -19,6 +19,7 @@ MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
     _camera(800, 600, pl1, pl2),
     _pl1(pl1),
     _pl2(pl2),
+    _EOG(false),
     _HUD(HUD::LAST)
 {
 }
@@ -82,7 +83,7 @@ void		MyGame::update(void)
 	      (*i)->takeDamage((*it));
 	      if ((*i)->getPv() == 0)
 		{
-		  (*i)->incNbKills();
+		  (*it)->getPlayer()->incNbKills();
 		  delete (*i);
 		  i = this->_match._players.erase(i);
 		}
@@ -92,6 +93,11 @@ void		MyGame::update(void)
 	  ++it;
 	}
     }
+  for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
+       it != this->_match._bonus.end(); ++it)
+    (*it)->update(this->_clock, this->_input);
+
+  this->_EOG = true;
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     {
       for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
@@ -102,47 +108,40 @@ void		MyGame::update(void)
 	    this->_match._bonus.erase(it);
 	    break;
 	  }
+      if (this->_match._players[i]->getTeamId() != this->_match._players[0]->getTeamId())
+	this->_EOG = false;
       this->_match._players[i]->update(this->_clock, this->_input);
       if ((newBomb = this->_match._players[i]->isAttack()))
 	this->_match._bombs.push_back(newBomb);
     }
 }
 
+void		MyGame::drawGame(APlayer* p, size_t lag)
+{
+  this->_match._map->setOptimization(&p->getPos());
+  this->_match._map->draw();
+  for (std::list<Bomb*>::iterator it = this->_match._bombs.begin();
+       it != this->_match._bombs.end(); ++it)
+    (*it)->draw();
+  for (std::list<ExplodedBomb*>::iterator it = this->_match._explodedBombs.begin();
+       it != this->_match._explodedBombs.end(); ++it)
+    (*it)->draw();
+  for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
+       it != this->_match._bonus.end(); ++it)
+    (*it)->draw();
+  for (unsigned int i = 0; i < this->_match._players.size(); ++i)
+    this->_match._players[i]->draw();
+  this->_camera.setViewHUD();
+  p->drawHUD(this->_HUD, 600, lag, this->isEOG());
+}
+
 void		MyGame::draw(void)
 {
   this->_camera.setSplitScreenLeft();
-  this->_match._map->setOptimization(&this->_pl1->getPos());
-  this->_match._map->draw();
-  for (std::list<Bomb*>::iterator it = this->_match._bombs.begin();
-       it != this->_match._bombs.end(); ++it)
-    (*it)->draw();
-  for (std::list<ExplodedBomb*>::iterator it = this->_match._explodedBombs.begin();
-       it != this->_match._explodedBombs.end(); ++it)
-    (*it)->draw();
-  for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
-       it != this->_match._bonus.end(); ++it)
-    (*it)->draw();
-  for (unsigned int i = 0; i < this->_match._players.size(); ++i)
-    this->_match._players[i]->draw();
-  this->_camera.setViewHUD();
-  this->_pl1->drawHUD(this->_HUD, 600, 0, this->isEOG());
+  this->drawGame(this->_pl1, 0);
 
   this->_camera.setSplitScreenRight();
-  this->_match._map->setOptimization(&this->_pl2->getPos());
-  this->_match._map->draw();
-  for (std::list<Bomb*>::iterator it = this->_match._bombs.begin();
-       it != this->_match._bombs.end(); ++it)
-    (*it)->draw();
-  for (std::list<ExplodedBomb*>::iterator it = this->_match._explodedBombs.begin();
-       it != this->_match._explodedBombs.end(); ++it)
-    (*it)->draw();
-  for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
-       it != this->_match._bonus.end(); ++it)
-    (*it)->draw();
-  for (unsigned int i = 0; i < this->_match._players.size(); ++i)
-    this->_match._players[i]->draw();
-  this->_camera.setViewHUD();
-  this->_pl2->drawHUD(this->_HUD, 600, 410, this->isEOG());
+  this->drawGame(this->_pl2, 410);
 }
 
 void		MyGame::unload(void)
@@ -151,5 +150,5 @@ void		MyGame::unload(void)
 
 bool		MyGame::isEOG(void) const
 {
-  return false;
+  return this->_EOG;
 }

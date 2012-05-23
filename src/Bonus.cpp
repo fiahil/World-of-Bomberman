@@ -36,5 +36,6 @@ void		Bonus::draw()
 
 void		Bonus::update(gdl::GameClock const& clock, gdl::Input&)
 {
+  this->_model.play("Take 001");
   this->_model.update(clock);
 }
