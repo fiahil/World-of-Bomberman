@@ -50,7 +50,7 @@ APlayer::APlayer(Map & map)
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
     _skin(Skin::ENNEMY),
-    _state(State::STAND),
+    _state(State::RUN),
     _dir(Dir::SOUTH),
     _indic(0.5f, 0.5f, 0.8f, _color),
     _curEffect(0),
@@ -435,6 +435,7 @@ void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
       this->_attack = true;
       this->_state = State::ATTACK;
       this->_model.play(g_refAnimName[this->_state]);
+      this->_model.set_anim_speed(g_refAnimName[this->_state], 2.0f);
     }
 }
 
