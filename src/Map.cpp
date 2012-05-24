@@ -27,6 +27,10 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
 
   this->_expFunc['1'] = &Map::explodeUnBreakable;
   this->_expFunc['2'] = &Map::explodeBreakable;
+  this->_expFunc['3'] = &Map::explodeBreakable;
+
+  this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
+  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate.FBX");
 
   for (size_t i = 0; i < (x * y); ++i)
     this->_map += "0";
@@ -39,10 +43,10 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
 	if (!dwallDensity || !(random() % dwallDensity))
 	  this->_map[POS(tx, ty)] = '1';
 	else
-	  this->_map[POS(tx, ty)] = '2';
+	  this->_map[POS(tx, ty)] = ((random() % 2) + 2) + 48;
       }
       else if (!iwallDensity || !(random() % iwallDensity))
-	this->_map[POS(tx, ty)] = '2';
+	this->_map[POS(tx, ty)] = ((random() % 2) + 2) + 48;
     }
   }
   this->_map[POS(1, 1)] = '0'; //TODO
@@ -59,6 +63,10 @@ Map::Map(std::string const& file)
 
   this->_expFunc['1'] = &Map::explodeUnBreakable;
   this->_expFunc['2'] = &Map::explodeBreakable;
+  this->_expFunc['3'] = &Map::explodeBreakable;
+
+  this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
+  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate.FBX");
 
   infile.open (file.c_str(), std::ifstream::in);
   if (!infile)
@@ -82,9 +90,14 @@ Map::Map(size_t x, size_t y, std::string const& map)
     _map(map),
     _modelBonus(BonusType::LAST)
 {
+
   this->_expFunc['1'] = &Map::explodeUnBreakable;
   this->_expFunc['2'] = &Map::explodeBreakable;
-  this->_map[POS(1, 1)] = '0'; //TODO
+  this->_expFunc['3'] = &Map::explodeBreakable;
+
+  this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
+  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate.FBX");
+
 }
 
 Map::~Map()
@@ -144,8 +157,15 @@ void		Map::draw(void)
       p.setPos(x, y);
       if (this->_map[POS(x, y)] == '1')
 	w_unbreak.draw(p);
-      else if (this->_map[POS(x, y)] == '2')
-	w_break.draw(p);
+      else if (this->_map[POS(x, y)] != '0')
+	{
+	  glPushMatrix();
+	  glTranslatef(p._pos.x, p._pos.y - 1.0f, p._pos.z);
+	  glScalef(0.4f, 0.4f, 0.4f);
+	  this->_modelBreak[this->_map[POS(x, y)]].draw();
+	  glPopMatrix();
+	}
+	// w_break.draw(p);
     }
 }
 
