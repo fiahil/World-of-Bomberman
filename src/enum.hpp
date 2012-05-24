@@ -60,8 +60,9 @@ struct State
   enum eState
     {
       RUN,
-      WALK,
-      STATIC,
+      STAND,
+      ATTACK,
+      DEATH,
       LAST
     };
 };

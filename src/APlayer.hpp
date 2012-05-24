@@ -17,6 +17,18 @@
 #include "Pyramid.hpp"
 #include "AObj.hpp"
 
+struct	infoAnim
+{
+  int	stand_s;
+  int	stand_e;
+  int	run_s;
+  int	run_e;
+  int	death_s;
+  int	death_e;
+  int	attack_s;
+  int	attack_e;
+};
+
 class APlayer : public AObj
 {
 public:
