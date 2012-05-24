@@ -34,6 +34,7 @@ private:
   gdl::Image	_background;
   Point const*	_opti;
   std::vector<gdl::Model>	_modelBonus;
+  std::map<char, gdl::Model>	_modelBreak;
 
 private:
 
