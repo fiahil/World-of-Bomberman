@@ -90,7 +90,7 @@ void		APlayer::initialize(void)
   gdl::Model::cut_animation(this->_model, "Take 001",
 			    g_refAnim[this->_skin].attack_s, g_refAnim[this->_skin].attack_e, g_refAnimName[State::ATTACK]);
   this->_Mbomb = gdl::Model::load(g_refBomb[this->_weapon]);
-  this->_MExplodedBomb = gdl::Model::load("models/Bomb_orange.FBX");
+  this->_MExplodedBomb = gdl::Model::load("models/fire.FBX");
 }
 
 void		APlayer::draw(void)
@@ -116,9 +116,8 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   if (this->_pv)
     this->play(clock, input);
-  if (this->_state != State::DEATH && this->_model.anim_is_ended(g_refAnimName[this->_state]))
+  if (this->_state == State::RUN && this->_model.anim_is_ended(g_refAnimName[this->_state]))
     {
-      this->_model.stop_animation(g_refAnimName[this->_state]);
       this->_state = State::STAND;
       this->_model.play(g_refAnimName[this->_state]);
     }
