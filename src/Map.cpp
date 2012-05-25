@@ -280,12 +280,25 @@ void		Map::explode(Pattern& real, Pattern& final, std::list<Bonus*>& bonus)
 				    );
 }
 
-size_t		Map::getWidth() const
+void		Map::setSpawnTeam(std::vector<APlayer*>& players)
 {
-  return this->_x;
-}
+  std::map<size_t, std::pair<size_t, size_t> >	tmp;
+  size_t	nb = 0;
+  size_t	size = this->_map.size() - 2 * this->_x;
+  size_t	pos;
 
-size_t		Map::getHeight() const
-{
-  return this->_y;
+  for (size_t i = 0; i < players.size(); ++i)
+    tmp[players[i]->getTeamId()] = std::make_pair(0, 0);
+  for (std::map<size_t, std::pair<size_t, size_t> >::iterator it = tmp.begin();
+       it != tmp.end(); ++it)
+    {
+      pos = nb * size / tmp.size() + this->_x - 1;
+      while (this->_map[++pos] != '0');
+      it->second.first = pos % this->_x;
+      it->second.second = pos / this->_x;
+      ++nb;
+    }
+  for (std::vector<APlayer*>::iterator it = players.begin(); it != players.end(); ++it)
+    (*it)->setPos(tmp[(*it)->getTeamId()].first,
+		  tmp[(*it)->getTeamId()].second);
 }

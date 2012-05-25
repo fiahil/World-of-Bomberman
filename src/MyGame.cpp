@@ -33,7 +33,7 @@ MyGame::~MyGame()
 void		MyGame::initialize(void)
 {
   this->_match._map->initialize();
-  this->setSpawnTeam();
+  this->_match._map->setSpawnTeam(this->_match._players);
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->initialize();
   this->_HUD[HUD::LIFE_BAR] = gdl::Image::load("textures/life.png");
@@ -174,23 +174,4 @@ void		MyGame::unload(void)
 bool		MyGame::isEOG(void) const
 {
   return (this->_EOG && this->_clock.getTotalGameTime() >= this->_EOGTimer);
-}
-
-void		MyGame::setSpawnTeam()
-{
-  std::map<size_t, std::pair<size_t, size_t> >	tmp;
-  size_t	nb = 0;
-
-  for (size_t i = 0; i < this->_match._players.size(); ++i)
-    tmp[this->_match._players[i]->getTeamId()] = std::make_pair(0, 0);
-  for (std::map<size_t, std::pair<size_t, size_t> >::iterator it = tmp.begin();
-       it != tmp.end(); ++it, ++nb)
-    {
-      it->second.first = nb * this->_match._map->getWidth() / tmp.size() + 1;
-      it->second.second = nb * this->_match._map->getHeight() / tmp.size() + 1;
-    }
-  for (size_t i = 0; i < this->_match._players.size(); ++i)
-    this->_match._players[i]->setPos(tmp[this->_match._players[i]->getTeamId()].first,
-				    tmp[this->_match._players[i]->getTeamId()].second);
-    
 }

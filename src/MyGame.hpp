@@ -35,7 +35,6 @@ private:
 
 private:
   void		drawGame(APlayer*, size_t);
-  void		setSpawnTeam();
 
 public:
   void		initialize(void);
