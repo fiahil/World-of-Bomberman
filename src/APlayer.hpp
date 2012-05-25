@@ -27,6 +27,8 @@ struct	infoAnim
   int	death_e;
   int	attack_s;
   int	attack_e;
+  int	hit_s;
+  int	hit_e;
 };
 
 class APlayer : public AObj
