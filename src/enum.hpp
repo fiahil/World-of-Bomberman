@@ -17,8 +17,8 @@ struct Input
 
 };
 
-struct HumGame {
-
+struct HumGame
+{
   enum eAction {
     UP,
     LEFT,
@@ -34,8 +34,7 @@ struct HumGame {
 
 struct BombType
 {
-  enum eBomb
-    {
+  enum eBomb {
       NORMAL,
       BIGBOMB,
       MEGABOMB,

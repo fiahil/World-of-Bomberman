@@ -211,8 +211,6 @@ bool	Human::eastJumpFunction()
   return true;
 }
 
-#include <iostream>
-
 void  Human::jumpSkill(gdl::GameClock const& clock)
 {
   double current;

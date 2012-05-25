@@ -20,7 +20,7 @@ View::View()
 
 View		AIView::ctor(char const c)
 {
-  return View(Elt::WALL, c);
+  return View(Elt::WALL, c - '0');
 }
 
 AIView::AIView(Map const& m)

@@ -16,18 +16,34 @@ AI::AI(AIType::eAI type, Map& map)
   this->_AIDifficulty[AIType::HARD] = &AI::AIHard;
 }
 
+bool	AI::isWall(size_t x, size_t y) const
+{
+  return this->_view->at(x, y).type == Elt::WALL && this->_view->at(x, y).pp != 0;
+}
+
+bool	AI::isExplosion(size_t x, size_t y) const
+{
+  return this->_view->at(x, y).type == Elt::EXBOMB;
+}
+
 void	AI::AIEasy(gdl::GameClock const& clock)
 {
-  int				pos = 0;
+  if (!this->isWall(this->_pos._x, this->_pos._y - 1) &&
+      !this->isExplosion(this->_pos._x, this->_pos._y - 1))
+    this->UPFunction(clock);
+  else if (!this->isWall(this->_pos._x, this->_pos._y + 1) &&
+           !this->isExplosion(this->_pos._x, this->_pos._y + 1))
+    this->DOWNFunction(clock);
+  /*int				pos = 0;
   std::vector<Dir::eDir>	ref(static_cast<int>(Dir::LAST), Dir::LAST);
 
-  if (this->_map.canMoveAt(this->_pos._x, this->_pos._y - 1))
+  if (this->isOk(this->_pos._x, this->_pos._y - 1))
     ref[pos++] = Dir::NORTH;
-  if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
+  if (this->isOk(this->_pos._x, this->_pos._y + 1))
     ref[pos++] = Dir::SOUTH;
-  if (this->_map.canMoveAt(this->_pos._x - 1, this->_pos._y))
+  if (this->isOk(this->_pos._x - 1, this->_pos._y))
     ref[pos++] = Dir::WEST;
-  if (this->_map.canMoveAt(this->_pos._x + 1, this->_pos._y))
+  if (this->isOk(this->_pos._x + 1, this->_pos._y))
     ref[pos++] = Dir::EAST;
   if (pos)
     {
@@ -40,7 +56,7 @@ void	AI::AIEasy(gdl::GameClock const& clock)
 	this->LEFTFunction(clock);
       else
 	this->RIGHTFunction(clock);
-    }
+    }*/
 }
 
 void	AI::AIMedium(gdl::GameClock const&)
