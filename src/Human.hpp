@@ -24,7 +24,7 @@ public:
 private:
 
   typedef void (APlayer::*actionFunc)(gdl::GameClock const&);
-  typedef void (Human::*bombAffFunc)(void);
+  typedef void (Human::*ptrFunc)(void);
 
   struct eventSt {
     gdl::Keys::Key _key;
@@ -47,6 +47,7 @@ private:
   int		_start;
   double	_startTimer;
   gdl::Text	_text;
+
   void		drawStart(size_t, size_t);
   void		drawEnd(size_t, size_t, bool);
 
@@ -54,11 +55,19 @@ private:
   void affBigBomb();
   void affMegaBomb();
 
+  Skill::eSkill			_skill;
+  std::vector<ptrFunc>		_skillFunc;
+  void halluSkill();
+  void healSkill();
+  void berserkSkill();
+  void jumpSkill();
+
+
 private:
   std::vector<Surface*>		_HUD;
-  std::vector<bombAffFunc>	_bombAff;
+  std::vector<ptrFunc>	_bombAff;
   // std::vector<size_t>&	_achievements;
-  // std::vector<size_t> const	_skill;
+  // std::vector<size_t> const	_skill; // passage en simple enum
 };
 
 #endif

@@ -13,6 +13,7 @@ static const char*	g_refSkin[Skin::LAST] = {
   "models/Character_thrall.FBX",
   "models/Character_sylvanas.FBX",
   "models/Character_varian.FBX",
+  "models/Character_ennemy.FBX",
   "models/Character_ennemy_low.FBX"
 };
 
@@ -54,7 +55,7 @@ APlayer::APlayer(Map & map)
     _nbKills(0),
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
-    _skin(Skin::THRALL),
+    _skin(Skin::ENNEMY_LOW),
     _state(State::STAND),
     _dir(Dir::SOUTH),
     _indic(0.5f, 0.5f, 0.8f, _color),
@@ -76,10 +77,7 @@ APlayer::APlayer(Map & map)
   this->_pos._scale = 2.0f;
   this->setPos(1, 1);
   this->_k = 0.2f;
-  this->_originPos = this->_pos._pos;
-  this->_realPos = this->_pos._pos;
   this->_indic.setScale(2.0f);
-  this->_indic.setPos(1, 1);
 }
 
 APlayer::~APlayer()
@@ -88,6 +86,9 @@ APlayer::~APlayer()
 
 void		APlayer::initialize(void)
 {
+  this->_originPos = this->_pos._pos;
+  this->_realPos = this->_pos._pos;
+  this->_indic.setPos(this->_pos._x, this->_pos._y);
   this->_model = gdl::Model::load(g_refSkin[this->_skin]);
   gdl::Model::cut_animation(this->_model, "Take 001",
 			    g_refAnim[this->_skin].stand_s, g_refAnim[this->_skin].stand_e, g_refAnimName[State::STAND]);
@@ -481,7 +482,7 @@ void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
       double	addTimer = 3.0 - (0.3 * this->_lustStack);
       if (addTimer < 0.00001)
 	addTimer = 0.0;
-      this->_timers[HumGame::ATTACK] = current + addTimer;
+      this->_timers[HumGame::ATTACK] = current + 0 ; //+ addTimer;
       this->_attack = true;
       this->_state = State::ATTACK;
       this->_model.play(g_refAnimName[this->_state]);
