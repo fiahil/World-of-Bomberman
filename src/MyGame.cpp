@@ -16,7 +16,7 @@ MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
   : _clock(clock),
     _input(input),
     _match(match),
-    _camera(800, 600, pl1, pl2),
+    _camera(1600, 800, pl1, pl2),
     _pl1(pl1),
     _pl2(pl2),
     _EOG(false),
@@ -146,7 +146,7 @@ void		MyGame::drawGame(APlayer* p, size_t lag)
        it != this->_dead.end(); ++it)
     (*it)->draw();
   this->_camera.setViewHUD();
-  p->drawHUD(this->_HUD, 600, lag, this->_EOG);
+  p->drawHUD(this->_HUD, 800, lag, this->_EOG);
 }
 
 void		MyGame::draw(void)
@@ -156,7 +156,7 @@ void		MyGame::draw(void)
       this->_camera.setSplitScreenLeft();
       this->drawGame(this->_pl1, 0);
       this->_camera.setSplitScreenRight();
-      this->drawGame(this->_pl2, 410);
+      this->drawGame(this->_pl2, 810);
     }
   else
     {
