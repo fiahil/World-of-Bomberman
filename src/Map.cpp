@@ -211,7 +211,6 @@ void		Map::draw(void)
 
 void		Map::update(gdl::GameClock const&, gdl::Input&)
 {
-  // TODO : implement
 }
 
 bool Map::canMoveAt(size_t x, size_t y)
@@ -280,4 +279,14 @@ void		Map::explode(Pattern& real, Pattern& final, std::list<Bonus*>& bonus)
 				    POS(final._x - real._coefW, final._y),
 				    bonus
 				    );
+}
+
+size_t		Map::getWidth() const
+{
+  return this->_x;
+}
+
+size_t		Map::getHeight() const
+{
+  return this->_y;
 }

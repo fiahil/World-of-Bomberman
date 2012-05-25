@@ -61,6 +61,9 @@ public:
   void setOptimization(Point const*);
   std::string const&	getMap(void) const;
   void explode(Pattern&, Pattern&, std::list<Bonus*>&);
+  
+  size_t	getWidth() const;
+  size_t	getHeight() const;
 };
 
 #endif /* __Bomberman_Map_h */
