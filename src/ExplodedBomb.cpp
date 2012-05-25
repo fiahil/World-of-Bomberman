@@ -59,12 +59,12 @@ void	ExplodedBomb::update(gdl::GameClock const& clock, gdl::Input&)
   this->_model.update(clock);
 }
 
-void	ExplodedBomb::drawPattern(Point const& pos)
+void	ExplodedBomb::drawPattern(double dir, Point const& pos)
 {
   glPushMatrix();
   glTranslatef(pos._pos.x, pos._pos.y, pos._pos.z);
-  //glScalef(0.3f, 0.3f, 0.3f);
-  glScalef(0.3f, 0.3f, 0.3f);
+  glScalef(0.07f, 0.07f, 0.07f);
+  glRotatef(dir, 0.0f, 1.0f, 0.0f);
   this->_model.draw();
   glPopMatrix();
 }
@@ -74,26 +74,31 @@ void	ExplodedBomb::draw()
   Point		pos(this->_pos);
   size_t	i;
 
-  this->drawPattern(pos);
+  glPushMatrix();
+  glTranslatef(pos._pos.x, pos._pos.y - 1.0f, pos._pos.z);
+  glScalef(0.1f, 0.1f, 0.1f);
+  glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+  this->_model.draw();
+  glPopMatrix();
   for (i = 1; i <= this->_real._coefN; ++i)
     {
       pos.setPos(this->_pos._x, this->_pos._y - i);
-      this->drawPattern(pos);
+      this->drawPattern(0.0f, pos);
     }
   for (i = 1; i <= this->_real._coefS; ++i)
     {
       pos.setPos(this->_pos._x, this->_pos._y + i);
-      this->drawPattern(pos);
+      this->drawPattern(180.0f, pos);
     }
   for (i = 1; i <= this->_real._coefW; ++i)
     {
       pos.setPos(this->_pos._x - i, this->_pos._y);
-      this->drawPattern(pos);
+      this->drawPattern(90.0f, pos);
     }
   for (i = 1; i <= this->_real._coefE; ++i)
     {
       pos.setPos(this->_pos._x + i, this->_pos._y);
-      this->drawPattern(pos);
+      this->drawPattern(-90.0f, pos);
     }
 }
 

@@ -21,7 +21,7 @@ private:
   gdl::Model&		_model;
 
 private:
-  void	drawPattern(Point const&);
+  void	drawPattern(double, Point const&);
 
 public:
   ExplodedBomb(BombType::eBomb, Point const&, Pattern const&, Pattern const&, APlayer*, double, gdl::Model&);
