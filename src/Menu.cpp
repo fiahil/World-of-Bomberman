@@ -24,7 +24,7 @@ void		Menu::initialize(void)
 {
   this->window_.setTitle("Bomberman v1.0");
   this->window_.create();
-  Map*	map = new Map(100, 100, 1, 5);
+  Map*	map = new Map(30, 30, 1, 5);
   std::vector<APlayer*>	players;
   Config conf;
   APlayer *newHum1 = new Human(*map, conf);

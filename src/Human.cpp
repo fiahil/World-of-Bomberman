@@ -23,7 +23,7 @@ Human::Human(Map & map, const Config& conf)//, std::vector<size_t>&, std::vector
     _bombAff(BombType::LAST, 0)
 {
   this->_event[Input::GAME]._freq = 2; // TODO TMP
-  this->_event[Input::GAME]._nb = 5;
+  this->_event[Input::GAME]._nb = 6;
   this->_event[Input::GAME].
     _event.push_back(initStruct(conf.getConfig(HumGame::UP),
 				HumGame::UP, &Human::UPFunction));
@@ -39,6 +39,9 @@ Human::Human(Map & map, const Config& conf)//, std::vector<size_t>&, std::vector
   this->_event[Input::GAME].
     _event.push_back(initStruct(conf.getConfig(HumGame::ATTACK),
 				HumGame::ATTACK, &Human::ATTACKFunction));
+  this->_event[Input::GAME].
+    _event.push_back(initStruct(gdl::Keys::Escape,
+				HumGame::PAUSE, &Human::PAUSEFunction));
   this->_bombAff[BombType::NORMAL] = &Human::affNormalBomb;
   this->_bombAff[BombType::BIGBOMB] = &Human::affBigBomb;
   this->_bombAff[BombType::MEGABOMB] = &Human::affMegaBomb;

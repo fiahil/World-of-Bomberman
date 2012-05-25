@@ -58,6 +58,7 @@ protected:
   bool			_canAttack;
   bool			_shield;
   double		_shieldTimer;
+  double		_tpTimer;
   size_t		_lustStack;
   size_t		_powerStack;
   size_t		_nbKills;
@@ -92,6 +93,7 @@ protected:
   void RIGHTFunction(gdl::GameClock const&);
   void DOWNFunction(gdl::GameClock const&);
   void ATTACKFunction(gdl::GameClock const&);
+  void PAUSEFunction(gdl::GameClock const&);
   // cheat
   // pause/menu
   // virtual dans APlayer and specialise dans Human

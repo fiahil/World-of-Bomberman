@@ -3,6 +3,8 @@
  * 12.05.2012
  */
 
+/* TMP */
+#include <stdlib.h>
 #include <iostream>
 #include <vector>
 #include "APlayer.hpp"
@@ -44,6 +46,7 @@ APlayer::APlayer(Map & map)
     _canAttack(true),
     _shield(false),
     _shieldTimer(-1.0f),
+    _tpTimer(-1.0f),
     _lustStack(0),
     _powerStack(0),
     _nbKills(0),
@@ -143,6 +146,11 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
     this->_canAttack = true;
   else
     this->_canAttack = false;
+  if (this->_tpTimer <= static_cast<double>(clock.getTotalGameTime()))
+    {
+      this->_tpTimer = static_cast<double>(clock.getTotalGameTime() + 3.0f);
+      this->_map.teleport(this->_pos);
+    }
 }
 
 void		APlayer::slowMotion()
@@ -221,12 +229,14 @@ void		APlayer::BombBonusEffect()
 
 void		APlayer::LustBonusEffect()
 {
-  ++this->_lustStack;
+  if (this->_lustStack < 6)
+    ++this->_lustStack;
 }
 
 void		APlayer::PowerBonusEffect()
 {
-  ++this->_powerStack;
+  if (this->_powerStack < 6)
+    ++this->_powerStack;
 }
 
 void		APlayer::ShieldBonusEffect()
@@ -441,7 +451,7 @@ void		APlayer::RIGHTFunction(gdl::GameClock const& clock)
 void		APlayer::DOWNFunction(gdl::GameClock const& clock)
 {
    double	current;
-   
+
    if ((current = static_cast<double>(clock.getTotalGameTime())) >=
        this->_timers[HumGame::DOWN] && this->_realPos == this->_pos._pos)
      {
@@ -471,6 +481,11 @@ void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
       this->_model.play(g_refAnimName[this->_state]);
       this->_model.set_anim_speed(g_refAnimName[this->_state], 3.0f);
     }
+}
+
+void		APlayer::PAUSEFunction(gdl::GameClock const&)
+{
+  exit (1);
 }
 
 Bomb*		APlayer::isAttack()
