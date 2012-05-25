@@ -34,7 +34,7 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
   this->_expFunc['2'] = &Map::explodeBreakable;
   this->_expFunc['3'] = &Map::explodeBreakable;
 
-  this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX"); // tp
+  this->_modelBreak['t'] = gdl::Model::load("models/Set_tp.FBX"); // tp
   this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
   this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
 
@@ -180,8 +180,7 @@ void		Map::draw(void)
       if (yf > this->_y)
 	yf = this->_y;
     }
-  
-  // TODO branchement comparaison
+
   for (size_t y = y0; y < yf; ++y)
     for (size_t x = x0; x < xf; ++x) {
       p.setPos(x, y);
@@ -198,20 +197,19 @@ void		Map::draw(void)
     }
   glPushMatrix();
   glTranslatef(this->_tp._pos1._pos.x, this->_tp._pos1._pos.y - 1.0f, this->_tp._pos1._pos.z);
-  glScalef(0.4f, 0.4f, 0.4f);
+  glScalef(0.155f, 0.155f, 0.155f);
   this->_modelBreak['t'].draw();
   glPopMatrix();
 
   glPushMatrix();
   glTranslatef(this->_tp._pos2._pos.x, this->_tp._pos2._pos.y - 1.0f, this->_tp._pos2._pos.z);
-  glScalef(0.4f, 0.4f, 0.4f);
+  glScalef(0.155f, 0.155f, 0.155f);
   this->_modelBreak['t'].draw();
   glPopMatrix();
 }
 
 void		Map::update(gdl::GameClock const&, gdl::Input&)
 {
-  // TODO : implement
 }
 
 bool Map::canMoveAt(size_t x, size_t y)
@@ -285,4 +283,27 @@ void		Map::explode(Pattern& real, Pattern& final, std::list<Bonus*>& bonus)
 				    POS(final._x - real._coefW, final._y),
 				    bonus
 				    );
+}
+
+void		Map::setSpawnTeam(std::vector<APlayer*>& players)
+{
+  std::map<size_t, std::pair<size_t, size_t> >	tmp;
+  size_t	nb = 0;
+  size_t	size = this->_map.size() - 2 * this->_x;
+  size_t	pos;
+
+  for (size_t i = 0; i < players.size(); ++i)
+    tmp[players[i]->getTeamId()] = std::make_pair(0, 0);
+  for (std::map<size_t, std::pair<size_t, size_t> >::iterator it = tmp.begin();
+       it != tmp.end(); ++it)
+    {
+      pos = nb * size / tmp.size() + this->_x - 1;
+      while (this->_map[++pos] != '0');
+      it->second.first = pos % this->_x;
+      it->second.second = pos / this->_x;
+      ++nb;
+    }
+  for (std::vector<APlayer*>::iterator it = players.begin(); it != players.end(); ++it)
+    (*it)->setPos(tmp[(*it)->getTeamId()].first,
+		  tmp[(*it)->getTeamId()].second);
 }

@@ -92,7 +92,7 @@ void		Camera::setNormalScreen()
   if (this->_pl1)
     {
       this->_w = this->_width;
-      this->_h = this->_height;   
+      this->_h = this->_height;
       this->_pos = this->_pl1->getPosReal();
       this->_pos.y += 7.0f * this->_pl1->getPos()._scale;
       this->_pos.z += 4.0f * this->_pl1->getPos()._scale;

@@ -10,6 +10,7 @@
 #include <Image.hpp>
 #include "Bonus.hpp"
 #include "Pattern.hpp"
+#include "APlayer.hpp"
 #include "AObj.hpp"
 
 #define POS(px, py) (((this->_x * (py))) + (px))
@@ -62,6 +63,11 @@ public:
   std::string const&	getMap(void) const;
   size_t		getX(void) const;
   void explode(Pattern&, Pattern&, std::list<Bonus*>&);
+  void setSpawnTeam(std::vector<APlayer*>&);
 };
+
+#else
+
+class Map;
 
 #endif /* __Bomberman_Map_h */

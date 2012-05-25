@@ -6,6 +6,7 @@
 #include <unistd.h>
 
 #include <GL/gl.h>
+#include <utility>
 #include <iostream>
 #include "Camera.hpp"
 #include "Match.hpp"
@@ -32,6 +33,7 @@ MyGame::~MyGame()
 void		MyGame::initialize(void)
 {
   this->_match._map->initialize();
+  this->_match._map->setSpawnTeam(this->_match._players);
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->initialize();
   this->_HUD[HUD::LIFE_BAR] = gdl::Image::load("textures/life.png");
@@ -40,6 +42,8 @@ void		MyGame::initialize(void)
   this->_HUD[HUD::LUST] = gdl::Image::load("textures/fury.png");
   this->_HUD[HUD::BOMB_OK] = gdl::Image::load("textures/bombActive.png");
   this->_HUD[HUD::BOMB_KO] = gdl::Image::load("textures/bombInactive.png");
+  this->_HUD[HUD::SKILL_OK] = gdl::Image::load("textures/skillActive.png");
+  this->_HUD[HUD::SKILL_KO] = gdl::Image::load("textures/skillInactive.png");
   this->_HUD[HUD::BIGBOMB_OK] = gdl::Image::load("textures/bigbombActive.png");
   this->_HUD[HUD::BIGBOMB_KO] = gdl::Image::load("textures/bigbombInactive.png");
   this->_HUD[HUD::MEGABOMB_OK] = gdl::Image::load("textures/megabombActive.png");

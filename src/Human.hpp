@@ -24,7 +24,9 @@ public:
 private:
 
   typedef void (APlayer::*actionFunc)(gdl::GameClock const&);
-  typedef void (Human::*bombAffFunc)(void);
+  typedef void (Human::*ptrFunc)(void);
+  typedef bool (Human::*ptrJumpFunc)();
+  typedef void (Human::*ptrSkillFunc)(gdl::GameClock const&);
 
   struct eventSt {
     gdl::Keys::Key _key;
@@ -38,6 +40,8 @@ private:
     double			_freq;
   };
 
+  void SkillFunction(gdl::GameClock const&);
+
   typedef std::map< Input::eMode, eventModeSt > inputMap;
 
   Human::eventSt initStruct(gdl::Keys::Key, HumGame::eAction, actionFunc) const;
@@ -47,6 +51,7 @@ private:
   int		_start;
   double	_startTimer;
   gdl::Text	_text;
+
   void		drawStart(size_t, size_t);
   void		drawEnd(size_t, size_t, bool);
 
@@ -54,11 +59,27 @@ private:
   void affBigBomb();
   void affMegaBomb();
 
+  void halluSkill(gdl::GameClock const&);
+  void healSkill(gdl::GameClock const&);
+  void berserkSkill(gdl::GameClock const&);
+  void jumpSkill(gdl::GameClock const&);
+
+  bool	northJumpFunction();
+  bool	southJumpFunction();
+  bool	westJumpFunction();
+  bool	eastJumpFunction();
+
+
 private:
+  bool				_skillUp;
+  double			_skillTimer;
+  Skill::eSkill			_skill;
+  std::vector<ptrSkillFunc>	_skillFunc;
   std::vector<Surface*>		_HUD;
-  std::vector<bombAffFunc>	_bombAff;
+  std::vector<ptrFunc>		_bombAff;
+  std::vector<ptrJumpFunc>	_jumpDir;
   // std::vector<size_t>&	_achievements;
-  // std::vector<size_t> const	_skill;
+  // std::vector<size_t> const	_skill; // passage en simple enum
 };
 
 #endif

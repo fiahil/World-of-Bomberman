@@ -80,11 +80,13 @@ private:
   void	normalBombEffect(ExplodedBomb const*);
   void	bigBombEffect(ExplodedBomb const*);
   void	megaBombEffect(ExplodedBomb const*);
+protected:
   void		lifeBonusEffect();
   void		BombBonusEffect();
   void		LustBonusEffect();
   void		PowerBonusEffect();
   void		ShieldBonusEffect();
+private:
   std::map<BombType::eBomb, fBomb>	_bombEffect;
   std::map<BonusType::eBonus, fBonus>	_bonusEffect;
   ExplodedBomb const*			_curEffect;
