@@ -13,6 +13,7 @@ static const char*	g_refSkin[Skin::LAST] = {
   "models/Character_thrall.FBX",
   "models/Character_sylvanas.FBX",
   "models/Character_varian.FBX",
+  "models/Character_ennemy.FBX",
   "models/Character_ennemy_low.FBX"
 };
 
@@ -54,7 +55,7 @@ APlayer::APlayer(Map & map)
     _nbKills(0),
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
-    _skin(Skin::THRALL),
+    _skin(Skin::ENNEMY_LOW),
     _state(State::STAND),
     _dir(Dir::SOUTH),
     _indic(0.5f, 0.5f, 0.8f, _color),

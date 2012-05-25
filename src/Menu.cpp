@@ -30,7 +30,7 @@ void		Menu::initialize(void)
   std::vector<APlayer*>	players;
   Config conf;
   APlayer *newHum1 = new Human(*map, conf);
-  newHum1->setSkin(Skin::THRALL);
+  newHum1->setSkin(Skin::SYLVANAS);
   newHum1->setTeamId(6);
   players.push_back(newHum1);
   conf.setConfig(HumGame::UP, gdl::Keys::W);
@@ -43,10 +43,13 @@ void		Menu::initialize(void)
   newHum2->setTeamId(6);
   newHum2->setSkin(Skin::VARIANT);
   players.push_back(newHum2);
-  APlayer *newAI = new AI(AIType::EASY, *map);
-  newAI->setColor(7);
-  newAI->setTeamId(7);
-  players.push_back(newAI);
+  for (int i = 0; i < 5; ++i)
+    {
+      APlayer *newAI = new AI(AIType::EASY, *map);
+      newAI->setColor(7);
+      newAI->setTeamId(7);
+      players.push_back(newAI);
+    }
   Match*	m = new Match(map, false, GameMode::VERSUS, players);
   this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0], players[1]); // TODO
   this->_game->initialize();

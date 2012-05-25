@@ -74,12 +74,6 @@ void	ExplodedBomb::draw()
   Point		pos(this->_pos);
   size_t	i;
 
-  glPushMatrix();
-  glTranslatef(pos._pos.x, pos._pos.y - 1.0f, pos._pos.z);
-  glScalef(0.1f, 0.1f, 0.1f);
-  glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-  this->_model.draw();
-  glPopMatrix();
   for (i = 1; i <= this->_real._coefN; ++i)
     {
       pos.setPos(this->_pos._x, this->_pos._y - i);
