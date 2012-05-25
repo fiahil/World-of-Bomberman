@@ -11,7 +11,7 @@
 class ExplodedBomb : public AObj
 {
 private:
-  BombType::eBomb	_type;		
+  BombType::eBomb	_type;
   Pattern		_final;
   Pattern		_real;
   APlayer*		_player;
@@ -19,7 +19,7 @@ private:
   double		_lastTime;
   bool			_EOE;
   gdl::Model&		_model;
-  
+
 private:
   void	drawPattern(Point const&);
 

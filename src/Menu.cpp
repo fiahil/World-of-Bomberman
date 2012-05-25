@@ -24,7 +24,7 @@ void		Menu::initialize(void)
 {
   this->window_.setTitle("Bomberman v1.0");
   this->window_.create();
-  Map*	map = new Map(20, 20, 1, 5);
+  Map*	map = new Map(30, 30, 1, 5);
   std::vector<APlayer*>	players;
   Config conf;
   APlayer *newHum1 = new Human(*map, conf);
@@ -40,10 +40,13 @@ void		Menu::initialize(void)
   newHum2->setTeamId(6);
   newHum2->setSkin(Skin::VARIANT);
   players.push_back(newHum2);
-  /* APlayer *newAI = new AI(AIType::EASY, *map);
-  newAI->setColor(7);
-  newAI->setTeamId(7);
-  players.push_back(newAI);*/
+  // for (int i = 0; i < 20; ++i)
+  //   {
+  //     APlayer *newAI = new AI(AIType::EASY, *map);
+  //     newAI->setColor(7);
+  //     newAI->setTeamId(7);
+  //     players.push_back(newAI);
+  //   }
   Match*	m = new Match(map, false, GameMode::ARCADE, players);
   this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0], players[1]); // TODO
   this->_game->initialize();

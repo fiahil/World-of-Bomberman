@@ -61,11 +61,11 @@ void	ExplodedBomb::update(gdl::GameClock const& clock, gdl::Input&)
 
 void	ExplodedBomb::drawPattern(Point const& pos)
 {
-  this->_model.play("Take 001");
+  //  this->_model.play("Take 001");
   glPushMatrix();
   glTranslatef(pos._pos.x, pos._pos.y, pos._pos.z);
-  //glScalef(0.3f, 0.3f, 0.3f);
-  glScalef(0.01f, 0.01f, 0.01f);
+  glScalef(1.3f, 1.3f, 1.3f);
+  // glScalef(0.01f, 0.01f, 0.01f);
   this->_model.draw();
   glPopMatrix();
 }

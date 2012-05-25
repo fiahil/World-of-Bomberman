@@ -44,6 +44,7 @@ APlayer::APlayer(Map & map)
     _canAttack(true),
     _shield(false),
     _shieldTimer(-1.0f),
+    _tpTimer(-1.0f),
     _lustStack(0),
     _powerStack(0),
     _nbKills(0),
@@ -138,6 +139,11 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
     this->_canAttack = true;
   else
     this->_canAttack = false;
+  if (this->_tpTimer <= static_cast<double>(clock.getTotalGameTime()))
+    {
+      this->_tpTimer = static_cast<double>(clock.getTotalGameTime() + 3.0f);
+      this->_map.teleport(this->_pos);
+    }
 }
 
 void		APlayer::normalBombEffect(ExplodedBomb const* cur)

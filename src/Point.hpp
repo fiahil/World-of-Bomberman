@@ -25,6 +25,7 @@ public:
   void		setPos(int, int);
   void		setPos(double, double, double);
   void		calcRealpos(void);
+  bool		operator==(Point const &) const;
 };
 
 #endif /* __Bomberman_Point_h */

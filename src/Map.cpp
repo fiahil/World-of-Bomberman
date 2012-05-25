@@ -13,6 +13,11 @@
 #include "Map.hpp"
 
 
+Tp::Tp()
+  : _pos1(2, 0, 0),
+    _pos2(2, 0, 0)
+{}
+
 Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
   : _x(x),
     _y(y),
@@ -29,6 +34,7 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
   this->_expFunc['2'] = &Map::explodeBreakable;
   this->_expFunc['3'] = &Map::explodeBreakable;
 
+  this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX");
   this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
   this->_modelBreak['3'] = gdl::Model::load("models/Set_crate.FBX");
 
@@ -50,6 +56,10 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
     }
   }
   this->_map[POS(1, 1)] = '0'; //TODO
+  this->_tp._pos1.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
+  this->_tp._pos2.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
+  this->_map[POS(this->_tp._pos1._x, this->_tp._pos1._y)] = '0';
+  this->_map[POS(this->_tp._pos2._x, this->_tp._pos2._y)] = '0';
 }
 
 Map::Map(std::string const& file)
@@ -65,6 +75,7 @@ Map::Map(std::string const& file)
   this->_expFunc['2'] = &Map::explodeBreakable;
   this->_expFunc['3'] = &Map::explodeBreakable;
 
+  this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX");
   this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
   this->_modelBreak['3'] = gdl::Model::load("models/Set_crate.FBX");
 
@@ -82,6 +93,11 @@ Map::Map(std::string const& file)
   if (this->_map.size() != (this->_x * this->_y))
     throw std::exception(); /* TODO BETTER */
   this->_map[POS(1, 1)] = '0'; //TODO
+
+  this->_tp._pos1.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
+  this->_tp._pos2.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
+  this->_map[POS(this->_tp._pos1._x, this->_tp._pos1._y)] = '0';
+  this->_map[POS(this->_tp._pos2._x, this->_tp._pos2._y)] = '0';
 }
 
 Map::Map(size_t x, size_t y, std::string const& map)
@@ -95,9 +111,14 @@ Map::Map(size_t x, size_t y, std::string const& map)
   this->_expFunc['2'] = &Map::explodeBreakable;
   this->_expFunc['3'] = &Map::explodeBreakable;
 
+  this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX");
   this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
   this->_modelBreak['3'] = gdl::Model::load("models/Set_crate.FBX");
 
+  this->_tp._pos1.setPos(random() % this->_x, random() % this->_y);
+  this->_tp._pos2.setPos(random() % this->_x, random() % this->_y);
+  this->_map[POS(this->_tp._pos1._x, this->_tp._pos1._y)] = '0';
+  this->_map[POS(this->_tp._pos2._x, this->_tp._pos2._y)] = '0';
 }
 
 Map::~Map()
@@ -112,6 +133,14 @@ Map::~Map()
   _y = oldMap._y;
   }
 */
+
+void		Map::teleport(Point & pos)
+{
+  if (pos == this->_tp._pos1)
+    pos = this->_tp._pos2;
+  else if (pos == this->_tp._pos2)
+    pos = this->_tp._pos1;
+}
 
 void		Map::initialize(void)
 {
@@ -152,6 +181,8 @@ void		Map::draw(void)
       if (yf > this->_y)
 	yf = this->_y;
     }
+
+  // TODO branchement comparaison
   for (size_t y = y0; y < yf; ++y)
     for (size_t x = x0; x < xf; ++x) {
       p.setPos(x, y);
@@ -167,6 +198,18 @@ void		Map::draw(void)
 	}
 	// w_break.draw(p);
     }
+  glPushMatrix();
+  glTranslatef(this->_tp._pos1._pos.x, this->_tp._pos1._pos.y - 1.0f, this->_tp._pos1._pos.z);
+  glScalef(0.4f, 0.4f, 0.4f);
+  this->_modelBreak['t'].draw();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(this->_tp._pos2._pos.x, this->_tp._pos2._pos.y - 1.0f, this->_tp._pos2._pos.z);
+  glScalef(0.4f, 0.4f, 0.4f);
+  this->_modelBreak['t'].draw();
+  glPopMatrix();
+
 }
 
 void		Map::update(gdl::GameClock const&, gdl::Input&)

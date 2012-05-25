@@ -49,7 +49,7 @@ void		Bomb::draw(void)
   if (!this->_exploded)
     {
       glPushMatrix();
-      glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
+      glTranslatef(this->_pos._pos.x, this->_pos._pos.y - 0.5f, this->_pos._pos.z);
       glScalef(g_bombScale[this->_type], g_bombScale[this->_type], g_bombScale[this->_type]);
       this->_model.draw();
       glPopMatrix();
