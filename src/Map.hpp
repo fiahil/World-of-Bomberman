@@ -60,6 +60,7 @@ public:
   bool canMoveAt(size_t x, size_t y);
   void setOptimization(Point const*);
   std::string const&	getMap(void) const;
+  size_t		getX(void) const;
   void explode(Pattern&, Pattern&, std::list<Bonus*>&);
 };
 

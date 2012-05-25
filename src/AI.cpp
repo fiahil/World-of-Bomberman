@@ -4,24 +4,21 @@
  */
 
 #include <cstdlib>
+#include "enum.hpp"
+#include "AIView.hpp"
 #include "AI.hpp"
 
 AI::AI(AIType::eAI type, Map& map)
-  : APlayer(map), _type(type), _start(4), _startTimer(-1.0f)
+  : APlayer(map), _type(type), _view(0), _start(4), _startTimer(-1.0f)
 {
   this->_AIDifficulty[AIType::EASY] = &AI::AIEasy;
   this->_AIDifficulty[AIType::MEDIUM] = &AI::AIMedium;
   this->_AIDifficulty[AIType::HARD] = &AI::AIHard;
 }
 
-AI::~AI()
-{
-
-}
-
 void	AI::AIEasy(gdl::GameClock const& clock)
 {
-  int	pos = 0;
+  int				pos = 0;
   std::vector<Dir::eDir>	ref(static_cast<int>(Dir::LAST), Dir::LAST);
 
   if (this->_map.canMoveAt(this->_pos._x, this->_pos._y - 1))
@@ -54,6 +51,11 @@ void	AI::AIMedium(gdl::GameClock const&)
 void	AI::AIHard(gdl::GameClock const&)
 {
 
+}
+
+void	AI::updateView(AIView const* v)
+{
+  this->_view = v;
 }
 
 void AI::play(gdl::GameClock const& clock, gdl::Input&)

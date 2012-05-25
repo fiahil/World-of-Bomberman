@@ -8,11 +8,13 @@
 
 #include "enum.hpp"
 #include "APlayer.hpp"
+#include "AIView.hpp"
 
 class AI : public APlayer
 {
 private:
   AIType::eAI	_type;
+  AIView const*	_view;
   int		_start;
   double	_startTimer;
 
@@ -25,8 +27,8 @@ private:
   
 public:
   AI(AIType::eAI, Map&);
-  virtual ~AI();
-  void play(gdl::GameClock const&, gdl::Input&);
+  void	updateView(AIView const*);
+  void	play(gdl::GameClock const&, gdl::Input&);
 };
 
 #endif

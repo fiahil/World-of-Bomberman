@@ -229,6 +229,11 @@ std::string const&	Map::getMap(void) const
   return this->_map;
 }
 
+size_t			Map::getX(void) const
+{
+  return this->_x;
+}
+
 void		Map::explodeUnBreakable(size_t &r, size_t &f, size_t, std::list<Bonus*>&)
 {
   --r;

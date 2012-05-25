@@ -158,4 +158,16 @@ struct AIType
   };
 };
 
+struct Elt
+{
+  enum eElt {
+  EMPTY,
+  WALL,
+  BOMB,
+  EXBOMB,
+  BONUS,
+  PLAYER  
+  };
+};
+
 #endif

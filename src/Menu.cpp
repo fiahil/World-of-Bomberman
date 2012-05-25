@@ -8,6 +8,7 @@
 #include "Map.hpp"
 #include "Human.hpp"
 #include "AI.hpp"
+#include "AIView.hpp"
 #include "Menu.hpp"
 
 Menu::Menu()
