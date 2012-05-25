@@ -12,8 +12,8 @@
 static const char*	g_refSkin[Skin::LAST] = {
   "models/Character_thrall.FBX",
   "models/Character_sylvanas.FBX",
-  "models/Character_variant.FBX",
-  "models/Character_ennemy.FBX"
+  "models/Character_varian.FBX",
+  "models/Character_ennemy_low.FBX"
 };
 
 static const char*	g_refBomb[BombType::LAST] = {
@@ -23,17 +23,19 @@ static const char*	g_refBomb[BombType::LAST] = {
 };
 
 static const infoAnim	g_refAnim[State::LAST] = {
-  {3, 136, 186, 206, 327, 457, 256, 277},
-  {3, 76, 126, 142, 267, 316, 192, 217},
-  {3, 69, 119, 135, 185, 235, 285, 310},
-  {3, 64, 114, 130, 180, 246, 296, 313},
+  {3, 137, 186, 206, 418, 548, 331, 368, 256, 281},
+  {144, 410, 3, 19, 535, 584, 69, 94, 460, 485},
+  {169, 236, 3, 19, 69, 119, 285, 310, 360, 385},
+  {69, 103, 3, 19, 302, 364, 227, 252, 152, 177},
+  {69, 119, 3, 19, 244, 269, 319, 344, 169, 194},
 };
 
 static const char*	g_refAnimName[State::LAST] = {
   "stand",
   "run",
   "death",
-  "attack"
+  "attack",
+  "hit"
 };
 
 APlayer::APlayer(Map & map)
@@ -52,7 +54,7 @@ APlayer::APlayer(Map & map)
     _nbKills(0),
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
-    _skin(Skin::ENNEMY),
+    _skin(Skin::THRALL),
     _state(State::STAND),
     _dir(Dir::SOUTH),
     _indic(0.5f, 0.5f, 0.8f, _color),
@@ -95,8 +97,10 @@ void		APlayer::initialize(void)
 			    g_refAnim[this->_skin].death_s, g_refAnim[this->_skin].death_e, g_refAnimName[State::DEATH]);
   gdl::Model::cut_animation(this->_model, "Take 001",
 			    g_refAnim[this->_skin].attack_s, g_refAnim[this->_skin].attack_e, g_refAnimName[State::ATTACK]);
+  gdl::Model::cut_animation(this->_model, "Take 001",
+			    g_refAnim[this->_skin].hit_s, g_refAnim[this->_skin].hit_e, g_refAnimName[State::HIT]);
   this->_Mbomb = gdl::Model::load(g_refBomb[this->_weapon]);
-  this->_MExplodedBomb = gdl::Model::load("models/Bomb_blue.FBX");
+  this->_MExplodedBomb = gdl::Model::load("models/Bomb_dart.FBX");
 }
 
 void		APlayer::draw(void)
@@ -122,7 +126,7 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   if (this->_pv)
     this->play(clock, input);
-  if ((this->_state == State::RUN || this->_state == State::STAND)
+  if ((this->_state == State::RUN || this->_state == State::STAND || this->_state == State::HIT)
       && this->_model.anim_is_ended(g_refAnimName[this->_state]))
     {
       this->_state = State::STAND;
@@ -257,10 +261,10 @@ void		APlayer::takeDamage(ExplodedBomb const* cur)
        this->_pos._x == pattern._x))
     (this->*_bombEffect[cur->getType()])(cur);
   if (!this->_pv)
-    {
-      this->_state = State::DEATH;
-      this->_model.play(g_refAnimName[this->_state]);
-    }
+    this->_state = State::DEATH;
+  else
+    this->_state = State::HIT;
+  this->_model.play(g_refAnimName[this->_state]);
 }
 
 bool		APlayer::takeBonus(Bonus const* cur)
