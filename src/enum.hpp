@@ -96,11 +96,9 @@ struct GameMode
 {
   enum eGameMode
     {
-      HISTORY,
-      ARCADE,
-      DEATH,
-      CAPT_FLAG,
-      NETWORK,
+      SOLO,
+      COOP,
+      VERSUS,
       LAST
     };
 };

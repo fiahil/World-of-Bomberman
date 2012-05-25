@@ -14,6 +14,7 @@ public:
   Vector(Vector const&);
   Vector&	operator=(Vector const&);
   ~Vector();
+  bool	operator==(Vector const&) const;
 
 public:
   double	x;

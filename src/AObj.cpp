@@ -24,6 +24,13 @@ void		AObj::setPos(int x, int y)
   this->_pos.setPos(x, y);
 }
 
+void		AObj::setPos(double x, double y, double z)
+{
+  this->_pos._pos.x = x;
+  this->_pos._pos.y = y;
+  this->_pos._pos.z = z;
+}
+
 void		AObj::setScale(double scale)
 {
   this->_pos._scale = scale;
