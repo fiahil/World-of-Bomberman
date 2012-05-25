@@ -152,6 +152,8 @@ struct HUD
     LUST,
     BOMB_OK,
     BOMB_KO,
+    SKILL_OK,
+    SKILL_KO,
     BIGBOMB_OK,
     BIGBOMB_KO,
     MEGABOMB_OK,

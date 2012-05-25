@@ -40,6 +40,8 @@ void		MyGame::initialize(void)
   this->_HUD[HUD::LUST] = gdl::Image::load("textures/fury.png");
   this->_HUD[HUD::BOMB_OK] = gdl::Image::load("textures/bombActive.png");
   this->_HUD[HUD::BOMB_KO] = gdl::Image::load("textures/bombInactive.png");
+  this->_HUD[HUD::SKILL_OK] = gdl::Image::load("textures/skillActive.png");
+  this->_HUD[HUD::SKILL_KO] = gdl::Image::load("textures/skillInactive.png");
   this->_HUD[HUD::BIGBOMB_OK] = gdl::Image::load("textures/bigbombActive.png");
   this->_HUD[HUD::BIGBOMB_KO] = gdl::Image::load("textures/bigbombInactive.png");
   this->_HUD[HUD::MEGABOMB_OK] = gdl::Image::load("textures/megabombActive.png");
