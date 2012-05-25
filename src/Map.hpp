@@ -53,7 +53,7 @@ private:
   std::map<char, explodeFunc> _expFunc;
 
 public:
-  void teleport(Point & pos);
+  void teleport(Point & pos) const;
   void initialize(void);
   void draw(void);
   void update(gdl::GameClock const& clock, gdl::Input& input);

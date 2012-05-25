@@ -34,7 +34,7 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
   this->_expFunc['2'] = &Map::explodeBreakable;
   this->_expFunc['3'] = &Map::explodeBreakable;
 
-  this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX");
+  this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX"); // tp
   this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
   this->_modelBreak['3'] = gdl::Model::load("models/Set_crate.FBX");
 
@@ -134,7 +134,7 @@ Map::~Map()
   }
 */
 
-void		Map::teleport(Point & pos)
+void		Map::teleport(Point & pos) const
 {
   if (pos == this->_tp._pos1)
     pos = this->_tp._pos2;
@@ -157,7 +157,6 @@ void		Map::initialize(void)
 void		Map::draw(void)
 {
   Point		p(2.0f, 0, 0);
-  Cube		w_break(this->_break);
   Cube		w_unbreak(this->_unbreak);
   Plane		background(this->_x, this->_y, p, this->_background);
   size_t	x0 = 0;
@@ -168,16 +167,16 @@ void		Map::draw(void)
   background.draw();
   if (this->_opti)
     {
-      x0 = this->_opti->_x - 45;
+      x0 = this->_opti->_x - 13;
       if (static_cast<int>(x0) < 0)
 	x0 = 0;
-      y0 = this->_opti->_y - 50;
+      y0 = this->_opti->_y - 12;
       if (static_cast<int>(y0) < 0)
      	y0 = 0;
-      xf = this->_opti->_x + 45;
+      xf = this->_opti->_x + 13;
       if (xf > this->_x)
 	xf = this->_x;
-      yf = this->_opti->_y + 10;
+      yf = this->_opti->_y + 6;
       if (yf > this->_y)
 	yf = this->_y;
     }
@@ -195,8 +194,7 @@ void		Map::draw(void)
 	  glScalef(0.4f, 0.4f, 0.4f);
 	  this->_modelBreak[this->_map[POS(x, y)]].draw();
 	  glPopMatrix();
-	}
-	// w_break.draw(p);
+	  }
     }
   glPushMatrix();
   glTranslatef(this->_tp._pos1._pos.x, this->_tp._pos1._pos.y - 1.0f, this->_tp._pos1._pos.z);
