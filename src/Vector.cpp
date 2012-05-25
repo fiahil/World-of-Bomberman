@@ -43,3 +43,8 @@ Vector&	Vector::operator=(Vector const& rhs)
 Vector::~Vector()
 {
 }
+
+bool	Vector::operator==(Vector const& rhs) const
+{
+  return (this->x == rhs.x && this->y == rhs.y && this->z == rhs.z);
+}

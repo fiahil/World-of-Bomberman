@@ -118,7 +118,7 @@ void		MyGame::update(void)
       if ((newBomb = this->_match._players[i]->isAttack()))
 	this->_match._bombs.push_back(newBomb);
     }
-  if (!nb)
+  if (!nb || (this->_match._gameMode == GameMode::COOP && nb < 2))
     this->_EOG = true;
   for (std::list<APlayer*>::iterator it = this->_dead.begin();
        it != this->_dead.end(); ++it)
@@ -151,11 +151,18 @@ void		MyGame::drawGame(APlayer* p, size_t lag)
 
 void		MyGame::draw(void)
 {
-  this->_camera.setSplitScreenLeft();
-  this->drawGame(this->_pl1, 0);
-
-  this->_camera.setSplitScreenRight();
-  this->drawGame(this->_pl2, 410);
+  if (this->_match._gameMode == GameMode::COOP || this->_match._gameMode == GameMode::VERSUS)
+    {
+      this->_camera.setSplitScreenLeft();
+      this->drawGame(this->_pl1, 0);
+      this->_camera.setSplitScreenRight();
+      this->drawGame(this->_pl2, 410);
+    }
+  else
+    {
+      this->_camera.setNormalScreen();
+      this->drawGame(this->_pl1, 0);
+    }
 }
 
 void		MyGame::unload(void)

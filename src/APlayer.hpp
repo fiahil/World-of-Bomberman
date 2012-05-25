@@ -45,6 +45,9 @@ private:
   typedef void	(APlayer::*fBonus)();
 
 protected:
+  Vector		_originPos;
+  double		_k;
+  Vector		_realPos;
   Map &			_map;
   int			_pv;
   size_t		_id;
@@ -55,6 +58,7 @@ protected:
   bool			_canAttack;
   bool			_shield;
   double		_shieldTimer;
+  double		_tpTimer;
   size_t		_lustStack;
   size_t		_powerStack;
   size_t		_nbKills;
@@ -89,6 +93,7 @@ protected:
   void RIGHTFunction(gdl::GameClock const&);
   void DOWNFunction(gdl::GameClock const&);
   void ATTACKFunction(gdl::GameClock const&);
+  void PAUSEFunction(gdl::GameClock const&);
   // cheat
   // pause/menu
   // virtual dans APlayer and specialise dans Human
@@ -113,6 +118,7 @@ public:
   void		takeDamage(ExplodedBomb const*);
   bool		takeBonus(Bonus const*);
 
+  Vector const&	getPosReal() const;
   int		getPv() const;
   BombType::eBomb	getWeapon() const;
   Skin::eSkin	getSkin() const;
@@ -137,6 +143,7 @@ public:
   void		setTeamName(std::string const&);
   void		setType(size_t);
   void		incNbKills();
+  void		slowMotion();
 };
 
 #else

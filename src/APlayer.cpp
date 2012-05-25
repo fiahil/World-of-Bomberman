@@ -3,6 +3,8 @@
  * 12.05.2012
  */
 
+/* TMP */
+#include <stdlib.h>
 #include <iostream>
 #include <vector>
 #include "APlayer.hpp"
@@ -44,13 +46,14 @@ APlayer::APlayer(Map & map)
     _canAttack(true),
     _shield(false),
     _shieldTimer(-1.0f),
+    _tpTimer(-1.0f),
     _lustStack(0),
     _powerStack(0),
     _nbKills(0),
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
     _skin(Skin::ENNEMY),
-    _state(State::RUN),
+    _state(State::STAND),
     _dir(Dir::SOUTH),
     _indic(0.5f, 0.5f, 0.8f, _color),
     _curEffect(0),
@@ -70,6 +73,9 @@ APlayer::APlayer(Map & map)
   this->_bonusEffect[BonusType::SHIELD] = &APlayer::ShieldBonusEffect;
   this->_pos._scale = 2.0f;
   this->setPos(1, 1);
+  this->_k = 0.2f;
+  this->_originPos = this->_pos._pos;
+  this->_realPos = this->_pos._pos;
   this->_indic.setScale(2.0f);
   this->_indic.setPos(1, 1);
 }
@@ -90,13 +96,13 @@ void		APlayer::initialize(void)
   gdl::Model::cut_animation(this->_model, "Take 001",
 			    g_refAnim[this->_skin].attack_s, g_refAnim[this->_skin].attack_e, g_refAnimName[State::ATTACK]);
   this->_Mbomb = gdl::Model::load(g_refBomb[this->_weapon]);
-  this->_MExplodedBomb = gdl::Model::load("models/fire.FBX");
+  this->_MExplodedBomb = gdl::Model::load("models/Bomb_blue.FBX");
 }
 
 void		APlayer::draw(void)
 {
   glPushMatrix();
-  glTranslatef(this->_pos._pos.x, this->_pos._pos.y - 1.0f, this->_pos._pos.z);
+  glTranslatef(this->_realPos.x, this->_realPos.y - 1.0f, this->_realPos.z);
   (this->*_rotFuncMap[this->_dir])();
    // glScalef(0.05f, 0.05f, 0.05f);
   glScalef(1.5f, 1.5f, 1.5f);
@@ -116,13 +122,15 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   if (this->_pv)
     this->play(clock, input);
-  if (this->_state == State::RUN && this->_model.anim_is_ended(g_refAnimName[this->_state]))
+  if ((this->_state == State::RUN || this->_state == State::STAND)
+      && this->_model.anim_is_ended(g_refAnimName[this->_state]))
     {
       this->_state = State::STAND;
       this->_model.play(g_refAnimName[this->_state]);
     }
   this->_model.update(clock);
-  this->_indic.setPos(this->_pos._x, this->_pos._y);
+  this->slowMotion();
+  this->_indic.setPos(this->_realPos.x, this->_realPos.y, this->_realPos.z);
   if (this->_shield)
     {
       if (this->_shieldTimer < 0.0f)
@@ -138,6 +146,27 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
     this->_canAttack = true;
   else
     this->_canAttack = false;
+  if (this->_tpTimer <= static_cast<double>(clock.getTotalGameTime()))
+    {
+      this->_tpTimer = static_cast<double>(clock.getTotalGameTime() + 3.0f);
+      this->_map.teleport(this->_pos);
+    }
+}
+
+void		APlayer::slowMotion()
+{
+  if (!(this->_realPos == this->_pos._pos))
+    {
+      this->_realPos.x = this->_originPos.x + this->_k * (this->_pos._pos.x - this->_originPos.x);
+      this->_realPos.z = this->_originPos.z + this->_k * (this->_pos._pos.z - this->_originPos.z);
+      this->_k += 0.2f;
+      if (this->_k > 1.2f)
+	{
+	  this->_originPos = this->_pos._pos;
+	  this->_realPos = this->_pos._pos;
+	  this->_k = 0.2f;
+	}
+    }
 }
 
 void		APlayer::normalBombEffect(ExplodedBomb const* cur)
@@ -200,12 +229,14 @@ void		APlayer::BombBonusEffect()
 
 void		APlayer::LustBonusEffect()
 {
-  ++this->_lustStack;
+  if (this->_lustStack < 6)
+    ++this->_lustStack;
 }
 
 void		APlayer::PowerBonusEffect()
 {
-  ++this->_powerStack;
+  if (this->_powerStack < 6)
+    ++this->_powerStack;
 }
 
 void		APlayer::ShieldBonusEffect()
@@ -240,6 +271,11 @@ bool		APlayer::takeBonus(Bonus const* cur)
       return true;
     }
   return false;
+}
+
+Vector const&		APlayer::getPosReal() const
+{
+  return this->_realPos;
 }
 
 void		APlayer::setPv(int pv)
@@ -363,14 +399,16 @@ void		APlayer::UPFunction(gdl::GameClock const& clock)
   double	current;
 
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
-      this->_timers[HumGame::UP])
+      this->_timers[HumGame::UP] && this->_realPos == this->_pos._pos)
     {
       this->_timers[HumGame::UP] = current + 0.15;
       this->_dir = Dir::NORTH;
       if (this->_map.canMoveAt(this->_pos._x, this->_pos._y - 1))
-	this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
-      this->_state = State::RUN;
-      this->_model.play(g_refAnimName[this->_state]);
+	{
+	  this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
+	  this->_state = State::RUN;
+	  this->_model.play(g_refAnimName[this->_state]);
+	}
     }
 }
 
@@ -379,14 +417,16 @@ void		APlayer::LEFTFunction(gdl::GameClock const& clock)
   double	current;
 
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
-      this->_timers[HumGame::LEFT])
+      this->_timers[HumGame::LEFT] && this->_realPos == this->_pos._pos)
     {
       this->_timers[HumGame::LEFT] = current + 0.15;
       this->_dir = Dir::WEST;
       if (this->_map.canMoveAt(this->_pos._x - 1, this->_pos._y))
-	this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
-      this->_state = State::RUN;
-      this->_model.play(g_refAnimName[this->_state]);
+	{
+	  this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
+	  this->_state = State::RUN;
+	  this->_model.play(g_refAnimName[this->_state]);
+	}
     }
 }
 
@@ -395,14 +435,16 @@ void		APlayer::RIGHTFunction(gdl::GameClock const& clock)
    double	current;
 
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
-      this->_timers[HumGame::RIGHT])
+      this->_timers[HumGame::RIGHT] && this->_realPos == this->_pos._pos)
     {
       this->_timers[HumGame::RIGHT] = current + 0.15;
       this->_dir = Dir::EAST;
       if (this->_map.canMoveAt(this->_pos._x + 1, this->_pos._y))
-	this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
-      this->_state = State::RUN;
-      this->_model.play(g_refAnimName[this->_state]);
+	{
+	  this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
+	  this->_state = State::RUN;
+	  this->_model.play(g_refAnimName[this->_state]);
+	}
     }
 }
 
@@ -410,15 +452,17 @@ void		APlayer::DOWNFunction(gdl::GameClock const& clock)
 {
    double	current;
 
-  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
-      this->_timers[HumGame::DOWN])
-    {
+   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
+       this->_timers[HumGame::DOWN] && this->_realPos == this->_pos._pos)
+     {
       this->_timers[HumGame::DOWN] = current + 0.15;
       this->_dir = Dir::SOUTH;
       if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
-	this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
-      this->_state = State::RUN;
-      this->_model.play(g_refAnimName[this->_state]);
+	{
+	  this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
+	  this->_state = State::RUN;
+	  this->_model.play(g_refAnimName[this->_state]);
+	}
     }
 }
 
@@ -435,8 +479,13 @@ void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
       this->_attack = true;
       this->_state = State::ATTACK;
       this->_model.play(g_refAnimName[this->_state]);
-      this->_model.set_anim_speed(g_refAnimName[this->_state], 2.0f);
+      this->_model.set_anim_speed(g_refAnimName[this->_state], 3.0f);
     }
+}
+
+void		APlayer::PAUSEFunction(gdl::GameClock const&)
+{
+  exit (1);
 }
 
 Bomb*		APlayer::isAttack()
