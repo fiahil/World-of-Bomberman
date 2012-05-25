@@ -259,12 +259,14 @@ void		APlayer::takeDamage(ExplodedBomb const* cur)
       (this->_pos._y >= (pattern._y - pattern._coefN) &&
        this->_pos._y <= (pattern._y + pattern._coefS) &&
        this->_pos._x == pattern._x))
-    (this->*_bombEffect[cur->getType()])(cur);
-  if (!this->_pv)
-    this->_state = State::DEATH;
-  else
-    this->_state = State::HIT;
-  this->_model.play(g_refAnimName[this->_state]);
+    {
+      (this->*_bombEffect[cur->getType()])(cur);
+      if (!this->_pv)
+	this->_state = State::DEATH;
+      else
+	this->_state = State::HIT;
+      this->_model.play(g_refAnimName[this->_state]);
+    }
 }
 
 bool		APlayer::takeBonus(Bonus const* cur)
