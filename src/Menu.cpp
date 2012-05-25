@@ -23,6 +23,8 @@ Menu::~Menu()
 void		Menu::initialize(void)
 {
   this->window_.setTitle("Bomberman v1.0");
+  this->window_.setHeight(800);
+  this->window_.setWidth(1600);
   this->window_.create();
   Map*	map = new Map(30, 30, 1, 5);
   std::vector<APlayer*>	players;

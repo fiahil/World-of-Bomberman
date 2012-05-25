@@ -50,7 +50,8 @@ struct Skin
       THRALL,
       SYLVANAS,
       VARIANT,
-      ENNEMY,
+      ENNEMY_HIGH,
+      ENNEMY_LOW,
       LAST
     };
 };
@@ -63,6 +64,7 @@ struct State
       STAND,
       ATTACK,
       DEATH,
+      HIT,
       LAST
     };
 };
