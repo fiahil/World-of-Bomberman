@@ -77,10 +77,7 @@ APlayer::APlayer(Map & map)
   this->_pos._scale = 2.0f;
   this->setPos(1, 1);
   this->_k = 0.2f;
-  this->_originPos = this->_pos._pos;
-  this->_realPos = this->_pos._pos;
   this->_indic.setScale(2.0f);
-  this->_indic.setPos(1, 1);
 }
 
 APlayer::~APlayer()
@@ -89,6 +86,9 @@ APlayer::~APlayer()
 
 void		APlayer::initialize(void)
 {
+  this->_originPos = this->_pos._pos;
+  this->_realPos = this->_pos._pos;
+  this->_indic.setPos(this->_pos._x, this->_pos._y);
   this->_model = gdl::Model::load(g_refSkin[this->_skin]);
   gdl::Model::cut_animation(this->_model, "Take 001",
 			    g_refAnim[this->_skin].stand_s, g_refAnim[this->_skin].stand_e, g_refAnimName[State::STAND]);

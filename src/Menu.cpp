@@ -40,14 +40,14 @@ void		Menu::initialize(void)
   conf.setConfig(HumGame::ATTACK, gdl::Keys::R);
   APlayer *newHum2 = new Human(*map, conf);
   newHum2->setColor(6);
-  newHum2->setTeamId(6);
+  newHum2->setTeamId(7);
   newHum2->setSkin(Skin::VARIANT);
   players.push_back(newHum2);
-  for (int i = 0; i < 2; ++i)
+  for (int i = 10; i < 20; ++i)
     {
       APlayer *newAI = new AI(AIType::EASY, *map);
       newAI->setColor(7);
-      newAI->setTeamId(7);
+      newAI->setTeamId(i);
       players.push_back(newAI);
     }
   Match*	m = new Match(map, false, GameMode::VERSUS, players);

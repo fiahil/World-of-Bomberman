@@ -6,6 +6,7 @@
 #include <unistd.h>
 
 #include <GL/gl.h>
+#include <utility>
 #include <iostream>
 #include "Camera.hpp"
 #include "Match.hpp"
@@ -32,6 +33,7 @@ MyGame::~MyGame()
 void		MyGame::initialize(void)
 {
   this->_match._map->initialize();
+  this->_match._map->setSpawnTeam(this->_match._players);
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->initialize();
   this->_HUD[HUD::LIFE_BAR] = gdl::Image::load("textures/life.png");

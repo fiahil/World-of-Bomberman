@@ -210,7 +210,6 @@ void		Map::draw(void)
 
 void		Map::update(gdl::GameClock const&, gdl::Input&)
 {
-  // TODO : implement
 }
 
 bool Map::canMoveAt(size_t x, size_t y)
@@ -279,4 +278,27 @@ void		Map::explode(Pattern& real, Pattern& final, std::list<Bonus*>& bonus)
 				    POS(final._x - real._coefW, final._y),
 				    bonus
 				    );
+}
+
+void		Map::setSpawnTeam(std::vector<APlayer*>& players)
+{
+  std::map<size_t, std::pair<size_t, size_t> >	tmp;
+  size_t	nb = 0;
+  size_t	size = this->_map.size() - 2 * this->_x;
+  size_t	pos;
+
+  for (size_t i = 0; i < players.size(); ++i)
+    tmp[players[i]->getTeamId()] = std::make_pair(0, 0);
+  for (std::map<size_t, std::pair<size_t, size_t> >::iterator it = tmp.begin();
+       it != tmp.end(); ++it)
+    {
+      pos = nb * size / tmp.size() + this->_x - 1;
+      while (this->_map[++pos] != '0');
+      it->second.first = pos % this->_x;
+      it->second.second = pos / this->_x;
+      ++nb;
+    }
+  for (std::vector<APlayer*>::iterator it = players.begin(); it != players.end(); ++it)
+    (*it)->setPos(tmp[(*it)->getTeamId()].first,
+		  tmp[(*it)->getTeamId()].second);
 }
