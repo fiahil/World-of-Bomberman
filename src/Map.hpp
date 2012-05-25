@@ -14,6 +14,13 @@
 
 #define POS(px, py) (((this->_x * (py))) + (px))
 
+struct	Tp {
+
+  Point _pos1;
+  Point _pos2;
+  Tp();
+};
+
 class Map : public AObj
 {
 public:
@@ -34,7 +41,8 @@ private:
   gdl::Image	_background;
   Point const*	_opti;
   std::vector<gdl::Model>	_modelBonus;
-
+  std::map<char, gdl::Model>	_modelBreak;
+  Tp		_tp;
 private:
 
   typedef void(Map::*explodeFunc)(size_t&, size_t&, size_t, std::list<Bonus*>&);
@@ -45,6 +53,7 @@ private:
   std::map<char, explodeFunc> _expFunc;
 
 public:
+  void teleport(Point & pos) const;
   void initialize(void);
   void draw(void);
   void update(gdl::GameClock const& clock, gdl::Input& input);

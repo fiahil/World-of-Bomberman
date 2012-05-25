@@ -13,6 +13,11 @@
 #include "Map.hpp"
 
 
+Tp::Tp()
+  : _pos1(2, 0, 0),
+    _pos2(2, 0, 0)
+{}
+
 Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
   : _x(x),
     _y(y),
@@ -27,6 +32,11 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
 
   this->_expFunc['1'] = &Map::explodeUnBreakable;
   this->_expFunc['2'] = &Map::explodeBreakable;
+  this->_expFunc['3'] = &Map::explodeBreakable;
+
+  this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX"); // tp
+  this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
+  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
 
   for (size_t i = 0; i < (x * y); ++i)
     this->_map += "0";
@@ -39,13 +49,17 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
 	if (!dwallDensity || !(random() % dwallDensity))
 	  this->_map[POS(tx, ty)] = '1';
 	else
-	  this->_map[POS(tx, ty)] = '2';
+	  this->_map[POS(tx, ty)] = ((random() % 2) + 2) + 48;
       }
       else if (!iwallDensity || !(random() % iwallDensity))
-	this->_map[POS(tx, ty)] = '2';
+	this->_map[POS(tx, ty)] = ((random() % 2) + 2) + 48;
     }
   }
   this->_map[POS(1, 1)] = '0'; //TODO
+  this->_tp._pos1.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
+  this->_tp._pos2.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
+  this->_map[POS(this->_tp._pos1._x, this->_tp._pos1._y)] = '0';
+  this->_map[POS(this->_tp._pos2._x, this->_tp._pos2._y)] = '0';
 }
 
 Map::Map(std::string const& file)
@@ -59,6 +73,11 @@ Map::Map(std::string const& file)
 
   this->_expFunc['1'] = &Map::explodeUnBreakable;
   this->_expFunc['2'] = &Map::explodeBreakable;
+  this->_expFunc['3'] = &Map::explodeBreakable;
+
+  this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX");
+  this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
+  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
 
   infile.open (file.c_str(), std::ifstream::in);
   if (!infile)
@@ -74,6 +93,11 @@ Map::Map(std::string const& file)
   if (this->_map.size() != (this->_x * this->_y))
     throw std::exception(); /* TODO BETTER */
   this->_map[POS(1, 1)] = '0'; //TODO
+
+  this->_tp._pos1.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
+  this->_tp._pos2.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
+  this->_map[POS(this->_tp._pos1._x, this->_tp._pos1._y)] = '0';
+  this->_map[POS(this->_tp._pos2._x, this->_tp._pos2._y)] = '0';
 }
 
 Map::Map(size_t x, size_t y, std::string const& map)
@@ -82,9 +106,19 @@ Map::Map(size_t x, size_t y, std::string const& map)
     _map(map),
     _modelBonus(BonusType::LAST)
 {
+
   this->_expFunc['1'] = &Map::explodeUnBreakable;
   this->_expFunc['2'] = &Map::explodeBreakable;
-  this->_map[POS(1, 1)] = '0'; //TODO
+  this->_expFunc['3'] = &Map::explodeBreakable;
+
+  this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX");
+  this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
+  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
+
+  this->_tp._pos1.setPos(random() % this->_x, random() % this->_y);
+  this->_tp._pos2.setPos(random() % this->_x, random() % this->_y);
+  this->_map[POS(this->_tp._pos1._x, this->_tp._pos1._y)] = '0';
+  this->_map[POS(this->_tp._pos2._x, this->_tp._pos2._y)] = '0';
 }
 
 Map::~Map()
@@ -100,6 +134,14 @@ Map::~Map()
   }
 */
 
+void		Map::teleport(Point & pos) const
+{
+  if (pos == this->_tp._pos1)
+    pos = this->_tp._pos2;
+  else if (pos == this->_tp._pos2)
+    pos = this->_tp._pos1;
+}
+
 void		Map::initialize(void)
 {
   this->_break = gdl::Image::load("textures/break.jpg");
@@ -109,13 +151,12 @@ void		Map::initialize(void)
   this->_modelBonus[BonusType::BOMB] = gdl::Model::load("models/Bonus_bomb.FBX");
   this->_modelBonus[BonusType::LUST] = gdl::Model::load("models/Bonus_fury.FBX");
   this->_modelBonus[BonusType::POWER] = gdl::Model::load("models/Bonus_power.FBX");
-  this->_modelBonus[BonusType::SHIELD] = gdl::Model::load("models/Bonus_shield.fbx");
+  this->_modelBonus[BonusType::SHIELD] = gdl::Model::load("models/Bonus_shield.FBX");
 }
 
 void		Map::draw(void)
 {
   Point		p(2.0f, 0, 0);
-  Cube		w_break(this->_break);
   Cube		w_unbreak(this->_unbreak);
   Plane		background(this->_x, this->_y, p, this->_background);
   size_t	x0 = 0;
@@ -126,27 +167,46 @@ void		Map::draw(void)
   background.draw();
   if (this->_opti)
     {
-      x0 = this->_opti->_x - 45;
+      x0 = this->_opti->_x - 20;
       if (static_cast<int>(x0) < 0)
 	x0 = 0;
-      y0 = this->_opti->_y - 50;
+      y0 = this->_opti->_y - 15;
       if (static_cast<int>(y0) < 0)
      	y0 = 0;
-      xf = this->_opti->_x + 45;
+      xf = this->_opti->_x + 20;
       if (xf > this->_x)
 	xf = this->_x;
-      yf = this->_opti->_y + 10;
+      yf = this->_opti->_y + 8;
       if (yf > this->_y)
 	yf = this->_y;
     }
+  
+  // TODO branchement comparaison
   for (size_t y = y0; y < yf; ++y)
     for (size_t x = x0; x < xf; ++x) {
       p.setPos(x, y);
       if (this->_map[POS(x, y)] == '1')
 	w_unbreak.draw(p);
-      else if (this->_map[POS(x, y)] == '2')
-	w_break.draw(p);
+      else if (this->_map[POS(x, y)] != '0')
+	{
+	  glPushMatrix();
+	  glTranslatef(p._pos.x, p._pos.y - 1.0f, p._pos.z);
+	  glScalef(0.4f, 0.4f, 0.4f);
+	  this->_modelBreak[this->_map[POS(x, y)]].draw();
+	  glPopMatrix();
+	}
     }
+  glPushMatrix();
+  glTranslatef(this->_tp._pos1._pos.x, this->_tp._pos1._pos.y - 1.0f, this->_tp._pos1._pos.z);
+  glScalef(0.4f, 0.4f, 0.4f);
+  this->_modelBreak['t'].draw();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(this->_tp._pos2._pos.x, this->_tp._pos2._pos.y - 1.0f, this->_tp._pos2._pos.z);
+  glScalef(0.4f, 0.4f, 0.4f);
+  this->_modelBreak['t'].draw();
+  glPopMatrix();
 }
 
 void		Map::update(gdl::GameClock const&, gdl::Input&)

@@ -26,7 +26,7 @@ void	Pyramid::initialize()
 void	Pyramid::draw()
 {
   glPushMatrix();
-  glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
+  glTranslatef(this->_pos._pos.x, this->_pos._pos.y + 1.0f, this->_pos._pos.z);
   glScalef(this->_w, this->_H, this->_h);
   glColor3ub(ContentColor::getColorFromId(this->_color).R,
 	     ContentColor::getColorFromId(this->_color).G,

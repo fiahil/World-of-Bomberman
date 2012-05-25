@@ -50,7 +50,8 @@ struct Skin
       THRALL,
       SYLVANAS,
       VARIANT,
-      ENNEMY,
+      ENNEMY_HIGH,
+      ENNEMY_LOW,
       LAST
     };
 };
@@ -60,8 +61,10 @@ struct State
   enum eState
     {
       RUN,
-      WALK,
-      STATIC,
+      STAND,
+      ATTACK,
+      DEATH,
+      HIT,
       LAST
     };
 };
@@ -95,11 +98,9 @@ struct GameMode
 {
   enum eGameMode
     {
-      HISTORY,
-      ARCADE,
-      DEATH,
-      CAPT_FLAG,
-      NETWORK,
+      SOLO,
+      COOP,
+      VERSUS,
       LAST
     };
 };
