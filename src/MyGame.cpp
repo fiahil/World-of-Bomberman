@@ -118,7 +118,7 @@ void		MyGame::update(void)
       if ((newBomb = this->_match._players[i]->isAttack()))
 	this->_match._bombs.push_back(newBomb);
     }
-  if (!nb)
+  if (!nb || (this->_match._gameMode == GameMode::COOP && nb < 2))
     this->_EOG = true;
   for (std::list<APlayer*>::iterator it = this->_dead.begin();
        it != this->_dead.end(); ++it)

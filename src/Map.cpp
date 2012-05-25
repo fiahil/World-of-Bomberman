@@ -141,13 +141,13 @@ void		Map::draw(void)
       x0 = this->_opti->_x - 13;
       if (static_cast<int>(x0) < 0)
 	x0 = 0;
-      y0 = this->_opti->_y - 12;
+      y0 = this->_opti->_y - 15;
       if (static_cast<int>(y0) < 0)
      	y0 = 0;
       xf = this->_opti->_x + 13;
       if (xf > this->_x)
 	xf = this->_x;
-      yf = this->_opti->_y + 6;
+      yf = this->_opti->_y + 8;
       if (yf > this->_y)
 	yf = this->_y;
     }
@@ -163,8 +163,7 @@ void		Map::draw(void)
 	  glScalef(0.4f, 0.4f, 0.4f);
 	  this->_modelBreak[this->_map[POS(x, y)]].draw();
 	  glPopMatrix();
-	  }
-	//w_break.draw(p);
+	}
     }
 }
 

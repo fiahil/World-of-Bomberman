@@ -29,23 +29,24 @@ void		Menu::initialize(void)
   Config conf;
   APlayer *newHum1 = new Human(*map, conf);
   newHum1->setSkin(Skin::THRALL);
+  newHum1->setTeamId(6);
   players.push_back(newHum1);
   conf.setConfig(HumGame::UP, gdl::Keys::W);
   conf.setConfig(HumGame::LEFT, gdl::Keys::A);
   conf.setConfig(HumGame::DOWN, gdl::Keys::S);
   conf.setConfig(HumGame::RIGHT, gdl::Keys::D);
   conf.setConfig(HumGame::ATTACK, gdl::Keys::R);
-  /*APlayer *newHum2 = new Human(*map, conf);
+  APlayer *newHum2 = new Human(*map, conf);
   newHum2->setColor(6);
   newHum2->setTeamId(6);
   newHum2->setSkin(Skin::VARIANT);
-  players.push_back(newHum2);*/
+  players.push_back(newHum2);
   APlayer *newAI = new AI(AIType::EASY, *map);
   newAI->setColor(7);
   newAI->setTeamId(7);
   players.push_back(newAI);
-  Match*	m = new Match(map, false, GameMode::SOLO, players);
-  this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0], 0); // TODO
+  Match*	m = new Match(map, false, GameMode::VERSUS, players);
+  this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0], players[1]); // TODO
   this->_game->initialize();
 }
 
