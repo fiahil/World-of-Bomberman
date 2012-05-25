@@ -482,7 +482,7 @@ void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
       double	addTimer = 3.0 - (0.3 * this->_lustStack);
       if (addTimer < 0.00001)
 	addTimer = 0.0;
-      this->_timers[HumGame::ATTACK] = current + addTimer;
+      this->_timers[HumGame::ATTACK] = current + 0 ; //+ addTimer;
       this->_attack = true;
       this->_state = State::ATTACK;
       this->_model.play(g_refAnimName[this->_state]);

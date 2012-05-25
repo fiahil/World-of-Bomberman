@@ -131,6 +131,22 @@ void  Human::affMegaBomb()
     this->_HUD[HUD::MEGABOMB_KO]->draw();
 }
 
+void Human::halluSkill()
+{
+}
+
+void  Human::healSkill()
+{
+}
+
+void  Human::berserkSkill()
+{
+}
+
+void  Human::jumpSkill()
+{
+}
+
 void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EOG) {
 
   std::stringstream ss;

@@ -56,6 +56,18 @@ struct Skin
     };
 };
 
+struct Skill
+{
+  enum eSkill
+    {
+      HALLU,
+      HEAL,
+      BERSERK,
+      JUMP,
+      LAST
+    };
+};
+
 struct State
 {
   enum eState

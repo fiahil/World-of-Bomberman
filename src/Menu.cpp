@@ -26,7 +26,7 @@ void		Menu::initialize(void)
   this->window_.setHeight(800);
   this->window_.setWidth(1600);
   this->window_.create();
-  Map*	map = new Map(100, 100, 1, 5);
+  Map*	map = new Map(30, 30, 1, 5);
   std::vector<APlayer*>	players;
   Config conf;
   APlayer *newHum1 = new Human(*map, conf);
@@ -43,7 +43,7 @@ void		Menu::initialize(void)
   newHum2->setTeamId(6);
   newHum2->setSkin(Skin::VARIANT);
   players.push_back(newHum2);
-  for (int i = 0; i < 5; ++i)
+  for (int i = 0; i < 2; ++i)
     {
       APlayer *newAI = new AI(AIType::EASY, *map);
       newAI->setColor(7);
