@@ -12,8 +12,8 @@
 static const char*	g_refSkin[Skin::LAST] = {
   "models/Character_thrall.FBX",
   "models/Character_sylvanas.FBX",
-  "models/Character_variant.FBX",
-  "models/Character_ennemy.FBX"
+  "models/Character_varian.FBX",
+  "models/Character_ennemy_low.FBX"
 };
 
 static const char*	g_refBomb[BombType::LAST] = {
@@ -96,7 +96,7 @@ void		APlayer::initialize(void)
   gdl::Model::cut_animation(this->_model, "Take 001",
 			    g_refAnim[this->_skin].attack_s, g_refAnim[this->_skin].attack_e, g_refAnimName[State::ATTACK]);
   this->_Mbomb = gdl::Model::load(g_refBomb[this->_weapon]);
-  this->_MExplodedBomb = gdl::Model::load("models/Bomb_blue.FBX");
+  this->_MExplodedBomb = gdl::Model::load("models/Bomb_dart.FBX");
 }
 
 void		APlayer::draw(void)

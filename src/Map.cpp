@@ -36,7 +36,7 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
 
   this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX"); // tp
   this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
-  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate.FBX");
+  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
 
   for (size_t i = 0; i < (x * y); ++i)
     this->_map += "0";
@@ -77,7 +77,7 @@ Map::Map(std::string const& file)
 
   this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX");
   this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
-  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate.FBX");
+  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
 
   infile.open (file.c_str(), std::ifstream::in);
   if (!infile)
@@ -113,7 +113,7 @@ Map::Map(size_t x, size_t y, std::string const& map)
 
   this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX");
   this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
-  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate.FBX");
+  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
 
   this->_tp._pos1.setPos(random() % this->_x, random() % this->_y);
   this->_tp._pos2.setPos(random() % this->_x, random() % this->_y);
@@ -151,7 +151,7 @@ void		Map::initialize(void)
   this->_modelBonus[BonusType::BOMB] = gdl::Model::load("models/Bonus_bomb.FBX");
   this->_modelBonus[BonusType::LUST] = gdl::Model::load("models/Bonus_fury.FBX");
   this->_modelBonus[BonusType::POWER] = gdl::Model::load("models/Bonus_power.FBX");
-  this->_modelBonus[BonusType::SHIELD] = gdl::Model::load("models/Bonus_shield.fbx");
+  this->_modelBonus[BonusType::SHIELD] = gdl::Model::load("models/Bonus_shield.FBX");
 }
 
 void		Map::draw(void)
