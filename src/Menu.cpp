@@ -30,7 +30,6 @@ void		Menu::initialize(void)
   Map*	map = new Map(30, 30, 1, 5);
   std::vector<APlayer*>	players;
   Config conf;
-  conf.setConfig(HumGame::ATTACK, gdl::Keys::RShift);
   APlayer *newHum1 = new Human(*map, conf);
   newHum1->setSkin(Skin::SYLVANAS);
   newHum1->setTeamId(6);
@@ -39,7 +38,7 @@ void		Menu::initialize(void)
   conf.setConfig(HumGame::LEFT, gdl::Keys::A);
   conf.setConfig(HumGame::DOWN, gdl::Keys::S);
   conf.setConfig(HumGame::RIGHT, gdl::Keys::D);
-  conf.setConfig(HumGame::ATTACK, gdl::Keys::Space);
+  conf.setConfig(HumGame::ATTACK, gdl::Keys::R);
   APlayer *newHum2 = new Human(*map, conf);
   newHum2->setColor(6);
   newHum2->setTeamId(7);
