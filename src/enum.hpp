@@ -122,12 +122,16 @@ struct TokenMenu
   enum eMenu
     {
       MAINMENU,
+      LOADPROFILE,
+      LOADSAVE,
+      LOADMAP,
+      GAMECHOOSE,
+      IA,
+      TEAM,
+      MAP,
       NEWPROFILE,
       PROFILE,
-      SLIDING,
-      GAMECHOOSE,
       SETTINGS,
-      BACK,
       QUIT,
       LAST
     };
