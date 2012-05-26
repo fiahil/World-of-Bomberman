@@ -157,8 +157,8 @@ void		MyGame::drawGame(APlayer* p) const
 		static_cast<void(*)(Bonus*)>(&MyGame::drawer));
 
   std::for_each(this->_dead.begin(),
-		this->_dead.end(),
-		static_cast<void(*)(APlayer*)>(&MyGame::drawer));
+  		this->_dead.end(),
+  		static_cast<void(*)(APlayer*)>(&MyGame::drawer));
 
   std::for_each(this->_match._players.begin(),
 		this->_match._players.end(),
