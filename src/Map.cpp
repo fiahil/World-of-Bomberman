@@ -212,9 +212,16 @@ void		Map::update(gdl::GameClock const&, gdl::Input&)
 {
 }
 
-bool Map::canMoveAt(size_t x, size_t y)
+bool Map::canMoveAt(size_t x, size_t y) const
 {
   return (this->_map[POS(x, y)] == '0');
+}
+
+bool Map::safeCanMoveAt(size_t x, size_t y) const
+{
+  return ((x > 0) && (x < this->_x) && (y > 0)
+	  && (y < this->_y)
+	  && (this->_map[POS(x, y)] == '0'));
 }
 
 void		Map::setOptimization(Point const* p)
