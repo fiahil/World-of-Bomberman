@@ -12,9 +12,10 @@
 
 class AObj
 {
+
 public:
   AObj();
-  ~AObj();
+  virtual ~AObj();
 
 private:
    AObj(const AObj& oldAObj);
@@ -31,6 +32,7 @@ public:
   void		setPos(double, double, double);
   void		setScale(double);
   Point const&	getPos() const;
+
 };
 
 #endif

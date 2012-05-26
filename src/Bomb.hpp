@@ -15,10 +15,16 @@
 
 class Bomb : public AObj
 {
+
 public:
-  Bomb(BombType::eBomb, Point const &, APlayer*, gdl::Model&, gdl::Model&, size_t = 0);
-  ~Bomb();
-  
+  Bomb(BombType::eBomb,
+       Point const &,
+       APlayer*,
+       gdl::Model&,
+       gdl::Model&,
+       size_t = 0);
+  virtual ~Bomb();
+
 private:
   BombType::eBomb	_type;
   APlayer*	_player;
@@ -27,16 +33,17 @@ private:
   gdl::Model&	_model;
   gdl::Model&	_modelExploded;
   Pattern	_pattern;
-  
+
 public:
+  void			initialize(void);
+  void			draw(void);
+  void			update(gdl::GameClock const&, gdl::Input&);
+
   BombType::eBomb	get_type(void) const;
-  
-  void		initialize(void);
-  void		draw(void);
-  bool		explode() const;
+  bool			explode() const;
   Pattern const&	getPattern() const;
-  ExplodedBomb*	createExplodedBomb();
-  void		update(gdl::GameClock const& clock, gdl::Input& input);
+  ExplodedBomb*		createExplodedBomb() const;
+
 };
 
 #else
@@ -44,43 +51,3 @@ public:
 class Bomb;
 
 #endif
-
-/*
-Update :
-{
-
-  - For each Bombe update -> explode
-              = si true :
-	          - get [Pattern]
-		  - explode de map
-		  - recup du new [Pattern] et stock la [BombExploded] dans la liste [recentExplosion]
-                  - delete de la bomb
-  - For each player
-                - Update du joueur (move ...)
-		- test des bonus + application
-		- test des [Pattern] d'explosion (de [recentExplosion]) si degat appel de la blablabla
-
-   - clean des explosion termine de [recentEsxplosion]
-
-}
-
-[BombExploded] {
-
-  - [Pattern]
-  - timer
-  - id joueur
-
-}
-
-[Pattern] {
-
-  - size_t x;
-  - size_t y;
-  - size_t coefNorth;
-  - size_t coefSouth;
-  - size_t coefWest;
-  - size_t coefEast;
-
-}
-
- */

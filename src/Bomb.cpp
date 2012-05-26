@@ -6,15 +6,12 @@
 #include <iostream>
 #include "Bomb.hpp"
 
-static const double g_bombScale [] =
-  {
-    0.3f,
-    0.3f,
-    0.3f
-  };
-
-
-Bomb::Bomb(BombType::eBomb t, Point const & pos, APlayer* p, gdl::Model& model, gdl::Model& modelE, size_t power)
+Bomb::Bomb(BombType::eBomb t,
+	   Point const & pos,
+	   APlayer* p,
+	   gdl::Model& model,
+	   gdl::Model& modelE,
+	   size_t power)
   : _type(t),
     _player(p),
     _timer(-1.0),
@@ -35,7 +32,7 @@ Bomb::~Bomb()
 {
 }
 
-BombType::eBomb		Bomb::get_type(void) const
+BombType::eBomb	Bomb::get_type(void) const
 {
   return _type;
 }
@@ -50,7 +47,7 @@ void		Bomb::draw(void)
     {
       glPushMatrix();
       glTranslatef(this->_pos._pos.x, this->_pos._pos.y - 0.5f, this->_pos._pos.z);
-      glScalef(g_bombScale[this->_type], g_bombScale[this->_type], g_bombScale[this->_type]);
+      glScalef(0.3f, 0.3f, 0.3f);
       this->_model.draw();
       glPopMatrix();
     }
@@ -60,7 +57,8 @@ void		Bomb::update(gdl::GameClock const& clock, gdl::Input&)
 {
   if (!this->_exploded && this->_timer == (-1.0))
     this->_timer = static_cast<double>(clock.getTotalGameTime()) + 2.0f;
-  else if (!this->_exploded && static_cast<double>(clock.getTotalGameTime()) >= this->_timer)
+  else if (!this->_exploded &&
+	   static_cast<double>(clock.getTotalGameTime()) >= this->_timer)
     this->_exploded = true;
 }
 
@@ -74,7 +72,7 @@ bool		Bomb::explode() const
   return this->_exploded;
 }
 
-ExplodedBomb*	Bomb::createExplodedBomb()
+ExplodedBomb*	Bomb::createExplodedBomb() const
 {
   ExplodedBomb	*ret;
   Pattern	tmp(this->_pattern);
@@ -83,7 +81,11 @@ ExplodedBomb*	Bomb::createExplodedBomb()
   tmp._coefS = 0;
   tmp._coefW = 0;
   tmp._coefE = 0;
-  ret = new ExplodedBomb(this->_type, this->_pos, tmp,
-			 this->_pattern, this->_player, 0.2f, this->_modelExploded);
+  ret = new ExplodedBomb(this->_type,
+			 this->_pos, tmp,
+			 this->_pattern,
+			 this->_player,
+			 0.2f,
+			 this->_modelExploded);
   return ret;
 }
