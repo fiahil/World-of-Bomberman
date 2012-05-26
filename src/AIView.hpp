@@ -23,9 +23,10 @@ struct View
 
 class AIView
 {
+
   public:
     AIView(Map const&);
-  
+
   private:
     size_t		_len;
     std::vector<View>	_view;
@@ -36,6 +37,7 @@ class AIView
 
   private:
     static View		ctor(char const c);
+
 };
 
 #endif /* __AIVIEW_HPP__ */

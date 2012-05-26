@@ -109,35 +109,35 @@ void		Human::drawStart(size_t h, size_t lag)
 {
   std::stringstream	ss;
 
-  this->_text.setSize(70);
+  this->_text.setSize(100);
   if (this->_start > 0)
     {
       ss << this->_start;
       this->_text.setText(ss.str());
-      this->_text.setPosition(lag + 160, h / 2);
+      this->_text.setPosition(lag + 390, h / 2);
       this->_text.draw();
     }
   else if (!this->_start)
     {
       this->_text.setText("Start");
-      this->_text.setPosition(lag + 90, h / 2);
+      this->_text.setPosition(lag + 260, h / 2);
       this->_text.draw();
     }
 }
 
 void		Human::drawEnd(size_t h, size_t lag, bool EOG)
 {
-  this->_text.setSize(40);
+  this->_text.setSize(80);
   if (!this->_pv)
     {
       this->_text.setText("You Lose !");
-      this->_text.setPosition(lag + 90, h / 2);
+      this->_text.setPosition(lag + 200, h / 2);
       this->_text.draw();
     }
   else if (EOG)
     {
       this->_text.setText("You Win !");
-      this->_text.setPosition(lag + 90, h / 2);
+      this->_text.setPosition(lag + 200, h / 2);
       this->_text.draw();
     }
 }
@@ -201,22 +201,42 @@ void		Human::berserkSkill(gdl::GameClock const& clock)
 
 bool		Human::northJumpFunction()
 {
-  return true;
+  if (this->_map.safeCanMoveAt(this->_pos._x, this->_pos._y - 2))
+    {
+      this->_pos.setPos(this->_pos._x, this->_pos._y - 2);
+      return true;
+    }
+  return false;
 }
 
 bool		Human::southJumpFunction()
 {
-  return true;
+  if (this->_map.safeCanMoveAt(this->_pos._x, this->_pos._y + 2))
+    {
+      this->_pos.setPos(this->_pos._x, this->_pos._y + 2);
+      return true;
+    }
+  return false;
 }
 
 bool		Human::westJumpFunction()
 {
-  return true;
+  if (this->_map.safeCanMoveAt(this->_pos._x - 2, this->_pos._y))
+    {
+      this->_pos.setPos(this->_pos._x - 2, this->_pos._y);
+      return true;
+    }
+  return false;
 }
 
 bool		Human::eastJumpFunction()
 {
-  return true;
+  if (this->_map.safeCanMoveAt(this->_pos._x + 2, this->_pos._y))
+    {
+      this->_pos.setPos(this->_pos._x + 2, this->_pos._y);
+      return true;
+    }
+  return false;
 }
 
 void		Human::jumpSkill(gdl::GameClock const& clock)

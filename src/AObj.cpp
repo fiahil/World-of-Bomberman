@@ -16,7 +16,6 @@ AObj::AObj(AObj const& oldAObj)
 
 AObj::~AObj()
 {
-  // TODO : implement
 }
 
 void		AObj::setPos(int x, int y)

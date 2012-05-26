@@ -14,15 +14,15 @@ class Bonus : public AObj
 {
 public:
   Bonus(BonusType::eBonus t, Point const&, gdl::Model&);
-  ~Bonus();
-  
+  virtual ~Bonus();
+
 private:
   BonusType::eBonus	_type;
-  gdl::Model&	_model;
-  
+  gdl::Model&		_model;
+
 public:
   BonusType::eBonus	getType(void) const;
-  
+
   void		initialize(void);
   void		draw();
   void		update(gdl::GameClock const&, gdl::Input&);

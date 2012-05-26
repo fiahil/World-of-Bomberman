@@ -16,7 +16,7 @@ class Cube : public AObj
 {
 public:
   Cube(gdl::Image&);
-  ~Cube();
+  virtual ~Cube();
 
 private:
   Cube(Cube const&);
@@ -26,13 +26,14 @@ private:
   Point*	_p;
   gdl::Image&	_txt;
 
-private:
-  virtual void	draw();
-
 public:
-  virtual void	initialize();
-  virtual void	update(gdl::GameClock const& clock, gdl::Input& input);
-  void		draw(Point&);
+  void	initialize();
+  void	update(gdl::GameClock const&, gdl::Input&);
+  void	draw(Point&);
+
+private:
+  void	draw();
+
 };
 
 #else

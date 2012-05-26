@@ -16,6 +16,7 @@ Config::Config()
   this->_conf[HumGame::ATTACK] = gdl::Keys::Space;
   this->_conf[HumGame::PAUSE] = gdl::Keys::Escape;
   this->_conf[HumGame::CHEAT] = gdl::Keys::Tab;
+  this->_conf[HumGame::SKILL] = gdl::Keys::Return;
 }
 
 Config::~Config()
@@ -60,7 +61,8 @@ bool	Config::isAllSet() const
 bool	Config::operator==(Config const & other) const
 {
   for (int i = 0; static_cast<HumGame::eAction>(i) < HumGame::LAST; ++i)
-    if (other.getConfig(static_cast<HumGame::eAction>(i)) != this->getConfig(static_cast<HumGame::eAction>(i)))
+    if (other.getConfig(static_cast<HumGame::eAction>(i)) !=
+	this->getConfig(static_cast<HumGame::eAction>(i)))
       return false;
   return true;
 }
@@ -68,7 +70,8 @@ bool	Config::operator==(Config const & other) const
 bool	Config::operator!=(Config const & other) const
 {
   for (int i = 0; static_cast<HumGame::eAction>(i) < HumGame::LAST; ++i)
-    if (other.getConfig(static_cast<HumGame::eAction>(i)) == this->getConfig(static_cast<HumGame::eAction>(i)))
+    if (other.getConfig(static_cast<HumGame::eAction>(i)) ==
+	this->getConfig(static_cast<HumGame::eAction>(i)))
       return false;
   return true;
 }

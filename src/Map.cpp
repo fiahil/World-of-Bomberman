@@ -153,13 +153,13 @@ void		Map::draw(void)
       x0 = this->_opti->_x - 20;
       if (static_cast<int>(x0) < 0)
 	x0 = 0;
-      y0 = this->_opti->_y - 15;
+      y0 = this->_opti->_y - 12;
       if (static_cast<int>(y0) < 0)
      	y0 = 0;
       xf = this->_opti->_x + 20;
       if (xf > this->_x)
 	xf = this->_x;
-      yf = this->_opti->_y + 8;
+      yf = this->_opti->_y + 6;
       if (yf > this->_y)
 	yf = this->_y;
     }
@@ -200,6 +200,13 @@ bool		Map::canMoveAt(size_t x, size_t y) const
   return this->_map.at(POS(x, y)) == '0';
 }
 
+bool Map::safeCanMoveAt(size_t x, size_t y) const
+{
+  return ((x > 0) && (x < this->_x) && (y > 0)
+	  && (y < this->_y)
+	  && (this->_map[POS(x, y)] == '0'));
+}
+
 void		Map::setOptimization(Point const* p)
 {
   this->_opti = p;
@@ -220,7 +227,9 @@ size_t		Map::getY(void) const
   return this->_y;
 }
 
-void		Map::explodeUnBreakable(size_t &r, size_t &f, size_t, std::list<Bonus*>&)
+void		Map::explodeUnBreakable(size_t &r,
+					size_t &f,
+					size_t, std::list<Bonus*>&)
 {
   --r;
   f = r;

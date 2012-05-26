@@ -60,10 +60,10 @@ public:
   void		draw(void);
   void		update(gdl::GameClock const& clock, gdl::Input& input);
   bool		canMoveAt(size_t x, size_t y) const;
+  bool		safeCanMoveAt(size_t x, size_t y) const;
   void		explode(Pattern&, Pattern&, std::list<Bonus*>&);
   void		setOptimization(Point const*);
   void		setSpawnTeam(std::vector<APlayer*>&);
-
   std::string const&	getMap(void) const;
   size_t		getX(void) const;
   size_t		getY(void) const;

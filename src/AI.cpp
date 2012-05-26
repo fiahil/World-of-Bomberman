@@ -3,13 +3,17 @@
  * 12.05.2012
  */
 
-#include <cstdlib>
 #include "enum.hpp"
 #include "AIView.hpp"
 #include "AI.hpp"
 
 AI::AI(AIType::eAI type, Map& map)
-  : APlayer(map), _type(type), _view(0), _start(4), _startTimer(-1.0f)
+  : APlayer(map),
+    _type(type),
+    _view(0),
+    _start(4),
+    _startTimer(-1.0f),
+    _AIDifficulty(AIType::LAST, 0)
 {
   this->_AIDifficulty[AIType::EASY] = &AI::AIEasy;
   this->_AIDifficulty[AIType::MEDIUM] = &AI::AIMedium;
@@ -26,14 +30,7 @@ bool	AI::isExplosion(size_t x, size_t y) const
   return this->_view->at(x, y).type == Elt::EXBOMB;
 }
 
-void	AI::AIEasy(gdl::GameClock const& clock)
-{
-  if (!this->isWall(this->_pos._x, this->_pos._y - 1) &&
-      !this->isExplosion(this->_pos._x, this->_pos._y - 1))
-    this->UPFunction(clock);
-  else if (!this->isWall(this->_pos._x, this->_pos._y + 1) &&
-           !this->isExplosion(this->_pos._x, this->_pos._y + 1))
-    this->DOWNFunction(clock);
+// TODO : old code AIEasy
   /*int				pos = 0;
   std::vector<Dir::eDir>	ref(static_cast<int>(Dir::LAST), Dir::LAST);
 
@@ -57,6 +54,15 @@ void	AI::AIEasy(gdl::GameClock const& clock)
       else
 	this->RIGHTFunction(clock);
     }*/
+
+void	AI::AIEasy(gdl::GameClock const& clock)
+{
+  if (!this->isWall(this->_pos._x, this->_pos._y - 1) &&
+      !this->isExplosion(this->_pos._x, this->_pos._y - 1))
+    this->UPFunction(clock);
+  else if (!this->isWall(this->_pos._x, this->_pos._y + 1) &&
+           !this->isExplosion(this->_pos._x, this->_pos._y + 1))
+    this->DOWNFunction(clock);
 }
 
 void	AI::AIMedium(gdl::GameClock const&)
@@ -74,9 +80,9 @@ void	AI::updateView(AIView const* v)
   this->_view = v;
 }
 
-void AI::play(gdl::GameClock const& clock, gdl::Input&)
+void	AI::play(gdl::GameClock const& clock, gdl::Input&)
 {
-  if (this->_start >= 0 && this->_startTimer <= clock.getTotalGameTime())
+  if ((this->_start >= 0) && (this->_startTimer <= clock.getTotalGameTime()))
     {
       --this->_start;
       this->_startTimer = clock.getTotalGameTime() + 1.0f;

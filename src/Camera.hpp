@@ -16,7 +16,6 @@ class Camera
 public:
   Camera();
   Camera(int, int,  APlayer const* = 0, APlayer const* = 0);
-  virtual ~Camera();
 
 private:
   int			_height;
@@ -28,15 +27,16 @@ private:
   APlayer const*	_pl1;
   APlayer const*	_pl2;
 
-private:
-  void	draw() const;
-
 public:
   void	setPos(double, double, double);
   void	setSplitScreenLeft();
   void	setSplitScreenRight();
   void	setNormalScreen();
   void	setViewHUD() const;
+
+private:
+  void	draw() const;
+
 };
 
 #else
