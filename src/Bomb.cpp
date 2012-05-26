@@ -3,7 +3,6 @@
  * 12.05.2012
  */
 
-#include <iostream>
 #include "Bomb.hpp"
 
 Bomb::Bomb(BombType::eBomb t,

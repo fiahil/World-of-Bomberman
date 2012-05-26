@@ -91,15 +91,25 @@ void		APlayer::initialize(void)
   this->_indic.setPos(this->_pos._x, this->_pos._y);
   this->_model = gdl::Model::load(g_refSkin[this->_skin]);
   gdl::Model::cut_animation(this->_model, "Take 001",
-			    g_refAnim[this->_skin].stand_s, g_refAnim[this->_skin].stand_e, g_refAnimName[State::STAND]);
+			    g_refAnim[this->_skin].stand_s,
+			    g_refAnim[this->_skin].stand_e,
+			    g_refAnimName[State::STAND]);
   gdl::Model::cut_animation(this->_model, "Take 001",
-			    g_refAnim[this->_skin].run_s, g_refAnim[this->_skin].run_e, g_refAnimName[State::RUN]);
+			    g_refAnim[this->_skin].run_s,
+			    g_refAnim[this->_skin].run_e,
+			    g_refAnimName[State::RUN]);
   gdl::Model::cut_animation(this->_model, "Take 001",
-			    g_refAnim[this->_skin].death_s, g_refAnim[this->_skin].death_e, g_refAnimName[State::DEATH]);
+			    g_refAnim[this->_skin].death_s,
+			    g_refAnim[this->_skin].death_e,
+			    g_refAnimName[State::DEATH]);
   gdl::Model::cut_animation(this->_model, "Take 001",
-			    g_refAnim[this->_skin].attack_s, g_refAnim[this->_skin].attack_e, g_refAnimName[State::ATTACK]);
+			    g_refAnim[this->_skin].attack_s,
+			    g_refAnim[this->_skin].attack_e,
+			    g_refAnimName[State::ATTACK]);
   gdl::Model::cut_animation(this->_model, "Take 001",
-			    g_refAnim[this->_skin].hit_s, g_refAnim[this->_skin].hit_e, g_refAnimName[State::HIT]);
+			    g_refAnim[this->_skin].hit_s,
+			    g_refAnim[this->_skin].hit_e,
+			    g_refAnimName[State::HIT]);
   this->_Mbomb = gdl::Model::load(g_refBomb[this->_weapon]);
   this->_MExplodedBomb = gdl::Model::load("models/Bomb_dart.FBX");
 }
@@ -109,7 +119,6 @@ void		APlayer::draw(void)
   glPushMatrix();
   glTranslatef(this->_realPos.x, this->_realPos.y - 1.0f, this->_realPos.z);
   (this->*_rotFuncMap[this->_dir])();
-   // glScalef(0.05f, 0.05f, 0.05f);
   glScalef(1.5f, 1.5f, 1.5f);
   this->_model.draw();
   glPopMatrix();
@@ -127,7 +136,9 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   if (this->_pv)
     this->play(clock, input);
-  if ((this->_state == State::RUN || this->_state == State::STAND || this->_state == State::HIT)
+  if ((this->_state == State::RUN ||
+       this->_state == State::STAND ||
+       this->_state == State::HIT)
       && this->_model.anim_is_ended(g_refAnimName[this->_state]))
     {
       this->_state = State::STAND;
@@ -162,8 +173,12 @@ void		APlayer::slowMotion()
 {
   if (!(this->_realPos == this->_pos._pos))
     {
-      this->_realPos.x = this->_originPos.x + this->_k * (this->_pos._pos.x - this->_originPos.x);
-      this->_realPos.z = this->_originPos.z + this->_k * (this->_pos._pos.z - this->_originPos.z);
+      this->_realPos.x = this->_originPos.x +
+	this->_k *
+	(this->_pos._pos.x - this->_originPos.x);
+      this->_realPos.z = this->_originPos.z +
+	this->_k *
+	(this->_pos._pos.z - this->_originPos.z);
       this->_k += 0.2f;
       if (this->_k > 1.2f)
 	{

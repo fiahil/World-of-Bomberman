@@ -4,7 +4,6 @@
  */
 
 #include <GL/gl.h>
-#include <iostream>
 #include "Cube.hpp"
 
 Cube::Cube(gdl::Image& txt)

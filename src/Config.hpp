@@ -11,9 +11,6 @@
 #include <Input.hpp>
 #include "enum.hpp"
 
-/*
- * TODO: Refaire objet config
- */
 class	Config
 {
 public:
@@ -25,14 +22,8 @@ private:
 
 private:
   std::map<HumGame::eAction, gdl::Keys::Key> _conf;
+
 public:
-  /***********************************************************************
-   ** Function : setConfig
-   ** Comment  :
-   **   - return HumGame::LAST si aucun problem rencontre
-   **   - return l'action a laquelle la touche etait deja assigne si problem
-   **     et reassigne gdl::Keys::Count (unset) a l'ancienne
-   ***********************************************************************/
   HumGame::eAction	setConfig(HumGame::eAction, gdl::Keys::Key);
   gdl::Keys::Key	getConfig(HumGame::eAction) const;
   bool			isAllSet() const;

@@ -27,6 +27,7 @@ struct HumGame
     ATTACK,
     PAUSE,
     CHEAT,
+    SKILL,
     LAST
   };
 

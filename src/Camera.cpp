@@ -5,8 +5,6 @@
 
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <cmath>
-#include <iostream>
 #include "Camera.hpp"
 
 Camera::Camera()
@@ -22,10 +20,6 @@ Camera::Camera(int w, int h,  APlayer const* pl1, APlayer const* pl2)
     _width(w),
     _pl1(pl1),
     _pl2(pl2)
-{
-}
-
-Camera::~Camera()
 {
 }
 
