@@ -65,8 +65,8 @@ void		Camera::setSplitScreenLeft()
       this->_h = this->_height;
       glViewport(0, 0, this->_w, this->_h);
       this->_pos = this->_pl1->getPosReal();
-      this->_pos.y += 10.0f * this->_pl1->getPos()._scale;
-      this->_pos.z += 5.0f * this->_pl1->getPos()._scale;
+      this->_pos.y += 7.0f * this->_pl1->getPos()._scale;
+      this->_pos.z += 4.0f * this->_pl1->getPos()._scale;
       this->_target = this->_pl1->getPosReal();
       this->draw();
     }
@@ -80,8 +80,8 @@ void		Camera::setSplitScreenRight()
       this->_h = this->_height;
       glViewport(this->_w + 20, 0, this->_w, this->_h);
       this->_pos = this->_pl2->getPosReal();
-      this->_pos.y += 10.0f * this->_pl2->getPos()._scale;
-      this->_pos.z += 5.0f * this->_pl2->getPos()._scale;
+      this->_pos.y += 7.0f * this->_pl2->getPos()._scale;
+      this->_pos.z += 4.0f * this->_pl2->getPos()._scale;
       this->_target = this->_pl2->getPosReal();
       this->draw();
     }
