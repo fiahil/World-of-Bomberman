@@ -48,6 +48,7 @@ void		Menu::initialize(void)
   for (int i = 10; i < 20; ++i)
     {
       APlayer *newAI = new AI(AIType::EASY, *map);
+      dynamic_cast<AI*>(newAI)->updateView(new AIView(*map));
       newAI->setColor(7);
       newAI->setTeamId(i);
       players.push_back(newAI);

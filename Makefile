@@ -45,7 +45,7 @@ INCLUDES	= -I./lib/libgdl_gl-2012.3/include -I./src -I./Serializer
 
 CXX		= g++
 
-CXXFLAGS	= -Wall -Wextra -g -O3 $(INCLUDES)
+CXXFLAGS	= -Wall -Wextra -O3 $(INCLUDES)
 
 LDFLAGS		= -lGL -lGLU -lgdl_gl -lserial			\
 		-L./lib/libgdl_gl-2012.3/lib -L./lib/libserial	\

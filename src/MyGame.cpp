@@ -24,69 +24,6 @@ MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
 {
 }
 
-template <typename T>
-void		MyGame::drawer(T *val)
-{
-  val->draw();
-}
-
-#include <iostream>
-
-bool		MyGame::operator()(Bomb*& val)
-{
-  if (val->explode())
-    {
-      this->_match._explodedBombs.push_back(val->createExplodedBomb());
-      delete val;
-      val = 0;
-      return true;
-    }
-  else
-    val->update(this->_clock, this->_input);
-  return false;
-}
-
-bool		MyGame::operator()(ExplodedBomb*& val)
-{
-  if (val->isEOE())
-    {
-      delete val;
-      return true;
-    }
-  else
-    {
-      val->update(this->_clock, this->_input);
-      this->_match._map->explode(val->getPatternReal(),
-				 val->getPatternFinal(),
-				 this->_match._bonus);
-
-      for (std::vector<APlayer*>::iterator i = this->_match._players.begin();
-	   i != this->_match._players.end();)
-	{
-	  (*i)->takeDamage(val);
-	  if ((*i)->getPv() == 0)
-	    {
-	      val->getPlayer()->incNbKills();
-	      this->_dead.push_back((*i));
-	      i = this->_match._players.erase(i);
-	    }
-	  else
-	    ++i;
-	}
-    }
-  return false;
-}
-
-void		MyGame::operator()(Bonus*& val)
-{
-  val->update(this->_clock, this->_input);
-}
-
-void		MyGame::operator()(APlayer*& val)
-{
-  val->update(this->_clock, this->_input);
-}
-
 void		MyGame::initialize(void)
 {
   this->_match._map->initialize();
@@ -113,24 +50,57 @@ void		MyGame::update(void)
   Bomb*		newBomb;
 
   this->_match._map->update(this->_clock, this->_input);
-  std::remove_if(this->_match._bombs.begin(),
-		 this->_match._bombs.end(),
-		 *this);
-
-  std::cout << "PAS MWA" << std::endl;
-
-  std::remove_if(this->_match._explodedBombs.begin(),
-		 this->_match._explodedBombs.end(),
-		 *this);
-
-  std::cout << "C LUI" << std::endl;
-  std::for_each(this->_dead.begin(),
-		this->_dead.end(),
-		*this);
-
-  std::for_each(this->_match._bonus.begin(),
-		this->_match._bonus.end(),
-		*this);
+  for (std::list<Bomb*>::iterator it = this->_match._bombs.begin();
+       it != this->_match._bombs.end();)
+    {
+      if ((*it)->explode())
+	{
+	  this->_match._explodedBombs.push_back((*it)->createExplodedBomb());
+	  delete (*it);
+	  it = this->_match._bombs.erase(it);
+	}
+      else
+	{
+	  (*it)->update(this->_clock, this->_input);
+	  ++it;
+	}
+    }
+  for (std::list<ExplodedBomb*>::iterator it = this->_match._explodedBombs.begin();
+       it != this->_match._explodedBombs.end();)
+    {
+      if ((*it)->isEOE())
+	{
+	  delete (*it);
+	  it = this->_match._explodedBombs.erase(it);
+	}
+      else
+	{
+	  (*it)->update(this->_clock, this->_input);
+	  this->_match._map->explode((*it)->getPatternReal(),
+				     (*it)->getPatternFinal(),
+				     this->_match._bonus);
+	  for (std::vector<APlayer*>::iterator i = this->_match._players.begin();
+	       i != this->_match._players.end();)
+	    {
+	      (*i)->takeDamage((*it));
+	      if ((*i)->getPv() == 0)
+		{
+		  (*it)->getPlayer()->incNbKills();
+		  this->_dead.push_back((*i));
+		  i = this->_match._players.erase(i);
+		}
+	      else
+		++i;
+	    }
+	  ++it;
+	}
+    }
+  for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
+       it != this->_match._bonus.end();
+       ++it)
+    {
+      (*it)->update(this->_clock, this->_input);
+    }
 
   int		 nb = 0;
 
@@ -160,6 +130,12 @@ void		MyGame::update(void)
     }
   if (!nb || (this->_match._gameMode == GameMode::COOP && nb < 2))
     this->_EOG = true;
+  for (std::list<APlayer*>::iterator it = this->_dead.begin();
+       it != this->_dead.end();
+       ++it)
+    {
+      (*it)->update(this->_clock, this->_input);
+    }
   if (this->_EOG && this->_EOGTimer < 0.0f)
     this->_EOGTimer = this->_clock.getTotalGameTime() + 3.0f;
 }
