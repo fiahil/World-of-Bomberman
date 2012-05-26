@@ -1,8 +1,13 @@
 
-#include <iostream>
 #include "ExplodedBomb.hpp"
 
-ExplodedBomb::ExplodedBomb(BombType::eBomb type, Point const& pos, Pattern const& real, Pattern const& final, APlayer* player, double timer, gdl::Model& model)
+ExplodedBomb::ExplodedBomb(BombType::eBomb type,
+			   Point const& pos,
+			   Pattern const& real,
+			   Pattern const& final,
+			   APlayer* player,
+			   double timer,
+			   gdl::Model& model)
   : _type(type),
     _final(final),
     _real(real),
@@ -17,14 +22,13 @@ ExplodedBomb::ExplodedBomb(BombType::eBomb type, Point const& pos, Pattern const
 
 ExplodedBomb::~ExplodedBomb()
 {
-
 }
 
-void	ExplodedBomb::initialize()
+void		ExplodedBomb::initialize()
 {
 }
 
-void	ExplodedBomb::update(gdl::GameClock const& clock, gdl::Input&)
+void		ExplodedBomb::update(gdl::GameClock const& clock, gdl::Input&)
 {
   if (!this->_EOE && this->_lastTime <= clock.getTotalGameTime())
     {
@@ -59,7 +63,7 @@ void	ExplodedBomb::update(gdl::GameClock const& clock, gdl::Input&)
   this->_model.update(clock);
 }
 
-void	ExplodedBomb::drawPattern(double dir, Point const& pos)
+void		ExplodedBomb::drawPattern(double dir, Point const& pos)
 {
   glPushMatrix();
   glTranslatef(pos._pos.x, pos._pos.y, pos._pos.z);
@@ -69,34 +73,33 @@ void	ExplodedBomb::drawPattern(double dir, Point const& pos)
   glPopMatrix();
 }
 
-void	ExplodedBomb::draw()
+void		ExplodedBomb::draw()
 {
   Point		pos(this->_pos);
-  size_t	i;
 
-  for (i = 1; i <= this->_real._coefN; ++i)
+  for (size_t i = 1; i <= this->_real._coefN; ++i)
     {
       pos.setPos(this->_pos._x, this->_pos._y - i);
       this->drawPattern(0.0f, pos);
     }
-  for (i = 1; i <= this->_real._coefS; ++i)
+  for (size_t i = 1; i <= this->_real._coefS; ++i)
     {
       pos.setPos(this->_pos._x, this->_pos._y + i);
       this->drawPattern(180.0f, pos);
     }
-  for (i = 1; i <= this->_real._coefW; ++i)
+  for (size_t i = 1; i <= this->_real._coefW; ++i)
     {
       pos.setPos(this->_pos._x - i, this->_pos._y);
       this->drawPattern(90.0f, pos);
     }
-  for (i = 1; i <= this->_real._coefE; ++i)
+  for (size_t i = 1; i <= this->_real._coefE; ++i)
     {
       pos.setPos(this->_pos._x + i, this->_pos._y);
       this->drawPattern(-90.0f, pos);
     }
 }
 
-bool	ExplodedBomb::isEOE() const
+bool		ExplodedBomb::isEOE() const
 {
   return this->_EOE;
 }

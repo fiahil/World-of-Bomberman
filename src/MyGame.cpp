@@ -3,11 +3,9 @@
  * 07.05.12
  */
 
-#include <unistd.h>
-
 #include <GL/gl.h>
 #include <utility>
-#include <iostream>
+#include <algorithm>
 #include "Camera.hpp"
 #include "Match.hpp"
 #include "MyGame.hpp"
@@ -23,10 +21,6 @@ MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
     _EOG(false),
     _EOGTimer(-1.0f),
     _HUD(HUD::LAST)
-{
-}
-
-MyGame::~MyGame()
 {
 }
 
@@ -53,10 +47,11 @@ void		MyGame::initialize(void)
 
 void		MyGame::update(void)
 {
-  Bomb*	newBomb;
+  Bomb*		newBomb;
 
   this->_match._map->update(this->_clock, this->_input);
-  for (std::list<Bomb*>::iterator it = this->_match._bombs.begin(); it != this->_match._bombs.end();)
+  for (std::list<Bomb*>::iterator it = this->_match._bombs.begin();
+       it != this->_match._bombs.end();)
     {
       if ((*it)->explode())
 	{
@@ -81,7 +76,9 @@ void		MyGame::update(void)
       else
 	{
 	  (*it)->update(this->_clock, this->_input);
-	  this->_match._map->explode((*it)->getPatternReal(), (*it)->getPatternFinal(), this->_match._bonus);
+	  this->_match._map->explode((*it)->getPatternReal(),
+				     (*it)->getPatternFinal(),
+				     this->_match._bonus);
 	  for (std::vector<APlayer*>::iterator i = this->_match._players.begin();
 	       i != this->_match._players.end();)
 	    {
@@ -99,21 +96,30 @@ void		MyGame::update(void)
 	}
     }
   for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
-       it != this->_match._bonus.end(); ++it)
-    (*it)->update(this->_clock, this->_input);
+       it != this->_match._bonus.end();
+       ++it)
+    {
+      (*it)->update(this->_clock, this->_input);
+    }
 
-  int	nb = 0;
+  int		 nb = 0;
+
   this->_EOG = true;
-  for (unsigned int i = 0; i < this->_match._players.size(); ++i)
+  for (unsigned int i = 0;
+       i < this->_match._players.size();
+       ++i)
     {
       for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
-	   it != this->_match._bonus.end(); ++it)
-	if (this->_match._players[i]->takeBonus((*it)))
-	  {
-	    delete (*it);
-	    this->_match._bonus.erase(it);
-	    break;
-	  }
+	   it != this->_match._bonus.end();
+	   ++it)
+	{
+	  if (this->_match._players[i]->takeBonus((*it)))
+	    {
+	      delete (*it);
+	      this->_match._bonus.erase(it);
+	      break;
+	    }
+	}
       if (this->_match._players[i]->getTeamId() != this->_match._players[0]->getTeamId())
 	this->_EOG = false;
       if (this->_pl1 == this->_match._players[i] || this->_pl2 == this->_match._players[i])
@@ -125,32 +131,38 @@ void		MyGame::update(void)
   if (!nb || (this->_match._gameMode == GameMode::COOP && nb < 2))
     this->_EOG = true;
   for (std::list<APlayer*>::iterator it = this->_dead.begin();
-       it != this->_dead.end(); ++it)
-    (*it)->update(this->_clock, this->_input);
+       it != this->_dead.end();
+       ++it)
+    {
+      (*it)->update(this->_clock, this->_input);
+    }
   if (this->_EOG && this->_EOGTimer < 0.0f)
     this->_EOGTimer = this->_clock.getTotalGameTime() + 3.0f;
 }
 
-void		MyGame::drawGame(APlayer* p, size_t lag)
+void		MyGame::drawGame(APlayer* p) const
 {
   this->_match._map->setOptimization(&p->getPos());
   this->_match._map->draw();
-  for (std::list<Bomb*>::iterator it = this->_match._bombs.begin();
-       it != this->_match._bombs.end(); ++it)
-    (*it)->draw();
-  for (std::list<ExplodedBomb*>::iterator it = this->_match._explodedBombs.begin();
-       it != this->_match._explodedBombs.end(); ++it)
-    (*it)->draw();
-  for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
-       it != this->_match._bonus.end(); ++it)
-    (*it)->draw();
-  for (unsigned int i = 0; i < this->_match._players.size(); ++i)
-    this->_match._players[i]->draw();
-  for (std::list<APlayer*>::iterator it = this->_dead.begin();
-       it != this->_dead.end(); ++it)
-    (*it)->draw();
-  this->_camera.setViewHUD();
-  p->drawHUD(this->_HUD, 800, lag, this->_EOG);
+  std::for_each(this->_match._bombs.begin(),
+		this->_match._bombs.end(),
+		static_cast<void(*)(Bomb*)>(&MyGame::drawer));
+
+  std::for_each(this->_match._explodedBombs.begin(),
+		this->_match._explodedBombs.end(),
+		static_cast<void(*)(ExplodedBomb*)>(&MyGame::drawer));
+
+  std::for_each(this->_match._bonus.begin(),
+		this->_match._bonus.end(),
+		static_cast<void(*)(Bonus*)>(&MyGame::drawer));
+
+  std::for_each(this->_dead.begin(),
+		this->_dead.end(),
+		static_cast<void(*)(APlayer*)>(&MyGame::drawer));
+
+  std::for_each(this->_match._players.begin(),
+		this->_match._players.end(),
+		static_cast<void(*)(APlayer*)>(&MyGame::drawer));
 }
 
 void		MyGame::draw(void)
@@ -158,14 +170,20 @@ void		MyGame::draw(void)
   if (this->_match._gameMode == GameMode::COOP || this->_match._gameMode == GameMode::VERSUS)
     {
       this->_camera.setSplitScreenLeft();
-      this->drawGame(this->_pl1, 0);
+      this->drawGame(this->_pl1);
+      this->_camera.setViewHUD();
+      this->_pl1->drawHUD(this->_HUD, 800, 0, this->_EOG);
       this->_camera.setSplitScreenRight();
-      this->drawGame(this->_pl2, 810);
+      this->drawGame(this->_pl2);
+      this->_camera.setViewHUD();
+      this->_pl2->drawHUD(this->_HUD, 800, 810, this->_EOG);
     }
   else
     {
       this->_camera.setNormalScreen();
-      this->drawGame(this->_pl1, 0);
+      this->drawGame(this->_pl1);
+      this->_camera.setViewHUD();
+      this->_pl1->drawHUD(this->_HUD, 800, 0, this->_EOG);
     }
 }
 

@@ -11,11 +11,10 @@
 #include "Camera.hpp"
 #include "Match.hpp"
 
-class	MyGame
+class MyGame
 {
 public:
   MyGame(gdl::GameClock&, gdl::Input&, Match&, APlayer*, APlayer* pl2 = 0);
-  ~MyGame();
 
 private:
   gdl::GameClock&	_clock;
@@ -28,13 +27,18 @@ private:
   bool			_EOG;
   double		_EOGTimer;
 
-private:
   std::vector<gdl::Image>	_HUD;
   gdl::Model			_Mbomb;
   gdl::Model			_MExplodedBomb;
 
 private:
-  void		drawGame(APlayer*, size_t);
+  template<typename T>
+  static void	drawer(T* val)
+    {
+      val->draw();
+    }
+
+  void		drawGame(APlayer*) const;
 
 public:
   void		initialize(void);

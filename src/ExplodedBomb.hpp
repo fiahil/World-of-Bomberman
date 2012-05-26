@@ -2,7 +2,7 @@
 #ifndef __EXPLODEDBOMB_HPP__
 #define __EXPLODEDBOMB_HPP__
 
-#include <Model.hpp>
+#include "Model.hpp"
 #include "APlayer.hpp"
 #include "enum.hpp"
 #include "Pattern.hpp"
@@ -10,6 +10,16 @@
 
 class ExplodedBomb : public AObj
 {
+public:
+  ExplodedBomb(BombType::eBomb,
+	       Point const&,
+	       Pattern const&,
+	       Pattern const&,
+	       APlayer*,
+	       double,
+	       gdl::Model&);
+  virtual ~ExplodedBomb();
+
 private:
   BombType::eBomb	_type;
   Pattern		_final;
@@ -21,20 +31,20 @@ private:
   gdl::Model&		_model;
 
 private:
-  void	drawPattern(double, Point const&);
+  void			drawPattern(double, Point const&);
 
 public:
-  ExplodedBomb(BombType::eBomb, Point const&, Pattern const&, Pattern const&, APlayer*, double, gdl::Model&);
-  virtual ~ExplodedBomb();
-  virtual void	initialize();
-  virtual void	update(gdl::GameClock const&, gdl::Input&);
-  virtual void	draw();
-  bool	isEOE() const;
+  void			initialize();
+  void			update(gdl::GameClock const&, gdl::Input&);
+  void			draw();
+
+  bool			isEOE() const;
+
   BombType::eBomb	getType() const;
-  Pattern&	getPatternReal();
+  Pattern&		getPatternReal();
   Pattern const&	getPatternReal() const;
-  Pattern&	getPatternFinal();
-  APlayer*	getPlayer() const;
+  Pattern&		getPatternFinal();
+  APlayer*		getPlayer() const;
 };
 
 #else
