@@ -9,3 +9,5 @@ GameManager::GameManager(Profile * p)
   : _mainProfile(p)
 {
 }
+
+

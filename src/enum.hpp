@@ -188,23 +188,4 @@ struct Elt
   };
 };
 
-struct TokenMenu
-{
-  enum eMenu {
-    MAINMENU,
-    LOADPROFILE,
-    LOADSAVE,
-    LOADMAP,
-    GAMECHOOSE,
-    IA,
-    TEAM,
-    MAP,
-    NEWPROFILE,
-    PROFILE,
-    SETTINGS,
-    LAST
-  };
-};
-
-
 #endif

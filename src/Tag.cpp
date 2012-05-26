@@ -16,22 +16,20 @@ Tag::Tag(const std::string& normal,
   : _spritePos(posX, posY, posZ),
     _spriteHighlit(gdl::Image::load(highlit)),
     _spriteNormal(gdl::Image::load(normal)),
-    _highlit(_spriteHighlit./*get sprite x (gdl::Image)*/, _spriteHighlit./*get sprite y (gdl::Image)*/, _spritePos, _spriteHighlit),
-    _normal(_spriteNormal./*get sprite x (gdl::Image)*/, _spriteNormal./*get sprite y (gdl::Image)*/, _spritePos, _spriteNormal),
+    _highlit(_spriteHighlit.getWidth(), _spriteHighlit.getHeight(), _spritePos, _spriteHighlit),
+    _normal(_spriteNormal.getWidth(), _spriteNormal.getHeight(), _spritePos, _spriteNormal),
     _status(status),
-    _text(0)
     _content(content),
+{
+}
+
+Tag::~Tag()
 {
 }
 
 TokenMenu::eMenu	Tag::getContent(void) const
 {
   return (this->_content);
-}
-
-bool			Tag::getStatus(void) const
-{
-  return (this->_status);
 }
 
 const Point &		Tag::getSpritePos(void) const
@@ -76,32 +74,15 @@ void			Tag::draw(void)
     this->_highlit.draw();
   else
     this->_normal.draw();
-  if (this->_text != 0)
+  if (this->_textDraw)
     this->drawText();
 }
 
 void			Tag::drawText(void)
 {
-  if (this->_text != 0)
-    {
-      this->pushMatrix();
-      this->_text->draw();
-      this->popMatrix();
-    }
-}
-
-void			deleteText(gdl::Text * obj)
-{
-  if (obj != 0)
-    {
-      delete obj;
-      obj = 0;
-    }
-}
-
-Tag::~Tag()
-{
-  deleteText(this->_text);
+  this->pushMatrix();
+  this->_text->draw();
+  this->popMatrix();
 }
 
 void		Tag::initialize(void)

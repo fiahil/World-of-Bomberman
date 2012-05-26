@@ -12,7 +12,8 @@
 #include "Menu.hpp"
 
 Menu::Menu()
-  : _game(0)
+  : _game(0),
+    _menu(0)
 {
   this->setContentRoot("./Ressources/");
 }
@@ -27,35 +28,8 @@ void		Menu::initialize(void)
   this->window_.setHeight(800);
   this->window_.setWidth(1600);
   this->window_.create();
-  Map*	map = new Map(30, 30, 1, 5);
-  std::vector<APlayer*>	players;
-  Config conf;
-  conf.setConfig(HumGame::ATTACK, gdl::Keys::RShift);
-  APlayer *newHum1 = new Human(*map, conf);
-  newHum1->setSkin(Skin::SYLVANAS);
-  newHum1->setTeamId(6);
-  players.push_back(newHum1);
-  conf.setConfig(HumGame::UP, gdl::Keys::W);
-  conf.setConfig(HumGame::LEFT, gdl::Keys::A);
-  conf.setConfig(HumGame::DOWN, gdl::Keys::S);
-  conf.setConfig(HumGame::RIGHT, gdl::Keys::D);
-  conf.setConfig(HumGame::ATTACK, gdl::Keys::Space);
-  APlayer *newHum2 = new Human(*map, conf);
-  newHum2->setColor(6);
-  newHum2->setTeamId(7);
-  newHum2->setSkin(Skin::VARIANT);
-  players.push_back(newHum2);
-  for (int i = 10; i < 20; ++i)
-    {
-      APlayer *newAI = new AI(AIType::EASY, *map);
-      dynamic_cast<AI*>(newAI)->updateView(new AIView(*map));
-      newAI->setColor(7);
-      newAI->setTeamId(i);
-      players.push_back(newAI);
-    }
-  Match*	m = new Match(map, false, GameMode::VERSUS, players);
-  this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0], players[1]); // TODO
-  this->_game->initialize();
+  this->_menu = new MenuManager(1600, 800);
+  this->_menu->initialize();
 }
 
 void		Menu::update(void)
@@ -71,6 +45,8 @@ void		Menu::update(void)
       else
 	this->_game->update();
     }
+  else
+    this->_menu->update(this->gameClock_, this->input_);
 }
 
 void		Menu::draw(void)
@@ -81,6 +57,8 @@ void		Menu::draw(void)
 
   if (this->_game)
     this->_game->draw();
+  else
+    this->_menu->draw();
   this->window_.display();
 }
 

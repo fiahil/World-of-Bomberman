@@ -37,7 +37,7 @@ private:
   std::vector<Profile *>	_profile;
   std::vector<Map *>		_map;
   MapManager			_mapManager;
-
+  GameManager			_gameManager;
   /*
     Heritance from AObj
   */

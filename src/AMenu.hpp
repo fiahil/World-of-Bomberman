@@ -16,7 +16,7 @@
 class		AMenu : public AObj
 {
 public:
-  AMenu();
+  AMenu(std::string const&, std::string const, double, double, double, GameManager&);
   virtual ~AMenu();
 
   typedef void (MenuManager::*keyPtrFunc)(gdl::GameClock const&);
@@ -48,7 +48,7 @@ protected:
   /*
     Keys
   */
-private:
+protected:
   void			UpFunction(gdl::GameClock const &);
   void			LeftFunction(gdl::GameClock const &);
   void			RightFunction(gdl::GameClock const &);
