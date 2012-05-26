@@ -5,7 +5,7 @@
 ## Login   <lemonn_v@epitech.net>
 ## 
 ## Started on  Mon Apr 23 18:20:16 2012 vincent lemonnier
-## Last update Mon May 21 22:50:43 2012 vincent lemonnier
+## Last update Sat May 26 20:00:47 2012 vincent lemonnier
 ##
 
 NAME		= bomberman
@@ -28,14 +28,11 @@ SRC		= ./src/main.cpp	\
 		./src/Config.cpp	\
 		./src/Profile.cpp	\
 		./src/Match.cpp		\
-		./src/AMenu.cpp		\
 		./src/Pyramid.cpp	\
-		./src/MenuManager.cpp	\
 		./src/ContentColor.cpp	\
 		./src/Bomb.cpp		\
 		./src/Bonus.cpp		\
 		./src/ExplodedBomb.cpp	\
-		./src/Tag.cpp		\
 		./src/DirWalker.cpp	\
 		./src/ProfileManager.cpp
 

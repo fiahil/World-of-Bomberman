@@ -8,7 +8,6 @@
 
 #include <Game.hpp>
 #include "MyGame.hpp"
-#include "MenuManager.hpp"
 
 class Menu : public gdl::Game
 {
