@@ -170,13 +170,13 @@ void		Map::draw(void)
       x0 = this->_opti->_x - 20;
       if (static_cast<int>(x0) < 0)
 	x0 = 0;
-      y0 = this->_opti->_y - 15;
+      y0 = this->_opti->_y - 12;
       if (static_cast<int>(y0) < 0)
      	y0 = 0;
       xf = this->_opti->_x + 20;
       if (xf > this->_x)
 	xf = this->_x;
-      yf = this->_opti->_y + 8;
+      yf = this->_opti->_y + 6;
       if (yf > this->_y)
 	yf = this->_y;
     }
