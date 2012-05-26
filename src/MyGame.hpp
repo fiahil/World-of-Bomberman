@@ -23,6 +23,7 @@ private:
   Camera		_camera;
   APlayer*		_pl1;
   APlayer*		_pl2;
+  APlayer*		_currentPlayer;
   std::list<APlayer*>	_dead;
   bool			_EOG;
   double		_EOGTimer;
@@ -33,11 +34,7 @@ private:
 
 private:
   template<typename T>
-  static void	drawer(T* val)
-    {
-      val->draw();
-    }
-
+  static void	drawer(T* val);
   void		drawGame(APlayer*) const;
 
 public:
@@ -46,6 +43,10 @@ public:
   void		draw(void);
   void		unload(void);
   bool		isEOG(void) const;
+  bool		operator()(Bomb*&);
+  bool		operator()(ExplodedBomb*&);
+  void		operator()(Bonus*&);
+  void		operator()(APlayer*&);
 };
 
 #else

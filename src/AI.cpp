@@ -82,6 +82,8 @@ void	AI::updateView(AIView const* v)
 
 void	AI::play(gdl::GameClock const& clock, gdl::Input&)
 {
+  if (!this->_view)
+    return;
   if ((this->_start >= 0) && (this->_startTimer <= clock.getTotalGameTime()))
     {
       --this->_start;
