@@ -3,11 +3,10 @@
  * 10.05.12
  */
 
-#include <time.h>
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
 #include "Cube.hpp"
 #include "Plane.hpp"
 #include "Map.hpp"
@@ -23,13 +22,6 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
     _y(y),
     _modelBonus(BonusType::LAST)
 {
-  /* TODO Move */
-  time_t now;
-
-  time(&now);
-  srandom(now);
-  /* TODO Move */
-
   this->_expFunc['1'] = &Map::explodeUnBreakable;
   this->_expFunc['2'] = &Map::explodeBreakable;
   this->_expFunc['3'] = &Map::explodeBreakable;
@@ -125,15 +117,6 @@ Map::~Map()
 {
 }
 
-/*
-  Map::Map(Map const& oldMap)
-  {
-  _map = oldMap._map;
-  _x = oldMap._x;
-  _y = oldMap._y;
-  }
-*/
-
 void		Map::teleport(Point & pos) const
 {
   if (pos == this->_tp._pos1)
@@ -212,9 +195,9 @@ void		Map::update(gdl::GameClock const&, gdl::Input&)
 {
 }
 
-bool Map::canMoveAt(size_t x, size_t y) const
+bool		Map::canMoveAt(size_t x, size_t y) const
 {
-  return (this->_map[POS(x, y)] == '0');
+  return this->_map.at(POS(x, y)) == '0';
 }
 
 bool Map::safeCanMoveAt(size_t x, size_t y) const
@@ -234,67 +217,77 @@ std::string const&	Map::getMap(void) const
   return this->_map;
 }
 
-size_t			Map::getX(void) const
+size_t		Map::getX(void) const
 {
   return this->_x;
 }
 
-void		Map::explodeUnBreakable(size_t &r, size_t &f, size_t, std::list<Bonus*>&)
+size_t		Map::getY(void) const
+{
+  return this->_y;
+}
+
+void		Map::explodeUnBreakable(size_t &r,
+					size_t &f,
+					size_t, std::list<Bonus*>&)
 {
   --r;
   f = r;
 }
 
-void		Map::explodeBreakable(size_t &r, size_t &f, size_t pos, std::list<Bonus*>& bonus)
+void		Map::explodeBreakable(size_t &r,
+				      size_t &f,
+				      size_t pos,
+				      std::list<Bonus*>& bonus)
 {
   f = r;
   this->_map[pos] = '0';
-  int rand = random() % (BonusType::LAST + 3);
+
+  int		rand = random() % (BonusType::LAST + 3);
+
   if (rand < BonusType::LAST)
     {
       Point	p(*this->_opti);
       p.setPos(pos % this->_y, pos / this->_y);
-      bonus.push_back(new Bonus(static_cast<BonusType::eBonus>(rand), p, this->_modelBonus[rand]));
+      bonus.push_back(new Bonus(static_cast<BonusType::eBonus>(rand),
+				p,
+				this->_modelBonus[rand]));
     }
 }
 
 void		Map::explode(Pattern& real, Pattern& final, std::list<Bonus*>& bonus)
 {
-  char elem;
+  char		elem;
 
   if ((elem = this->_map[POS(final._x, final._y - real._coefN)]) != '0')
-    (this->*(this->_expFunc[elem]))(
-				    real._coefN,
+    (this->*(this->_expFunc[elem]))(real._coefN,
 				    final._coefN,
 				    POS(final._x, final._y - real._coefN),
-				    bonus
-				    );
+				    bonus);
+
   if ((elem = this->_map[POS(final._x, final._y + real._coefS)]) != '0')
-    (this->*(this->_expFunc[elem]))(
-				    real._coefS,
+    (this->*(this->_expFunc[elem]))(real._coefS,
 				    final._coefS,
 				    POS(final._x, final._y + real._coefS),
-				    bonus
-				    );
+				    bonus);
+
   if ((elem = this->_map[POS(final._x + real._coefE, final._y)]) != '0')
-    (this->*(this->_expFunc[elem]))(
-				    real._coefE,
+    (this->*(this->_expFunc[elem]))(real._coefE,
 				    final._coefE,
 				    POS(final._x + real._coefE, final._y),
-				    bonus
-				    );
+				    bonus);
+
   if ((elem = this->_map[POS(final._x - real._coefW, final._y)]) != '0')
-    (this->*(this->_expFunc[elem]))(
-				    real._coefW,
+    (this->*(this->_expFunc[elem]))(real._coefW,
 				    final._coefW,
 				    POS(final._x - real._coefW, final._y),
-				    bonus
-				    );
+				    bonus);
 }
 
 void		Map::setSpawnTeam(std::vector<APlayer*>& players)
 {
   std::map<size_t, std::pair<size_t, size_t> >	tmp;
+
   size_t	nb = 0;
   size_t	size = this->_map.size() - 2 * this->_x;
   size_t	pos;
@@ -302,7 +295,8 @@ void		Map::setSpawnTeam(std::vector<APlayer*>& players)
   for (size_t i = 0; i < players.size(); ++i)
     tmp[players[i]->getTeamId()] = std::make_pair(0, 0);
   for (std::map<size_t, std::pair<size_t, size_t> >::iterator it = tmp.begin();
-       it != tmp.end(); ++it)
+       it != tmp.end();
+       ++it)
     {
       pos = nb * size / tmp.size() + this->_x - 1;
       while (this->_map[++pos] != '0');
@@ -310,7 +304,11 @@ void		Map::setSpawnTeam(std::vector<APlayer*>& players)
       it->second.second = pos / this->_x;
       ++nb;
     }
-  for (std::vector<APlayer*>::iterator it = players.begin(); it != players.end(); ++it)
-    (*it)->setPos(tmp[(*it)->getTeamId()].first,
-		  tmp[(*it)->getTeamId()].second);
+  for (std::vector<APlayer*>::iterator it = players.begin();
+       it != players.end();
+       ++it)
+    {
+      (*it)->setPos(tmp[(*it)->getTeamId()].first,
+		    tmp[(*it)->getTeamId()].second);
+    }
 }

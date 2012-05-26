@@ -13,7 +13,7 @@ class Plane : public AObj
 {
 public:
   Plane(double, double, Point const&, gdl::Image&);
-  ~Plane();
+  virtual ~Plane();
 
 private:
   double	_w;

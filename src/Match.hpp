@@ -14,7 +14,7 @@
 #include "APlayer.hpp"
 #include "enum.hpp"
 
-class	Match
+class Match
 {
 public:
   Match();
@@ -26,10 +26,10 @@ private:
   const Match & operator=(const Match &);
 
 public:
-  Map *				_map;
+  Map*				_map;
   bool				_cheat;
   GameMode::eGameMode		_gameMode;
-  std::vector<APlayer *>	_players;
+  std::vector<APlayer*>		_players;
   std::list<Bomb*>		_bombs;
   std::list<Bonus*>		_bonus;
   std::list<ExplodedBomb*>	_explodedBombs;

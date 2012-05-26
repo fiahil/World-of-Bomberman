@@ -10,7 +10,7 @@
 #include "Plane.hpp"
 
 Tag::Tag(const std::string& normal, const std::string& highlit, bool status, TokenMenu::eMenu content)
-  : _spritePos(1.0, 20, 20),				// Mettre en param
+  : _spritePos(1.0, 20, 20),				// TODO Mettre en param
     _spriteHighlit(gdl::Image::load(highlit)),
     _spriteNormal(gdl::Image::load(normal)),
     _highlit(50.0, 50.0, _spritePos, _spriteHighlit),	// Mettre en param

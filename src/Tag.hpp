@@ -17,7 +17,7 @@ class	Tag : public AObj
 {
 public:
   Tag(const std::string&, const std::string&, bool, TokenMenu::eMenu);
-  ~Tag();
+  virtual ~Tag();
 
 private:
   Tag();

@@ -24,14 +24,17 @@ struct	Tp {
 
 class Map : public AObj
 {
+  typedef void(Map::*explodeFunc)(size_t&, size_t&, size_t, std::list<Bonus*>&);
+
 public:
   Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity);
   Map(std::string const& file);
   Map(size_t x, size_t y, std::string const& map);
-  ~Map();
+  virtual ~Map();
 
 private:
   Map(const Map& oldMap);
+
 
 private:
   size_t	_x;
@@ -41,30 +44,29 @@ private:
   gdl::Image	_break;
   gdl::Image	_background;
   Point const*	_opti;
+  Tp		_tp;
+
   std::vector<gdl::Model>	_modelBonus;
   std::map<char, gdl::Model>	_modelBreak;
-  Tp		_tp;
+  std::map<char, explodeFunc>	_expFunc;
+
 private:
-
-  typedef void(Map::*explodeFunc)(size_t&, size_t&, size_t, std::list<Bonus*>&);
-
   void		explodeUnBreakable(size_t &, size_t &, size_t, std::list<Bonus*>&);
   void		explodeBreakable(size_t &, size_t &, size_t, std::list<Bonus*>&);
 
-  std::map<char, explodeFunc> _expFunc;
-
 public:
-  void teleport(Point & pos) const;
-  void initialize(void);
-  void draw(void);
-  void update(gdl::GameClock const& clock, gdl::Input& input);
-  bool canMoveAt(size_t x, size_t y) const;
-  bool safeCanMoveAt(size_t x, size_t y) const;
-  void setOptimization(Point const*);
+  void		teleport(Point & pos) const;
+  void		initialize(void);
+  void		draw(void);
+  void		update(gdl::GameClock const& clock, gdl::Input& input);
+  bool		canMoveAt(size_t x, size_t y) const;
+  bool		safeCanMoveAt(size_t x, size_t y) const;
+  void		explode(Pattern&, Pattern&, std::list<Bonus*>&);
+  void		setOptimization(Point const*);
+  void		setSpawnTeam(std::vector<APlayer*>&);
   std::string const&	getMap(void) const;
   size_t		getX(void) const;
-  void explode(Pattern&, Pattern&, std::list<Bonus*>&);
-  void setSpawnTeam(std::vector<APlayer*>&);
+  size_t		getY(void) const;
 };
 
 #else

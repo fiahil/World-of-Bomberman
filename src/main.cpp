@@ -8,11 +8,17 @@
 // Last update Wed May 16 17:28:07 2012 nicolas magere
 //
 
+#include <cstdlib>
 #include "Menu.hpp"
 
-int	main()
+int		main()
 {
-  Menu	bomberman;
+  time_t	now;
+
+  time(&now);
+  srandom(now);
+
+  Menu		bomberman;
 
   bomberman.run();
   return 0;

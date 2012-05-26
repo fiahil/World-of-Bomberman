@@ -13,7 +13,7 @@ class Surface : public AObj
 {
 public:
   Surface(double, double, double, double, gdl::Image&);
-  ~Surface();
+  virtual ~Surface();
 
 private:
   double	_w;

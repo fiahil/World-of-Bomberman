@@ -6,14 +6,7 @@
 #include <sstream>
 #include "Human.hpp"
 
-Human::eventSt Human::initStruct(gdl::Keys::Key key, HumGame::eAction action, actionFunc f) const
-{
-  Human::eventSt nwEl = { key, action, f };
-  return nwEl;
-}
-
-
-Human::Human(Map & map, const Config& conf)//, std::vector<size_t>&, std::vector<size_t> const&)
+Human::Human(Map & map, const Config& conf)
   : APlayer(map),
     _mode(Input::GAME),
     _start(4),
@@ -27,29 +20,41 @@ Human::Human(Map & map, const Config& conf)//, std::vector<size_t>&, std::vector
     _bombAff(BombType::LAST, 0),
     _jumpDir(Dir::LAST, 0)
 {
-  this->_event[Input::GAME]._freq = 2; // TODO TMP
   this->_event[Input::GAME]._nb = 7;
   this->_event[Input::GAME].
     _event.push_back(initStruct(conf.getConfig(HumGame::UP),
-				HumGame::UP, &Human::UPFunction));
+				HumGame::UP,
+				&Human::UPFunction));
+
   this->_event[Input::GAME].
     _event.push_back(initStruct(conf.getConfig(HumGame::DOWN),
-				HumGame::DOWN, &Human::DOWNFunction));
+				HumGame::DOWN,
+				&Human::DOWNFunction));
+
   this->_event[Input::GAME].
     _event.push_back(initStruct(conf.getConfig(HumGame::LEFT),
-				HumGame::LEFT, &Human::LEFTFunction));
+				HumGame::LEFT,
+				&Human::LEFTFunction));
+
   this->_event[Input::GAME].
     _event.push_back(initStruct(conf.getConfig(HumGame::RIGHT),
-				HumGame::RIGHT, &Human::RIGHTFunction));
+				HumGame::RIGHT,
+				&Human::RIGHTFunction));
+
   this->_event[Input::GAME].
     _event.push_back(initStruct(conf.getConfig(HumGame::ATTACK),
-				HumGame::ATTACK, &Human::ATTACKFunction));
+				HumGame::ATTACK,
+				&Human::ATTACKFunction));
+
   this->_event[Input::GAME].
     _event.push_back(initStruct(gdl::Keys::Escape,
-				HumGame::PAUSE, &Human::PAUSEFunction)); // TODO
+				HumGame::PAUSE,
+				&Human::PAUSEFunction)); // TODO
+
   this->_event[Input::GAME].
     _event.push_back(initStruct(gdl::Keys::Return,
-				HumGame::CHEAT, static_cast<actionFunc>(&Human::SkillFunction))); // TODO
+				HumGame::CHEAT,
+				static_cast<actionFunc>(&Human::SkillFunction)));
 
   this->_bombAff[BombType::NORMAL] = &Human::affNormalBomb;
   this->_bombAff[BombType::BIGBOMB] = &Human::affBigBomb;
@@ -71,17 +76,22 @@ Human::~Human() {
 
 }
 
-void Human::SkillFunction(gdl::GameClock const& clock)
+Human::eventSt	Human::initStruct(gdl::Keys::Key key,
+				  HumGame::eAction action,
+				  actionFunc f) const
+{
+  Human::eventSt	nwEl = {key, action, f};
+  return nwEl;
+}
+
+void		Human::SkillFunction(gdl::GameClock const& clock)
 {
   (this->*(this->_skillFunc[this->_skill]))(clock);
 }
 
-void Human::play(gdl::GameClock const& clock, gdl::Input& key)
+void		Human::play(gdl::GameClock const& clock, gdl::Input& key)
 {
-  // for each ?
-
-  if ((static_cast<double>(clock.getTotalGameTime())) >=
-      this->_skillTimer)
+  if ((static_cast<double>(clock.getTotalGameTime())) >= this->_skillTimer)
     this->_skillUp = true;
   if (this->_start >= 0 && clock.getTotalGameTime() >= this->_startTimer)
     {
@@ -95,7 +105,7 @@ void Human::play(gdl::GameClock const& clock, gdl::Input& key)
     }
 }
 
-void Human::drawStart(size_t h, size_t lag)
+void		Human::drawStart(size_t h, size_t lag)
 {
   std::stringstream	ss;
 
@@ -115,7 +125,7 @@ void Human::drawStart(size_t h, size_t lag)
     }
 }
 
-void Human::drawEnd(size_t h, size_t lag, bool EOG)
+void		Human::drawEnd(size_t h, size_t lag, bool EOG)
 {
   this->_text.setSize(80);
   if (!this->_pv)
@@ -132,7 +142,7 @@ void Human::drawEnd(size_t h, size_t lag, bool EOG)
     }
 }
 
-void Human::affNormalBomb()
+void		Human::affNormalBomb() const
 {
   if (this->_canAttack)
     this->_HUD[HUD::BOMB_OK]->draw();
@@ -140,7 +150,7 @@ void Human::affNormalBomb()
     this->_HUD[HUD::BOMB_KO]->draw();
 }
 
-void  Human::affBigBomb()
+void		Human::affBigBomb() const
 {
   if (this->_canAttack)
     this->_HUD[HUD::BIGBOMB_OK]->draw();
@@ -148,7 +158,7 @@ void  Human::affBigBomb()
     this->_HUD[HUD::BIGBOMB_KO]->draw();
 }
 
-void  Human::affMegaBomb() // TODO const ?
+void		Human::affMegaBomb() const
 {
   if (this->_canAttack)
     this->_HUD[HUD::MEGABOMB_OK]->draw();
@@ -156,16 +166,15 @@ void  Human::affMegaBomb() // TODO const ?
     this->_HUD[HUD::MEGABOMB_KO]->draw();
 }
 
-void Human::halluSkill(gdl::GameClock const&)
+void		Human::halluSkill(gdl::GameClock const&)
 {
 }
 
-void  Human::healSkill(gdl::GameClock const& clock)
+void		Human::healSkill(gdl::GameClock const& clock)
 {
-  double current;
+  double	current;
 
-  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
-      this->_skillTimer)
+  if ((current = clock.getTotalGameTime()) >= this->_skillTimer)
     {
       this->_skillTimer = current + 60.0;
       this->lifeBonusEffect();
@@ -174,12 +183,11 @@ void  Human::healSkill(gdl::GameClock const& clock)
     }
 }
 
-void  Human::berserkSkill(gdl::GameClock const& clock)
+void		Human::berserkSkill(gdl::GameClock const& clock)
 {
-  double current;
+  double	current;
 
-  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
-      this->_skillTimer)
+  if ((current = clock.getTotalGameTime()) >= this->_skillTimer)
     {
       this->_skillTimer = current + 120.0;
       this->LustBonusEffect();
@@ -191,7 +199,7 @@ void  Human::berserkSkill(gdl::GameClock const& clock)
     }
 }
 
-bool	Human::northJumpFunction()
+bool		Human::northJumpFunction()
 {
   if (this->_map.safeCanMoveAt(this->_pos._x, this->_pos._y - 2))
     {
@@ -201,7 +209,7 @@ bool	Human::northJumpFunction()
   return false;
 }
 
-bool	Human::southJumpFunction()
+bool		Human::southJumpFunction()
 {
   if (this->_map.safeCanMoveAt(this->_pos._x, this->_pos._y + 2))
     {
@@ -211,7 +219,7 @@ bool	Human::southJumpFunction()
   return false;
 }
 
-bool	Human::westJumpFunction()
+bool		Human::westJumpFunction()
 {
   if (this->_map.safeCanMoveAt(this->_pos._x - 2, this->_pos._y))
     {
@@ -221,7 +229,7 @@ bool	Human::westJumpFunction()
   return false;
 }
 
-bool	Human::eastJumpFunction()
+bool		Human::eastJumpFunction()
 {
   if (this->_map.safeCanMoveAt(this->_pos._x + 2, this->_pos._y))
     {
@@ -231,12 +239,11 @@ bool	Human::eastJumpFunction()
   return false;
 }
 
-void  Human::jumpSkill(gdl::GameClock const& clock)
+void		Human::jumpSkill(gdl::GameClock const& clock)
 {
   double current;
 
-  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
-      this->_skillTimer)
+  if ((current = clock.getTotalGameTime()) >= this->_skillTimer)
     if ((this->*(this->_jumpDir[this->_dir]))())
       {
 	this->_skillUp = false;
@@ -244,35 +251,87 @@ void  Human::jumpSkill(gdl::GameClock const& clock)
       }
 }
 
-void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EOG) {
+void		Human::drawHUD(std::vector<gdl::Image>& img,
+			       size_t hi,
+			       size_t lag,
+			       bool EOG)
+{
 
   std::stringstream ss;
 
   if (!this->_HUD[0])
     {
-      this->_HUD[HUD::LIFE_BAR] = new Surface(310.0f, 40.0f, 10.0f, 10.0f, img[HUD::LIFE_BAR]);
-      this->_HUD[HUD::SHIELD] = new Surface(40.0f, 40.0f, 30.0f, 60.0f, img[HUD::SHIELD]);
-      this->_HUD[HUD::LUST] = new Surface(40.0f, 40.0f, 80.0f, 60.0f, img[HUD::LUST]);
-      this->_HUD[HUD::POWER] = new Surface(40.0f, 40.0f, 130.0f, 60.0f, img[HUD::POWER]);
+      this->_HUD[HUD::LIFE_BAR] = new Surface(310.0f,
+					      40.0f,
+					      10.0f,
+					      10.0f,
+					      img[HUD::LIFE_BAR]);
 
-      this->_HUD[HUD::SKILL_OK] =
-	new Surface(50.0f, 50.0f, 90.0f, hi - 60.0f, img[HUD::SKILL_OK]);
-      this->_HUD[HUD::SKILL_KO] =
-	new Surface(50.0f, 50.0f, 90.0f, hi - 60.0f, img[HUD::SKILL_KO]);
+      this->_HUD[HUD::SHIELD] = new Surface(40.0f,
+					    40.0f,
+					    30.0f,
+					    60.0f,
+					    img[HUD::SHIELD]);
 
-      this->_HUD[HUD::BOMB_OK] =
-	new Surface(70.0f, 70.0f, 10.0f, hi - 80.0f, img[HUD::BOMB_OK]);
-      this->_HUD[HUD::BOMB_KO] =
-	new Surface(70.0f, 70.0f, 10.0f, hi - 80.0f, img[HUD::BOMB_KO]);
+      this->_HUD[HUD::LUST] = new Surface(40.0f,
+					  40.0f,
+					  80.0f,
+					  60.0f,
+					  img[HUD::LUST]);
 
-      this->_HUD[HUD::BIGBOMB_OK] =
-	new Surface(70.0f, 70.0f, 10.0f, hi - 80.0f, img[HUD::BIGBOMB_OK]);
-      this->_HUD[HUD::BIGBOMB_KO] =
-	new Surface(70.0f, 70.0f, 10.0f, hi - 80.0f, img[HUD::BIGBOMB_KO]);
-      this->_HUD[HUD::MEGABOMB_OK] =
-	new Surface(70.0f, 70.0f, 10.0f, hi - 80.0f, img[HUD::MEGABOMB_OK]);
-      this->_HUD[HUD::MEGABOMB_KO] =
-	new Surface(70.0f, 70.0f, 10.0f, hi - 80.0f, img[HUD::MEGABOMB_KO]);
+      this->_HUD[HUD::POWER] = new Surface(40.0f,
+					   40.0f,
+					   130.0f,
+					   60.0f,
+					   img[HUD::POWER]);
+
+      this->_HUD[HUD::SKILL_OK] = new Surface(50.0f,
+					      50.0f,
+					      90.0f,
+					      hi - 60.0f,
+					      img[HUD::SKILL_OK]);
+
+      this->_HUD[HUD::SKILL_KO] = new Surface(50.0f,
+					      50.0f,
+					      90.0f,
+					      hi - 60.0f,
+					      img[HUD::SKILL_KO]);
+
+      this->_HUD[HUD::BOMB_OK] = new Surface(70.0f,
+					     70.0f,
+					     10.0f,
+					     hi - 80.0f,
+					     img[HUD::BOMB_OK]);
+
+      this->_HUD[HUD::BOMB_KO] = new Surface(70.0f,
+					     70.0f,
+					     10.0f,
+					     hi - 80.0f,
+					     img[HUD::BOMB_KO]);
+
+      this->_HUD[HUD::BIGBOMB_OK] = new Surface(70.0f,
+						70.0f,
+						10.0f,
+						hi - 80.0f,
+						img[HUD::BIGBOMB_OK]);
+
+      this->_HUD[HUD::BIGBOMB_KO] = new Surface(70.0f,
+						70.0f,
+						10.0f,
+						hi - 80.0f,
+						img[HUD::BIGBOMB_KO]);
+
+      this->_HUD[HUD::MEGABOMB_OK] = new Surface(70.0f,
+						 70.0f,
+						 10.0f,
+						 hi - 80.0f,
+						 img[HUD::MEGABOMB_OK]);
+
+      this->_HUD[HUD::MEGABOMB_KO] = new Surface(70.0f,
+						 70.0f,
+						 10.0f,
+						 hi - 80.0f,
+						 img[HUD::MEGABOMB_KO]);
     }
   this->_HUD[HUD::LIFE_BAR]->draw();
 
@@ -287,7 +346,9 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EO
 
   if (size > 250.0f)
     size = 250.0f;
-  Surface pvIndic(size, 20.0f, 40.0f, 20.0f, img[HUD::LIFE]);
+
+  Surface	pvIndic(size, 20.0f, 40.0f, 20.0f, img[HUD::LIFE]);
+
   pvIndic.draw();
 
   if (this->_shield)
@@ -296,8 +357,8 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EO
     this->_HUD[HUD::LUST]->draw();
   if (this->_powerStack)
     this->_HUD[HUD::POWER]->draw();
-
   this->_text.setSize(30);
+
   if (this->_lustStack)
     {
       ss << this->_lustStack;
@@ -326,7 +387,6 @@ void Human::drawHUD(std::vector<gdl::Image>& img, size_t hi, size_t lag, bool EO
   this->_text.setPosition(45 + lag, 18);
   this->_text.draw();
 
-  // TODO nb kill
   this->_text.setSize(30);
   ss << this->_nbKills;
   this->_text.setText(ss.str());
