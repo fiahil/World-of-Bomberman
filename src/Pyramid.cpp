@@ -31,7 +31,7 @@ void	Pyramid::draw()
   glColor3ub(ContentColor::getColorFromId(this->_color).R,
 	     ContentColor::getColorFromId(this->_color).G,
 	     ContentColor::getColorFromId(this->_color).B);
-  
+
   glBegin(GL_QUADS);
 
   glNormal3f(0.0f, 1.0f, 0.0f);
