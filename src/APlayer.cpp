@@ -66,14 +66,17 @@ APlayer::APlayer(Map & map)
   this->_rotFuncMap[Dir::SOUTH] = &APlayer::SOUTHFunction;
   this->_rotFuncMap[Dir::WEST] = &APlayer::WESTFunction;
   this->_rotFuncMap[Dir::EAST] = &APlayer::EASTFunction;
+
   this->_bombEffect[BombType::NORMAL] = &APlayer::normalBombEffect;
   this->_bombEffect[BombType::BIGBOMB] = &APlayer::bigBombEffect;
   this->_bombEffect[BombType::MEGABOMB] = &APlayer::megaBombEffect;
+
   this->_bonusEffect[BonusType::LIFE] = &APlayer::lifeBonusEffect;
   this->_bonusEffect[BonusType::BOMB] = &APlayer::BombBonusEffect;
   this->_bonusEffect[BonusType::LUST] = &APlayer::LustBonusEffect;
   this->_bonusEffect[BonusType::POWER] = &APlayer::PowerBonusEffect;
   this->_bonusEffect[BonusType::SHIELD] = &APlayer::ShieldBonusEffect;
+
   this->_pos._scale = 2.0f;
   this->setPos(1, 1);
   this->_k = 0.2f;
@@ -136,6 +139,7 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   if (this->_pv)
     this->play(clock, input);
+
   if ((this->_state == State::RUN ||
        this->_state == State::STAND ||
        this->_state == State::HIT)
@@ -144,9 +148,11 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_state = State::STAND;
       this->_model.play(g_refAnimName[this->_state]);
     }
+
   this->_model.update(clock);
   this->slowMotion();
   this->_indic.setPos(this->_realPos.x, this->_realPos.y, this->_realPos.z);
+
   if (this->_shield)
     {
       if (this->_shieldTimer < 0.0f)
@@ -157,11 +163,13 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 	  this->_shieldTimer = -1.0f;
 	}
     }
+
   if ((static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::ATTACK])
     this->_canAttack = true;
   else
     this->_canAttack = false;
+
   if (this->_tpTimer <= static_cast<double>(clock.getTotalGameTime()))
     {
       this->_tpTimer = static_cast<double>(clock.getTotalGameTime() + 3.0f);
@@ -176,10 +184,12 @@ void		APlayer::slowMotion()
       this->_realPos.x = this->_originPos.x +
 	this->_k *
 	(this->_pos._pos.x - this->_originPos.x);
+
       this->_realPos.z = this->_originPos.z +
 	this->_k *
 	(this->_pos._pos.z - this->_originPos.z);
       this->_k += 0.2f;
+
       if (this->_k > 1.2f)
 	{
 	  this->_originPos = this->_pos._pos;
@@ -507,7 +517,7 @@ void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
 
 void		APlayer::PAUSEFunction(gdl::GameClock const&)
 {
-  exit (1);
+  exit (1); // TODO
 }
 
 Bomb*		APlayer::isAttack()
@@ -515,8 +525,12 @@ Bomb*		APlayer::isAttack()
   if (!this->_attack)
     return 0;
 
-  Bomb	*ret = new Bomb(this->_weapon, this->_pos,
-			this, this->_Mbomb, this->_MExplodedBomb, this->_powerStack);
+  Bomb	*ret = new Bomb(this->_weapon,
+			this->_pos,
+			this,
+			this->_Mbomb,
+			this->_MExplodedBomb,
+			this->_powerStack);
   this->_attack = false;
   return ret;
 }

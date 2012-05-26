@@ -33,18 +33,16 @@ struct	infoAnim
 
 class APlayer : public AObj
 {
+  typedef void	(APlayer::*fBomb)(ExplodedBomb const*);
+  typedef void	(APlayer::*fBonus)();
+  typedef void	(APlayer::*t_rotFunc)();
+
 public:
   APlayer(Map &);
   virtual ~APlayer();
 
 private:
   APlayer(const APlayer&);
-
-  /*
-   * TODO : IMPLEMENT FUNCTION
-   */
-  typedef void	(APlayer::*fBomb)(ExplodedBomb const*);
-  typedef void	(APlayer::*fBonus)();
 
 protected:
   Vector		_originPos;
@@ -77,39 +75,42 @@ protected:
 private:
   gdl::Model		_Mbomb;
   gdl::Model		_MExplodedBomb;
+
+  std::map<BombType::eBomb, fBomb>	_bombEffect;
+  std::map<BonusType::eBonus, fBonus>	_bonusEffect;
+  ExplodedBomb const*			_curEffect;
+  std::vector<t_rotFunc>		_rotFuncMap;
+
+private:
   void	normalBombEffect(ExplodedBomb const*);
   void	bigBombEffect(ExplodedBomb const*);
   void	megaBombEffect(ExplodedBomb const*);
+
+  void	NORTHFunction();
+  void	SOUTHFunction();
+  void	WESTFunction();
+  void	EASTFunction();
+
 protected:
   void		lifeBonusEffect();
   void		BombBonusEffect();
   void		LustBonusEffect();
   void		PowerBonusEffect();
   void		ShieldBonusEffect();
-private:
-  std::map<BombType::eBomb, fBomb>	_bombEffect;
-  std::map<BonusType::eBonus, fBonus>	_bonusEffect;
-  ExplodedBomb const*			_curEffect;
 
-protected:
-  void UPFunction(gdl::GameClock const&);
-  void LEFTFunction(gdl::GameClock const&);
-  void RIGHTFunction(gdl::GameClock const&);
-  void DOWNFunction(gdl::GameClock const&);
-  void ATTACKFunction(gdl::GameClock const&);
-  void PAUSEFunction(gdl::GameClock const&);
-  // cheat
-  // pause/menu
-  // virtual dans APlayer and specialise dans Human
-  // TODO implementer + rajouter a la liste des bind a catch
-
-private:
-  typedef void	(APlayer::*t_rotFunc)();
-  void	NORTHFunction();
-  void	SOUTHFunction();
-  void	WESTFunction();
-  void	EASTFunction();
-  std::vector<t_rotFunc>	_rotFuncMap;
+  void		UPFunction(gdl::GameClock const&);
+  void		LEFTFunction(gdl::GameClock const&);
+  void		RIGHTFunction(gdl::GameClock const&);
+  void		DOWNFunction(gdl::GameClock const&);
+  void		ATTACKFunction(gdl::GameClock const&);
+  void		PAUSEFunction(gdl::GameClock const&);
+  /*
+  ** TODO :
+  ** Cheat
+  ** pause/menu
+  ** virtual dans APlayer and specialise dans Human
+  ** TODO implementer + rajouter a la liste des bind a catch
+  */
 
 public:
   virtual void	play(gdl::GameClock const&, gdl::Input&) = 0;
@@ -122,18 +123,18 @@ public:
   void		takeDamage(ExplodedBomb const*);
   bool		takeBonus(Bonus const*);
 
-  Vector const&	getPosReal() const;
-  int		getPv() const;
-  BombType::eBomb	getWeapon() const;
-  Skin::eSkin	getSkin() const;
-  size_t	getId() const;
-  size_t	getTeamId() const;
-  size_t	getColor() const;
-  State::eState	getState() const;
-  Dir::eDir	getDir() const;
-  size_t	getType() const;
-  std::string const&	getName() const;
-  std::string const&	getTeamName() const;
+  Vector const&		getPosReal()	const;
+  int			getPv()		const;
+  BombType::eBomb	getWeapon()	const;
+  Skin::eSkin		getSkin()	const;
+  size_t		getId()		const;
+  size_t		getTeamId()	const;
+  size_t		getColor()	const;
+  State::eState		getState()	const;
+  Dir::eDir		getDir()	const;
+  size_t		getType()	const;
+  std::string const&	getName()	const;
+  std::string const&	getTeamName()	const;
 
   void		setPv(int);
   void		setWeapon(BombType::eBomb);
