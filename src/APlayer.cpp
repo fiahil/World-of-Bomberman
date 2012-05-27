@@ -466,7 +466,7 @@ void		APlayer::incNbKills()
     }
 }
 
-void		APlayer::UPFunction(gdl::GameClock const& clock)
+bool		APlayer::UPFunction(gdl::GameClock const& clock)
 {
   double	current;
 
@@ -480,11 +480,13 @@ void		APlayer::UPFunction(gdl::GameClock const& clock)
 	  this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
 	  this->_state = State::RUN;
 	  this->_model.play(g_refAnimName[this->_state]);
+	  return true;
 	}
     }
+  return false;
 }
 
-void		APlayer::LEFTFunction(gdl::GameClock const& clock)
+bool		APlayer::LEFTFunction(gdl::GameClock const& clock)
 {
   double	current;
 
@@ -498,13 +500,15 @@ void		APlayer::LEFTFunction(gdl::GameClock const& clock)
 	  this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
 	  this->_state = State::RUN;
 	  this->_model.play(g_refAnimName[this->_state]);
+	  return true;
 	}
     }
+  return false;
 }
 
-void		APlayer::RIGHTFunction(gdl::GameClock const& clock)
+bool		APlayer::RIGHTFunction(gdl::GameClock const& clock)
 {
-   double	current;
+  double	current;
 
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::RIGHT] && this->_realPos == this->_pos._pos)
@@ -516,11 +520,13 @@ void		APlayer::RIGHTFunction(gdl::GameClock const& clock)
 	  this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
 	  this->_state = State::RUN;
 	  this->_model.play(g_refAnimName[this->_state]);
+	  return true;
 	}
     }
+  return false;
 }
 
-void		APlayer::DOWNFunction(gdl::GameClock const& clock)
+bool		APlayer::DOWNFunction(gdl::GameClock const& clock)
 {
    double	current;
 
@@ -534,11 +540,13 @@ void		APlayer::DOWNFunction(gdl::GameClock const& clock)
 	  this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
 	  this->_state = State::RUN;
 	  this->_model.play(g_refAnimName[this->_state]);
+	  return true;
 	}
     }
+   return false;
 }
 
-void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
+bool		APlayer::ATTACKFunction(gdl::GameClock const& clock)
 {
    double	current;
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
@@ -552,12 +560,15 @@ void		APlayer::ATTACKFunction(gdl::GameClock const& clock)
       this->_state = State::ATTACK;
       this->_model.play(g_refAnimName[this->_state]);
       this->_model.set_anim_speed(g_refAnimName[this->_state], 3.0f);
+      return true;
     }
+  return false;
 }
 
-void		APlayer::PAUSEFunction(gdl::GameClock const&)
+bool		APlayer::PAUSEFunction(gdl::GameClock const&)
 {
   exit (1); // TODO
+  return true;
 }
 
 Bomb*		APlayer::isAttack()

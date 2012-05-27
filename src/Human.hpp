@@ -15,10 +15,10 @@
 
 class Human : public APlayer
 {
-  typedef void	(APlayer::*actionFunc)(gdl::GameClock const&);
+  typedef bool	(APlayer::*actionFunc)(gdl::GameClock const&);
   typedef void	(Human::*ptrFunc)(void) const;
   typedef bool	(Human::*ptrJumpFunc)();
-  typedef void	(Human::*ptrSkillFunc)(gdl::GameClock const&);
+  typedef bool	(Human::*ptrSkillFunc)(gdl::GameClock const&);
 
   struct eventSt {
     gdl::Keys::Key		_key;
@@ -64,7 +64,7 @@ protected:
   virtual void	 drawSuccess(Success::eSuccess s);
 
 private:
-  void		 SkillFunction(gdl::GameClock const&);
+  bool		 SkillFunction(gdl::GameClock const&);
   Human::eventSt initStruct(gdl::Keys::Key, HumGame::eAction, actionFunc) const;
   void		 drawStart(size_t, size_t, size_t);
   void		 drawEnd(size_t, size_t, bool, size_t);
@@ -73,10 +73,10 @@ private:
   void		 affBigBomb() const;
   void		 affMegaBomb() const;
 
-  void		 halluSkill(gdl::GameClock const&);
-  void		 healSkill(gdl::GameClock const&);
-  void		 berserkSkill(gdl::GameClock const&);
-  void		 jumpSkill(gdl::GameClock const&);
+  bool		 halluSkill(gdl::GameClock const&);
+  bool		 healSkill(gdl::GameClock const&);
+  bool		 berserkSkill(gdl::GameClock const&);
+  bool		 jumpSkill(gdl::GameClock const&);
 
   bool		 northJumpFunction();
   bool		 southJumpFunction();
