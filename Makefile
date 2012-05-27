@@ -51,7 +51,7 @@ OBJ		= $(SRC:.cpp=.o)
 
 INCLUDES	= -I./lib/libgdl_gl-2012.3/include -I./src -I./Serializer
 
-CXX		= g++ -g3
+CXX		= g++
 
 CXXFLAGS	= -g -Wall -Wextra -O3 $(INCLUDES)
 
