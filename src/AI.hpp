@@ -52,14 +52,20 @@ private:
   void	AIMedium(gdl::GameClock const&);
   void	AIHard(gdl::GameClock const&);
 
+  size_t adjBarrel(size_t x, size_t y) const;
+
   bool	isWall(size_t x, size_t y) const;
   bool	isBomb(size_t x, size_t y) const;
+  bool	isEmpty(size_t x, size_t y) const;
+  bool	isBarrel(size_t x, size_t y) const;
 
   bool	nearBomb(void);
   bool	nearBonus(void);
+  bool	nearEmpty(void);
 
   void	waitState(void);
   void	surviveState(void);
+  void	attackState(void);
   void	moveState(void);
   void	fetchState(void);
 

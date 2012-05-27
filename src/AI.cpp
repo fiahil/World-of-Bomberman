@@ -24,6 +24,7 @@ AI::AI(AIType::eAI type, Map& map)
   this->_AIDifficulty[AIType::HARD] = &AI::AIHard;
 
   this->_EASYtable.push_back(std::make_pair(&AI::nearBomb, &AI::surviveState));
+  this->_EASYtable.push_back(std::make_pair(&AI::nearEmpty, &AI::attackState));
   this->_EASYtable.push_back(std::make_pair(&AI::nearBonus, &AI::fetchState));
 
   {
@@ -209,9 +210,19 @@ bool	AI::isWall(size_t x, size_t y) const
   return this->_view->at(x, y).type == Elt::WALL && this->_view->at(x, y).pp != 0;
 }
 
+bool	AI::isEmpty(size_t x, size_t y) const
+{
+  return this->_view->at(x, y).type == Elt::WALL && this->_view->at(x, y).pp == 0;
+}
+
 bool	AI::isBomb(size_t x, size_t y) const
 {
   return this->_view->at(x, y).type == Elt::BOMB;
+}
+
+bool	AI::isBarrel(size_t x, size_t y) const
+{
+  return this->_view->at(x, y).type == Elt::WALL && this->_view->at(x, y).pp == 2;
 }
 
 // TODO : old code AIEasy
@@ -255,8 +266,16 @@ void	AI::AIHard(gdl::GameClock const&)
 
 }
 
-bool	AI::nearBomb(void)
+size_t	AI::adjBarrel(size_t x, size_t y) const
 {
+  return isBarrel(x, y + 1) +
+    	 isBarrel(x, y - 1) +
+	 isBarrel(x + 1, y) +
+	 isBarrel(x - 1, y);
+}
+
+bool	AI::nearBomb(void)
+{/*
   for (int y = -5; y < 5; ++y)
   {
     for (int x = -5; x < 5; ++x)
@@ -267,12 +286,41 @@ bool	AI::nearBomb(void)
 	    this->_pos._x, this->_pos._y);
       }
     }
-  }
+  }*/
   return false;
 }
 
 bool	AI::nearBonus(void)
 {
+  return false;
+}
+
+bool	AI::nearEmpty(void)
+{
+  std::vector<std::pair<int, int> >	tmp;
+
+  for (int y = -5; y < 5; ++y)
+  {
+    for (int x = -5; x < 5; ++x)
+    {
+      if (isEmpty(this->_pos._x + x, this->_pos._y + y)) 
+      {
+	if (this->pathFind(this->_pos._x + x, this->_pos._y + y,
+	    	           this->_pos._x, this->_pos._y))
+	  tmp.push_back(std::make_pair(x, y));
+      }
+    }
+  }
+  this->_target.clear();
+  if (tmp.size() > 0)
+  {
+    size_t	rander = random() % tmp.size();
+
+    this->pathFind(this->_pos._x + tmp[rander].first,
+	           this->_pos._y + tmp[rander].second,
+		   this->_pos._x, this->_pos._y);
+    return true;
+  }
   return false;
 }
 
@@ -308,6 +356,14 @@ void	AI::moveState(void)
 
 void	AI::fetchState(void)
 {
+}
+
+void	AI::attackState(void)
+{
+  std::deque<dirFunc>	tmp(this->_target);
+
+  this->_target.push_front(&AI::ATTACKFunction);
+  this->_state = &AI::moveState;
 }
 
 bool	AI::pathDiscovery(size_t cx, size_t cy, Path const& p)
