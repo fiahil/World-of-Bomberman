@@ -31,6 +31,7 @@ protected:
   std::vector<TextEdit *>	_textEdit;
   vKeyEvent			_keyEvent;
   GameManager &			_gameManager;
+  TokenMenu::eMenu		_curToken;
 
   /*
 	INFOS :
@@ -50,8 +51,6 @@ protected:
   */
 protected:
   void			UpFunction(gdl::GameClock const &);
-  void			LeftFunction(gdl::GameClock const &);
-  void			RightFunction(gdl::GameClock const &);
   void			DownFunction(gdl::GameClock const &);
   void			SelectFunction(gdl::GameClock const &);
 
@@ -62,6 +61,9 @@ public:
   virtual void		draw(void);
   virtual void		initialize(void);
   virtual void		update(gdl::GameClock const&, gdl::Input&);
+
+public:
+  void			setTextDraw(bool);
 
 public:
   virtual double	getCenterX(void) const = 0;

@@ -25,7 +25,11 @@ MenuManager::~MenuManager()
 
 void	MenuManager::initialize(void)
 {
-  
+  this->_menu.push_back(new MainMenu(this->_gameManager));
+  this->_menu[this->_curMenu]->initialize();
+  this->_menu[this->_curMenu]->setTextDraw(true);
+  this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), 600.0f,
+		       this->_menu[this->_curMenu]->getCenterY());
 }
 
 void	MenuManager::draw(void)

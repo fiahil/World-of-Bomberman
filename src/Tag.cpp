@@ -42,6 +42,11 @@ void			Tag::setStatus(bool status)
   this->_status = status;
 }
 
+void			Tag::setTextDraw(bool status)
+{
+  this->_textDraw = status;
+}
+
 void			Tag::pushMatrix(void)
 {
   glMatrixMode(GL_PROJECTION);
