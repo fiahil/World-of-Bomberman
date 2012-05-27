@@ -10,6 +10,7 @@
 #include "MenuManager.hpp"
 #include "MainMenu.hpp"
 #include "MenuProfile.hpp"
+#include "Settings.hpp"
 #include "NewProfile.hpp"
 #include "LoadProfile.hpp"
 #include "TeamMenu.hpp"
@@ -33,6 +34,8 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::MAINMENU]->initialize();
   this->_menu[TokenMenu::PROFILE] = new MenuProfile(this->_gameManager);
   this->_menu[TokenMenu::PROFILE]->initialize();
+  this->_menu[TokenMenu::SETTINGS] = new Settings(this->_gameManager);
+  this->_menu[TokenMenu::SETTINGS]->initialize();
   this->_menu[TokenMenu::NEWPROFILE] = new NewProfile(this->_gameManager);
   this->_menu[TokenMenu::NEWPROFILE]->initialize();
   this->_menu[TokenMenu::LOADPROFILE] = new LoadProfile(this->_gameManager);

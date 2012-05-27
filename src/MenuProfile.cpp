@@ -29,3 +29,8 @@ double		MenuProfile::getCenterY() const
 {
   return 1350.0f;
 }
+
+void		MenuProfile::doAction(gdl::GameClock const&, gdl::Input&)
+{
+
+}
