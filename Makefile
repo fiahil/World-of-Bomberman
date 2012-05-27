@@ -44,6 +44,7 @@ SRC		= ./src/main.cpp	\
 		./src/NewProfile.cpp	\
 		./src/LoadProfile.cpp	\
 		./src/MenuProfile.cpp	\
+		./src/TeamMenu.cpp	\
 		./src/Tag.cpp		\
 		./src/ProfileManager.cpp
 

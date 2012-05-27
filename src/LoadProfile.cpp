@@ -10,7 +10,8 @@ LoadProfile::LoadProfile(GameManager& game)
     One tag per profile available.
     gotta see how to display with scrolling
   */
-
+  this->_textDraw = true;
+  std::cout << this->_textDraw << std::endl;
   this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::MAINMENU, 727.5f, 0.0f, 1325.0f));
 }
 
