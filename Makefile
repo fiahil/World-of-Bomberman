@@ -34,12 +34,15 @@ SRC		= ./src/main.cpp	\
 		./src/Bonus.cpp		\
 		./src/ExplodedBomb.cpp	\
 		./src/DirWalker.cpp	\
+		./src/ProfileLoader.cpp	\
 		./src/MenuManager.cpp	\
 		./src/MapManager.cpp	\
 		./src/GameManager.cpp	\
 		./src/TextEdit.cpp	\
 		./src/AMenu.cpp		\
 		./src/MainMenu.cpp	\
+		./src/NewProfile.cpp	\
+		./src/LoadProfile.cpp	\
 		./src/Tag.cpp		\
 		./src/ProfileManager.cpp
 
@@ -47,7 +50,7 @@ OBJ		= $(SRC:.cpp=.o)
 
 INCLUDES	= -I./lib/libgdl_gl-2012.3/include -I./src -I./Serializer
 
-CXX		= g++
+CXX		= g++ -g3
 
 CXXFLAGS	= -Wall -Wextra -O3 $(INCLUDES)
 
