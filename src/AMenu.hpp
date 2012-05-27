@@ -33,7 +33,8 @@ protected:
   vKeyEvent			_keyEvent;
   GameManager &			_gameManager;
   TokenMenu::eMenu		_curToken;
-
+  bool				_changeMenu;
+  
   /*
 	INFOS :
 
