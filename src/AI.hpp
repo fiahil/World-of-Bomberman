@@ -7,7 +7,7 @@
 #define __Bomberman_AI_h
 
 #include <vector>
-#include <queue>
+#include <deque>
 #include <utility>
 #include "enum.hpp"
 #include "APlayer.hpp"
@@ -16,10 +16,16 @@
 class AI : public APlayer
 {
   typedef void	(AI::*fDifficulty)(gdl::GameClock const&);
-  typedef void	(AI::*dirFunc)(gdl::GameClock const&);
+  typedef bool	(AI::*dirFunc)(gdl::GameClock const&);
   typedef bool	(AI::*isFunc)(size_t x, size_t y);
   typedef void	(AI::*stFunc)(void);
   typedef bool	(AI::*gtFunc)(void);
+
+  struct Path
+  {
+    std::vector<std::pair<int, int> >	elt;
+    std::deque<dirFunc>			func;
+  };
 
 public:
   AI(AIType::eAI, Map&);
@@ -32,10 +38,9 @@ private:
   gdl::GameClock const*		_clock;
   std::vector<fDifficulty>	_AIDifficulty;
   stFunc			_state;
-  size_t			_xDanger;
-  size_t			_yDanger;
+  std::deque<dirFunc>		_target;
+  std::vector<Path>		_paths;
 
-  std::queue<std::pair<size_t, size_t> >	_target; //TODO
   std::vector<std::pair<gtFunc, stFunc> >	_EASYtable;
 
 public:
@@ -58,7 +63,8 @@ private:
   void	moveState(void);
   void	fetchState(void);
 
-  Dir::eDir	chooseDirection() const;
+  bool	pathFind(size_t x, size_t y, size_t cx, size_t cy);
+  bool	pathDiscovery(size_t cx, size_t cy, Path const& p);
 };
 
 #endif

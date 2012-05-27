@@ -84,9 +84,9 @@ Human::eventSt	Human::initStruct(gdl::Keys::Key key,
   return nwEl;
 }
 
-void		Human::SkillFunction(gdl::GameClock const& clock)
+bool		Human::SkillFunction(gdl::GameClock const& clock)
 {
-  (this->*(this->_skillFunc[this->_skill]))(clock);
+  return (this->*(this->_skillFunc[this->_skill]))(clock);
 }
 
 void		Human::play(gdl::GameClock const& clock, gdl::Input& key)
@@ -166,11 +166,12 @@ void		Human::affMegaBomb() const
     this->_HUD[HUD::MEGABOMB_KO]->draw();
 }
 
-void		Human::halluSkill(gdl::GameClock const&)
+bool		Human::halluSkill(gdl::GameClock const&)
 {
+  return true;
 }
 
-void		Human::healSkill(gdl::GameClock const& clock)
+bool		Human::healSkill(gdl::GameClock const& clock)
 {
   double	current;
 
@@ -180,10 +181,12 @@ void		Human::healSkill(gdl::GameClock const& clock)
       this->lifeBonusEffect();
       this->ShieldBonusEffect();
       this->_skillUp = false;
+      return true;
     }
+  return false;
 }
 
-void		Human::berserkSkill(gdl::GameClock const& clock)
+bool		Human::berserkSkill(gdl::GameClock const& clock)
 {
   double	current;
 
@@ -196,7 +199,9 @@ void		Human::berserkSkill(gdl::GameClock const& clock)
       this->PowerBonusEffect();
       this->ShieldBonusEffect();
       this->_skillUp = false;
+      return true;
     }
+  return false;
 }
 
 bool		Human::northJumpFunction()
@@ -239,7 +244,7 @@ bool		Human::eastJumpFunction()
   return false;
 }
 
-void		Human::jumpSkill(gdl::GameClock const& clock)
+bool		Human::jumpSkill(gdl::GameClock const& clock)
 {
   double current;
 
@@ -248,7 +253,9 @@ void		Human::jumpSkill(gdl::GameClock const& clock)
       {
 	this->_skillUp = false;
 	this->_skillTimer = current + 60.0;
+	return true;
       }
+  return false;
 }
 
 void		Human::drawHUD(std::vector<gdl::Image>& img,

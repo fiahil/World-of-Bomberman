@@ -98,12 +98,12 @@ protected:
   void		PowerBonusEffect();
   void		ShieldBonusEffect();
 
-  void		UPFunction(gdl::GameClock const&);
-  void		LEFTFunction(gdl::GameClock const&);
-  void		RIGHTFunction(gdl::GameClock const&);
-  void		DOWNFunction(gdl::GameClock const&);
-  void		ATTACKFunction(gdl::GameClock const&);
-  void		PAUSEFunction(gdl::GameClock const&);
+  bool		UPFunction(gdl::GameClock const&);
+  bool		LEFTFunction(gdl::GameClock const&);
+  bool		RIGHTFunction(gdl::GameClock const&);
+  bool		DOWNFunction(gdl::GameClock const&);
+  bool		ATTACKFunction(gdl::GameClock const&);
+  bool		PAUSEFunction(gdl::GameClock const&);
   /*
   ** TODO :
   ** Cheat

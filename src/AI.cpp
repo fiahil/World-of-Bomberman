@@ -25,6 +25,17 @@ AI::AI(AIType::eAI type, Map& map)
 
   this->_EASYtable.push_back(std::make_pair(&AI::nearBomb, &AI::surviveState));
   this->_EASYtable.push_back(std::make_pair(&AI::nearBonus, &AI::fetchState));
+
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
 }
 
 bool	AI::isWall(size_t x, size_t y) const
@@ -78,14 +89,6 @@ void	AI::AIHard(gdl::GameClock const&)
 
 }
 
-Dir::eDir	AI::chooseDirection(void) const
-{
-  /*
-   * TODO: remplacer par point de destination
-   */
-  return static_cast<Dir::eDir>(random() % Dir::LAST);
-}
-
 bool	AI::nearBomb(void)
 {
   for (int y = -5; y < 5; ++y)
@@ -94,9 +97,8 @@ bool	AI::nearBomb(void)
 	{
 	  if (isBomb(this->_pos._x + x, this->_pos._y + y))
 	    {
-	      this->_xDanger = this->_pos._x + x;
-	      this->_yDanger = this->_pos._y + y;
-	      return true;
+	      return this->pathFind(this->_pos._x + x, this->_pos._y + y,
+		      		    this->_pos._x, this->_pos._y);
 	    }
 	}
     }
@@ -125,19 +127,12 @@ void	AI::waitState(void)
 
 void	AI::surviveState(void)
 {
-  std::vector<dirFunc>	dir(static_cast<int>(Dir::LAST), &AI::UPFunction);
-
-  dir[Dir::NORTH] = &AI::UPFunction;
-  dir[Dir::SOUTH] = &AI::DOWNFunction;
-  dir[Dir::WEST] = &AI::ATTACKFunction;
-  dir[Dir::EAST] = &AI::ATTACKFunction;
-
   if (!nearBomb())
     {
       this->_state = &AI::waitState;
       return;
     }
-  (this->*(dir[this->chooseDirection()]))(*this->_clock);
+  this->_state = &AI::moveState;
 }
 
 void	AI::moveState(void)
@@ -147,11 +142,39 @@ void	AI::moveState(void)
       this->_state = &AI::waitState;
       return;
     }
-  //TODO
+  if ((this->*(this->_target.back()))(*this->_clock))
+    this->_target.pop_back();
 }
 
 void	AI::fetchState(void)
 {
+}
+
+bool	AI::pathDiscovery(size_t cx, size_t cy, Path const& p)
+{
+  for (size_t i = 0; i < p.elt.size(); ++i)
+  {
+    if (isWall(cx + p.elt[i].first, cy + p.elt[i].second))
+      return false;
+  }
+  return true;
+}
+
+bool	AI::pathFind(size_t x, size_t y, size_t cx, size_t cy)
+{
+  for (std::vector<Path>::iterator it = this->_paths.begin();
+      it != this->_paths.end();
+      ++it)
+  {
+    if (pathDiscovery(cx, cy, *it) &&
+	cx + it->elt[it->elt.size() - 1].first == x &&
+	cy + it->elt[it->elt.size() - 1].second == y)
+    {
+      this->_target.insert(this->_target.begin(), it->func.begin(), it->func.end());
+      return true;
+    }
+  }
+  return false;
 }
 
 void	AI::updateView(AIView const* v)
