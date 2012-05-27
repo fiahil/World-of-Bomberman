@@ -35,7 +35,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::RIGHTFunction);
 
     this->_paths.push_back(p); 
-  }
+  }/*
   {
     Path	p;
 
@@ -185,7 +185,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::RIGHTFunction);
 
     this->_paths.push_back(p); 
-  }
+  }*/
 }
 
 bool	AI::isWall(size_t x, size_t y) const
@@ -248,7 +248,7 @@ bool	AI::nearBomb(void)
 	  if (isBomb(this->_pos._x + x, this->_pos._y + y))
 	    {
 	      return this->pathFind(this->_pos._x + x, this->_pos._y + y,
-		      		    this->_pos._x, this->_pos._y);
+		 		    this->_pos._x, this->_pos._y);
 	    }
 	}
     }
@@ -269,7 +269,6 @@ void	AI::waitState(void)
       if ((this->*(it->first))())
   	{
 	  this->_state = it->second;
-  	  (this->*(it->second))();
   	  break;
   	}
     }
@@ -282,6 +281,7 @@ void	AI::surviveState(void)
       this->_state = &AI::waitState;
       return;
     }
+  std::cout << "je survie" << std::endl;
   this->_state = &AI::moveState;
 }
 
@@ -289,11 +289,15 @@ void	AI::moveState(void)
 {
   if (this->_target.size() == 0)
     {
+      std::cout << "je me repose" << std::endl;
       this->_state = &AI::waitState;
       return;
     }
   if ((this->*(this->_target.back()))(*this->_clock))
+  {
+    std::cout << "je bouge" << std::endl;
     this->_target.pop_back();
+  }
 }
 
 void	AI::fetchState(void)
@@ -321,6 +325,7 @@ bool	AI::pathFind(size_t x, size_t y, size_t cx, size_t cy)
 	cy + it->elt[it->elt.size() - 1].second == y)
     {
       this->_target.insert(this->_target.begin(), it->func.begin(), it->func.end());
+      std::cout << "Je rempplis" << std::endl;
       return true;
     }
   }

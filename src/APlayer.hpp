@@ -38,7 +38,7 @@ class APlayer : public AObj
   typedef void	(APlayer::*t_rotFunc)();
 
 public:
-  APlayer(Map &);
+  APlayer(Map &, std::vector<bool>* = 0);
   virtual ~APlayer();
 
 private:
@@ -71,6 +71,7 @@ protected:
   Dir::eDir		_dir;
   gdl::Model		_model;
   Pyramid		_indic;
+  std::vector<bool>*	_success;
 
 private:
   gdl::Model		_Mbomb;
@@ -111,6 +112,8 @@ protected:
   ** virtual dans APlayer and specialise dans Human
   ** TODO implementer + rajouter a la liste des bind a catch
   */
+
+  virtual void	drawSuccess(Success::eSuccess);
 
 public:
   virtual void	play(gdl::GameClock const&, gdl::Input&) = 0;

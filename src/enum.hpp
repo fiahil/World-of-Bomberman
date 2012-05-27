@@ -6,6 +6,24 @@
 #ifndef __ENUM_HPP__
 #define __ENUM_HPP__
 
+struct Success
+{
+  enum eSuccess {
+    ONE_KILL,
+    TUTO,
+    BONUS,
+    FIVE_KILL,
+    HARD_AI,
+    POWER,
+    LUST,
+    TP,
+    DIE,
+    FABULOUS,
+    LAST
+  };
+
+};
+
 struct Input
 {
   enum eMode {
@@ -158,6 +176,16 @@ struct HUD
     BIGBOMB_KO,
     MEGABOMB_OK,
     MEGABOMB_KO,
+    SUCCESS_ONE_KILL,
+    SUCCESS_TUTO,
+    SUCCESS_BONUS,
+    SUCCESS_FIVE_KILL,
+    SUCCESS_HARD_AI,
+    SUCCESS_POWER,
+    SUCCESS_LUST,
+    SUCCESS_TP,
+    SUCCESS_DIE,
+    SUCCESS_FABULOUS,
     LAST
   };
 };

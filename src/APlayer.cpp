@@ -39,7 +39,7 @@ static const char*	g_refAnimName[State::LAST] = {
   "hit"
 };
 
-APlayer::APlayer(Map & map)
+APlayer::APlayer(Map & map, std::vector<bool>* success)
   : _map(map),
     _pv(100),
     _id(0),
@@ -59,6 +59,7 @@ APlayer::APlayer(Map & map)
     _state(State::STAND),
     _dir(Dir::SOUTH),
     _indic(0.5f, 0.5f, 0.8f, _color),
+    _success(success),
     _curEffect(0),
     _rotFuncMap(Dir::LAST, 0)
 {
@@ -135,6 +136,11 @@ void		APlayer::drawHUD(std::vector<gdl::Image>&, size_t, size_t, bool)
 {
 }
 
+void		APlayer::drawSuccess(Success::eSuccess s)
+{
+  /* TOTO */ std::cout << "Achievement : " << s << std::endl;
+}
+
 void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   if (this->_pv)
@@ -156,24 +162,30 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
   if (this->_shield)
     {
       if (this->_shieldTimer < 0.0f)
-	this->_shieldTimer = static_cast<double>(clock.getTotalGameTime() + 10.0f);
-      else if (this->_shieldTimer <= static_cast<double>(clock.getTotalGameTime()))
+	this->_shieldTimer = clock.getTotalGameTime() + 10.0f;
+      else if (this->_shieldTimer <= clock.getTotalGameTime())
 	{
 	  this->_shield = false;
 	  this->_shieldTimer = -1.0f;
 	}
     }
 
-  if ((static_cast<double>(clock.getTotalGameTime())) >=
+  if ((clock.getTotalGameTime()) >=
       this->_timers[HumGame::ATTACK])
     this->_canAttack = true;
   else
     this->_canAttack = false;
 
-  if (this->_tpTimer <= static_cast<double>(clock.getTotalGameTime()))
+  if (this->_tpTimer <= clock.getTotalGameTime())
     {
-      this->_tpTimer = static_cast<double>(clock.getTotalGameTime() + 3.0f);
-      this->_map.teleport(this->_pos);
+      this->_tpTimer = clock.getTotalGameTime() + 3.0f;
+      if (this->_map.teleport(this->_pos) &&
+	  this->_success &&
+	  !this->_success->at(Success::TP))
+	{
+	  this->_success->at(Success::TP) = true;
+	  this->drawSuccess(Success::TP);
+	}
     }
 }
 
@@ -260,13 +272,31 @@ void		APlayer::BombBonusEffect()
 void		APlayer::LustBonusEffect()
 {
   if (this->_lustStack < 6)
-    ++this->_lustStack;
+    {
+      ++this->_lustStack;
+      if (this->_lustStack == 6 &&
+	  this->_success &&
+	  !this->_success->at(Success::LUST))
+	{
+	  this->_success->at(Success::LUST) = true;
+	  this->drawSuccess(Success::LUST);
+	}
+    }
 }
 
 void		APlayer::PowerBonusEffect()
 {
   if (this->_powerStack < 6)
-    ++this->_powerStack;
+    {
+      ++this->_powerStack;
+      if (this->_powerStack == 6 &&
+	  this->_success &&
+	  !this->_success->at(Success::POWER))
+	{
+	  this->_success->at(Success::POWER) = true;
+	  this->drawSuccess(Success::POWER);
+	}
+    }
 }
 
 void		APlayer::ShieldBonusEffect()
@@ -300,6 +330,11 @@ bool		APlayer::takeBonus(Bonus const* cur)
   if (this->_pos._x == cur->getPos()._x && this->_pos._y == cur->getPos()._y)
     {
       (this->*_bonusEffect[cur->getType()])();
+      if (this->_success && !this->_success->at(Success::BONUS))
+      	{
+      	  this->_success->at(Success::BONUS) = true;
+      	  this->drawSuccess(Success::BONUS);
+      	}
       return true;
     }
   return false;
@@ -424,6 +459,11 @@ std::string const&	APlayer::getTeamName() const
 void		APlayer::incNbKills()
 {
   ++this->_nbKills;
+  if (this->_success && !this->_success->at(Success::ONE_KILL))
+    {
+      this->_success->at(Success::ONE_KILL) = true;
+      this->drawSuccess(Success::ONE_KILL);
+    }
 }
 
 bool		APlayer::UPFunction(gdl::GameClock const& clock)

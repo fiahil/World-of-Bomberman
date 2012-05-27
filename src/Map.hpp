@@ -55,7 +55,7 @@ private:
   void		explodeBreakable(size_t &, size_t &, size_t, std::list<Bonus*>&);
 
 public:
-  void		teleport(Point & pos) const;
+  bool		teleport(Point & pos) const;
   void		initialize(void);
   void		draw(void);
   void		update(gdl::GameClock const& clock, gdl::Input& input);

@@ -6,8 +6,8 @@
 #include <sstream>
 #include "Human.hpp"
 
-Human::Human(Map & map, const Config& conf)
-  : APlayer(map),
+Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
+  : APlayer(map, success),
     _mode(Input::GAME),
     _start(4),
     _startTimer(-1.0f),
@@ -18,7 +18,9 @@ Human::Human(Map & map, const Config& conf)
     _skillFunc(Skill::LAST, 0),
     _HUD(HUD::LAST, 0),
     _bombAff(BombType::LAST, 0),
-    _jumpDir(Dir::LAST, 0)
+    _jumpDir(Dir::LAST, 0),
+    _lastSuccess(Success::LAST),
+    _successTimer(-1.0f)
 {
   this->_event[Input::GAME]._nb = 7;
   this->_event[Input::GAME].
@@ -84,6 +86,12 @@ Human::eventSt	Human::initStruct(gdl::Keys::Key key,
   return nwEl;
 }
 
+void            Human::drawSuccess(Success::eSuccess s)
+{
+  this->_lastSuccess = s;
+  this->_successTimer = -1.0f;
+}
+
 bool		Human::SkillFunction(gdl::GameClock const& clock)
 {
   return (this->*(this->_skillFunc[this->_skill]))(clock);
@@ -91,7 +99,12 @@ bool		Human::SkillFunction(gdl::GameClock const& clock)
 
 void		Human::play(gdl::GameClock const& clock, gdl::Input& key)
 {
-  if ((static_cast<double>(clock.getTotalGameTime())) >= this->_skillTimer)
+  if (this->_successTimer == -1.0f && this->_lastSuccess != Success::LAST)
+    this->_successTimer = clock.getTotalGameTime() + 5.0f;
+  else if (this->_successTimer <= clock.getTotalGameTime())
+    this->_lastSuccess = Success::LAST;
+
+  if (clock.getTotalGameTime() >= this->_skillTimer)
     this->_skillUp = true;
   if (this->_start >= 0 && clock.getTotalGameTime() >= this->_startTimer)
     {
@@ -130,15 +143,33 @@ void		Human::drawEnd(size_t h, size_t lag, bool EOG)
   this->_text.setSize(80);
   if (!this->_pv)
     {
-      this->_text.setText("You Lose !");
+      if (this->_success && !this->_success->at(Success::DIE))
+      	{
+      	  this->_success->at(Success::DIE) = true;
+      	  this->drawSuccess(Success::DIE);
+      	}
+     this->_text.setText("You Lose !");
       this->_text.setPosition(lag + 200, h / 2);
       this->_text.draw();
-    }
+     }
   else if (EOG)
     {
-      this->_text.setText("You Win !");
+      if (this->_nbKills >= 5 && this->_success && !this->_success->at(Success::FIVE_KILL))
+      	{
+      	  this->_success->at(Success::FIVE_KILL) = true;
+      	  this->drawSuccess(Success::FIVE_KILL);
+      	}
+
+      if (this->_pv >= 100 && this->_success && !this->_success->at(Success::FABULOUS))
+      	{
+      	  this->_success->at(Success::FABULOUS) = true;
+      	  this->drawSuccess(Success::FABULOUS);
+      	}
+
+    this->_text.setText("You Win !");
       this->_text.setPosition(lag + 200, h / 2);
       this->_text.draw();
+
     }
 }
 
@@ -252,7 +283,7 @@ bool		Human::jumpSkill(gdl::GameClock const& clock)
     if ((this->*(this->_jumpDir[this->_dir]))())
       {
 	this->_skillUp = false;
-	this->_skillTimer = current + 60.0;
+	this->_skillTimer = current + 30.0;
 	return true;
       }
   return false;
@@ -339,7 +370,71 @@ void		Human::drawHUD(std::vector<gdl::Image>& img,
 						 10.0f,
 						 hi - 80.0f,
 						 img[HUD::MEGABOMB_KO]);
+
+      this->_HUD[HUD::SUCCESS_ONE_KILL] = new Surface(300.0f,
+						      81.0f,
+						      300.0f,
+						      hi - 90.0f,
+						      img[HUD::SUCCESS_ONE_KILL]);
+
+      this->_HUD[HUD::SUCCESS_TUTO] = new Surface(300.0f,
+						  81.0f,
+						  300.0f,
+						  hi - 90.0f,
+						  img[HUD::SUCCESS_TUTO]);
+
+      this->_HUD[HUD::SUCCESS_BONUS] = new Surface(300.0f,
+						   81.0f,
+						   300.0f,
+						   hi - 90.0f,
+						   img[HUD::SUCCESS_BONUS]);
+
+      this->_HUD[HUD::SUCCESS_FIVE_KILL] = new Surface(300.0f,
+						       81.0f,
+						       300.0f,
+						       hi - 90.0f,
+						       img[HUD::SUCCESS_FIVE_KILL]);
+
+      this->_HUD[HUD::SUCCESS_HARD_AI] = new Surface(300.0f,
+						     81.0f,
+						     300.0f,
+						     hi - 90.0f,
+						     img[HUD::SUCCESS_HARD_AI]);
+
+      this->_HUD[HUD::SUCCESS_POWER] = new Surface(300.0f,
+						   81.0f,
+						   300.0f,
+						   hi - 90.0f,
+						   img[HUD::SUCCESS_POWER]);
+
+      this->_HUD[HUD::SUCCESS_LUST] = new Surface(300.0f,
+						  81.0f,
+						  300.0f,
+						  hi - 90.0f,
+						  img[HUD::SUCCESS_LUST]);
+
+      this->_HUD[HUD::SUCCESS_TP] = new Surface(300.0f,
+						81.0f,
+						300.0f,
+						hi - 90.0f,
+						img[HUD::SUCCESS_TP]);
+
+      this->_HUD[HUD::SUCCESS_DIE] = new Surface(300.0f,
+						 81.0f,
+						 300.0f,
+						 hi - 90.0f,
+						 img[HUD::SUCCESS_DIE]);
+
+      this->_HUD[HUD::SUCCESS_FABULOUS] = new Surface(300.0f,
+						      81.0f,
+						      300.0f,
+						      hi - 90.0f,
+						      img[HUD::SUCCESS_FABULOUS]);
     }
+
+  if (this->_lastSuccess != Success::LAST)
+    this->_HUD[this->_lastSuccess + HUD::SUCCESS_ONE_KILL]->draw();
+
   this->_HUD[HUD::LIFE_BAR]->draw();
 
   double	size = (this->_pv / 100.0f * 250.0f);
