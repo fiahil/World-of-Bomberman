@@ -36,6 +36,156 @@ AI::AI(AIType::eAI type, Map& map)
 
     this->_paths.push_back(p); 
   }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
 }
 
 bool	AI::isWall(size_t x, size_t y) const
