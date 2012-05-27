@@ -58,7 +58,7 @@ void		MyGame::update(void)
 
   if (this->_view)
     delete this->_view;
-  this->_view = new AIView(*this->_match._map);
+  this->_view = new AIView(*this->_match._map, this->_match._bombs);
 
   for (std::vector<APlayer*>::iterator it = this->_match._players.begin();
        it != this->_match._players.end();
