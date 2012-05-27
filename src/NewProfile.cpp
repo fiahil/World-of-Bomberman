@@ -29,3 +29,8 @@ double	NewProfile::getCenterY(void) const
 {
   return (450.0f);
 }
+
+void	NewProfile::doAction(gdl::GameClock const&, gdl::Input&)
+{
+
+}

@@ -27,3 +27,8 @@ double	LoadProfile::getCenterY() const
 {
   return (1350.0f);
 }
+
+void		LoadProfile::doAction(gdl::GameClock const&, gdl::Input&)
+{
+  
+}

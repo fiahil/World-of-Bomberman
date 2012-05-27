@@ -22,6 +22,7 @@ public:
 
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
+  virtual void		doAction(gdl::GameClock const&, gdl::Input&);
 };
 
 #endif
