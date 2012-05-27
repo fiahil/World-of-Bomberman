@@ -12,7 +12,7 @@ AMenu::AMenu(std::string const& normal, std::string const select,
   : _background(normal, select, false, false, TokenMenu::LAST, x, y, z),
     _textDraw(false),
     _cursor(0),
-    _timer(-1.0f),
+    _timers(3, -1.0f),
     _gameManager(game),
     _curToken(TokenMenu::LAST)
 {
@@ -45,15 +45,11 @@ void			AMenu::draw(void)
 
 void			AMenu::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-  if (clock.getTotalGameTime() >= this->_timer)
-    {
-      for (size_t i = 0; i < this->_keyEvent.size(); ++i)
-	if (input.isKeyDown(this->_keyEvent[i].first))
-	  (this->*_keyEvent[i].second)(clock);
-      for (std::vector<TextEdit *>::iterator it = this->_textEdit.begin(); it != this->_textEdit.end(); ++it)
-	(*it)->update(input);
-      this->_timer = clock.getTotalGameTime() + 0.15f;
-    }
+  for (size_t i = 0; i < this->_keyEvent.size(); ++i)
+    if (input.isKeyDown(this->_keyEvent[i].first))
+      (this->*_keyEvent[i].second)(clock);
+  for (std::vector<TextEdit *>::iterator it = this->_textEdit.begin(); it != this->_textEdit.end(); ++it)
+    (*it)->update(input);
 }
 
 void			AMenu::setTextDraw(bool flag)
@@ -69,25 +65,37 @@ TokenMenu::eMenu	AMenu::getContent() const
   return this->_curToken;
 }
 
-void			AMenu::UpFunction(gdl::GameClock const&)
+void			AMenu::UpFunction(gdl::GameClock const& clock)
 {
-  this->_tags[this->_cursor]->setStatus(false);
-  if (!this->_cursor)
-    this->_cursor = this->_tags.size();
-  --this->_cursor;
-  this->_tags[this->_cursor]->setStatus(true);
+  if (clock.getTotalGameTime() >= this->_timers[0])
+    {
+      this->_tags[this->_cursor]->setStatus(false);
+      if (!this->_cursor)
+	this->_cursor = this->_tags.size();
+      --this->_cursor;
+      this->_tags[this->_cursor]->setStatus(true);
+      this->_timers[0] = clock.getTotalGameTime() + 0.15f;
+    }
 }
 
-void			AMenu::DownFunction(gdl::GameClock const&)
+void			AMenu::DownFunction(gdl::GameClock const& clock)
 {
-  this->_tags[this->_cursor]->setStatus(false);
-  ++this->_cursor;
-  if (this->_cursor == this->_tags.size())
-    this->_cursor = 0;
-  this->_tags[this->_cursor]->setStatus(true);
+  if (clock.getTotalGameTime() >= this->_timers[1])
+    {
+      this->_tags[this->_cursor]->setStatus(false);
+      ++this->_cursor;
+      if (this->_cursor == this->_tags.size())
+	this->_cursor = 0;
+      this->_tags[this->_cursor]->setStatus(true);
+      this->_timers[1] = clock.getTotalGameTime() + 0.15f;
+    }
 }
 
-void			AMenu::SelectFunction(gdl::GameClock const&)
+void			AMenu::SelectFunction(gdl::GameClock const& clock)
 {
-  this->_curToken = this->_tags[this->_cursor]->getContent();
+  if (clock.getTotalGameTime() >= this->_timers[2])
+    {
+      this->_curToken = this->_tags[this->_cursor]->getContent();
+      this->_timers[2] = clock.getTotalGameTime() + 0.15f;
+    }
 }

@@ -43,9 +43,17 @@ void	MenuManager::draw(void)
 
 void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-  if (this->_menu[this->_curMenu]->getContent() != TokenMenu::LAST)
+  TokenMenu::eMenu	tmp;
+  
+  if ((tmp = this->_menu[this->_curMenu]->getContent()) != TokenMenu::LAST)
     {
-      
+      if (tmp == TokenMenu::QUIT) //TODO
+	exit(0);
+      this->_menu[this->_curMenu]->setTextDraw(false);
+      this->_curMenu = tmp;
+      this->_menu[this->_curMenu]->setTextDraw(true);
+      this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), 600.0f,
+			   this->_menu[this->_curMenu]->getCenterY());
     }
   else
     this->_menu[this->_curMenu]->update(clock, input);

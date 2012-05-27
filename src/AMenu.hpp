@@ -27,7 +27,7 @@ protected:
   Tag				_background;
   bool				_textDraw;
   size_t			_cursor;
-  double			_timer;
+  std::vector<double>		_timers;
   std::vector<Tag *>		_tags;
   std::vector<TextEdit *>	_textEdit;
   vKeyEvent			_keyEvent;
