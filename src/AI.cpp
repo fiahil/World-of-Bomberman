@@ -30,19 +30,21 @@ AI::AI(AIType::eAI type, Map& map)
     Path	p;
 
     p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
+    p.elt.push_back(std::make_pair(-1, -1));
     p.func.push_front(&AI::UPFunction);
-    p.func.push_front(&AI::RIGHTFunction);
+    p.func.push_front(&AI::LEFTFunction);
 
     this->_paths.push_back(p); 
-  }/*
+  }
   {
     Path	p;
 
     p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
+    p.elt.push_back(std::make_pair(0, -2));
+    p.elt.push_back(std::make_pair(-1, -2));
     p.func.push_front(&AI::UPFunction);
-    p.func.push_front(&AI::RIGHTFunction);
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::LEFTFunction);
 
     this->_paths.push_back(p); 
   }
@@ -60,7 +62,9 @@ AI::AI(AIType::eAI type, Map& map)
     Path	p;
 
     p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
+    p.elt.push_back(std::make_pair(0, -2));
+    p.elt.push_back(std::make_pair(1, -2));
+    p.func.push_front(&AI::UPFunction);
     p.func.push_front(&AI::UPFunction);
     p.func.push_front(&AI::RIGHTFunction);
 
@@ -69,9 +73,53 @@ AI::AI(AIType::eAI type, Map& map)
   {
     Path	p;
 
-    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, 0));
     p.elt.push_back(std::make_pair(1, -1));
+    p.func.push_front(&AI::RIGHTFunction);
     p.func.push_front(&AI::UPFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(1, 0));
+    p.elt.push_back(std::make_pair(2, 0));
+    p.elt.push_back(std::make_pair(2, -1));
+    p.func.push_front(&AI::RIGHTFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+    p.func.push_front(&AI::UPFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(1, 0));
+    p.elt.push_back(std::make_pair(1, 1));
+    p.func.push_front(&AI::RIGHTFunction);
+    p.func.push_front(&AI::DOWNFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(1, 0));
+    p.elt.push_back(std::make_pair(2, 0));
+    p.elt.push_back(std::make_pair(2, 1));
+    p.func.push_front(&AI::RIGHTFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+    p.func.push_front(&AI::DOWNFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, 1));
+    p.elt.push_back(std::make_pair(1, 1));
+    p.func.push_front(&AI::DOWNFunction);
     p.func.push_front(&AI::RIGHTFunction);
 
     this->_paths.push_back(p); 
@@ -79,9 +127,11 @@ AI::AI(AIType::eAI type, Map& map)
   {
     Path	p;
 
-    p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
-    p.func.push_front(&AI::UPFunction);
+    p.elt.push_back(std::make_pair(0, 1));
+    p.elt.push_back(std::make_pair(0, 2));
+    p.elt.push_back(std::make_pair(1, 2));
+    p.func.push_front(&AI::DOWNFunction);
+    p.func.push_front(&AI::DOWNFunction);
     p.func.push_front(&AI::RIGHTFunction);
 
     this->_paths.push_back(p); 
@@ -89,103 +139,69 @@ AI::AI(AIType::eAI type, Map& map)
   {
     Path	p;
 
-    p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
-    p.func.push_front(&AI::UPFunction);
-    p.func.push_front(&AI::RIGHTFunction);
+    p.elt.push_back(std::make_pair(0, 1));
+    p.elt.push_back(std::make_pair(-1, 1));
+    p.func.push_front(&AI::DOWNFunction);
+    p.func.push_front(&AI::LEFTFunction);
 
     this->_paths.push_back(p); 
   }
   {
     Path	p;
 
-    p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
-    p.func.push_front(&AI::UPFunction);
-    p.func.push_front(&AI::RIGHTFunction);
+    p.elt.push_back(std::make_pair(0, 1));
+    p.elt.push_back(std::make_pair(0, 2));
+    p.elt.push_back(std::make_pair(-1, 2));
+    p.func.push_front(&AI::DOWNFunction);
+    p.func.push_front(&AI::DOWNFunction);
+    p.func.push_front(&AI::LEFTFunction);
 
     this->_paths.push_back(p); 
   }
   {
     Path	p;
 
-    p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
-    p.func.push_front(&AI::UPFunction);
-    p.func.push_front(&AI::RIGHTFunction);
+    p.elt.push_back(std::make_pair(-1, 0));
+    p.elt.push_back(std::make_pair(-1, 1));
+    p.func.push_front(&AI::LEFTFunction);
+    p.func.push_front(&AI::DOWNFunction);
 
     this->_paths.push_back(p); 
   }
   {
     Path	p;
 
-    p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
-    p.func.push_front(&AI::UPFunction);
-    p.func.push_front(&AI::RIGHTFunction);
+    p.elt.push_back(std::make_pair(-1, 0));
+    p.elt.push_back(std::make_pair(-2, 0));
+    p.elt.push_back(std::make_pair(-2, 1));
+    p.func.push_front(&AI::LEFTFunction);
+    p.func.push_front(&AI::LEFTFunction);
+    p.func.push_front(&AI::DOWNFunction);
 
     this->_paths.push_back(p); 
   }
   {
     Path	p;
 
-    p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
+    p.elt.push_back(std::make_pair(-1, 0));
+    p.elt.push_back(std::make_pair(-1, -1));
+    p.func.push_front(&AI::LEFTFunction);
     p.func.push_front(&AI::UPFunction);
-    p.func.push_front(&AI::RIGHTFunction);
 
     this->_paths.push_back(p); 
   }
   {
     Path	p;
 
-    p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
+    p.elt.push_back(std::make_pair(-1, 0));
+    p.elt.push_back(std::make_pair(-2, 0));
+    p.elt.push_back(std::make_pair(-2, -1));
+    p.func.push_front(&AI::LEFTFunction);
+    p.func.push_front(&AI::LEFTFunction);
     p.func.push_front(&AI::UPFunction);
-    p.func.push_front(&AI::RIGHTFunction);
 
     this->_paths.push_back(p); 
   }
-  {
-    Path	p;
-
-    p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
-    p.func.push_front(&AI::UPFunction);
-    p.func.push_front(&AI::RIGHTFunction);
-
-    this->_paths.push_back(p); 
-  }
-  {
-    Path	p;
-
-    p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
-    p.func.push_front(&AI::UPFunction);
-    p.func.push_front(&AI::RIGHTFunction);
-
-    this->_paths.push_back(p); 
-  }
-  {
-    Path	p;
-
-    p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
-    p.func.push_front(&AI::UPFunction);
-    p.func.push_front(&AI::RIGHTFunction);
-
-    this->_paths.push_back(p); 
-  }
-  {
-    Path	p;
-
-    p.elt.push_back(std::make_pair(0, -1));
-    p.elt.push_back(std::make_pair(1, -1));
-    p.func.push_front(&AI::UPFunction);
-    p.func.push_front(&AI::RIGHTFunction);
-
-    this->_paths.push_back(p); 
-  }*/
 }
 
 bool	AI::isWall(size_t x, size_t y) const
@@ -199,29 +215,29 @@ bool	AI::isBomb(size_t x, size_t y) const
 }
 
 // TODO : old code AIEasy
-  /*int				pos = 0;
+/*int				pos = 0;
   std::vector<Dir::eDir>	ref(static_cast<int>(Dir::LAST), Dir::LAST);
 
   if (this->isOk(this->_pos._x, this->_pos._y - 1))
-    ref[pos++] = Dir::NORTH;
+  ref[pos++] = Dir::NORTH;
   if (this->isOk(this->_pos._x, this->_pos._y + 1))
-    ref[pos++] = Dir::SOUTH;
+  ref[pos++] = Dir::SOUTH;
   if (this->isOk(this->_pos._x - 1, this->_pos._y))
-    ref[pos++] = Dir::WEST;
+  ref[pos++] = Dir::WEST;
   if (this->isOk(this->_pos._x + 1, this->_pos._y))
-    ref[pos++] = Dir::EAST;
+  ref[pos++] = Dir::EAST;
   if (pos)
-    {
-      pos = random() % pos;
-      if (ref[pos] == Dir::NORTH)
-	this->UPFunction(clock);
-      else if (ref[pos] == Dir::SOUTH)
-	this->DOWNFunction(clock);
-      else if (ref[pos] == Dir::WEST)
-	this->LEFTFunction(clock);
-      else
-	this->RIGHTFunction(clock);
-    }*/
+  {
+  pos = random() % pos;
+  if (ref[pos] == Dir::NORTH)
+  this->UPFunction(clock);
+  else if (ref[pos] == Dir::SOUTH)
+  this->DOWNFunction(clock);
+  else if (ref[pos] == Dir::WEST)
+  this->LEFTFunction(clock);
+  else
+  this->RIGHTFunction(clock);
+  }*/
 
 void	AI::AIEasy(gdl::GameClock const& clock)
 {
@@ -242,16 +258,16 @@ void	AI::AIHard(gdl::GameClock const&)
 bool	AI::nearBomb(void)
 {
   for (int y = -5; y < 5; ++y)
+  {
+    for (int x = -5; x < 5; ++x)
     {
-      for (int x = -5; x < 5; ++x)
-	{
-	  if (isBomb(this->_pos._x + x, this->_pos._y + y))
-	    {
-	      return this->pathFind(this->_pos._x + x, this->_pos._y + y,
-		 		    this->_pos._x, this->_pos._y);
-	    }
-	}
+      if (isBomb(this->_pos._x + x, this->_pos._y + y))
+      {
+	return this->pathFind(this->_pos._x + x, this->_pos._y + y,
+	    this->_pos._x, this->_pos._y);
+      }
     }
+  }
   return false;
 }
 
@@ -263,41 +279,31 @@ bool	AI::nearBonus(void)
 void	AI::waitState(void)
 {
   for (std::vector<std::pair<gtFunc, stFunc> >::iterator it = this->_EASYtable.begin();
-       it != this->_EASYtable.end();
-       ++it)
+      it != this->_EASYtable.end();
+      ++it)
+  {
+    if ((this->*(it->first))())
     {
-      if ((this->*(it->first))())
-  	{
-	  this->_state = it->second;
-  	  break;
-  	}
+      this->_state = it->second;
+      return;
     }
+  }
 }
 
 void	AI::surviveState(void)
 {
-  if (!nearBomb())
-    {
-      this->_state = &AI::waitState;
-      return;
-    }
-  std::cout << "je survie" << std::endl;
   this->_state = &AI::moveState;
 }
 
 void	AI::moveState(void)
 {
   if (this->_target.size() == 0)
-    {
-      std::cout << "je me repose" << std::endl;
-      this->_state = &AI::waitState;
-      return;
-    }
-  if ((this->*(this->_target.back()))(*this->_clock))
   {
-    std::cout << "je bouge" << std::endl;
-    this->_target.pop_back();
+    this->_state = &AI::waitState;
+    return;
   }
+  if ((this->*(this->_target.back()))(*this->_clock))
+    this->_target.pop_back();
 }
 
 void	AI::fetchState(void)
@@ -325,7 +331,6 @@ bool	AI::pathFind(size_t x, size_t y, size_t cx, size_t cy)
 	cy + it->elt[it->elt.size() - 1].second == y)
     {
       this->_target.insert(this->_target.begin(), it->func.begin(), it->func.end());
-      std::cout << "Je rempplis" << std::endl;
       return true;
     }
   }
@@ -340,10 +345,10 @@ void	AI::updateView(AIView const* v)
 void	AI::play(gdl::GameClock const& clock, gdl::Input&)
 {
   if ((this->_start >= 0) && (this->_startTimer <= clock.getTotalGameTime()))
-    {
-      --this->_start;
-      this->_startTimer = clock.getTotalGameTime() + 1.0f;
-    }
+  {
+    --this->_start;
+    this->_startTimer = clock.getTotalGameTime() + 1.0f;
+  }
   else if (this->_start < 0)
     (this->*_AIDifficulty[this->_type])(clock);
 }
