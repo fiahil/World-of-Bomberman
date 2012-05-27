@@ -6,7 +6,7 @@
 #include "MainMenu.hpp"
 
 MainMenu::MainMenu(GameManager& game)
-  : AMenu("Background.png", "Background.png", 0.0f, -1.0f. 0.0f, game)
+  : AMenu("Background.png", "Background.png", 0.0f, -1.0f, 0.0f, game)
 {
 
 }

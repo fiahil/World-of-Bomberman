@@ -6,11 +6,8 @@
 #ifndef		__MENU_MANAGER_HPP__
 #define		__MENU_MANAGER_HPP__
 
-#include <map>
 #include <string>
 #include <vector>
-#include <utility>
-#include <GL/gl.h>
 #include "AMenu.hpp"
 #include "enum.hpp"
 #include "AObj.hpp"
@@ -22,7 +19,7 @@ class	MenuManager : public AObj
 {
 public:
   MenuManager(int, int);
-  ~MenuManager();
+  virtual ~MenuManager();
 
 private:
   MenuManager();

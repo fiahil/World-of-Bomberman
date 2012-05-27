@@ -9,6 +9,7 @@
 #include "Human.hpp"
 #include "AI.hpp"
 #include "AIView.hpp"
+#include "MainMenu.hpp"
 #include "Menu.hpp"
 
 Menu::Menu()

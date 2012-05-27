@@ -7,6 +7,7 @@
 #define		__AMENU_HPP__
 
 #include <vector>
+#include <utility>
 #include "enum.hpp"
 #include "AObj.hpp"
 #include "Tag.hpp"
@@ -19,7 +20,7 @@ public:
   AMenu(std::string const&, std::string const, double, double, double, GameManager&);
   virtual ~AMenu();
 
-  typedef void (MenuManager::*keyPtrFunc)(gdl::GameClock const&);
+  typedef void (AMenu::*keyPtrFunc)(gdl::GameClock const&);
   typedef std::vector< std::pair<gdl::Keys::Key, keyPtrFunc> > vKeyEvent;
 
 protected:
@@ -64,6 +65,7 @@ public:
 
 public:
   void			setTextDraw(bool);
+  TokenMenu::eMenu	getContent() const;
 
 public:
   virtual double	getCenterX(void) const = 0;

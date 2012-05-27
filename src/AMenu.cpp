@@ -34,7 +34,7 @@ void			AMenu::initialize(void)
 
 void			AMenu::draw(void)
 {
-  this->_background->draw();
+  this->_background.draw();
   for (std::vector<Tag *>::iterator it = this->_tags.begin(); it != this->_tags.end(); ++it)
     (*it)->draw();
   if (this->_textDraw)
@@ -46,9 +46,9 @@ void			AMenu::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   if (clock.getTotalGameTime() >= this->_timer)
     {
-      for (vKeyEvent::iterator it =  this->_keyEvent.begin(); it != this->_keyEvent.end(); ++it)
-	if (input.isKeyDown((*it).first))
-	  (*it).second(clock);
+      for (size_t i = 0; i < this->_keyEvent.size(); ++i)
+	if (input.isKeyDown(this->_keyEvent[i].first))
+	  (this->*_keyEvent[i].second)(clock);
       for (std::vector<TextEdit *>::iterator it = this->_textEdit.begin(); it != this->_textEdit.end(); ++it)
 	(*it)->update(input);
       this->_timer = clock.getTotalGameTime() + 0.15f;
@@ -61,6 +61,11 @@ void			AMenu::setTextDraw(bool flag)
   this->_curToken = TokenMenu::LAST;
   for (std::vector<Tag *>::iterator it = this->_tags.begin(); it != this->_tags.end(); ++it)
     (*it)->setTextDraw(flag);
+}
+
+TokenMenu::eMenu	AMenu::getContent() const
+{
+  return this->_curToken;
 }
 
 void			AMenu::UpFunction(gdl::GameClock const&)

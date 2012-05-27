@@ -6,6 +6,8 @@
 #ifndef __MAINMENU_HPP__
 #define __MAINMENU_HPP__
 
+#include "AMenu.hpp"
+
 class MainMenu : public AMenu
 {
 public:

@@ -19,7 +19,8 @@ Tag::Tag(const std::string& normal,
     _highlit(_spriteHighlit.getWidth(), _spriteHighlit.getHeight(), _spritePos, _spriteHighlit),
     _normal(_spriteNormal.getWidth(), _spriteNormal.getHeight(), _spritePos, _spriteNormal),
     _status(status),
-    _content(content),
+    _textDraw(textDraw),
+    _content(content)
 {
 }
 
@@ -32,11 +33,6 @@ TokenMenu::eMenu	Tag::getContent(void) const
   return (this->_content);
 }
 
-const Point &		Tag::getSpritePos(void) const
-{
-  return this->_spritePos;
-}
-
 void			Tag::setStatus(bool status)
 {
   this->_status = status;
@@ -47,7 +43,7 @@ void			Tag::setTextDraw(bool status)
   this->_textDraw = status;
 }
 
-void			Tag::pushMatrix(void)
+void			Tag::pushMatrix(void) const
 {
   glMatrixMode(GL_PROJECTION);
   glPushMatrix();
@@ -55,7 +51,7 @@ void			Tag::pushMatrix(void)
   glPushMatrix();
 }
 
-void			Tag::popMatrix(void)
+void			Tag::popMatrix(void) const
 {
   glMatrixMode(GL_PROJECTION);
   glPopMatrix();
@@ -65,12 +61,9 @@ void			Tag::popMatrix(void)
 
 void			Tag::createText(const std::string & name, int size, int x, int y)
 {
-  gdl::Text *		text = new gdl::Text;
-
-  text->setText(name);
-  text->setSize(size);
-  text->setPosition(x, y);
-  this->_text = text;
+  this->_text.setText(name);
+  this->_text.setSize(size);
+  this->_text.setPosition(x, y);
 }
 
 void			Tag::draw(void)
@@ -86,7 +79,7 @@ void			Tag::draw(void)
 void			Tag::drawText(void)
 {
   this->pushMatrix();
-  this->_text->draw();
+  this->_text.draw();
   this->popMatrix();
 }
 
