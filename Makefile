@@ -34,12 +34,15 @@ SRC		= ./src/main.cpp	\
 		./src/Bonus.cpp		\
 		./src/ExplodedBomb.cpp	\
 		./src/DirWalker.cpp	\
+		./src/ProfileLoader.cpp	\
 		./src/MenuManager.cpp	\
 		./src/MapManager.cpp	\
 		./src/GameManager.cpp	\
 		./src/TextEdit.cpp	\
 		./src/AMenu.cpp		\
 		./src/MainMenu.cpp	\
+		./src/NewProfile.cpp	\
+		./src/LoadProfile.cpp	\
 		./src/MenuProfile.cpp	\
 		./src/Settings.cpp	\
 		./src/Tag.cpp		\
