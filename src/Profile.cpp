@@ -47,6 +47,11 @@ const Config &	Profile::getConfig(void) const
   return this->_config;
 }
 
+Config&		Profile::getConfig(void)
+{
+  return this->_config;
+}
+
 const std::string &		Profile::getName(void) const
 {
   return this->_name;

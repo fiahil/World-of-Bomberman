@@ -51,6 +51,7 @@ void			AMenu::update(gdl::GameClock const& clock, gdl::Input& input)
       (this->*_keyEvent[i].second)(clock);
   for (std::vector<TextEdit *>::iterator it = this->_textEdit.begin(); it != this->_textEdit.end(); ++it)
     (*it)->update(input);
+  this->doAction(clock, input);
 }
 
 void			AMenu::setTextDraw(bool flag)

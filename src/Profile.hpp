@@ -41,6 +41,7 @@ public:
   bool				getTuto(void) const;
   Skin::eSkin			getSkin(void) const;
   const Config &		getConfig(void) const;
+  Config&			getConfig(void);
   const std::string &		getName(void) const;
   const std::vector<size_t> &	getSkill(void) const;
   const std::vector<size_t> &	getStat(void) const;
