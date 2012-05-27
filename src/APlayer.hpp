@@ -38,7 +38,7 @@ class APlayer : public AObj
   typedef void	(APlayer::*t_rotFunc)();
 
 public:
-  APlayer(Map &);
+  APlayer(Map &, std::vector<bool>* = 0);
   virtual ~APlayer();
 
 private:
@@ -80,6 +80,7 @@ private:
   std::map<BonusType::eBonus, fBonus>	_bonusEffect;
   ExplodedBomb const*			_curEffect;
   std::vector<t_rotFunc>		_rotFuncMap;
+  std::vector<bool>*			_success;
 
 private:
   void	normalBombEffect(ExplodedBomb const*);
@@ -111,6 +112,8 @@ protected:
   ** virtual dans APlayer and specialise dans Human
   ** TODO implementer + rajouter a la liste des bind a catch
   */
+
+  virtual void	drawSuccess(Success::eSuccess);
 
 public:
   virtual void	play(gdl::GameClock const&, gdl::Input&) = 0;

@@ -38,8 +38,8 @@ public:
    * TODO: implement enum skill
    * TODO: implement std::vector<bool> achievements
    */
-  Human(Map &, const Config&);
-  virtual ~Human();
+  Human(Map &, const Config&, std::vector<bool>* = 0);
+  virtual ~Human(); // delete des surface
 
   virtual void	play(gdl::GameClock const&, gdl::Input&);
   virtual void	drawHUD(std::vector<gdl::Image>&, size_t, size_t, bool);
@@ -57,8 +57,12 @@ private:
   std::vector<Surface*>		_HUD;
   std::vector<ptrFunc>		_bombAff;
   std::vector<ptrJumpFunc>	_jumpDir;
-  //std::vector<size_t>&	_achievements;
-  //std::vector<size_t> const	_skill;
+  Success::eSuccess		_lastSuccess;
+  double		        _successTimer;
+  std::vector<Surface*>         _successHUD;
+
+protected:
+  virtual void	 drawSuccess(Success::eSuccess s);
 
 private:
   void		 SkillFunction(gdl::GameClock const&);

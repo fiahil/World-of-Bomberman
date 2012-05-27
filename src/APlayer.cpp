@@ -39,7 +39,7 @@ static const char*	g_refAnimName[State::LAST] = {
   "hit"
 };
 
-APlayer::APlayer(Map & map)
+APlayer::APlayer(Map & map, std::vector<bool>* success)
   : _map(map),
     _pv(100),
     _id(0),
@@ -60,7 +60,8 @@ APlayer::APlayer(Map & map)
     _dir(Dir::SOUTH),
     _indic(0.5f, 0.5f, 0.8f, _color),
     _curEffect(0),
-    _rotFuncMap(Dir::LAST, 0)
+    _rotFuncMap(Dir::LAST, 0),
+    _success(success)
 {
   this->_rotFuncMap[Dir::NORTH] = &APlayer::NORTHFunction;
   this->_rotFuncMap[Dir::SOUTH] = &APlayer::SOUTHFunction;
@@ -133,6 +134,11 @@ void		APlayer::draw(void)
 
 void		APlayer::drawHUD(std::vector<gdl::Image>&, size_t, size_t, bool)
 {
+}
+
+void		APlayer::drawSuccess(Success::eSuccess s)
+{
+  /* TOTO */ std::cout << "Achievement : " << s << std::endl;
 }
 
 void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
@@ -260,13 +266,31 @@ void		APlayer::BombBonusEffect()
 void		APlayer::LustBonusEffect()
 {
   if (this->_lustStack < 6)
-    ++this->_lustStack;
+    {
+      ++this->_lustStack;
+      if (this->_lustStack == 6 &&
+	  this->_success &&
+	  !this->_success->at(Success::LUST))
+	{
+	  this->_success->at(Success::LUST) = true;
+	  this->drawSuccess(Success::LUST);
+	}
+    }
 }
 
 void		APlayer::PowerBonusEffect()
 {
   if (this->_powerStack < 6)
-    ++this->_powerStack;
+    {
+      ++this->_powerStack;
+      if (this->_powerStack == 6 &&
+	  this->_success &&
+	  !this->_success->at(Success::POWER))
+	{
+	  this->_success->at(Success::POWER) = true;
+	  this->drawSuccess(Success::POWER);
+	}
+    }
 }
 
 void		APlayer::ShieldBonusEffect()
@@ -300,6 +324,11 @@ bool		APlayer::takeBonus(Bonus const* cur)
   if (this->_pos._x == cur->getPos()._x && this->_pos._y == cur->getPos()._y)
     {
       (this->*_bonusEffect[cur->getType()])();
+      if (this->_success && !this->_success->at(Success::BONUS))
+      	{
+      	  this->_success->at(Success::BONUS) = true;
+      	  this->drawSuccess(Success::BONUS);
+      	}
       return true;
     }
   return false;
@@ -424,6 +453,11 @@ std::string const&	APlayer::getTeamName() const
 void		APlayer::incNbKills()
 {
   ++this->_nbKills;
+  if (this->_success && !this->_success->at(Success::ONE_KILL))
+    {
+      this->_success->at(Success::ONE_KILL) = true;
+      this->drawSuccess(Success::ONE_KILL);
+    }
 }
 
 void		APlayer::UPFunction(gdl::GameClock const& clock)

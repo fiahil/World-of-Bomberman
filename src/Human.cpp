@@ -6,8 +6,8 @@
 #include <sstream>
 #include "Human.hpp"
 
-Human::Human(Map & map, const Config& conf)
-  : APlayer(map),
+Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
+  : APlayer(map, success),
     _mode(Input::GAME),
     _start(4),
     _startTimer(-1.0f),
@@ -18,7 +18,10 @@ Human::Human(Map & map, const Config& conf)
     _skillFunc(Skill::LAST, 0),
     _HUD(HUD::LAST, 0),
     _bombAff(BombType::LAST, 0),
-    _jumpDir(Dir::LAST, 0)
+    _jumpDir(Dir::LAST, 0),
+    _lastSuccess(Success::LAST),
+    _successTimer(-1.0f),
+    _successHUD(Success::LAST, 0)
 {
   this->_event[Input::GAME]._nb = 7;
   this->_event[Input::GAME].
@@ -84,6 +87,12 @@ Human::eventSt	Human::initStruct(gdl::Keys::Key key,
   return nwEl;
 }
 
+void            Human::drawSuccess(Success::eSuccess s)
+{
+  this->_lastSuccess = s;
+  this->_successTimer = -1.0f;
+}
+
 void		Human::SkillFunction(gdl::GameClock const& clock)
 {
   (this->*(this->_skillFunc[this->_skill]))(clock);
@@ -91,7 +100,12 @@ void		Human::SkillFunction(gdl::GameClock const& clock)
 
 void		Human::play(gdl::GameClock const& clock, gdl::Input& key)
 {
-  if ((static_cast<double>(clock.getTotalGameTime())) >= this->_skillTimer)
+  if (this->_successTimer == -1.0f && this->_lastSuccess != Success::LAST)
+    this->_successTimer = clock.getTotalGameTime() + 5.0f;
+  else if (this->_successTimer <= clock.getTotalGameTime())
+    this->_lastSuccess = Success::LAST;
+
+  if (clock.getTotalGameTime() >= this->_skillTimer)
     this->_skillUp = true;
   if (this->_start >= 0 && clock.getTotalGameTime() >= this->_startTimer)
     {
@@ -247,7 +261,7 @@ void		Human::jumpSkill(gdl::GameClock const& clock)
     if ((this->*(this->_jumpDir[this->_dir]))())
       {
 	this->_skillUp = false;
-	this->_skillTimer = current + 60.0;
+	this->_skillTimer = current + 30.0;
       }
 }
 
@@ -332,7 +346,32 @@ void		Human::drawHUD(std::vector<gdl::Image>& img,
 						 10.0f,
 						 hi - 80.0f,
 						 img[HUD::MEGABOMB_KO]);
+      // TODO tmp
+      this->_successHUD[Success::LUST] = new Surface(100.0f,
+						     70.0f,
+						     200.0f,
+						     hi - 80.0f,
+						     img[HUD::LUST]);
+      this->_successHUD[Success::BONUS] = new Surface(100.0f,
+						      70.0f,
+						      200.0f,
+						      hi - 80.0f,
+						      img[HUD::BOMB_KO]);
+      this->_successHUD[Success::POWER] = new Surface(100.0f,
+						      70.0f,
+						      200.0f,
+						      hi - 80.0f,
+						      img[HUD::POWER]);
+      this->_successHUD[Success::ONE_KILL] = new Surface(100.0f,
+							 70.0f,
+							 200.0f,
+							 hi - 80.0f,
+							 img[HUD::MEGABOMB_KO]);
     }
+
+  if (this->_lastSuccess != Success::LAST)
+    this->_successHUD[this->_lastSuccess]->draw();
+
   this->_HUD[HUD::LIFE_BAR]->draw();
 
   double	size = (this->_pv / 100.0f * 250.0f);
