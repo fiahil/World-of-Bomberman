@@ -3,6 +3,7 @@
  * 15.05.12
  */
 
+#include <iostream>
 #include <algorithm>
 #include "AMenu.hpp"
 

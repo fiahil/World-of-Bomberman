@@ -10,15 +10,13 @@
 
 MapManager::MapManager(void)
 {
-  this->setMaps();
+  //this->setMaps();
 }
 
 void			MapManager::setMaps(void)
 {
-  std::cout << "Before" << std::endl;
   DirWalker	_texasRanger("./Ressources/saves/");
-  std::cout << "After" << std::endl;
-
+  
   while (!(_texasRanger.isEnd()))
     {
       this->_maps.push_back(this->getMap(*_texasRanger.current()));
