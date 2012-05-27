@@ -132,7 +132,7 @@ void		APlayer::draw(void)
   glPopMatrix();
 }
 
-void		APlayer::drawHUD(std::vector<gdl::Image>&, size_t, size_t, bool)
+void		APlayer::drawHUD(std::vector<gdl::Image>&, size_t, size_t, size_t, bool)
 {
 }
 

@@ -206,18 +206,18 @@ void		MyGame::draw(void)
       this->_camera.setSplitScreenLeft();
       this->drawGame(this->_pl1);
       this->_camera.setViewHUD();
-      this->_pl1->drawHUD(this->_HUD, 800, 0, this->_EOG);
+      this->_pl1->drawHUD(this->_HUD, 800, 0, 0, this->_EOG);
       this->_camera.setSplitScreenRight();
       this->drawGame(this->_pl2);
       this->_camera.setViewHUD();
-      this->_pl2->drawHUD(this->_HUD, 800, 810, this->_EOG);
+      this->_pl2->drawHUD(this->_HUD, 800, 810, 0, this->_EOG);
     }
   else
     {
       this->_camera.setNormalScreen();
       this->drawGame(this->_pl1);
       this->_camera.setViewHUD();
-      this->_pl1->drawHUD(this->_HUD, 800, 0, this->_EOG);
+      this->_pl1->drawHUD(this->_HUD, 800, 0, 350, this->_EOG);
     }
 }
 

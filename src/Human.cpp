@@ -118,7 +118,7 @@ void		Human::play(gdl::GameClock const& clock, gdl::Input& key)
     }
 }
 
-void		Human::drawStart(size_t h, size_t lag)
+void		Human::drawStart(size_t h, size_t lag, size_t mode)
 {
   std::stringstream	ss;
 
@@ -127,18 +127,18 @@ void		Human::drawStart(size_t h, size_t lag)
     {
       ss << this->_start;
       this->_text.setText(ss.str());
-      this->_text.setPosition(lag + 390, h / 2);
+      this->_text.setPosition(lag + 390 + mode, h / 2);
       this->_text.draw();
     }
   else if (!this->_start)
     {
       this->_text.setText("Start");
-      this->_text.setPosition(lag + 260, h / 2);
+      this->_text.setPosition(lag + 260 + mode, h / 2);
       this->_text.draw();
     }
 }
 
-void		Human::drawEnd(size_t h, size_t lag, bool EOG)
+void		Human::drawEnd(size_t h, size_t lag, bool EOG, size_t mode)
 {
   this->_text.setSize(80);
   if (!this->_pv)
@@ -149,7 +149,7 @@ void		Human::drawEnd(size_t h, size_t lag, bool EOG)
       	  this->drawSuccess(Success::DIE);
       	}
      this->_text.setText("You Lose !");
-      this->_text.setPosition(lag + 200, h / 2);
+     this->_text.setPosition(lag + 200 + mode, h / 2);
       this->_text.draw();
      }
   else if (EOG)
@@ -285,6 +285,7 @@ void		Human::jumpSkill(gdl::GameClock const& clock)
 void		Human::drawHUD(std::vector<gdl::Image>& img,
 			       size_t hi,
 			       size_t lag,
+			       size_t mode,
 			       bool EOG)
 {
 
@@ -366,61 +367,61 @@ void		Human::drawHUD(std::vector<gdl::Image>& img,
 
       this->_HUD[HUD::SUCCESS_ONE_KILL] = new Surface(300.0f,
 						      81.0f,
-						      300.0f,
+						      300.0f + mode,
 						      hi - 90.0f,
 						      img[HUD::SUCCESS_ONE_KILL]);
 
       this->_HUD[HUD::SUCCESS_TUTO] = new Surface(300.0f,
 						  81.0f,
-						  300.0f,
+						  300.0f + mode,
 						  hi - 90.0f,
 						  img[HUD::SUCCESS_TUTO]);
 
       this->_HUD[HUD::SUCCESS_BONUS] = new Surface(300.0f,
 						   81.0f,
-						   300.0f,
+						   300.0f + mode,
 						   hi - 90.0f,
 						   img[HUD::SUCCESS_BONUS]);
 
       this->_HUD[HUD::SUCCESS_FIVE_KILL] = new Surface(300.0f,
 						       81.0f,
-						       300.0f,
+						       300.0f + mode,
 						       hi - 90.0f,
 						       img[HUD::SUCCESS_FIVE_KILL]);
 
       this->_HUD[HUD::SUCCESS_HARD_AI] = new Surface(300.0f,
 						     81.0f,
-						     300.0f,
+						     300.0f + mode,
 						     hi - 90.0f,
 						     img[HUD::SUCCESS_HARD_AI]);
 
       this->_HUD[HUD::SUCCESS_POWER] = new Surface(300.0f,
 						   81.0f,
-						   300.0f,
+						   300.0f + mode,
 						   hi - 90.0f,
 						   img[HUD::SUCCESS_POWER]);
 
       this->_HUD[HUD::SUCCESS_LUST] = new Surface(300.0f,
 						  81.0f,
-						  300.0f,
+						  300.0f + mode,
 						  hi - 90.0f,
 						  img[HUD::SUCCESS_LUST]);
 
       this->_HUD[HUD::SUCCESS_TP] = new Surface(300.0f,
 						81.0f,
-						300.0f,
+						300.0f + mode,
 						hi - 90.0f,
 						img[HUD::SUCCESS_TP]);
 
       this->_HUD[HUD::SUCCESS_DIE] = new Surface(300.0f,
 						 81.0f,
-						 300.0f,
+						 300.0f + mode,
 						 hi - 90.0f,
 						 img[HUD::SUCCESS_DIE]);
 
       this->_HUD[HUD::SUCCESS_FABULOUS] = new Surface(300.0f,
 						      81.0f,
-						      300.0f,
+						      300.0f + mode,
 						      hi - 90.0f,
 						      img[HUD::SUCCESS_FABULOUS]);
     }
@@ -491,6 +492,6 @@ void		Human::drawHUD(std::vector<gdl::Image>& img,
   this->_text.setText("kills");
   this->_text.setPosition(55.0f + lag, hi - 100.0f);
   this->_text.draw();
-  this->drawStart(hi, lag);
-  this->drawEnd(hi, lag, EOG);
+  this->drawStart(hi, lag, mode);
+  this->drawEnd(hi, lag, EOG, mode);
 }

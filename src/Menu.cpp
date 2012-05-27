@@ -39,16 +39,16 @@ void		Menu::initialize(void)
   newHum1->setSkin(Skin::SYLVANAS);
   newHum1->setTeamId(6);
   players.push_back(newHum1);
-  conf.setConfig(HumGame::UP, gdl::Keys::W);
-  conf.setConfig(HumGame::LEFT, gdl::Keys::A);
-  conf.setConfig(HumGame::DOWN, gdl::Keys::S);
-  conf.setConfig(HumGame::RIGHT, gdl::Keys::D);
-  conf.setConfig(HumGame::ATTACK, gdl::Keys::Space);
-  APlayer *newHum2 = new Human(*map, conf, _aP2);
-  newHum2->setColor(6);
-  newHum2->setTeamId(7);
-  newHum2->setSkin(Skin::VARIANT);
-  players.push_back(newHum2);
+  // conf.setConfig(HumGame::UP, gdl::Keys::W);
+  // conf.setConfig(HumGame::LEFT, gdl::Keys::A);
+  // conf.setConfig(HumGame::DOWN, gdl::Keys::S);
+  // conf.setConfig(HumGame::RIGHT, gdl::Keys::D);
+  // conf.setConfig(HumGame::ATTACK, gdl::Keys::Space);
+  // APlayer *newHum2 = new Human(*map, conf, _aP2);
+  // newHum2->setColor(6);
+  // newHum2->setTeamId(7);
+  // newHum2->setSkin(Skin::VARIANT);
+  //  players.push_back(newHum2);
   for (int i = 10; i < 20; ++i)
     {
       APlayer *newAI = new AI(AIType::EASY, *map);
@@ -56,9 +56,9 @@ void		Menu::initialize(void)
       newAI->setTeamId(i);
       players.push_back(newAI);
     }
-  Match*	m = new Match(map, false, GameMode::VERSUS, players);
+  Match*	m = new Match(map, false, GameMode::SOLO, players);
 
-  this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0], players[1]); // TODO
+  this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0], 0); // TODO
   this->_game->initialize();
 }
 
