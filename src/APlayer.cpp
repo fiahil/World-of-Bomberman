@@ -59,9 +59,9 @@ APlayer::APlayer(Map & map, std::vector<bool>* success)
     _state(State::STAND),
     _dir(Dir::SOUTH),
     _indic(0.5f, 0.5f, 0.8f, _color),
+    _success(success),
     _curEffect(0),
-    _rotFuncMap(Dir::LAST, 0),
-    _success(success)
+    _rotFuncMap(Dir::LAST, 0)
 {
   this->_rotFuncMap[Dir::NORTH] = &APlayer::NORTHFunction;
   this->_rotFuncMap[Dir::SOUTH] = &APlayer::SOUTHFunction;
@@ -162,24 +162,30 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
   if (this->_shield)
     {
       if (this->_shieldTimer < 0.0f)
-	this->_shieldTimer = static_cast<double>(clock.getTotalGameTime() + 10.0f);
-      else if (this->_shieldTimer <= static_cast<double>(clock.getTotalGameTime()))
+	this->_shieldTimer = clock.getTotalGameTime() + 10.0f;
+      else if (this->_shieldTimer <= clock.getTotalGameTime())
 	{
 	  this->_shield = false;
 	  this->_shieldTimer = -1.0f;
 	}
     }
 
-  if ((static_cast<double>(clock.getTotalGameTime())) >=
+  if ((clock.getTotalGameTime()) >=
       this->_timers[HumGame::ATTACK])
     this->_canAttack = true;
   else
     this->_canAttack = false;
 
-  if (this->_tpTimer <= static_cast<double>(clock.getTotalGameTime()))
+  if (this->_tpTimer <= clock.getTotalGameTime())
     {
-      this->_tpTimer = static_cast<double>(clock.getTotalGameTime() + 3.0f);
-      this->_map.teleport(this->_pos);
+      this->_tpTimer = clock.getTotalGameTime() + 3.0f;
+      if (this->_map.teleport(this->_pos) &&
+	  this->_success &&
+	  !this->_success->at(Success::TP))
+	{
+	  this->_success->at(Success::TP) = true;
+	  this->drawSuccess(Success::TP);
+	}
     }
 }
 

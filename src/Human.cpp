@@ -20,8 +20,7 @@ Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
     _bombAff(BombType::LAST, 0),
     _jumpDir(Dir::LAST, 0),
     _lastSuccess(Success::LAST),
-    _successTimer(-1.0f),
-    _successHUD(Success::LAST, 0)
+    _successTimer(-1.0f)
 {
   this->_event[Input::GAME]._nb = 7;
   this->_event[Input::GAME].
@@ -144,15 +143,33 @@ void		Human::drawEnd(size_t h, size_t lag, bool EOG)
   this->_text.setSize(80);
   if (!this->_pv)
     {
-      this->_text.setText("You Lose !");
+      if (this->_success && !this->_success->at(Success::DIE))
+      	{
+      	  this->_success->at(Success::DIE) = true;
+      	  this->drawSuccess(Success::DIE);
+      	}
+     this->_text.setText("You Lose !");
       this->_text.setPosition(lag + 200, h / 2);
       this->_text.draw();
-    }
+     }
   else if (EOG)
     {
-      this->_text.setText("You Win !");
+      if (this->_nbKills >= 5 && this->_success && !this->_success->at(Success::FIVE_KILL))
+      	{
+      	  this->_success->at(Success::FIVE_KILL) = true;
+      	  this->drawSuccess(Success::FIVE_KILL);
+      	}
+
+      if (this->_pv >= 100 && this->_success && !this->_success->at(Success::FABULOUS))
+      	{
+      	  this->_success->at(Success::FABULOUS) = true;
+      	  this->drawSuccess(Success::FABULOUS);
+      	}
+
+    this->_text.setText("You Win !");
       this->_text.setPosition(lag + 200, h / 2);
       this->_text.draw();
+
     }
 }
 
@@ -346,31 +363,70 @@ void		Human::drawHUD(std::vector<gdl::Image>& img,
 						 10.0f,
 						 hi - 80.0f,
 						 img[HUD::MEGABOMB_KO]);
-      // TODO tmp
-      this->_successHUD[Success::LUST] = new Surface(100.0f,
-						     70.0f,
-						     200.0f,
-						     hi - 80.0f,
-						     img[HUD::LUST]);
-      this->_successHUD[Success::BONUS] = new Surface(100.0f,
-						      70.0f,
-						      200.0f,
-						      hi - 80.0f,
-						      img[HUD::BOMB_KO]);
-      this->_successHUD[Success::POWER] = new Surface(100.0f,
-						      70.0f,
-						      200.0f,
-						      hi - 80.0f,
-						      img[HUD::POWER]);
-      this->_successHUD[Success::ONE_KILL] = new Surface(100.0f,
-							 70.0f,
-							 200.0f,
-							 hi - 80.0f,
-							 img[HUD::MEGABOMB_KO]);
+
+      this->_HUD[HUD::SUCCESS_ONE_KILL] = new Surface(300.0f,
+						      81.0f,
+						      300.0f,
+						      hi - 90.0f,
+						      img[HUD::SUCCESS_ONE_KILL]);
+
+      this->_HUD[HUD::SUCCESS_TUTO] = new Surface(300.0f,
+						  81.0f,
+						  300.0f,
+						  hi - 90.0f,
+						  img[HUD::SUCCESS_TUTO]);
+
+      this->_HUD[HUD::SUCCESS_BONUS] = new Surface(300.0f,
+						   81.0f,
+						   300.0f,
+						   hi - 90.0f,
+						   img[HUD::SUCCESS_BONUS]);
+
+      this->_HUD[HUD::SUCCESS_FIVE_KILL] = new Surface(300.0f,
+						       81.0f,
+						       300.0f,
+						       hi - 90.0f,
+						       img[HUD::SUCCESS_FIVE_KILL]);
+
+      this->_HUD[HUD::SUCCESS_HARD_AI] = new Surface(300.0f,
+						     81.0f,
+						     300.0f,
+						     hi - 90.0f,
+						     img[HUD::SUCCESS_HARD_AI]);
+
+      this->_HUD[HUD::SUCCESS_POWER] = new Surface(300.0f,
+						   81.0f,
+						   300.0f,
+						   hi - 90.0f,
+						   img[HUD::SUCCESS_POWER]);
+
+      this->_HUD[HUD::SUCCESS_LUST] = new Surface(300.0f,
+						  81.0f,
+						  300.0f,
+						  hi - 90.0f,
+						  img[HUD::SUCCESS_LUST]);
+
+      this->_HUD[HUD::SUCCESS_TP] = new Surface(300.0f,
+						81.0f,
+						300.0f,
+						hi - 90.0f,
+						img[HUD::SUCCESS_TP]);
+
+      this->_HUD[HUD::SUCCESS_DIE] = new Surface(300.0f,
+						 81.0f,
+						 300.0f,
+						 hi - 90.0f,
+						 img[HUD::SUCCESS_DIE]);
+
+      this->_HUD[HUD::SUCCESS_FABULOUS] = new Surface(300.0f,
+						      81.0f,
+						      300.0f,
+						      hi - 90.0f,
+						      img[HUD::SUCCESS_FABULOUS]);
     }
 
   if (this->_lastSuccess != Success::LAST)
-    this->_successHUD[this->_lastSuccess]->draw();
+    this->_HUD[this->_lastSuccess + HUD::SUCCESS_ONE_KILL]->draw();
 
   this->_HUD[HUD::LIFE_BAR]->draw();
 

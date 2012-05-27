@@ -117,12 +117,15 @@ Map::~Map()
 {
 }
 
-void		Map::teleport(Point & pos) const
+bool		Map::teleport(Point & pos) const
 {
   if (pos == this->_tp._pos1)
     pos = this->_tp._pos2;
   else if (pos == this->_tp._pos2)
     pos = this->_tp._pos1;
+  else
+    return false;
+  return true;
 }
 
 void		Map::initialize(void)

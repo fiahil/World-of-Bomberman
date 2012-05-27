@@ -71,6 +71,7 @@ protected:
   Dir::eDir		_dir;
   gdl::Model		_model;
   Pyramid		_indic;
+  std::vector<bool>*	_success;
 
 private:
   gdl::Model		_Mbomb;
@@ -80,7 +81,6 @@ private:
   std::map<BonusType::eBonus, fBonus>	_bonusEffect;
   ExplodedBomb const*			_curEffect;
   std::vector<t_rotFunc>		_rotFuncMap;
-  std::vector<bool>*			_success;
 
 private:
   void	normalBombEffect(ExplodedBomb const*);

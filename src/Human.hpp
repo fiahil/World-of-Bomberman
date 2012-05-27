@@ -59,7 +59,6 @@ private:
   std::vector<ptrJumpFunc>	_jumpDir;
   Success::eSuccess		_lastSuccess;
   double		        _successTimer;
-  std::vector<Surface*>         _successHUD;
 
 protected:
   virtual void	 drawSuccess(Success::eSuccess s);
