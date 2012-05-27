@@ -11,7 +11,7 @@ LoadProfile::LoadProfile(GameManager& game)
     gotta see how to display with scrolling
   */
 
-  this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::MAINMENU, 727.5f, 0.0f, 1325.0f));
+  // this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::MAINMENU, 800.0f, 0.0f, 1100.0f));
 }
 
 LoadProfile::~LoadProfile(void)
@@ -30,5 +30,4 @@ double	LoadProfile::getCenterY() const
 
 void		LoadProfile::doAction(gdl::GameClock const&, gdl::Input&)
 {
-  
 }

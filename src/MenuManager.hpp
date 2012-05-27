@@ -15,6 +15,8 @@
 #include "Profile.hpp"
 #include "MapManager.hpp"
 
+#define	CAM_DISTANCE	(1200.0f)
+
 class	MenuManager : public AObj
 {
 public:

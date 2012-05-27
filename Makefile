@@ -5,48 +5,52 @@
 ## Login   <lemonn_v@epitech.net>
 ## 
 ## Started on  Mon Apr 23 18:20:16 2012 vincent lemonnier
-## Last update Sun May 27 17:33:19 2012 vincent lemonnier
+## Last update Sun May 27 19:57:30 2012 nicolas magere
 ##
 
 NAME		= bomberman
 
-SRC		= ./src/main.cpp	\
-		./src/AIView.cpp	\
-		./src/Camera.cpp	\
-		./src/Menu.cpp		\
-		./src/MyGame.cpp	\
-		./src/AObj.cpp		\
-		./src/Point.cpp		\
-		./src/Vector.cpp	\
-		./src/Cube.cpp		\
-		./src/Surface.cpp	\
-		./src/Plane.cpp		\
-		./src/Map.cpp		\
-		./src/APlayer.cpp	\
-		./src/Human.cpp		\
-		./src/AI.cpp		\
-		./src/Config.cpp	\
-		./src/Profile.cpp	\
-		./src/Match.cpp		\
-		./src/Pyramid.cpp	\
-		./src/ContentColor.cpp	\
-		./src/Bomb.cpp		\
-		./src/Bonus.cpp		\
-		./src/ExplodedBomb.cpp	\
-		./src/DirWalker.cpp	\
-		./src/ProfileLoader.cpp	\
-		./src/MenuManager.cpp	\
-		./src/MapManager.cpp	\
-		./src/GameManager.cpp	\
-		./src/TextEdit.cpp	\
-		./src/AMenu.cpp		\
-		./src/MainMenu.cpp	\
-		./src/NewProfile.cpp	\
-		./src/LoadProfile.cpp	\
-		./src/MenuProfile.cpp	\
-		./src/Settings.cpp	\
-		./src/Tag.cpp		\
-		./src/ProfileManager.cpp
+SRC		= ./src/main.cpp	 \
+		./src/AIView.cpp	 \
+		./src/Camera.cpp	 \
+		./src/Menu.cpp		 \
+		./src/MyGame.cpp	 \
+		./src/AObj.cpp		 \
+		./src/Point.cpp		 \
+		./src/Vector.cpp	 \
+		./src/Cube.cpp		 \
+		./src/Surface.cpp	 \
+		./src/Plane.cpp		 \
+		./src/Map.cpp		 \
+		./src/APlayer.cpp	 \
+		./src/Human.cpp		 \
+		./src/AI.cpp		 \
+		./src/Config.cpp	 \
+		./src/Profile.cpp	 \
+		./src/Match.cpp		 \
+		./src/Pyramid.cpp	 \
+		./src/ContentColor.cpp	 \
+		./src/Bomb.cpp		 \
+		./src/Bonus.cpp		 \
+		./src/ExplodedBomb.cpp	 \
+		./src/DirWalker.cpp	 \
+		./src/ProfileLoader.cpp	 \
+		./src/ProfileManager.cpp \
+		./src/MapManager.cpp	 \
+		./src/GameManager.cpp	 \
+		./src/TextEdit.cpp	 \
+		./src/MenuManager.cpp	 \
+		./src/AMenu.cpp		 \
+		./src/MainMenu.cpp	 \
+		./src/LoadProfile.cpp	 \
+		./src/LoadSave.cpp	 \
+		./src/GameChoose.cpp	 \
+		./src/MenuIA.cpp	 \
+		./src/MenuMap.cpp	 \
+		./src/NewProfile.cpp	 \
+		./src/MenuProfile.cpp	 \
+		./src/Settings.cpp	 \
+		./src/Tag.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 

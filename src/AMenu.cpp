@@ -31,7 +31,8 @@ void			AMenu::initialize(void)
 {
   for (std::vector<Tag *>::iterator it = this->_tags.begin(); it != this->_tags.end(); ++it)
     (*it)->initialize();
-  this->_tags[this->_cursor]->setStatus(true);
+  if (!this->_tags.empty())
+    this->_tags[this->_cursor]->setStatus(true);
 }
 
 void			AMenu::draw(void)
