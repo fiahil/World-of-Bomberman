@@ -16,7 +16,7 @@
 
 MenuManager::MenuManager(int w, int h)
   : _menu(TokenMenu::LAST, 0),
-    _curMenu(TokenMenu::LOADPROFILE),
+    _curMenu(TokenMenu::MAINMENU),
     _camera(w, h, 0, 0)
 {
   // this->_maps = this->_mapManager.getAll();
@@ -37,7 +37,7 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::LOADPROFILE] = new LoadProfile(this->_gameManager);
   this->_menu[TokenMenu::LOADPROFILE]->initialize();
   this->_menu[this->_curMenu]->setTextDraw(true);
-  this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), 600.0f,
+  this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), 1000.0f/*600.0f*/,
 		       this->_menu[this->_curMenu]->getCenterY());
 }
 
@@ -61,7 +61,7 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
-      this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), 600.0f,
+      this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), 1000.0f/*600.0f*/,
 			   this->_menu[this->_curMenu]->getCenterY());
     }
   else
