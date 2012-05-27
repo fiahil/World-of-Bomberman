@@ -18,10 +18,17 @@ MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
     _camera(1600, 800, pl1, pl2),
     _pl1(pl1),
     _pl2(pl2),
+    _view(0),
     _EOG(false),
     _EOGTimer(-1.0f),
     _HUD(HUD::LAST)
 {
+}
+
+template <typename T>
+void		MyGame::drawer(T* val)
+{
+  val->draw();
 }
 
 void		MyGame::initialize(void)
@@ -49,7 +56,22 @@ void		MyGame::update(void)
 {
   Bomb*		newBomb;
 
+  if (this->_view)
+    delete this->_view;
+  this->_view = new AIView(*this->_match._map, this->_match._bombs);
+
+  for (std::vector<APlayer*>::iterator it = this->_match._players.begin();
+       it != this->_match._players.end();
+       ++it)
+    {
+      AI	*tmp;
+
+      if ((tmp = dynamic_cast<AI*>(*it)))
+	tmp->updateView(this->_view);
+    }
+
   this->_match._map->update(this->_clock, this->_input);
+
   for (std::list<Bomb*>::iterator it = this->_match._bombs.begin();
        it != this->_match._bombs.end();)
     {

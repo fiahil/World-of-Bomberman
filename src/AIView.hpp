@@ -4,13 +4,15 @@
  */
 
 #include <vector>
+#include <list>
+#include "Bomb.hpp"
 #include "Map.hpp"
 #include "enum.hpp"
 
 #ifndef __AIVIEW_HPP__
 #define __AIVIEW_HPP__
 
-#define AIPOS(px, py) (((this->_len * (py))) + (px))
+#define AIPOS(px, py) (((this->_x * (py))) + (px))
 
 struct View
 {
@@ -23,21 +25,21 @@ struct View
 
 class AIView
 {
+public:
+  AIView(Map const&, std::list<Bomb*> const&);
 
-  public:
-    AIView(Map const&);
+private:
+  size_t		_x;
+  size_t		_y;
+  std::vector<View>	_view;
 
-  private:
-    size_t		_len;
-    std::vector<View>	_view;
+public:
+  View const&	at(size_t x, size_t y) const;
+  size_t	getX(void) const;
+  size_t	getY(void) const;
 
-  public:
-    View const&	at(size_t x, size_t y) const;
-    size_t	getLen(void) const;
-
-  private:
-    static View		ctor(char const c);
-
+private:
+  static View	ctor(char const c);
 };
 
 #endif /* __AIVIEW_HPP__ */

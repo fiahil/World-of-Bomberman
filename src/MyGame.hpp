@@ -8,6 +8,8 @@
 
 #include <GameClock.hpp>
 #include <Input.hpp>
+#include "AI.hpp"
+#include "AIView.hpp"
 #include "Camera.hpp"
 #include "Match.hpp"
 
@@ -23,6 +25,7 @@ private:
   Camera		_camera;
   APlayer*		_pl1;
   APlayer*		_pl2;
+  AIView*		_view;
   std::list<APlayer*>	_dead;
   bool			_EOG;
   double		_EOGTimer;
@@ -33,14 +36,12 @@ private:
 
 private:
   template<typename T>
-  static void	drawer(T* val)
-    {
-      val->draw();
-    }
-
+  static void	drawer(T* val);
   void		drawGame(APlayer*) const;
 
 public:
+  bool		operator()(Bomb*);
+
   void		initialize(void);
   void		update(void);
   void		draw(void);
