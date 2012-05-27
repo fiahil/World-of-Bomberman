@@ -53,6 +53,7 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::SETTINGS]->initialize();
   this->_menu[TokenMenu::NEWPROFILE] = new NewProfile(this->_gameManager);
   this->_menu[TokenMenu::NEWPROFILE]->initialize();
+
   this->_menu[this->_curMenu]->setTextDraw(true);
   this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
 		       this->_menu[this->_curMenu]->getCenterY());
@@ -70,7 +71,7 @@ void	MenuManager::draw(void)
 void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   TokenMenu::eMenu	tmp;
-  
+
   if ((tmp = this->_menu[this->_curMenu]->getContent()) != TokenMenu::LAST)
     {
       if (tmp == TokenMenu::QUIT) //TODO
@@ -78,8 +79,8 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
-      this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-			   this->_menu[this->_curMenu]->getCenterY());
+      this->_camera.setPosScroll(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
+				 this->_menu[this->_curMenu]->getCenterY());
     }
   else
     this->_menu[this->_curMenu]->update(clock, input);
