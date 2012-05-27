@@ -42,7 +42,7 @@ public:
   virtual ~Human(); // delete des surface
 
   virtual void	play(gdl::GameClock const&, gdl::Input&);
-  virtual void	drawHUD(std::vector<gdl::Image>&, size_t, size_t, bool);
+  virtual void	drawHUD(std::vector<gdl::Image>&, size_t, size_t, size_t, bool);
 
 private:
   Input::eMode			_mode;
@@ -66,8 +66,8 @@ protected:
 private:
   bool		 SkillFunction(gdl::GameClock const&);
   Human::eventSt initStruct(gdl::Keys::Key, HumGame::eAction, actionFunc) const;
-  void		 drawStart(size_t, size_t);
-  void		 drawEnd(size_t, size_t, bool);
+  void		 drawStart(size_t, size_t, size_t);
+  void		 drawEnd(size_t, size_t, bool, size_t);
 
   void		 affNormalBomb() const;
   void		 affBigBomb() const;

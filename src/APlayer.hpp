@@ -120,7 +120,7 @@ public:
   virtual void	initialize(void);
   virtual void	draw(void);
   virtual void	update(gdl::GameClock const& clock, gdl::Input& input);
-  virtual void	drawHUD(std::vector<gdl::Image>&, size_t, size_t, bool);
+  virtual void	drawHUD(std::vector<gdl::Image>&, size_t, size_t, size_t, bool);
 
   Bomb*		isAttack();
   void		takeDamage(ExplodedBomb const*);
