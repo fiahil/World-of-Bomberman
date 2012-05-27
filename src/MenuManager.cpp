@@ -9,11 +9,12 @@
 #include <algorithm>
 #include "MenuManager.hpp"
 #include "MainMenu.hpp"
+#include "MenuProfile.hpp"
 #include "ProfileManager.hpp"
 
 MenuManager::MenuManager(int w, int h)
   : _menu(TokenMenu::LAST, 0),
-    _curMenu(TokenMenu::MAINMENU),
+    _curMenu(TokenMenu::PROFILE),
     _camera(w, h, 0, 0)
 {
   // this->_maps = this->_mapManager.getAll();
@@ -26,7 +27,9 @@ MenuManager::~MenuManager()
 void	MenuManager::initialize(void)
 {
   this->_menu[TokenMenu::MAINMENU] = new MainMenu(this->_gameManager);
-  this->_menu[this->_curMenu]->initialize();
+  this->_menu[TokenMenu::MAINMENU]->initialize();
+  this->_menu[TokenMenu::PROFILE] = new MenuProfile(this->_gameManager);
+  this->_menu[TokenMenu::PROFILE]->initialize();
   this->_menu[this->_curMenu]->setTextDraw(true);
   this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), 600.0f,
 		       this->_menu[this->_curMenu]->getCenterY());

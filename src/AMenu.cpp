@@ -14,7 +14,8 @@ AMenu::AMenu(std::string const& normal, std::string const select,
     _cursor(0),
     _timers(3, -1.0f),
     _gameManager(game),
-    _curToken(TokenMenu::LAST)
+    _curToken(TokenMenu::LAST),
+    _changeMenu(false)
 {
   this->_keyEvent.push_back(std::make_pair(gdl::Keys::Up, &AMenu::UpFunction));
   this->_keyEvent.push_back(std::make_pair(gdl::Keys::Down, &AMenu::DownFunction));
@@ -55,6 +56,7 @@ void			AMenu::update(gdl::GameClock const& clock, gdl::Input& input)
 void			AMenu::setTextDraw(bool flag)
 {
   this->_textDraw = flag;
+  this->_changeMenu = true;
   this->_curToken = TokenMenu::LAST;
   for (std::vector<Tag *>::iterator it = this->_tags.begin(); it != this->_tags.end(); ++it)
     (*it)->setTextDraw(flag);
@@ -95,7 +97,10 @@ void			AMenu::SelectFunction(gdl::GameClock const& clock)
 {
   if (clock.getTotalGameTime() >= this->_timers[2])
     {
-      this->_curToken = this->_tags[this->_cursor]->getContent();
+      if (!this->_changeMenu)
+	this->_curToken = this->_tags[this->_cursor]->getContent();
+      else
+	this->_changeMenu = false;
       this->_timers[2] = clock.getTotalGameTime() + 0.15f;
     }
 }
