@@ -20,7 +20,7 @@ LoadProfile::~LoadProfile(void)
 
 double	LoadProfile::getCenterX() const
 {
-  return (800.0f);
+  return (900.0f);
 }
 
 double	LoadProfile::getCenterY() const
