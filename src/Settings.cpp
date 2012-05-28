@@ -33,9 +33,17 @@ static const int	g_refPos[6][2] = {
   {450, 500},
 };
 
+static const HumGame::eAction	g_refAction[6] = {
+  HumGame::UP,
+  HumGame::DOWN,
+  HumGame::LEFT,
+  HumGame::RIGHT,
+  HumGame::ATTACK,
+  HumGame::SKILL
+};
+
 Settings::Settings(GameManager& game)
   : AMenu("menu/Background.png", "menu/Background.png", 1600.0f, -1.0f, 1800.0f, game),
-    _conf(game._mainProfile->getConfig()),
     _oneTime(-1.0f),
     _selected(false)
 {
@@ -77,18 +85,8 @@ double	Settings::getCenterY() const
 
 void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-  //this->_tags[1]->createText(g_ref[this->_conf.getConfig(HumGame::UP)], 20, 800, 450);
-
-  /*this->_tags[3]->createText(g_ref[this->_conf.getConfig(HumGame::DOWN)], 20, 800, 470);
-
-  this->_tags[5]->createText(g_ref[this->_conf.getConfig(HumGame::LEFT)], 20, 800, 490);
-
-  this->_tags[7]->createText(g_ref[this->_conf.getConfig(HumGame::RIGHT)], 20, 800, 510);
-
-  this->_tags[9]->createText(g_ref[this->_conf.getConfig(HumGame::ATTACK)], 20, 800, 530);
-
-  this->_tags[11]->createText(g_ref[this->_conf.getConfig(HumGame::SKILL)], 20, 800, 550);*/
-
+  Config&	conf = this->_gameManager._mainProfile->getConfig();
+    
   if (this->_oneTime > 0.0f)
     {
       if (clock.getTotalGameTime() >= this->_oneTime)
@@ -96,6 +94,12 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
     }
   else if (!this->_selected)
     {
+      this->_tags[1]->createText(g_ref[conf.getConfig(g_refAction[0])], 20, g_refPos[0][0], g_refPos[0][1]);
+      this->_tags[3]->createText(g_ref[conf.getConfig(g_refAction[1])], 20, g_refPos[1][0], g_refPos[1][1]);
+      this->_tags[5]->createText(g_ref[conf.getConfig(g_refAction[2])], 20, g_refPos[2][0], g_refPos[2][1]);
+      this->_tags[7]->createText(g_ref[conf.getConfig(g_refAction[3])], 20, g_refPos[3][0], g_refPos[3][1]);
+      this->_tags[9]->createText(g_ref[conf.getConfig(g_refAction[4])], 20, g_refPos[4][0], g_refPos[4][1]);
+      this->_tags[11]->createText(g_ref[conf.getConfig(g_refAction[5])], 20, g_refPos[5][0], g_refPos[5][1]);
       for (size_t i = 0; i < this->_keyEvent.size(); ++i)
 	if (input.isKeyDown(this->_keyEvent[i].first))
 	  (this->*_keyEvent[i].second)(clock);
@@ -123,10 +127,8 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
       if (g_ref[i][0] && input.isKeyDown(static_cast<gdl::Keys::Key>(i)))
 	{
 	  this->_selected = false;
+	  conf.setConfig(g_refAction[(this->_cursor + 1) / 2], static_cast<gdl::Keys::Key>(i));
 	  this->_oneTime = clock.getTotalGameTime() + 0.15f;
-	  this->_tags[this->_cursor + 1]->createText("", 20,
-						     g_refPos[(this->_cursor + 1) / 2][0],
-						     g_refPos[(this->_cursor + 1) / 2][1]);
 	  break;
 	}
 
