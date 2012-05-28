@@ -10,9 +10,10 @@
 #include "ProfileManager.hpp"
 #include "MenuManager.hpp"
 #include "MainMenu.hpp"
+#include "Credits.hpp"
 #include "LoadProfile.hpp"
 #include "LoadSave.hpp"
-// #include "LoadMap.hpp"
+#include "LoadMap.hpp"
 #include "GameChoose.hpp"
 #include "MenuIA.hpp"
 // #include "Team.hpp"
@@ -37,10 +38,14 @@ void	MenuManager::initialize(void)
 {
   this->_menu[TokenMenu::MAINMENU] = new MainMenu(this->_gameManager);
   this->_menu[TokenMenu::MAINMENU]->initialize();
+  this->_menu[TokenMenu::CREDITS] = new Credits(this->_gameManager);
+  this->_menu[TokenMenu::CREDITS]->initialize();
   this->_menu[TokenMenu::LOADPROFILE] = new LoadProfile(this->_gameManager);
   this->_menu[TokenMenu::LOADPROFILE]->initialize();
   this->_menu[TokenMenu::LOADSAVE] = new LoadSave(this->_gameManager);
   this->_menu[TokenMenu::LOADSAVE]->initialize();
+  this->_menu[TokenMenu::LOADMAP] = new LoadMap(this->_gameManager);
+  this->_menu[TokenMenu::LOADMAP]->initialize();
   this->_menu[TokenMenu::GAMECHOOSE] = new GameChoose(this->_gameManager);
   this->_menu[TokenMenu::GAMECHOOSE]->initialize();
   this->_menu[TokenMenu::IA] = new MenuIA(this->_gameManager);
@@ -79,8 +84,8 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
-      this->_camera.setPosScroll(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-				 this->_menu[this->_curMenu]->getCenterY());
+      this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
+			   this->_menu[this->_curMenu]->getCenterY());
     }
   else
     this->_menu[this->_curMenu]->update(clock, input);

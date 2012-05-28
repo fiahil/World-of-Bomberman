@@ -122,6 +122,7 @@ struct TokenMenu
   enum eMenu
     {
       MAINMENU,
+      CREDITS,
       LOADPROFILE,
       LOADSAVE,
       LOADMAP,

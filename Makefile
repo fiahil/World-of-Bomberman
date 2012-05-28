@@ -5,7 +5,7 @@
 ## Login   <lemonn_v@epitech.net>
 ## 
 ## Started on  Mon Apr 23 18:20:16 2012 vincent lemonnier
-## Last update Sun May 27 19:57:30 2012 nicolas magere
+## Last update Mon May 28 12:01:35 2012 nicolas magere
 ##
 
 NAME		= bomberman
@@ -42,8 +42,10 @@ SRC		= ./src/main.cpp	 \
 		./src/MenuManager.cpp	 \
 		./src/AMenu.cpp		 \
 		./src/MainMenu.cpp	 \
+		./src/Credits.cpp	 \
 		./src/LoadProfile.cpp	 \
 		./src/LoadSave.cpp	 \
+		./src/LoadMap.cpp	 \
 		./src/GameChoose.cpp	 \
 		./src/MenuIA.cpp	 \
 		./src/MenuMap.cpp	 \
