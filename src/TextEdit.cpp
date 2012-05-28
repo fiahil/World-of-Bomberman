@@ -3,10 +3,11 @@
  * 12.05.2012
  */
 
+#include <GL/gl.h>
 #include "TextEdit.hpp"
 
 TextEdit::TextEdit()
-  : _str(""), _x(0), _y(0), _size(20)
+  : _str(""), _x(0), _y(0), _size(20), _sizeMax(20), _timers(48, -1.0f)
 {
   this->_ref[gdl::Keys::A] = "a";
   this->_ref[gdl::Keys::B] = "b";
@@ -58,7 +59,7 @@ TextEdit::TextEdit()
 }
 
 TextEdit::TextEdit(int x, int y, std::string const& str)
-  : _str(str), _x(x), _y(y), _size(20)
+  : _str(str), _x(x), _y(y), _size(20), _sizeMax(20), _timers(47, -1.0f)
 {
   this->_ref[gdl::Keys::A] = "a";
   this->_ref[gdl::Keys::B] = "b";
@@ -114,21 +115,38 @@ TextEdit::~TextEdit()
 
 }
 
-void	TextEdit::update(gdl::Input& input)
+void	TextEdit::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-  for (std::map<gdl::Keys::Key, std::string>::iterator it = this->_ref.begin(); it != this->_ref.end(); ++it)
-    if (input.isKeyDown(it->first))
-      this->_str += it->second;
-  if (input.isKeyDown(gdl::Keys::Back))
-    this->_str.resize(this->_str.size() - 1);
+  int	nb = 0;
+
+  if (this->_str.size() < this->_sizeMax)
+    for (std::map<gdl::Keys::Key, std::string>::iterator it = this->_ref.begin(); it != this->_ref.end(); ++it, ++nb)
+      if (input.isKeyDown(it->first) && clock.getTotalGameTime() >= this->_timers[nb])
+	{
+	  this->_str += it->second;
+	  this->_timers[nb] = clock.getTotalGameTime() + 0.15f;
+	}
+  if (input.isKeyDown(gdl::Keys::Back) && !this->_str.empty() && clock.getTotalGameTime() >= this->_timers[47])
+    {
+      this->_str.resize(this->_str.size() - 1);
+      this->_timers[47] = clock.getTotalGameTime() + 0.08f;
+    }
 }
 
 void	TextEdit::draw()
 {
+  glMatrixMode(GL_PROJECTION);
+  glPushMatrix();
+  glMatrixMode(GL_MODELVIEW);
+  glPushMatrix();
   this->_text.setText(this->_str);
   this->_text.setSize(this->_size);
   this->_text.setPosition(this->_x, this->_y);
   this->_text.draw();
+  glMatrixMode(GL_PROJECTION);
+  glPopMatrix();
+  glMatrixMode(GL_MODELVIEW);
+  glPopMatrix();
 }
 
 void	TextEdit::setPos(int x, int y)
@@ -155,4 +173,9 @@ void	TextEdit::setSize(int size)
 int	TextEdit::getSize() const
 {
   return this->_size;
+}
+
+void	TextEdit::setSizeMax(size_t nb)
+{
+  this->_sizeMax = nb;
 }

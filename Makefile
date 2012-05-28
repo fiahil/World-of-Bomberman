@@ -5,7 +5,6 @@
 ## Login   <lemonn_v@epitech.net>
 ## 
 ## Started on  Mon Apr 23 18:20:16 2012 vincent lemonnier
-## Last update Mon May 28 12:01:35 2012 nicolas magere
 ##
 
 NAME		= bomberman
@@ -52,6 +51,7 @@ SRC		= ./src/main.cpp	 \
 		./src/NewProfile.cpp	 \
 		./src/MenuProfile.cpp	 \
 		./src/Settings.cpp	 \
+		./src/TeamMenu.cpp	 \
 		./src/Tag.cpp
 
 OBJ		= $(SRC:.cpp=.o)
