@@ -134,6 +134,7 @@ struct TokenMenu
       PROFILE,
       SETTINGS,
       QUIT,
+      CREATEGAME,
       LAST
     };
 };

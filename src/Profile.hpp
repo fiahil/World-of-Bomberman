@@ -29,24 +29,24 @@ private:
   Skin::eSkin	_skin;
   std::string	_name;
 
-  std::vector<size_t>	_skill;
-  std::vector<size_t>	_stat;
-  std::vector<size_t>	_achievement;
-  std::vector<size_t>	_save;
+  std::vector<size_t>		_skill;
+  std::vector<size_t>		_stat;
+  std::vector<size_t>		_achievement;
+  std::vector<std::string>	_save;
 
 public:
-  size_t			getId(void) const;
-  size_t			getLvl(void) const;
-  size_t			getXp(void) const;
-  bool				getTuto(void) const;
-  Skin::eSkin			getSkin(void) const;
-  const Config &		getConfig(void) const;
-  Config&			getConfig(void);
-  const std::string &		getName(void) const;
-  const std::vector<size_t> &	getSkill(void) const;
-  const std::vector<size_t> &	getStat(void) const;
-  const std::vector<size_t> &	getAchievement(void) const;
-  const std::vector<size_t> &	getSave(void) const;
+  size_t				getId(void) const;
+  size_t				getLvl(void) const;
+  size_t				getXp(void) const;
+  bool					getTuto(void) const;
+  Skin::eSkin				getSkin(void) const;
+  const Config &			getConfig(void) const;
+  Config&				getConfig(void);
+  const std::string &			getName(void) const;
+  const std::vector<size_t> &		getSkill(void) const;
+  const std::vector<size_t> &		getStat(void) const;
+  const std::vector<size_t> &		getAchievement(void) const;
+  const std::vector<std::string> &	getSave(void) const;
 
 public:
   void		setId(size_t);
@@ -63,8 +63,8 @@ public:
   void		addStat(size_t);
   void		setAchievement(const std::vector<size_t> &);
   void		addAchievement(size_t);
-  void		setSave(const std::vector<size_t> &);
-  void		addSave(size_t);
+  void		setSave(const std::vector<std::string> &);
+  void		addSave(const std::string *);
   void		setAllProfile(size_t, size_t,
 			      bool, Skin::eSkin,
 			      const Config &,
@@ -72,7 +72,7 @@ public:
 			      const std::vector<size_t> &,
 			      const std::vector<size_t> &,
 			      const std::vector<size_t> &,
-			      const std::vector<size_t> &);
+			      const std::vector<std::string> &);
 };
 
 #endif	 /*__PROFILE_HPP__ */

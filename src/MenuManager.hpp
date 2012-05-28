@@ -13,6 +13,7 @@
 #include "AObj.hpp"
 #include "Camera.hpp"
 #include "Profile.hpp"
+#include "MyGame.hpp"
 #include "MapManager.hpp"
 
 #define	CAM_DISTANCE	(600.0f)
@@ -36,6 +37,7 @@ private:
   std::vector<Profile *>	_profile;
   std::vector<Map *>		_map;
   GameManager			_gameManager;
+  bool				_createGame;
 
   /*
     Heritance from AObj
@@ -44,6 +46,7 @@ public:
   virtual void		draw(void);
   virtual void		initialize(void);
   virtual void		update(gdl::GameClock const&, gdl::Input&);
+  MyGame*		createGame(gdl::GameClock&, gdl::Input&);
 };
 
 #endif		/* __MENU_MANAGEMENT_HPP__ */
