@@ -84,6 +84,8 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
+      this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
+			   this->_menu[this->_curMenu]->getCenterY());
 
       /*this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), 2500.0f600.0f,
 			   this->_menu[this->_curMenu]->getCenterY());*/
