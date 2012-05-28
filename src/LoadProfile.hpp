@@ -12,7 +12,7 @@
 
 class	LoadProfile : public AMenu
 {
-  private:
+private:
   std::vector<Profile *>	_profiles;
   ProfileLoader			_profileLoader;
 

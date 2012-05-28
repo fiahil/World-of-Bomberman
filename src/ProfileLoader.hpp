@@ -13,16 +13,16 @@
 class	ProfileLoader
 {
 private:
+  std::string			_folder;
   ProfileManager		_pm;
   std::vector<Profile *>	_profiles;
   std::vector<std::string>	_names;
 
   bool	isNum(std::string) const;
-  int	idToString(std::string);
+  int	idToInt(std::string);
 
 public:
   ProfileLoader(void);
-  ~ProfileLoader(void);
 
   void					setProfiles(void);
   const std::vector<Profile *>&		getProfiles(void) const;
