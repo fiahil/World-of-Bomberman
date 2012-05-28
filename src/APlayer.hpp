@@ -72,6 +72,7 @@ protected:
   gdl::Model		_model;
   Pyramid		_indic;
   std::vector<bool>*	_success;
+  APlayer*		_lastHitId;
 
 private:
   gdl::Model		_Mbomb;
@@ -138,6 +139,8 @@ public:
   size_t		getType()	const;
   std::string const&	getName()	const;
   std::string const&	getTeamName()	const;
+  APlayer*		getLastHitId()	const;
+  bool			isUnanim()	const;
 
   void		setPv(int);
   void		setWeapon(BombType::eBomb);
@@ -152,6 +155,9 @@ public:
   void		setType(size_t);
   void		incNbKills();
   void		slowMotion();
+
+  void	operator()(ExplodedBomb*);
+
 };
 
 #else
