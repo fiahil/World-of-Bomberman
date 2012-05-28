@@ -12,6 +12,8 @@ class Settings : public AMenu
 {
 private:
   Config&	_conf;
+  double	_oneTime;
+  bool		_selected;
 
 public:
   Settings(GameManager&);
