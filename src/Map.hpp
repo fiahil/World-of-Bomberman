@@ -34,6 +34,7 @@ public:
   Map(size_t x, size_t y, std::string const& map);
   virtual ~Map();
 
+
 private:
   Map(const Map& oldMap);
 
@@ -71,6 +72,7 @@ public:
   void		explode(Pattern&, Pattern&, std::list<Bonus*>&);
   void		setOptimization(Point const*);
   void		setSpawnTeam(std::vector<APlayer*>&);
+
   std::string const&	getMap(void) const;
   size_t		getX(void) const;
   size_t		getY(void) const;

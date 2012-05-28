@@ -7,6 +7,7 @@
 #include <sstream>
 #include <iostream>
 #include <cstdlib>
+#include <stdexcept>
 #include "Map.hpp"
 
 
@@ -22,13 +23,13 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
     background(0),
     _modelBonus(BonusType::LAST)
 {
+
+  if (this->_x < 10 || this->_y < 10)
+    throw std::runtime_error("Invalid map");
+
   this->_expFunc['1'] = &Map::explodeUnBreakable;
   this->_expFunc['2'] = &Map::explodeBreakable;
   this->_expFunc['3'] = &Map::explodeBreakable;
-
-  this->_modelBreak['t'] = gdl::Model::load("models/Set_tp.FBX"); // tp
-  this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
-  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
 
   for (size_t i = 0; i < (x * y); ++i)
     this->_map += "0";
@@ -67,23 +68,24 @@ Map::Map(std::string const& file)
   this->_expFunc['2'] = &Map::explodeBreakable;
   this->_expFunc['3'] = &Map::explodeBreakable;
 
-  this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX");
-  this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
-  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
-
   infile.open (file.c_str(), std::ifstream::in);
   if (!infile)
-    throw std::exception(); /* TODO BETTER */
+    throw std::runtime_error("cannot open file");
   std::getline(infile, swap);
   ss << swap;
   ss >> this->_x;
   ss >> this->_y;
+
+  if (this->_x < 10 || this->_y < 10)
+    throw std::runtime_error("Invalid map");
+
   while (!infile.eof()) {
     std::getline(infile, swap);
     this->_map += swap;
   }
   if (this->_map.size() != (this->_x * this->_y))
-    throw std::exception(); /* TODO BETTER */
+    throw std::runtime_error("Invalid map");
+
   this->_map[POS(1, 1)] = '0'; //TODO
 
   this->_tp._pos1.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
@@ -99,13 +101,12 @@ Map::Map(size_t x, size_t y, std::string const& map)
     _modelBonus(BonusType::LAST)
 {
 
+  if (this->_x < 10 || this->_y < 10)
+    throw std::runtime_error("Invalid map");
+
   this->_expFunc['1'] = &Map::explodeUnBreakable;
   this->_expFunc['2'] = &Map::explodeBreakable;
   this->_expFunc['3'] = &Map::explodeBreakable;
-
-  this->_modelBreak['t'] = gdl::Model::load("models/Bomb_rox.FBX");
-  this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
-  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
 
   this->_tp._pos1.setPos(random() % this->_x, random() % this->_y);
   this->_tp._pos2.setPos(random() % this->_x, random() % this->_y);
@@ -132,6 +133,10 @@ bool		Map::teleport(Point & pos) const
 
 void		Map::initialize(void)
 {
+  this->_modelBreak['t'] = gdl::Model::load("models/Set_tp.FBX"); // tp
+  this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
+  this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
+
   this->_break = gdl::Image::load("textures/break.jpg");
   this->_unbreak = gdl::Image::load("textures/unbreak.jpg");
   this->_background = gdl::Image::load("textures/background.jpg");
@@ -207,8 +212,18 @@ void		Map::draw(void)
   glPopMatrix();
 }
 
-void		Map::update(gdl::GameClock const&, gdl::Input&)
+void		Map::update(gdl::GameClock const& clock, gdl::Input&)
 {
+  this->_modelBonus[0].play("Take 001");
+  this->_modelBonus[0].update(clock);
+  this->_modelBonus[1].play("Take 001");
+  this->_modelBonus[1].update(clock);
+  this->_modelBonus[2].play("Take 001");
+  this->_modelBonus[2].update(clock);
+  this->_modelBonus[3].play("Take 001");
+  this->_modelBonus[3].update(clock);
+  this->_modelBonus[4].play("Take 001");
+  this->_modelBonus[4].update(clock);
 }
 
 bool		Map::canMoveAt(size_t x, size_t y) const

@@ -5,7 +5,7 @@
 ## Login   <lemonn_v@epitech.net>
 ## 
 ## Started on  Mon Apr 23 18:20:16 2012 vincent lemonnier
-## Last update Sat May 26 20:00:47 2012 vincent lemonnier
+## Last update Mon May 28 18:45:23 2012 benjamin businaro
 ##
 
 NAME		= bomberman
@@ -43,7 +43,7 @@ INCLUDES	= -I./lib/libgdl_gl-2012.3/include -I./lib/libfmodex/inc -I./src -I./Se
 
 CXX		= g++
 
-CXXFLAGS	= -Wall -Wextra -O3 $(INCLUDES)
+CXXFLAGS	= -g -Wall -Wextra -O3 $(INCLUDES)
 
 LDFLAGS		= -lGL -lGLU -lgdl_gl -lserial -lfmodex				     \
 		-L./lib/libgdl_gl-2012.3/lib -L./lib/libserial -L./lib/libfmodex/lib \

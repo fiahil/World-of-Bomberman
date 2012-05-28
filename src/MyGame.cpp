@@ -63,13 +63,105 @@ void		MyGame::initialize(void)
   this->_HUD[HUD::SUCCESS_FABULOUS] = gdl::Image::load("textures/fabulous_success.png");
 }
 
+bool		MyGame::updateBomb(Bomb *b)
+{
+  if (b->explode())
+    {
+      this->_match._explodedBombs.push_back(b->createExplodedBomb());
+      delete b;
+      return true;
+    }
+  else
+    {
+      b->update(this->_clock, this->_input);
+      return false;
+    }
+}
+
+bool		MyGame::updateExplodedBomb(ExplodedBomb *b)
+{
+  if (b->isEOE())
+    {
+      delete b;
+      return true;
+    }
+  else
+    {
+      b->update(this->_clock, this->_input);
+      this->_match._map->explode(b->getPatternReal(),
+				 b->getPatternFinal(),
+				 this->_match._bonus);
+      return false;
+    }
+}
+
+bool		MyGame::updatePlayer(APlayer *p)
+{
+  std::for_each< std::list<ExplodedBomb*>::iterator, APlayer& >
+    (
+     this->_match._explodedBombs.begin(),
+     this->_match._explodedBombs.end(),
+     (*p)
+     );
+
+     if (p->getPv() == 0)
+       {
+	 if (p->getLastHitId() != p)
+	   p->getLastHitId()->incNbKills();
+	 this->_dead.push_back(p);
+	 return true;
+       }
+
+     for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
+	  it != this->_match._bonus.end();
+	  ++it)
+       {
+	 if (p->takeBonus((*it)))
+	   {
+	     delete (*it);
+	     this->_match._bonus.erase(it);
+	     break;
+	   }
+       }
+
+     if (p->getTeamId() != this->_match._players.front()->getTeamId())
+       this->_EOG = false;
+
+     if (this->_pl1 == p || this->_pl2 == p)
+    	++this->_nb;
+
+     Bomb*		newBomb;
+
+     p->update(this->_clock, this->_input);
+     if ((newBomb = p->isAttack()))
+       this->_match._bombs.push_back(newBomb);
+     return false;
+  }
+
+bool		MyGame::updateDeadPlayer(APlayer* p)
+{
+  if (p->isUnanim())
+    {
+      this->_cadaver.push_back(p);
+      return true;
+    }
+  else
+    {
+      p->update(this->_clock, this->_input);
+      return false;
+    }
+}
+
 void		MyGame::update(void)
 {
-  Bomb*		newBomb;
+
+  this->_nb = 0;
 
   if (this->_view)
     delete this->_view;
   this->_view = new AIView(*this->_match._map, this->_match._bombs);
+
+  this->_match._map->update(this->_clock, this->_input);
 
   for (std::vector<APlayer*>::iterator it = this->_match._players.begin();
        it != this->_match._players.end();
@@ -81,95 +173,26 @@ void		MyGame::update(void)
 	tmp->updateView(this->_view);
     }
 
-  this->_match._map->update(this->_clock, this->_input);
+  this->removeIf
+    (this->_match._bombs,
+    &MyGame::updateBomb);
 
-  for (std::list<Bomb*>::iterator it = this->_match._bombs.begin();
-       it != this->_match._bombs.end();)
-    {
-      if ((*it)->explode())
-	{
-	  this->_match._explodedBombs.push_back((*it)->createExplodedBomb());
-	  delete (*it);
-	  it = this->_match._bombs.erase(it);
-	}
-      else
-	{
-	  (*it)->update(this->_clock, this->_input);
-	  ++it;
-	}
-    }
-  for (std::list<ExplodedBomb*>::iterator it = this->_match._explodedBombs.begin();
-       it != this->_match._explodedBombs.end();)
-    {
-      if ((*it)->isEOE())
-	{
-	  delete (*it);
-	  it = this->_match._explodedBombs.erase(it);
-	}
-      else
-	{
-	  (*it)->update(this->_clock, this->_input);
-	  this->_match._map->explode((*it)->getPatternReal(),
-				     (*it)->getPatternFinal(),
-				     this->_match._bonus);
-	  for (std::vector<APlayer*>::iterator i = this->_match._players.begin();
-	       i != this->_match._players.end();)
-	    {
-	      (*i)->takeDamage((*it));
-	      if ((*i)->getPv() == 0)
-		{
-		  if ((*it)->getPlayer() != (*i))
-		    (*it)->getPlayer()->incNbKills();
-		  this->_dead.push_back((*i));
-		  i = this->_match._players.erase(i);
-		}
-	      else
-		++i;
-	    }
-	  ++it;
-	}
-    }
-  for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
-       it != this->_match._bonus.end();
-       ++it)
-    {
-      (*it)->update(this->_clock, this->_input);
-    }
-
-  int		 nb = 0;
+  this->removeIf
+    (this->_match._explodedBombs,
+     &MyGame::updateExplodedBomb);
 
   this->_EOG = true;
-  for (unsigned int i = 0;
-       i < this->_match._players.size();
-       ++i)
-    {
-      for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
-	   it != this->_match._bonus.end();
-	   ++it)
-	{
-	  if (this->_match._players[i]->takeBonus((*it)))
-	    {
-	      delete (*it);
-	      this->_match._bonus.erase(it);
-	      break;
-	    }
-	}
-      if (this->_match._players[i]->getTeamId() != this->_match._players[0]->getTeamId())
-	this->_EOG = false;
-      if (this->_pl1 == this->_match._players[i] || this->_pl2 == this->_match._players[i])
-	++nb;
-      this->_match._players[i]->update(this->_clock, this->_input);
-      if ((newBomb = this->_match._players[i]->isAttack()))
-	this->_match._bombs.push_back(newBomb);
-    }
-  if (!nb || (this->_match._gameMode == GameMode::COOP && nb < 2))
+  this->removeIf
+    (this->_match._players,
+     &MyGame::updatePlayer);
+
+  if (!this->_nb || (this->_match._gameMode == GameMode::COOP && this->_nb < 2))
     this->_EOG = true;
-  for (std::list<APlayer*>::iterator it = this->_dead.begin();
-       it != this->_dead.end();
-       ++it)
-    {
-      (*it)->update(this->_clock, this->_input);
-    }
+
+  this->removeIf
+    (this->_dead,
+     &MyGame::updateDeadPlayer);
+
   if (this->_EOG && this->_EOGTimer < 0.0f)
     this->_EOGTimer = this->_clock.getTotalGameTime() + 3.0f;
 }

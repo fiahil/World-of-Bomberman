@@ -27,8 +27,10 @@ private:
   APlayer*		_pl2;
   AIView*		_view;
   std::list<APlayer*>	_dead;
+  std::list<APlayer*>	_cadaver;
   bool			_EOG;
   double		_EOGTimer;
+  size_t		_nb;
 
   std::vector<gdl::Image>	_HUD;
   gdl::Model			_Mbomb;
@@ -47,6 +49,27 @@ public:
   void		draw(void);
   void		unload(void);
   bool		isEOG(void) const;
+
+private:
+  template<typename T, typename U>
+  void    removeIf(T & cont, U rmFunc)
+  {
+    typename T::iterator           it = cont.begin();
+
+    while (it != cont.end())
+      {
+	if ((this->*rmFunc)(*it))
+	  it = cont.erase(it);
+	else
+	  ++it;
+      }
+  }
+
+  bool	updateBomb(Bomb *);
+  bool	updateExplodedBomb(ExplodedBomb *);
+  bool	updatePlayer(APlayer *);
+  bool	updateDeadPlayer(APlayer* p);
+
 };
 
 #else

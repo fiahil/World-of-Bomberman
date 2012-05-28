@@ -36,7 +36,7 @@ void		Menu::initialize(void)
   Config conf;
   conf.setConfig(HumGame::ATTACK, gdl::Keys::RControl);
   APlayer *newHum1 = new Human(*map, conf, _aP1);
-  newHum1->setSkin(Skin::SYLVANAS);
+  newHum1->setSkin(Skin::VARIANT);
   newHum1->setTeamId(6);
   players.push_back(newHum1);
   // conf.setConfig(HumGame::UP, gdl::Keys::W);
@@ -49,7 +49,7 @@ void		Menu::initialize(void)
   // newHum2->setTeamId(7);
   // newHum2->setSkin(Skin::VARIANT);
   //  players.push_back(newHum2);
-  for (int i = 10; i < 20; ++i)
+  for (int i = 0; i < 10; ++i)
     {
       APlayer *newAI = new AI(AIType::EASY, *map);
       newAI->setColor(7);

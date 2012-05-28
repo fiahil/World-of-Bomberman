@@ -607,3 +607,20 @@ void		APlayer::EASTFunction()
 {
   glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
 }
+
+APlayer*	APlayer::getLastHitId()	const
+{
+  return this->_lastHitId;
+}
+
+
+void		APlayer::operator()(ExplodedBomb* b)
+{
+  this->_lastHitId = b->getPlayer();
+  this->takeDamage(b);
+}
+
+bool		APlayer::isUnanim() const
+{
+  return this->_model.anim_is_ended(g_refAnimName[this->_state]);
+}
