@@ -54,6 +54,7 @@ public:
   */
 public:
   TokenMenu::eMenu	getContent(void) const;
+  bool			getStatus(void) const;
   void			setStatus(bool);
   void			setTextDraw(bool);
   void			createText(const std::string &, int, int, int);

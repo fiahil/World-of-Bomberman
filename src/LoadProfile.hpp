@@ -13,11 +13,12 @@
 class	LoadProfile : public AMenu
 {
 private:
-  std::vector<Profile *>	_profiles;
   ProfileLoader			_profileLoader;
 
+  int		getCurTagPos(void) const;
+
 public:
-  LoadProfile(GameManager&);
+  LoadProfile(GameManager&, std::vector<Profile *>&);
   virtual ~LoadProfile(void);
 
   virtual double	getCenterX() const;

@@ -64,7 +64,7 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::SETTINGS]->initialize();
   this->_menu[TokenMenu::NEWPROFILE] = new NewProfile(this->_gameManager);
   this->_menu[TokenMenu::NEWPROFILE]->initialize();
-  this->_menu[TokenMenu::LOADPROFILE] = new LoadProfile(this->_gameManager);
+  this->_menu[TokenMenu::LOADPROFILE] = new LoadProfile(this->_gameManager, this->_profile);
   this->_menu[TokenMenu::LOADPROFILE]->initialize();
   this->_menu[TokenMenu::TEAM] = new TeamMenu(this->_gameManager);
   this->_menu[TokenMenu::TEAM]->initialize();
