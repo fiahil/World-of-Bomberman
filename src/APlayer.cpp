@@ -156,16 +156,6 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
     this->_state = State::STAND;
   }
   this->_model.play(g_refAnimName[this->_state]);
-  /*
-  if ((this->_state == State::RUN ||
-       this->_state == State::STAND ||
-       this->_state == State::HIT) &&
-      this->_model.anim_is_ended(g_refAnimName[this->_state]))
-    {
-      this->_state = State::STAND;
-      this->_model.play(g_refAnimName[this->_state]);
-    }
-    */
 
   this->_model.update(clock);
   this->slowMotion();
