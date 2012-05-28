@@ -25,12 +25,12 @@ static const char*	g_refBomb[BombType::LAST] = {
 };
 
 static const infoAnim	g_refAnim[Skin::LAST] = {
-  {3, 137, 186, 206, 418, 548, 331, 368, 256, 281},
-  {144, 410, 3, 19, 535, 584, 69, 94, 460, 485},
-  {169, 236, 3, 19, 69, 119, 285, 310, 360, 385},
-  {153, 184, 236, 256, 309, 362, 3, 28, 78, 103},
-  {69, 103, 3, 19, 302, 364, 227, 252, 152, 177},
-  {69, 119, 3, 19, 244, 269, 319, 344, 169, 194},
+  {3, 137, 186, 205, 418, 548, 331, 368, 256, 281},
+  {144, 410, 3, 18, 535, 584, 69, 94, 460, 485},
+  {169, 236, 3, 18, 69, 119, 285, 310, 360, 385},
+  {153, 184, 236, 255, 309, 362, 3, 28, 78, 103},
+  {69, 103, 3, 18, 302, 364, 227, 252, 152, 177},
+  {69, 119, 3, 18, 244, 269, 319, 344, 169, 194},
 };
 
 static const char*	g_refAnimName[State::LAST] = {
@@ -145,17 +145,25 @@ void		APlayer::drawSuccess(Success::eSuccess s)
 
 void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 {
+  this->_moving = false;
   if (this->_pv)
     this->play(clock, input);
 
+  if (!this->_moving)
+  {
+    this->_state = State::STAND;
+    this->_model.play(g_refAnimName[this->_state]);
+  }
+  /*
   if ((this->_state == State::RUN ||
        this->_state == State::STAND ||
        this->_state == State::HIT) &&
       this->_model.anim_is_ended(g_refAnimName[this->_state]))
     {
-      //this->_state = State::STAND;
+      this->_state = State::STAND;
       this->_model.play(g_refAnimName[this->_state]);
     }
+    */
 
   this->_model.update(clock);
   this->slowMotion();
@@ -482,6 +490,7 @@ bool		APlayer::UPFunction(gdl::GameClock const& clock)
 	  this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
 	  this->_state = State::RUN;
 	  this->_model.play(g_refAnimName[this->_state]);
+	  this->_moving = true;
 	  return true;
 	}
     }
@@ -502,6 +511,7 @@ bool		APlayer::LEFTFunction(gdl::GameClock const& clock)
 	  this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
 	  this->_state = State::RUN;
 	  this->_model.play(g_refAnimName[this->_state]);
+	  this->_moving = true;
 	  return true;
     }
   }
@@ -522,6 +532,7 @@ bool		APlayer::RIGHTFunction(gdl::GameClock const& clock)
       this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
       this->_state = State::RUN;
       this->_model.play(g_refAnimName[this->_state]);
+      this->_moving = true;
       return true;
     }
   }
@@ -542,6 +553,7 @@ bool		APlayer::DOWNFunction(gdl::GameClock const& clock)
       this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
       this->_state = State::RUN;
       this->_model.play(g_refAnimName[this->_state]);
+      this->_moving = true;
       return true;
     }
   }
@@ -562,6 +574,7 @@ bool		APlayer::ATTACKFunction(gdl::GameClock const& clock)
     this->_attack = true;
     this->_state = State::ATTACK;
     this->_model.play(g_refAnimName[this->_state]);
+    this->_moving = true;
     return true;
   }
   return false;

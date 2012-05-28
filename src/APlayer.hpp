@@ -57,6 +57,7 @@ protected:
   bool			_attack;
   bool			_canAttack;
   bool			_shield;
+  bool			_moving;
   double		_shieldTimer;
   double		_tpTimer;
   size_t		_lustStack;
