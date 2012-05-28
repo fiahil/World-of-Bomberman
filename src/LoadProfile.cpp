@@ -11,12 +11,17 @@ LoadProfile::LoadProfile(GameManager& game)
     gotta see how to display with scrolling
   */
 
-  /*while (unsigned int i = 0; i < this->_profiles.size(); ++i)
+  unsigned int	i;
+  for (i = 0; i < this->_profiles.size(); ++i)
     {
       if (!i)
-	this->_tags.push_back(new Tag("menu/BlankNormal.png", "menu/BlankHighlit.png", false, false, TokenMenu::));
-	}*/
-  this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::MAINMENU, 800.0f, 0.0f, 1100.0f));
+	this->_tags.push_back(new Tag("menu/BlankNormal.png", "menu/BlankHighlit.png", true, false, TokenMenu::PROFILE, 800.0f, 0.0f, 1000.0f));
+      else
+	this->_tags.push_back(new Tag("menu/BlankNormal.png", "menu/BlankHighlit.png", false, false, TokenMenu::PROFILE, 800.0f, 0.0f, (1000.0f + (50.0f * i))));
+      this->_tags.back()->setTextDraw(true);
+      this->_tags.back()->createText(this->_profiles[i]->getName(), 30.0f, 830.0f, (65.0f + (45.0f * i)));
+    }
+  this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::MAINMENU, 800.0f, 0.0f, (1000.0f + (50.0f * i))));
 }
 
 LoadProfile::~LoadProfile(void)
