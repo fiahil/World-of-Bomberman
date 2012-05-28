@@ -53,7 +53,7 @@ void				ProfileLoader::setProfiles(void)
     }
 }
 
-const std::vector<Profile *>&	ProfileLoader::getProfiles(void) const
+const std::vector<Profile *>&	ProfileLoader::getProfiles(void)
 {
   return (this->_profiles);
 }
