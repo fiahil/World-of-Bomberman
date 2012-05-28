@@ -15,6 +15,8 @@ class	LoadProfile : public AMenu
 private:
   ProfileLoader			_profileLoader;
 
+  int		getCurTagPos(void) const;
+
 public:
   LoadProfile(GameManager&, std::vector<Profile *>&);
   virtual ~LoadProfile(void);

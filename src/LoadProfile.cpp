@@ -3,6 +3,7 @@
  * 27.05.12
  */
 
+#include <algorithm>
 #include <iostream>
 #include "LoadProfile.hpp"
 
@@ -43,9 +44,24 @@ double	LoadProfile::getCenterY() const
   return (1350.0f);
 }
 
+static bool	isSelected(Tag *obj)
+{
+  return (obj->getStatus());
+}
+
+int	LoadProfile::getCurTagPos(void) const
+{
+  unsigned int	i;
+
+  for (i = 0; !isSelected(this->_tags[i]); ++i);
+  return (i);
+}
+
 void	LoadProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
+  if ((this->_curToken != TokenMenu::LAST) && (this->getCurTagPos() < (this->_tags.size() - 1)))
+    this->_gameManager._mainProfile = this->_profileLoader.getProfiles()[this->getCurTagPos()];
 }

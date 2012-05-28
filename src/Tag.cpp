@@ -33,6 +33,11 @@ TokenMenu::eMenu	Tag::getContent(void) const
   return (this->_content);
 }
 
+bool			Tag::getStatus(void) const
+{
+  return (this->_status);
+}
+
 void			Tag::setStatus(bool status)
 {
   this->_status = status;

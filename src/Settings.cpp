@@ -175,7 +175,7 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
   this->_tags[9]->createText(g_ref[this->_conf.getConfig(HumGame::ATTACK)], 20, 800, 530);
 
   this->_tags[11]->createText(g_ref[this->_conf.getConfig(HumGame::SKILL)], 20, 800, 550);*/
-  
+
   if (this->_oneTime > 0.0f)
     {
       if (clock.getTotalGameTime() >= this->_oneTime)
