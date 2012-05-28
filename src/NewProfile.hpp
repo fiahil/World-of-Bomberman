@@ -10,10 +10,15 @@
 
 class	NewProfile : public AMenu
 {
+private:
+  bool		_selected;
+  double	_oneTime;
+
 public:
   NewProfile(GameManager&);
   virtual ~NewProfile(void);
 
+  void			setNewProfile();
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);
