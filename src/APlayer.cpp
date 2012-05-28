@@ -150,10 +150,10 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
 
   if ((this->_state == State::RUN ||
        this->_state == State::STAND ||
-       this->_state == State::HIT)
-      && this->_model.anim_is_ended(g_refAnimName[this->_state]))
+       this->_state == State::HIT) &&
+      this->_model.anim_is_ended(g_refAnimName[this->_state]))
     {
-      this->_state = State::STAND;
+      //this->_state = State::STAND;
       this->_model.play(g_refAnimName[this->_state]);
     }
 
@@ -494,17 +494,17 @@ bool		APlayer::LEFTFunction(gdl::GameClock const& clock)
 
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::LEFT] && this->_realPos == this->_pos._pos)
+  {
+    this->_timers[HumGame::LEFT] = current + 0.15;
+    this->_dir = Dir::WEST;
+    if (this->_map.canMoveAt(this->_pos._x - 1, this->_pos._y))
     {
-      this->_timers[HumGame::LEFT] = current + 0.15;
-      this->_dir = Dir::WEST;
-      if (this->_map.canMoveAt(this->_pos._x - 1, this->_pos._y))
-	{
 	  this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
 	  this->_state = State::RUN;
 	  this->_model.play(g_refAnimName[this->_state]);
 	  return true;
-	}
     }
+  }
   return false;
 }
 
@@ -514,55 +514,56 @@ bool		APlayer::RIGHTFunction(gdl::GameClock const& clock)
 
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::RIGHT] && this->_realPos == this->_pos._pos)
+  {
+    this->_timers[HumGame::RIGHT] = current + 0.15;
+    this->_dir = Dir::EAST;
+    if (this->_map.canMoveAt(this->_pos._x + 1, this->_pos._y))
     {
-      this->_timers[HumGame::RIGHT] = current + 0.15;
-      this->_dir = Dir::EAST;
-      if (this->_map.canMoveAt(this->_pos._x + 1, this->_pos._y))
-	{
-	  this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
-	  this->_state = State::RUN;
-	  this->_model.play(g_refAnimName[this->_state]);
-	  return true;
-	}
+      this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
+      this->_state = State::RUN;
+      this->_model.play(g_refAnimName[this->_state]);
+      return true;
     }
+  }
   return false;
 }
 
 bool		APlayer::DOWNFunction(gdl::GameClock const& clock)
 {
-   double	current;
+  double	current;
 
-   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
-       this->_timers[HumGame::DOWN] && this->_realPos == this->_pos._pos)
-     {
-      this->_timers[HumGame::DOWN] = current + 0.15;
-      this->_dir = Dir::SOUTH;
-      if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
-	{
-	  this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
-	  this->_state = State::RUN;
-	  this->_model.play(g_refAnimName[this->_state]);
-	  return true;
-	}
+  if ((current = static_cast<double>(clock.getTotalGameTime())) >=
+      this->_timers[HumGame::DOWN] && this->_realPos == this->_pos._pos)
+  {
+    this->_timers[HumGame::DOWN] = current + 0.15;
+    this->_dir = Dir::SOUTH;
+    if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
+    {
+      this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
+      this->_state = State::RUN;
+      this->_model.play(g_refAnimName[this->_state]);
+      return true;
     }
-   return false;
+  }
+  return false;
 }
 
 bool		APlayer::ATTACKFunction(gdl::GameClock const& clock)
 {
-   double	current;
+  double	current;
+
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::ATTACK])
-    {
-      double	addTimer = 3.0 - (0.3 * this->_lustStack);
-      if (addTimer < 0.00001)
-	addTimer = 0.0;
-      this->_timers[HumGame::ATTACK] = current + addTimer;
-      this->_attack = true;
-      this->_state = State::ATTACK;
-      this->_model.play(g_refAnimName[this->_state]);
-      return true;
-    }
+  {
+    double	addTimer = 3.0 - (0.3 * this->_lustStack);
+    if (addTimer < 0.00001)
+      addTimer = 0.0;
+    this->_timers[HumGame::ATTACK] = current + addTimer;
+    this->_attack = true;
+    this->_state = State::ATTACK;
+    this->_model.play(g_refAnimName[this->_state]);
+    return true;
+  }
   return false;
 }
 
@@ -578,11 +579,11 @@ Bomb*		APlayer::isAttack()
     return 0;
 
   Bomb	*ret = new Bomb(this->_weapon,
-			this->_pos,
-			this,
-			this->_Mbomb,
-			this->_MExplodedBomb,
-			this->_powerStack);
+      this->_pos,
+      this,
+      this->_Mbomb,
+      this->_MExplodedBomb,
+      this->_powerStack);
   this->_attack = false;
   return ret;
 }
@@ -599,7 +600,7 @@ void		APlayer::SOUTHFunction()
 
 void		APlayer::WESTFunction()
 {
- glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
+  glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
 }
 
 void		APlayer::EASTFunction()
