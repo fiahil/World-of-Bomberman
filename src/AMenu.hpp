@@ -34,7 +34,7 @@ protected:
   GameManager &			_gameManager;
   TokenMenu::eMenu		_curToken;
   bool				_changeMenu;
-  
+
   /*
 	INFOS :
 

@@ -3,17 +3,29 @@
  * 28.12.05
  */
 
+#include <iostream>		// REMOVE
 #include "LoadMap.hpp"
 
-LoadMap::LoadMap(GameManager& game, const std::vector<Map *> & /* map */)
+LoadMap::LoadMap(GameManager& game, const std::vector<Map *> & map)
   : AMenu("menu/Background2.png", "menu/Background2.png", 1600.0f, -1.0f, 3600.0f, game)
 {
-  // std::vector<Map *>::const_iterator	it = map.begin();
+  bool					selected = true;
+  std::vector<Map *>::const_iterator	it = map.begin();
+  double				y = 4050.0f;
+  int					i = 0;
+  int					yText = 400;
 
-  // for (; it != map.end ; ++it)
-  //   {
-  //     this->_tags.push_back(new Tag("menu/NewProfileNormal.png", "menu/NewProfileHighlit.png", true, false, TokenMenu::NEWPROFILE, 800.0f, 0.0f, 450.0f));
-  //   }
+  for (; it != map.end() ; ++it)
+    {
+      this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", selected, false, /**/TokenMenu::MAINMENU, 2400.0f, 0.0f, y));
+      this->_tags[i]->createText((*it)->getName(), 20, 800, yText);
+
+      i++;
+      y += 50.0;
+      yText += 50;
+      if (selected)
+	selected = false;
+    }
 }
 
 LoadMap::~LoadMap(void)

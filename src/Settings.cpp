@@ -7,107 +7,20 @@
 #include "Settings.hpp"
 
 static const char*	g_ref[gdl::Keys::Count + 1] = {
-  "Bouton A",
-  "Bouton B",
-  "Bouton C",
-  "Bouton D",
-  "Bouton E",
-  "Bouton F",
-  "Bouton G",
-  "Bouton H",
-  "Bouton I",
-  "Bouton J",
-  "Bouton K",
-  "Bouton L",
-  "Bouton M",
-  "Bouton N",
-  "Bouton O",
-  "Bouton P",
-  "Bouton Q",
-  "Bouton R",
-  "Bouton S",
-  "Bouton T",
-  "Bouton U",
-  "Bouton V",
-  "Bouton W",
-  "Bouton X",
-  "Bouton Y",
-  "Bouton Z",
-  "Bouton Num0",
-  "Bouton Num1",
-  "Bouton Num2",
-  "Bouton Num3",
-  "Bouton Num4",
-  "Bouton Num5",
-  "Bouton Num6",
-  "Bouton Num7",
-  "Bouton Num8",
-  "Bouton Num9",
-  "",
-  "Bouton LControl",
-  "Bouton LShift",
-  "Bouton LAlt",
-  "",
-  "Bouton RControl",
-  "Bouton RShift",
-  "Bouton RAlt",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "Bouton Space",
-  "Bouton Return",
-  "Bouton Back",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "Bouton Left",
-  "Bouton Right",
-  "Bouton Up",
-  "Bouton Down",
-  "Bouton Numpad0",
-  "Bouton Numpad1",
-  "Bouton Numpad2",
-  "Bouton Numpad3",
-  "Bouton Numpad4",
-  "Bouton Numpad5",
-  "Bouton Numpad6",
-  "Bouton Numpad7",
-  "Bouton Numpad8",
-  "Bouton Numpad9",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
+  "Bouton A", "Bouton B", "Bouton C", "Bouton D", "Bouton E", "Bouton F", "Bouton G", "Bouton H", "Bouton I",
+  "Bouton J", "Bouton K", "Bouton L", "Bouton M", "Bouton N", "Bouton O", "Bouton P", "Bouton Q", "Bouton R",
+  "Bouton S", "Bouton T", "Bouton U", "Bouton V", "Bouton W", "Bouton X", "Bouton Y", "Bouton Z",
+  "Bouton Num0", "Bouton Num1", "Bouton Num2", "Bouton Num3", "Bouton Num4",
+  "Bouton Num5", "Bouton Num6", "Bouton Num7", "Bouton Num8", "Bouton Num9",
+  "", "Bouton LControl", "Bouton LShift", "Bouton LAlt",
+  "", "Bouton RControl", "Bouton RShift", "Bouton RAlt",
+  "", "", "", "", "", "", "", "", "", "", "", "", "",
+  "Bouton Space", "Bouton Return","Bouton Back",
+  "", "", "", "", "", "", "", "", "", "", "",
+  "Bouton Left", "Bouton Right", "Bouton Up", "Bouton Down",
+  "Bouton Numpad0", "Bouton Numpad1", "Bouton Numpad2", "Bouton Numpad3", "Bouton Numpad4",
+  "Bouton Numpad5", "Bouton Numpad6", "Bouton Numpad7", "Bouton Numpad8", "Bouton Numpad9",
+  "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
   "Bouton not set",
 };
 
@@ -127,22 +40,22 @@ Settings::Settings(GameManager& game)
     _selected(false)
 {
   this->_tags.push_back(new Tag("menu/ForwardNormal.png", "menu/ForwardHighlit.png", true, false, TokenMenu::SETTINGS, 1700.0f, 0.0f, 2100.0f));
-  this->_tags.push_back(new Tag("menu/White.png", "menu/White.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2100.0f));
-  
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2100.0f));
+
   this->_tags.push_back(new Tag("menu/BackwardNormal.png", "menu/BackwardHighlit.png", false, false, TokenMenu::SETTINGS, 1700.0f, 0.0f, 2150.0f));
-  this->_tags.push_back(new Tag("menu/White.png", "menu/White.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2150.0f));
-  
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2150.0f));
+
   this->_tags.push_back(new Tag("menu/LeftNormal.png", "menu/LeftHighlit.png", false, false, TokenMenu::SETTINGS, 1700.0f, 0.0f, 2200.0f));
-  this->_tags.push_back(new Tag("menu/White.png", "menu/White.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2200.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2200.0f));
 
   this->_tags.push_back(new Tag("menu/RightNormal.png", "menu/RightHighlit.png", false, false, TokenMenu::SETTINGS, 1700.0f, 0.0f, 2250.0f));
-  this->_tags.push_back(new Tag("menu/White.png", "menu/White.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2250.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2250.0f));
 
   this->_tags.push_back(new Tag("menu/DropBombNormal.png", "menu/DropBombHighlit.png", false, false, TokenMenu::SETTINGS, 1700.0f, 0.0f, 2300.0f));
-  this->_tags.push_back(new Tag("menu/White.png", "menu/White.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2300.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2300.0f));
 
   this->_tags.push_back(new Tag("menu/SkillNormal.png", "menu/SkillHighlit.png", false, false, TokenMenu::SETTINGS, 1700.0f, 0.0f, 2350.0f));
-  this->_tags.push_back(new Tag("menu/White.png", "menu/White.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2350.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2350.0f));
 
   this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::PROFILE, 1700.0f, 0.0f, 2400.0f));
 }
@@ -165,9 +78,9 @@ double	Settings::getCenterY() const
 void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   //this->_tags[1]->createText(g_ref[this->_conf.getConfig(HumGame::UP)], 20, 800, 450);
-  
+
   /*this->_tags[3]->createText(g_ref[this->_conf.getConfig(HumGame::DOWN)], 20, 800, 470);
- 
+
   this->_tags[5]->createText(g_ref[this->_conf.getConfig(HumGame::LEFT)], 20, 800, 490);
 
   this->_tags[7]->createText(g_ref[this->_conf.getConfig(HumGame::RIGHT)], 20, 800, 510);
@@ -202,7 +115,7 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
 	    ++this->_cursor;
 	  else
 	    --this->_cursor;
-	  this->_tags[this->_cursor]->setStatus(true);      
+	  this->_tags[this->_cursor]->setStatus(true);
 	}
     }
   else
@@ -216,5 +129,5 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
 						     g_refPos[(this->_cursor + 1) / 2][1]);
 	  break;
 	}
-	
+
 }

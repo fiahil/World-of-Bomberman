@@ -36,5 +36,5 @@ void	NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)
   //this->_textEdit[0]->update(clock, input);
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
-    (this->*_keyEvent[i].second)(clock);
+      (this->*_keyEvent[i].second)(clock);
 }
