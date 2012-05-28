@@ -12,7 +12,7 @@ NewProfile::NewProfile(GameManager& game)
 {
   this->_oneTime = -1.0;
   this->_selected = false;
-  this->_textEdit.push_back(new TextEdit(965, 360));
+  this->_textEdit.push_back(new TextEdit(965, 360, "[Press Enter to type your name]"));
   this->_tags.push_back(new Tag("menu/NameNormal.png", "menu/NameHighlit.png", false, false, TokenMenu::NEWPROFILE, 2400.0f, 0.0f, 400.0f));
   this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::NEWPROFILE, 2550.0f, 0.0f, 400.0f));
   this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::PROFILE, 2400.0f, 0.0f, 450.0f));
@@ -45,6 +45,7 @@ void	NewProfile::setNewProfile(void)
   this->_gameManager._mainProfile->setStat(_six);
   this->_gameManager._mainProfile->setAchievement(_three);
   _pm.setProfile(_id, *this->_gameManager._mainProfile);
+	    this->_textEdit[0]->setStr("[Press enter to type your name]");
 }
 
 double	NewProfile::getCenterX(void) const
@@ -72,6 +73,7 @@ void	NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 
       if (this->_curToken == TokenMenu::NEWPROFILE)
 	{
+	  this->_textEdit[0]->setStr("");
 	  this->_selected = true;
 	  this->_oneTime = clock.getTotalGameTime() + 0.15f;
 	  this->_curToken = TokenMenu::LAST;
@@ -86,7 +88,7 @@ void	NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 		this->_curToken = TokenMenu::LAST;
 	    }
 	  else if (this->_curToken == TokenMenu::MAINMENU)
-	    this->_textEdit[0]->setStr("");
+	    this->_textEdit[0]->setStr("[Press enter to type your name]");
 	}
 
       if (this->_cursor == 1)
