@@ -40,6 +40,7 @@ private:
   size_t	_x;
   size_t	_y;
   std::string	_map;
+  std::string	_name;		// Ajoute
   gdl::Image	_unbreak;
   gdl::Image	_break;
   gdl::Image	_background;
@@ -67,6 +68,7 @@ public:
   std::string const&	getMap(void) const;
   size_t		getX(void) const;
   size_t		getY(void) const;
+  const std::string &	getName(void) const; // Ajoute
 };
 
 #else
