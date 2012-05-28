@@ -154,8 +154,8 @@ void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
   if (!this->_moving)
   {
     this->_state = State::STAND;
-    this->_model.play(g_refAnimName[this->_state]);
   }
+  this->_model.play(g_refAnimName[this->_state]);
   /*
   if ((this->_state == State::RUN ||
        this->_state == State::STAND ||
@@ -487,6 +487,7 @@ bool		APlayer::UPFunction(gdl::GameClock const& clock)
 {
   double	current;
 
+  this->_moving = true;
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::UP] && this->_realPos == this->_pos._pos)
     {
@@ -497,7 +498,6 @@ bool		APlayer::UPFunction(gdl::GameClock const& clock)
 	  this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
 	  this->_state = State::RUN;
 	  this->_model.play(g_refAnimName[this->_state]);
-	  this->_moving = true;
 	  return true;
 	}
     }
@@ -508,6 +508,7 @@ bool		APlayer::LEFTFunction(gdl::GameClock const& clock)
 {
   double	current;
 
+  this->_moving = true;
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::LEFT] && this->_realPos == this->_pos._pos)
   {
@@ -518,7 +519,6 @@ bool		APlayer::LEFTFunction(gdl::GameClock const& clock)
 	  this->_pos.setPos(this->_pos._x - 1, this->_pos._y);
 	  this->_state = State::RUN;
 	  this->_model.play(g_refAnimName[this->_state]);
-	  this->_moving = true;
 	  return true;
     }
   }
@@ -529,6 +529,7 @@ bool		APlayer::RIGHTFunction(gdl::GameClock const& clock)
 {
   double	current;
 
+  this->_moving = true;
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::RIGHT] && this->_realPos == this->_pos._pos)
   {
@@ -539,7 +540,6 @@ bool		APlayer::RIGHTFunction(gdl::GameClock const& clock)
       this->_pos.setPos(this->_pos._x + 1, this->_pos._y);
       this->_state = State::RUN;
       this->_model.play(g_refAnimName[this->_state]);
-      this->_moving = true;
       return true;
     }
   }
@@ -550,6 +550,7 @@ bool		APlayer::DOWNFunction(gdl::GameClock const& clock)
 {
   double	current;
 
+  this->_moving = true;
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::DOWN] && this->_realPos == this->_pos._pos)
   {
@@ -560,7 +561,6 @@ bool		APlayer::DOWNFunction(gdl::GameClock const& clock)
       this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
       this->_state = State::RUN;
       this->_model.play(g_refAnimName[this->_state]);
-      this->_moving = true;
       return true;
     }
   }
@@ -574,6 +574,7 @@ bool		APlayer::ATTACKFunction(gdl::GameClock const& clock)
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::ATTACK])
   {
+    this->_moving = true;
     double	addTimer = 3.0 - (0.3 * this->_lustStack);
     if (addTimer < 0.00001)
       addTimer = 0.0;
@@ -581,7 +582,6 @@ bool		APlayer::ATTACKFunction(gdl::GameClock const& clock)
     this->_attack = true;
     this->_state = State::ATTACK;
     this->_model.play(g_refAnimName[this->_state]);
-    this->_moving = true;
     return true;
   }
   return false;
