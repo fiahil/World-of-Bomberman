@@ -9,7 +9,8 @@
 Plane::Plane(double w, double h, Point const& p, gdl::Image& img)
   : _w(w),
     _h(h),
-    _txt(img)
+    _txt(img),
+    _mode(false)
 {
   this->_pos = p;
   this->_pos._pos.x -= this->_pos._scale / 2;
@@ -25,6 +26,16 @@ void	Plane::initialize()
 {
 }
 
+void	Plane::changeMode()
+{
+  if (this->_mode)
+    this->_mode = false;
+  else
+    this->_mode = true;
+}
+
+#include <iostream> // TODO
+
 void	Plane::draw()
 {
   double x = static_cast<double>(this->_txt.getWidth()) / this->_w;
@@ -36,6 +47,10 @@ void	Plane::draw()
     y = 1.0f;
   glPushMatrix();
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
+  if (this->_mode)
+    {
+           glRotatef(45.0f, 1.0f, 0.0f, 0.0f);
+    }
   glScalef(this->_pos._scale, this->_pos._scale, this->_pos._scale);
   glColor3ub(255, 255, 255);
   glEnable(GL_TEXTURE_2D);

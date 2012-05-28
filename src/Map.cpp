@@ -7,8 +7,6 @@
 #include <sstream>
 #include <iostream>
 #include <cstdlib>
-#include "Cube.hpp"
-#include "Plane.hpp"
 #include "Map.hpp"
 
 
@@ -20,6 +18,8 @@ Tp::Tp()
 Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
   : _x(x),
     _y(y),
+    w_unbreak(0),
+    background(0),
     _modelBonus(BonusType::LAST)
 {
   this->_expFunc['1'] = &Map::explodeUnBreakable;
@@ -115,6 +115,8 @@ Map::Map(size_t x, size_t y, std::string const& map)
 
 Map::~Map()
 {
+  delete this->w_unbreak;
+  delete this->background;
 }
 
 bool		Map::teleport(Point & pos) const
@@ -133,24 +135,35 @@ void		Map::initialize(void)
   this->_break = gdl::Image::load("textures/break.jpg");
   this->_unbreak = gdl::Image::load("textures/unbreak.jpg");
   this->_background = gdl::Image::load("textures/background.jpg");
+  this->_landscape = gdl::Image::load("textures/landscape.jpg");
   this->_modelBonus[BonusType::LIFE] = gdl::Model::load("models/Bonus_life.FBX");
   this->_modelBonus[BonusType::BOMB] = gdl::Model::load("models/Bonus_bomb.FBX");
   this->_modelBonus[BonusType::LUST] = gdl::Model::load("models/Bonus_fury.FBX");
   this->_modelBonus[BonusType::POWER] = gdl::Model::load("models/Bonus_power.FBX");
   this->_modelBonus[BonusType::SHIELD] = gdl::Model::load("models/Bonus_shield.FBX");
+  this->w_unbreak = new Cube(this->_unbreak);
+
+  Point		p(2.0f, 0, 0);
+  this->background = new Plane(this->_x, this->_y, p, this->_background);
+  p.setPos(-300, -100);
+  this->landscape = new Plane(800.0f, 400.0f, p, this->_landscape);
+  this->landscape->changeMode();
+
+
 }
 
 void		Map::draw(void)
 {
   Point		p(2.0f, 0, 0);
-  Cube		w_unbreak(this->_unbreak);
-  Plane		background(this->_x, this->_y, p, this->_background);
+
   size_t	x0 = 0;
   size_t	y0 = 0;
   size_t	xf = this->_x;
   size_t	yf = this->_y;
 
-  background.draw();
+  this->landscape->draw();
+  this->background->draw();
+
   if (this->_opti)
     {
       x0 = this->_opti->_x - 200;
@@ -171,7 +184,7 @@ void		Map::draw(void)
     for (size_t x = x0; x < xf; ++x) {
       p.setPos(x, y);
       if (this->_map[POS(x, y)] == '1')
-	w_unbreak.draw(p);
+	this->w_unbreak->draw(p);
       else if (this->_map[POS(x, y)] != '0')
 	{
 	  glPushMatrix();

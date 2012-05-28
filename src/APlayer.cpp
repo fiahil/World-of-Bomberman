@@ -13,6 +13,7 @@ static const char*	g_refSkin[Skin::LAST] = {
   "models/Character_thrall.FBX",
   "models/Character_sylvanas.FBX",
   "models/Character_varian.FBX",
+  "models/Character_zuljin.FBX",
   "models/Character_ennemy.FBX",
   "models/Character_ennemy_low.FBX"
 };
@@ -23,10 +24,11 @@ static const char*	g_refBomb[BombType::LAST] = {
   "models/Bomb_orange.FBX"
 };
 
-static const infoAnim	g_refAnim[State::LAST] = {
+static const infoAnim	g_refAnim[Skin::LAST] = {
   {3, 137, 186, 206, 418, 548, 331, 368, 256, 281},
   {144, 410, 3, 19, 535, 584, 69, 94, 460, 485},
   {169, 236, 3, 19, 69, 119, 285, 310, 360, 385},
+  {153, 184, 236, 256, 309, 362, 3, 28, 78, 103},
   {69, 103, 3, 19, 302, 364, 227, 252, 152, 177},
   {69, 119, 3, 19, 244, 269, 319, 344, 169, 194},
 };

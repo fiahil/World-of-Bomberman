@@ -19,11 +19,13 @@ private:
   double	_w;
   double	_h;
   gdl::Image&	_txt;
-
+  bool		_mode;
 public:
   virtual void	initialize();
   virtual void	draw();
   virtual void	update(gdl::GameClock const&, gdl::Input&);
+
+  void	changeMode();
 };
 
 #else

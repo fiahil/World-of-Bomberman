@@ -67,7 +67,7 @@ void		ExplodedBomb::drawPattern(double dir, Point const& pos)
 {
   glPushMatrix();
   glTranslatef(pos._pos.x, pos._pos.y, pos._pos.z);
-  glScalef(0.2f, 0.2f, 0.2f);
+  glScalef(0.15f, 0.15f, 0.15f);
   glRotatef(dir, 0.0f, 1.0f, 0.0f);
   this->_model.draw();
   glPopMatrix();
@@ -77,25 +77,31 @@ void		ExplodedBomb::draw()
 {
   Point		pos(this->_pos);
 
+  glPushMatrix();
+  glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
+  glScalef(0.15f, 0.15f, 0.09f);
+  this->_model.draw();
+  glPopMatrix();
+
   for (size_t i = 1; i <= this->_real._coefN; ++i)
     {
       pos.setPos(this->_pos._x, this->_pos._y - i);
-      this->drawPattern(-90.0f, pos);
+      this->drawPattern(0.0f, pos);
     }
   for (size_t i = 1; i <= this->_real._coefS; ++i)
     {
       pos.setPos(this->_pos._x, this->_pos._y + i);
-      this->drawPattern(90.0f, pos);
+      this->drawPattern(180.0f, pos);
     }
   for (size_t i = 1; i <= this->_real._coefW; ++i)
     {
       pos.setPos(this->_pos._x - i, this->_pos._y);
-      this->drawPattern(0.0f, pos);
+      this->drawPattern(90.0f, pos);
     }
   for (size_t i = 1; i <= this->_real._coefE; ++i)
     {
       pos.setPos(this->_pos._x + i, this->_pos._y);
-      this->drawPattern(180.0f, pos);
+      this->drawPattern(-90.0f, pos);
     }
 }
 

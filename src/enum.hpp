@@ -75,6 +75,7 @@ struct Skin
       THRALL,
       SYLVANAS,
       VARIANT,
+      ZULJIN,
       ENNEMY_HIGH,
       ENNEMY_LOW,
       LAST
