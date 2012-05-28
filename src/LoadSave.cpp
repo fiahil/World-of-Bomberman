@@ -3,8 +3,10 @@
  * 27.05.12
  */
 
-#include <iostream>		// REMOVE
+#include "Scanner.hpp"
+#include "Unpackman.hpp"
 #include "LoadSave.hpp"
+#include <fstream>
 
 LoadSave::LoadSave(GameManager& game)
   : AMenu("menu/Background2.png", "menu/Background2.png", 3200.0f, -1.0f, 900.0f, game),
@@ -26,6 +28,27 @@ double		LoadSave::getCenterY(void) const
   return (1350.0f);
 }
 
+void		LoadSave::loadSave()
+{
+  Serializer::Unpackman up(*this->_gameManager._mainProfile, this->_gameManager._match);
+  std::string	path("Ressources/saves/" + this->_gameManager._mainProfile->getSave()[this->_cursor]);
+  std::ifstream	file(path.c_str());
+  
+  if (!file.good())
+    this->_curToken = TokenMenu::MAINMENU;
+  else
+    {
+      Serializer::Scanner	scanner(file);
+      Serializer::Loader	loader(scanner, up);
+
+      loader.parse();
+      /*if (up.ma._gameMode != GameMode::SOLO)
+	{
+	  up.ma._players[0]
+	  }*/
+    }
+}
+
 void		LoadSave::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   if (this->_buildTags)
@@ -33,8 +56,8 @@ void		LoadSave::update(gdl::GameClock const& clock, gdl::Input& input)
       for (size_t i = 0; i < this->_keyEvent.size(); ++i)
 	if (input.isKeyDown(this->_keyEvent[i].first))
 	  (this->*_keyEvent[i].second)(clock);
-      // if (this->_curToken == TokenMenu::CREATEGAME)
-      // 	;
+      if (this->_curToken == TokenMenu::CREATEGAME)
+	this->loadSave();
     }
   else
     this->buildTags();
