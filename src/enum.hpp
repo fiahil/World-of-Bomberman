@@ -6,6 +6,13 @@
 #ifndef __ENUM_HPP__
 #define __ENUM_HPP__
 
+struct Audio
+{
+  enum eAudio {
+    LAST
+  };
+};
+
 struct Success
 {
   enum eSuccess {

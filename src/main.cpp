@@ -9,6 +9,7 @@
 //
 
 #include <cstdlib>
+#include "Sound.hpp"
 #include "Menu.hpp"
 
 int		main()
@@ -18,6 +19,7 @@ int		main()
   time(&now);
   srandom(now);
 
+  Sound::getMe();
   Menu		bomberman;
 
   bomberman.run();
