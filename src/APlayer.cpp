@@ -481,8 +481,6 @@ bool		APlayer::UPFunction(gdl::GameClock const& clock)
 	{
 	  this->_pos.setPos(this->_pos._x, this->_pos._y - 1);
 	  this->_state = State::RUN;
-std::cout << this->_model.get_anim_speed(g_refAnimName[this->_state]) << std::endl;
-	  this->_model.set_anim_speed(g_refAnimName[this->_state], 1.4);
 	  this->_model.play(g_refAnimName[this->_state]);
 	  return true;
 	}
@@ -563,7 +561,6 @@ bool		APlayer::ATTACKFunction(gdl::GameClock const& clock)
       this->_attack = true;
       this->_state = State::ATTACK;
       this->_model.play(g_refAnimName[this->_state]);
-      this->_model.set_anim_speed(g_refAnimName[this->_state], 3.0f);
       return true;
     }
   return false;
