@@ -1,22 +1,22 @@
 /*
- * Texan
+ * NicoW
  * 27.05.2012
  */
 
-#ifndef __NEWPROFILE_HPP__
-#define __NEWPROFILE_HPP__
+#ifndef		__LOAD_SAVE_HPP__
+#define		__LOAD_SAVE_HPP__
 
 #include "AMenu.hpp"
 
-class	NewProfile : public AMenu
+class	LoadSave : public AMenu
 {
 public:
-  NewProfile(GameManager&);
-  virtual ~NewProfile(void);
+  LoadSave(GameManager&);
+  virtual ~LoadSave(void);
 
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);
 };
 
-#endif
+#endif		/* __LOAD_SAVE_HPP__ */

@@ -7,8 +7,17 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "ProfileManager.hpp"
 #include "MenuManager.hpp"
 #include "MainMenu.hpp"
+#include "LoadProfile.hpp"
+#include "LoadSave.hpp"
+// #include "LoadMap.hpp"
+#include "GameChoose.hpp"
+#include "MenuIA.hpp"
+#include "TeamMenu.hpp"
+#include "MenuMap.hpp"
+#include "NewProfile.hpp"
 #include "MenuProfile.hpp"
 #include "Settings.hpp"
 #include "NewProfile.hpp"
@@ -18,7 +27,7 @@
 
 MenuManager::MenuManager(int w, int h)
   : _menu(TokenMenu::LAST, 0),
-    _curMenu(TokenMenu::TEAM),
+    _curMenu(TokenMenu::MAINMENU),
     _camera(w, h, 0, 0)
 {
   // this->_maps = this->_mapManager.getAll();
@@ -32,6 +41,14 @@ void	MenuManager::initialize(void)
 {
   this->_menu[TokenMenu::MAINMENU] = new MainMenu(this->_gameManager);
   this->_menu[TokenMenu::MAINMENU]->initialize();
+  this->_menu[TokenMenu::LOADSAVE] = new LoadSave(this->_gameManager);
+  this->_menu[TokenMenu::LOADSAVE]->initialize();
+  this->_menu[TokenMenu::GAMECHOOSE] = new GameChoose(this->_gameManager);
+  this->_menu[TokenMenu::GAMECHOOSE]->initialize();
+  this->_menu[TokenMenu::IA] = new MenuIA(this->_gameManager);
+  this->_menu[TokenMenu::IA]->initialize();
+  this->_menu[TokenMenu::MAP] = new MenuMap(this->_gameManager);
+  this->_menu[TokenMenu::MAP]->initialize();
   this->_menu[TokenMenu::PROFILE] = new MenuProfile(this->_gameManager);
   this->_menu[TokenMenu::PROFILE]->initialize();
   this->_menu[TokenMenu::SETTINGS] = new Settings(this->_gameManager);
@@ -43,7 +60,7 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::TEAM] = new TeamMenu(this->_gameManager);
   this->_menu[TokenMenu::TEAM]->initialize();
   this->_menu[this->_curMenu]->setTextDraw(true);
-  this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), 2500.0f/*600.0f*/,
+  this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
 		       this->_menu[this->_curMenu]->getCenterY());
 }
 
@@ -59,7 +76,7 @@ void	MenuManager::draw(void)
 void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   TokenMenu::eMenu	tmp;
-  
+
   if ((tmp = this->_menu[this->_curMenu]->getContent()) != TokenMenu::LAST)
     {
       if (tmp == TokenMenu::QUIT) //TODO
@@ -67,8 +84,12 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
-      this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), 2500.0f/*600.0f*/,
-			   this->_menu[this->_curMenu]->getCenterY());
+
+      /*this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), 2500.0f600.0f,
+			   this->_menu[this->_curMenu]->getCenterY());*/
+
+      this->_camera.setPosScroll(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
+				 this->_menu[this->_curMenu]->getCenterY());
     }
   else
     this->_menu[this->_curMenu]->update(clock, input);

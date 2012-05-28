@@ -151,7 +151,7 @@ double	Settings::getCenterY() const
   return 2250.0f;
 }
 
-void	Settings::doAction(gdl::GameClock const&, gdl::Input&)
+void	Settings::update(gdl::GameClock const&, gdl::Input&)
 {
   //this->_tags[1]->createText(g_ref[this->_conf.getConfig(HumGame::UP)], 20, 800, 450);
   
@@ -165,13 +165,5 @@ void	Settings::doAction(gdl::GameClock const&, gdl::Input&)
 
   this->_tags[11]->createText(g_ref[this->_conf.getConfig(HumGame::SKILL)], 20, 800, 550);*/
   
-  if (this->_cursor % 2 == 1)
-    {
-      this->_tags[this->_cursor]->setStatus(false);
-      if (this->_timers[0] < this->_timers[1])
-	++this->_cursor;
-      else
-	--this->_cursor;
-      this->_tags[this->_cursor]->setStatus(true);
-    }
+
 }

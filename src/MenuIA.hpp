@@ -1,22 +1,22 @@
 /*
- * Texan
- * 27.05.2012
+ * NicoW
+ * 27.05.12
  */
 
-#ifndef __NEWPROFILE_HPP__
-#define __NEWPROFILE_HPP__
+#ifndef		__MENU_IA_HPP__
+#define		__MENU_IA_HPP__
 
 #include "AMenu.hpp"
 
-class	NewProfile : public AMenu
+class	MenuIA : public AMenu
 {
 public:
-  NewProfile(GameManager&);
-  virtual ~NewProfile(void);
+  MenuIA(GameManager&);
+  virtual ~MenuIA(void);
 
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);
 };
 
-#endif
+#endif		/* __MENU_IA_HPP__ */

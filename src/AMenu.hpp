@@ -71,7 +71,6 @@ public:
 public:
   virtual double	getCenterX(void) const = 0;
   virtual double	getCenterY(void) const = 0;
-  virtual void		doAction(gdl::GameClock const&, gdl::Input&) = 0;
 };
 
 #endif		/* __AMENU_HPP__ */

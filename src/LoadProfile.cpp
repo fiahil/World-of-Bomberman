@@ -10,9 +10,13 @@ LoadProfile::LoadProfile(GameManager& game)
     One tag per profile available.
     gotta see how to display with scrolling
   */
-  this->_textDraw = true;
-  std::cout << this->_textDraw << std::endl;
-  this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::MAINMENU, 727.5f, 0.0f, 1325.0f));
+
+  /*while (unsigned int i = 0; i < this->_profiles.size(); ++i)
+    {
+      if (!i)
+	this->_tags.push_back(new Tag("menu/BlankNormal.png", "menu/BlankHighlit.png", false, false, TokenMenu::));
+	}*/
+  this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::MAINMENU, 800.0f, 0.0f, 1100.0f));
 }
 
 LoadProfile::~LoadProfile(void)
@@ -29,7 +33,9 @@ double	LoadProfile::getCenterY() const
   return (1350.0f);
 }
 
-void		LoadProfile::doAction(gdl::GameClock const&, gdl::Input&)
+void	LoadProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-  
+  for (size_t i = 0; i < this->_keyEvent.size(); ++i)
+    if (input.isKeyDown(this->_keyEvent[i].first))
+      (this->*_keyEvent[i].second)(clock);
 }
