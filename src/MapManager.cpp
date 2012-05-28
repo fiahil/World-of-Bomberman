@@ -10,13 +10,13 @@
 
 MapManager::MapManager(void)
 {
-  //this->setMaps();
+  this->setMaps();
 }
 
 void			MapManager::setMaps(void)
 {
   DirWalker	_texasRanger("./Ressources/saves/");
-  
+
   while (!(_texasRanger.isEnd()))
     {
       this->_maps.push_back(this->getMap(*_texasRanger.current()));
@@ -50,7 +50,7 @@ const std::vector<Map *>&	MapManager::getAll(void) const
 
 static void		freeMap(Map *obj)
 {
-  if (obj)
+  if (obj != 0)
     {
       delete (obj);
       obj = 0;

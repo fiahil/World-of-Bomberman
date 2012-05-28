@@ -36,6 +36,10 @@ MenuManager::~MenuManager()
 
 void	MenuManager::initialize(void)
 {
+  MapManager	mapManager;
+
+  this->_map = mapManager.getAll();
+
   this->_menu[TokenMenu::MAINMENU] = new MainMenu(this->_gameManager);
   this->_menu[TokenMenu::MAINMENU]->initialize();
   this->_menu[TokenMenu::CREDITS] = new Credits(this->_gameManager);
@@ -44,7 +48,7 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::LOADPROFILE]->initialize();
   this->_menu[TokenMenu::LOADSAVE] = new LoadSave(this->_gameManager);
   this->_menu[TokenMenu::LOADSAVE]->initialize();
-  this->_menu[TokenMenu::LOADMAP] = new LoadMap(this->_gameManager);
+  this->_menu[TokenMenu::LOADMAP] = new LoadMap(this->_gameManager, this->_map);
   this->_menu[TokenMenu::LOADMAP]->initialize();
   this->_menu[TokenMenu::GAMECHOOSE] = new GameChoose(this->_gameManager);
   this->_menu[TokenMenu::GAMECHOOSE]->initialize();

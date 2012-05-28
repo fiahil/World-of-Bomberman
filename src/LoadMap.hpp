@@ -11,7 +11,7 @@
 class	LoadMap : public AMenu
 {
 public:
-  LoadMap(GameManager&);
+  LoadMap(GameManager&, const std::vector<Map *> &);
   virtual ~LoadMap(void);
 
   /*

@@ -5,8 +5,8 @@
 
 #include "LoadMap.hpp"
 
-LoadMap::LoadMap(GameManager& game)
-  : AMenu("menu/Background2.png", "menu/Background.png", 1600.0f, -1.0f, 3600.0f, game)
+LoadMap::LoadMap(GameManager& game, const std::vector<Map *> &)
+  : AMenu("menu/Background2.png", "menu/Background2.png", 1600.0f, -1.0f, 3600.0f, game)
 {
 }
 
