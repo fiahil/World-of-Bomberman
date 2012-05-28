@@ -5,15 +5,21 @@
 
 #include "LoadMap.hpp"
 
-LoadMap::LoadMap(GameManager& game, const std::vector<Map *> & /* map */)
+LoadMap::LoadMap(GameManager& game, const std::vector<Map *> & map)
   : AMenu("menu/Background2.png", "menu/Background2.png", 1600.0f, -1.0f, 3600.0f, game)
 {
-  // std::vector<Map *>::const_iterator	it = map.begin();
+  bool					selected = true;
+  std::vector<Map *>::const_iterator	it = map.begin();
+  double				y = 4050.0f;
 
-  // for (; it != map.end ; ++it)
-  //   {
-  //     this->_tags.push_back(new Tag("menu/NewProfileNormal.png", "menu/NewProfileHighlit.png", true, false, TokenMenu::NEWPROFILE, 800.0f, 0.0f, 450.0f));
-  //   }
+  for (; it != map.end() ; ++it)
+    {
+      this->_tags.push_back(new Tag("menu/WhiteNormal.png", "menu/WhiteHighlit.png", selected, false, /**/TokenMenu::MAINMENU, 2400.0f, 0.0f, y));
+
+      y += 50.0;
+      if (selected)
+	selected = false;
+    }
 }
 
 LoadMap::~LoadMap(void)
