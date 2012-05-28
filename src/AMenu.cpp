@@ -41,7 +41,7 @@ void			AMenu::draw(void)
   for (std::vector<Tag *>::iterator it = this->_tags.begin(); it != this->_tags.end(); ++it)
     (*it)->draw();
   if (this->_textDraw)
-    for (std::vector<TextEdit *>::iterator it = this->_textEdit.begin(); it != this->_textEdit.end(); ++it)
+   for (std::vector<TextEdit *>::iterator it = this->_textEdit.begin(); it != this->_textEdit.end(); ++it)
       (*it)->draw();
 }
 
