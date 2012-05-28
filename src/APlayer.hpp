@@ -62,6 +62,7 @@ protected:
   size_t		_lustStack;
   size_t		_powerStack;
   size_t		_nbKills;
+  double		_speed;
   std::vector<double>   _timers;
   std::string		_name;
   std::string		_teamName;
@@ -99,6 +100,7 @@ protected:
   void		LustBonusEffect();
   void		PowerBonusEffect();
   void		ShieldBonusEffect();
+  void		SprintBonusEffect();
 
   bool		UPFunction(gdl::GameClock const&);
   bool		LEFTFunction(gdl::GameClock const&);
