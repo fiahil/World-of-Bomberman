@@ -3,6 +3,7 @@
  * 15.05.12
  */
 
+#include <iostream>
 #include "MainMenu.hpp"
 
 MainMenu::MainMenu(GameManager& game)
@@ -34,4 +35,6 @@ void	MainMenu::update(gdl::GameClock const& clock, gdl::Input& input)
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
+  if (this->_gameManager._mainProfile)
+    this->_gameManager._mainProfile = 0;
 }
