@@ -6,7 +6,7 @@
 #include "LoadSave.hpp"
 
 LoadSave::LoadSave(GameManager& game)
-  : AMenu("menu/Background2.png", "menu/Background.png", 0.0f, -1.0f, 900.0f, game)
+  : AMenu("menu/Background2.png", "menu/Background2.png", 3200.0f, -1.0f, 900.0f, game)
 {
 }
 
@@ -16,7 +16,7 @@ LoadSave::~LoadSave(void)
 
 double		LoadSave::getCenterX(void) const
 {
-  return (800.0f);
+  return (4000.0f);
 }
 
 double		LoadSave::getCenterY(void) const

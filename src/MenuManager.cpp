@@ -10,9 +10,10 @@
 #include "ProfileManager.hpp"
 #include "MenuManager.hpp"
 #include "MainMenu.hpp"
+#include "Credits.hpp"
 #include "LoadProfile.hpp"
 #include "LoadSave.hpp"
-// #include "LoadMap.hpp"
+#include "LoadMap.hpp"
 #include "GameChoose.hpp"
 #include "MenuIA.hpp"
 #include "TeamMenu.hpp"
@@ -39,10 +40,18 @@ MenuManager::~MenuManager()
 
 void	MenuManager::initialize(void)
 {
+  MapManager	mapManager;
+
+  this->_map = mapManager.getAll();
+
   this->_menu[TokenMenu::MAINMENU] = new MainMenu(this->_gameManager);
   this->_menu[TokenMenu::MAINMENU]->initialize();
+  this->_menu[TokenMenu::CREDITS] = new Credits(this->_gameManager);
+  this->_menu[TokenMenu::CREDITS]->initialize();
   this->_menu[TokenMenu::LOADSAVE] = new LoadSave(this->_gameManager);
   this->_menu[TokenMenu::LOADSAVE]->initialize();
+  this->_menu[TokenMenu::LOADMAP] = new LoadMap(this->_gameManager, this->_map);
+  this->_menu[TokenMenu::LOADMAP]->initialize();
   this->_menu[TokenMenu::GAMECHOOSE] = new GameChoose(this->_gameManager);
   this->_menu[TokenMenu::GAMECHOOSE]->initialize();
   this->_menu[TokenMenu::IA] = new MenuIA(this->_gameManager);

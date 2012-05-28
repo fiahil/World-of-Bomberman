@@ -65,7 +65,7 @@ const std::vector<Map *>&	MapManager::getAll(void) const
 
 static void		freeMap(Map *obj)
 {
-  if (obj)
+  if (obj != 0)
     {
       delete (obj);
       obj = 0;
