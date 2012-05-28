@@ -34,6 +34,8 @@ void		LoadSave::update(gdl::GameClock const& clock, gdl::Input& input)
       for (size_t i = 0; i < this->_keyEvent.size(); ++i)
 	if (input.isKeyDown(this->_keyEvent[i].first))
 	  (this->*_keyEvent[i].second)(clock);
+      if (this->_curToken == TokenMenu::CREATEGAME)
+	
     }
   else
     this->buildTags();
@@ -42,7 +44,6 @@ void		LoadSave::update(gdl::GameClock const& clock, gdl::Input& input)
 void		LoadSave::buildTags(void)
 {
   bool		select = true;
-  int		i = 0;
   double	yText = 400;
   double	yTag = 1350.0f;
   std::string	str;
@@ -59,10 +60,11 @@ void		LoadSave::buildTags(void)
 	  sstrm << *it;
 	  sstrm >> str;
 
-	  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", select, false, /**/TokenMenu::LOADSAVE, 4000.0f, 0.0f, yTag));
-	  this->_tags[i]->createText(str, 20, 800, yText);
+	  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png",
+					select, true, TokenMenu::CREATEGAME, 4000.0f, 0.0f, yTag));
+	  this->_tags.back()->initialize();
+	  this->_tags.back()->createText(str, 20, 800, yText);
 
-	  i++;
 	  sstrm.clear();
 	  str.clear();
 	  yText += 50;
@@ -71,5 +73,6 @@ void		LoadSave::buildTags(void)
 	    select = false;
 	}
     }
-  this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", select, false, TokenMenu::PROFILE, 4000.0f, 0.0f, yTag));
+  this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", select, true, TokenMenu::PROFILE, 4000.0f, 0.0f, yTag));
+  this->_tags.back()->initialize();
 }

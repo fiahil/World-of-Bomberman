@@ -46,7 +46,7 @@ void		Menu::update(void)
       else
 	this->_game->update();
     }
-  else
+  else if (!(this->_game = this->_menu->createGame(this->gameClock_, this->input_)))
     this->_menu->update(this->gameClock_, this->input_);
 }
 

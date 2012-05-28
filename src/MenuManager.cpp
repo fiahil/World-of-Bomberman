@@ -29,7 +29,8 @@
 MenuManager::MenuManager(int w, int h)
   : _menu(TokenMenu::LAST, 0),
     _curMenu(TokenMenu::MAINMENU),
-    _camera(w, h, 0, 0)
+    _camera(w, h, 0, 0),
+    _createGame(false)
 {
   // this->_maps = this->_mapManager.getAll();
 }
@@ -90,19 +91,34 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
     {
       if (tmp == TokenMenu::QUIT) //TODO
 	exit(0);
+      else if (tmp == TokenMenu::CREATEGAME)
+	{
+	  this->_createGame = true;
+	  return ;
+	}
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
       this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-			   this->_menu[this->_curMenu]->getCenterY());
-
-      /*this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), 2500.0f600.0f,
-			   this->_menu[this->_curMenu]->getCenterY());*/
-
-      this->_camera.setPosScroll(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
 				 this->_menu[this->_curMenu]->getCenterY());
     }
   else
     this->_menu[this->_curMenu]->update(clock, input);
   this->_camera.update();
+}
+
+MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
+{
+  APlayer*	pl1 = 0;
+  APlayer*	pl2 = 0;
+
+  if (this->_createGame)
+    {
+      this->_createGame = false;
+      pl1 = this->_gameManager._match._players[0];
+      if (this->_gameManager._match._gameMode != GameMode::SOLO)
+	pl2 = this->_gameManager._match._players[1];
+      return new MyGame(clock, input, this->_gameManager._match, pl1, pl2);
+    }
+  return 0;
 }
