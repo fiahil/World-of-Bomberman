@@ -36,19 +36,6 @@ protected:
   bool				_changeMenu;
 
   /*
-	INFOS :
-
-    -> Dans Menu Load profile :
-    std::vector<Profile *> &	_profiles;
-    ProfileLoader		_profileLoader;
-
-    -> Dans le menu LoadMap :
-    std::vector<Map *> &	_maps;
-
-  */
-
-
-  /*
     Keys
   */
 protected:

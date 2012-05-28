@@ -14,9 +14,21 @@ public:
   LoadSave(GameManager&);
   virtual ~LoadSave(void);
 
+private:
+  bool		_buildTags;
+
+public:
+  virtual void		update(gdl::GameClock const&, gdl::Input&);
+
+public:
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
-  virtual void		update(gdl::GameClock const&, gdl::Input&);
+
+  /*
+    Others
+  */
+public:
+  void			buildTags(void);
 };
 
 #endif		/* __LOAD_SAVE_HPP__ */
