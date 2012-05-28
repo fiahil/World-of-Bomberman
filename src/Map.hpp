@@ -9,6 +9,8 @@
 #include <map>
 #include <Image.hpp>
 #include "Bonus.hpp"
+#include "Cube.hpp"
+#include "Plane.hpp"
 #include "Pattern.hpp"
 #include "APlayer.hpp"
 #include "AObj.hpp"
@@ -43,8 +45,13 @@ private:
   gdl::Image	_unbreak;
   gdl::Image	_break;
   gdl::Image	_background;
+  gdl::Image	_landscape;
   Point const*	_opti;
   Tp		_tp;
+  Cube		*w_unbreak;
+  Plane		*background;
+  Plane		*landscape;
+
 
   std::vector<gdl::Model>	_modelBonus;
   std::map<char, gdl::Model>	_modelBreak;
