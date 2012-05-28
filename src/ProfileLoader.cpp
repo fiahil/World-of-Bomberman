@@ -7,11 +7,8 @@
 
 ProfileLoader::ProfileLoader(void)
 {
+  this->_folder = "./Ressources/profiles/";
   this->setProfiles();
-}
-
-ProfileLoader::~ProfileLoader(void)
-{
 }
 
 bool				ProfileLoader::isNum(std::string str) const
@@ -22,7 +19,7 @@ bool				ProfileLoader::isNum(std::string str) const
   return (true);
 }
 
-int				ProfileLoader::idToString(std::string str)
+int				ProfileLoader::idToInt(std::string str)
 {
   std::stringstream	os(str);
   int			id;
@@ -33,7 +30,7 @@ int				ProfileLoader::idToString(std::string str)
 
 void				ProfileLoader::setProfiles(void)
 {
-  DirWalker	_texasRanger("./Ressources/profiles/");
+  DirWalker	_texasRanger(this->_folder);
 
   while (!(_texasRanger.isEnd()))
     {
@@ -41,12 +38,14 @@ void				ProfileLoader::setProfiles(void)
 	{
 	  try
 	    {
-	      this->_profiles.push_back(this->_pm.getProfile(idToString(*_texasRanger.current())));
-	      this->_names.push_back(this->_profiles.back()->getName());
+	      if ((*_texasRanger.current() != ".") && (*_texasRanger.current() != ".."))
+		{
+		  this->_profiles.push_back(this->_pm.getProfile(idToInt(*_texasRanger.current())));
+		  this->_names.push_back(this->_profiles.back()->getName());
+		}
 	    }
 	  catch (const std::runtime_error&)
 	    {
-	      // Invalid file format, just ignore
 	    }
 	}
       _texasRanger.clean();

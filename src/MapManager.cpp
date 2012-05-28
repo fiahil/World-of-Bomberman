@@ -10,16 +10,35 @@
 
 MapManager::MapManager(void)
 {
+  this->_folder = "./Ressources/maps/";
   this->setMaps();
+}
+
+bool			MapManager::isNum(std::string str) const
+{
+  for (int i = 0; str[i]; ++i)
+    if ((str[i] < '0') ^ (str[i] > '9'))
+      return (false);
+  return (true);
 }
 
 void			MapManager::setMaps(void)
 {
-  DirWalker	_texasRanger("./Ressources/saves/");
+  DirWalker	_texasRanger(this->_folder);
 
   while (!(_texasRanger.isEnd()))
     {
-      this->_maps.push_back(this->getMap(*_texasRanger.current()));
+      if (this->isNum(*_texasRanger.current()))
+	{
+	  try
+	    {
+	      if ((*_texasRanger.current() != ".") && (*_texasRanger.current() != ".."))
+		this->_maps.push_back(this->getMap(*_texasRanger.current()));
+	    }
+	  catch (const std::exception& e)
+	    {
+	    }
+	}
       _texasRanger.clean();
       ++_texasRanger;
     }
@@ -34,11 +53,7 @@ Map*			MapManager::getMap(size_t idx)
 
 Map*			MapManager::getMap(const std::string& file)
 {
-  Map*	ret = new Map(file);
-
-  /*
-    Gerer exception ?
-  */
+  Map*	ret = new Map(this->_folder + file);
 
   return (ret);
 }
