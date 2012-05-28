@@ -134,6 +134,7 @@ Settings::Settings(GameManager& game)
   this->_tags.push_back(new Tag("menu/White.png", "menu/White.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2350.0f));
 
   this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::PROFILE, 1700.0f, 0.0f, 2400.0f));
+  this->_textEdit.push_back(new TextEdit(300, 300));
 }
 
 Settings::~Settings()
@@ -151,7 +152,7 @@ double	Settings::getCenterY() const
   return 2250.0f;
 }
 
-void	Settings::update(gdl::GameClock const&, gdl::Input&)
+void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   //this->_tags[1]->createText(g_ref[this->_conf.getConfig(HumGame::UP)], 20, 800, 450);
   
@@ -165,5 +166,18 @@ void	Settings::update(gdl::GameClock const&, gdl::Input&)
 
   this->_tags[11]->createText(g_ref[this->_conf.getConfig(HumGame::SKILL)], 20, 800, 550);*/
   
-
+  this->_textEdit[0]->update(clock, input);
+  
+  /*for (size_t i = 0; i < this->_keyEvent.size(); ++i)
+    if (input.isKeyDown(this->_keyEvent[i].first))
+      (this->*_keyEvent[i].second)(clock);
+  if (this->_cursor % 2 == 1)
+    {
+      this->_tags[this->_cursor]->setStatus(false);
+      if (this->_timers[0] < this->_timers[1])
+	++this->_cursor;
+      else
+	--this->_cursor;
+      this->_tags[this->_cursor]->setStatus(true);      
+      }*/
 }
