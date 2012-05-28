@@ -39,6 +39,7 @@ void		MyGame::initialize(void)
     this->_match._players[i]->initialize();
   this->_HUD[HUD::LIFE_BAR] = gdl::Image::load("textures/life.png");
   this->_HUD[HUD::SHIELD] = gdl::Image::load("textures/shield.png");
+  this->_HUD[HUD::SPRINT] = gdl::Image::load("textures/sprint.png");
   this->_HUD[HUD::POWER] = gdl::Image::load("textures/power.png");
   this->_HUD[HUD::LUST] = gdl::Image::load("textures/fury.png");
   this->_HUD[HUD::BOMB_OK] = gdl::Image::load("textures/bombActive.png");

@@ -55,6 +55,7 @@ APlayer::APlayer(Map & map, std::vector<bool>* success)
     _lustStack(0),
     _powerStack(0),
     _nbKills(0),
+    _speed(0.15f),
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
     _skin(Skin::ENNEMY_LOW),
@@ -79,6 +80,7 @@ APlayer::APlayer(Map & map, std::vector<bool>* success)
   this->_bonusEffect[BonusType::LUST] = &APlayer::LustBonusEffect;
   this->_bonusEffect[BonusType::POWER] = &APlayer::PowerBonusEffect;
   this->_bonusEffect[BonusType::SHIELD] = &APlayer::ShieldBonusEffect;
+  this->_bonusEffect[BonusType::SPRINT] = &APlayer::SprintBonusEffect;
 
   this->_pos._scale = 2.0f;
   this->setPos(1, 1);
@@ -210,13 +212,13 @@ void		APlayer::slowMotion()
       this->_realPos.z = this->_originPos.z +
 	this->_k *
 	(this->_pos._pos.z - this->_originPos.z);
-      this->_k += 0.2f;
+      this->_k += this->_speed;
 
-      if (this->_k > 1.2f)
+      if (this->_k > 1.0f + this->_speed)
 	{
 	  this->_originPos = this->_pos._pos;
 	  this->_realPos = this->_pos._pos;
-	  this->_k = 0.2f;
+	  this->_k = this->_speed;
 	}
     }
 }
@@ -313,6 +315,11 @@ void		APlayer::ShieldBonusEffect()
 {
   this->_shield = true;
   this->_shieldTimer = -1.0f;
+}
+
+void		APlayer::SprintBonusEffect()
+{
+  this->_speed = 0.20f;
 }
 
 void		APlayer::takeDamage(ExplodedBomb const* cur)

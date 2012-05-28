@@ -324,6 +324,12 @@ void		Human::drawHUD(std::vector<gdl::Image>& img,
 					   60.0f,
 					   img[HUD::POWER]);
 
+      this->_HUD[HUD::SPRINT] = new Surface(40.0f,
+					    40.0f,
+					    180.0f,
+					    60.0f,
+					    img[HUD::SPRINT]);
+
       this->_HUD[HUD::SKILL_OK] = new Surface(50.0f,
 					      50.0f,
 					      90.0f,
@@ -456,6 +462,9 @@ void		Human::drawHUD(std::vector<gdl::Image>& img,
 
   if (this->_shield)
     this->_HUD[HUD::SHIELD]->draw();
+
+  if (this->_speed >= 0.20f)
+    this->_HUD[HUD::SPRINT]->draw();
   if (this->_lustStack)
     this->_HUD[HUD::LUST]->draw();
   if (this->_powerStack)

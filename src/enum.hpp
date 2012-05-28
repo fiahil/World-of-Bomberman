@@ -128,6 +128,7 @@ struct BonusType
       LUST,
       POWER,
       SHIELD,
+      SPRINT,
       LAST
     };
 };
@@ -174,6 +175,7 @@ struct HUD
     LIFE_BAR,
     LIFE,
     SHIELD,
+    SPRINT,
     POWER,
     LUST,
     BOMB_OK,

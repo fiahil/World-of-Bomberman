@@ -146,6 +146,7 @@ void		Map::initialize(void)
   this->_modelBonus[BonusType::LUST] = gdl::Model::load("models/Bonus_fury.FBX");
   this->_modelBonus[BonusType::POWER] = gdl::Model::load("models/Bonus_power.FBX");
   this->_modelBonus[BonusType::SHIELD] = gdl::Model::load("models/Bonus_shield.FBX");
+  this->_modelBonus[BonusType::SPRINT] = gdl::Model::load("models/Bomb_rox.FBX");
   this->w_unbreak = new Cube(this->_unbreak);
 
   Point		p(2.0f, 0, 0);
