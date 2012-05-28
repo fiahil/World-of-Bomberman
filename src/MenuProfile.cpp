@@ -30,7 +30,9 @@ double		MenuProfile::getCenterY() const
   return 1350.0f;
 }
 
-void		MenuProfile::doAction(gdl::GameClock const&, gdl::Input&)
+void		MenuProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-
+  for (size_t i = 0; i < this->_keyEvent.size(); ++i)
+    if (input.isKeyDown(this->_keyEvent[i].first))
+      (this->*_keyEvent[i].second)(clock);
 }

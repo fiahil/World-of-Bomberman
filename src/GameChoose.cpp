@@ -28,6 +28,9 @@ double		GameChoose::getCenterY(void) const
   return (2250.0f);
 }
 
-void		GameChoose::doAction(gdl::GameClock const&, gdl::Input&)
+void		GameChoose::update(gdl::GameClock const& clock, gdl::Input& input)
 {
+  for (size_t i = 0; i < this->_keyEvent.size(); ++i)
+    if (input.isKeyDown(this->_keyEvent[i].first))
+      (this->*_keyEvent[i].second)(clock);
 }

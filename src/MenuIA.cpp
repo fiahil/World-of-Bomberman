@@ -30,6 +30,9 @@ double		MenuIA::getCenterY(void) const
   return (3150.0f);
 }
 
-void		MenuIA::doAction(gdl::GameClock const&, gdl::Input&)
+void		MenuIA::update(gdl::GameClock const& clock, gdl::Input& input)
 {
+  for (size_t i = 0; i < this->_keyEvent.size(); ++i)
+    if (input.isKeyDown(this->_keyEvent[i].first))
+      (this->*_keyEvent[i].second)(clock);
 }

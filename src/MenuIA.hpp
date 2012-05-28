@@ -16,7 +16,7 @@ public:
 
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
-  virtual void		doAction(gdl::GameClock const&, gdl::Input&);
+  virtual void		update(gdl::GameClock const&, gdl::Input&);
 };
 
 #endif		/* __MENU_IA_HPP__ */
