@@ -36,7 +36,7 @@ void		Menu::initialize(void)
   Config conf;
   conf.setConfig(HumGame::ATTACK, gdl::Keys::RControl);
   APlayer *newHum1 = new Human(*map, conf, _aP1);
-  newHum1->setSkin(Skin::VARIANT);
+  newHum1->setSkin(Skin::ZULJIN);
   newHum1->setTeamId(6);
   players.push_back(newHum1);
   // conf.setConfig(HumGame::UP, gdl::Keys::W);
