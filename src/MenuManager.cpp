@@ -8,6 +8,7 @@
 #include <vector>
 #include <algorithm>
 #include "ProfileManager.hpp"
+#include "MapManager.hpp"
 #include "MenuManager.hpp"
 #include "MainMenu.hpp"
 #include "Credits.hpp"
@@ -35,10 +36,12 @@ MenuManager::MenuManager(int w, int h)
     _createGame(false),
     _refInitGame(GameMode::LAST, 0)
 {
+  MapManager	mapManager;
+
   this->_refInitGame[GameMode::SOLO] = &MenuManager::initGameSolo;
   this->_refInitGame[GameMode::COOP] = &MenuManager::initGameCoop;
   this->_refInitGame[GameMode::VERSUS] = &MenuManager::initGameVersus;
-  // this->_maps = this->_mapManager.getAll();
+  this->_map = mapManager.getAll();
 }
 
 MenuManager::~MenuManager()
