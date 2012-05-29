@@ -22,6 +22,8 @@
 #include "NewProfile.hpp"
 #include "MenuProfile.hpp"
 #include "Settings.hpp"
+#include "SettingsChoose.hpp"
+#include "SkinChoose.hpp"
 #include "NewProfile.hpp"
 #include "LoadProfile.hpp"
 #include "TeamMenu.hpp"
@@ -58,6 +60,8 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::MAINMENU]->initialize();
   this->_menu[TokenMenu::CREDITS] = new Credits(this->_gameManager);
   this->_menu[TokenMenu::CREDITS]->initialize();
+  this->_menu[TokenMenu::LOADPROFILE] = new LoadProfile(this->_gameManager, this->_profile);
+  this->_menu[TokenMenu::LOADPROFILE]->initialize();
   this->_menu[TokenMenu::LOADSAVE] = new LoadSave(this->_gameManager);
   this->_menu[TokenMenu::LOADSAVE]->initialize();
   this->_menu[TokenMenu::LOADMAP] = new LoadMap(this->_gameManager, this->_map);
@@ -66,18 +70,20 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::GAMECHOOSE]->initialize();
   this->_menu[TokenMenu::IA] = new MenuIA(this->_gameManager);
   this->_menu[TokenMenu::IA]->initialize();
-  this->_menu[TokenMenu::MAP] = new MenuMap(this->_gameManager);
-  this->_menu[TokenMenu::MAP]->initialize();
-  this->_menu[TokenMenu::PROFILE] = new MenuProfile(this->_gameManager);
-  this->_menu[TokenMenu::PROFILE]->initialize();
-  this->_menu[TokenMenu::SETTINGS] = new Settings(this->_gameManager);
-  this->_menu[TokenMenu::SETTINGS]->initialize();
-  this->_menu[TokenMenu::NEWPROFILE] = new NewProfile(this->_gameManager);
-  this->_menu[TokenMenu::NEWPROFILE]->initialize();
-  this->_menu[TokenMenu::LOADPROFILE] = new LoadProfile(this->_gameManager, this->_profile);
-  this->_menu[TokenMenu::LOADPROFILE]->initialize();
   this->_menu[TokenMenu::TEAM] = new TeamMenu(this->_gameManager);
   this->_menu[TokenMenu::TEAM]->initialize();
+  this->_menu[TokenMenu::MAP] = new MenuMap(this->_gameManager);
+  this->_menu[TokenMenu::MAP]->initialize();
+  this->_menu[TokenMenu::NEWPROFILE] = new NewProfile(this->_gameManager);
+  this->_menu[TokenMenu::NEWPROFILE]->initialize();
+  this->_menu[TokenMenu::PROFILE] = new MenuProfile(this->_gameManager);
+  this->_menu[TokenMenu::PROFILE]->initialize();
+  this->_menu[TokenMenu::SETTINGSCHOOSE] = new SettingsChoose(this->_gameManager);
+  this->_menu[TokenMenu::SETTINGSCHOOSE]->initialize();
+  this->_menu[TokenMenu::SETTINGS] = new Settings(this->_gameManager);
+  this->_menu[TokenMenu::SETTINGS]->initialize();
+  this->_menu[TokenMenu::SKINCHOOSE] = new SkinChoose(this->_gameManager);
+  this->_menu[TokenMenu::SKINCHOOSE]->initialize();
 
   this->_menu[this->_curMenu]->setTextDraw(true);
   this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,

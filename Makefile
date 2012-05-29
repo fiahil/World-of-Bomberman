@@ -51,7 +51,9 @@ SRC		= ./src/main.cpp	 \
 		./src/MenuMap.cpp	 \
 		./src/NewProfile.cpp	 \
 		./src/MenuProfile.cpp	 \
+		./src/SettingsChoose.cpp \
 		./src/Settings.cpp	 \
+		./src/SkinChoose.cpp	 \
 		./src/TeamMenu.cpp	 \
 		./src/Tag.cpp
 

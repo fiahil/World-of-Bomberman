@@ -10,7 +10,7 @@ MenuProfile::MenuProfile(GameManager& game)
 {
   this->_tags.push_back(new Tag("menu/NewGameNormal.png", "menu/NewGameHighlit.png", true, false, TokenMenu::GAMECHOOSE, 2400.0f, 0.0f, 1200.0f));
   this->_tags.push_back(new Tag("menu/LoadGameNormal.png", "menu/LoadGameHighlit.png", false, false, TokenMenu::LOADSAVE, 2400.0f, 0.0f, 1250.0f));
-  this->_tags.push_back(new Tag("menu/SettingsNormal.png", "menu/SettingsHighlit.png", false, false, TokenMenu::SETTINGS, 2400.0f, 0.0f, 1300.0f));
+  this->_tags.push_back(new Tag("menu/SettingsNormal.png", "menu/SettingsHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 2400.0f, 0.0f, 1300.0f));
   this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::MAINMENU, 2400.0f, 0.0f, 1350.0f));
   this->_tags.push_back(new Tag("menu/QuitNormal.png", "menu/QuitHighlit.png", false, false, TokenMenu::QUIT, 2400.0f, 0.0f, 1400.0f));
 }
