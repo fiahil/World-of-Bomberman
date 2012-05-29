@@ -11,6 +11,7 @@ NewProfile::NewProfile(GameManager& game)
   : AMenu("menu/Background2.png", "menu/Background2.png", 1600.0f, -1.0f, 0.0f, game)
 {
   this->_oneTime = -1.0;
+  this->_strStatus = false;
   this->_selected = false;
   this->_textEdit.push_back(new TextEdit(965, 360, "[Press Enter to type your name]"));
   this->_tags.push_back(new Tag("menu/NameNormal.png", "menu/NameHighlit.png", false, false, TokenMenu::NEWPROFILE, 2400.0f, 0.0f, 400.0f));
@@ -27,12 +28,11 @@ void	NewProfile::setNewProfile(void)
 {
   ProfileManager	_pm;
   Config		_cfg;
-  size_t		_id = 0;
+  size_t		_id;
   std::vector<size_t>	_six(6, 0);
   std::vector<size_t>	_three(3, 0);
-  
-  if ((_id = _pm.getMax()))
-    ++_id;
+
+  for (_id = 0; _pm.isHere(_id); ++_id);
   this->_gameManager._mainProfile = new Profile;
   this->_gameManager._mainProfile->setId(_id);
   this->_gameManager._mainProfile->setLvl(1);
@@ -45,7 +45,8 @@ void	NewProfile::setNewProfile(void)
   this->_gameManager._mainProfile->setStat(_six);
   this->_gameManager._mainProfile->setAchievement(_three);
   _pm.setProfile(_id, *this->_gameManager._mainProfile);
-	    this->_textEdit[0]->setStr("[Press enter to type your name]");
+  this->_strStatus = false;
+  this->_textEdit[0]->setStr("[Press Enter to type your name]");
 }
 
 double	NewProfile::getCenterX(void) const
@@ -82,13 +83,16 @@ void	NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 	{
 	  if (this->_curToken == TokenMenu::PROFILE)
 	    {
-	      if (!this->_textEdit[0]->getStr().empty())
+	      if (!this->_textEdit[0]->getStr().empty() && _strStatus)
 		this->setNewProfile();
 	      else
 		this->_curToken = TokenMenu::LAST;
 	    }
 	  else if (this->_curToken == TokenMenu::MAINMENU)
-	    this->_textEdit[0]->setStr("[Press enter to type your name]");
+	    {
+	      this->_strStatus = false;
+	      this->_textEdit[0]->setStr("[Press Enter to type your name]");
+	    }
 	}
 
       if (this->_cursor == 1)
@@ -105,6 +109,7 @@ void	NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)
     {
       if (input.isKeyDown(gdl::Keys::Return))
 	{
+	  this->_strStatus = true;
 	  this->_selected = false;
 	  this->_oneTime = clock.getTotalGameTime() + 0.15f;
 	}
