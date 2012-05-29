@@ -8,6 +8,7 @@
 
 GameManager::GameManager(Profile * p)
   : _mainProfile(p),
+    _secondProfile(0),
     _typeAI(AIType::LAST)
 {
   this->_configJ1.setConfig(HumGame::UP, gdl::Keys::W);

@@ -34,8 +34,10 @@ void		MenuMap::update(gdl::GameClock const& clock, gdl::Input& input)
       (this->*_keyEvent[i].second)(clock);
   if (this->_curToken == TokenMenu::CREATEGAME)
     {
-      int	size = this->_gameManager._nbPlayers * 5;
+      int	size = this->_gameManager._match._players.size() * 3;
 
+      if (size < 10)
+	size = 10;
       this->_gameManager._match._map = new Map(size, size, 2, 2);
     }
 }

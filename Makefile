@@ -51,7 +51,9 @@ SRC		= ./src/main.cpp	 \
 		./src/MenuMap.cpp	 \
 		./src/NewProfile.cpp	 \
 		./src/MenuProfile.cpp	 \
+		./src/SettingsChoose.cpp \
 		./src/Settings.cpp	 \
+		./src/SkinChoose.cpp	 \
 		./src/TeamMenu.cpp	 \
 		./src/Tag.cpp
 
@@ -61,7 +63,7 @@ INCLUDES	= -I./lib/libgdl_gl-2012.3/include -I./lib/libfmodex/inc -I./src -I./Se
 
 CXX		= g++
 
-CXXFLAGS	= -g -Wall -Wextra -O3 $(INCLUDES)
+CXXFLAGS	= -Wall -Wextra -O3 $(INCLUDES)
 
 LDFLAGS		= -lGL -lGLU -lgdl_gl -lserial -lfmodex				     \
 		-L./lib/libgdl_gl-2012.3/lib -L./lib/libserial -L./lib/libfmodex/lib \
