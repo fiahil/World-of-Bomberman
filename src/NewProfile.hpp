@@ -12,6 +12,7 @@ class	NewProfile : public AMenu
 {
 private:
   bool		_selected;
+  bool		_strStatus;
   double	_oneTime;
 
 public:
