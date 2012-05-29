@@ -203,6 +203,7 @@ struct HUD
 struct AIType
 {
   enum eAI {
+    HALLU,
     EASY,
     MEDIUM,
     HARD,

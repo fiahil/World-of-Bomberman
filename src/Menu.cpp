@@ -34,7 +34,7 @@ void		Menu::initialize(void)
 
   std::vector<APlayer*>	players;
   Config conf;
-  conf.setConfig(HumGame::ATTACK, gdl::Keys::RControl);
+  conf.setConfig(HumGame::ATTACK, gdl::Keys::Space);
   APlayer *newHum1 = new Human(*map, conf, _aP1);
   newHum1->setSkin(Skin::SYLVANAS);
   newHum1->setTeamId(6);
@@ -49,7 +49,7 @@ void		Menu::initialize(void)
   // newHum2->setTeamId(7);
   // newHum2->setSkin(Skin::VARIANT);
   //  players.push_back(newHum2);
-  for (int i = 0; i < 10; ++i)
+  for (int i = 0; i < 50; ++i)
     {
       APlayer *newAI = new AI(AIType::EASY, *map);
       newAI->setColor(7);

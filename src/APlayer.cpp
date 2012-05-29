@@ -56,6 +56,7 @@ APlayer::APlayer(Map & map, std::vector<bool>* success)
     _powerStack(0),
     _nbKills(0),
     _speed(0.15f),
+    _dam(1.0),
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
     _skin(Skin::ENNEMY_LOW),
@@ -218,9 +219,9 @@ void		APlayer::normalBombEffect(ExplodedBomb const* cur)
   if (this->_curEffect != cur)
     {
       if (this->_shield)
-	this->_pv -= 15;
+	this->_pv -= 15 * this->_dam;
       else
-	this->_pv -= 30;
+	this->_pv -= 30 * this->_dam;
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
@@ -232,9 +233,9 @@ void		APlayer::bigBombEffect(ExplodedBomb const* cur)
   if (this->_curEffect != cur)
     {
       if (this->_shield)
-	this->_pv -= 22;
+	this->_pv -= 22 * this->_dam;
       else
-	this->_pv -= 45;
+	this->_pv -= 45 * this->_dam;
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
@@ -246,9 +247,9 @@ void		APlayer::megaBombEffect(ExplodedBomb const* cur)
   if (this->_curEffect != cur)
     {
       if (this->_shield)
-	this->_pv -= 30;
+	this->_pv -= 30 * this->_dam;
       else
-	this->_pv -= 60;
+	this->_pv -= 60 * this->_dam;
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
