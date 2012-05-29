@@ -72,7 +72,7 @@ struct Skin
 {
   enum eSkin
     {
-      THRALL,
+      WORGEN,
       SYLVANAS,
       VARIANT,
       ZULJIN,
@@ -159,7 +159,9 @@ struct TokenMenu
       MAP,
       NEWPROFILE,
       PROFILE,
+      SETTINGSCHOOSE,
       SETTINGS,
+      SKINCHOOSE,
       QUIT,
       CREATEGAME,
       LAST

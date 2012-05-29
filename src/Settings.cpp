@@ -27,12 +27,12 @@ static const char*	g_ref[gdl::Keys::Count + 1] = {
 };
 
 static const int	g_refPos[6][2] = {
-  {450, 250},
-  {450, 300},
-  {450, 350},
-  {450, 400},
-  {450, 450},
-  {450, 500},
+  {670, 170},
+  {670, 220},
+  {670, 270},
+  {670, 320},
+  {670, 370},
+  {670, 420},
 };
 
 static const HumGame::eAction	g_refAction[6] = {
@@ -45,29 +45,29 @@ static const HumGame::eAction	g_refAction[6] = {
 };
 
 Settings::Settings(GameManager& game)
-  : AMenu("menu/Background.png", "menu/Background.png", 1600.0f, -1.0f, 1800.0f, game),
+  : AMenu("menu/Background.png", "menu/Background.png", 3200.0f, -1.0f, 2700.0f, game),
     _oneTime(-1.0f),
     _selected(false)
 {
-  this->_tags.push_back(new Tag("menu/ForwardNormal.png", "menu/ForwardHighlit.png", true, false, TokenMenu::SETTINGS, 1700.0f, 0.0f, 2100.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2100.0f));
+  this->_tags.push_back(new Tag("menu/ForwardNormal.png", "menu/ForwardHighlit.png", true, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2900.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2900.0f));
 
-  this->_tags.push_back(new Tag("menu/BackwardNormal.png", "menu/BackwardHighlit.png", false, false, TokenMenu::SETTINGS, 1700.0f, 0.0f, 2150.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2150.0f));
+  this->_tags.push_back(new Tag("menu/BackwardNormal.png", "menu/BackwardHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2950.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2950.0f));
 
-  this->_tags.push_back(new Tag("menu/LeftNormal.png", "menu/LeftHighlit.png", false, false, TokenMenu::SETTINGS, 1700.0f, 0.0f, 2200.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2200.0f));
+  this->_tags.push_back(new Tag("menu/LeftNormal.png", "menu/LeftHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 3000.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 3000.0f));
 
-  this->_tags.push_back(new Tag("menu/RightNormal.png", "menu/RightHighlit.png", false, false, TokenMenu::SETTINGS, 1700.0f, 0.0f, 2250.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2250.0f));
+  this->_tags.push_back(new Tag("menu/RightNormal.png", "menu/RightHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 3050.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 3050.0f));
 
-  this->_tags.push_back(new Tag("menu/DropBombNormal.png", "menu/DropBombHighlit.png", false, false, TokenMenu::SETTINGS, 1700.0f, 0.0f, 2300.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2300.0f));
+  this->_tags.push_back(new Tag("menu/DropBombNormal.png", "menu/DropBombHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 3100.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 3100.0f));
 
-  this->_tags.push_back(new Tag("menu/SkillNormal.png", "menu/SkillHighlit.png", false, false, TokenMenu::SETTINGS, 1700.0f, 0.0f, 2350.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 2000.0f, 0.0f, 2350.0f));
+  this->_tags.push_back(new Tag("menu/SkillNormal.png", "menu/SkillHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 3150.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 3150.0f));
 
-  this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::PROFILE, 1700.0f, 0.0f, 2400.0f));
+  this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::PROFILE, 3500.0f, 0.0f, 3200.0f));
 }
 
 Settings::~Settings()
@@ -77,18 +77,18 @@ Settings::~Settings()
 
 double	Settings::getCenterX() const
 {
-  return 2400.0f;
+  return 4000.0f;
 }
 
 double	Settings::getCenterY() const
 {
-  return 2250.0f;
+  return 3150.0f;
 }
 
 void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   Config&	conf = this->_gameManager._mainProfile->getConfig();
-    
+
   if (this->_oneTime > 0.0f)
     {
       if (clock.getTotalGameTime() >= this->_oneTime)
