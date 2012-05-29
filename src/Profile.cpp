@@ -47,6 +47,11 @@ const Config &	Profile::getConfig(void) const
   return this->_config;
 }
 
+Config&		Profile::getConfig(void)
+{
+  return this->_config;
+}
+
 const std::string &		Profile::getName(void) const
 {
   return this->_name;
@@ -67,7 +72,7 @@ const std::vector<size_t> &	Profile::getAchievement(void) const
   return this->_achievement;
 }
 
-const std::vector<size_t> &	Profile::getSave(void) const
+const std::vector<std::string> &	Profile::getSave(void) const
 {
   return this->_save;
 }
@@ -143,14 +148,14 @@ void		Profile::addAchievement(size_t value)
   this->_achievement.push_back(value);
 }
 
-void		Profile::setSave(const std::vector<size_t> & value)
+void		Profile::setSave(const std::vector<std::string> & value)
 {
   this->_save = value;
 }
 
-void		Profile::addSave(size_t value)
+void		Profile::addSave(const std::string * value)
 {
-  this->_save.push_back(value);
+  this->_save.push_back(*value);
 }
 
 void		Profile::setAllProfile(size_t id, size_t xp,
@@ -160,7 +165,7 @@ void		Profile::setAllProfile(size_t id, size_t xp,
 			       const std::vector<size_t> & skill,
 			       const std::vector<size_t> & stat,
 			       const std::vector<size_t> & achievement,
-			       const std::vector<size_t> & save)
+				       const std::vector<std::string> & save)
 {
   this->_id = id;
   this->_lvl = xp / 100; //TODO: curve

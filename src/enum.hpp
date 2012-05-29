@@ -149,13 +149,19 @@ struct TokenMenu
   enum eMenu
     {
       MAINMENU,
+      CREDITS,
+      LOADPROFILE,
+      LOADSAVE,
+      LOADMAP,
+      GAMECHOOSE,
+      IA,
+      TEAM,
+      MAP,
       NEWPROFILE,
       PROFILE,
-      SLIDING,
-      GAMECHOOSE,
       SETTINGS,
-      BACK,
       QUIT,
+      CREATEGAME,
       LAST
     };
 };
@@ -205,7 +211,7 @@ struct AIType
   enum eAI {
     HALLU,
     EASY,
-    MEDIUM,
+    NORMAL,
     HARD,
     LAST
   };

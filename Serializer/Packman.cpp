@@ -44,7 +44,7 @@ namespace Serializer
     this->_os	<< std::endl << std::endl;
     this->_os	<< "#SAVES";
     for (size_t i = 0; i < p.getSave().size(); ++i) {
-      this->_os << "\t:" << p.getSave().at(i);
+      this->_os << "\t:[" << p.getSave().at(i) << "]";
     }
     this->_os	<< std::endl << std::endl;
     this->_os	<< "#CONFIG" << std::endl;
