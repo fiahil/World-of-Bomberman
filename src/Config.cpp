@@ -3,7 +3,6 @@
  * 12.05.2012
  */
 
-#include <iostream>
 #include <algorithm>
 #include "Config.hpp"
 

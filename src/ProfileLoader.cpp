@@ -44,8 +44,9 @@ void				ProfileLoader::setProfiles(void)
 		  this->_names.push_back(this->_profiles.back()->getName());
 		}
 	    }
-	  catch (const std::runtime_error&)
+	  catch (const std::runtime_error& e)
 	    {
+	      std::cerr << e.what() << std::endl;
 	    }
 	}
       _texasRanger.clean();
