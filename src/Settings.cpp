@@ -4,6 +4,8 @@
  */
 
 #include <iostream>
+#include <sstream>
+#include "Packman.hpp"
 #include "Settings.hpp"
 
 static const char*	g_ref[gdl::Keys::Count + 1] = {
@@ -111,6 +113,16 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
 	  this->_tags[this->_cursor + 1]->createText("Please press a button", 20,
 						     g_refPos[(this->_cursor + 1) / 2][0],
 						     g_refPos[(this->_cursor + 1) / 2][1]);
+	}
+      else if (this->_curToken == TokenMenu::PROFILE)
+	{
+	  std::stringstream	ss;
+	  
+	  ss << "Ressources/profiles/" << this->_gameManager._mainProfile->getId();
+	  std::cout << ss.str() << std::endl;
+	  Serializer::Packman	pa(ss.str());
+	  
+	  pa.packProfile(*this->_gameManager._mainProfile);
 	}
       if (this->_cursor % 2 == 1)
 	{
