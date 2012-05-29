@@ -172,7 +172,7 @@ struct AIType
 {
   enum eAI {
     EASY,
-    MEDIUM,
+    NORMAL,
     HARD,
     LAST
   };

@@ -111,6 +111,16 @@ void		doBilan(const GameManager & game)
   else
     std::cout << "Inactif !" << std::endl;
 
+  std::cout << "*IA Level : ";
+  if (game._typeAI == AIType::EASY)
+    std::cout << "Easy" << std::endl;
+  else if (game._typeAI == AIType::NORMAL)
+    std::cout << "Normal" << std::endl;
+  else if (game._typeAI == AIType::HARD)
+    std::cout << "Hard" << std::endl;
+  else
+    std::cout << "Pas set !" << std::endl;
+
   std::cout << "*Mode de jeu : ";
   if (game._match._gameMode == GameMode::SOLO)
     std::cout << "Solo" << std::endl;

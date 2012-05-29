@@ -7,7 +7,8 @@
 #include "GameManager.hpp"
 
 GameManager::GameManager(Profile * p)
-  : _mainProfile(p)
+  : _mainProfile(p),
+    _typeAI(AIType::LAST)
 {
   this->_configJ1.setConfig(HumGame::UP, gdl::Keys::W);
   this->_configJ1.setConfig(HumGame::DOWN, gdl::Keys::S);

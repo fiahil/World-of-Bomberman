@@ -16,7 +16,7 @@ AI::AI(AIType::eAI type, Map& map)
     _AIDifficulty(AIType::LAST, 0)
 {
   this->_AIDifficulty[AIType::EASY] = &AI::AIEasy;
-  this->_AIDifficulty[AIType::MEDIUM] = &AI::AIMedium;
+  this->_AIDifficulty[AIType::NORMAL] = &AI::AIMedium;
   this->_AIDifficulty[AIType::HARD] = &AI::AIHard;
 }
 
