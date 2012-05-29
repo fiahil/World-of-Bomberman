@@ -69,6 +69,7 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::LOADPROFILE]->initialize();
   this->_menu[TokenMenu::TEAM] = new TeamMenu(this->_gameManager);
   this->_menu[TokenMenu::TEAM]->initialize();
+
   this->_menu[this->_curMenu]->setTextDraw(true);
   this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
 		       this->_menu[this->_curMenu]->getCenterY());
@@ -83,6 +84,40 @@ void	MenuManager::draw(void)
       (*it)->draw();
 }
 
+void		doBilan(const GameManager & game)
+{
+  std::cout << "\nBilan Menu :" << std::endl;
+  std::cout << "*Main Profile : ";
+  if (game._mainProfile != 0)
+    std::cout << "Existe : Nom = " << game._mainProfile->getName() << std::endl;
+  else
+    std::cout << "N'existe Pas !" << std::endl;
+
+  std::cout << "*Map : ";
+  if (game._match._map != 0)
+    std::cout << "Existe :)" << std::endl;
+  else
+    std::cout << "N'existe Pas !" << std::endl;
+
+  std::cout << "*Cheat : ";
+  if (game._match._cheat)
+    std::cout << "Active :)" << std::endl;
+  else
+    std::cout << "Inactif !" << std::endl;
+
+  std::cout << "*Mode de jeu : ";
+  if (game._match._gameMode == GameMode::SOLO)
+    std::cout << "Solo" << std::endl;
+  else if (game._match._gameMode == GameMode::COOP)
+    std::cout << "Coop" << std::endl;
+  else if (game._match._gameMode == GameMode::VERSUS)
+    std::cout << "Versus" << std::endl;
+  else
+    std::cout << "Pas set !" << std::endl;
+
+  std::cout << "*Nb Joueurs : " << game._match._players.size() << std::endl;
+}
+
 void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   TokenMenu::eMenu	tmp;
@@ -93,6 +128,7 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 	exit(0);
       else if (tmp == TokenMenu::CREATEGAME)
 	{
+	  std::cout << "Creation de la partie !" << std::endl;
 	  this->_createGame = true;
 	  return ;
 	}
@@ -100,7 +136,8 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
       this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-				 this->_menu[this->_curMenu]->getCenterY());
+			   this->_menu[this->_curMenu]->getCenterY());
+      /**/doBilan(this->_gameManager);
     }
   else
     this->_menu[this->_curMenu]->update(clock, input);

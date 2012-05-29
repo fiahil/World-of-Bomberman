@@ -33,4 +33,13 @@ void		MenuIA::update(gdl::GameClock const& clock, gdl::Input& input)
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
+  // if (this->_curToken == TokenMap::TEAM)
+  //   {
+  //     if (this->_cursor == 0)
+  // 	this-> = ;
+  //     if (this->_cursor == 1)
+  // 	this-> = ;
+  //     if (this->_cursor == 2)
+  // 	this-> = ;
+  //   }
 }

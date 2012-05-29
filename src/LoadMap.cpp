@@ -6,8 +6,9 @@
 #include <iostream>		// REMOVE
 #include "LoadMap.hpp"
 
-LoadMap::LoadMap(GameManager& game, const std::vector<Map *> & map)
-  : AMenu("menu/Background2.png", "menu/Background2.png", 1600.0f, -1.0f, 3600.0f, game)
+LoadMap::LoadMap(GameManager& game, std::vector<Map *> & map)
+  : AMenu("menu/Background2.png", "menu/Background2.png", 1600.0f, -1.0f, 3600.0f, game),
+    _map(map)
 {
   bool					selected = true;
   std::vector<Map *>::const_iterator	it = map.begin();
@@ -49,7 +50,5 @@ void		LoadMap::update(gdl::GameClock const& clock, gdl::Input& input)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
   if (this->_curToken == TokenMenu::CREATEGAME)
-    {
-      std::cout << "Creation de la partie !" << std::endl;
-    }
+    this->_gameManager._match._map = this->_map[this->_cursor];
 }

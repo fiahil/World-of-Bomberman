@@ -22,7 +22,6 @@ public:
 
 public:
   GameManager(Profile * = 0);
-
 };
 
 #endif		/* __GAME_MANAGEMENT_HPP__ */

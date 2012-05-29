@@ -11,8 +11,11 @@
 class	LoadMap : public AMenu
 {
 public:
-  LoadMap(GameManager&, const std::vector<Map *> &);
+  LoadMap(GameManager&, std::vector<Map *> &);
   virtual ~LoadMap(void);
+
+private:
+  std::vector<Map *> & _map;
 
   /*
     Heritance from AObj
