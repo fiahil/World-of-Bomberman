@@ -13,15 +13,17 @@
 class	TeamMenu : public AMenu
 {
 private:
+  std::vector<Profile*>&	_profiles;
   std::vector<int>	_nb;
   std::vector<double>	_timersLR;
 
 private:
-  void	updateNumber() const;
+  void	updateText() const;
+  void	changeProfile(gdl::GameClock const&, gdl::Input&);
   void	changeNumber(gdl::GameClock const&, gdl::Input&);
 
 public:
-  TeamMenu(GameManager&);
+  TeamMenu(GameManager&, std::vector<Profile*>&);
   virtual ~TeamMenu(void);
 
   virtual double	getCenterX() const;

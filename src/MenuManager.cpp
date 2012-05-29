@@ -76,10 +76,9 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::NEWPROFILE]->initialize();
   this->_menu[TokenMenu::LOADPROFILE] = new LoadProfile(this->_gameManager, this->_profile);
   this->_menu[TokenMenu::LOADPROFILE]->initialize();
-  this->_menu[TokenMenu::TEAM] = new TeamMenu(this->_gameManager);
+  this->_menu[TokenMenu::TEAM] = new TeamMenu(this->_gameManager, this->_profile);
   this->_menu[TokenMenu::TEAM]->initialize();
 
-  this->_menu[this->_curMenu]->setTextDraw(true);
   this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
 		       this->_menu[this->_curMenu]->getCenterY());
 }
@@ -123,13 +122,16 @@ void	MenuManager::initGameSolo()
 
   this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
 							 this->_gameManager._mainProfile->getConfig()));
-  this->_gameManager._match._players.back()->setTeamId(id++);
+  this->_gameManager._match._players.back()->setTeamId(id);
+  this->_gameManager._match._players.back()->setSkin(this->_gameManager._mainProfile->getSkin());
+  this->_gameManager._match._players.back()->setColor(id++);
   for (int i = 0; i < this->_gameManager._nbTeams; ++i, ++id)
     for (int c = 0; c < this->_gameManager._nbPlayers; ++c)
       {
 	this->_gameManager._match._players.push_back(new AI(this->_gameManager._typeAI,
 							    *this->_gameManager._match._map));
 	this->_gameManager._match._players.back()->setTeamId(id);
+	this->_gameManager._match._players.back()->setColor(id);
       }
 }
 
@@ -140,15 +142,20 @@ void	MenuManager::initGameCoop()
   this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
 							 this->_gameManager._configJ1));
   this->_gameManager._match._players.back()->setTeamId(id);
+  this->_gameManager._match._players.back()->setSkin(this->_gameManager._mainProfile->getSkin());
+  this->_gameManager._match._players.back()->setColor(id);
   this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
 							 this->_gameManager._configJ2));
-  this->_gameManager._match._players.back()->setTeamId(id++);
+  this->_gameManager._match._players.back()->setTeamId(id);
+  this->_gameManager._match._players.back()->setSkin(this->_gameManager._secondProfile->getSkin());
+  this->_gameManager._match._players.back()->setColor(id++);
   for (int i = 0; i < this->_gameManager._nbTeams; ++i, ++id)
     for (int c = 0; c < this->_gameManager._nbPlayers; ++c)
       {
 	this->_gameManager._match._players.push_back(new AI(this->_gameManager._typeAI,
 							    *this->_gameManager._match._map));
 	this->_gameManager._match._players.back()->setTeamId(id);
+	this->_gameManager._match._players.back()->setColor(id);
       }
 }
 
@@ -158,16 +165,21 @@ void	MenuManager::initGameVersus()
   
   this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
 							 this->_gameManager._configJ1));
-  this->_gameManager._match._players.back()->setTeamId(id++);
+  this->_gameManager._match._players.back()->setTeamId(id);
+  this->_gameManager._match._players.back()->setSkin(this->_gameManager._mainProfile->getSkin());
+this->_gameManager._match._players.back()->setColor(id++);
   this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
 							 this->_gameManager._configJ2));
-  this->_gameManager._match._players.back()->setTeamId(id++);
+  this->_gameManager._match._players.back()->setTeamId(id);
+  this->_gameManager._match._players.back()->setSkin(this->_gameManager._secondProfile->getSkin());
+  this->_gameManager._match._players.back()->setColor(id++);
   for (int i = 0; i < this->_gameManager._nbTeams; ++i, ++id)
     for (int c = 0; c < this->_gameManager._nbPlayers; ++c)
       {
 	this->_gameManager._match._players.push_back(new AI(this->_gameManager._typeAI,
 							    *this->_gameManager._match._map));
 	this->_gameManager._match._players.back()->setTeamId(id);
+	this->_gameManager._match._players.back()->setColor(id);
       }
 }
 
