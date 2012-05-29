@@ -36,22 +36,17 @@ private:
   int				_start;
   double			_startTimer;
   gdl::GameClock const*		_clock;
-  std::vector<fDifficulty>	_AIDifficulty;
   stFunc			_state;
   std::deque<dirFunc>		_target;
   std::vector<Path>		_paths;
 
-  std::vector<std::pair<gtFunc, stFunc> >	_EASYtable;
+  std::vector<std::vector<std::pair<gtFunc, stFunc> > >	_table;
 
 public:
   void	updateView(AIView const*);
   void	play(gdl::GameClock const&, gdl::Input&);
 
 private:
-  void	AIEasy(gdl::GameClock const&);
-  void	AIMedium(gdl::GameClock const&);
-  void	AIHard(gdl::GameClock const&);
-
   size_t adjBarrel(size_t x, size_t y) const;
 
   bool	isWall(size_t x, size_t y) const;
