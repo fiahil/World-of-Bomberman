@@ -8,12 +8,10 @@
 MenuIA::MenuIA(GameManager& game)
   : AMenu("menu/Background2.png", "menu/Background2.png", 1600.0f, -1.0f, 2700.0f, game)
 {
-  this->_tags.push_back(new Tag("menu/NbTextNormal.png", "menu/NbTextHighlit.png", true, false, /**/TokenMenu::IA, 2400.0f, 0.0f, 2900.0f));
-  this->_tags.push_back(new Tag("menu/LevelNormal.png", "menu/LevelHighlit.png", false, false, /**/TokenMenu::IA, 2400.0f, 0.0f, 2950.0f));
-  this->_tags.push_back(new Tag("menu/EasyNormal.png", "menu/EasyHighlit.png", false, false, /**/TokenMenu::MAP, 2400.0f, 0.0f, 3000.0f));
-  this->_tags.push_back(new Tag("menu/NormalNormal.png", "menu/NormalHighlit.png", false, false, /**/TokenMenu::MAP, 2400.0f, 0.0f, 3050.0f));
-  this->_tags.push_back(new Tag("menu/HardNormal.png", "menu/HardHighlit.png", false, false, /**/TokenMenu::MAP, 2400.0f, 0.0f, 3100.0f));
-  this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::GAMECHOOSE, 2400.0f, 0.0f, 3150.0f));
+  this->_tags.push_back(new Tag("menu/EasyNormal.png", "menu/EasyHighlit.png", true, false, TokenMenu::TEAM, 2400.0f, 0.0f, 2900.0f));
+  this->_tags.push_back(new Tag("menu/NormalNormal.png", "menu/NormalHighlit.png", false, false, TokenMenu::TEAM, 2400.0f, 0.0f, 2950.0f));
+  this->_tags.push_back(new Tag("menu/HardNormal.png", "menu/HardHighlit.png", false, false, TokenMenu::TEAM, 2400.0f, 0.0f, 3000.0f));
+  this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::GAMECHOOSE, 2400.0f, 0.0f, 3050.0f));
 }
 
 MenuIA::~MenuIA(void)
