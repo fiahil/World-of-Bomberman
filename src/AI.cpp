@@ -275,18 +275,27 @@ size_t	AI::adjBarrel(size_t x, size_t y) const
 }
 
 bool	AI::nearBomb(void)
-{/*
-  for (int y = -5; y < 5; ++y)
+{
+  int	x = 0;
+  int	y = -3;
+
+  for (; y < 3; ++y)
   {
-    for (int x = -5; x < 5; ++x)
+    if (isBomb(this->_pos._x + x, this->_pos._y + y))
     {
-      if (isBomb(this->_pos._x + x, this->_pos._y + y))
-      {
-	return this->pathFind(this->_pos._x + x, this->_pos._y + y,
-	    this->_pos._x, this->_pos._y);
-      }
+      return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
+	  this->_pos._x, this->_pos._y);
     }
-  }*/
+  }
+  y = 0;
+  for (x = -3; x < 3; ++x)
+  {
+    if (isBomb(this->_pos._x + x, this->_pos._y + y))
+    {
+      return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
+	  this->_pos._x, this->_pos._y);
+    }
+  }
   return false;
 }
 
@@ -360,9 +369,7 @@ void	AI::fetchState(void)
 
 void	AI::attackState(void)
 {
-  std::deque<dirFunc>	tmp(this->_target);
-
-  this->_target.push_front(&AI::ATTACKFunction);
+  this->_target.push_back(&AI::ATTACKFunction);
   this->_state = &AI::moveState;
 }
 
@@ -389,6 +396,50 @@ bool	AI::pathFind(size_t x, size_t y, size_t cx, size_t cy)
       this->_target.insert(this->_target.begin(), it->func.begin(), it->func.end());
       return true;
     }
+  }
+  return false;
+}
+
+bool	AI::dodgeBomb(size_t x, size_t y, size_t cx, size_t cy)
+{
+  std::cout << "dodging" << std::endl;
+  if (x == cx)
+    return this->dodgingX(cx, cy);
+  else if (y == cy)
+    return this->dodgingY(cx, cy);
+  return false;
+}
+
+bool	AI::dodgingX(size_t cx, size_t cy)
+{
+  if (isEmpty(cx - 1, cy))
+  {
+    this->_target.push_back(&AI::LEFTFunction);
+    std::cout << "ESQUIVE LEFT" << std::endl;
+    return true;
+  }
+  if (isEmpty(cx + 1, cy))
+  {
+    this->_target.push_back(&AI::RIGHTFunction);
+    std::cout << "ESQUIVE RIGHT" << std::endl;
+    return true;
+  }
+  return false;
+}
+
+bool	AI::dodgingY(size_t cx, size_t cy)
+{
+  if (isEmpty(cx, cy - 1))
+  {
+    this->_target.push_back(&AI::UPFunction);
+    std::cout << "ESQUIVE UP" << std::endl;
+    return true;
+  }
+  if (isEmpty(cx, cy + 1))
+  {
+    this->_target.push_back(&AI::DOWNFunction);
+    std::cout << "ESQUIVE DOWN" << std::endl;
+    return true;
   }
   return false;
 }

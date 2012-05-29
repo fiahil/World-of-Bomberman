@@ -71,6 +71,9 @@ private:
 
   bool	pathFind(size_t x, size_t y, size_t cx, size_t cy);
   bool	pathDiscovery(size_t cx, size_t cy, Path const& p);
+  bool	dodgeBomb(size_t x, size_t y, size_t cx, size_t cy);
+  bool	dodgingX(size_t cx, size_t cy);
+  bool	dodgingY(size_t cx, size_t cy);
 };
 
 #endif

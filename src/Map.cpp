@@ -146,7 +146,7 @@ void		Map::initialize(void)
   this->_modelBonus[BonusType::LUST] = gdl::Model::load("models/Bonus_fury.FBX");
   this->_modelBonus[BonusType::POWER] = gdl::Model::load("models/Bonus_power.FBX");
   this->_modelBonus[BonusType::SHIELD] = gdl::Model::load("models/Bonus_shield.FBX");
-  this->_modelBonus[BonusType::SPRINT] = gdl::Model::load("models/Bomb_rox.FBX");
+  this->_modelBonus[BonusType::SPRINT] = gdl::Model::load("models/Bonus_sprint.FBX");
   this->w_unbreak = new Cube(this->_unbreak);
 
   Point		p(2.0f, 0, 0);
@@ -225,6 +225,8 @@ void		Map::update(gdl::GameClock const& clock, gdl::Input&)
   this->_modelBonus[3].update(clock);
   this->_modelBonus[4].play("Take 001");
   this->_modelBonus[4].update(clock);
+  this->_modelBonus[5].play("Take 001");
+  this->_modelBonus[5].update(clock);
 }
 
 bool		Map::canMoveAt(size_t x, size_t y) const
