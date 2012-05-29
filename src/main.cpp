@@ -19,7 +19,7 @@ int		main()
   time(&now);
   srandom(now);
 
-  //Sound::getMe();
+  Sound::getMe();
   Menu		bomberman;
 
   bomberman.run();
