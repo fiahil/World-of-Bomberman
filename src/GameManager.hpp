@@ -18,6 +18,9 @@ public:
   Profile *		_mainProfile;
   Config		_configJ1;
   Config		_configJ2;
+  AIType::eAI		_typeAI;
+  int			_nbPlayers;
+  int			_nbTeams;
   Match			_match;
 
 public:
