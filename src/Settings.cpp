@@ -27,12 +27,12 @@ static const char*	g_ref[gdl::Keys::Count + 1] = {
 };
 
 static const int	g_refPos[6][2] = {
-  {450, 250},
-  {450, 300},
-  {450, 350},
-  {450, 400},
-  {450, 450},
-  {450, 500},
+  {670, 170},
+  {670, 220},
+  {670, 270},
+  {670, 320},
+  {670, 370},
+  {670, 420},
 };
 
 static const HumGame::eAction	g_refAction[6] = {
