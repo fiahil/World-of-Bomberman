@@ -119,7 +119,6 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
 	  std::stringstream	ss;
 	  
 	  ss << "Ressources/profiles/" << this->_gameManager._mainProfile->getId();
-	  std::cout << ss.str() << std::endl;
 	  Serializer::Packman	pa(ss.str());
 	  
 	  pa.packProfile(*this->_gameManager._mainProfile);
