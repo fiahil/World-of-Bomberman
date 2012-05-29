@@ -6,7 +6,9 @@
 #ifndef __MENU_HPP__
 #define __MENU_HPP__
 
-#include <Game.hpp>
+#include <cv.h>
+#include <highgui.h>
+#include "Game.hpp"
 #include "MenuManager.hpp"
 #include "MyGame.hpp"
 
@@ -19,6 +21,8 @@ public:
 private:
   MyGame*	_game;
   MenuManager*	_menu;
+  bool		_intro;
+  CvCapture*	_capture;
 
 private:
   virtual void		initialize(void);

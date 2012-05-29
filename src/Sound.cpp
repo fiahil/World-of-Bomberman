@@ -22,6 +22,7 @@ Sound::Sound()
     throw std::runtime_error("FMOD cannot create.");
   if (FMOD_System_Init(this->_system, 32, FMOD_INIT_NORMAL, NULL) != FMOD_OK)
     throw std::runtime_error("FMOD cannot create.");
+  this->loadSound("Ressources/video/intro.mp3", Audio::INTRO);
 }
 
 Sound::~Sound()

@@ -9,6 +9,7 @@
 struct Audio
 {
   enum eAudio {
+    INTRO,
     LAST
   };
 };
