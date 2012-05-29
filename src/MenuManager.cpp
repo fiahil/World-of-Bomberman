@@ -24,14 +24,20 @@
 #include "NewProfile.hpp"
 #include "LoadProfile.hpp"
 #include "TeamMenu.hpp"
+#include "Human.hpp"
+#include "AI.hpp"
 #include "ProfileManager.hpp"
 
 MenuManager::MenuManager(int w, int h)
   : _menu(TokenMenu::LAST, 0),
     _curMenu(TokenMenu::MAINMENU),
     _camera(w, h, 0, 0),
-    _createGame(false)
+    _createGame(false),
+    _refInitGame(GameMode::LAST, 0)
 {
+  this->_refInitGame[GameMode::SOLO] = &MenuManager::initGameSolo;
+  this->_refInitGame[GameMode::COOP] = &MenuManager::initGameCoop;
+  this->_refInitGame[GameMode::VERSUS] = &MenuManager::initGameVersus;
   // this->_maps = this->_mapManager.getAll();
 }
 
@@ -144,14 +150,69 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
   this->_camera.update();
 }
 
+void	MenuManager::initGameSolo()
+{
+  int	id = 0;
+
+  this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
+							 this->_gameManager._mainProfile->getConfig()));
+  this->_gameManager._match._players.back()->setTeamId(id++);
+  for (int i = 0; i < this->_gameManager._nbTeams; ++i, ++id)
+    for (int c = 0; c < this->_gameManager._nbPlayers; ++c)
+      {
+	this->_gameManager._match._players.push_back(new AI(this->_gameManager._typeAI,
+							    *this->_gameManager._match._map));
+	this->_gameManager._match._players.back()->setTeamId(id);
+      }
+}
+
+void	MenuManager::initGameCoop()
+{
+  int	id = 0;
+  
+  this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
+							 this->_gameManager._configJ1));
+  this->_gameManager._match._players.back()->setTeamId(id);
+  this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
+							 this->_gameManager._configJ2));
+  this->_gameManager._match._players.back()->setTeamId(id++);
+  for (int i = 0; i < this->_gameManager._nbTeams; ++i, ++id)
+    for (int c = 0; c < this->_gameManager._nbPlayers; ++c)
+      {
+	this->_gameManager._match._players.push_back(new AI(this->_gameManager._typeAI,
+							    *this->_gameManager._match._map));
+	this->_gameManager._match._players.back()->setTeamId(id);
+      }
+}
+
+void	MenuManager::initGameVersus()
+{
+  int	id = 0;
+  
+  this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
+							 this->_gameManager._configJ1));
+  this->_gameManager._match._players.back()->setTeamId(id++);
+  this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
+							 this->_gameManager._configJ2));
+  this->_gameManager._match._players.back()->setTeamId(id++);
+  for (int i = 0; i < this->_gameManager._nbTeams; ++i, ++id)
+    for (int c = 0; c < this->_gameManager._nbPlayers; ++c)
+      {
+	this->_gameManager._match._players.push_back(new AI(this->_gameManager._typeAI,
+							    *this->_gameManager._match._map));
+	this->_gameManager._match._players.back()->setTeamId(id);
+      }
+}
+
 MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
 {
   APlayer*	pl1 = 0;
   APlayer*	pl2 = 0;
-
+  
   if (this->_createGame)
     {
       this->_createGame = false;
+      (this->*_refInitGame[this->_gameManager._match._gameMode])();
       pl1 = this->_gameManager._match._players[0];
       if (this->_gameManager._match._gameMode != GameMode::SOLO)
 	pl2 = this->_gameManager._match._players[1];

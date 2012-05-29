@@ -131,5 +131,4 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
 	  this->_oneTime = clock.getTotalGameTime() + 0.15f;
 	  break;
 	}
-
 }

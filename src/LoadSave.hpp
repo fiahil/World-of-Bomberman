@@ -27,8 +27,9 @@ public:
   /*
     Others
   */
-public:
+private:
   void			buildTags(void);
+  void			loadSave();
 };
 
 #endif		/* __LOAD_SAVE_HPP__ */

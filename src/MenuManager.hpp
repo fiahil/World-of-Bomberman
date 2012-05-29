@@ -39,6 +39,14 @@ private:
   GameManager			_gameManager;
   bool				_createGame;
 
+private:
+  typedef void	(MenuManager::*fInitGame)();
+
+  void	initGameSolo();
+  void	initGameCoop();
+  void	initGameVersus();
+  std::vector<fInitGame>	_refInitGame;
+
   /*
     Heritance from AObj
   */
