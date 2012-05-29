@@ -211,10 +211,10 @@ struct HUD
 struct AIType
 {
   enum eAI {
-    HALLU,
     EASY,
     NORMAL,
     HARD,
+    HALLU,
     LAST
   };
 };
