@@ -25,7 +25,7 @@ private:
   Match(const Match &);
   const Match & operator=(const Match &);
 
-public:
+public:	// WHYYYYYYYY ???
   Map*				_map;
   bool				_cheat;
   GameMode::eGameMode		_gameMode;

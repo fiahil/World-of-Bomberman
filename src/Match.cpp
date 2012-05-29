@@ -5,7 +5,10 @@
 
 #include "Match.hpp"
 
-Match::Match()
+Match::Match()			// RAJOUT
+  : _map(0),
+    _cheat(false),
+    _gameMode(GameMode::LAST)
 {
 }
 
