@@ -17,7 +17,7 @@ LoadMap::LoadMap(GameManager& game, const std::vector<Map *> & map)
 
   for (; it != map.end() ; ++it)
     {
-      this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", selected, false, /**/TokenMenu::MAINMENU, 2400.0f, 0.0f, yTag));
+      this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", selected, false, TokenMenu::CREATEGAME, 2400.0f, 0.0f, yTag));
       this->_tags[i]->createText((*it)->getName(), 20, 800, yText);
 
       i++;
@@ -48,4 +48,8 @@ void		LoadMap::update(gdl::GameClock const& clock, gdl::Input& input)
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
+  if (this->_curToken == TokenMenu::CREATEGAME)
+    {
+      std::cout << "Creation de la partie !" << std::endl;
+    }
 }
