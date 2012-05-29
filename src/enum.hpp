@@ -6,6 +6,13 @@
 #ifndef __ENUM_HPP__
 #define __ENUM_HPP__
 
+struct Audio
+{
+  enum eAudio {
+    LAST
+  };
+};
+
 struct Success
 {
   enum eSuccess {
@@ -65,7 +72,7 @@ struct Skin
 {
   enum eSkin
     {
-      THRALL,
+      WORGEN,
       SYLVANAS,
       VARIANT,
       ZULJIN,
@@ -142,13 +149,21 @@ struct TokenMenu
   enum eMenu
     {
       MAINMENU,
+      CREDITS,
+      LOADPROFILE,
+      LOADSAVE,
+      LOADMAP,
+      GAMECHOOSE,
+      IA,
+      TEAM,
+      MAP,
       NEWPROFILE,
       PROFILE,
-      SLIDING,
-      GAMECHOOSE,
+      SETTINGSCHOOSE,
       SETTINGS,
-      BACK,
+      SKINCHOOSE,
       QUIT,
+      CREATEGAME,
       LAST
     };
 };
@@ -197,8 +212,9 @@ struct AIType
 {
   enum eAI {
     EASY,
-    MEDIUM,
+    NORMAL,
     HARD,
+    HALLU,
     LAST
   };
 };

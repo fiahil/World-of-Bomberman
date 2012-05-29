@@ -57,12 +57,14 @@ protected:
   bool			_attack;
   bool			_canAttack;
   bool			_shield;
+  bool			_moving;
   double		_shieldTimer;
   double		_tpTimer;
   size_t		_lustStack;
   size_t		_powerStack;
   size_t		_nbKills;
   double		_speed;
+  double		_dam;
   std::vector<double>   _timers;
   std::string		_name;
   std::string		_teamName;

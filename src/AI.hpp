@@ -36,35 +36,39 @@ private:
   int				_start;
   double			_startTimer;
   gdl::GameClock const*		_clock;
-  std::vector<fDifficulty>	_AIDifficulty;
   stFunc			_state;
   std::deque<dirFunc>		_target;
   std::vector<Path>		_paths;
 
-  std::vector<std::pair<gtFunc, stFunc> >	_EASYtable;
+  std::vector<std::vector<std::pair<gtFunc, stFunc> > >	_table;
 
 public:
   void	updateView(AIView const*);
   void	play(gdl::GameClock const&, gdl::Input&);
 
 private:
-  void	AIEasy(gdl::GameClock const&);
-  void	AIMedium(gdl::GameClock const&);
-  void	AIHard(gdl::GameClock const&);
+  size_t adjBarrel(size_t x, size_t y) const;
 
   bool	isWall(size_t x, size_t y) const;
   bool	isBomb(size_t x, size_t y) const;
+  bool	isEmpty(size_t x, size_t y) const;
+  bool	isBarrel(size_t x, size_t y) const;
 
   bool	nearBomb(void);
   bool	nearBonus(void);
+  bool	nearEmpty(void);
 
   void	waitState(void);
   void	surviveState(void);
+  void	attackState(void);
   void	moveState(void);
   void	fetchState(void);
 
   bool	pathFind(size_t x, size_t y, size_t cx, size_t cy);
   bool	pathDiscovery(size_t cx, size_t cy, Path const& p);
+  bool	dodgeBomb(size_t x, size_t y, size_t cx, size_t cy);
+  bool	dodgingX(size_t cx, size_t cy);
+  bool	dodgingY(size_t cx, size_t cy);
 };
 
 #endif

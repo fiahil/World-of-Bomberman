@@ -19,6 +19,7 @@ Tp::Tp()
 Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
   : _x(x),
     _y(y),
+    _name("Generated Map"),
     w_unbreak(0),
     background(0),
     _modelBonus(BonusType::LAST)
@@ -58,6 +59,9 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
 Map::Map(std::string const& file)
   : _x(0),
     _y(0),
+    _name(file),
+    w_unbreak(0),
+    background(0),
     _modelBonus(BonusType::LAST)
 {
   std::string swap;
@@ -98,6 +102,8 @@ Map::Map(size_t x, size_t y, std::string const& map)
   : _x(x),
     _y(y),
     _map(map),
+    w_unbreak(0),
+    background(0),
     _modelBonus(BonusType::LAST)
 {
 
@@ -146,7 +152,7 @@ void		Map::initialize(void)
   this->_modelBonus[BonusType::LUST] = gdl::Model::load("models/Bonus_fury.FBX");
   this->_modelBonus[BonusType::POWER] = gdl::Model::load("models/Bonus_power.FBX");
   this->_modelBonus[BonusType::SHIELD] = gdl::Model::load("models/Bonus_shield.FBX");
-  this->_modelBonus[BonusType::SPRINT] = gdl::Model::load("models/Bomb_rox.FBX");
+  this->_modelBonus[BonusType::SPRINT] = gdl::Model::load("models/Bonus_sprint.FBX");
   this->w_unbreak = new Cube(this->_unbreak);
 
   Point		p(2.0f, 0, 0);
@@ -225,6 +231,8 @@ void		Map::update(gdl::GameClock const& clock, gdl::Input&)
   this->_modelBonus[3].update(clock);
   this->_modelBonus[4].play("Take 001");
   this->_modelBonus[4].update(clock);
+  this->_modelBonus[5].play("Take 001");
+  this->_modelBonus[5].update(clock);
 }
 
 bool		Map::canMoveAt(size_t x, size_t y) const
@@ -259,6 +267,11 @@ size_t		Map::getY(void) const
   return this->_y;
 }
 
+const std::string &	Map::getName(void) const
+{
+  return this->_name;
+}
+
 void		Map::explodeUnBreakable(size_t &r,
 					size_t &f,
 					size_t, std::list<Bonus*>&)
@@ -275,7 +288,7 @@ void		Map::explodeBreakable(size_t &r,
   f = r;
   this->_map[pos] = '0';
 
-  int		rand = random() % (BonusType::LAST + 3);
+  int		rand = random() % (BonusType::LAST + 10);
 
   if (rand < BonusType::LAST)
     {
