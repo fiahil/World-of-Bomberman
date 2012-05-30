@@ -165,6 +165,7 @@ struct TokenMenu
       SKINCHOOSE,
       QUIT,
       CREATEGAME,
+      PAUSE,
       LAST
     };
 };

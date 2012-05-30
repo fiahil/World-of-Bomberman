@@ -49,6 +49,8 @@ public:
   void		draw(void);
   void		unload(void);
   bool		isEOG(void) const;
+  bool		isPause() const;
+  void		resumeGame();
 
 private:
   template<typename T, typename U>

@@ -255,3 +255,19 @@ bool		MyGame::isEOG(void) const
 {
   return (this->_EOG && this->_clock.getTotalGameTime() >= this->_EOGTimer);
 }
+
+bool		MyGame::isPause() const
+{
+  bool	tmp = this->_pl1->getPause();
+  
+  this->_pl1->setPause(false);
+  return tmp;
+}
+
+void		MyGame::resumeGame()
+{
+  double	time = this->_clock.getTotalGameTime() + 0.15f;
+  this->_pl1->setTimer(time);
+  if (this->_pl2)
+    this->_pl2->setTimer(time);
+}
