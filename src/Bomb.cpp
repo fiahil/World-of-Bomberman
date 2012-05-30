@@ -4,6 +4,7 @@
  */
 
 #include "Bomb.hpp"
+#include "Sound.hpp"
 
 Bomb::Bomb(BombType::eBomb t,
 	   Point const & pos,
@@ -86,5 +87,6 @@ ExplodedBomb*	Bomb::createExplodedBomb() const
 			 this->_player,
 			 0.2f,
 			 this->_modelExploded);
+  Sound::getMe()->playBack(Audio::EXPLODE);
   return ret;
 }

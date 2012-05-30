@@ -19,14 +19,20 @@ AI::AI(AIType::eAI type, Map& map)
     _state(&AI::waitState)
 {
   std::vector<std::pair<gtFunc, stFunc> >	EASY;
+  std::vector<std::pair<gtFunc, stFunc> >	NORMAL;
+  std::vector<std::pair<gtFunc, stFunc> >	HARD;
   std::vector<std::pair<gtFunc, stFunc> >	HALLU;
 
   EASY.push_back(std::make_pair(&AI::nearBomb, &AI::surviveState));
   EASY.push_back(std::make_pair(&AI::nearEmpty, &AI::attackState));
+  NORMAL.push_back(std::make_pair(&AI::nearEmpty, &AI::moveState));
+  HARD.push_back(std::make_pair(&AI::nearEmpty, &AI::moveState));
   HALLU.push_back(std::make_pair(&AI::nearEmpty, &AI::moveState));
 
   this->_table.push_back(EASY);
   this->_table.push_back(HALLU);
+  this->_table.push_back(NORMAL);
+  this->_table.push_back(HARD);
 
   if (type == AIType::HALLU)
     this->_dam = 0.0;

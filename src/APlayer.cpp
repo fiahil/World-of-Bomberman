@@ -85,13 +85,16 @@ APlayer::APlayer(Map & map, std::vector<bool>* success)
   this->_bonusEffect[BonusType::SHIELD] = &APlayer::ShieldBonusEffect;
   this->_bonusEffect[BonusType::SPRINT] = &APlayer::SprintBonusEffect;
 
-  // First = Hurt, Second = Death
-
-  this->_soundPlayer[Skin::SYLVANAS] = std::make_pair(Audio::HURT, Audio::HURT);
-  this->_soundPlayer[Skin::VARIANT] = std::make_pair(Audio::HURT, Audio::HURT);
-  this->_soundPlayer[Skin::ZULJIN] = std::make_pair(Audio::HURT, Audio::HURT);
-  this->_soundPlayer[Skin::WORGEN] = std::make_pair(Audio::HURT, Audio::HURT);
-  this->_soundPlayer[Skin::ENNEMY_LOW] = std::make_pair(Audio::ENNEMY_HURT, Audio::ENNEMY_HURT);
+  this->_soundPlayer[Skin::SYLVANAS] =
+    std::make_pair(Audio::SYLVANAS_HURT, Audio::SYLVANAS_DEATH);
+  this->_soundPlayer[Skin::VARIANT] =
+    std::make_pair(Audio::VARIANT_HURT, Audio::VARIANT_DEATH);
+  this->_soundPlayer[Skin::ZULJIN] =
+    std::make_pair(Audio::ZULJIN_HURT, Audio::ZULJIN_DEATH);
+  this->_soundPlayer[Skin::WORGEN] =
+    std::make_pair(Audio::WORGEN_HURT, Audio::WORGEN_DEATH);
+  this->_soundPlayer[Skin::ENNEMY_LOW] =
+    std::make_pair(Audio::ENNEMY_HURT, Audio::ENNEMY_DEATH);
 
   this->_pos._scale = 2.0f;
   this->setPos(1, 1);
@@ -339,7 +342,10 @@ void		APlayer::takeDamage(ExplodedBomb const* cur)
     {
       (this->*_bombEffect[cur->getType()])(cur);
       if (!this->_pv)
-	this->_state = State::DEATH;
+	{
+	  this->_state = State::DEATH;
+	  Sound::getMe()->playBack(this->_soundPlayer[this->_skin].second);
+	}
       else
 	this->_state = State::HIT;
       this->_model.play(g_refAnimName[this->_state]);
@@ -356,6 +362,7 @@ bool		APlayer::takeBonus(Bonus const* cur)
       	  this->_success->at(Success::BONUS) = true;
       	  this->drawSuccess(Success::BONUS);
       	}
+      Sound::getMe()->playBack(Audio::BONUS);
       return true;
     }
   return false;
