@@ -148,7 +148,7 @@ void		Menu::draw(void)
       Sound::getMe()->stopLastSound();
       this->_menu->initCamera();
     }
-    if (this->_game)
+    else if (this->_game && !this->_pause)
       this->_game->draw();
     else
       this->_menu->draw();
