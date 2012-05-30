@@ -18,7 +18,7 @@
 Menu::Menu()
   : _game(0),
     _menu(0),
-    _intro(false),
+    _intro(true),
     _pause(false),
     _capture(0)
 {
@@ -38,20 +38,21 @@ void		Menu::initialize(void)
   this->_menu = new MenuManager(1600, 800);
   this->_menu->initialize();
 
-  //  this->_capture = cvCaptureFromAVI("./Ressources/video/intro.avi");
-  // if (!this->_capture)
-  // throw std::runtime_error("Fail to load introduction.");
-  this->_intro = false; // TODO
-  // Sound::getMe()->playBack(Audio::INTRO);
+  this->_capture = cvCaptureFromAVI("./Ressources/video/intro.avi");
+  if (!this->_capture)
+    throw std::runtime_error("Fail to load introduction.");
+  Sound::getMe()->playBack(Audio::INTRO);
 }
 
 void		Menu::updateIntro()
 {
   if (this->input_.isKeyDown(gdl::Keys::Escape))
-    {
-      cvReleaseCapture(&this->_capture);
-      this->_intro = false;
-    }
+  {
+    cvReleaseCapture(&this->_capture);
+    this->_intro = false;
+    Sound::getMe()->stopLastSound();
+    this->_menu->initCamera();
+  }
 }
 
 void		Menu::updateGame()
@@ -83,6 +84,7 @@ void		Menu::updateMenu()
 	{
 	  if (this->_game)
 	    {
+	      this->_pause = false;
 	      this->_game->unload();
 	      delete this->_game;
 	    }
@@ -111,39 +113,46 @@ void		Menu::draw(void)
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
   glClearDepth(1.0f);
-  
-  if (this->_intro)
-    {
-      IplImage*	image = cvQueryFrame(this->_capture);
-      
-      cvCvtColor(image, image, CV_BGR2RGB);
-      gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, image->width, image->height, GL_RGB, GL_UNSIGNED_BYTE, image->imageData);
-      
-      glEnable(GL_TEXTURE_2D);
-      glMatrixMode(GL_PROJECTION);
-      glLoadIdentity();
-      gluOrtho2D(0, 1600, 800, 0);
-      glMatrixMode(GL_MODELVIEW);
-      glLoadIdentity();
-      
-      glBegin(GL_QUADS);
-      glTexCoord2f(0.0f, 0.0f);
-      glVertex2f(0.0f, 0.0f);
-      glTexCoord2f(1.0f, 0.0f);
-      glVertex2f(1600, 0.0f);
-      glTexCoord2f(1.0f, 1.0f);
-      glVertex2f(1600, 800);
-      glTexCoord2f(0.0f, 1.0f);
-      glVertex2f(0.0f, 800);
-      glEnd();
-    }
+
+  if (this->_intro && cvGrabFrame(this->_capture))
+  {
+    IplImage*	image = cvRetrieveFrame(this->_capture);
+
+    cvCvtColor(image, image, CV_BGR2RGB);
+    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, image->width, image->height, GL_RGB, GL_UNSIGNED_BYTE, image->imageData);
+
+    glEnable(GL_TEXTURE_2D);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0, 1600, 800, 0);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex2f(0.0f, 0.0f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex2f(1600, 0.0f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex2f(1600, 800);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex2f(0.0f, 800);
+    glEnd();
+  }
   else
-    {
-      if (this->_game && !this->_pause)
-	this->_game->draw();
-      else
-	this->_menu->draw();
+  {
+    if (this->_intro)
+    {       
+      cvReleaseCapture(&this->_capture);
+      this->_intro = false;
+      Sound::getMe()->stopLastSound();
+      this->_menu->initCamera();
     }
+    if (this->_game)
+      this->_game->draw();
+    else
+      this->_menu->draw();
+  }
   this->window_.display();
 }
 
