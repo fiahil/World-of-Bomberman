@@ -277,7 +277,7 @@ void		Map::explodeBreakable(size_t &r,
   f = r;
   this->_map[pos] = '0';
 
-  int		rand = random() % (BonusType::LAST + 3);
+  int		rand = random() % (BonusType::LAST + 10);
 
   if (rand < BonusType::LAST)
     {

@@ -74,6 +74,7 @@ bool		MyGame::updateBomb(Bomb *b)
     }
   else
     {
+      this->_view->setBombAt(b->getPos()._x, b->getPos()._y);
       b->update(this->_clock, this->_input);
       return false;
     }
@@ -123,6 +124,7 @@ bool		MyGame::updatePlayer(APlayer *p)
 	     this->_match._bonus.erase(it);
 	     break;
 	   }
+	 this->_view->setBonusAt((*it)->getPos()._x, (*it)->getPos()._y, (*it)->getType());
        }
 
      if (p->getTeamId() != this->_match._players.front()->getTeamId())
@@ -160,7 +162,7 @@ void		MyGame::update(void)
 
   if (this->_view)
     delete this->_view;
-  this->_view = new AIView(*this->_match._map, this->_match._bombs);
+  this->_view = new AIView(*this->_match._map);
 
   this->_match._map->update(this->_clock, this->_input);
 

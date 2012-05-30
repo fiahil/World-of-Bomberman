@@ -26,7 +26,7 @@ struct View
 class AIView
 {
 public:
-  AIView(Map const&, std::list<Bomb*> const&);
+  AIView(Map const&);
 
 private:
   size_t		_x;
@@ -35,6 +35,8 @@ private:
 
 public:
   View const&	at(size_t x, size_t y) const;
+  void		setBombAt(size_t x, size_t y);
+  void		setBonusAt(size_t x, size_t y, BonusType::eBonus b);
   size_t	getX(void) const;
   size_t	getY(void) const;
 

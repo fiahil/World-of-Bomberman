@@ -11,6 +11,7 @@
 NAME		= bomberman
 
 SRC		= ./src/main.cpp	\
+		./src/Sound.cpp		\
 		./src/AIView.cpp	\
 		./src/Camera.cpp	\
 		./src/Menu.cpp		\
@@ -37,16 +38,16 @@ SRC		= ./src/main.cpp	\
 		./src/ProfileManager.cpp
 
 OBJ		= $(SRC:.cpp=.o)
-
-INCLUDES	= -I./lib/libgdl_gl-2012.3/include -I./src -I./Serializer
+ 
+INCLUDES	= -I./lib/libgdl_gl-2012.3/include -I./lib/libfmodex/inc -I./src -I./Serializer
 
 CXX		= g++
 
 CXXFLAGS	= -g -Wall -Wextra -O3 $(INCLUDES)
 
-LDFLAGS		= -lGL -lGLU -lgdl_gl -lserial			\
-		-L./lib/libgdl_gl-2012.3/lib -L./lib/libserial	\
-		-Wl,--rpath=./lib/libgdl_gl-2012.3/lib,--rpath=./lib/SFML-1.6/lib
+LDFLAGS		= -lGL -lGLU -lgdl_gl -lserial -lfmodex				     \
+		-L./lib/libgdl_gl-2012.3/lib -L./lib/libserial -L./lib/libfmodex/lib \
+		-Wl,--rpath=./lib/libgdl_gl-2012.3/lib,--rpath=./lib/SFML-1.6/lib,--rpath=./lib/libfmodex/lib
 
 RM		= rm -rf
 

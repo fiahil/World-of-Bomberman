@@ -36,7 +36,7 @@ class APlayer : public AObj
   typedef void	(APlayer::*fBomb)(ExplodedBomb const*);
   typedef void	(APlayer::*fBonus)();
   typedef void	(APlayer::*t_rotFunc)();
-
+  typedef std::vector< std::pair<Audio::eAudio, Audio::eAudio> > audioVect;
 public:
   APlayer(Map &, std::vector<bool>* = 0);
   virtual ~APlayer();
@@ -57,6 +57,7 @@ protected:
   bool			_attack;
   bool			_canAttack;
   bool			_shield;
+  bool			_moving;
   double		_shieldTimer;
   double		_tpTimer;
   size_t		_lustStack;
@@ -83,6 +84,7 @@ private:
   std::map<BonusType::eBonus, fBonus>	_bonusEffect;
   ExplodedBomb const*			_curEffect;
   std::vector<t_rotFunc>		_rotFuncMap;
+  audioVect				_soundPlayer;
 
 private:
   void	normalBombEffect(ExplodedBomb const*);

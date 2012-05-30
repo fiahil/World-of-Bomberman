@@ -27,16 +27,18 @@ void		Menu::initialize(void)
   this->window_.setHeight(800);
   this->window_.setWidth(1600);
   this->window_.create();
-  Map*	map = new Map(20, 20, 1, 2);
+  Map*	map = new Map(30, 30, 100, 100);
 
   std::vector<bool>* _aP1 = new std::vector<bool>(Success::LAST, false);
-  //  std::vector<bool>* _aP2 = new std::vector<bool>(Success::LAST, false);
+   // std::vector<bool>* _aP2 = new std::vector<bool>(Success::LAST, false);
 
   std::vector<APlayer*>	players;
   Config conf;
   conf.setConfig(HumGame::ATTACK, gdl::Keys::RControl);
   APlayer *newHum1 = new Human(*map, conf, _aP1);
-  newHum1->setSkin(Skin::ZULJIN);
+
+  newHum1->setSkin(Skin::SYLVANAS);
+
   newHum1->setTeamId(6);
   players.push_back(newHum1);
   // conf.setConfig(HumGame::UP, gdl::Keys::W);
@@ -48,7 +50,7 @@ void		Menu::initialize(void)
   // newHum2->setColor(6);
   // newHum2->setTeamId(7);
   // newHum2->setSkin(Skin::VARIANT);
-  //  players.push_back(newHum2);
+   // players.push_back(newHum2);
   for (int i = 0; i < 10; ++i)
     {
       APlayer *newAI = new AI(AIType::EASY, *map);

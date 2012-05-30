@@ -16,15 +16,17 @@ AI::AI(AIType::eAI type, Map& map)
     _start(4),
     _startTimer(-1.0f),
     _clock(0),
-    _AIDifficulty(AIType::LAST, 0),
     _state(&AI::waitState)
 {
-  this->_AIDifficulty[AIType::EASY] = &AI::AIEasy;
-  this->_AIDifficulty[AIType::MEDIUM] = &AI::AIMedium;
-  this->_AIDifficulty[AIType::HARD] = &AI::AIHard;
+  std::vector<std::pair<gtFunc, stFunc> >	EASY;
+  std::vector<std::pair<gtFunc, stFunc> >	HALLU;
 
-  this->_EASYtable.push_back(std::make_pair(&AI::nearBomb, &AI::surviveState));
-  this->_EASYtable.push_back(std::make_pair(&AI::nearBonus, &AI::fetchState));
+  EASY.push_back(std::make_pair(&AI::nearBomb, &AI::surviveState));
+  EASY.push_back(std::make_pair(&AI::nearEmpty, &AI::attackState));
+  HALLU.push_back(std::make_pair(&AI::nearEmpty, &AI::moveState));
+
+  this->_table.push_back(EASY);
+  this->_table.push_back(HALLU);
 
   {
     Path	p;
@@ -209,63 +211,49 @@ bool	AI::isWall(size_t x, size_t y) const
   return this->_view->at(x, y).type == Elt::WALL && this->_view->at(x, y).pp != 0;
 }
 
+bool	AI::isEmpty(size_t x, size_t y) const
+{
+  return this->_view->at(x, y).type == Elt::WALL && this->_view->at(x, y).pp == 0;
+}
+
 bool	AI::isBomb(size_t x, size_t y) const
 {
   return this->_view->at(x, y).type == Elt::BOMB;
 }
 
-// TODO : old code AIEasy
-/*int				pos = 0;
-  std::vector<Dir::eDir>	ref(static_cast<int>(Dir::LAST), Dir::LAST);
-
-  if (this->isOk(this->_pos._x, this->_pos._y - 1))
-  ref[pos++] = Dir::NORTH;
-  if (this->isOk(this->_pos._x, this->_pos._y + 1))
-  ref[pos++] = Dir::SOUTH;
-  if (this->isOk(this->_pos._x - 1, this->_pos._y))
-  ref[pos++] = Dir::WEST;
-  if (this->isOk(this->_pos._x + 1, this->_pos._y))
-  ref[pos++] = Dir::EAST;
-  if (pos)
-  {
-  pos = random() % pos;
-  if (ref[pos] == Dir::NORTH)
-  this->UPFunction(clock);
-  else if (ref[pos] == Dir::SOUTH)
-  this->DOWNFunction(clock);
-  else if (ref[pos] == Dir::WEST)
-  this->LEFTFunction(clock);
-  else
-  this->RIGHTFunction(clock);
-  }*/
-
-void	AI::AIEasy(gdl::GameClock const& clock)
+bool	AI::isBarrel(size_t x, size_t y) const
 {
-  this->_clock = &clock;
-  (this->*_state)();
+  return this->_view->at(x, y).type == Elt::WALL && this->_view->at(x, y).pp == 2;
 }
 
-void	AI::AIMedium(gdl::GameClock const&)
+size_t	AI::adjBarrel(size_t x, size_t y) const
 {
-
-}
-
-void	AI::AIHard(gdl::GameClock const&)
-{
-
+  return isBarrel(x, y + 1) +
+    	 isBarrel(x, y - 1) +
+	 isBarrel(x + 1, y) +
+	 isBarrel(x - 1, y);
 }
 
 bool	AI::nearBomb(void)
 {
-  for (int y = -5; y < 5; ++y)
+  int	x = 0;
+  int	y = -7;
+
+  for (; y < 7; ++y)
   {
-    for (int x = -5; x < 5; ++x)
+    if (isBomb(this->_pos._x + x, this->_pos._y + y))
     {
-      if (isBomb(this->_pos._x + x, this->_pos._y + y))
-      {
-	return this->pathFind(this->_pos._x + x, this->_pos._y + y,
-	    this->_pos._x, this->_pos._y);
-      }
+      return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
+	  this->_pos._x, this->_pos._y);
+    }
+  }
+  y = 0;
+  for (x = -7; x < 7; ++x)
+  {
+    if (isBomb(this->_pos._x + x, this->_pos._y + y))
+    {
+      return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
+	  this->_pos._x, this->_pos._y);
     }
   }
   return false;
@@ -276,10 +264,39 @@ bool	AI::nearBonus(void)
   return false;
 }
 
+bool	AI::nearEmpty(void)
+{
+  std::vector<std::pair<int, int> >	tmp;
+
+  for (int y = -4; y < 4; ++y)
+  {
+    for (int x = -4; x < 4; ++x)
+    {
+      if (isEmpty(this->_pos._x + x, this->_pos._y + y)) 
+      {
+	if (this->pathFind(this->_pos._x + x, this->_pos._y + y,
+	    	           this->_pos._x, this->_pos._y))
+	  tmp.push_back(std::make_pair(x, y));
+      }
+    }
+  }
+  this->_target.clear();
+  if (tmp.size() > 0)
+  {
+    size_t	rander = random() % tmp.size();
+
+    this->pathFind(this->_pos._x + tmp[rander].first,
+	           this->_pos._y + tmp[rander].second,
+		   this->_pos._x, this->_pos._y);
+    return true;
+  }
+  return false;
+}
+
 void	AI::waitState(void)
 {
-  for (std::vector<std::pair<gtFunc, stFunc> >::iterator it = this->_EASYtable.begin();
-      it != this->_EASYtable.end();
+  for (std::vector<std::pair<gtFunc, stFunc> >::iterator it = this->_table.at(this->_type).begin();
+      it != this->_table.at(this->_type).end();
       ++it)
   {
     if ((this->*(it->first))())
@@ -310,6 +327,12 @@ void	AI::fetchState(void)
 {
 }
 
+void	AI::attackState(void)
+{
+  this->_target.push_back(&AI::ATTACKFunction);
+  this->_state = &AI::moveState;
+}
+
 bool	AI::pathDiscovery(size_t cx, size_t cy, Path const& p)
 {
   for (size_t i = 0; i < p.elt.size(); ++i)
@@ -337,6 +360,45 @@ bool	AI::pathFind(size_t x, size_t y, size_t cx, size_t cy)
   return false;
 }
 
+bool	AI::dodgeBomb(size_t x, size_t y, size_t cx, size_t cy)
+{
+  if (x == cx)
+    return this->dodgingX(cx, cy);
+  else if (y == cy)
+    return this->dodgingY(cx, cy);
+  return false;
+}
+
+bool	AI::dodgingX(size_t cx, size_t cy)
+{
+  if (isEmpty(cx - 1, cy))
+  {
+    this->_target.push_back(&AI::LEFTFunction);
+    return true;
+  }
+  if (isEmpty(cx + 1, cy))
+  {
+    this->_target.push_back(&AI::RIGHTFunction);
+    return true;
+  }
+  return false;
+}
+
+bool	AI::dodgingY(size_t cx, size_t cy)
+{
+  if (isEmpty(cx, cy - 1))
+  {
+    this->_target.push_back(&AI::UPFunction);
+    return true;
+  }
+  if (isEmpty(cx, cy + 1))
+  {
+    this->_target.push_back(&AI::DOWNFunction);
+    return true;
+  }
+  return false;
+}
+
 void	AI::updateView(AIView const* v)
 {
   this->_view = v;
@@ -350,5 +412,8 @@ void	AI::play(gdl::GameClock const& clock, gdl::Input&)
     this->_startTimer = clock.getTotalGameTime() + 1.0f;
   }
   else if (this->_start < 0)
-    (this->*_AIDifficulty[this->_type])(clock);
+  {
+    this->_clock = &clock;
+    (this->*_state)();
+  }
 }

@@ -6,6 +6,15 @@
 #ifndef __ENUM_HPP__
 #define __ENUM_HPP__
 
+struct Audio
+{
+  enum eAudio {
+    HURT,
+    ENNEMY_HURT,
+    LAST
+  };
+};
+
 struct Success
 {
   enum eSuccess {
@@ -65,11 +74,10 @@ struct Skin
 {
   enum eSkin
     {
-      THRALL,
       SYLVANAS,
       VARIANT,
       ZULJIN,
-      ENNEMY_HIGH,
+      WARWIK,
       ENNEMY_LOW,
       LAST
     };
