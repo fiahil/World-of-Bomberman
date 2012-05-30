@@ -1,2 +1,0 @@
-g++ VideoTexture.cpp -lGL -lGLU -lglut -I/usr/include/opencv -lopencv_imgproc -lopencv_highgui -I./include -L../../lib/libfmodex/lib -lfmodex -Wl,--rpath=../../lib/libfmodex/lib
-
