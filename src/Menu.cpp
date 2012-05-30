@@ -84,6 +84,7 @@ void		Menu::updateMenu()
 	{
 	  if (this->_game)
 	    {
+	      this->_pause = false;
 	      this->_game->unload();
 	      delete this->_game;
 	    }
