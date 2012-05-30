@@ -18,7 +18,7 @@
 Menu::Menu()
   : _game(0),
     _menu(0),
-    _intro(false),
+    _intro(true),
     _capture(0)
 {
   this->setContentRoot("./Ressources/");
@@ -37,11 +37,10 @@ void		Menu::initialize(void)
   this->_menu = new MenuManager(1600, 800);
   this->_menu->initialize();
 
-  //  this->_capture = cvCaptureFromAVI("./Ressources/video/intro.avi");
-  // if (!this->_capture)
-    // throw std::runtime_error("Fail to load introduction.");
-  this->_intro = false; // TODO
-  // Sound::getMe()->playBack(Audio::INTRO);
+  this->_capture = cvCaptureFromAVI("./Ressources/video/intro.avi");
+  if (!this->_capture)
+    throw std::runtime_error("Fail to load introduction.");
+  Sound::getMe()->playBack(Audio::INTRO);
 }
 
 void		Menu::update(void)
@@ -88,13 +87,13 @@ void		Menu::draw(void)
     glLoadIdentity();
 
     glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex2f(0.0f, 0.0f);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex2f(1600, 0.0f);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex2f(1600, 800);
     glTexCoord2f(0.0f, 1.0f);
+    glVertex2f(0.0f, 0.0f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex2f(1600, 0.0f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex2f(1600, 800);
+    glTexCoord2f(0.0f, 0.0f);
     glVertex2f(0.0f, 800);
     glEnd();
   }
