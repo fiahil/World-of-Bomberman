@@ -114,8 +114,8 @@ Map::Map(size_t x, size_t y, std::string const& map)
   this->_expFunc['2'] = &Map::explodeBreakable;
   this->_expFunc['3'] = &Map::explodeBreakable;
 
-  this->_tp._pos1.setPos(random() % this->_x, random() % this->_y);
-  this->_tp._pos2.setPos(random() % this->_x, random() % this->_y);
+  this->_tp._pos1.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
+  this->_tp._pos2.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
   this->_map[POS(this->_tp._pos1._x, this->_tp._pos1._y)] = '0';
   this->_map[POS(this->_tp._pos2._x, this->_tp._pos2._y)] = '0';
 }

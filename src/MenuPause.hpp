@@ -10,6 +10,9 @@
 
 class MenuPause : public AMenu
 {
+private:
+  void	restartGame();
+
 public:
   MenuPause(GameManager&);
   virtual ~MenuPause();

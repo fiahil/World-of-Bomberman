@@ -50,5 +50,10 @@ void		LoadMap::update(gdl::GameClock const& clock, gdl::Input& input)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
   if (this->_curToken == TokenMenu::CREATEGAME)
-    this->_gameManager._match._map = this->_map[this->_cursor];
+    {
+      this->_gameManager._originMap = this->_map[this->_cursor];
+      this->_gameManager._match._map = new Map(this->_map[this->_cursor]->getX(), 
+					       this->_map[this->_cursor]->getY(),
+					       this->_map[this->_cursor]->getMap());  
+    }
 }

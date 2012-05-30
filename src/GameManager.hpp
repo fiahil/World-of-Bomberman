@@ -17,6 +17,7 @@ struct	GameManager
 public:
   Profile *		_mainProfile;
   Profile *		_secondProfile;
+  Map*			_originMap;
   Config		_configJ1;
   Config		_configJ2;
   AIType::eAI		_typeAI;
