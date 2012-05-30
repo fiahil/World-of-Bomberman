@@ -22,8 +22,19 @@ Sound::Sound()
     throw std::runtime_error("FMOD cannot create.");
   if (FMOD_System_Init(this->_system, 32, FMOD_INIT_NORMAL, NULL) != FMOD_OK)
     throw std::runtime_error("FMOD cannot create.");
-  this->loadSound("Ressources/audio/hurt.WAV", Audio::HURT);
+  this->loadSound("Ressources/audio/hurt.WAV", Audio::SYLVANAS_HURT);
+  this->loadSound("Ressources/audio/hurt.WAV", Audio::SYLVANAS_DEATH);
+  this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::VARIANT_HURT);
+  this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::VARIANT_DEATH);
+  this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::WORGEN_HURT);
+  this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::WORGEN_DEATH);
+  this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::ZULJIN_HURT);
+  this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::ZULJIN_DEATH);
   this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::ENNEMY_HURT);
+  this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::ENNEMY_DEATH);
+  this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::EXPLODE);
+  this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::BONUS);
+  this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::SUCCESS);
   //  this->loadSound("Ressources/video/intro.mp3", Audio::INTRO);
 }
 

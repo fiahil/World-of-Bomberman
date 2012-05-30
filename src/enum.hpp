@@ -9,8 +9,19 @@
 struct Audio
 {
   enum eAudio {
-    HURT,
     ENNEMY_HURT,
+    ENNEMY_DEATH,
+    SYLVANAS_HURT,
+    SYLVANAS_DEATH,
+    VARIANT_HURT,
+    VARIANT_DEATH,
+    WORGEN_HURT,
+    WORGEN_DEATH,
+    ZULJIN_HURT,
+    ZULJIN_DEATH,
+    EXPLODE,
+    BONUS,
+    SUCCESS,
     INTRO,
     LAST
   };

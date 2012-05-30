@@ -3,10 +3,9 @@
  * 12.05.2012
  */
 
-#include <iostream>
-
 #include <sstream>
 #include "Human.hpp"
+#include "Sound.hpp"
 
 Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
   : APlayer(map, success),
@@ -95,6 +94,7 @@ Human::eventSt	Human::initStruct(gdl::Keys::Key key,
 
 void            Human::drawSuccess(Success::eSuccess s)
 {
+  Sound::getMe()->playBack(Audio::SUCCESS);
   this->_lastSuccess = s;
   this->_successTimer = -1.0f;
 }
