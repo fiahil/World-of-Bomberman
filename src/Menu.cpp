@@ -49,6 +49,8 @@ void		Menu::update(void)
   {
     cvReleaseCapture(&this->_capture);
     this->_intro = false;
+    Sound::getMe()->stopLastSound();
+    this->_menu->initCamera();
   }
   else
     if (this->_game)
@@ -72,9 +74,9 @@ void		Menu::draw(void)
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
   glClearDepth(1.0f);
 
-  if (this->_intro)
+  if (this->_intro && cvGrabFrame(this->_capture))
   {
-    IplImage*	image = cvQueryFrame(this->_capture);
+    IplImage*	image = cvRetrieveFrame(this->_capture);
 
     cvCvtColor(image, image, CV_BGR2RGB);
     gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, image->width, image->height, GL_RGB, GL_UNSIGNED_BYTE, image->imageData);
@@ -99,6 +101,13 @@ void		Menu::draw(void)
   }
   else
   {
+    if (this->_intro)
+    {       
+      cvReleaseCapture(&this->_capture);
+      this->_intro = false;
+      Sound::getMe()->stopLastSound();
+      this->_menu->initCamera();
+    }
     if (this->_game)
       this->_game->draw();
     else

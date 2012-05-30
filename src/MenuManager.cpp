@@ -208,3 +208,9 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
     }
   return 0;
 }
+
+void	MenuManager::initCamera(void)
+{         
+  this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
+      this->_menu[this->_curMenu]->getCenterY());
+}

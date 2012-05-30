@@ -55,6 +55,7 @@ public:
   virtual void		initialize(void);
   virtual void		update(gdl::GameClock const&, gdl::Input&);
   MyGame*		createGame(gdl::GameClock&, gdl::Input&);
+  void			initCamera(void);
 };
 
 #endif		/* __MENU_MANAGEMENT_HPP__ */
