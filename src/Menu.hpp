@@ -22,7 +22,13 @@ private:
   MyGame*	_game;
   MenuManager*	_menu;
   bool		_intro;
+  bool		_pause;
   CvCapture*	_capture;
+
+private:
+  void			updateIntro(void);
+  void			updateGame(void);
+  void			updateMenu(void);
 
 private:
   virtual void		initialize(void);

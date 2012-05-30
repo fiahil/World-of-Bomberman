@@ -49,6 +49,11 @@ void			AMenu::update(gdl::GameClock const&, gdl::Input&)
 {
 }
 
+void			AMenu::setChangeMenu(bool flag)
+{
+  this->_changeMenu = flag;
+}
+
 void			AMenu::setTextDraw(bool flag)
 {
   this->_textDraw = flag;

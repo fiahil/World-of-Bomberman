@@ -44,6 +44,7 @@ public:
 
   virtual void	play(gdl::GameClock const&, gdl::Input&);
   virtual void	drawHUD(std::vector<gdl::Image>&, size_t, size_t, size_t, bool);
+  virtual void	setTimer(double);
 
 private:
   Input::eMode			_mode;

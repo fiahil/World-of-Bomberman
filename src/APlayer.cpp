@@ -64,6 +64,7 @@ APlayer::APlayer(Map & map, std::vector<bool>* success)
     _dir(Dir::SOUTH),
     _indic(0.5f, 0.5f, 0.8f, _color),
     _success(success),
+    _pause(false),
     _curEffect(0),
     _rotFuncMap(Dir::LAST, 0),
     _soundPlayer(Skin::LAST)
@@ -476,6 +477,20 @@ std::string const&	APlayer::getTeamName() const
   return this->_teamName;
 }
 
+void		APlayer::setPause(bool pause)
+{
+  this->_pause = pause;
+}
+
+bool		APlayer::getPause() const
+{
+  return this->_pause;
+}
+
+void		APlayer::setTimer(double)
+{
+}
+
 void		APlayer::incNbKills()
 {
   ++this->_nbKills;
@@ -592,7 +607,7 @@ bool		APlayer::ATTACKFunction(gdl::GameClock const& clock)
 
 bool		APlayer::PAUSEFunction(gdl::GameClock const&)
 {
-  exit (1); // TODO
+  this->_pause = true;
   return true;
 }
 

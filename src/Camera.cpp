@@ -38,10 +38,10 @@ void		Camera::update()
       this->_pos.z = this->_origin.z + this->_k * (this->_final.z - this->_origin.z);
       this->_target.x = this->_pos.x;
       this->_target.z = this->_pos.z - 0.1f;
-      this->draw();
     }
   else
     this->_origin = this->_final;
+  this->draw();
 }
 
 void		Camera::draw() const

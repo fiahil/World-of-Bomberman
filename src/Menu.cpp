@@ -19,6 +19,7 @@ Menu::Menu()
   : _game(0),
     _menu(0),
     _intro(true),
+    _pause(false),
     _capture(0)
 {
   this->setContentRoot("./Ressources/");
@@ -43,29 +44,67 @@ void		Menu::initialize(void)
   Sound::getMe()->playBack(Audio::INTRO);
 }
 
-void		Menu::update(void)
+void		Menu::updateIntro()
 {
-  if (this->_intro && this->input_.isKeyDown(gdl::Keys::Escape))
+  if (this->input_.isKeyDown(gdl::Keys::Escape))
   {
     cvReleaseCapture(&this->_capture);
     this->_intro = false;
     Sound::getMe()->stopLastSound();
     this->_menu->initCamera();
   }
-  else
-    if (this->_game)
+}
+
+void		Menu::updateGame()
+{
+  if (this->_game->isEOG())
     {
-      if (this->_game->isEOG())
-      {
-	this->_game->unload();
-	delete this->_game;
-	this->_game = 0;
-      }
-      else
-	this->_game->update();
+      this->_game->unload();
+      delete this->_game;
+      this->_game = 0;
+      this->_menu->setEOG();
     }
-    else if (!(this->_game = this->_menu->createGame(this->gameClock_, this->input_)))
+  else if (this->_game->isPause())
+    {
+      this->_pause = true;
+      this->_menu->setPause();
+    }
+  else
+    this->_game->update();
+}
+
+void		Menu::updateMenu()
+{
+  MyGame*	tmp;
+  
+  if (!this->_game || this->_pause)
+    {
       this->_menu->update(this->gameClock_, this->input_);
+      if ((tmp = this->_menu->createGame(this->gameClock_, this->input_)))
+	{
+	  if (this->_game)
+	    {
+	      this->_game->unload();
+	      delete this->_game;
+	    }
+	  this->_game = tmp;
+	}
+      else if (this->_menu->isResume())
+	{
+	  this->_pause = false;
+	  this->_game->resumeGame(); 
+	}
+    }
+}
+
+void		Menu::update(void)
+{
+  if (this->_intro)
+    this->updateIntro();
+  else if (this->_game && !this->_pause)
+    this->updateGame();
+  else
+    this->updateMenu();
 }
 
 void		Menu::draw(void)

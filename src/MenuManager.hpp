@@ -38,6 +38,7 @@ private:
   std::vector<Map *>		_map;
   GameManager			_gameManager;
   bool				_createGame;
+  bool				_resume;
 
 private:
   typedef void	(MenuManager::*fInitGame)();
@@ -56,6 +57,9 @@ public:
   virtual void		update(gdl::GameClock const&, gdl::Input&);
   MyGame*		createGame(gdl::GameClock&, gdl::Input&);
   void			initCamera(void);
+  bool			isResume() const;
+  void			setPause();
+  void			setEOG();
 };
 
 #endif		/* __MENU_MANAGEMENT_HPP__ */
