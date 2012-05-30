@@ -17,7 +17,6 @@ LoadMap::LoadMap(GameManager& game, std::vector<Map *> & map)
   this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::LAST, 2400.0f, 0.0f, 3900.0f));
   this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::CREATEGAME, 2200.0f, 0.0f, 3950.0f));
   this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::MAP, 2200.0f, 0.0f, 4000.0f));
-  std::cout << this->_map.size() << std::endl;
 }
 
 LoadMap::~LoadMap(void)
@@ -36,9 +35,11 @@ double		LoadMap::getCenterY(void) const
 
 void		LoadMap::updateText() const
 {
-  // TODO get name
-  this->_tags[1]->createText(this->_map[this->_index]->getName(), 20, 800, 450);
-}x
+  if (this->_map.size())
+    this->_tags[1]->createText(this->_map[this->_index]->getName(), 20, 800, 270);
+  else
+    this->_tags[1]->createText("", 20, 800, 270);
+}
 
 void		LoadMap::changeMap(gdl::GameClock const& clock, gdl::Input& input)
 {
@@ -46,7 +47,7 @@ void		LoadMap::changeMap(gdl::GameClock const& clock, gdl::Input& input)
     {
       --this->_index;
       if (static_cast<int>(this->_index) < 0)
-	this->_index = this->_map.size();
+	this->_index = this->_map.size() - 1;
       this->_timerL = clock.getTotalGameTime() + 0.15f;
     }
   else if (clock.getTotalGameTime() >= this->_timerR && input.isKeyDown(gdl::Keys::Right))
@@ -60,6 +61,7 @@ void		LoadMap::changeMap(gdl::GameClock const& clock, gdl::Input& input)
 
 void		LoadMap::update(gdl::GameClock const& clock, gdl::Input& input)
 {
+  this->updateText();
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);

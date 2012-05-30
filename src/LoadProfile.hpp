@@ -14,8 +14,9 @@ class	LoadProfile : public AMenu
 {
 private:
   ProfileLoader			_profileLoader;
-
-  int		getCurTagPos(void) const;
+  size_t			_index;
+  double			_timerL;
+  double			_timerR;
 
 public:
   LoadProfile(GameManager&, std::vector<Profile *>&);
@@ -24,6 +25,10 @@ public:
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);
+
+private:
+  void			updateText() const;
+  void			changeProfile(gdl::GameClock const&, gdl::Input&);
 };
 
 #endif

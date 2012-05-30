@@ -15,7 +15,10 @@ public:
   virtual ~LoadSave(void);
 
 private:
-  bool		_buildTags;
+  std::vector<std::string>	_save;
+  size_t			_index;
+  double			_timerL;
+  double			_timerR;
 
 public:
   virtual void		update(gdl::GameClock const&, gdl::Input&);
@@ -28,8 +31,9 @@ public:
     Others
   */
 private:
-  void			buildTags(void);
   void			loadSave();
+  void			changeSave(gdl::GameClock const&, gdl::Input&);
+  void			updateText() const;
 };
 
 #endif		/* __LOAD_SAVE_HPP__ */
