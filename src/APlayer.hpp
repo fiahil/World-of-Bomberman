@@ -76,6 +76,7 @@ protected:
   Pyramid		_indic;
   std::vector<bool>*	_success;
   APlayer*		_lastHitId;
+  bool			_pause;
 
 private:
   gdl::Model		_Mbomb;
@@ -127,6 +128,8 @@ public:
   virtual void	draw(void);
   virtual void	update(gdl::GameClock const& clock, gdl::Input& input);
   virtual void	drawHUD(std::vector<gdl::Image>&, size_t, size_t, size_t, bool);
+  virtual void	setTimer(double);
+  
 
   Bomb*		isAttack();
   void		takeDamage(ExplodedBomb const*);
@@ -146,6 +149,7 @@ public:
   std::string const&	getTeamName()	const;
   APlayer*		getLastHitId()	const;
   bool			isUnanim()	const;
+  bool			getPause()	const;
 
   void		setPv(int);
   void		setWeapon(BombType::eBomb);
@@ -158,6 +162,7 @@ public:
   void		setName(std::string const&);
   void		setTeamName(std::string const&);
   void		setType(size_t);
+  void		setPause(bool);
   void		incNbKills();
   void		slowMotion();
 

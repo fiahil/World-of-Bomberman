@@ -27,6 +27,7 @@
 #include "NewProfile.hpp"
 #include "LoadProfile.hpp"
 #include "TeamMenu.hpp"
+#include "MenuPause.hpp"
 #include "Human.hpp"
 #include "AI.hpp"
 #include "ProfileManager.hpp"
@@ -84,6 +85,8 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::SETTINGS]->initialize();
   this->_menu[TokenMenu::SKINCHOOSE] = new SkinChoose(this->_gameManager);
   this->_menu[TokenMenu::SKINCHOOSE]->initialize();
+  this->_menu[TokenMenu::PAUSE] = new MenuPause(this->_gameManager);
+  this->_menu[TokenMenu::PAUSE]->initialize();
 
   this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
 		       this->_menu[this->_curMenu]->getCenterY());
@@ -109,13 +112,15 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       else if (tmp == TokenMenu::CREATEGAME)
 	{
 	  this->_createGame = true;
-	  return ;
+	  tmp = TokenMenu::PROFILE;
 	}
+      else if (tmp == TokenMenu::PAUSE)
+	this->_resume = true;
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
       this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-			   this->_menu[this->_curMenu]->getCenterY());
+			   this->_menu[this->_curMenu]->getCenterY()); 
     }
   else
     this->_menu[this->_curMenu]->update(clock, input);
@@ -207,4 +212,24 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
       return game;
     }
   return 0;
+}
+
+bool	MenuManager::isResume() const
+{
+  return this->_resume;
+}
+
+void	MenuManager::setPause()
+{
+  this->_curMenu = TokenMenu::PAUSE;
+  this->_resume = false;
+  this->_menu[this->_curMenu]->setTextDraw(true);
+  this->_menu[this->_curMenu]->setChangeMenu(false);
+  this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
+		       this->_menu[this->_curMenu]->getCenterY()); 
+}
+
+void	MenuManager::setEOG()
+{
+
 }

@@ -52,6 +52,7 @@ public:
   virtual void		update(gdl::GameClock const&, gdl::Input&);
 
 public:
+  void			setChangeMenu(bool);
   void			setTextDraw(bool);
   TokenMenu::eMenu	getContent() const;
 

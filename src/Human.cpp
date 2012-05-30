@@ -191,8 +191,8 @@ void		Human::drawEnd(size_t h, size_t lag, bool EOG, size_t mode)
       	  this->_success->at(Success::FABULOUS) = true;
       	  this->drawSuccess(Success::FABULOUS);
       	}
-
-    this->_text.setText("You Win !");
+      
+      this->_text.setText("You Win !");
       this->_text.setPosition(lag + 200 + mode, h / 2);
       this->_text.draw();
 
@@ -550,4 +550,11 @@ void		Human::drawHUD(std::vector<gdl::Image>& img,
   this->_text.draw();
   this->drawStart(hi, lag, mode);
   this->drawEnd(hi, lag, EOG, mode);
+}
+
+void		Human::setTimer(double timer)
+{
+  this->_timers.assign(this->_timers.size(), timer);
+  if (this->_skillTimer + 0.15f < timer)
+    this->_skillTimer = timer;
 }
