@@ -12,6 +12,7 @@
 #include "Surface.hpp"
 #include "Config.hpp"
 #include "enum.hpp"
+#include "AI.hpp"
 
 class Human : public APlayer
 {
@@ -59,8 +60,11 @@ private:
   std::vector<ptrJumpFunc>	_jumpDir;
   Success::eSuccess		_lastSuccess;
   double		        _successTimer;
+  AI*				_hallu;
+  double			_halluLifeTimer;
 
 protected:
+  virtual void draw(void);
   virtual void	 drawSuccess(Success::eSuccess s);
 
 private:

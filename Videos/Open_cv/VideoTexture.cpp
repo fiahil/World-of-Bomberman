@@ -28,7 +28,7 @@
 #include <string.h>
 #include <GL/glut.h>
 
-#include "Sound.hpp"
+//#include "Sound.hpp"
 
 #define VIEWPORT_WIDTH              640
 #define VIEWPORT_HEIGHT             480

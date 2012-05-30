@@ -28,6 +28,9 @@ AI::AI(AIType::eAI type, Map& map)
   this->_table.push_back(EASY);
   this->_table.push_back(HALLU);
 
+  if (type == AIType::HALLU)
+    this->_dam = 0.0;
+
   {
     Path	p;
 
@@ -36,7 +39,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::UPFunction);
     p.func.push_front(&AI::LEFTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -48,7 +51,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::UPFunction);
     p.func.push_front(&AI::LEFTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -204,6 +207,102 @@ AI::AI(AIType::eAI type, Map& map)
 
     this->_paths.push_back(p); 
   }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(1, 0));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.elt.push_back(std::make_pair(1, -2));
+    p.func.push_front(&AI::RIGHTFunction);
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::UPFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(1, 0));
+    p.elt.push_back(std::make_pair(1, 1));
+    p.elt.push_back(std::make_pair(1, 2));
+    p.func.push_front(&AI::RIGHTFunction);
+    p.func.push_front(&AI::DOWNFunction);
+    p.func.push_front(&AI::DOWNFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, 1));
+    p.elt.push_back(std::make_pair(1, 1));
+    p.elt.push_back(std::make_pair(2, 1));
+    p.func.push_front(&AI::DOWNFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(1, -1));
+    p.elt.push_back(std::make_pair(2, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+    p.func.push_front(&AI::RIGHTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, 1));
+    p.elt.push_back(std::make_pair(-1, 1));
+    p.elt.push_back(std::make_pair(-2, 1));
+    p.func.push_front(&AI::DOWNFunction);
+    p.func.push_front(&AI::LEFTFunction);
+    p.func.push_front(&AI::LEFTFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(-1, 0));
+    p.elt.push_back(std::make_pair(-1, 1));
+    p.elt.push_back(std::make_pair(-1, 2));
+    p.func.push_front(&AI::LEFTFunction);
+    p.func.push_front(&AI::DOWNFunction);
+    p.func.push_front(&AI::DOWNFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(-1, 0));
+    p.elt.push_back(std::make_pair(-1, -1));
+    p.elt.push_back(std::make_pair(-1, -2));
+    p.func.push_front(&AI::LEFTFunction);
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::UPFunction);
+
+    this->_paths.push_back(p); 
+  }
+  {
+    Path	p;
+
+    p.elt.push_back(std::make_pair(0, -1));
+    p.elt.push_back(std::make_pair(-1, -1));
+    p.elt.push_back(std::make_pair(-2, -1));
+    p.func.push_front(&AI::UPFunction);
+    p.func.push_front(&AI::LEFTFunction);
+    p.func.push_front(&AI::LEFTFunction);
+
+    this->_paths.push_back(p); 
+  }
 }
 
 bool	AI::isWall(size_t x, size_t y) const
@@ -239,8 +338,20 @@ bool	AI::nearBomb(void)
   int	x = 0;
   int	y = -7;
 
-  for (; y < 7; ++y)
+  for (y = -7; y < 0; ++y)
   {
+    if (isWall(this->_pos._x + x, this->_pos._y + y))
+      break;
+    if (isBomb(this->_pos._x + x, this->_pos._y + y))
+    {
+      return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
+	  this->_pos._x, this->_pos._y);
+    }
+  }
+  for (y = 0; y < 7; ++y)
+  {
+    if (isWall(this->_pos._x + x, this->_pos._y + y))
+      break;
     if (isBomb(this->_pos._x + x, this->_pos._y + y))
     {
       return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
@@ -248,8 +359,20 @@ bool	AI::nearBomb(void)
     }
   }
   y = 0;
-  for (x = -7; x < 7; ++x)
+  for (x = -7; x < 0; ++x)
   {
+    if (isWall(this->_pos._x + x, this->_pos._y + y))
+      break;
+    if (isBomb(this->_pos._x + x, this->_pos._y + y))
+    {
+      return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
+	  this->_pos._x, this->_pos._y);
+    }
+  }
+  for (x = 0; x < 7; ++x)
+  {
+    if (isWall(this->_pos._x + x, this->_pos._y + y))
+      break;
     if (isBomb(this->_pos._x + x, this->_pos._y + y))
     {
       return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,

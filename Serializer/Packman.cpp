@@ -22,7 +22,6 @@ namespace Serializer
     this->_os	<< "#INFO"
       << "\t:" << p.getId()
       << "\t:" << p.getName()
-      << "\t:" << p.getLvl()
       << "\t:" << p.getXp()
       << "\t:" << p.getTuto()
       << "\t:" << p.getSkin()
@@ -37,14 +36,14 @@ namespace Serializer
       this->_os << "\t:" << p.getSkill().at(i);
     }
     this->_os	<< std::endl << std::endl;
-    this->_os	<< "#ACHIEVEMENT";
+    this->_os	<< "#ACHIEVEMENTS";
     for (size_t i = 0; i < 3; ++i) {
       this->_os << "\t:" << p.getAchievement().at(i);
     }
     this->_os	<< std::endl << std::endl;
     this->_os	<< "#SAVES";
     for (size_t i = 0; i < p.getSave().size(); ++i) {
-      this->_os << "\t:" << p.getSave().at(i);
+      this->_os << "\t:[" << p.getSave().at(i) << "]";
     }
     this->_os	<< std::endl << std::endl;
     this->_os	<< "#CONFIG" << std::endl;

@@ -11,6 +11,7 @@ struct Audio
   enum eAudio {
     HURT,
     ENNEMY_HURT,
+    INTRO,
     LAST
   };
 };
@@ -74,10 +75,10 @@ struct Skin
 {
   enum eSkin
     {
+      WORGEN,
       SYLVANAS,
       VARIANT,
       ZULJIN,
-      WARWIK,
       ENNEMY_LOW,
       LAST
     };
@@ -150,13 +151,21 @@ struct TokenMenu
   enum eMenu
     {
       MAINMENU,
+      CREDITS,
+      LOADPROFILE,
+      LOADSAVE,
+      LOADMAP,
+      GAMECHOOSE,
+      IA,
+      TEAM,
+      MAP,
       NEWPROFILE,
       PROFILE,
-      SLIDING,
-      GAMECHOOSE,
+      SETTINGSCHOOSE,
       SETTINGS,
-      BACK,
+      SKINCHOOSE,
       QUIT,
+      CREATEGAME,
       LAST
     };
 };
@@ -205,8 +214,9 @@ struct AIType
 {
   enum eAI {
     EASY,
-    MEDIUM,
+    NORMAL,
     HARD,
+    HALLU,
     LAST
   };
 };

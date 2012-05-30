@@ -19,6 +19,7 @@ Tp::Tp()
 Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
   : _x(x),
     _y(y),
+    _name("Generated Map"),
     w_unbreak(0),
     background(0),
     _modelBonus(BonusType::LAST)
@@ -58,6 +59,9 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
 Map::Map(std::string const& file)
   : _x(0),
     _y(0),
+    _name(file),
+    w_unbreak(0),
+    background(0),
     _modelBonus(BonusType::LAST)
 {
   std::string swap;
@@ -98,6 +102,8 @@ Map::Map(size_t x, size_t y, std::string const& map)
   : _x(x),
     _y(y),
     _map(map),
+    w_unbreak(0),
+    background(0),
     _modelBonus(BonusType::LAST)
 {
 
@@ -259,6 +265,11 @@ size_t		Map::getX(void) const
 size_t		Map::getY(void) const
 {
   return this->_y;
+}
+
+const std::string &	Map::getName(void) const
+{
+  return this->_name;
 }
 
 void		Map::explodeUnBreakable(size_t &r,

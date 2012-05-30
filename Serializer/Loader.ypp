@@ -110,7 +110,7 @@ info
 
 sequence
 : EOL
-| SEP NUMBER sequence
+| SEP MIXTE sequence
 {
   up.pf.addSave($2);
 }

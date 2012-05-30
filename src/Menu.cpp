@@ -5,14 +5,21 @@
 
 #include <iostream>
 #include <GL/gl.h>
+#include <cv.h>
+#include <highgui.h>
 #include "Map.hpp"
 #include "Human.hpp"
 #include "AI.hpp"
 #include "AIView.hpp"
+#include "MainMenu.hpp"
 #include "Menu.hpp"
+#include "Sound.hpp"
 
 Menu::Menu()
-  : _game(0)
+  : _game(0),
+    _menu(0),
+    _intro(false),
+    _capture(0)
 {
   this->setContentRoot("./Ressources/");
 }
@@ -27,56 +34,37 @@ void		Menu::initialize(void)
   this->window_.setHeight(800);
   this->window_.setWidth(1600);
   this->window_.create();
-  Map*	map = new Map(30, 30, 100, 100);
+  this->_menu = new MenuManager(1600, 800);
+  this->_menu->initialize();
 
-  std::vector<bool>* _aP1 = new std::vector<bool>(Success::LAST, false);
-   // std::vector<bool>* _aP2 = new std::vector<bool>(Success::LAST, false);
-
-  std::vector<APlayer*>	players;
-  Config conf;
-  conf.setConfig(HumGame::ATTACK, gdl::Keys::RControl);
-  APlayer *newHum1 = new Human(*map, conf, _aP1);
-
-  newHum1->setSkin(Skin::SYLVANAS);
-
-  newHum1->setTeamId(6);
-  players.push_back(newHum1);
-  // conf.setConfig(HumGame::UP, gdl::Keys::W);
-  // conf.setConfig(HumGame::LEFT, gdl::Keys::A);
-  // conf.setConfig(HumGame::DOWN, gdl::Keys::S);
-  // conf.setConfig(HumGame::RIGHT, gdl::Keys::D);
-  // conf.setConfig(HumGame::ATTACK, gdl::Keys::Space);
-  // APlayer *newHum2 = new Human(*map, conf, _aP2);
-  // newHum2->setColor(6);
-  // newHum2->setTeamId(7);
-  // newHum2->setSkin(Skin::VARIANT);
-   // players.push_back(newHum2);
-  for (int i = 0; i < 10; ++i)
-    {
-      APlayer *newAI = new AI(AIType::EASY, *map);
-      newAI->setColor(7);
-      newAI->setTeamId(i);
-      players.push_back(newAI);
-    }
-  Match*	m = new Match(map, false, GameMode::SOLO, players);
-
-  this->_game = new MyGame(this->gameClock_, this->input_, *m, players[0], 0); // TODO
-  this->_game->initialize();
+  //  this->_capture = cvCaptureFromAVI("./Ressources/video/intro.avi");
+  // if (!this->_capture)
+    // throw std::runtime_error("Fail to load introduction.");
+  this->_intro = false; // TODO
+  // Sound::getMe()->playBack(Audio::INTRO);
 }
 
 void		Menu::update(void)
 {
-  if (this->_game)
+  if (this->_intro && this->input_.isKeyDown(gdl::Keys::Escape))
+  {
+    cvReleaseCapture(&this->_capture);
+    this->_intro = false;
+  }
+  else
+    if (this->_game)
     {
       if (this->_game->isEOG())
-	{
-	  this->_game->unload();
-	  delete this->_game;
-	  this->_game = 0;
-	}
+      {
+	this->_game->unload();
+	delete this->_game;
+	this->_game = 0;
+      }
       else
 	this->_game->update();
     }
+    else if (!(this->_game = this->_menu->createGame(this->gameClock_, this->input_)))
+      this->_menu->update(this->gameClock_, this->input_);
 }
 
 void		Menu::draw(void)
@@ -85,8 +73,38 @@ void		Menu::draw(void)
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
   glClearDepth(1.0f);
 
-  if (this->_game)
-    this->_game->draw();
+  if (this->_intro)
+  {
+    IplImage*	image = cvQueryFrame(this->_capture);
+
+    cvCvtColor(image, image, CV_BGR2RGB);
+    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, image->width, image->height, GL_RGB, GL_UNSIGNED_BYTE, image->imageData);
+
+    glEnable(GL_TEXTURE_2D);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0, 1600, 800, 0);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex2f(0.0f, 0.0f);
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex2f(1600, 0.0f);
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex2f(1600, 800);
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex2f(0.0f, 800);
+    glEnd();
+  }
+  else
+  {
+    if (this->_game)
+      this->_game->draw();
+    else
+      this->_menu->draw();
+  }
   this->window_.display();
 }
 

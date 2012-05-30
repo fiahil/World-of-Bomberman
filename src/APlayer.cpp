@@ -12,10 +12,10 @@
 #include "APlayer.hpp"
 
 static const char*	g_refSkin[Skin::LAST] = {
+  "models/Character_ennemy.FBX",
   "models/Character_sylvanas.FBX",
   "models/Character_varian.FBX",
   "models/Character_zuljin.FBX",
-  "models/Character_ennemy.FBX",
   "models/Character_ennemy_low.FBX"
 };
 
@@ -26,10 +26,10 @@ static const char*	g_refBomb[BombType::LAST] = {
 };
 
 static const infoAnim	g_refAnim[Skin::LAST] = {
+  {69, 103, 3, 18, 302, 364, 227, 252, 152, 177},
   {144, 410, 3, 18, 535, 584, 69, 94, 460, 485},
   {169, 236, 3, 18, 69, 119, 285, 310, 360, 385},
   {153, 184, 236, 255, 309, 362, 3, 28, 78, 103},
-  {69, 103, 3, 18, 302, 364, 227, 252, 152, 177},
   {69, 119, 3, 18, 244, 269, 319, 344, 169, 194},
 };
 
@@ -56,6 +56,7 @@ APlayer::APlayer(Map & map, std::vector<bool>* success)
     _powerStack(0),
     _nbKills(0),
     _speed(0.15f),
+    _dam(1.0),
     _timers(5, -1.0),
     _weapon(BombType::NORMAL),
     _skin(Skin::ENNEMY_LOW),
@@ -88,7 +89,7 @@ APlayer::APlayer(Map & map, std::vector<bool>* success)
   this->_soundPlayer[Skin::SYLVANAS] = std::make_pair(Audio::HURT, Audio::HURT);
   this->_soundPlayer[Skin::VARIANT] = std::make_pair(Audio::HURT, Audio::HURT);
   this->_soundPlayer[Skin::ZULJIN] = std::make_pair(Audio::HURT, Audio::HURT);
-  this->_soundPlayer[Skin::WARWIK] = std::make_pair(Audio::HURT, Audio::HURT);
+  this->_soundPlayer[Skin::WORGEN] = std::make_pair(Audio::HURT, Audio::HURT);
   this->_soundPlayer[Skin::ENNEMY_LOW] = std::make_pair(Audio::ENNEMY_HURT, Audio::ENNEMY_HURT);
 
   this->_pos._scale = 2.0f;
@@ -227,9 +228,9 @@ void		APlayer::normalBombEffect(ExplodedBomb const* cur)
   if (this->_curEffect != cur)
     {
       if (this->_shield)
-	this->_pv -= 15;
+	this->_pv -= 15 * this->_dam;
       else
-	this->_pv -= 30;
+	this->_pv -= 30 * this->_dam;
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
@@ -242,9 +243,9 @@ void		APlayer::bigBombEffect(ExplodedBomb const* cur)
   if (this->_curEffect != cur)
     {
       if (this->_shield)
-	this->_pv -= 22;
+	this->_pv -= 22 * this->_dam;
       else
-	this->_pv -= 45;
+	this->_pv -= 45 * this->_dam;
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
@@ -257,9 +258,9 @@ void		APlayer::megaBombEffect(ExplodedBomb const* cur)
   if (this->_curEffect != cur)
     {
       if (this->_shield)
-	this->_pv -= 30;
+	this->_pv -= 30 * this->_dam;
       else
-	this->_pv -= 60;
+	this->_pv -= 60 * this->_dam;
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
