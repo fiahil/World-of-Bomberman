@@ -120,7 +120,7 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
       this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-			   this->_menu[this->_curMenu]->getCenterY()); 
+			   this->_menu[this->_curMenu]->getCenterY());
     }
   else
     this->_menu[this->_curMenu]->update(clock, input);
@@ -149,7 +149,7 @@ void	MenuManager::initGameSolo()
 void	MenuManager::initGameCoop()
 {
   int	id = 0;
-  
+
   this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
 							 this->_gameManager._configJ1));
   this->_gameManager._match._players.back()->setTeamId(id);
@@ -173,7 +173,7 @@ void	MenuManager::initGameCoop()
 void	MenuManager::initGameVersus()
 {
   int	id = 0;
-  
+
   this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
 							 this->_gameManager._configJ1));
   this->_gameManager._match._players.back()->setTeamId(id);
@@ -226,7 +226,7 @@ void	MenuManager::setPause()
   this->_menu[this->_curMenu]->setTextDraw(true);
   this->_menu[this->_curMenu]->setChangeMenu(false);
   this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-		       this->_menu[this->_curMenu]->getCenterY()); 
+		       this->_menu[this->_curMenu]->getCenterY());
 }
 
 void	MenuManager::setEOG()

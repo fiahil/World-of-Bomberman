@@ -15,14 +15,14 @@ TeamMenu::TeamMenu(GameManager& game, std::vector<Profile*>& pro)
 {
   this->_nb[2] = -1;
   this->_tags.push_back(new Tag("menu/NbPlayerNormal.png", "menu/NbPlayerHighlit.png", true, false, TokenMenu::TEAM, 800.0f, 0.0f, 2900.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::LAST, 1000.0f, 0.0f, 2900.0f));  
-  
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::LAST, 1000.0f, 0.0f, 2900.0f));
+
   this->_tags.push_back(new Tag("menu/NbTeamNormal.png", "menu/NbTeamHighlit.png", false, false, TokenMenu::TEAM, 800.0f, 0.0f, 2950.0f));
   this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::LAST, 1000.0f, 0.0f, 2950.0f));
-  
+
   this->_tags.push_back(new Tag("menu/Player2Normal.png", "menu/Player2Highlit.png", false, false, TokenMenu::TEAM, 800.0f, 0.0f, 3000.0f));
   this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::LAST, 1000.0f, 0.0f, 3000.0f));
-  
+
   this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::MAP, 800.0f, 0.0f, 3050.0f));
   this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::IA, 800.0f, 0.0f, 3100.0f));
 }
@@ -132,7 +132,7 @@ void	TeamMenu::update(gdl::GameClock const& clock, gdl::Input& input)
     this->changeNumber(clock, input); //TODO
   else if (this->_cursor == 4)
     this->changeProfile(clock, input);
-  
+
   if (this->_curToken == TokenMenu::MAP)
     {
       this->_gameManager._nbPlayers = this->_nb[0];
