@@ -31,20 +31,39 @@ double	MenuPause::getCenterY() const
   return 450.0f;
 }
 
+void	MenuPause::restartGame()
+{
+  delete this->_gameManager._match._map;
+  this->_gameManager._match._map = new Map(this->_gameManager._originMap->getX(),
+					   this->_gameManager._originMap->getY(),
+					   this->_gameManager._originMap->getMap());
+  while (this->_gameManager._match._players.size())
+    {
+      delete this->_gameManager._match._players.back();
+      this->_gameManager._match._players.pop_back();
+    }
+  while (this->_gameManager._match._bombs.size())
+    {
+      delete this->_gameManager._match._bombs.back();
+      this->_gameManager._match._bombs.pop_back();
+    }
+  while (this->_gameManager._match._bonus.size())
+    {
+      delete this->_gameManager._match._bonus.back();
+      this->_gameManager._match._bonus.pop_back();
+    }
+  while (this->_gameManager._match._explodedBombs.size())
+    {
+      delete this->_gameManager._match._explodedBombs.back();
+      this->_gameManager._match._explodedBombs.pop_back();
+    }
+}
+
 void	MenuPause::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
   if (this->_curToken == TokenMenu::CREATEGAME)
-    {
-      while (this->_gameManager._match._players.size())
-	{
-
-	}
-      // players
-      // bomb *
-      // bonus *
-      // ExplodedBomb *
-    }
+    this->restartGame();
 }

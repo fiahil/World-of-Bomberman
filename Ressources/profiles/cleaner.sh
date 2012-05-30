@@ -7,3 +7,4 @@ do
     rm -rf $i
     let "i+=1"
 done
+    rm -rf *~

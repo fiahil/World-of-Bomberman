@@ -37,6 +37,7 @@ void			MapManager::setMaps(void)
 	    }
 	  catch (const std::exception& e)
 	    {
+	      std::cerr << e.what() << std::endl;
 	    }
 	}
       _texasRanger.clean();

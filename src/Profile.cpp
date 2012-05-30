@@ -8,9 +8,13 @@
 #include "Profile.hpp"
 
 Profile::Profile()
+  : _id(0),
+    _lvl(1),
+    _xp(0),
+    _tuto(false),
+    _skin(Skin::VARIANT),
+    _name("Default_Player")
 {
-  this->_tuto = false;
-  this->_name = "Default_Player";
 }
 
 Profile::~Profile()

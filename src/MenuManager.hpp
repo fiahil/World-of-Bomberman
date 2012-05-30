@@ -56,6 +56,7 @@ public:
   virtual void		initialize(void);
   virtual void		update(gdl::GameClock const&, gdl::Input&);
   MyGame*		createGame(gdl::GameClock&, gdl::Input&);
+  void			initCamera(void);
   bool			isResume() const;
   void			setPause();
   void			setEOG();
