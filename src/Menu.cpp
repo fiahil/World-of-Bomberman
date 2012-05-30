@@ -40,7 +40,7 @@ void		Menu::initialize(void)
 
   //  this->_capture = cvCaptureFromAVI("./Ressources/video/intro.avi");
   // if (!this->_capture)
-    // throw std::runtime_error("Fail to load introduction.");
+  // throw std::runtime_error("Fail to load introduction.");
   this->_intro = false; // TODO
   // Sound::getMe()->playBack(Audio::INTRO);
 }
@@ -80,7 +80,14 @@ void		Menu::updateMenu()
     {
       this->_menu->update(this->gameClock_, this->input_);
       if ((tmp = this->_menu->createGame(this->gameClock_, this->input_)))
-	this->_game = tmp;
+	{
+	  if (this->_game)
+	    {
+	      this->_game->unload();
+	      delete this->_game;
+	    }
+	  this->_game = tmp;
+	}
       else if (this->_menu->isResume())
 	{
 	  this->_pause = false;
