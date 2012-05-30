@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "Error.hpp"
 #include "ProfileManager.hpp"
 #include "MapManager.hpp"
 #include "MenuManager.hpp"
@@ -107,8 +108,8 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 
   if ((tmp = this->_menu[this->_curMenu]->getContent()) != TokenMenu::LAST)
     {
-      if (tmp == TokenMenu::QUIT) //TODO
-	exit(0);
+      if (tmp == TokenMenu::QUIT)
+	throw EndOfGame();
       else if (tmp == TokenMenu::CREATEGAME)
 	{
 	  this->_createGame = true;
@@ -156,7 +157,7 @@ void	MenuManager::initGameCoop()
   this->_gameManager._match._players.back()->setSkin(this->_gameManager._mainProfile->getSkin());
   this->_gameManager._match._players.back()->setColor(id);
   this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
-							 this->_gameManager._configJ2));
+  							 this->_gameManager._configJ2));
   this->_gameManager._match._players.back()->setTeamId(id);
   this->_gameManager._match._players.back()->setSkin(this->_gameManager._secondProfile->getSkin());
   this->_gameManager._match._players.back()->setColor(id++);
@@ -178,7 +179,7 @@ void	MenuManager::initGameVersus()
 							 this->_gameManager._configJ1));
   this->_gameManager._match._players.back()->setTeamId(id);
   this->_gameManager._match._players.back()->setSkin(this->_gameManager._mainProfile->getSkin());
-this->_gameManager._match._players.back()->setColor(id++);
+  this->_gameManager._match._players.back()->setColor(id++);
   this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
 							 this->_gameManager._configJ2));
   this->_gameManager._match._players.back()->setTeamId(id);
@@ -215,7 +216,7 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
 }
 
 void	MenuManager::initCamera(void)
-{         
+{
   this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
       this->_menu[this->_curMenu]->getCenterY());
 }
