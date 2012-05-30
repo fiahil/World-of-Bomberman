@@ -3,6 +3,8 @@
  * 12.05.2012
  */
 
+#include <iostream>
+
 #include <sstream>
 #include "Human.hpp"
 
@@ -14,13 +16,16 @@ Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
     _text("Ressources/Police/DejaVuSansMono.ttf"),
     _skillUp(true),
     _skillTimer(-1.0f),
-    _skill(Skill::JUMP),
+    _skill(Skill::HALLU),
     _skillFunc(Skill::LAST, 0),
     _HUD(HUD::LAST, 0),
     _bombAff(BombType::LAST, 0),
     _jumpDir(Dir::LAST, 0),
     _lastSuccess(Success::LAST),
-    _successTimer(-1.0f)
+    _successTimer(-1.0f),
+    _hallu(0),
+    _halluLifeTimer(-1.0f)
+
 {
   this->_event[Input::GAME]._nb = 7;
   this->_event[Input::GAME].
@@ -71,7 +76,9 @@ Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
   this->_jumpDir[Dir::SOUTH] = &Human::southJumpFunction;
   this->_jumpDir[Dir::WEST] = &Human::westJumpFunction;
   this->_jumpDir[Dir::EAST] = &Human::eastJumpFunction;
- // TODO implement other mode
+
+  // review simplification mode de game
+
 }
 
 Human::~Human() {
@@ -97,8 +104,27 @@ bool		Human::SkillFunction(gdl::GameClock const& clock)
   return (this->*(this->_skillFunc[this->_skill]))(clock);
 }
 
+void		Human::draw()
+{
+  APlayer::draw();
+  if (this->_hallu)
+    this->_hallu->draw();
+}
+
 void		Human::play(gdl::GameClock const& clock, gdl::Input& key)
 {
+  if (this->_hallu)
+    {
+      if (this->_halluLifeTimer <= clock.getTotalGameTime())
+	{
+	  delete this->_hallu;
+	  this->_hallu = 0;
+	  this->_halluLifeTimer = 1.0f;
+	}
+      else
+	this->_hallu->update(clock, key);
+    }
+
   if (this->_successTimer == -1.0f && this->_lastSuccess != Success::LAST)
     this->_successTimer = clock.getTotalGameTime() + 5.0f;
   else if (this->_successTimer <= clock.getTotalGameTime())
@@ -197,9 +223,23 @@ void		Human::affMegaBomb() const
     this->_HUD[HUD::MEGABOMB_KO]->draw();
 }
 
-bool		Human::halluSkill(gdl::GameClock const&)
+bool		Human::halluSkill(gdl::GameClock const& clock)
 {
-  return true;
+  double	current;
+
+  if ((current = clock.getTotalGameTime()) >= this->_skillTimer)
+    {
+      this->_skillTimer = current + 60.0;
+      this->_hallu = new AI(AIType::HALLU, this->_map);
+      this->_hallu->setSkin(this->_skin);
+      this->_hallu->setPos(this->_pos._x, this->_pos._y);
+      this->_hallu->setTeamId(_teamId);
+      this->_halluLifeTimer = current + 30.0;
+      this->_hallu->initialize();
+      this->_skillUp = false;
+      return true;
+    }
+  return false;
 }
 
 bool		Human::healSkill(gdl::GameClock const& clock)

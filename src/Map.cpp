@@ -221,18 +221,18 @@ void		Map::draw(void)
 
 void		Map::update(gdl::GameClock const& clock, gdl::Input&)
 {
-  this->_modelBonus[0].play("Take 001");
-  this->_modelBonus[0].update(clock);
-  this->_modelBonus[1].play("Take 001");
-  this->_modelBonus[1].update(clock);
-  this->_modelBonus[2].play("Take 001");
-  this->_modelBonus[2].update(clock);
-  this->_modelBonus[3].play("Take 001");
-  this->_modelBonus[3].update(clock);
-  this->_modelBonus[4].play("Take 001");
-  this->_modelBonus[4].update(clock);
-  this->_modelBonus[5].play("Take 001");
-  this->_modelBonus[5].update(clock);
+  this->_modelBonus[BonusType::LIFE].play("Take 001");
+  this->_modelBonus[BonusType::LIFE].update(clock);
+  this->_modelBonus[BonusType::BOMB].play("Take 001");
+  this->_modelBonus[BonusType::BOMB].update(clock);
+  this->_modelBonus[BonusType::LUST].play("Take 001");
+  this->_modelBonus[BonusType::LUST].update(clock);
+  this->_modelBonus[BonusType::POWER].play("Take 001");
+  this->_modelBonus[BonusType::POWER].update(clock);
+  this->_modelBonus[BonusType::SHIELD].play("Take 001");
+  this->_modelBonus[BonusType::SHIELD].update(clock);
+  this->_modelBonus[BonusType::SPRINT].play("Take 001");
+  this->_modelBonus[BonusType::SPRINT].update(clock);
 }
 
 bool		Map::canMoveAt(size_t x, size_t y) const

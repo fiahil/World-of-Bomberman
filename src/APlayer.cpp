@@ -6,15 +6,16 @@
 /* TMP */
 #include <stdlib.h>
 #include <iostream>
+#include <utility>
 #include <vector>
+#include "Sound.hpp"
 #include "APlayer.hpp"
 
 static const char*	g_refSkin[Skin::LAST] = {
-  "models/Character_thrall.FBX",
+  "models/Character_ennemy.FBX",
   "models/Character_sylvanas.FBX",
   "models/Character_varian.FBX",
   "models/Character_zuljin.FBX",
-  "models/Character_ennemy.FBX",
   "models/Character_ennemy_low.FBX"
 };
 
@@ -25,11 +26,10 @@ static const char*	g_refBomb[BombType::LAST] = {
 };
 
 static const infoAnim	g_refAnim[Skin::LAST] = {
-  {3, 137, 186, 205, 418, 548, 331, 368, 256, 281},
+  {69, 103, 3, 18, 302, 364, 227, 252, 152, 177},
   {144, 410, 3, 18, 535, 584, 69, 94, 460, 485},
   {169, 236, 3, 18, 69, 119, 285, 310, 360, 385},
   {153, 184, 236, 255, 309, 362, 3, 28, 78, 103},
-  {69, 103, 3, 18, 302, 364, 227, 252, 152, 177},
   {69, 119, 3, 18, 244, 269, 319, 344, 169, 194},
 };
 
@@ -66,7 +66,8 @@ APlayer::APlayer(Map & map, std::vector<bool>* success)
     _success(success),
     _pause(false),
     _curEffect(0),
-    _rotFuncMap(Dir::LAST, 0)
+    _rotFuncMap(Dir::LAST, 0),
+    _soundPlayer(Skin::LAST)
 {
   this->_rotFuncMap[Dir::NORTH] = &APlayer::NORTHFunction;
   this->_rotFuncMap[Dir::SOUTH] = &APlayer::SOUTHFunction;
@@ -83,6 +84,14 @@ APlayer::APlayer(Map & map, std::vector<bool>* success)
   this->_bonusEffect[BonusType::POWER] = &APlayer::PowerBonusEffect;
   this->_bonusEffect[BonusType::SHIELD] = &APlayer::ShieldBonusEffect;
   this->_bonusEffect[BonusType::SPRINT] = &APlayer::SprintBonusEffect;
+
+  // First = Hurt, Second = Death
+
+  this->_soundPlayer[Skin::SYLVANAS] = std::make_pair(Audio::HURT, Audio::HURT);
+  this->_soundPlayer[Skin::VARIANT] = std::make_pair(Audio::HURT, Audio::HURT);
+  this->_soundPlayer[Skin::ZULJIN] = std::make_pair(Audio::HURT, Audio::HURT);
+  this->_soundPlayer[Skin::WORGEN] = std::make_pair(Audio::HURT, Audio::HURT);
+  this->_soundPlayer[Skin::ENNEMY_LOW] = std::make_pair(Audio::ENNEMY_HURT, Audio::ENNEMY_HURT);
 
   this->_pos._scale = 2.0f;
   this->setPos(1, 1);
@@ -226,6 +235,7 @@ void		APlayer::normalBombEffect(ExplodedBomb const* cur)
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
+      Sound::getMe()->playBack(this->_soundPlayer[this->_skin].first);
     }
 }
 
@@ -240,6 +250,7 @@ void		APlayer::bigBombEffect(ExplodedBomb const* cur)
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
+      Sound::getMe()->playBack(this->_soundPlayer[this->_skin].first);
     }
 }
 
@@ -254,6 +265,7 @@ void		APlayer::megaBombEffect(ExplodedBomb const* cur)
       if (this->_pv < 0)
 	this->_pv = 0;
       this->_curEffect = cur;
+      Sound::getMe()->playBack(this->_soundPlayer[this->_skin].first);
     }
 }
 

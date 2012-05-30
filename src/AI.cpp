@@ -39,7 +39,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::UPFunction);
     p.func.push_front(&AI::LEFTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -51,7 +51,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::UPFunction);
     p.func.push_front(&AI::LEFTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;

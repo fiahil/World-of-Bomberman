@@ -9,6 +9,8 @@
 struct Audio
 {
   enum eAudio {
+    HURT,
+    ENNEMY_HURT,
     INTRO,
     LAST
   };
@@ -77,7 +79,6 @@ struct Skin
       SYLVANAS,
       VARIANT,
       ZULJIN,
-      ENNEMY_HIGH,
       ENNEMY_LOW,
       LAST
     };
