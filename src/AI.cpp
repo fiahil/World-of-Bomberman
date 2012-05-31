@@ -25,8 +25,12 @@ AI::AI(AIType::eAI type, Map& map)
 
   EASY.push_back(std::make_pair(&AI::nearBomb, &AI::surviveState));
   EASY.push_back(std::make_pair(&AI::nearEmpty, &AI::attackState));
-  NORMAL.push_back(std::make_pair(&AI::nearEmpty, &AI::moveState));
-  HARD.push_back(std::make_pair(&AI::nearEmpty, &AI::moveState));
+  NORMAL.push_back(std::make_pair(&AI::nearBomb, &AI::surviveState));
+  NORMAL.push_back(std::make_pair(&AI::nearBonus, &AI::moveState));
+  NORMAL.push_back(std::make_pair(&AI::nearEmpty, &AI::attackState));
+  HARD.push_back(std::make_pair(&AI::nearBomb, &AI::surviveState));
+  HARD.push_back(std::make_pair(&AI::nearBonus, &AI::moveState));
+  HARD.push_back(std::make_pair(&AI::nearEmpty, &AI::attackState));
   HALLU.push_back(std::make_pair(&AI::nearEmpty, &AI::moveState));
 
   this->_table.push_back(EASY);
@@ -36,6 +40,8 @@ AI::AI(AIType::eAI type, Map& map)
 
   if (type == AIType::HALLU)
     this->_dam = 0.0;
+  if (type == AIType::HARD)
+    this->_dam = 0.25;
 
   {
     Path	p;
@@ -326,6 +332,11 @@ bool	AI::isBomb(size_t x, size_t y) const
   return this->_view->at(x, y).type == Elt::BOMB;
 }
 
+bool	AI::isBonus(size_t x, size_t y) const
+{
+  return this->_view->at(x, y).type == Elt::BONUS;
+}
+
 bool	AI::isBarrel(size_t x, size_t y) const
 {
   return this->_view->at(x, y).type == Elt::WALL && this->_view->at(x, y).pp == 2;
@@ -390,6 +401,30 @@ bool	AI::nearBomb(void)
 
 bool	AI::nearBonus(void)
 {
+  std::vector<std::pair<int, int> >	tmp;
+
+  for (int y = -4; y < 4; ++y)
+  {
+    for (int x = -4; x < 4; ++x)
+    {
+      if (isBonus(this->_pos._x + x, this->_pos._y + y)) 
+      {
+	if (this->pathFind(this->_pos._x + x, this->_pos._y + y,
+	    	           this->_pos._x, this->_pos._y))
+	  tmp.push_back(std::make_pair(x, y));
+      }
+    }
+  }
+  this->_target.clear();
+  if (tmp.size() > 0)
+  {
+    size_t	rander = random() % tmp.size();
+
+    this->pathFind(this->_pos._x + tmp[rander].first,
+	           this->_pos._y + tmp[rander].second,
+		   this->_pos._x, this->_pos._y);
+    return true;
+  }
   return false;
 }
 
@@ -450,10 +485,6 @@ void	AI::moveState(void)
   }
   if ((this->*(this->_target.back()))(*this->_clock))
     this->_target.pop_back();
-}
-
-void	AI::fetchState(void)
-{
 }
 
 void	AI::attackState(void)
