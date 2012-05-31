@@ -56,7 +56,7 @@ double	NewProfile::getCenterX(void) const
 
 double	NewProfile::getCenterY(void) const
 {
-  return (450.0f);
+  return (400.0f);
 }
 
 void	NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)

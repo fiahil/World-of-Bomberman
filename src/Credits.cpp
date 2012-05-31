@@ -22,7 +22,7 @@ double		Credits::getCenterX(void) const
 
 double		Credits::getCenterY(void) const
 {
-  return (450.0f);
+  return (400.0f);
 }
 
 void		Credits::update(gdl::GameClock const& clock, gdl::Input& input)

@@ -7,7 +7,7 @@
 #include "LoadMap.hpp"
 
 LoadMap::LoadMap(GameManager& game, std::vector<Map *> & map)
-  : AMenu("menu/background/backgroundLoadMap.jpg", "menu/background/backgroundLoadMap.jpg", 1600.0f, -1.0f, 3600.0f, game),
+  : AMenu("menu/background/backgroundLoadMap.jpg", "menu/background/backgroundLoadMap.jpg", 1600.0f, -1.0f, 3200.0f, game),
     _map(map),
     _timerL(-1.0f),
     _timerR(-1.0f),
@@ -30,7 +30,7 @@ double		LoadMap::getCenterX(void) const
 
 double		LoadMap::getCenterY(void) const
 {
-  return (4050.0f);
+  return (3600.0f);
 }
 
 void		LoadMap::updateText() const

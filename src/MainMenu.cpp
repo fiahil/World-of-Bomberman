@@ -27,7 +27,7 @@ double	MainMenu::getCenterX() const
 
 double	MainMenu::getCenterY() const
 {
-  return 450.0f;
+  return 400.0f;
 }
 
 void	MainMenu::update(gdl::GameClock const& clock, gdl::Input& input)

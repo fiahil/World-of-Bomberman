@@ -33,7 +33,7 @@ void		Camera::update()
 {
   if (this->_k < 1.0f && !(this->_pos == this->_final))
     {
-      this->_k += 0.01f;
+      this->_k += 0.1f;
       this->_pos.x = this->_origin.x + this->_k * (this->_final.x - this->_origin.x);
       this->_pos.z = this->_origin.z + this->_k * (this->_final.z - this->_origin.z);
       this->_target.x = this->_pos.x;

@@ -6,7 +6,7 @@
 #include "SkinChoose.hpp"
 
 SkinChoose::SkinChoose(GameManager& game)
-  : AMenu("menu/background/backgroundPersonnalization.jpg", "menu/background/backgroundPersonnalization.jpg", 3200.0f, -1.0f, 1800.0f, game)
+  : AMenu("menu/background/backgroundPersonnalization.jpg", "menu/background/backgroundPersonnalization.jpg", 3200.0f, -1.0f, 1600.0f, game)
 {
   this->_tags.push_back(new Tag("menu/WorgenNormal.png", "menu/WorgenHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 4000.0f, 0.0f, 2000.0f));
   this->_tags.push_back(new Tag("menu/SylvanasNormal.png", "menu/SylvanasHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 4000.0f, 0.0f, 2050.0f));
@@ -25,7 +25,7 @@ double	SkinChoose::getCenterX() const
 
 double	SkinChoose::getCenterY() const
 {
-  return 2250.0f;
+  return 2000.0f;
 }
 
 void	SkinChoose::update(gdl::GameClock const& clock, gdl::Input& input)
