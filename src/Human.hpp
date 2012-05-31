@@ -32,8 +32,6 @@ class Human : public APlayer
     size_t			_nb;
   };
 
-  typedef std::map<Input::eMode, eventModeSt>	inputMap;
-
 public:
   /*
    * TODO: implement enum skill
@@ -48,7 +46,7 @@ public:
 
 private:
   Input::eMode			_mode;
-  inputMap			_event;
+  eventModeSt			_event;
   int				_start;
   double			_startTimer;
   gdl::Text		       	_text;
@@ -65,9 +63,9 @@ private:
   double			_halluLifeTimer;
 
 protected:
-  virtual void draw(void);
-  virtual void	 drawSuccess(Success::eSuccess s);
-
+  virtual void	draw(void);
+  virtual void	drawSuccess(Success::eSuccess s);
+  virtual void	playBonusSound(void);
 private:
   bool		 SkillFunction(gdl::GameClock const&);
   Human::eventSt initStruct(gdl::Keys::Key, HumGame::eAction, actionFunc) const;

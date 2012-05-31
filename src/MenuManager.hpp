@@ -16,7 +16,7 @@
 #include "MyGame.hpp"
 #include "MapManager.hpp"
 
-#define	CAM_DISTANCE	(600.0f)
+#define	CAM_DISTANCE	(570.4f)
 
 class	MenuManager : public AObj
 {

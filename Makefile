@@ -36,6 +36,7 @@ SRC		= ./src/main.cpp	 \
 		./src/DirWalker.cpp	 \
 		./src/ProfileLoader.cpp	 \
 		./src/ProfileManager.cpp \
+		./src/SaveManager.cpp	 \
 		./src/MapManager.cpp	 \
 		./src/GameManager.cpp	 \
 		./src/TextEdit.cpp	 \
@@ -56,6 +57,7 @@ SRC		= ./src/main.cpp	 \
 		./src/SkinChoose.cpp	 \
 		./src/TeamMenu.cpp	 \
 		./src/MenuPause.cpp	 \
+		./src/Stat.cpp		 \
 		./src/Tag.cpp
 
 OBJ		= $(SRC:.cpp=.o)

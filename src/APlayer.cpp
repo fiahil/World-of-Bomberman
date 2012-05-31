@@ -352,6 +352,10 @@ void		APlayer::takeDamage(ExplodedBomb const* cur)
     }
 }
 
+void		APlayer::playBonusSound()
+{
+}
+
 bool		APlayer::takeBonus(Bonus const* cur)
 {
   if (this->_pos._x == cur->getPos()._x && this->_pos._y == cur->getPos()._y)
@@ -362,7 +366,7 @@ bool		APlayer::takeBonus(Bonus const* cur)
       	  this->_success->at(Success::BONUS) = true;
       	  this->drawSuccess(Success::BONUS);
       	}
-      Sound::getMe()->playBack(Audio::BONUS);
+      this->playBonusSound();
       return true;
     }
   return false;

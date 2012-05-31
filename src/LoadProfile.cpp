@@ -8,7 +8,7 @@
 #include "LoadProfile.hpp"
 
 LoadProfile::LoadProfile(GameManager& game, std::vector<Profile *>& profiles)
-  : AMenu("menu/Background3.png", "menu/Background3.png", 0.0f, -1.0f, 900.0f, game),
+  : AMenu("menu/background/backgroundLoadProfile.jpg", "menu/background/backgroundLoadProfile.jpg", 0.0f, -1.0f, 800.0f, game),
     _index(0),
     _timerL(-1.0f),
     _timerR(-1.0f)
@@ -33,7 +33,7 @@ double	LoadProfile::getCenterX() const
 
 double	LoadProfile::getCenterY() const
 {
-  return (1350.0f);
+  return (1200.0f);
 }
 
 void		LoadProfile::updateText() const
@@ -43,8 +43,7 @@ void		LoadProfile::updateText() const
   if (this->_profileLoader.getProfiles().size())
     {
       this->_tags[1]->createText(this->_profileLoader.getNames()[this->_index], 20, 950, 270);
-      ss << "Xp : " << this->_profileLoader.getProfiles()[this->_index]->getXp()
-	 << " Skin : " << this->_profileLoader.getProfiles()[this->_index]->getSkin();
+      ss << " Skin : " << this->_profileLoader.getProfiles()[this->_index]->getSkin();
       this->_tags[2]->createText(ss.str(), 20, 950, 310);
     }
   else

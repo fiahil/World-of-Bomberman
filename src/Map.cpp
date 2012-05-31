@@ -329,6 +329,12 @@ void		Map::explode(Pattern& real, Pattern& final, std::list<Bonus*>& bonus)
 				    bonus);
 }
 
+static void	clear_case(char &c)
+{
+  if (c == '2' || c == '3')
+    c = '0';
+}
+
 void		Map::setSpawnTeam(std::vector<APlayer*>& players)
 {
   std::map<size_t, std::pair<size_t, size_t> >	tmp;
@@ -344,9 +350,18 @@ void		Map::setSpawnTeam(std::vector<APlayer*>& players)
        ++it)
     {
       pos = nb * size / tmp.size() + this->_x - 1;
-      while (this->_map[++pos] != '0');
+      while (this->_map[++pos] == '1');
       it->second.first = pos % this->_x;
       it->second.second = pos / this->_x;
+      this->_map[POS(it->second.first, it->second.second)] = '0';
+      clear_case(this->_map[POS(it->second.first + 1, it->second.second)]);
+      clear_case(this->_map[POS(it->second.first + 1, it->second.second + 1)]);
+      clear_case(this->_map[POS(it->second.first, it->second.second + 1)]);
+      clear_case(this->_map[POS(it->second.first - 1, it->second.second + 1)]);
+      clear_case(this->_map[POS(it->second.first - 1, it->second.second)]);
+      clear_case(this->_map[POS(it->second.first - 1, it->second.second - 1)]);
+      clear_case(this->_map[POS(it->second.first, it->second.second - 1)]);
+
       ++nb;
     }
   for (std::vector<APlayer*>::iterator it = players.begin();

@@ -13,6 +13,7 @@ class MenuPause : public AMenu
 private:
   void	clearMatch();
   void	restartGame();
+  void	saveCurGame();
 
 public:
   MenuPause(GameManager&);

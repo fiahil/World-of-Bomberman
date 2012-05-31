@@ -8,7 +8,7 @@
 #include "TeamMenu.hpp"
 
 TeamMenu::TeamMenu(GameManager& game, std::vector<Profile*>& pro)
-  : AMenu("menu/Background5.png", "menu/Background5.png", 0.0f, -1.0f, 2700.0f, game),
+  : AMenu("menu/background/backgroundTeam.jpg", "menu/background/backgroundTeam.jpg", 0.0f, -1.0f, 2400.0f, game),
     _profiles(pro),
     _nb(3, 1),
     _timersLR(2, -1.0f)
@@ -38,7 +38,7 @@ double	TeamMenu::getCenterX(void) const
 
 double	TeamMenu::getCenterY(void) const
 {
-  return (3150.0f);
+  return (2800.0f);
 }
 
 void	TeamMenu::updateText() const
@@ -89,19 +89,27 @@ void	TeamMenu::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
   if (clock.getTotalGameTime() >= this->_timersLR[0] && input.isKeyDown(gdl::Keys::Left))
     {
       --this->_nb[2];
-      if (this->_nb[2] >= 0 && this->_profiles[this->_nb[2]] == this->_gameManager._mainProfile)
-	--this->_nb[2];
       if (this->_nb[2] < 0)
 	this->_nb[2] = this->_profiles.size() - 1;
+      while (this->_profiles[this->_nb[2]] == this->_gameManager._mainProfile)
+	{
+	  --this->_nb[2];
+	  if (this->_nb[2] < 0)
+	    this->_nb[2] = this->_profiles.size() - 1;
+	}
       this->_timersLR[0] = clock.getTotalGameTime() + 0.15f;
     }
   else if (clock.getTotalGameTime() >= this->_timersLR[1] && input.isKeyDown(gdl::Keys::Right))
     {
       ++this->_nb[2];
-      if (static_cast<unsigned int>(this->_nb[2]) < this->_profiles.size() && this->_gameManager._mainProfile == this->_profiles[this->_nb[2]])
-	++this->_nb[2];
       if (static_cast<unsigned int>(this->_nb[2]) >= this->_profiles.size())
 	this->_nb[2] = 0;
+      while (this->_profiles[this->_nb[2]] == this->_gameManager._mainProfile)
+	{
+	  ++this->_nb[2];
+	  if (static_cast<unsigned int>(this->_nb[2]) >= this->_profiles.size())
+	    this->_nb[2] = 0;
+	}
       this->_timersLR[1] = clock.getTotalGameTime() + 0.15f;
     }
 }

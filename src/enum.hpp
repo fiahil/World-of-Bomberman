@@ -19,6 +19,8 @@ struct Audio
     WORGEN_DEATH,
     ZULJIN_HURT,
     ZULJIN_DEATH,
+    TIMER_START,
+    START,
     EXPLODE,
     BONUS,
     SUCCESS,
