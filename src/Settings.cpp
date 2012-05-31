@@ -45,7 +45,7 @@ static const HumGame::eAction	g_refAction[6] = {
 };
 
 Settings::Settings(GameManager& game)
-  : AMenu("menu/background/backgroundSettings.jpg", "menu/background/backgroundSettings.jpg", 3200.0f, -1.0f, 2400.0f, game),
+  : AMenu("menu/background/backgroundConfiguration.jpg", "menu/background/backgroundConfiguration.jpg", 3200.0f, -1.0f, 2400.0f, game),
     _oneTime(-1.0f),
     _selected(false)
 {
@@ -67,7 +67,7 @@ Settings::Settings(GameManager& game)
   this->_tags.push_back(new Tag("menu/SkillNormal.png", "menu/SkillHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 3150.0f));
   this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 3150.0f));
 
-  this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::PROFILE, 3500.0f, 0.0f, 3200.0f));
+  this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 3500.0f, 0.0f, 3200.0f));
 }
 
 Settings::~Settings()
