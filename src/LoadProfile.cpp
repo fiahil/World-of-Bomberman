@@ -94,6 +94,12 @@ void	LoadProfile::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_tags[this->_cursor]->setStatus(true);
       
     }
-  if (this->_curToken == TokenMenu::PROFILE && this->_profiles.size())
-    this->_gameManager._mainProfile = this->_profiles[this->_index];
+
+  if (this->_curToken == TokenMenu::PROFILE)
+    {
+      if (this->_profiles.size())
+	this->_gameManager._mainProfile = this->_profiles[this->_index];
+      else
+	this->_curToken = TokenMenu::LAST;
+    }
 }

@@ -89,5 +89,10 @@ void		LoadSave::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_tags[this->_cursor]->setStatus(true);
     }
   if (this->_curToken == TokenMenu::CREATEGAME)
-    this->loadSave();
+    {
+      if (this->_save.size())
+	this->loadSave();
+      else
+	this->_curToken = TokenMenu::LAST;
+    }
 }
