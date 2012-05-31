@@ -28,7 +28,7 @@ double	MenuPause::getCenterX() const
 
 double	MenuPause::getCenterY() const
 {
-  return 450.0f;
+  return 400.0f;
 }
 
 void	MenuPause::clearMatch()
