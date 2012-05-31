@@ -3,7 +3,7 @@
  * 27.05.12
  */
 
-#include <algorithm>
+#include <iostream>
 #include <sstream>
 #include "LoadProfile.hpp"
 
@@ -44,8 +44,7 @@ void		LoadProfile::updateText() const
   if (this->_profiles.size())
     {
       this->_tags[1]->createText(this->_names[this->_index], 20, 950, 270);
-      ss << "Xp : " << this->_profiles[this->_index]->getXp()
-	 << " Skin : " << this->_profiles[this->_index]->getSkin();
+      ss << " Skin : " << this->_profiles[this->_index]->getSkin();
       this->_tags[2]->createText(ss.str(), 20, 950, 310);
     }
   else

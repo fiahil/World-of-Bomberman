@@ -50,6 +50,8 @@ void	NewProfile::setNewProfile(void)
       this->_gameManager._mainProfile->setConfig(_cfg);
       this->_gameManager._mainProfile->setName(this->_textEdit[0]->getStr());
       _pm.setProfile(_id, *this->_gameManager._mainProfile);
+      this->_profiles.push_back(this->_gameManager._mainProfile);
+      this->_names.push_back(this->_gameManager._mainProfile->getName());
       this->_strStatus = false;
       this->_textEdit[0]->setStr("[Press Enter to type your name]");
     }

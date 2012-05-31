@@ -1,20 +1,20 @@
-#INFO	:0	:Busi	:55	:1	:1
+#INFO	:toto	:2	:1
 
-#STAT	:666	:0	:5555	:0	:999	:444
+#STAT	:0	:0	:0	:0
 
-#SKILLS	:0	:1	:0
 
-#ACHIEVEMENTS	:0	:1	:1
 
-#SAVES	:[41]	:[21]	:[5]
+#ACHIEVEMENTS	:0	:0	:0
+
+#SAVES
 
 #CONFIG
-0	:22
-1	:0
-2	:3
-3	:18
+0	:73
+1	:71
+2	:72
+3	:74
 4	:57
-5	:5
-6	:6
-7	:4
+5	:36
+6	:60
+7	:58
 #ENDCONFIG
