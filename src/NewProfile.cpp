@@ -16,11 +16,10 @@ NewProfile::NewProfile(GameManager& game, std::vector<Profile *>& profiles, std:
   this->_oneTime = -1.0;
   this->_strStatus = false;
   this->_selected = false;
-  this->_textEdit.push_back(new TextEdit(965, 360, "[Press Enter to type your name]"));
-  this->_tags.push_back(new Tag("menu/NameNormal.png", "menu/NameHighlit.png", false, false, TokenMenu::NEWPROFILE, 2400.0f, 0.0f, 400.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::NEWPROFILE, 2550.0f, 0.0f, 400.0f));
-  this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::PROFILE, 2400.0f, 0.0f, 450.0f));
-  this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::MAINMENU, 2400.0f, 0.0f, 500.0f));
+  this->_textEdit.push_back(new TextEdit(780, 413, "[Press Enter to type your name]"));
+  this->_tags.push_back(new Tag("menu/tags/NameNormal.png", "menu/tags/NameHighlit.png", false, false, TokenMenu::NEWPROFILE, 2029.0f, 0.0f, 400.0f));
+  this->_tags.push_back(new Tag("menu/tags/DoneNormal.png", "menu/tags/DoneHighlit.png", false, false, TokenMenu::PROFILE, 2029.0f, 0.0f, 465.0f));
+  this->_tags.push_back(new Tag("menu/tags/BackNormal.png", "menu/tags/BackHighlit.png", false, false, TokenMenu::MAINMENU, 2029.0f, 0.0f, 530.0f));
 }
 
 NewProfile::~NewProfile(void)
@@ -41,7 +40,7 @@ void	NewProfile::setNewProfile(void)
       ProfileManager	_pm;
       Config		_cfg;
       size_t		_id;
-      
+
       for (_id = 0; _pm.isHere(_id); ++_id);
       this->_gameManager._mainProfile = new Profile;
       this->_gameManager._mainProfile->setId(_id);
@@ -103,18 +102,18 @@ void	NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 	    }
 	}
 
-      if (this->_cursor == 1)
-	{
-	  this->_tags[this->_cursor]->setStatus(false);
-	  if (this->_timers[0] < this->_timers[1])
-	    ++this->_cursor;
-	  else
-	    --this->_cursor;
-	  this->_tags[this->_cursor]->setStatus(true);
-	}
-    }
-  else
-    {
+  //     if (this->_cursor == 1)
+  // 	{
+  // 	  this->_tags[this->_cursor]->setStatus(false);
+  // 	  if (this->_timers[0] < this->_timers[1])
+  // 	    ++this->_cursor;
+  // 	  else
+  // 	    --this->_cursor;
+  // 	  this->_tags[this->_cursor]->setStatus(true);
+  // 	}
+  //   }
+  // else
+  //   {
       if (input.isKeyDown(gdl::Keys::Return))
 	{
 	  this->_strStatus = true;
@@ -123,5 +122,6 @@ void	NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 	}
       else
 	this->_textEdit[0]->update(clock, input);
+      // }
     }
 }

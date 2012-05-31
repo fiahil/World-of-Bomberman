@@ -51,9 +51,9 @@ void	TeamMenu::updateText() const
   ss.clear();
   ss << this->_nb[2];
   if (this->_gameManager._match._gameMode != GameMode::SOLO)
-    this->_tags[2]->createText(this->_profiles[this->_nb[2]]->getName(), 20, 860, 495);
+    this->_tags[2]->createText(this->_profiles[this->_nb[2]]->getName(), 20, 855, 495);
   else
-    this->_tags[2]->createText("", 20, 1100, 270);
+    this->_tags[2]->createText("", 20, 855, 495);
 }
 
 void	TeamMenu::changeNumber(gdl::GameClock const& clock, gdl::Input& input)

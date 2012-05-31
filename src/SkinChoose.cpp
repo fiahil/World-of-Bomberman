@@ -68,7 +68,7 @@ double	SkinChoose::getCenterY() const
 void	SkinChoose::updateText()
 {
   this->_tags[0]->createText(g_refSkin[this->_indexSkin], 20, 700, 370);
-  this->_tags[1]->createText(g_refSkill[this->_indexSkill], 20, 700, 435);
+  this->_tags[1]->createText(g_refSkill[this->_indexSkill], 20, 650, 435);
 }
 
 void	SkinChoose::changeSkin(gdl::GameClock const& clock, gdl::Input& input)

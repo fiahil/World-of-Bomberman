@@ -12,11 +12,11 @@
 MenuPause::MenuPause(GameManager& game)
   : AMenu("menu/background/backgroundPause.jpg", "menu/background/backgroundPause.jpg", 3200.0f, -1.0f, 0.0f, game)
 {
-  this->_tags.push_back(new Tag("menu/ResumeNormal.png", "menu/ResumeHighlit.png", true, false, TokenMenu::PAUSE, 4000.0f, 0.0f, 450.0f));
-  this->_tags.push_back(new Tag("menu/RestartNormal.png", "menu/RestartHighlit.png", false, false, TokenMenu::CREATEGAME, 4000.0f, 0.0f, 500.0f));
-  this->_tags.push_back(new Tag("menu/SaveNormal.png", "menu/SaveHighlit.png", false, false, TokenMenu::LOADSAVE, 4000.0f, 0.0f, 550.0f));
-  this->_tags.push_back(new Tag("menu/MainMenuNormal.png", "menu/MainMenuHighlit.png", false, false, TokenMenu::PROFILE, 4000.0f, 0.0f, 600.0f));
-  this->_tags.push_back(new Tag("menu/QuitNormal.png", "menu/QuitHighlit.png", false, false, TokenMenu::QUIT, 4000.0f, 0.0f, 650.0f));
+  this->_tags.push_back(new Tag("menu/tags/ResumeNormal.png", "menu/tags/ResumeHighlit.png", true, false, TokenMenu::PAUSE, 3629.0f, 0.0f, 250.0f));
+  this->_tags.push_back(new Tag("menu/tags/RestartNormal.png", "menu/tags/RestartHighlit.png", false, false, TokenMenu::CREATEGAME, 3629.0f, 0.0f, 315.0f));
+  this->_tags.push_back(new Tag("menu/tags/SaveNormal.png", "menu/tags/SaveHighlit.png", false, false, TokenMenu::LOADSAVE, 3629.0f, 0.0f, 380.0f));
+  this->_tags.push_back(new Tag("menu/tags/MainMenuNormal.png", "menu/tags/MainMenuHighlit.png", false, false, TokenMenu::PROFILE, 3629.0f, 0.0f, 445.0f));
+  this->_tags.push_back(new Tag("menu/tags/QuitNormal.png", "menu/tags/QuitHighlit.png", false, false, TokenMenu::QUIT, 3629.0f, 0.0f, 510.0f));
 }
 
 MenuPause::~MenuPause()
