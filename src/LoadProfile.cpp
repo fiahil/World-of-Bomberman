@@ -18,8 +18,8 @@ LoadProfile::LoadProfile(GameManager& game, std::vector<Profile *>& profiles, st
   this->_tags.push_back(new Tag("menu/LoadNormal.png", "menu/LoadHighlit.png", true, false, TokenMenu::LAST, 700.0f, 0.0f, 1200.0f));
   this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::LAST, 900.0f, 0.0f, 1200.0f));
   this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::LAST, 900.0f, 0.0f, 1250.0f));
-  this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::PROFILE, 700.0f, 0.0f, 1300.0f));
-  this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::MAINMENU, 700.0f, 0.0f, 1350.0f));
+  this->_tags.push_back(new Tag("menu/tags/DoneNormal.png", "menu/tags/DoneHighlit.png", false, false, TokenMenu::PROFILE, 700.0f, 0.0f, 1300.0f));
+  this->_tags.push_back(new Tag("menu/tags/BackNormal.png", "menu/tags/BackHighlit.png", false, false, TokenMenu::MAINMENU, 700.0f, 0.0f, 1350.0f));
 
 }
 
