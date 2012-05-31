@@ -63,7 +63,6 @@ namespace Serializer
     this->_os	<< "#HEADER"
       		<< "\t:" << 0
 		<< "\t:" << m._gameMode
-		<< "\t:" << m._cheat
 		<< std::endl << std::endl;
     this->_os	<< "#PLAYERS" << std::endl;
     for (size_t i = 0; i < m._players.size(); ++i) {

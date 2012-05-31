@@ -85,16 +85,15 @@ info
   up.pf.addAchievement($5);
   up.pf.addAchievement($7);
 }
-| HEADER SEP NUMBER SEP NUMBER EOL
+| HEADER SEP NUMBER EOL
 {
-  up.ma.setGameMode(static_cast<GameMode::eGameMode>($3));
-  up.ma.setCheat($5);
+  up.ma._gameMode = static_cast<GameMode::eGameMode>($3);
 }
 | MAP SEP NUMBER SEP NUMBER EOL MIXTE EOL ENDMAP
 {
   Map*		m = new Map($3, $5, *$7);
 
-  up.ma.setMap(m);
+  up.ma._map = m;
 }
 | SAVES sequence
 | PLAYERS EOL players
