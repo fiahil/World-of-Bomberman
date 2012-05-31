@@ -33,7 +33,7 @@ void		LoadSave::loadSave()
   Serializer::Unpackman up(*this->_gameManager._mainProfile, this->_gameManager._match);
   std::string	path("Ressources/saves/" + this->_gameManager._mainProfile->getSave()[this->_cursor]);
   std::ifstream	file(path.c_str());
-  
+
   if (!file.good())
     this->_curToken = TokenMenu::MAINMENU;
   else
@@ -42,10 +42,6 @@ void		LoadSave::loadSave()
       Serializer::Loader	loader(scanner, up);
 
       loader.parse();
-      /*if (up.ma._gameMode != GameMode::SOLO)
-	{
-	  up.ma._players[0]
-	  }*/
     }
 }
 
