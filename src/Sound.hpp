@@ -35,6 +35,18 @@ public:
 
   void		playBack(Audio::eAudio);
   void		stopLastSound();
+
+  /* TO DO */
+
+  /*
+    FMOD_RESULT F_API FMOD_Channel_SetVolume             (FMOD_CHANNEL *channel, float volume);
+  */
+  void		setVolume(bool);
+
+  /*
+    Stop + play
+  */
+  void		replaySound(void);
 };
 
 #endif

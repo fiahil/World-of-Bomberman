@@ -73,6 +73,7 @@ LDFLAGS		= -lGL -lGLU -lgdl_gl -lserial -lfmodex		\
 		-Wl,--rpath=./lib/libgdl_gl-2012.3/lib,--rpath=./lib/SFML-1.6/lib,--rpath=./lib/libfmodex/lib
 
 RM		= rm -rf
+DUST		= *~ src/*~ Serializer/*~
 
 all:		gen $(NAME)
 
@@ -83,7 +84,7 @@ gen:
 		make all -C ./Serializer
 
 clean:
-		$(RM) $(OBJ)
+		$(RM) $(OBJ) $(DUST)
 		make clean -C ./Serializer
 
 fclean:		clean
@@ -93,3 +94,6 @@ re:		fclean all
 
 libclean:
 		make fclean -C ./Serializer
+
+modelclean:
+		$(RM) Ressources/models/*.fbm*
