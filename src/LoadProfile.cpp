@@ -80,20 +80,23 @@ void	LoadProfile::update(gdl::GameClock const& clock, gdl::Input& input)
       (this->*_keyEvent[i].second)(clock);
   if (this->_cursor == 0) //TODO pointer function
     this->changeProfile(clock, input);
-  else if (this->_cursor == 1)
+  else if ((this->_cursor == 1) ^ (this->_cursor == 2))
     {
       this->_tags[this->_cursor]->setStatus(false);
-      this->_cursor = 3;
+      if (this->_cursor == 1)
+	this->_cursor = 3;
+      else
+	this->_cursor = 0;
       this->_tags[this->_cursor]->setStatus(true);
       
     }
-  else if (this->_cursor == 2)
+  /*else if (this->_cursor == 2)
     {
       this->_tags[this->_cursor]->setStatus(false);
       this->_cursor = 0;
       this->_tags[this->_cursor]->setStatus(true);
       
-    }
+      }*/
 
   if (this->_curToken == TokenMenu::PROFILE)
     {
