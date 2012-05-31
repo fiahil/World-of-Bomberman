@@ -36,6 +36,7 @@ SRC		= ./src/main.cpp	 \
 		./src/DirWalker.cpp	 \
 		./src/ProfileLoader.cpp	 \
 		./src/ProfileManager.cpp \
+		./src/SaveManager.cpp	 \
 		./src/MapManager.cpp	 \
 		./src/GameManager.cpp	 \
 		./src/TextEdit.cpp	 \

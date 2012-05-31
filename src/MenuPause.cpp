@@ -3,7 +3,9 @@
  * 15.05.12
  */
 
+#include <sstream>
 #include <iostream>
+#include "SaveManager.hpp"
 #include "MenuPause.hpp"
 
 MenuPause::MenuPause(GameManager& game)
@@ -65,6 +67,16 @@ void	MenuPause::restartGame()
 					   this->_gameManager._originMap->getMap());
 }
 
+void	MenuPause::saveCurGame()
+{
+  std::stringstream	ss;
+
+  ++SaveManager::maxId;
+  ss << SaveManager::maxId;
+  SaveManager::setSave(SaveManager::maxId, this->_gameManager._match);
+  this->_gameManager._mainProfile->addSave(ss.str());
+}
+
 void	MenuPause::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
@@ -72,8 +84,8 @@ void	MenuPause::update(gdl::GameClock const& clock, gdl::Input& input)
       (this->*_keyEvent[i].second)(clock);
   if (this->_curToken == TokenMenu::CREATEGAME)
     this->restartGame();
-  else if (this->_curToken == TokenMenu::LAST);
-    
+  else if (this->_curToken == TokenMenu::LAST)
+    this->saveCurGame();
   else if (this->_curToken == TokenMenu::PROFILE)
     this->clearMatch();
 }
