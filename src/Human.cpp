@@ -178,7 +178,10 @@ void		Human::drawEnd(size_t h, size_t lag, bool EOG, size_t mode)
       	  this->_success->at(Success::DIE) = true;
       	  this->drawSuccess(Success::DIE);
       	}
-      this->_text.setText("You Die !");
+      if (EOG)
+	this->_text.setText("You Lose !");
+      else
+	this->_text.setText("You Die !");
       this->_text.setPosition(lag + 200 + mode, h / 2);
       this->_text.draw();
      }
@@ -195,10 +198,7 @@ void		Human::drawEnd(size_t h, size_t lag, bool EOG, size_t mode)
       	  this->_success->at(Success::FABULOUS) = true;
       	  this->drawSuccess(Success::FABULOUS);
       	}
-      if (!this->_pv)
-	this->_text.setText("You Lose !");
-      else
-	this->_text.setText("You Win !");
+      this->_text.setText("You Win !");
       this->_text.setPosition(lag + 200 + mode, h / 2);
       this->_text.draw();
 
