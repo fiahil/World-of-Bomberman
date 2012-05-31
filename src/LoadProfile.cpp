@@ -43,8 +43,7 @@ void		LoadProfile::updateText() const
   if (this->_profileLoader.getProfiles().size())
     {
       this->_tags[1]->createText(this->_profileLoader.getNames()[this->_index], 20, 950, 270);
-      ss << "Xp : " << this->_profileLoader.getProfiles()[this->_index]->getXp()
-	 << " Skin : " << this->_profileLoader.getProfiles()[this->_index]->getSkin();
+      ss << " Skin : " << this->_profileLoader.getProfiles()[this->_index]->getSkin();
       this->_tags[2]->createText(ss.str(), 20, 950, 310);
     }
   else
