@@ -3,6 +3,7 @@
  * 27.05.12
  */
 
+#include <iostream>
 #include "MenuIA.hpp"
 
 MenuIA::MenuIA(GameManager& game)
