@@ -13,7 +13,7 @@
 #include "DirWalker.hpp"
 #include "ProfileManager.hpp"
 
-size_t		ProfileManager::maxId = ProfileManager::getMax();
+size_t		ProfileManager::maxId = ProfileManager::getMax(); 
 
 size_t		ProfileManager::getMax()
 {
