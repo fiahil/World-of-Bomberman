@@ -115,8 +115,8 @@ void		Profile::setSave(const std::vector<std::string> & value)
   this->_save = value;
 }
 
-void		Profile::addSave(const std::string * value)
+void		Profile::addSave(const std::string & value)
 {
-  this->_save.push_back(*value);
+  this->_save.push_back(value);
 }
 
