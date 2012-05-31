@@ -18,31 +18,20 @@ class Match
 {
 public:
   Match();
-  Match(Map *, bool, GameMode::eGameMode, const std::vector<APlayer *> &);
+  Match(Map *, GameMode::eGameMode, const std::vector<APlayer *> &);
   ~Match();
 
 private:
   Match(const Match &);
   const Match & operator=(const Match &);
 
-public:	// WHYYYYYYYY ???
+public:
   Map*				_map;
-  bool				_cheat;
   GameMode::eGameMode		_gameMode;
   std::vector<APlayer*>		_players;
   std::list<Bomb*>		_bombs;
   std::list<Bonus*>		_bonus;
   std::list<ExplodedBomb*>	_explodedBombs;
-
-public:
-  void		setMap(Map *);
-  void		setGameMode(GameMode::eGameMode);
-  void		setCheat(bool);
-  void		setPlayers(const std::vector<APlayer *> &);
-  void		setAllMatch(Map *,
-			    bool,
-			    GameMode::eGameMode,
-			    const std::vector<APlayer *> &);
 };
 
 #endif	/* __MATCH_HPP__*/

@@ -52,6 +52,7 @@ private:
   bool	isWall(size_t x, size_t y) const;
   bool	isBomb(size_t x, size_t y) const;
   bool	isEmpty(size_t x, size_t y) const;
+  bool	isBonus(size_t x, size_t y) const;
   bool	isBarrel(size_t x, size_t y) const;
 
   bool	nearBomb(void);
@@ -62,7 +63,6 @@ private:
   void	surviveState(void);
   void	attackState(void);
   void	moveState(void);
-  void	fetchState(void);
 
   bool	pathFind(size_t x, size_t y, size_t cx, size_t cy);
   bool	pathDiscovery(size_t cx, size_t cy, Path const& p);

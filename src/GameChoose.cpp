@@ -37,10 +37,10 @@ void		GameChoose::update(gdl::GameClock const& clock, gdl::Input& input)
   if (this->_curToken == TokenMenu::IA)
     {
       if (this->_cursor == 0)
-	this->_gameManager._match.setGameMode(GameMode::SOLO);
+	this->_gameManager._match._gameMode = GameMode::SOLO;
       else if (this->_cursor == 1)
-	this->_gameManager._match.setGameMode(GameMode::COOP);
+	this->_gameManager._match._gameMode = GameMode::COOP;
       else if (this->_cursor == 2)
-	this->_gameManager._match.setGameMode(GameMode::VERSUS);
+	this->_gameManager._match._gameMode = GameMode::VERSUS;
     }
 }
