@@ -89,19 +89,27 @@ void	TeamMenu::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
   if (clock.getTotalGameTime() >= this->_timersLR[0] && input.isKeyDown(gdl::Keys::Left))
     {
       --this->_nb[2];
-      if (this->_nb[2] >= 0 && this->_profiles[this->_nb[2]] == this->_gameManager._mainProfile)
-	--this->_nb[2];
       if (this->_nb[2] < 0)
 	this->_nb[2] = this->_profiles.size() - 1;
+      while (this->_profiles[this->_nb[2]] == this->_gameManager._mainProfile)
+	{
+	  --this->_nb[2];
+	  if (this->_nb[2] < 0)
+	    this->_nb[2] = this->_profiles.size() - 1;
+	}
       this->_timersLR[0] = clock.getTotalGameTime() + 0.15f;
     }
   else if (clock.getTotalGameTime() >= this->_timersLR[1] && input.isKeyDown(gdl::Keys::Right))
     {
       ++this->_nb[2];
-      if (static_cast<unsigned int>(this->_nb[2]) < this->_profiles.size() && this->_gameManager._mainProfile == this->_profiles[this->_nb[2]])
-	++this->_nb[2];
       if (static_cast<unsigned int>(this->_nb[2]) >= this->_profiles.size())
 	this->_nb[2] = 0;
+      while (this->_profiles[this->_nb[2]] == this->_gameManager._mainProfile)
+	{
+	  ++this->_nb[2];
+	  if (static_cast<unsigned int>(this->_nb[2]) >= this->_profiles.size())
+	    this->_nb[2] = 0;
+	}
       this->_timersLR[1] = clock.getTotalGameTime() + 0.15f;
     }
 }

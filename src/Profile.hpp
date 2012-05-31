@@ -54,7 +54,7 @@ public:
   void		setAchievement(const std::vector<bool> &);
   void		addAchievement(bool);
   void		setSave(const std::vector<std::string> &);
-  void		addSave(const std::string *);
+  void		addSave(const std::string &);
 };
 
 #endif	 /*__PROFILE_HPP__ */
