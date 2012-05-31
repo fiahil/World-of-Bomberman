@@ -11,6 +11,7 @@
 class MenuPause : public AMenu
 {
 private:
+  void	clearMatch();
   void	restartGame();
 
 public:
