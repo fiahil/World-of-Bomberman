@@ -17,6 +17,8 @@ private:
   bool				_strStatus;
   double			_oneTime;
 
+  bool				alreadyExists(std::string);
+
 public:
   NewProfile(GameManager&, std::vector<Profile *>&, std::vector<std::string>&);
   virtual ~NewProfile(void);

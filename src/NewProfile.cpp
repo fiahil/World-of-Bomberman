@@ -3,6 +3,7 @@
  *
  */
 
+#include <algorithm>
 #include <iostream>
 #include "ProfileManager.hpp"
 #include "NewProfile.hpp"
@@ -28,29 +29,40 @@ NewProfile::~NewProfile(void)
 
 void	NewProfile::setNewProfile(void)
 {
-  ProfileManager	_pm;
-  Config		_cfg;
-  size_t		_id;
-  std::vector<size_t>	_six(6, 0);
-  std::vector<size_t>	_three(3, 0);
 
-  for (_id = 0; _pm.isHere(_id); ++_id);
-  this->_gameManager._mainProfile = new Profile;
-  this->_gameManager._mainProfile->setId(_id);
-  this->_gameManager._mainProfile->setLvl(1);
-  this->_gameManager._mainProfile->setXp(0);
-  this->_gameManager._mainProfile->setTuto(false);
-  this->_gameManager._mainProfile->setSkin(Skin::VARIANT);
-  this->_gameManager._mainProfile->setConfig(_cfg);
-  this->_gameManager._mainProfile->setName(this->_textEdit[0]->getStr());
-  this->_gameManager._mainProfile->setSkill(_three);
-  this->_gameManager._mainProfile->setStat(_six);
-  this->_gameManager._mainProfile->setAchievement(_three);
-  _pm.setProfile(_id, *this->_gameManager._mainProfile);
-  this->_profiles.push_back(this->_gameManager._mainProfile);
-  this->_names.push_back(this->_gameManager._mainProfile->getName());
-  this->_strStatus = false;
-  this->_textEdit[0]->setStr("[Press Enter to type your name]");
+  unsigned int	i;
+  for (i = 0; (i < this->_names.size()) && (this->_textEdit[0]->getStr() != this->_names[i]); ++i);
+  if (i < this->_names.size())
+    {
+      this->_textEdit[0]->setStr("[Name already used]");
+      this->_curToken = TokenMenu::LAST;
+    }
+  else
+    {
+      ProfileManager	_pm;
+      Config		_cfg;
+      size_t		_id;
+      std::vector<size_t>	_six(6, 0);
+      std::vector<size_t>	_three(3, 0);
+      
+      for (_id = 0; _pm.isHere(_id); ++_id);
+      this->_gameManager._mainProfile = new Profile;
+      this->_gameManager._mainProfile->setId(_id);
+      this->_gameManager._mainProfile->setLvl(1);
+      this->_gameManager._mainProfile->setXp(0);
+      this->_gameManager._mainProfile->setTuto(false);
+      this->_gameManager._mainProfile->setSkin(Skin::VARIANT);
+      this->_gameManager._mainProfile->setConfig(_cfg);
+      this->_gameManager._mainProfile->setName(this->_textEdit[0]->getStr());
+      this->_gameManager._mainProfile->setSkill(_three);
+      this->_gameManager._mainProfile->setStat(_six);
+      this->_gameManager._mainProfile->setAchievement(_three);
+      _pm.setProfile(_id, *this->_gameManager._mainProfile);
+      this->_profiles.push_back(this->_gameManager._mainProfile);
+      this->_names.push_back(this->_gameManager._mainProfile->getName());
+      this->_strStatus = false;
+      this->_textEdit[0]->setStr("[Press Enter to type your name]");
+    }
 }
 
 double	NewProfile::getCenterX(void) const
