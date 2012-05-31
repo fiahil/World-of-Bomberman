@@ -26,41 +26,41 @@ Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
     _halluLifeTimer(-1.0f)
 
 {
-  this->_event[Input::GAME]._nb = 7;
-  this->_event[Input::GAME].
+  this->_event._nb = 7;
+  this->_event.
     _event.push_back(initStruct(conf.getConfig(HumGame::UP),
 				HumGame::UP,
 				&Human::UPFunction));
 
-  this->_event[Input::GAME].
+  this->_event.
     _event.push_back(initStruct(conf.getConfig(HumGame::DOWN),
 				HumGame::DOWN,
 				&Human::DOWNFunction));
 
-  this->_event[Input::GAME].
+  this->_event.
     _event.push_back(initStruct(conf.getConfig(HumGame::LEFT),
 				HumGame::LEFT,
 				&Human::LEFTFunction));
 
-  this->_event[Input::GAME].
+  this->_event.
     _event.push_back(initStruct(conf.getConfig(HumGame::RIGHT),
 				HumGame::RIGHT,
 				&Human::RIGHTFunction));
 
-  this->_event[Input::GAME].
+  this->_event.
     _event.push_back(initStruct(conf.getConfig(HumGame::ATTACK),
 				HumGame::ATTACK,
 				&Human::ATTACKFunction));
 
-  this->_event[Input::GAME].
+  this->_event.
     _event.push_back(initStruct(gdl::Keys::Escape,
 				HumGame::PAUSE,
-				&Human::PAUSEFunction)); // TODO
+				&Human::PAUSEFunction));
 
-  this->_event[Input::GAME].
+  this->_event.
     _event.push_back(initStruct(gdl::Keys::Return,
 				HumGame::CHEAT,
-				static_cast<actionFunc>(&Human::SkillFunction)));
+				static_cast<actionFunc>(&Human::SkillFunction))); // SKILL
 
   this->_bombAff[BombType::NORMAL] = &Human::affNormalBomb;
   this->_bombAff[BombType::BIGBOMB] = &Human::affBigBomb;
@@ -136,11 +136,15 @@ void		Human::play(gdl::GameClock const& clock, gdl::Input& key)
     {
       --this->_start;
       this->_startTimer = clock.getTotalGameTime() + 1.0f;
+      if (!this->_start)
+	Sound::getMe()->playBack(Audio::START);
+      else
+	Sound::getMe()->playBack(Audio::TIMER_START);
     }
   else if (this->_start < 0)
-    for (size_t i = 0; i < this->_event[this->_mode]._nb; ++i) {
-      if (key.isKeyDown(this->_event[this->_mode]._event[i]._key))
-	(this->*(_event[this->_mode]._event[i]._f))(clock);
+    for (size_t i = 0; i < this->_event._nb; ++i) {
+      if (key.isKeyDown(this->_event._event[i]._key))
+	(this->*(_event._event[i]._f))(clock);
     }
 }
 
