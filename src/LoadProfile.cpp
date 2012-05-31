@@ -3,17 +3,18 @@
  * 27.05.12
  */
 
-#include <algorithm>
+#include <iostream>
 #include <sstream>
 #include "LoadProfile.hpp"
 
-LoadProfile::LoadProfile(GameManager& game, std::vector<Profile *>& profiles)
+LoadProfile::LoadProfile(GameManager& game, std::vector<Profile *>& profiles, std::vector<std::string>& names)
   : AMenu("menu/background/backgroundLoadProfile.jpg", "menu/background/backgroundLoadProfile.jpg", 0.0f, -1.0f, 800.0f, game),
+    _profiles(profiles),
+    _names(names),
     _index(0),
     _timerL(-1.0f),
     _timerR(-1.0f)
 {
-  profiles = this->_profileLoader.getProfiles();
   this->_tags.push_back(new Tag("menu/LoadNormal.png", "menu/LoadHighlit.png", true, false, TokenMenu::LAST, 700.0f, 0.0f, 1200.0f));
   this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::LAST, 900.0f, 0.0f, 1200.0f));
   this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::LAST, 900.0f, 0.0f, 1250.0f));
@@ -40,10 +41,10 @@ void		LoadProfile::updateText() const
 {
   std::stringstream	ss;
   
-  if (this->_profileLoader.getProfiles().size())
+  if (this->_profiles.size())
     {
-      this->_tags[1]->createText(this->_profileLoader.getNames()[this->_index], 20, 950, 270);
-      ss << " Skin : " << this->_profileLoader.getProfiles()[this->_index]->getSkin();
+      this->_tags[1]->createText(this->_names[this->_index], 20, 950, 270);
+      ss << " Skin : " << this->_profiles[this->_index]->getSkin();
       this->_tags[2]->createText(ss.str(), 20, 950, 310);
     }
   else
@@ -59,13 +60,13 @@ void		LoadProfile::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
     {
       --this->_index;
       if (static_cast<int>(this->_index) < 0)
-	this->_index = this->_profileLoader.getProfiles().size() - 1;
+	this->_index = this->_profiles.size() - 1;
       this->_timerL = clock.getTotalGameTime() + 0.15f;
     }
   else if (clock.getTotalGameTime() >= this->_timerR && input.isKeyDown(gdl::Keys::Right))
     {
       ++this->_index;
-      if (this->_index >= this->_profileLoader.getProfiles().size())
+      if (this->_index >= this->_profiles.size())
 	this->_index = 0;
       this->_timerR = clock.getTotalGameTime() + 0.15f;
     }
@@ -93,6 +94,6 @@ void	LoadProfile::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_tags[this->_cursor]->setStatus(true);
       
     }
-  if (this->_curToken == TokenMenu::PROFILE && this->_profileLoader.getProfiles().size())
-    this->_gameManager._mainProfile = this->_profileLoader.getProfiles()[this->_index];
+  if (this->_curToken == TokenMenu::PROFILE && this->_profiles.size())
+    this->_gameManager._mainProfile = this->_profiles[this->_index];
 }

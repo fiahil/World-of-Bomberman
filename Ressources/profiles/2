@@ -1,20 +1,20 @@
-#INFO	:2	:NicoW	:12345	:1	:2
+#INFO	:moi	:2	:1
 
-#STAT	:42	:3	:43	:1	:99	:98
+#STAT	:0	:0	:0	:0
 
-#SKILLS	:0	:0	:0
 
-#ACHIEVEMENTS	:1	:0	:0
 
-#SAVES	:[1]
+#ACHIEVEMENTS	:0	:0	:0
+
+#SAVES
 
 #CONFIG
-0	:22
-1	:0
-2	:3
-3	:18
+0	:73
+1	:71
+2	:72
+3	:74
 4	:57
 5	:36
 6	:60
-7	:4
+7	:58
 #ENDCONFIG

@@ -1,8 +1,8 @@
-#INFO	:1	:vincent	:0	:0	:3
+#INFO	:plop	:2	:1
 
-#STAT	:0	:0	:0	:0	:0	:0
+#STAT	:0	:0	:0	:0
 
-#SKILLS	:0	:0	:0
+
 
 #ACHIEVEMENTS	:0	:0	:0
 
@@ -16,5 +16,5 @@
 4	:57
 5	:36
 6	:60
-7	:39
+7	:58
 #ENDCONFIG

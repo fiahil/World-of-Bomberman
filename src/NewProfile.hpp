@@ -11,12 +11,16 @@
 class	NewProfile : public AMenu
 {
 private:
-  bool		_selected;
-  bool		_strStatus;
-  double	_oneTime;
+  std::vector<Profile *>&	_profiles;
+  std::vector<std::string>&	_names;
+  bool				_selected;
+  bool				_strStatus;
+  double			_oneTime;
+
+  bool				alreadyExists(std::string);
 
 public:
-  NewProfile(GameManager&);
+  NewProfile(GameManager&, std::vector<Profile *>&, std::vector<std::string>&);
   virtual ~NewProfile(void);
 
   void			setNewProfile();
