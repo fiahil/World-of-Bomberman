@@ -8,10 +8,10 @@
 SkinChoose::SkinChoose(GameManager& game)
   : AMenu("menu/background/backgroundPersonnalization.jpg", "menu/background/backgroundPersonnalization.jpg", 3200.0f, -1.0f, 1600.0f, game)
 {
-  this->_tags.push_back(new Tag("menu/WorgenNormal.png", "menu/WorgenHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 4000.0f, 0.0f, 2000.0f));
-  this->_tags.push_back(new Tag("menu/SylvanasNormal.png", "menu/SylvanasHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 4000.0f, 0.0f, 2050.0f));
-  this->_tags.push_back(new Tag("menu/VariantNormal.png", "menu/VariantHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 4000.0f, 0.0f, 2100.0f));
-  this->_tags.push_back(new Tag("menu/ZuljinNormal.png", "menu/ZuljinHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 4000.0f, 0.0f, 2150.0f));
+  this->_tags.push_back(new Tag("menu/tags/WorgenNormal.png", "menu/tags/WorgenHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 3649.0f, 0.0f, 1955.0f));
+  this->_tags.push_back(new Tag("menu/tags/SylvanasNormal.png", "menu/tags/SylvanasHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 3649.0f, 0.0f, 2020.0f));
+  this->_tags.push_back(new Tag("menu/tags/VariantNormal.png", "menu/tags/VariantHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 3649.0f, 0.0f, 2085.0f));
+  this->_tags.push_back(new Tag("menu/tags/ZuljinNormal.png", "menu/tags/ZuljinHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 3649.0f, 0.0f, 2150.0f));
 }
 
 SkinChoose::~SkinChoose()
