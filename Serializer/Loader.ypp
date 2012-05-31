@@ -43,7 +43,7 @@
    std::string*	sval;
 };
 
-%token <sval> INFO STAT SKILLS ACHIEVEMENTS SAVES HEADER
+%token <sval> INFO STAT ACHIEVEMENTS SAVES HEADER
 %token <sval> CONFIG ENDCONFIG MAP ENDMAP PLAYERS ENDPLAYERS
 %token <sval> MIXTE
 %token <sval> WORD
@@ -63,28 +63,21 @@ line
 ;
 
 info
-: INFO SEP NUMBER SEP WORD SEP NUMBER SEP NUMBER SEP NUMBER EOL
+: INFO SEP WORD SEP NUMBER SEP NUMBER EOL
 {
-  up.pf.setId($3);
-  up.pf.setName(*$5);
-  up.pf.setXp($7);
-  up.pf.setTuto($9);
-  up.pf.setSkin(static_cast<Skin::eSkin>($11));
+  up.pf.setName(*$3);
+  up.pf.setSkin(static_cast<Skin::eSkin>($5));
+  up.pf.setSkill(static_cast<Skill::eSkill>($7));
 }
-| STAT SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL
+| STAT SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL
 {
-  up.pf.addStat($3);
-  up.pf.addStat($5);
-  up.pf.addStat($7);
-  up.pf.addStat($9);
-  up.pf.addStat($11);
-  up.pf.addStat($13);
-}
-| SKILLS SEP NUMBER SEP NUMBER SEP NUMBER EOL
-{
-  up.pf.addSkill($3);
-  up.pf.addSkill($5);
-  up.pf.addSkill($7);
+  Stat		inst;
+
+  inst.setKills($3);
+  inst.setDefeats($5);
+  inst.setVictories($7);
+  inst.setMaxKills($9);
+  up.pf.setStat(inst);
 }
 | ACHIEVEMENTS SEP NUMBER SEP NUMBER SEP NUMBER EOL
 {
