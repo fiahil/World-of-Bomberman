@@ -65,9 +65,9 @@ private:
   double			_halluLifeTimer;
 
 protected:
-  virtual void draw(void);
-  virtual void	 drawSuccess(Success::eSuccess s);
-
+  virtual void	draw(void);
+  virtual void	drawSuccess(Success::eSuccess s);
+  virtual void	playBonusSound(void);
 private:
   bool		 SkillFunction(gdl::GameClock const&);
   Human::eventSt initStruct(gdl::Keys::Key, HumGame::eAction, actionFunc) const;

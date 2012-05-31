@@ -7,7 +7,7 @@
 #include "MenuPause.hpp"
 
 MenuPause::MenuPause(GameManager& game)
-  : AMenu("menu/Background.png", "menu/Background.png", 3200.0f, -1.0f, 0.0f, game)
+  : AMenu("menu/background/backgroundPause.jpg", "menu/background/backgroundPause.jpg", 3200.0f, -1.0f, 0.0f, game)
 {
   this->_tags.push_back(new Tag("menu/ResumeNormal.png", "menu/ResumeHighlit.png", true, false, TokenMenu::PAUSE, 4000.0f, 0.0f, 450.0f));
   this->_tags.push_back(new Tag("menu/RestartNormal.png", "menu/RestartHighlit.png", false, false, TokenMenu::CREATEGAME, 4000.0f, 0.0f, 500.0f));

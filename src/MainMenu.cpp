@@ -7,7 +7,7 @@
 #include "MainMenu.hpp"
 
 MainMenu::MainMenu(GameManager& game)
-  : AMenu("menu/Background.png", "menu/Background.png", 0.0f, -1.0f, 0.0f, game)
+  : AMenu("menu/background/backgroundMainMenu.jpg", "menu/background/backgroundMainMenu.jpg", 0.0f, -1.0f, 0.0f, game)
 {
   this->_tags.push_back(new Tag("menu/NewProfileNormal.png", "menu/NewProfileHighlit.png", true, true, TokenMenu::NEWPROFILE, 800.0f, 0.0f, 450.0f));
   this->_tags.push_back(new Tag("menu/LoadProfileNormal.png", "menu/LoadProfileHighlit.png", false, true, TokenMenu::LOADPROFILE, 800.0f, 0.0f, 500.0f));

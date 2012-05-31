@@ -45,7 +45,7 @@ static const HumGame::eAction	g_refAction[6] = {
 };
 
 Settings::Settings(GameManager& game)
-  : AMenu("menu/Background.png", "menu/Background.png", 3200.0f, -1.0f, 2700.0f, game),
+  : AMenu("menu/background/backgroundSettings.jpg", "menu/background/backgroundSettings.jpg", 3200.0f, -1.0f, 2700.0f, game),
     _oneTime(-1.0f),
     _selected(false)
 {

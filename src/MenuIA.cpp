@@ -6,7 +6,7 @@
 #include "MenuIA.hpp"
 
 MenuIA::MenuIA(GameManager& game)
-  : AMenu("menu/Background2.png", "menu/Background2.png", 1600.0f, -1.0f, 2700.0f, game)
+  : AMenu("menu/background/backgroundAI.jpg", "menu/background/backgroundAI.jpg", 1600.0f, -1.0f, 2700.0f, game)
 {
   this->_tags.push_back(new Tag("menu/EasyNormal.png", "menu/EasyHighlit.png", true, false, TokenMenu::TEAM, 2400.0f, 0.0f, 2900.0f));
   this->_tags.push_back(new Tag("menu/NormalNormal.png", "menu/NormalHighlit.png", false, false, TokenMenu::TEAM, 2400.0f, 0.0f, 2950.0f));

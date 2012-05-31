@@ -8,7 +8,7 @@
 #include "TeamMenu.hpp"
 
 TeamMenu::TeamMenu(GameManager& game, std::vector<Profile*>& pro)
-  : AMenu("menu/Background5.png", "menu/Background5.png", 0.0f, -1.0f, 2700.0f, game),
+  : AMenu("menu/background/backgroundTeam.jpg", "menu/background/backgroundTeam.jpg", 0.0f, -1.0f, 2700.0f, game),
     _profiles(pro),
     _nb(3, 1),
     _timersLR(2, -1.0f)

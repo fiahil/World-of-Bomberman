@@ -6,7 +6,7 @@
 #include "MenuProfile.hpp"
 
 MenuProfile::MenuProfile(GameManager& game)
-  : AMenu("menu/Background.png", "menu/Background.png", 1600.0f, -1.0f, 900.0f, game)
+  : AMenu("menu/background/backgroundGameMenu.jpg", "menu/background/backgroundGameMenu.jpg", 1600.0f, -1.0f, 900.0f, game)
 {
   this->_tags.push_back(new Tag("menu/NewGameNormal.png", "menu/NewGameHighlit.png", true, false, TokenMenu::GAMECHOOSE, 2400.0f, 0.0f, 1200.0f));
   this->_tags.push_back(new Tag("menu/LoadGameNormal.png", "menu/LoadGameHighlit.png", false, false, TokenMenu::LOADSAVE, 2400.0f, 0.0f, 1250.0f));
