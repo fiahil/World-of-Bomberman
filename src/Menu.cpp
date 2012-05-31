@@ -14,6 +14,7 @@
 #include "MainMenu.hpp"
 #include "Menu.hpp"
 #include "Sound.hpp"
+#include "GameResult.hpp"
 
 Menu::Menu()
   : _game(0),
@@ -63,6 +64,15 @@ void		Menu::updateGame()
       delete this->_game;
       this->_game = 0;
       this->_menu->setEOG();
+
+      GameManager	tmp;
+      // GameResult	*test = new GameResult(tmp, this->_game->getMatch());
+
+      // // /* TEST RESULT HERE*/
+      // Faire une fonction membre
+      // this->_menu[TokenMenu::GAMERESULT] = new GameResult(tmp, this->_game->getMatch());
+      // this->_menu[TokenMenu::GAMERESULT]->initialize();
+      // /**/exit(0);
     }
   else if (this->_game->isPause())
     {
@@ -76,7 +86,7 @@ void		Menu::updateGame()
 void		Menu::updateMenu()
 {
   MyGame*	tmp;
-  
+
   //std::cout << "Game " << this->_game << std::endl;
   if (!this->_game || this->_pause)
     {

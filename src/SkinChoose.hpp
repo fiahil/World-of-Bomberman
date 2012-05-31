@@ -10,6 +10,18 @@
 
 class SkinChoose : public AMenu
 {
+private:
+  std::vector<gdl::Model>	_model;
+  double	_timerL;
+  double	_timerR;
+  size_t	_indexSkin;
+  size_t	_indexSkill;
+
+private:
+  void		updateText();
+  void		changeSkin(gdl::GameClock const&, gdl::Input&);
+  void		changeSkill(gdl::GameClock const&, gdl::Input&);
+
 public:
   SkinChoose(GameManager&);
   virtual ~SkinChoose();

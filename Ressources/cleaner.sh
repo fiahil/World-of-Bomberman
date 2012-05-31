@@ -2,7 +2,7 @@
 
 i=10
 
-while [ ! $i -eq 2000 ]
+while [ ! $i -eq 100 ]
 do
     rm -rf "maps/"$i
     rm -rf "profiles/"$i

@@ -150,6 +150,8 @@ public:
   APlayer*		getLastHitId()	const;
   bool			isUnanim()	const;
   bool			getPause()	const;
+  size_t		getNbKills()	const;
+
 
   void		setPv(int);
   void		setWeapon(BombType::eBomb);

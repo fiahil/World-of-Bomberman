@@ -498,6 +498,12 @@ bool		APlayer::getPause() const
   return this->_pause;
 }
 
+size_t		APlayer::getNbKills() const
+{
+  return this->_nbKills;
+}
+
+
 void		APlayer::setTimer(double)
 {
 }

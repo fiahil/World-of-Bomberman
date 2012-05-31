@@ -281,3 +281,8 @@ void		MyGame::resumeGame()
   if (this->_pl2)
     this->_pl2->setTimer(time);
 }
+
+Match &	MyGame::getMatch() const // added
+{
+  return this->_match;
+}
