@@ -231,6 +231,7 @@ struct AIType
     NORMAL,
     HARD,
     HALLU,
+    HUMAN,
     LAST
   };
 };

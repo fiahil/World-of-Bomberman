@@ -49,29 +49,29 @@ protected:
   double		_k;
   Vector		_realPos;
   Map &			_map;
-  int			_pv;
-  size_t		_id;
-  size_t		_teamId;
-  size_t		_color;
-  size_t		_type;
-  bool			_attack;
+  int			_pv; //
+  size_t		_id; //
+  size_t		_teamId; //
+  size_t		_color; //
+  size_t		_type; // mettre le bon type AIType::eAI
+  bool			_attack; 
   bool			_canAttack;
   bool			_shield;
   bool			_moving;
   double		_shieldTimer;
   double		_tpTimer;
-  size_t		_lustStack;
-  size_t		_powerStack;
-  size_t		_nbKills;
-  double		_speed;
+  size_t		_lustStack; //
+  size_t		_powerStack; //
+  size_t		_nbKills; //
+  double		_speed; //
   double		_dam;
   std::vector<double>   _timers;
-  std::string		_name;
-  std::string		_teamName;
-  BombType::eBomb	_weapon;
-  Skin::eSkin		_skin;
-  State::eState		_state;
-  Dir::eDir		_dir;
+  std::string		_name; // a virer
+  std::string		_teamName; // a virer
+  BombType::eBomb	_weapon; // 
+  Skin::eSkin		_skin; // 
+  State::eState		_state; // 
+  Dir::eDir		_dir; // 
   gdl::Model		_model;
   Pyramid		_indic;
   std::vector<bool>*	_success;
