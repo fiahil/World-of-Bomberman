@@ -47,13 +47,10 @@ public:
   void	play(gdl::GameClock const&, gdl::Input&);
 
 private:
-  size_t adjBarrel(size_t x, size_t y) const;
-
   bool	isWall(size_t x, size_t y) const;
   bool	isBomb(size_t x, size_t y) const;
   bool	isEmpty(size_t x, size_t y) const;
   bool	isBonus(size_t x, size_t y) const;
-  bool	isBarrel(size_t x, size_t y) const;
 
   bool	nearBomb(void);
   bool	nearBonus(void);

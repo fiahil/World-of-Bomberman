@@ -9,6 +9,7 @@
 #include "Camera.hpp"
 #include "Match.hpp"
 #include "MyGame.hpp"
+#include "Human.hpp"
 
 MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
 	       APlayer* pl1,  APlayer* pl2)
@@ -99,12 +100,16 @@ bool		MyGame::updateExplodedBomb(ExplodedBomb *b)
 
 bool		MyGame::updatePlayer(APlayer *p)
 {
+  Human*	ph = dynamic_cast<Human*>(p);
+
+  if (ph)
+    ph->setHalluView(this->_view);
+
   std::for_each< std::list<ExplodedBomb*>::iterator, APlayer& >
     (
      this->_match._explodedBombs.begin(),
      this->_match._explodedBombs.end(),
-     (*p)
-     );
+     (*p));
 
      if (p->getPv() == 0)
        {
@@ -198,7 +203,7 @@ void		MyGame::update(void)
 
   if (this->_EOG && this->_EOGTimer < 0.0f)
     {
-      if ((this->_match._gameMode == GameMode::COOP) &
+      if ((this->_match._gameMode == GameMode::COOP) &&
 	  (this->_pl1->getPv() || this->_pl2->getPv()))
 	{
 	  if (this->_pl1->getPv() != 100)

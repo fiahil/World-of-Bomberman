@@ -13,6 +13,7 @@
 #include "Config.hpp"
 #include "enum.hpp"
 #include "AI.hpp"
+#include "AIView.hpp"
 
 class Human : public APlayer
 {
@@ -43,6 +44,8 @@ public:
   virtual void	play(gdl::GameClock const&, gdl::Input&);
   virtual void	drawHUD(std::vector<gdl::Image>&, size_t, size_t, size_t, bool);
   virtual void	setTimer(double);
+
+  void		setHalluView(AIView const*);
 
 private:
   Input::eMode			_mode;
