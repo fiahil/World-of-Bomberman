@@ -56,6 +56,7 @@ SRC		= ./src/main.cpp	 \
 		./src/SkinChoose.cpp	 \
 		./src/TeamMenu.cpp	 \
 		./src/MenuPause.cpp	 \
+		./src/Stat.cpp		 \
 		./src/Tag.cpp
 
 OBJ		= $(SRC:.cpp=.o)

@@ -31,11 +31,6 @@
   return Serializer::Loader::token::STAT;
 }
 
-"#SKILLS"	{
-  yylval->sval = new std::string(yytext, yyleng);
-  return Serializer::Loader::token::SKILLS;
-}
-
 "#ACHIEVEMENTS"	{
   yylval->sval = new std::string(yytext, yyleng);
   return Serializer::Loader::token::ACHIEVEMENTS;
