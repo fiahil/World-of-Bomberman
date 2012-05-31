@@ -27,12 +27,12 @@ static const char*	g_ref[gdl::Keys::Count + 1] = {
 };
 
 static const int	g_refPos[6][2] = {
-  {670, 170},
-  {670, 220},
-  {670, 270},
-  {670, 320},
-  {670, 370},
-  {670, 420},
+  {750, 165},
+  {750, 230},
+  {750, 295},
+  {750, 360},
+  {750, 425},
+  {750, 490},
 };
 
 static const HumGame::eAction	g_refAction[6] = {
@@ -49,25 +49,19 @@ Settings::Settings(GameManager& game)
     _oneTime(-1.0f),
     _selected(false)
 {
-  this->_tags.push_back(new Tag("menu/ForwardNormal.png", "menu/ForwardHighlit.png", true, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2700.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2700.0f));
+  this->_tags.push_back(new Tag("menu/tags/ForwardNormal.png", "menu/tags/ForwardHighlit.png", true, false, TokenMenu::SETTINGS, 3629.0f, 0.0f, 2550.0f));
 
-  this->_tags.push_back(new Tag("menu/BackwardNormal.png", "menu/BackwardHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2750.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2750.0f));
+  this->_tags.push_back(new Tag("menu/tags/BackConfNormal.png", "menu/tags/BackConfHighlit.png", false, false, TokenMenu::SETTINGS, 3629.0f, 0.0f, 2615.0f));
 
-  this->_tags.push_back(new Tag("menu/LeftNormal.png", "menu/LeftHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2800.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2800.0f));
+  this->_tags.push_back(new Tag("menu/tags/LeftNormal.png", "menu/tags/LeftHighlit.png", false, false, TokenMenu::SETTINGS, 3629.0f, 0.0f, 2680.0f));
 
-  this->_tags.push_back(new Tag("menu/RightNormal.png", "menu/RightHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2850.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2850.0f));
+  this->_tags.push_back(new Tag("menu/tags/RightNormal.png", "menu/tags/RightHighlit.png", false, false, TokenMenu::SETTINGS, 3629.0f, 0.0f, 2745.0f));
 
-  this->_tags.push_back(new Tag("menu/DropBombNormal.png", "menu/DropBombHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2900.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2900.0f));
+  this->_tags.push_back(new Tag("menu/tags/BombNormal.png", "menu/tags/BombHighlit.png", false, false, TokenMenu::SETTINGS, 3629.0f, 0.0f, 2810.0f));
 
-  this->_tags.push_back(new Tag("menu/SkillNormal.png", "menu/SkillHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2950.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2950.0f));
+  this->_tags.push_back(new Tag("menu/tags/SkillConfNormal.png", "menu/tags/SkillConfHighlit.png", false, false, TokenMenu::SETTINGS, 3629.0f, 0.0f, 2875.0f));
 
-  this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 3500.0f, 0.0f, 3000.0f));
+  this->_tags.push_back(new Tag("menu/tags/DoneNormal.png", "menu/tags/DoneHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 3629.0f, 0.0f, 2940.0f));
 }
 
 Settings::~Settings()
@@ -96,12 +90,12 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
     }
   else if (!this->_selected)
     {
-      this->_tags[1]->createText(g_ref[conf.getConfig(g_refAction[0])], 20, g_refPos[0][0], g_refPos[0][1]);
-      this->_tags[3]->createText(g_ref[conf.getConfig(g_refAction[1])], 20, g_refPos[1][0], g_refPos[1][1]);
-      this->_tags[5]->createText(g_ref[conf.getConfig(g_refAction[2])], 20, g_refPos[2][0], g_refPos[2][1]);
-      this->_tags[7]->createText(g_ref[conf.getConfig(g_refAction[3])], 20, g_refPos[3][0], g_refPos[3][1]);
-      this->_tags[9]->createText(g_ref[conf.getConfig(g_refAction[4])], 20, g_refPos[4][0], g_refPos[4][1]);
-      this->_tags[11]->createText(g_ref[conf.getConfig(g_refAction[5])], 20, g_refPos[5][0], g_refPos[5][1]);
+      this->_tags[0]->createText(g_ref[conf.getConfig(g_refAction[0])], 20, g_refPos[0][0], g_refPos[0][1]);
+      this->_tags[1]->createText(g_ref[conf.getConfig(g_refAction[1])], 20, g_refPos[1][0], g_refPos[1][1]);
+      this->_tags[2]->createText(g_ref[conf.getConfig(g_refAction[2])], 20, g_refPos[2][0], g_refPos[2][1]);
+      this->_tags[3]->createText(g_ref[conf.getConfig(g_refAction[3])], 20, g_refPos[3][0], g_refPos[3][1]);
+      this->_tags[4]->createText(g_ref[conf.getConfig(g_refAction[4])], 20, g_refPos[4][0], g_refPos[4][1]);
+      this->_tags[5]->createText(g_ref[conf.getConfig(g_refAction[5])], 20, g_refPos[5][0], g_refPos[5][1]);
       for (size_t i = 0; i < this->_keyEvent.size(); ++i)
 	if (input.isKeyDown(this->_keyEvent[i].first))
 	  (this->*_keyEvent[i].second)(clock);
@@ -110,28 +104,19 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
 	  this->_selected = true;
 	  this->_oneTime = clock.getTotalGameTime() + 0.15f;
 	  this->_curToken = TokenMenu::LAST;
-	  this->_tags[this->_cursor + 1]->createText("Please press a button", 20,
-						     g_refPos[(this->_cursor + 1) / 2][0],
-						     g_refPos[(this->_cursor + 1) / 2][1]);
+	  this->_tags[this->_cursor]->createText("Please press a button", 20,
+						     g_refPos[(this->_cursor)][0],
+						     g_refPos[(this->_cursor)][1]);
 	}
       else if (this->_curToken == TokenMenu::SETTINGSCHOOSE)
 	ProfileManager::setProfile(this->_gameManager._mainProfile->getId(), *this->_gameManager._mainProfile);
-      if (this->_cursor % 2 == 1)
-	{
-	  this->_tags[this->_cursor]->setStatus(false);
-	  if (this->_timers[0] < this->_timers[1])
-	    ++this->_cursor;
-	  else
-	    --this->_cursor;
-	  this->_tags[this->_cursor]->setStatus(true);
-	}
     }
   else
     for (size_t i = 0; i <= gdl::Keys::Count; ++i)
       if (g_ref[i][0] && input.isKeyDown(static_cast<gdl::Keys::Key>(i)))
 	{
 	  this->_selected = false;
-	  conf.setConfig(g_refAction[(this->_cursor + 1) / 2], static_cast<gdl::Keys::Key>(i));
+	  conf.setConfig(g_refAction[(this->_cursor)], static_cast<gdl::Keys::Key>(i));
 	  this->_oneTime = clock.getTotalGameTime() + 0.15f;
 	  break;
 	}

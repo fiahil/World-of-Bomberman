@@ -15,11 +15,10 @@ LoadProfile::LoadProfile(GameManager& game, std::vector<Profile *>& profiles, st
     _timerL(-1.0f),
     _timerR(-1.0f)
 {
-  this->_tags.push_back(new Tag("menu/LoadNormal.png", "menu/LoadHighlit.png", true, false, TokenMenu::LAST, 700.0f, 0.0f, 1200.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::LAST, 900.0f, 0.0f, 1200.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::LAST, 900.0f, 0.0f, 1250.0f));
-  this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::PROFILE, 700.0f, 0.0f, 1300.0f));
-  this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", false, false, TokenMenu::MAINMENU, 700.0f, 0.0f, 1350.0f));
+  this->_tags.push_back(new Tag("menu/tags/LoadNormal.png", "menu/tags/LoadHighlit.png", true, false, TokenMenu::LAST, 429.0f, 0.0f, 1100.0f));
+  this->_tags.push_back(new Tag("menu/tags/EmptyNormal.png", "menu/tags/EmptyHighlit.png", false, false, TokenMenu::LAST, 429.0f, 0.0f, 1165.0f));
+  this->_tags.push_back(new Tag("menu/tags/DoneNormal.png", "menu/tags/DoneHighlit.png", false, false, TokenMenu::PROFILE, 429.0f, 0.0f, 1230.0f));
+  this->_tags.push_back(new Tag("menu/tags/BackNormal.png", "menu/tags/BackHighlit.png", false, false, TokenMenu::MAINMENU, 429.0f, 0.0f, 1295.0f));
 
 }
 
@@ -43,14 +42,14 @@ void		LoadProfile::updateText() const
   
   if (this->_profiles.size())
     {
-      this->_tags[1]->createText(this->_names[this->_index], 20, 950, 270);
+      this->_tags[0]->createText(this->_names[this->_index], 20, 850, 315);
       ss << " Skin : " << this->_profiles[this->_index]->getSkin();
-      this->_tags[2]->createText(ss.str(), 20, 950, 310);
+      this->_tags[1]->createText(ss.str(), 20, 500, 380);
     }
   else
     {
-      this->_tags[1]->createText("", 20, 950, 270);
-      this->_tags[2]->createText("", 20, 950, 310);
+      this->_tags[0]->createText("", 20, 950, 270);
+      this->_tags[1]->createText("", 20, 950, 310);
     }
 }
 
@@ -78,21 +77,16 @@ void	LoadProfile::update(gdl::GameClock const& clock, gdl::Input& input)
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
-  if (this->_cursor == 0) //TODO pointer function
+  if (this->_cursor == 0)
     this->changeProfile(clock, input);
   else if (this->_cursor == 1)
     {
       this->_tags[this->_cursor]->setStatus(false);
-      this->_cursor = 3;
+      if (this->_timers[0] > this->_timers[1])
+	--this->_cursor;
+      else
+	++this->_cursor;
       this->_tags[this->_cursor]->setStatus(true);
-      
-    }
-  else if (this->_cursor == 2)
-    {
-      this->_tags[this->_cursor]->setStatus(false);
-      this->_cursor = 0;
-      this->_tags[this->_cursor]->setStatus(true);
-      
     }
 
   if (this->_curToken == TokenMenu::PROFILE)
