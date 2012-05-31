@@ -9,7 +9,7 @@
 #include <fstream>
 
 LoadSave::LoadSave(GameManager& game)
-  : AMenu("menu/background/backgroundLoadSave.jpg", "menu/background/backgroundLoadSave.jpg", 3200.0f, -1.0f, 900.0f, game),
+  : AMenu("menu/background/backgroundLoadSave.jpg", "menu/background/backgroundLoadSave.jpg", 3200.0f, -1.0f, 800.0f, game),
     _index(0),
     _timerL(-1.0f),
     _timerR(-1.0f)
@@ -31,7 +31,7 @@ double		LoadSave::getCenterX(void) const
 
 double		LoadSave::getCenterY(void) const
 {
-  return (1350.0f);
+  return (1200.0f);
 }
 
 void		LoadSave::loadSave()
