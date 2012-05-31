@@ -16,6 +16,9 @@ public:
 
 private:
   std::vector<Map *> & _map;
+  double		_timerL;
+  double		_timerR;
+  size_t		_index;
 
   /*
     Heritance from AObj
@@ -29,6 +32,10 @@ public:
 public:
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
+
+private:
+  void			changeMap(gdl::GameClock const&, gdl::Input&);
+  void			updateText() const;
 };
 
 #endif		/* __LOAD_MAP_HPP__ */

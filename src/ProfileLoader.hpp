@@ -25,7 +25,7 @@ public:
   ProfileLoader(void);
 
   void					setProfiles(void);
-  const std::vector<Profile *>&		getProfiles(void);
+  const std::vector<Profile *>&		getProfiles(void) const;
   const std::vector<std::string>&	getNames(void) const;
   void					unsetProfiles(void);
 };
