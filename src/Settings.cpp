@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <sstream>
-#include "Packman.hpp"
+#include "ProfileManager.hpp"
 #include "Settings.hpp"
 
 static const char*	g_ref[gdl::Keys::Count + 1] = {
@@ -49,25 +49,25 @@ Settings::Settings(GameManager& game)
     _oneTime(-1.0f),
     _selected(false)
 {
-  this->_tags.push_back(new Tag("menu/ForwardNormal.png", "menu/ForwardHighlit.png", true, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2900.0f));
+  this->_tags.push_back(new Tag("menu/ForwardNormal.png", "menu/ForwardHighlit.png", true, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2700.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2700.0f));
+
+  this->_tags.push_back(new Tag("menu/BackwardNormal.png", "menu/BackwardHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2750.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2750.0f));
+
+  this->_tags.push_back(new Tag("menu/LeftNormal.png", "menu/LeftHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2800.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2800.0f));
+
+  this->_tags.push_back(new Tag("menu/RightNormal.png", "menu/RightHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2850.0f));
+  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2850.0f));
+
+  this->_tags.push_back(new Tag("menu/DropBombNormal.png", "menu/DropBombHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2900.0f));
   this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2900.0f));
 
-  this->_tags.push_back(new Tag("menu/BackwardNormal.png", "menu/BackwardHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2950.0f));
+  this->_tags.push_back(new Tag("menu/SkillNormal.png", "menu/SkillHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 2950.0f));
   this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 2950.0f));
 
-  this->_tags.push_back(new Tag("menu/LeftNormal.png", "menu/LeftHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 3000.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 3000.0f));
-
-  this->_tags.push_back(new Tag("menu/RightNormal.png", "menu/RightHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 3050.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 3050.0f));
-
-  this->_tags.push_back(new Tag("menu/DropBombNormal.png", "menu/DropBombHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 3100.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 3100.0f));
-
-  this->_tags.push_back(new Tag("menu/SkillNormal.png", "menu/SkillHighlit.png", false, false, TokenMenu::SETTINGS, 3500.0f, 0.0f, 3150.0f));
-  this->_tags.push_back(new Tag("menu/BlackNormal.png", "menu/BlackHighlit.png", false, false, TokenMenu::SETTINGS, 3800.0f, 0.0f, 3150.0f));
-
-  this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 3500.0f, 0.0f, 3200.0f));
+  this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 3500.0f, 0.0f, 3000.0f));
 }
 
 Settings::~Settings()
@@ -114,15 +114,8 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
 						     g_refPos[(this->_cursor + 1) / 2][0],
 						     g_refPos[(this->_cursor + 1) / 2][1]);
 	}
-      else if (this->_curToken == TokenMenu::PROFILE)
-	{
-	  std::stringstream	ss;
-	  
-	  ss << "Ressources/profiles/" << this->_gameManager._mainProfile->getId();
-	  Serializer::Packman	pa(ss.str());
-	  
-	  pa.packProfile(*this->_gameManager._mainProfile);
-	}
+      else if (this->_curToken == TokenMenu::SETTINGSCHOOSE)
+	ProfileManager::setProfile(this->_gameManager._mainProfile->getId(), *this->_gameManager._mainProfile);
       if (this->_cursor % 2 == 1)
 	{
 	  this->_tags[this->_cursor]->setStatus(false);
