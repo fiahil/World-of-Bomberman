@@ -211,7 +211,7 @@ void		MyGame::update(void)
 	  if (this->_pl2->getPv() != 100)
 	    this->_pl2->setPv(90);
 	}
-      this->_EOGTimer = this->_clock.getTotalGameTime() + 3.0f;
+      this->_EOGTimer = this->_clock.getTotalGameTime() + 4.0f;
     }
 }
 
