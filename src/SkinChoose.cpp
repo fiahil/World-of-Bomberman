@@ -3,6 +3,7 @@
  * 29.05.12
  */
 
+#include "ProfileManager.hpp"
 #include "SkinChoose.hpp"
 
 SkinChoose::SkinChoose(GameManager& game)
@@ -33,15 +34,9 @@ void	SkinChoose::update(gdl::GameClock const& clock, gdl::Input& input)
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
-  if (this->_curToken == TokenMenu::SETTINGSCHOOSE)
+  if (this->_curToken == TokenMenu::SETTINGSCHOOSE && this->_cursor < 4)
     {
-      if (this->_cursor == 0)
-	this->_gameManager._mainProfile->setSkin(Skin::WORGEN);
-      else if (this->_cursor == 1)
-	this->_gameManager._mainProfile->setSkin(Skin::SYLVANAS);
-      else if (this->_cursor == 2)
-	this->_gameManager._mainProfile->setSkin(Skin::VARIANT);
-      else if (this->_cursor == 3)
-	this->_gameManager._mainProfile->setSkin(Skin::ZULJIN);
+      this->_gameManager._mainProfile->setSkin(static_cast<Skin::eSkin>(this->_cursor));
+      ProfileManager::setProfile(this->_gameManager._mainProfile->getId(), *this->_gameManager._mainProfile);
     }
 }
