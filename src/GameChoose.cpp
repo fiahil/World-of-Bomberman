@@ -7,7 +7,7 @@
 #include "GameChoose.hpp"
 
 GameChoose::GameChoose(GameManager& game)
-  : AMenu("menu/Background.png", "menu/Background.png", 0.0f, -1.0f, 1800.0f, game)
+  : AMenu("menu/background/backgroundGameMode.jpg", "menu/background/backgroundGameMode.jpg", 0.0f, -1.0f, 1600.0f, game)
 {
   this->_tags.push_back(new Tag("menu/SoloNormal.png", "menu/SoloHighlit.png", true, false, TokenMenu::IA, 800.0f, 0.0f, 2000.0f));
   this->_tags.push_back(new Tag("menu/CoopNormal.png", "menu/CoopHighlit.png", false, false, TokenMenu::IA, 800.0f, 0.0f, 2050.0f));
@@ -26,7 +26,7 @@ double		GameChoose::getCenterX(void) const
 
 double		GameChoose::getCenterY(void) const
 {
-  return (2250.0f);
+  return (2000.0f);
 }
 
 void		GameChoose::update(gdl::GameClock const& clock, gdl::Input& input)

@@ -38,6 +38,7 @@ MenuManager::MenuManager(int w, int h)
     _curMenu(TokenMenu::MAINMENU),
     _camera(w, h, 0, 0),
     _createGame(false),
+    _stopGame(false),
     _refInitGame(GameMode::LAST, 0)
 {
   MapManager	mapManager;
@@ -117,10 +118,12 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 	}
       else if (tmp == TokenMenu::PAUSE)
 	this->_resume = true;
+      else if (this->_curMenu == TokenMenu::PAUSE && tmp == TokenMenu::PROFILE)
+	this->_stopGame = true;
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
-      this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
+      this->_camera.setPosScroll(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
 			   this->_menu[this->_curMenu]->getCenterY());
     }
   else
@@ -131,7 +134,7 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 void	MenuManager::initGameSolo()
 {
   int	id = 0;
-
+  
   this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
 							 this->_gameManager._mainProfile->getConfig()));
   this->_gameManager._match._players.back()->setTeamId(id);
@@ -157,7 +160,7 @@ void	MenuManager::initGameCoop()
   this->_gameManager._match._players.back()->setSkin(this->_gameManager._mainProfile->getSkin());
   this->_gameManager._match._players.back()->setColor(id);
   this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
-  							 this->_gameManager._configJ2));
+							 this->_gameManager._configJ2));
   this->_gameManager._match._players.back()->setTeamId(id);
   this->_gameManager._match._players.back()->setSkin(this->_gameManager._secondProfile->getSkin());
   this->_gameManager._match._players.back()->setColor(id++);
@@ -218,18 +221,32 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
 void	MenuManager::initCamera(void)
 {
   this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-      this->_menu[this->_curMenu]->getCenterY());
+		       this->_menu[this->_curMenu]->getCenterY());
 }
 
-bool	MenuManager::isResume() const
+bool	MenuManager::isStopGame()
 {
-  return this->_resume;
+  bool	tmp = this->_stopGame;
+
+  if (this->_stopGame)
+    this->_stopGame = false;
+  return tmp;
+}
+
+bool	MenuManager::isResume()
+{
+  bool	tmp = this->_resume;
+
+  if (this->_resume)
+    this->_resume = false;
+  return tmp;
 }
 
 void	MenuManager::setPause()
 {
   this->_curMenu = TokenMenu::PAUSE;
   this->_resume = false;
+  this->_stopGame = false;
   this->_menu[this->_curMenu]->setTextDraw(true);
   this->_menu[this->_curMenu]->setChangeMenu(false);
   this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,

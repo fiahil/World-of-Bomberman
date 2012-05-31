@@ -33,8 +33,10 @@ Sound::Sound()
   this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::ZULJIN_DEATH);
   this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::ENNEMY_HURT);
   this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::ENNEMY_DEATH);
+  this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::TIMER_START);
+  this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::START);
   this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::EXPLODE);
-  this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::BONUS);
+ this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::BONUS);
   this->loadSound("Ressources/audio/ennemy_hurt.mp3", Audio::SUCCESS);
   this->loadSound("Ressources/audio/intro.mp3", Audio::INTRO);
 }

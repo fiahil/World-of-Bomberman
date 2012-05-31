@@ -6,7 +6,7 @@
 #include "SettingsChoose.hpp"
 
 SettingsChoose::SettingsChoose(GameManager& game)
-  : AMenu("menu/Background.png", "menu/Background.png", 1600.0f, -1.0f, 1800.0f, game)
+  : AMenu("menu/background/backgroundConfiguration.jpg", "menu/background/backgroundConfiguration.jpg", 1600.0f, -1.0f, 1600.0f, game)
 {
   this->_tags.push_back(new Tag("menu/KeyboardNormal.png", "menu/KeyboardHighlit.png", false, false, TokenMenu::SETTINGS, 2400.0f, 0.0f, 2000.0f));
   this->_tags.push_back(new Tag("menu/SkinChooseNormal.png", "menu/SkinChooseHighlit.png", false, false, TokenMenu::SKINCHOOSE, 2400.0f, 0.0f, 2050.0f));
@@ -24,7 +24,7 @@ double	SettingsChoose::getCenterX() const
 
 double	SettingsChoose::getCenterY() const
 {
-  return 2250.0f;
+  return 2000.0f;
 }
 
 void	SettingsChoose::update(gdl::GameClock const& clock, gdl::Input& input)

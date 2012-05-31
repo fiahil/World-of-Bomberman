@@ -189,7 +189,7 @@ void		MyGame::update(void)
     (this->_match._players,
      &MyGame::updatePlayer);
 
-  if (!this->_nb || (this->_match._gameMode == GameMode::COOP && this->_nb < 2))
+  if (!this->_nb)
     this->_EOG = true;
 
   this->removeIf
@@ -197,7 +197,17 @@ void		MyGame::update(void)
      &MyGame::updateDeadPlayer);
 
   if (this->_EOG && this->_EOGTimer < 0.0f)
-    this->_EOGTimer = this->_clock.getTotalGameTime() + 3.0f;
+    {
+      if ((this->_match._gameMode == GameMode::COOP) &
+	  (this->_pl1->getPv() || this->_pl2->getPv()))
+	{
+	  if (this->_pl1->getPv() != 100)
+	    this->_pl1->setPv(90);
+	  if (this->_pl2->getPv() != 100)
+	    this->_pl2->setPv(90);
+	}
+      this->_EOGTimer = this->_clock.getTotalGameTime() + 3.0f;
+    }
 }
 
 void		MyGame::drawGame(APlayer* p) const
@@ -259,7 +269,7 @@ bool		MyGame::isEOG(void) const
 bool		MyGame::isPause() const
 {
   bool	tmp = this->_pl1->getPause();
-  
+
   this->_pl1->setPause(false);
   return tmp;
 }

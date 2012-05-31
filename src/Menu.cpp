@@ -77,11 +77,13 @@ void		Menu::updateMenu()
 {
   MyGame*	tmp;
   
+  //std::cout << "Game " << this->_game << std::endl;
   if (!this->_game || this->_pause)
     {
       this->_menu->update(this->gameClock_, this->input_);
       if ((tmp = this->_menu->createGame(this->gameClock_, this->input_)))
 	{
+	  std::cout << "Create Game" << std::endl;
 	  if (this->_game)
 	    {
 	      this->_pause = false;
@@ -94,6 +96,13 @@ void		Menu::updateMenu()
 	{
 	  this->_pause = false;
 	  this->_game->resumeGame(); 
+	}
+      else if (this->_menu->isStopGame())
+	{
+	  this->_pause = false;
+	  this->_game->unload();
+	  delete this->_game;
+	  this->_game = 0;
 	}
     }
 }

@@ -8,7 +8,7 @@
 #include "NewProfile.hpp"
 
 NewProfile::NewProfile(GameManager& game)
-  : AMenu("menu/Background2.png", "menu/Background2.png", 1600.0f, -1.0f, 0.0f, game)
+  : AMenu("menu/background/backgroundNewProfile.jpg", "menu/background/backgroundNewProfile.jpg", 1600.0f, -1.0f, 0.0f, game)
 {
   this->_oneTime = -1.0;
   this->_strStatus = false;
@@ -49,7 +49,7 @@ double	NewProfile::getCenterX(void) const
 
 double	NewProfile::getCenterY(void) const
 {
-  return (450.0f);
+  return (400.0f);
 }
 
 void	NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)

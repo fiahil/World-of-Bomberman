@@ -16,7 +16,7 @@
 #include "MyGame.hpp"
 #include "MapManager.hpp"
 
-#define	CAM_DISTANCE	(600.0f)
+#define	CAM_DISTANCE	(570.4f)
 
 class	MenuManager : public AObj
 {
@@ -39,6 +39,7 @@ private:
   GameManager			_gameManager;
   bool				_createGame;
   bool				_resume;
+  bool				_stopGame;
 
 private:
   typedef void	(MenuManager::*fInitGame)();
@@ -57,7 +58,8 @@ public:
   virtual void		update(gdl::GameClock const&, gdl::Input&);
   MyGame*		createGame(gdl::GameClock&, gdl::Input&);
   void			initCamera(void);
-  bool			isResume() const;
+  bool			isResume();
+  bool			isStopGame();
   void			setPause();
   void			setEOG();
 };
