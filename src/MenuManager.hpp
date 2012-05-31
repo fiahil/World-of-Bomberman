@@ -35,6 +35,7 @@ private:
   Camera			_camera;
 
   std::vector<Profile *>	_profile;
+  std::vector<std::string>	_names;
   std::vector<Map *>		_map;
   GameManager			_gameManager;
   bool				_createGame;

@@ -47,6 +47,11 @@ MenuManager::MenuManager(int w, int h)
   this->_refInitGame[GameMode::COOP] = &MenuManager::initGameCoop;
   this->_refInitGame[GameMode::VERSUS] = &MenuManager::initGameVersus;
   this->_map = mapManager.getAll();
+
+  ProfileLoader	profileLoader;
+
+  this->_profile = profileLoader.getProfiles();
+  this->_names = profileLoader.getNames();
 }
 
 MenuManager::~MenuManager()
@@ -63,7 +68,7 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::MAINMENU]->initialize();
   this->_menu[TokenMenu::CREDITS] = new Credits(this->_gameManager);
   this->_menu[TokenMenu::CREDITS]->initialize();
-  this->_menu[TokenMenu::LOADPROFILE] = new LoadProfile(this->_gameManager, this->_profile);
+  this->_menu[TokenMenu::LOADPROFILE] = new LoadProfile(this->_gameManager, this->_profile, this->_names);
   this->_menu[TokenMenu::LOADPROFILE]->initialize();
   this->_menu[TokenMenu::LOADSAVE] = new LoadSave(this->_gameManager);
   this->_menu[TokenMenu::LOADSAVE]->initialize();
@@ -77,7 +82,7 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::TEAM]->initialize();
   this->_menu[TokenMenu::MAP] = new MenuMap(this->_gameManager);
   this->_menu[TokenMenu::MAP]->initialize();
-  this->_menu[TokenMenu::NEWPROFILE] = new NewProfile(this->_gameManager);
+  this->_menu[TokenMenu::NEWPROFILE] = new NewProfile(this->_gameManager, this->_profile, this->_names);
   this->_menu[TokenMenu::NEWPROFILE]->initialize();
   this->_menu[TokenMenu::PROFILE] = new MenuProfile(this->_gameManager);
   this->_menu[TokenMenu::PROFILE]->initialize();
