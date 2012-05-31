@@ -74,6 +74,7 @@ void		LoadProfile::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
 
 void	LoadProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 {
+  std::cout << this->_profiles.size()  << std::endl;
   this->updateText();
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
@@ -94,6 +95,12 @@ void	LoadProfile::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_tags[this->_cursor]->setStatus(true);
       
     }
-  if (this->_curToken == TokenMenu::PROFILE && this->_profiles.size())
-    this->_gameManager._mainProfile = this->_profiles[this->_index];
+
+  if (this->_curToken == TokenMenu::PROFILE)
+    {
+      if (this->_profiles.size())
+	this->_gameManager._mainProfile = this->_profiles[this->_index];
+      else
+	this->_curToken = TokenMenu::LAST;
+    }
 }
