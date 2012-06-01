@@ -8,6 +8,7 @@
 
 #include <string>
 #include <vector>
+#include <list>
 #include "Map.hpp"
 #include "Bonus.hpp"
 #include "Bomb.hpp"
@@ -28,6 +29,8 @@ private:
 public:
   Map*				_map;
   GameMode::eGameMode		_gameMode;
+  std::string			_date;
+  size_t			_nbPlayer;
   std::vector<APlayer*>		_players;
   std::list<APlayer*>		_dead;
   std::list<APlayer*>		_cadaver;

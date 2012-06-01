@@ -32,6 +32,7 @@ void	NewProfile::setNewProfile(void)
   for (i = 0; (i < this->_names.size()) && (this->_textEdit[0]->getStr() != this->_names[i]); ++i);
   if (i < this->_names.size())
     {
+      this->_strStatus = false;
       this->_textEdit[0]->setStr("[Name already used]");
       this->_curToken = TokenMenu::LAST;
     }
@@ -66,6 +67,33 @@ double	NewProfile::getCenterY(void) const
   return (400.0f);
 }
 
+void	NewProfile::updateStr(gdl::GameClock const& clock)
+{
+  if (this->_curToken == TokenMenu::NEWPROFILE)
+    {
+      this->_textEdit[0]->setStr("");
+      this->_selected = true;
+      this->_oneTime = clock.getTotalGameTime() + 0.15f;
+      this->_curToken = TokenMenu::LAST;
+    }
+  else if (this->_curToken == TokenMenu::PROFILE)
+    {
+      if (!this->_textEdit[0]->getStr().empty() && _strStatus)
+	this->setNewProfile();
+      else
+	{
+	  this->_curToken = TokenMenu::LAST;
+	  this->_strStatus = false;
+	  this->_textEdit[0]->setStr("[Press Enter to type your name]");
+	}
+    }
+  else
+    {
+      this->_strStatus = false;
+      this->_textEdit[0]->setStr("[Press Enter to type your name]");
+    }  
+}
+
 void	NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   if (this->_oneTime > 0.0f)
@@ -79,49 +107,19 @@ void	NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 	if (input.isKeyDown(this->_keyEvent[i].first))
 	  (this->*_keyEvent[i].second)(clock);
 
-      if (this->_curToken == TokenMenu::NEWPROFILE)
-	{
-	  //this->_textEdit[0]->setStr("");
-	  this->_selected = true;
-	  this->_oneTime = clock.getTotalGameTime() + 0.15f;
-	  this->_curToken = TokenMenu::LAST;
-	}
-      else if (input.isKeyDown(gdl::Keys::Return))
-	{
-	  if (this->_curToken == TokenMenu::PROFILE)
-	    {
-	      if (!this->_textEdit[0]->getStr().empty() && _strStatus)
-		this->setNewProfile();
-	      else
-		this->_curToken = TokenMenu::LAST;
-	    }
-	  else if (this->_curToken == TokenMenu::MAINMENU)
-	    {
-	      this->_strStatus = false;
-	      this->_textEdit[0]->setStr("[Press Enter to type your name]");
-	    }
-	}
-
-  //     if (this->_cursor == 1)
-  // 	{
-  // 	  this->_tags[this->_cursor]->setStatus(false);
-  // 	  if (this->_timers[0] < this->_timers[1])
-  // 	    ++this->_cursor;
-  // 	  else
-  // 	    --this->_cursor;
-  // 	  this->_tags[this->_cursor]->setStatus(true);
-  // 	}
-  //   }
-  // else
-  //   {
+      if (this->_curToken != TokenMenu::LAST)
+	this->updateStr(clock);
+    }
+  else
+    {
       if (input.isKeyDown(gdl::Keys::Return))
 	{
-	  this->_strStatus = true;
+	  if (!this->_textEdit[0]->getStr().empty())
+	    this->_strStatus = true;
 	  this->_selected = false;
 	  this->_oneTime = clock.getTotalGameTime() + 0.15f;
 	}
       else
 	this->_textEdit[0]->update(clock, input);
-      // }
     }
 }

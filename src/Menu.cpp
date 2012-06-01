@@ -84,7 +84,6 @@ void		Menu::updateMenu()
       this->_menu->update(this->gameClock_, this->input_);
       if ((tmp = this->_menu->createGame(this->gameClock_, this->input_)))
 	{
-	  std::cout << "Create Game" << std::endl;
 	  if (this->_game)
 	    {
 	      this->_pause = false;

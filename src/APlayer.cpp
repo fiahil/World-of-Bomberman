@@ -147,6 +147,23 @@ void		APlayer::draw(void)
   glPushMatrix();
   glTranslatef(0.0f, 3.0f, 0.0f);
   this->_indic.draw();
+
+  glPushMatrix();
+  glTranslatef(this->_realPos.x + 1, this->_realPos.y + 0.3f, this->_realPos.z);
+  glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
+  GLUquadric* params = gluNewQuadric();
+  gluQuadricDrawStyle(params,GLU_FILL);
+  gluQuadricTexture(params,GL_TRUE);
+  glColor3ub(255, 0, 0);
+  gluCylinder(params, 0.05f, 0.05f, 2.0f, 20, 20);
+  if (this->_shield)
+    glColor3ub(70, 220, 255);
+  else
+    glColor3ub(0, 255, 0);
+  gluCylinder(params, 0.0505f, 0.0505f, 2.0f * (this->_pv / 100.0f), 20, 20);
+  gluDeleteQuadric(params);
+  glPopMatrix();
+
   glPopMatrix();
 }
 
@@ -154,9 +171,8 @@ void		APlayer::drawHUD(std::vector<gdl::Image>&, size_t, size_t, size_t, bool)
 {
 }
 
-void		APlayer::drawSuccess(Success::eSuccess s)
+void		APlayer::drawSuccess(Success::eSuccess)
 {
-  /* TOTO */ std::cout << "Achievement : " << s << std::endl;
 }
 
 void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
@@ -458,34 +474,14 @@ Dir::eDir	APlayer::getDir() const
   return this->_dir;
 }
 
-size_t		APlayer::getType() const
+AIType::eAI	APlayer::getType() const
 {
   return this->_type;
 }
 
-void		APlayer::setType(size_t t)
+void		APlayer::setType(AIType::eAI t)
 {
   this->_type = t;
-}
-
-void		APlayer::setName(std::string const& name)
-{
-  this->_name = name;
-}
-
-void		APlayer::setTeamName(std::string const& name)
-{
-  this->_teamName = name;
-}
-
-std::string const&	APlayer::getName() const
-{
-  return this->_name;
-}
-
-std::string const&	APlayer::getTeamName() const
-{
-  return this->_teamName;
 }
 
 void		APlayer::setPause(bool pause)
@@ -496,6 +492,46 @@ void		APlayer::setPause(bool pause)
 bool		APlayer::getPause() const
 {
   return this->_pause;
+}
+
+size_t		APlayer::getLust() const
+{
+  return this->_lustStack;
+}
+
+void		APlayer::setLust(size_t val)
+{
+  this->_lustStack = val;
+}
+
+size_t		APlayer::getPower() const
+{
+  return this->_powerStack;
+}
+
+void		APlayer::setPower(size_t val)
+{
+  this->_powerStack = val;
+}
+
+size_t		APlayer::getNbKills() const
+{
+  return this->_nbKills;
+}
+
+void		APlayer::setNbKills(size_t val)
+{
+  this->_nbKills = val;
+}
+
+size_t		APlayer::getSpeed() const
+{
+  return this->_speed * 10000;
+}
+
+void		APlayer::setSpeed(size_t val)
+{
+  this->_speed = val / 10000;
 }
 
 size_t		APlayer::getNbKills() const

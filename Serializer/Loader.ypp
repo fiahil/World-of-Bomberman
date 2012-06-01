@@ -20,6 +20,7 @@
 #include <stdexcept>
 #include <sstream>
 #include <cassert>
+#include <ctime>
 #include "APlayer.hpp"
 #include "AI.hpp"
 #include "enum.hpp"
@@ -44,7 +45,7 @@
 };
 
 %token <sval> INFO STAT ACHIEVEMENTS SAVES HEADER
-%token <sval> CONFIG ENDCONFIG MAP ENDMAP PLAYERS ENDPLAYERS
+%token <sval> CONFIG ENDCONFIG MAP ENDMAP PLAYERS ENDPLAYERS DEADS ENDDEADS
 %token <sval> MIXTE
 %token <sval> WORD
 %token <ival> NUMBER
@@ -79,15 +80,26 @@ info
   inst.setMaxKills($9);
   up.pf.setStat(inst);
 }
-| ACHIEVEMENTS SEP NUMBER SEP NUMBER SEP NUMBER EOL
+| ACHIEVEMENTS SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER
+SEP NUMBER SEP NUMBER EOL
 {
-  up.pf.addAchievement($3);
-  up.pf.addAchievement($5);
-  up.pf.addAchievement($7);
+  std::vector<bool>	success(Success::LAST, false);
+
+  success[0] = $3;
+  success[1] = $5;
+  success[2] = $7;
+  success[3] = $9;
+  success[4] = $11;
+  success[5] = $13;
+  success[6] = $15;
+  success[7] = $17;
+  up.pf.setAchievement(success);
 }
-| HEADER SEP NUMBER EOL
+| HEADER SEP NUMBER SEP NUMBER SEP NUMBER EOL
 {
   up.ma._gameMode = static_cast<GameMode::eGameMode>($3);
+  up.ma._date = std::string(ctime(reinterpret_cast<time_t const*>(&$5)));
+  up.ma._nbPlayer = $7;
 }
 | MAP SEP NUMBER SEP NUMBER EOL MIXTE EOL ENDMAP
 {
@@ -97,6 +109,7 @@ info
 }
 | SAVES sequence
 | PLAYERS EOL players
+| DEADS EOL deads
 | CONFIG EOL config
 ;
 
@@ -109,45 +122,64 @@ sequence
 
 players
 : ENDPLAYERS
-| NUMBER SEP NUMBER SEP WORD SEP WORD SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL players
+| NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL players
 {
   assert(up.ma._map != 0);
 
   APlayer*	p = 0;
 
-  if ($11 > 0)
-    p = new Human(*up.ma._map, Config()); //TODO CONFIG
+  if ($5 == AIType::HUMAN)
+    p = new Human(*up.ma._map, Config());
   else
-    p = new Human(*up.ma._map, Config()); //TODO:AI
+    p = new AI(static_cast<AIType::eAI>($5), *up.ma._map);
 
   p->setId($1);
   p->setTeamId($3);
-  p->setName(*$5);
-  p->setTeamName(*$7);
-  p->setColor($11);
-  p->setSkin(static_cast<Skin::eSkin>($13));
-  p->setState(static_cast<State::eState>($15));
-  p->setDir(static_cast<Dir::eDir>($17));
-  p->setWeapon(static_cast<BombType::eBomb>($19));
-  p->setPv($25);
-  p->setType($9);
-  p->setPos($21, $23);
+  p->setType(static_cast<AIType::eAI>($5));
+  p->setPv($7);
+  p->setPos($9, $11);
+  p->setColor($13);
+  p->setLust($15);
+  p->setPower($17);
+  p->setNbKills($19);
+  p->setSpeed($21);
+  p->setWeapon(static_cast<BombType::eBomb>($23));
+  p->setSkin(static_cast<Skin::eSkin>($25));
+  p->setState(static_cast<State::eState>($27));
+  p->setDir(static_cast<Dir::eDir>($29));
 
   up.ma._players.push_back(p);
-  std::cout << "- Player: "
-  	    //<< "\n-> id player " << $1
-  	    //<< "\n-> id team: " << $3
-  	    //<< "\n-> nick: " << *$5
-  	    //<< "\n-> team name: " << *$7
-  	    //<< "\n-> type: " << ($9 > 0 ? "HUMAN" : "AI")
-  	    //<< "\n-> color: " << $11
-  	    //<< "\n-> skin: " << $13
-  	    //<< "\n-> state: " << $15
-  	    //<< "\n-> dir: " << $17
-  	    //<< "\n-> weapon: " << $19
-  	    //<< "\n-> x: " << $21
-  	    //<< "\n-> y: " << $23
-	    << std::endl << std::endl;
+}
+
+deads
+: ENDDEADS
+| NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL players
+{
+  assert(up.ma._map != 0);
+
+  APlayer*	p = 0;
+
+  if ($5 == AIType::HUMAN)
+    p = new Human(*up.ma._map, Config());
+  else
+    p = new AI(static_cast<AIType::eAI>($5), *up.ma._map);
+
+  p->setId($1);
+  p->setTeamId($3);
+  p->setType(static_cast<AIType::eAI>($5));
+  p->setPv($7);
+  p->setPos($9, $11);
+  p->setColor($13);
+  p->setLust($15);
+  p->setPower($17);
+  p->setNbKills($19);
+  p->setSpeed($21);
+  p->setWeapon(static_cast<BombType::eBomb>($23));
+  p->setSkin(static_cast<Skin::eSkin>($25));
+  p->setState(static_cast<State::eState>($27));
+  p->setDir(static_cast<Dir::eDir>($29));
+
+  up.ma._players.push_back(p);
 }
 
 config

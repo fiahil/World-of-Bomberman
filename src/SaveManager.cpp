@@ -44,7 +44,7 @@ bool		SaveManager::isHere(size_t)
   return false;
 }
 
-Match*		SaveManager::getSave(size_t id)
+bool		SaveManager::getSave(size_t id, Match& ma)
 {
   std::stringstream	ss;
   std::string		root("./Ressources/saves/");
@@ -56,24 +56,23 @@ Match*		SaveManager::getSave(size_t id)
       if (ranger.current() != 0 && *ranger.current() == ss.str())
 	{
 	  Profile	profile;
-	  Match*	ma = new Match;
 	  std::ifstream		input((root + ss.str()).c_str());
 	  
 	  if (!input.good())
-	    throw std::runtime_error("Bad profile file.");
+	    throw std::runtime_error("Bad save file.");
 	  
-	  Serializer::Unpackman	unpackman(profile, *ma);
+	  Serializer::Unpackman	unpackman(profile, ma);
 	  Serializer::Scanner	scanner(input);
 	  Serializer::Loader	loader(scanner, unpackman);
 	  
 	  loader.parse();
 	  ranger.clean();
-	  return ma;
+	  return true;
 	}
       ranger.clean();
       ++ranger;
     }
-  return 0;
+  return false;
 }
 
 void		SaveManager::setSave(size_t id, Match const& p)

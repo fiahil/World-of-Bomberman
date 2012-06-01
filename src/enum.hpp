@@ -177,6 +177,7 @@ struct TokenMenu
       SETTINGSCHOOSE,
       SETTINGS,
       SKINCHOOSE,
+      STATS,
       QUIT,
       CREATEGAME,
       PAUSE,
