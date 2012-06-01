@@ -68,8 +68,6 @@ namespace Serializer
     for (size_t i = 0; i < m._players.size(); ++i) {
       this->_os	<< m._players[i]->getId()
 		<< "\t:" << m._players[i]->getTeamId()
-		<< "\t:" << m._players[i]->getName()
-		<< "\t:" << m._players[i]->getTeamName()
 		<< "\t:" << m._players[i]->getType()
 		<< "\t:" << m._players[i]->getColor()
 		<< "\t:" << m._players[i]->getSkin()

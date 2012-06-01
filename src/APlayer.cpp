@@ -458,34 +458,14 @@ Dir::eDir	APlayer::getDir() const
   return this->_dir;
 }
 
-size_t		APlayer::getType() const
+AIType::eAI	APlayer::getType() const
 {
   return this->_type;
 }
 
-void		APlayer::setType(size_t t)
+void		APlayer::setType(AIType::eAI t)
 {
   this->_type = t;
-}
-
-void		APlayer::setName(std::string const& name)
-{
-  this->_name = name;
-}
-
-void		APlayer::setTeamName(std::string const& name)
-{
-  this->_teamName = name;
-}
-
-std::string const&	APlayer::getName() const
-{
-  return this->_name;
-}
-
-std::string const&	APlayer::getTeamName() const
-{
-  return this->_teamName;
 }
 
 void		APlayer::setPause(bool pause)

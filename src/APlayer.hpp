@@ -53,7 +53,7 @@ protected:
   size_t		_id; //
   size_t		_teamId; //
   size_t		_color; //
-  size_t		_type; // mettre le bon type AIType::eAI
+  AIType::eAI		_type; //
   bool			_attack; 
   bool			_canAttack;
   bool			_shield;
@@ -66,8 +66,6 @@ protected:
   double		_speed; //
   double		_dam;
   std::vector<double>   _timers;
-  std::string		_name; // a virer
-  std::string		_teamName; // a virer
   BombType::eBomb	_weapon; // 
   Skin::eSkin		_skin; // 
   State::eState		_state; // 
@@ -134,6 +132,8 @@ public:
   Bomb*		isAttack();
   void		takeDamage(ExplodedBomb const*);
   bool		takeBonus(Bonus const*);
+  
+  void	operator()(ExplodedBomb*);
 
   Vector const&		getPosReal()	const;
   int			getPv()		const;
@@ -144,9 +144,7 @@ public:
   size_t		getColor()	const;
   State::eState		getState()	const;
   Dir::eDir		getDir()	const;
-  size_t		getType()	const;
-  std::string const&	getName()	const;
-  std::string const&	getTeamName()	const;
+  AIType::eAI		getType()	const;
   APlayer*		getLastHitId()	const;
   bool			isUnanim()	const;
   bool			getPause()	const;
@@ -159,15 +157,10 @@ public:
   void		setColor(size_t);
   void		setState(State::eState);
   void		setDir(Dir::eDir);
-  void		setName(std::string const&);
-  void		setTeamName(std::string const&);
-  void		setType(size_t);
+  void		setType(AIType::eAI);
   void		setPause(bool);
   void		incNbKills();
   void		slowMotion();
-
-  void	operator()(ExplodedBomb*);
-
 };
 
 #else
