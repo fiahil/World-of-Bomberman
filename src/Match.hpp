@@ -31,6 +31,8 @@ public:
   std::string			_date;
   size_t			_nbPlayer;
   std::vector<APlayer*>		_players;
+  std::list<APlayer*>		_dead;
+  std::list<APlayer*>		_cadaver;
   std::list<Bomb*>		_bombs;
   std::list<Bonus*>		_bonus;
   std::list<ExplodedBomb*>	_explodedBombs;
