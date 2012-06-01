@@ -41,7 +41,7 @@ AI::AI(AIType::eAI type, Map& map)
   this->_table.push_back(HALLU);
   this->_table.push_back(HALLU);
 
-  //if (type == AIType::HALLU)
+  if (type == AIType::HALLU)
     this->_dam = 0.0;
   if (type == AIType::HARD)
     this->_dam = 0.25;

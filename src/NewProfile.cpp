@@ -81,7 +81,7 @@ void	NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 
       if (this->_curToken == TokenMenu::NEWPROFILE)
 	{
-	  this->_textEdit[0]->setStr("");
+	  //this->_textEdit[0]->setStr("");
 	  this->_selected = true;
 	  this->_oneTime = clock.getTotalGameTime() + 0.15f;
 	  this->_curToken = TokenMenu::LAST;
