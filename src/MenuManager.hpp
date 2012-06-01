@@ -41,10 +41,12 @@ private:
   bool				_createGame;
   bool				_resume;
   bool				_stopGame;
+  Profile *			_guest;
 
 private:
   typedef void	(MenuManager::*fInitGame)();
 
+private:
   void	initGameSolo();
   void	initGameCoop();
   void	initGameVersus();
@@ -54,16 +56,18 @@ private:
     Heritance from AObj
   */
 public:
-  virtual void			draw(void);
-  virtual void			initialize(void);
-  virtual void			update(gdl::GameClock const&, gdl::Input&);
+  virtual void		draw(void);
+  virtual void		initialize(void);
+  virtual void		update(gdl::GameClock const&, gdl::Input&);
 
-  MyGame*			createGame(gdl::GameClock&, gdl::Input&);
-  void				initCamera(void);
-  bool				isResume();
-  bool				isStopGame();
-  void				setPause();
-  void				setEOG();
+public:
+  MyGame*		createGame(gdl::GameClock&, gdl::Input&);
+  void			initCamera(void);
+  bool			isResume();
+  bool			isStopGame();
+  void			setPause();
+  void			setEOG();
+  bool			operator()(size_t);
 };
 
 #endif		/* __MENU_MANAGEMENT_HPP__ */

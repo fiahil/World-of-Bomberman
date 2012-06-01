@@ -49,17 +49,16 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
 	this->_map[POS(tx, ty)] = ((random() % 2) + 2) + 48;
     }
   }
-  this->_map[POS(1, 1)] = '0'; //TODO
   this->_tp._pos1.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
   this->_tp._pos2.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
   this->_map[POS(this->_tp._pos1._x, this->_tp._pos1._y)] = '0';
   this->_map[POS(this->_tp._pos2._x, this->_tp._pos2._y)] = '0';
 }
 
-Map::Map(std::string const& file)
+Map::Map(std::string const& file, std::string const &name)
   : _x(0),
     _y(0),
-    _name(file),
+    _name(name),
     w_unbreak(0),
     background(0),
     _modelBonus(BonusType::LAST)
@@ -89,8 +88,6 @@ Map::Map(std::string const& file)
   }
   if (this->_map.size() != (this->_x * this->_y))
     throw std::runtime_error("Invalid map");
-
-  this->_map[POS(1, 1)] = '0'; //TODO
 
   this->_tp._pos1.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
   this->_tp._pos2.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
@@ -139,11 +136,10 @@ bool		Map::teleport(Point & pos) const
 
 void		Map::initialize(void)
 {
-  this->_modelBreak['t'] = gdl::Model::load("models/Set_tp.FBX"); // tp
+  this->_modelBreak['t'] = gdl::Model::load("models/Set_tp.FBX");
   this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
   this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
 
-  this->_break = gdl::Image::load("textures/break.jpg");
   this->_unbreak = gdl::Image::load("textures/unbreak.jpg");
   this->_background = gdl::Image::load("textures/background.jpg");
   this->_landscape = gdl::Image::load("textures/landscape.jpg");
@@ -160,8 +156,6 @@ void		Map::initialize(void)
   p.setPos(-300, -100);
   this->landscape = new Plane(800.0f, 400.0f, p, this->_landscape);
   this->landscape->changeMode();
-
-
 }
 
 void		Map::draw(void)

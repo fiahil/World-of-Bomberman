@@ -145,7 +145,7 @@ players
   p->setSpeed($21);
   p->setWeapon(static_cast<BombType::eBomb>($23));
   p->setSkin(static_cast<Skin::eSkin>($25));
-  p->setState(static_cast<State::eState>($27));
+  //p->setState(static_cast<State::eState>($27));
   p->setDir(static_cast<Dir::eDir>($29));
 
   up.ma._players.push_back(p);
@@ -153,7 +153,7 @@ players
 
 deads
 : ENDDEADS
-| NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL players
+| NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL deads
 {
   assert(up.ma._map != 0);
 
@@ -176,7 +176,7 @@ deads
   p->setSpeed($21);
   p->setWeapon(static_cast<BombType::eBomb>($23));
   p->setSkin(static_cast<Skin::eSkin>($25));
-  p->setState(static_cast<State::eState>($27));
+  //p->setState(static_cast<State::eState>($27));
   p->setDir(static_cast<Dir::eDir>($29));
 
   up.ma._players.push_back(p);

@@ -3,7 +3,7 @@
  * 28.12.05
  */
 
-#include <iostream>		// REMOVE
+#include <sstream>
 #include "LoadMap.hpp"
 
 LoadMap::LoadMap(GameManager& game, std::vector<Map *> & map)
@@ -36,13 +36,17 @@ void		LoadMap::updateText() const
 {
   if (this->_map.size())
     {
-      this->_tags[0]->createText(this->_map[this->_index]->getName(), 20, 800, 365);
-      this->_tags[1]->createText("info", 20, 500, 414);
+      this->_tags[0]->createText(this->_map[this->_index]->getName(), 20, 750, 365);
+      std::stringstream	ss;
+      ss << " Width : " << this->_map[this->_index]->getX()
+	 << "        "
+	 << " Height : " << this->_map[this->_index]->getY();
+      this->_tags[1]->createText(ss.str(), 20, 670, 414);
     }
   else
     {
-      this->_tags[0]->createText("", 20, 800, 365);
-      this->_tags[1]->createText("", 20, 500, 414);
+      this->_tags[0]->createText("", 20, 750, 365);
+      this->_tags[1]->createText("", 20, 670, 414);
     }
 }
 
@@ -75,8 +79,8 @@ void		LoadMap::update(gdl::GameClock const& clock, gdl::Input& input)
   if (this->_curToken == TokenMenu::CREATEGAME)
     {
       this->_gameManager._originMap = this->_map[this->_cursor];
-      this->_gameManager._match._map = new Map(this->_map[this->_cursor]->getX(),
-					       this->_map[this->_cursor]->getY(),
-					       this->_map[this->_cursor]->getMap());
+      this->_gameManager._match._map = new Map(this->_map[this->_index]->getX(),
+					       this->_map[this->_index]->getY(),
+					       this->_map[this->_index]->getMap());
     }
 }

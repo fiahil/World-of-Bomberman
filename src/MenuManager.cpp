@@ -54,6 +54,15 @@ MenuManager::MenuManager(int w, int h)
 
   this->_profile = profileLoader.getProfiles();
   this->_names = profileLoader.getNames();
+  
+  this->_guest = new Profile;
+  //this->_gameManager._secondProfile->setId();   Facultatif ?
+  this->_guest->setSkin(Skin::VARIANT);
+  this->_guest->setSkill(Skill::HEAL);
+  this->_guest->setConfig(this->_gameManager._configJ2);
+  this->_guest->setName("Guest");
+  this->_profile.push_back(this->_guest);
+  this->_names.push_back("Guest");
 }
 
 MenuManager::~MenuManager()
@@ -142,11 +151,10 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 	this->_stopGame = true;
       else if (this->_curMenu == TokenMenu::GAMERESULT)
 	{
-	  delete this->__map;
+	  delete this->_gameManager._match._map;
 	  for_each(this->_gameManager._match._players.begin(), this->_gameManager._match._players.end(), deleteAPlayer);
 	  for_each(this->_gameManager._match._dead.begin(), this->_gameManager._match._dead.end(), deleteAPlayer);
 	  for_each(this->_gameManager._match._cadaver.begin(), this->_gameManager._match._cadaver.end(), deleteAPlayer);
-
 	  tmp = TokenMenu::PROFILE;
 	}
       this->_menu[this->_curMenu]->setTextDraw(false);
@@ -260,9 +268,14 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
     {
       this->_createGame = false;
       (this->*_refInitGame[this->_gameManager._match._gameMode])();
-      pl1 = this->_gameManager._match._players[0];
-      if (this->_gameManager._match._gameMode != GameMode::SOLO)
-	pl2 = this->_gameManager._match._players[1];
+      for (std::vector<APlayer*>::const_iterator it = this->_gameManager._match._players.begin();
+	   it != this->_gameManager._match._players.end(); ++it)
+	
+	if (this->_gameManager._mainProfile->getId() == (*it)->getId())
+	  pl1 = (*it);
+	else if (this->_gameManager._match._gameMode != GameMode::SOLO &&
+		 this->_gameManager._secondProfile->getId() == (*it)->getId())
+	  pl2 = (*it);
       game = new MyGame(clock, input, this->_gameManager._match, pl1, pl2);
       game->initialize();
       return game;
