@@ -147,6 +147,23 @@ void		APlayer::draw(void)
   glPushMatrix();
   glTranslatef(0.0f, 3.0f, 0.0f);
   this->_indic.draw();
+
+  glPushMatrix();
+  glTranslatef(this->_realPos.x + 1, this->_realPos.y + 0.3f, this->_realPos.z);
+  glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
+  GLUquadric* params = gluNewQuadric();
+  gluQuadricDrawStyle(params,GLU_FILL);
+  gluQuadricTexture(params,GL_TRUE);
+  glColor3ub(255, 0, 0);
+  gluCylinder(params, 0.05f, 0.05f, 2.0f, 20, 20);
+  if (this->_shield)
+    glColor3ub(70, 220, 255);
+  else
+    glColor3ub(0, 255, 0);
+  gluCylinder(params, 0.0505f, 0.0505f, 2.0f * (this->_pv / 100.0f), 20, 20);
+  gluDeleteQuadric(params);
+  glPopMatrix();
+
   glPopMatrix();
 }
 
@@ -154,9 +171,8 @@ void		APlayer::drawHUD(std::vector<gdl::Image>&, size_t, size_t, size_t, bool)
 {
 }
 
-void		APlayer::drawSuccess(Success::eSuccess s)
+void		APlayer::drawSuccess(Success::eSuccess)
 {
-  /* TOTO */ std::cout << "Achievement : " << s << std::endl;
 }
 
 void		APlayer::update(gdl::GameClock const& clock, gdl::Input& input)
