@@ -78,7 +78,7 @@ namespace Serializer
   {
     assert(m._map != 0);
 
-    this->_os	<< "#MAP" << std::endl;
+    this->_os	<< "#MAP:" << m._map->getX() << ":" << m._map->getY() << std::endl;
     this->_os	<< "[";
     this->_os	<< m._map->getMap();
     this->_os	<< "]" << std::endl;
