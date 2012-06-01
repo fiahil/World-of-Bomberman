@@ -1,4 +1,5 @@
 
+#include "Sound.hpp"
 #include "ExplodedBomb.hpp"
 
 ExplodedBomb::ExplodedBomb(BombType::eBomb type,
