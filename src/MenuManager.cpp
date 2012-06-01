@@ -53,6 +53,15 @@ MenuManager::MenuManager(int w, int h)
 
   this->_profile = profileLoader.getProfiles();
   this->_names = profileLoader.getNames();
+  
+  this->_guest = new Profile;
+  //this->_gameManager._secondProfile->setId();   Facultatif ?
+  this->_guest->setSkin(Skin::VARIANT);
+  this->_guest->setSkill(Skill::HEAL);
+  this->_guest->setConfig(this->_gameManager._configJ2);
+  this->_guest->setName("Guest");
+  this->_profile.push_back(this->_guest);
+  this->_names.push_back("Guest");
 }
 
 MenuManager::~MenuManager()
