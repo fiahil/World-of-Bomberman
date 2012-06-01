@@ -148,6 +148,7 @@ void	MenuManager::initGameSolo()
 		  this->_gameManager._mainProfile->getConfig(),
 		  &(this->_gameManager._mainProfile->getAchievement()));
   tmp->setSkill(this->_gameManager._mainProfile->getSkill());
+  tmp->setId(this->_gameManager._mainProfile->getId());
   tmp->setTeamId(id);
   tmp->setSkin(this->_gameManager._mainProfile->getSkin());
   tmp->setColor(id++);
@@ -171,6 +172,7 @@ void	MenuManager::initGameCoop()
 		  this->_gameManager._configJ1,
 		  &(this->_gameManager._mainProfile->getAchievement()));
   tmp->setSkill(this->_gameManager._mainProfile->getSkill());
+  tmp->setId(this->_gameManager._mainProfile->getId());
   tmp->setTeamId(id);
   tmp->setSkin(this->_gameManager._mainProfile->getSkin());
   tmp->setColor(id);
@@ -179,6 +181,7 @@ void	MenuManager::initGameCoop()
 		  this->_gameManager._configJ2,
 		  &(this->_gameManager._secondProfile->getAchievement()));
   tmp->setSkill(this->_gameManager._secondProfile->getSkill());
+  tmp->setId(this->_gameManager._secondProfile->getId());
   tmp->setTeamId(id);
   tmp->setSkin(this->_gameManager._secondProfile->getSkin());
   tmp->setColor(id++);
@@ -202,6 +205,7 @@ void	MenuManager::initGameVersus()
 		  this->_gameManager._configJ1,
 		  &(this->_gameManager._mainProfile->getAchievement()));
   tmp->setSkill(this->_gameManager._mainProfile->getSkill());
+  tmp->setId(this->_gameManager._mainProfile->getId());
   tmp->setTeamId(id);
   tmp->setSkin(this->_gameManager._mainProfile->getSkin());
   tmp->setColor(id++);
@@ -210,6 +214,7 @@ void	MenuManager::initGameVersus()
 		  this->_gameManager._configJ2,
 		  &(this->_gameManager._secondProfile->getAchievement()));
   tmp->setSkill(this->_gameManager._secondProfile->getSkill());
+  tmp->setId(this->_gameManager._secondProfile->getId());
   tmp->setTeamId(id);
   tmp->setSkin(this->_gameManager._secondProfile->getSkin());
   tmp->setColor(id++);
