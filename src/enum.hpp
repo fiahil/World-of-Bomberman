@@ -22,6 +22,7 @@ struct Audio
     TIMER_START,
     START,
     EXPLODE,
+    EXPLODE_DIFFUSE,
     BONUS,
     SUCCESS,
     INTRO,
