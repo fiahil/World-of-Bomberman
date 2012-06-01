@@ -49,27 +49,27 @@ protected:
   double		_k;
   Vector		_realPos;
   Map &			_map;
-  int			_pv; //
-  size_t		_id; //
-  size_t		_teamId; //
-  size_t		_color; //
-  AIType::eAI		_type; //
+  int			_pv;
+  size_t		_id;
+  size_t		_teamId;
+  size_t		_color;
+  AIType::eAI		_type;
   bool			_attack; 
   bool			_canAttack;
   bool			_shield;
   bool			_moving;
   double		_shieldTimer;
   double		_tpTimer;
-  size_t		_lustStack; //
-  size_t		_powerStack; //
-  size_t		_nbKills; //
-  double		_speed; //
+  size_t		_lustStack;
+  size_t		_powerStack;
+  size_t		_nbKills;
+  double		_speed;
   double		_dam;
   std::vector<double>   _timers;
-  BombType::eBomb	_weapon; // 
-  Skin::eSkin		_skin; // 
-  State::eState		_state; // 
-  Dir::eDir		_dir; // 
+  BombType::eBomb	_weapon;
+  Skin::eSkin		_skin;
+  State::eState		_state;
+  Dir::eDir		_dir;
   gdl::Model		_model;
   Pyramid		_indic;
   std::vector<bool>*	_success;
@@ -145,7 +145,7 @@ public:
   size_t		getLust()	const;
   size_t		getPower()	const;
   size_t		getNbKills()	const;
-  double		getSpeed()	const;
+  size_t		getSpeed()	const;
   State::eState		getState()	const;
   Dir::eDir		getDir()	const;
   AIType::eAI		getType()	const;
@@ -161,7 +161,7 @@ public:
   void		setLust(size_t);
   void		setPower(size_t);
   void		setNbKills(size_t);
-  void		setSpeed(double);
+  void		setSpeed(size_t);
   void		setColor(size_t);
   void		setState(State::eState);
   void		setDir(Dir::eDir);
