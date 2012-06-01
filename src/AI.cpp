@@ -16,7 +16,7 @@ AI::AI(AIType::eAI type, Map& map)
     _start(4),
     _startTimer(-1.0f),
     _clock(0),
-    _state(&AI::waitState)
+    _AIstate(&AI::waitState)
 {
   this->_type = type;
 
@@ -456,7 +456,7 @@ void	AI::waitState(void)
   {
     if ((this->*(it->first))())
     {
-      this->_state = it->second;
+      this->_AIstate = it->second;
       return;
     }
   }
@@ -464,14 +464,14 @@ void	AI::waitState(void)
 
 void	AI::surviveState(void)
 {
-  this->_state = &AI::moveState;
+  this->_AIstate = &AI::moveState;
 }
 
 void	AI::moveState(void)
 {
   if (this->_target.size() == 0)
   {
-    this->_state = &AI::waitState;
+    this->_AIstate = &AI::waitState;
     return;
   }
   if ((this->*(this->_target.back()))(*this->_clock))
@@ -481,7 +481,7 @@ void	AI::moveState(void)
 void	AI::attackState(void)
 {
   this->_target.push_back(&AI::ATTACKFunction);
-  this->_state = &AI::moveState;
+  this->_AIstate = &AI::moveState;
 }
 
 bool	AI::pathDiscovery(size_t cx, size_t cy, Path const& p)
@@ -566,6 +566,6 @@ void	AI::play(gdl::GameClock const& clock, gdl::Input&)
   else if (this->_start < 0)
   {
     this->_clock = &clock;
-    (this->*_state)();
+    (this->*_AIstate)();
   }
 }
