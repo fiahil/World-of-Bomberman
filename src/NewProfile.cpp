@@ -42,7 +42,7 @@ void	NewProfile::setNewProfile(void)
       Config		_cfg;
       size_t		_id;
 
-      for (_id = 0; _pm.isHere(_id); ++_id);
+      for (_id = 1; _pm.isHere(_id); ++_id);
       this->_gameManager._mainProfile = new Profile;
       this->_gameManager._mainProfile->setId(_id);
       this->_gameManager._mainProfile->setSkin(Skin::VARIANT);
