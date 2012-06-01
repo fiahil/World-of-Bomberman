@@ -116,6 +116,8 @@ void	NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 	{
 	  if (!this->_textEdit[0]->getStr().empty())
 	    this->_strStatus = true;
+	  else
+	    this->_textEdit[0]->setStr("[Press Enter to type your name]");
 	  this->_selected = false;
 	  this->_oneTime = clock.getTotalGameTime() + 0.15f;
 	}
