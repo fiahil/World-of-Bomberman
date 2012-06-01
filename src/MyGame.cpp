@@ -54,10 +54,8 @@ void		MyGame::initialize(void)
   this->_HUD[HUD::LIFE] = gdl::Image::load("textures/pv.png");
 
   this->_HUD[HUD::SUCCESS_ONE_KILL] = gdl::Image::load("textures/one_kill_success.png");
-  this->_HUD[HUD::SUCCESS_TUTO] = gdl::Image::load("textures/tuto_success.png");
   this->_HUD[HUD::SUCCESS_BONUS] = gdl::Image::load("textures/bonus_success.png");
   this->_HUD[HUD::SUCCESS_FIVE_KILL] = gdl::Image::load("textures/five_kill_success.png");
-  this->_HUD[HUD::SUCCESS_HARD_AI] = gdl::Image::load("textures/ai_success.png");
   this->_HUD[HUD::SUCCESS_POWER] = gdl::Image::load("textures/power_success.png");
   this->_HUD[HUD::SUCCESS_LUST] = gdl::Image::load("textures/lust_success.png");
   this->_HUD[HUD::SUCCESS_TP] = gdl::Image::load("textures/tp_success.png");
@@ -115,7 +113,7 @@ bool		MyGame::updatePlayer(APlayer *p)
        {
 	 if (p->getLastHitId() != p)
 	   p->getLastHitId()->incNbKills();
-	 this->_dead.push_back(p);
+	 this->_match._dead.push_back(p);
 	 return true;
        }
 
@@ -150,7 +148,7 @@ bool		MyGame::updateDeadPlayer(APlayer* p)
 {
   if (p->isUnanim())
     {
-      this->_cadaver.push_back(p);
+      this->_match._cadaver.push_back(p);
       return true;
     }
   else
@@ -198,7 +196,7 @@ void		MyGame::update(void)
     this->_EOG = true;
 
   this->removeIf
-    (this->_dead,
+    (this->_match._dead,
      &MyGame::updateDeadPlayer);
 
   if (this->_EOG && this->_EOGTimer < 0.0f)
@@ -231,8 +229,8 @@ void		MyGame::drawGame(APlayer* p) const
 		this->_match._bonus.end(),
 		static_cast<void(*)(Bonus*)>(&MyGame::drawer));
 
-  std::for_each(this->_dead.begin(),
-  		this->_dead.end(),
+  std::for_each(this->_match._dead.begin(),
+  		this->_match._dead.end(),
   		static_cast<void(*)(APlayer*)>(&MyGame::drawer));
 
   std::for_each(this->_match._players.begin(),

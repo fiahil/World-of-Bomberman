@@ -439,11 +439,6 @@ void		Human::drawHUD(std::vector<gdl::Image>& img,
 						      hi - 90.0f,
 						      img[HUD::SUCCESS_ONE_KILL]);
 
-      this->_HUD[HUD::SUCCESS_TUTO] = new Surface(300.0f,
-						  81.0f,
-						  300.0f + mode,
-						  hi - 90.0f,
-						  img[HUD::SUCCESS_TUTO]);
 
       this->_HUD[HUD::SUCCESS_BONUS] = new Surface(300.0f,
 						   81.0f,
@@ -457,11 +452,6 @@ void		Human::drawHUD(std::vector<gdl::Image>& img,
 						       hi - 90.0f,
 						       img[HUD::SUCCESS_FIVE_KILL]);
 
-      this->_HUD[HUD::SUCCESS_HARD_AI] = new Surface(300.0f,
-						     81.0f,
-						     300.0f + mode,
-						     hi - 90.0f,
-						     img[HUD::SUCCESS_HARD_AI]);
 
       this->_HUD[HUD::SUCCESS_POWER] = new Surface(300.0f,
 						   81.0f,
@@ -578,4 +568,9 @@ void		Human::setHalluView(AIView const* v)
 {
   if (this->_hallu)
     this->_hallu->updateView(v);
+}
+
+void		Human::setSkill(Skill::eSkill s)
+{
+  this->_skill = s;
 }

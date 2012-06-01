@@ -29,6 +29,7 @@
 #include "LoadProfile.hpp"
 #include "TeamMenu.hpp"
 #include "MenuPause.hpp"
+#include "MenuStats.hpp"
 #include "Human.hpp"
 #include "AI.hpp"
 #include "ProfileManager.hpp"
@@ -92,6 +93,8 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::SETTINGS]->initialize();
   this->_menu[TokenMenu::SKINCHOOSE] = new SkinChoose(this->_gameManager);
   this->_menu[TokenMenu::SKINCHOOSE]->initialize();
+  this->_menu[TokenMenu::STATS] = new MenuStats(this->_gameManager);
+  this->_menu[TokenMenu::STATS]->initialize();
   this->_menu[TokenMenu::PAUSE] = new MenuPause(this->_gameManager);
   this->_menu[TokenMenu::PAUSE]->initialize();
 
@@ -139,12 +142,16 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 void	MenuManager::initGameSolo()
 {
   int	id = 0;
+  Human*	tmp;
   
-  this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
-							 this->_gameManager._mainProfile->getConfig()));
-  this->_gameManager._match._players.back()->setTeamId(id);
-  this->_gameManager._match._players.back()->setSkin(this->_gameManager._mainProfile->getSkin());
-  this->_gameManager._match._players.back()->setColor(id++);
+  tmp = new Human(*this->_gameManager._match._map,
+		  this->_gameManager._mainProfile->getConfig(),
+		  &(this->_gameManager._mainProfile->getAchievement()));
+  tmp->setSkill(this->_gameManager._mainProfile->getSkill());
+  tmp->setTeamId(id);
+  tmp->setSkin(this->_gameManager._mainProfile->getSkin());
+  tmp->setColor(id++);
+  this->_gameManager._match._players.push_back(tmp);
   for (int i = 0; i < this->_gameManager._nbTeams; ++i, ++id)
     for (int c = 0; c < this->_gameManager._nbPlayers; ++c)
       {
@@ -158,17 +165,24 @@ void	MenuManager::initGameSolo()
 void	MenuManager::initGameCoop()
 {
   int	id = 0;
+  Human*	tmp;
 
-  this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
-							 this->_gameManager._configJ1));
-  this->_gameManager._match._players.back()->setTeamId(id);
-  this->_gameManager._match._players.back()->setSkin(this->_gameManager._mainProfile->getSkin());
-  this->_gameManager._match._players.back()->setColor(id);
-  this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
-							 this->_gameManager._configJ2));
-  this->_gameManager._match._players.back()->setTeamId(id);
-  this->_gameManager._match._players.back()->setSkin(this->_gameManager._secondProfile->getSkin());
-  this->_gameManager._match._players.back()->setColor(id++);
+  tmp = new Human(*this->_gameManager._match._map,
+		  this->_gameManager._configJ1,
+		  &(this->_gameManager._mainProfile->getAchievement()));
+  tmp->setSkill(this->_gameManager._mainProfile->getSkill());
+  tmp->setTeamId(id);
+  tmp->setSkin(this->_gameManager._mainProfile->getSkin());
+  tmp->setColor(id);
+  this->_gameManager._match._players.push_back(tmp);
+  tmp = new Human(*this->_gameManager._match._map,
+		  this->_gameManager._configJ2,
+		  &(this->_gameManager._secondProfile->getAchievement()));
+  tmp->setSkill(this->_gameManager._secondProfile->getSkill());
+  tmp->setTeamId(id);
+  tmp->setSkin(this->_gameManager._secondProfile->getSkin());
+  tmp->setColor(id++);
+  this->_gameManager._match._players.push_back(tmp);
   for (int i = 0; i < this->_gameManager._nbTeams; ++i, ++id)
     for (int c = 0; c < this->_gameManager._nbPlayers; ++c)
       {
@@ -182,17 +196,24 @@ void	MenuManager::initGameCoop()
 void	MenuManager::initGameVersus()
 {
   int	id = 0;
+  Human*	tmp;
 
-  this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
-							 this->_gameManager._configJ1));
-  this->_gameManager._match._players.back()->setTeamId(id);
-  this->_gameManager._match._players.back()->setSkin(this->_gameManager._mainProfile->getSkin());
-  this->_gameManager._match._players.back()->setColor(id++);
-  this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
-							 this->_gameManager._configJ2));
-  this->_gameManager._match._players.back()->setTeamId(id);
-  this->_gameManager._match._players.back()->setSkin(this->_gameManager._secondProfile->getSkin());
-  this->_gameManager._match._players.back()->setColor(id++);
+  tmp = new Human(*this->_gameManager._match._map,
+		  this->_gameManager._configJ1,
+		  &(this->_gameManager._mainProfile->getAchievement()));
+  tmp->setSkill(this->_gameManager._mainProfile->getSkill());
+  tmp->setTeamId(id);
+  tmp->setSkin(this->_gameManager._mainProfile->getSkin());
+  tmp->setColor(id++);
+  this->_gameManager._match._players.push_back(tmp);
+  tmp = new Human(*this->_gameManager._match._map,
+		  this->_gameManager._configJ2,
+		  &(this->_gameManager._secondProfile->getAchievement()));
+  tmp->setSkill(this->_gameManager._secondProfile->getSkill());
+  tmp->setTeamId(id);
+  tmp->setSkin(this->_gameManager._secondProfile->getSkin());
+  tmp->setColor(id++);
+  this->_gameManager._match._players.push_back(tmp);
   for (int i = 0; i < this->_gameManager._nbTeams; ++i, ++id)
     for (int c = 0; c < this->_gameManager._nbPlayers; ++c)
       {

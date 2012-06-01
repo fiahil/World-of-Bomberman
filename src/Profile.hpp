@@ -35,12 +35,15 @@ private:
 public:
   size_t				getId(void) const;
   Skin::eSkin				getSkin(void) const;
+  std::string const&			getSkinName(void) const;
   Skill::eSkill				getSkill(void) const;
+  std::string const&			getSkillName(void) const;
   const Config &			getConfig(void) const;
   Config&				getConfig(void);
   Stat const&				getStat(void) const;
   const std::string &			getName(void) const;
   const std::vector<bool> &		getAchievement(void) const;
+  std::vector<bool> &			getAchievement(void);
   const std::vector<std::string> &	getSave(void) const;
 
 public:

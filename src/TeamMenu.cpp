@@ -72,8 +72,8 @@ void	TeamMenu::changeNumber(gdl::GameClock const& clock, gdl::Input& input)
   else if (clock.getTotalGameTime() >= this->_timersLR[1] && input.isKeyDown(gdl::Keys::Right))
     {
       ++this->_nb[this->_cursor];
-      if (this->_nb[this->_cursor] > 30)
-  	this->_nb[this->_cursor] = 30;
+      if (this->_nb[this->_cursor] > 5)
+  	this->_nb[this->_cursor] = 5;
       this->_timersLR[1] = clock.getTotalGameTime() + 0.15f;
     }
 }

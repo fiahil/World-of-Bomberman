@@ -36,7 +36,7 @@ size_t		Stat::getMaxKill(void) const
 size_t		Stat::getScore(void) const
 {
   return this->_nbKills * 26 +
-    (this->_nbVictories / (this->_nbVictories + this->_nbDefeats)) * 100 +
+    (this->_nbVictories / (this->_nbVictories + this->_nbDefeats + 1)) * 100 +
     this->_nbMaxKills;
 }
 

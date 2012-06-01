@@ -18,8 +18,8 @@ static const char*	g_refSkin[Skin::LAST - 1] = {
 static const char*	g_refSkill[Skill::LAST] = {
   "Divine Intervention",
   "Protective Spirit",
-  "Quick Jump",
-  "Berserker's Rage"
+  "Berserker's Rage",
+  "Quick Jump"
 };
 
 static const char*	g_refModel[Skin::LAST - 1] = {
