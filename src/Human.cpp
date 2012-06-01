@@ -26,6 +26,7 @@ Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
     _halluLifeTimer(-1.0f)
 
 {
+  this->_type = AIType::HUMAN;
   this->_event._nb = 7;
   this->_event.
     _event.push_back(initStruct(conf.getConfig(HumGame::UP),

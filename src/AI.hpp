@@ -31,7 +31,6 @@ public:
   AI(AIType::eAI, Map&);
 
 private:
-  AIType::eAI			_type;
   AIView const*			_view;
   int				_start;
   double			_startTimer;

@@ -7,7 +7,7 @@
 #define __PACKMAN_HPP__
 
 #include <string>
-#include <fstream>
+#include <iosfwd>
 #include "Match.hpp"
 #include "Profile.hpp"
 
@@ -24,6 +24,11 @@ namespace Serializer
     public:
       void	packProfile(Profile const&);
       void	packMatch(Match const&);
+      void	operator()(APlayer const*);
+
+    private:
+      Packman(Packman const&);
+      Packman&	operator=(Packman const&);
   };
 }
 

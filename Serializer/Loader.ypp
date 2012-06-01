@@ -122,15 +122,13 @@ players
 
   p->setId($1);
   p->setTeamId($3);
-  p->setName(*$5);
-  p->setTeamName(*$7);
   p->setColor($11);
   p->setSkin(static_cast<Skin::eSkin>($13));
   p->setState(static_cast<State::eState>($15));
   p->setDir(static_cast<Dir::eDir>($17));
   p->setWeapon(static_cast<BombType::eBomb>($19));
   p->setPv($25);
-  p->setType($9);
+  p->setType(static_cast<AIType::eAI>($9));
   p->setPos($21, $23);
 
   up.ma._players.push_back(p);
