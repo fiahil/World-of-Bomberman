@@ -14,6 +14,7 @@
 #include "MainMenu.hpp"
 #include "Menu.hpp"
 #include "Sound.hpp"
+#include "GameResult.hpp"
 
 Menu::Menu()
   : _game(0),
@@ -77,7 +78,7 @@ void		Menu::updateGame()
 void		Menu::updateMenu()
 {
   MyGame*	tmp;
-  
+
   if (!this->_game || this->_pause)
     {
       this->_menu->update(this->gameClock_, this->input_);
@@ -96,7 +97,7 @@ void		Menu::updateMenu()
       else if (this->_menu->isResume())
 	{
 	  this->_pause = false;
-	  this->_game->resumeGame(); 
+	  this->_game->resumeGame();
 	}
       else if (this->_menu->isStopGame())
 	{
@@ -155,7 +156,7 @@ void		Menu::draw(void)
   else
   {
     if (this->_intro)
-    {       
+    {
       cvReleaseCapture(&this->_capture);
       this->_intro = false;
       Sound::getMe()->stopLastSound();
@@ -174,4 +175,3 @@ void		Menu::unload(void)
 {
   this->window_.close();
 }
-

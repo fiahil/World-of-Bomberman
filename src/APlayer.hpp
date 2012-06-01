@@ -132,7 +132,7 @@ public:
   Bomb*		isAttack();
   void		takeDamage(ExplodedBomb const*);
   bool		takeBonus(Bonus const*);
-  
+
   void	operator()(ExplodedBomb*);
 
   Vector const&		getPosReal()	const;

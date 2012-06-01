@@ -181,6 +181,7 @@ struct TokenMenu
       QUIT,
       CREATEGAME,
       PAUSE,
+      GAMERESULT,
       LAST
     };
 };
