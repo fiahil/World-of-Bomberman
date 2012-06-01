@@ -17,8 +17,8 @@ static const std::string	g_refSkin[Skin::LAST] = {
 };
 
 static const std::string	g_refSkill[Skill::LAST] = {
-  "Divine Intervention",
   "Protective Spirit",
+  "Divine Intervention",
   "Berserker's Rage",
   "Quick Jump"
 };
