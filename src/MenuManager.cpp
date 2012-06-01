@@ -151,8 +151,9 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 	this->_stopGame = true;
       else if (this->_curMenu == TokenMenu::GAMERESULT)
 	{
-	  delete this->_gameManager._match._map;
-	  for_each(this->_gameManager._match._players.begin(), this->_gameManager._match._players.end(), deleteAPlayer);
+	  // delete this->_gameManager._match._map;
+	  // this->_gameManager._match._map = 0;
+ 	  for_each(this->_gameManager._match._players.begin(), this->_gameManager._match._players.end(), deleteAPlayer);
 	  for_each(this->_gameManager._match._dead.begin(), this->_gameManager._match._dead.end(), deleteAPlayer);
 	  for_each(this->_gameManager._match._cadaver.begin(), this->_gameManager._match._cadaver.end(), deleteAPlayer);
 	  tmp = TokenMenu::PROFILE;
@@ -269,7 +270,6 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
       (this->*_refInitGame[this->_gameManager._match._gameMode])();
       for (std::vector<APlayer*>::const_iterator it = this->_gameManager._match._players.begin();
 	   it != this->_gameManager._match._players.end(); ++it)
-	
 	if (this->_gameManager._mainProfile->getId() == (*it)->getId())
 	  pl1 = (*it);
 	else if (this->_gameManager._match._gameMode != GameMode::SOLO &&
