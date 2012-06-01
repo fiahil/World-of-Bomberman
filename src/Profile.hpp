@@ -41,6 +41,7 @@ public:
   Stat const&				getStat(void) const;
   const std::string &			getName(void) const;
   const std::vector<bool> &		getAchievement(void) const;
+  std::vector<bool> &			getAchievement(void);
   const std::vector<std::string> &	getSave(void) const;
 
 public:

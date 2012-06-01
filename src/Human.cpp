@@ -579,3 +579,8 @@ void		Human::setHalluView(AIView const* v)
   if (this->_hallu)
     this->_hallu->updateView(v);
 }
+
+void		Human::setSkill(Skill::eSkill s)
+{
+  this->_skill = s;
+}
