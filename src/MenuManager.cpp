@@ -29,6 +29,7 @@
 #include "LoadProfile.hpp"
 #include "TeamMenu.hpp"
 #include "MenuPause.hpp"
+#include "MenuStats.hpp"
 #include "Human.hpp"
 #include "AI.hpp"
 #include "ProfileManager.hpp"
@@ -92,6 +93,8 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::SETTINGS]->initialize();
   this->_menu[TokenMenu::SKINCHOOSE] = new SkinChoose(this->_gameManager);
   this->_menu[TokenMenu::SKINCHOOSE]->initialize();
+  this->_menu[TokenMenu::STATS] = new MenuStats(this->_gameManager);
+  this->_menu[TokenMenu::STATS]->initialize();
   this->_menu[TokenMenu::PAUSE] = new MenuPause(this->_gameManager);
   this->_menu[TokenMenu::PAUSE]->initialize();
 
