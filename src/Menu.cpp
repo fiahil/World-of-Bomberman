@@ -51,6 +51,7 @@ void		Menu::updateIntro()
     cvReleaseCapture(&this->_capture);
     this->_intro = false;
     Sound::getMe()->stopLastSound();
+    Sound::getMe()->playMusic();
     this->_menu->initCamera();
   }
 }
@@ -77,7 +78,6 @@ void		Menu::updateMenu()
 {
   MyGame*	tmp;
   
-  //std::cout << "Game " << this->_game << std::endl;
   if (!this->_game || this->_pause)
     {
       this->_menu->update(this->gameClock_, this->input_);
@@ -155,6 +155,7 @@ void		Menu::draw(void)
       cvReleaseCapture(&this->_capture);
       this->_intro = false;
       Sound::getMe()->stopLastSound();
+      Sound::getMe()->playMusic();
       this->_menu->initCamera();
     }
     else if (this->_game && !this->_pause)
@@ -162,6 +163,7 @@ void		Menu::draw(void)
     else
       this->_menu->draw();
   }
+  Sound::getMe()->updateMusic();
   this->window_.display();
 }
 
