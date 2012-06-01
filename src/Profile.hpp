@@ -55,7 +55,6 @@ public:
   void		setSkill(Skill::eSkill);
   void		setStat(const Stat &);
   void		setAchievement(const std::vector<bool> &);
-  void		addAchievement(bool);
   void		setSave(const std::vector<std::string> &);
   void		addSave(const std::string &);
 };

@@ -44,7 +44,7 @@ static const char*	g_refAnimName[State::LAST] = {
 APlayer::APlayer(Map & map, std::vector<bool>* success)
   : _map(map),
     _pv(100),
-    _id(0),
+    _id(-1),
     _teamId(0),
     _color(0),
     _attack(false),
@@ -524,14 +524,14 @@ void		APlayer::setNbKills(size_t val)
   this->_nbKills = val;
 }
 
-double		APlayer::getSpeed() const
+size_t		APlayer::getSpeed() const
 {
-  return this->_speed;
+  return this->_speed * 10000;
 }
 
-void		APlayer::setSpeed(double val)
+void		APlayer::setSpeed(size_t val)
 {
-  this->_speed = val;
+  this->_speed = val / 10000;
 }
 
 void		APlayer::setTimer(double)

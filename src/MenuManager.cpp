@@ -148,6 +148,7 @@ void	MenuManager::initGameSolo()
 		  this->_gameManager._mainProfile->getConfig(),
 		  &(this->_gameManager._mainProfile->getAchievement()));
   tmp->setSkill(this->_gameManager._mainProfile->getSkill());
+  tmp->setId(this->_gameManager._mainProfile->getId());
   tmp->setTeamId(id);
   tmp->setSkin(this->_gameManager._mainProfile->getSkin());
   tmp->setColor(id++);
@@ -171,6 +172,7 @@ void	MenuManager::initGameCoop()
 		  this->_gameManager._configJ1,
 		  &(this->_gameManager._mainProfile->getAchievement()));
   tmp->setSkill(this->_gameManager._mainProfile->getSkill());
+  tmp->setId(this->_gameManager._mainProfile->getId());
   tmp->setTeamId(id);
   tmp->setSkin(this->_gameManager._mainProfile->getSkin());
   tmp->setColor(id);
@@ -179,6 +181,7 @@ void	MenuManager::initGameCoop()
 		  this->_gameManager._configJ2,
 		  &(this->_gameManager._secondProfile->getAchievement()));
   tmp->setSkill(this->_gameManager._secondProfile->getSkill());
+  tmp->setId(this->_gameManager._secondProfile->getId());
   tmp->setTeamId(id);
   tmp->setSkin(this->_gameManager._secondProfile->getSkin());
   tmp->setColor(id++);
@@ -202,6 +205,7 @@ void	MenuManager::initGameVersus()
 		  this->_gameManager._configJ1,
 		  &(this->_gameManager._mainProfile->getAchievement()));
   tmp->setSkill(this->_gameManager._mainProfile->getSkill());
+  tmp->setId(this->_gameManager._mainProfile->getId());
   tmp->setTeamId(id);
   tmp->setSkin(this->_gameManager._mainProfile->getSkin());
   tmp->setColor(id++);
@@ -210,6 +214,7 @@ void	MenuManager::initGameVersus()
 		  this->_gameManager._configJ2,
 		  &(this->_gameManager._secondProfile->getAchievement()));
   tmp->setSkill(this->_gameManager._secondProfile->getSkill());
+  tmp->setId(this->_gameManager._secondProfile->getId());
   tmp->setTeamId(id);
   tmp->setSkin(this->_gameManager._secondProfile->getSkin());
   tmp->setColor(id++);
@@ -234,9 +239,14 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
     {
       this->_createGame = false;
       (this->*_refInitGame[this->_gameManager._match._gameMode])();
-      pl1 = this->_gameManager._match._players[0];
-      if (this->_gameManager._match._gameMode != GameMode::SOLO)
-	pl2 = this->_gameManager._match._players[1];
+      for (std::vector<APlayer*>::const_iterator it = this->_gameManager._match._players.begin();
+	   it != this->_gameManager._match._players.end(); ++it)
+	
+	if (this->_gameManager._mainProfile->getId() == (*it)->getId())
+	  pl1 = (*it);
+	else if (this->_gameManager._match._gameMode != GameMode::SOLO &&
+		 this->_gameManager._secondProfile->getId() == (*it)->getId())
+	  pl2 = (*it);
       game = new MyGame(clock, input, this->_gameManager._match, pl1, pl2);
       game->initialize();
       return game;

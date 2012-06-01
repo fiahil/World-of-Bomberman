@@ -17,7 +17,7 @@ public:
 public:
   static bool		isHere(size_t);
   static size_t		getMax(void);
-  static Match*		getSave(size_t);
+  static bool		getSave(size_t, Match&);
   static void		setSave(size_t, Match const&);
 };
 

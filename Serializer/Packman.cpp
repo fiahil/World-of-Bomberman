@@ -35,7 +35,7 @@ namespace Serializer
       << std::endl << std::endl;
     this->_os	<< std::endl << std::endl;
     this->_os	<< "#ACHIEVEMENTS";
-    for (size_t i = 0; i < 3; ++i) {
+    for (size_t i = 0; i < Success::LAST; ++i) {
       this->_os << "\t:" << p.getAchievement().at(i);
     }
     this->_os	<< std::endl << std::endl;
@@ -78,7 +78,7 @@ namespace Serializer
   {
     assert(m._map != 0);
 
-    this->_os	<< "#MAP" << std::endl;
+    this->_os	<< "#MAP:" << m._map->getX() << ":" << m._map->getY() << std::endl;
     this->_os	<< "[";
     this->_os	<< m._map->getMap();
     this->_os	<< "]" << std::endl;
