@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include <cassert>
+#include <ctime>
 #include "Profile.hpp"
 #include "Match.hpp"
 #include "Packman.hpp"
@@ -61,8 +62,9 @@ namespace Serializer
     this->_os	<< "]" << std::endl;
     this->_os	<< "#ENDMAP" << std::endl << std::endl;
     this->_os	<< "#HEADER"
-      		<< "\t:" << 0
 		<< "\t:" << m._gameMode
+		<< "\t:" << time(0)
+		<< "\t:" << m._players.size()
 		<< std::endl << std::endl;
     this->_os	<< "#PLAYERS" << std::endl;
     for (size_t i = 0; i < m._players.size(); ++i) {

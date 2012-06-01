@@ -28,6 +28,8 @@ private:
 public:
   Map*				_map;
   GameMode::eGameMode		_gameMode;
+  std::string			_date;
+  size_t			_nbPlayer;
   std::vector<APlayer*>		_players;
   std::list<Bomb*>		_bombs;
   std::list<Bonus*>		_bonus;
