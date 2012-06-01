@@ -37,18 +37,21 @@ double	LoadProfile::getCenterY() const
 
 void		LoadProfile::updateText() const
 {
-  std::stringstream	ss;
-
   if (this->_profiles.size())
     {
-      this->_tags[0]->createText(this->_names[this->_index], 20, 850, 315);
-      ss << " Skin : " << this->_profiles[this->_index]->getSkin();
-      this->_tags[1]->createText(ss.str(), 20, 500, 367);
+      this->_tags[0]->createText(this->_names[this->_index], 20, 800, 314);
+      std::stringstream	ss;
+      ss << " Skin : " << this->_profiles[this->_index]->getSkinName()
+	 << "        "
+	 << " Skill : " << this->_profiles[this->_index]->getSkillName()
+	 << "        "
+	 << " Score : " << this->_profiles[this->_index]->getStat().getScore();
+      this->_tags[1]->createText(ss.str(), 20, 500, 365);
     }
   else
     {
-      this->_tags[0]->createText("", 20, 950, 270);
-      this->_tags[1]->createText("", 20, 950, 310);
+      this->_tags[0]->createText("", 20, 800, 314);
+      this->_tags[1]->createText("", 20, 500, 365);
     }
 }
 
