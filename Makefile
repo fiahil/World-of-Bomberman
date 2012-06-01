@@ -67,7 +67,7 @@ INCLUDES	= -I./lib/libgdl_gl-2012.3/include -I./lib/libfmodex/inc -I./src -I./Se
 
 CXX		= g++
 
-CXXFLAGS	= -g -Wall -Wextra -O3 $(INCLUDES)
+CXXFLAGS	= -Wall -Wextra -O3 $(INCLUDES)
 
 LDFLAGS		= -lGL -lGLU -lgdl_gl -lserial -lfmodex		\
 		  -lopencv_imgproc -lopencv_highgui		\

@@ -88,6 +88,9 @@ private:
   bool		 southJumpFunction();
   bool		 westJumpFunction();
   bool		 eastJumpFunction();
+  
+public:
+  void		setSkill(Skill::eSkill);
 };
 
 #endif

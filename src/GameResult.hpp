@@ -15,13 +15,24 @@ public:
   GameResult(GameManager &, Match &);
   virtual ~GameResult(void);
 
-private:
+public:
+  bool			_isBuilt;
   Match &		_match;
+
+private:
+  std::vector<APlayer*>			_playerScore;
+
+private:
+  void			buildPlayerScore();
+
+private:
+  virtual void		draw();
 
 public:
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);
+  void			buildGameResult();
 };
 
 #endif		/* __GAME_RESULT_HPP__ */

@@ -13,7 +13,7 @@ LoadSave::LoadSave(GameManager& game)
     _timerL(-1.0f),
     _timerR(-1.0f)
 {
-  this->_tags.push_back(new Tag("menu/tags/LoadNormal.png", "menu/tags/LoadHighlit.png", true, false, TokenMenu::LAST, 3629.0f, 0.0f, 1200.0f));
+  this->_tags.push_back(new Tag("menu/tags/LoadNormal.png", "menu/tags/LoadHighlit.png", true, false, TokenMenu::LAST, 3629.0f, 0.0f, 1150.0f));
   this->_tags.push_back(new Tag("menu/tags/DoneNormal.png", "menu/tags/DoneHighlit.png", false, false, TokenMenu::CREATEGAME, 3629.0f, 0.0f, 1265.0f));
   this->_tags.push_back(new Tag("menu/tags/BackNormal.png", "menu/tags/BackHighlit.png", false, false, TokenMenu::PROFILE, 3629.0f, 0.0f, 1330.0f));
 }
@@ -45,9 +45,15 @@ void		LoadSave::loadSave()
 void		LoadSave::updateText() const
 {
   if (this->_save.size())
-    this->_tags[1]->createText(this->_save[this->_index], 20, 950, 270);
+    {
+      this->_tags[0]->createText(this->_save[this->_index], 20, 850, 360);
+      this->_tags[0]->createText("info", 20, 500, 411);
+    }
   else
-    this->_tags[1]->createText("", 20, 739, 415);
+    {
+      this->_tags[0]->createText("", 20, 850, 360);
+      this->_tags[1]->createText("", 20, 500, 411);
+    }
 }
 
 void		LoadSave::changeSave(gdl::GameClock const& clock, gdl::Input& input)
