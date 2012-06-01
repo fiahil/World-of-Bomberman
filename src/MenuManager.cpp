@@ -56,7 +56,7 @@ MenuManager::MenuManager(int w, int h)
   this->_names = profileLoader.getNames();
   
   this->_guest = new Profile;
-  //this->_gameManager._secondProfile->setId();   Facultatif ?
+  this->_guest->setId(0);
   this->_guest->setSkin(Skin::VARIANT);
   this->_guest->setSkill(Skill::HEAL);
   this->_guest->setConfig(this->_gameManager._configJ2);
@@ -205,7 +205,6 @@ void	MenuManager::initGameCoop()
   tmp->setTeamId(id);
   tmp->setSkin(this->_gameManager._mainProfile->getSkin());
   tmp->setColor(id);
-  this->_gameManager._match._players.push_back(tmp);
   tmp = new Human(*this->_gameManager._match._map,
 		  this->_gameManager._configJ2,
 		  &(this->_gameManager._secondProfile->getAchievement()));

@@ -35,7 +35,7 @@ private:
   int				_start;
   double			_startTimer;
   gdl::GameClock const*		_clock;
-  stFunc			_state;
+  stFunc			_AIstate;
   std::deque<dirFunc>		_target;
   std::vector<Path>		_paths;
 
