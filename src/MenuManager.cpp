@@ -54,7 +54,7 @@ MenuManager::MenuManager(int w, int h)
 
   this->_profile = profileLoader.getProfiles();
   this->_names = profileLoader.getNames();
-  
+
   this->_guest = new Profile;
   this->_guest->setId(0);
   this->_guest->setSkin(Skin::VARIANT);
@@ -142,42 +142,37 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 	this->_stopGame = true;
       else if (this->_curMenu == TokenMenu::GAMERESULT)
 	{
-	  // delete this->_gameManager._match._map;
-	  // this->_gameManager._match._map = 0;
-
-	  std::cout << "Avant del" << std::endl;
-	  std::cout << "size player = " << this->_gameManager._match._players.size() << std::endl;
-	  std::cout << "size player = " << this->_gameManager._match._dead.size() << std::endl;
-	  std::cout << "size player = " << this->_gameManager._match._cadaver.size() << std::endl;
-
-	  while (this->_gameManager._match._players.size() != 0)
+	  while (this->_gameManager._match._players.size())
 	    {
 	      delete _gameManager._match._players.back();
 	      this->_gameManager._match._players.pop_back();
 	    }
-	  while (this->_gameManager._match._dead.size() != 0)
+	  while (this->_gameManager._match._dead.size())
 	    {
 	      delete _gameManager._match._dead.back();
 	      this->_gameManager._match._dead.pop_back();
 	    }
-	  while (this->_gameManager._match._cadaver.size() != 0)
+	  while (this->_gameManager._match._cadaver.size())
 	    {
 	      delete _gameManager._match._cadaver.back();
 	      this->_gameManager._match._cadaver.pop_back();
 	    }
-
- 	  // for_each(this->_gameManager._match._players.begin(), this->_gameManager._match._players.end(), deleteAPlayer);
-	  // for_each(this->_gameManager._match._dead.begin(), this->_gameManager._match._dead.end(), deleteAPlayer);
-	  // for_each(this->_gameManager._match._cadaver.begin(), this->_gameManager._match._cadaver.end(), deleteAPlayer);
-
+	  while (this->_gameManager._match._bombs.size())
+	    {
+	      delete this->_gameManager._match._bombs.back();
+	      this->_gameManager._match._bombs.pop_back();
+	    }
+	  while (this->_gameManager._match._bonus.size())
+	    {
+	      delete this->_gameManager._match._bonus.back();
+	      this->_gameManager._match._bonus.pop_back();
+	    }
+	  while (this->_gameManager._match._explodedBombs.size())
+	    {
+	      delete this->_gameManager._match._explodedBombs.back();
+	      this->_gameManager._match._explodedBombs.pop_back();
+	    }
 	  tmp = TokenMenu::PROFILE;
-
-	  std::cout << "Apres del" << std::endl;
-	  std::cout << "size player = " << this->_gameManager._match._players.size() << std::endl;
-	  std::cout << "size player = " << this->_gameManager._match._dead.size() << std::endl;
-	  std::cout << "size player = " << this->_gameManager._match._cadaver.size() << std::endl;
-
-
 	}
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;

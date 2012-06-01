@@ -43,6 +43,16 @@ void	MenuPause::clearMatch()
       delete this->_gameManager._match._players.back();
       this->_gameManager._match._players.pop_back();
     }
+  while (this->_gameManager._match._dead.size())
+    {
+      delete _gameManager._match._dead.back();
+      this->_gameManager._match._dead.pop_back();
+    }
+  while (this->_gameManager._match._cadaver.size())
+    {
+      delete _gameManager._match._cadaver.back();
+      this->_gameManager._match._cadaver.pop_back();
+    }
   while (this->_gameManager._match._bombs.size())
     {
       delete this->_gameManager._match._bombs.back();
