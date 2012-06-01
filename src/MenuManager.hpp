@@ -45,6 +45,7 @@ private:
 private:
   typedef void	(MenuManager::*fInitGame)();
 
+  void	setGuest();
   void	initGameSolo();
   void	initGameCoop();
   void	initGameVersus();

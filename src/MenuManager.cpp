@@ -139,6 +139,16 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
   this->_camera.update();
 }
 
+void	MenuManager::setGuest(void)
+{
+  this->_gameManager._secondProfile = new Profile;
+  //this->_gameManager._secondProfile->setId();   Facultatif ?
+  this->_gameManager._secondProfile->setSkin(this->_gameManager._mainProfile->getSkin());
+  this->_gameManager._secondProfile->setSkill(this->_gameManager._mainProfile->getSkill());
+  this->_gameManager._secondProfile->setConfig(this->_gameManager._configJ2);
+  this->_gameManager._secondProfile->setName("Guest");
+}
+
 void	MenuManager::initGameSolo()
 {
   int	id = 0;
@@ -175,6 +185,8 @@ void	MenuManager::initGameCoop()
   tmp->setSkin(this->_gameManager._mainProfile->getSkin());
   tmp->setColor(id);
   this->_gameManager._match._players.push_back(tmp);
+  if (!this->_gameManager._secondProfile)
+    this->setGuest();
   tmp = new Human(*this->_gameManager._match._map,
 		  this->_gameManager._configJ2,
 		  &(this->_gameManager._secondProfile->getAchievement()));
@@ -206,6 +218,8 @@ void	MenuManager::initGameVersus()
   tmp->setSkin(this->_gameManager._mainProfile->getSkin());
   tmp->setColor(id++);
   this->_gameManager._match._players.push_back(tmp);
+  if (!this->_gameManager._secondProfile)
+    this->setGuest();
   tmp = new Human(*this->_gameManager._match._map,
 		  this->_gameManager._configJ2,
 		  &(this->_gameManager._secondProfile->getAchievement()));
