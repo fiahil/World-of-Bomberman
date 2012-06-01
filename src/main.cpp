@@ -16,7 +16,6 @@
 
 int		main()
 {
-  std::cerr << "PLOP" << std::endl;
   Menu		bomberman;
   time_t	now;
 
