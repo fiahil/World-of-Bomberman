@@ -8,6 +8,21 @@
 #include "enum.hpp"
 #include "Profile.hpp"
 
+static const std::string	g_refSkin[Skin::LAST] = {
+  "Warwik",
+  "Sylvanas",
+  "Variant",
+  "Zuljin",
+  "Enemy"
+};
+
+static const std::string	g_refSkill[Skill::LAST] = {
+  "Divine Intervention",
+  "Protective Spirit",
+  "Berserker's Rage",
+  "Quick Jump"
+};
+
 Profile::Profile()
   : _id(0),
     _skin(Skin::VARIANT),
@@ -30,6 +45,11 @@ Skin::eSkin	Profile::getSkin(void) const
   return this->_skin;
 }
 
+std::string const&	Profile::getSkinName(void) const
+{
+  return g_refSkin[this->_skin];
+}
+
 const Config &	Profile::getConfig(void) const
 {
   return this->_config;
@@ -48,6 +68,11 @@ const std::string &		Profile::getName(void) const
 Skill::eSkill			Profile::getSkill(void) const
 {
   return this->_skill;
+}
+
+std::string const&		Profile::getSkillName(void) const
+{
+  return g_refSkill[this->_skill];
 }
 
 Stat const&			Profile::getStat(void) const 
