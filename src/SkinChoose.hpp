@@ -12,6 +12,8 @@ class SkinChoose : public AMenu
 {
 private:
   std::vector<gdl::Model>	_model;
+  gdl::Model			_tp;
+  double	_rot;
   double	_timerL;
   double	_timerR;
   size_t	_indexSkin;

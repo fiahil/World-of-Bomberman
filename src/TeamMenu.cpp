@@ -50,7 +50,7 @@ void	TeamMenu::updateText() const
   ss.str("");
   ss.clear();
   ss << this->_nb[2];
-  if (this->_gameManager._match._gameMode != GameMode::SOLO)
+  if (this->_profiles.size() > 1 && this->_gameManager._match._gameMode != GameMode::SOLO)
     this->_tags[2]->createText(this->_profiles[this->_nb[2]]->getName(), 20, 855, 495);
   else
     this->_tags[2]->createText("", 20, 855, 495);
@@ -112,7 +112,7 @@ void	TeamMenu::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
 
 void	TeamMenu::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-  if (this->_nb[2] < 0)
+  if (this->_nb[2] < 0 && this->_profiles.size() > 1)
     {
       this->_nb[2] = 0;
       for (std::vector<Profile*>::iterator it =  this->_profiles.begin();
@@ -123,18 +123,15 @@ void	TeamMenu::update(gdl::GameClock const& clock, gdl::Input& input)
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
-    else
-      {
-	if (this->_cursor == 0 || this->_cursor == 1)
-	  this->changeNumber(clock, input); //TODO
-	if (this->_cursor == 2)
-	  this->changeProfile(clock, input);
-      }
+  if (this->_cursor == 0 || this->_cursor == 1)
+    this->changeNumber(clock, input); //TODO
+  if (this->_cursor == 2)
+    this->changeProfile(clock, input);
   if (this->_curToken == TokenMenu::MAP)
     {
       this->_gameManager._nbPlayers = this->_nb[0];
       this->_gameManager._nbTeams = this->_nb[1];
-      if (this->_gameManager._match._gameMode != GameMode::SOLO)
+      if (this->_profiles.size() > 1 && this->_gameManager._match._gameMode != GameMode::SOLO)
 	this->_gameManager._secondProfile = this->_profiles[this->_nb[2]];
     }
 }

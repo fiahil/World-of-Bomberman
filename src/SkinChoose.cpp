@@ -32,6 +32,7 @@ static const char*	g_refModel[Skin::LAST - 1] = {
 SkinChoose::SkinChoose(GameManager& game)
   : AMenu("menu/background/backgroundPersonnalization.jpg", "menu/background/backgroundPersonnalization.jpg", 3200.0f, -1.0f, 1600.0f, game),
     _model(Skin::LAST - 1),
+    _rot(0.0f),
     _timerL(-1.0f),
     _timerR(-1.0f),
     _indexSkin(Skin::LAST),
@@ -53,6 +54,7 @@ void	SkinChoose::initialize()
   this->_model[1] = gdl::Model::load(g_refModel[1]);
   this->_model[2] = gdl::Model::load(g_refModel[2]);
   this->_model[3] = gdl::Model::load(g_refModel[3]);
+  this->_tp = gdl::Model::load("./models/Set_tp.FBX");
 }
 
 double	SkinChoose::getCenterX() const
@@ -107,8 +109,6 @@ void	SkinChoose::changeSkill(gdl::GameClock const& clock, gdl::Input& input)
     }
 }
 
-#include <iostream>
-
 void	SkinChoose::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   if (this->_indexSkin == Skin::LAST)
@@ -137,10 +137,21 @@ void	SkinChoose::draw()
 {
   AMenu::draw();
   glPushMatrix();
-  glTranslatef(4400.0f, 100.0f, 2200.0f);
+  glTranslatef(4001.2f, 569.0f, 2000.4f);
   glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
-  glScalef(50.5f, 50.5f, 50.5f);
+  glRotatef(this->_rot, 0.0f, 1.0f, 0.0f);
+  this->_rot += 1.0f;
+  if (this->_rot >= 360.0f)
+    this->_rot = 0.0f;
+  glScalef(0.15f, 0.15f, 0.15f);
   if (this->_indexSkin < Skin::LAST - 1)
     this->_model[this->_indexSkin].draw();
+  glPopMatrix();
+  glPushMatrix();
+  glTranslatef(4001.2f, 569.02f, 2000.57f);
+  glRotatef(-100.0f, 1.0f, 0.0f, 0.0f);
+  glRotatef(7.0f, 0.0f, 0.0f, 1.0f);
+  glScalef(0.05f, 0.05f, 0.05f);
+  this->_tp.draw();
   glPopMatrix();
 }
