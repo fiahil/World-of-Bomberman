@@ -40,7 +40,10 @@ void				ProfileLoader::setProfiles(void)
 	    {
 	      if ((*_texasRanger.current() != ".") && (*_texasRanger.current() != ".."))
 		{
-		  this->_profiles.push_back(this->_pm.getProfile(idToInt(*_texasRanger.current())));
+		  size_t	id;
+
+		  this->_profiles.push_back(this->_pm.getProfile((id = idToInt(*_texasRanger.current()))));
+		  this->_profiles.back()->setId(id);
 		  this->_names.push_back(this->_profiles.back()->getName());
 		}
 	    }

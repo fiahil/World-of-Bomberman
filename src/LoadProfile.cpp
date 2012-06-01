@@ -18,7 +18,6 @@ LoadProfile::LoadProfile(GameManager& game, std::vector<Profile *>& profiles, st
   this->_tags.push_back(new Tag("menu/tags/LoadNormal.png", "menu/tags/LoadHighlit.png", true, false, TokenMenu::LAST, 429.0f, 0.0f, 1100.0f));
   this->_tags.push_back(new Tag("menu/tags/DoneNormal.png", "menu/tags/DoneHighlit.png", false, false, TokenMenu::PROFILE, 429.0f, 0.0f, 1215.0f));
   this->_tags.push_back(new Tag("menu/tags/BackNormal.png", "menu/tags/BackHighlit.png", false, false, TokenMenu::MAINMENU, 429.0f, 0.0f, 1280.0f));
-
 }
 
 LoadProfile::~LoadProfile(void)
@@ -37,7 +36,7 @@ double	LoadProfile::getCenterY() const
 
 void		LoadProfile::updateText() const
 {
-  if (this->_profiles.size())
+  if (this->_profiles.size() > 1)
     {
       this->_tags[0]->createText(this->_names[this->_index], 20, 750, 314);
       std::stringstream	ss;
@@ -95,7 +94,7 @@ void	LoadProfile::update(gdl::GameClock const& clock, gdl::Input& input)
     this->changeProfile(clock, input);
   if (this->_curToken == TokenMenu::PROFILE)
     {
-      if (this->_profiles.size())
+      if (this->_profiles.size() > 1)
 	this->_gameManager._mainProfile = this->_profiles[this->_index];
       else
 	this->_curToken = TokenMenu::LAST;

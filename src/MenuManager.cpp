@@ -54,7 +54,7 @@ MenuManager::MenuManager(int w, int h)
 
   this->_profile = profileLoader.getProfiles();
   this->_names = profileLoader.getNames();
-  
+
   this->_guest = new Profile;
   this->_guest->setId(0);
   this->_guest->setSkin(Skin::VARIANT);
@@ -123,15 +123,6 @@ void	MenuManager::draw(void)
       (*it)->draw();
 }
 
-static void	deleteAPlayer(APlayer *obj)
-{
-  if (obj)
-    {
-      delete obj;
-      obj = 0;
-    }
-}
-
 void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   TokenMenu::eMenu	tmp;
@@ -151,10 +142,36 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 	this->_stopGame = true;
       else if (this->_curMenu == TokenMenu::GAMERESULT)
 	{
-	  delete this->_gameManager._match._map;
-	  for_each(this->_gameManager._match._players.begin(), this->_gameManager._match._players.end(), deleteAPlayer);
-	  for_each(this->_gameManager._match._dead.begin(), this->_gameManager._match._dead.end(), deleteAPlayer);
-	  for_each(this->_gameManager._match._cadaver.begin(), this->_gameManager._match._cadaver.end(), deleteAPlayer);
+	  while (this->_gameManager._match._players.size())
+	    {
+	      delete _gameManager._match._players.back();
+	      this->_gameManager._match._players.pop_back();
+	    }
+	  while (this->_gameManager._match._dead.size())
+	    {
+	      delete _gameManager._match._dead.back();
+	      this->_gameManager._match._dead.pop_back();
+	    }
+	  while (this->_gameManager._match._cadaver.size())
+	    {
+	      delete _gameManager._match._cadaver.back();
+	      this->_gameManager._match._cadaver.pop_back();
+	    }
+	  while (this->_gameManager._match._bombs.size())
+	    {
+	      delete this->_gameManager._match._bombs.back();
+	      this->_gameManager._match._bombs.pop_back();
+	    }
+	  while (this->_gameManager._match._bonus.size())
+	    {
+	      delete this->_gameManager._match._bonus.back();
+	      this->_gameManager._match._bonus.pop_back();
+	    }
+	  while (this->_gameManager._match._explodedBombs.size())
+	    {
+	      delete this->_gameManager._match._explodedBombs.back();
+	      this->_gameManager._match._explodedBombs.pop_back();
+	    }
 	  tmp = TokenMenu::PROFILE;
 	}
       this->_menu[this->_curMenu]->setTextDraw(false);
@@ -205,6 +222,7 @@ void	MenuManager::initGameCoop()
   tmp->setTeamId(id);
   tmp->setSkin(this->_gameManager._mainProfile->getSkin());
   tmp->setColor(id);
+  this->_gameManager._match._players.push_back(tmp);
   tmp = new Human(*this->_gameManager._match._map,
 		  this->_gameManager._configJ2,
 		  &(this->_gameManager._secondProfile->getAchievement()));
@@ -265,18 +283,25 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
 
   if (this->_createGame)
     {
+      std::cout << "Create game begin" << std::endl;
       this->_createGame = false;
       (this->*_refInitGame[this->_gameManager._match._gameMode])();
       for (std::vector<APlayer*>::const_iterator it = this->_gameManager._match._players.begin();
 	   it != this->_gameManager._match._players.end(); ++it)
-	
-	if (this->_gameManager._mainProfile->getId() == (*it)->getId())
-	  pl1 = (*it);
-	else if (this->_gameManager._match._gameMode != GameMode::SOLO &&
-		 this->_gameManager._secondProfile->getId() == (*it)->getId())
-	  pl2 = (*it);
+	{
+	  std::cout << "Id " << (*it)->getId() << std::endl;
+	  if (this->_gameManager._mainProfile->getId() == (*it)->getId())
+	    pl1 = (*it);
+	  else if (this->_gameManager._match._gameMode != GameMode::SOLO &&
+		   this->_gameManager._secondProfile->getId() == (*it)->getId())
+	    pl2 = (*it);
+	}
+      std::cout << "pl1 " << pl1 << " mainProfile " << this->_gameManager._mainProfile->getId() << std::endl;
+      if (this->_gameManager._secondProfile)
+	std::cout << "pl2 " << pl2 << " secondProfile " << this->_gameManager._secondProfile->getId() << std::endl;
       game = new MyGame(clock, input, this->_gameManager._match, pl1, pl2);
       game->initialize();
+      std::cout << "Create game end" << std::endl;
       return game;
     }
   return 0;
