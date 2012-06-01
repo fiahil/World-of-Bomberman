@@ -136,7 +136,7 @@ bool		Map::teleport(Point & pos) const
 
 void		Map::initialize(void)
 {
-  this->_modelBreak['t'] = gdl::Model::load("models/Set_tp.FBX"); // tp
+  this->_modelBreak['t'] = gdl::Model::load("models/Set_tp.FBX");
   this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
   this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
 
