@@ -60,6 +60,11 @@ const std::vector<bool> &	Profile::getAchievement(void) const
   return this->_achievement;
 }
 
+std::vector<bool> &		Profile::getAchievement(void)
+{
+  return this->_achievement;
+}
+
 const std::vector<std::string> &	Profile::getSave(void) const
 {
   return this->_save;
