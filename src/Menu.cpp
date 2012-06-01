@@ -65,15 +65,6 @@ void		Menu::updateGame()
       delete this->_game;
       this->_game = 0;
       this->_menu->setEOG();
-
-      GameManager	tmp;
-      // GameResult	*test = new GameResult(tmp, this->_game->getMatch());
-
-      // // /* TEST RESULT HERE*/
-      // Faire une fonction membre
-      // this->_menu[TokenMenu::GAMERESULT] = new GameResult(tmp, this->_game->getMatch());
-      // this->_menu[TokenMenu::GAMERESULT]->initialize();
-      // /**/exit(0);
     }
   else if (this->_game->isPause())
     {
@@ -107,7 +98,7 @@ void		Menu::updateMenu()
       else if (this->_menu->isResume())
 	{
 	  this->_pause = false;
-	  this->_game->resumeGame(); 
+	  this->_game->resumeGame();
 	}
       else if (this->_menu->isStopGame())
 	{
@@ -185,4 +176,3 @@ void		Menu::unload(void)
 {
   this->window_.close();
 }
-

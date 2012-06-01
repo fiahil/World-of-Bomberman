@@ -6,7 +6,9 @@
 #include <iostream>		// REMOVE
 #include <algorithm>
 #include <vector>
+#include "Match.hpp"
 #include "GameResult.hpp"
+#include "GameManager.hpp"
 
 void		printKill(const std::vector<APlayer *> & v)
 {
@@ -23,19 +25,10 @@ bool		orderKill(APlayer *one, APlayer *two)
 }
 
 GameResult::GameResult(GameManager & game, Match & match)
-  : AMenu("menu/background/backgroundGameResult.jpg", "menu/background/backgroundGameResult.jpg", 4800.0f, -1.0f, 0.0f, game)
+  : AMenu("menu/backgroundCredits.jpg", "menu/backgroundCredits.jpg", 4800.0f, -1.0f, 0.0f, game),
+    _match(match)
 {
-  bool		selected = true;
-
-  std::cout << "\nAvant" << std::endl;
-  printKill(match._players);
-
-  std::sort(match._players.begin(), match._players.end(), orderKill);
-
-  std::cout << "\nApres" << std::endl;
-  printKill(match._players);
-
-  this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", selected, false, TokenMenu::PROFILE, 4800.0f, 0.0f, 400.0f));
+  this->_tags.push_back(new Tag("menu/DoneNormal.png", "menu/DoneHighlit.png", true, false, TokenMenu::PROFILE, 4800.0f, 0.0f, 400.0f));
 }
 
 GameResult::~GameResult(void)
@@ -52,6 +45,24 @@ double		GameResult::getCenterY() const
   return 400.0f;
 }
 
-void		GameResult::update(gdl::GameClock const&, gdl::Input&)
+void		GameResult::update(gdl::GameClock const& clock, gdl::Input& input)
 {
+  std::cout << "Update GameResult" << std::endl;
+  for (size_t i = 0; i < this->_keyEvent.size(); ++i)
+    if (input.isKeyDown(this->_keyEvent[i].first))
+      (this->*_keyEvent[i].second)(clock);
 }
+
+/*
+  bool		selected = true;
+
+  std::cout << "\nNb Players = " << match._players.size() << std::endl;
+
+  std::cout << "\nAvant" << std::endl;
+  printKill(match._players);
+
+  std::sort(match._players.begin(), match._players.end(), orderKill);
+
+  std::cout << "\nApres" << std::endl;
+  printKill(match._players);
+*/

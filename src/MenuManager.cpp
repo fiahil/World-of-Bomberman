@@ -29,6 +29,7 @@
 #include "LoadProfile.hpp"
 #include "TeamMenu.hpp"
 #include "MenuPause.hpp"
+#include "GameResult.hpp"
 #include "Human.hpp"
 #include "AI.hpp"
 #include "ProfileManager.hpp"
@@ -94,6 +95,8 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::SKINCHOOSE]->initialize();
   this->_menu[TokenMenu::PAUSE] = new MenuPause(this->_gameManager);
   this->_menu[TokenMenu::PAUSE]->initialize();
+  this->_menu[TokenMenu::GAMERESULT] = new GameResult(this->_gameManager, this->_gameManager._match);
+  this->_menu[TokenMenu::GAMERESULT]->initialize();
 
   this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
 		       this->_menu[this->_curMenu]->getCenterY());
@@ -129,7 +132,7 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
       this->_camera.setPosScroll(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-			   this->_menu[this->_curMenu]->getCenterY());
+				 this->_menu[this->_curMenu]->getCenterY());
     }
   else
     this->_menu[this->_curMenu]->update(clock, input);
@@ -139,7 +142,7 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 void	MenuManager::initGameSolo()
 {
   int	id = 0;
-  
+
   this->_gameManager._match._players.push_back(new Human(*this->_gameManager._match._map,
 							 this->_gameManager._mainProfile->getConfig()));
   this->_gameManager._match._players.back()->setTeamId(id);
@@ -260,4 +263,5 @@ void	MenuManager::setPause()
 
 void	MenuManager::setEOG()
 {
+  this->_curMenu = TokenMenu::GAMERESULT;
 }

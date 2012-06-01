@@ -54,15 +54,16 @@ private:
     Heritance from AObj
   */
 public:
-  virtual void		draw(void);
-  virtual void		initialize(void);
-  virtual void		update(gdl::GameClock const&, gdl::Input&);
-  MyGame*		createGame(gdl::GameClock&, gdl::Input&);
-  void			initCamera(void);
-  bool			isResume();
-  bool			isStopGame();
-  void			setPause();
-  void			setEOG();
+  virtual void			draw(void);
+  virtual void			initialize(void);
+  virtual void			update(gdl::GameClock const&, gdl::Input&);
+
+  MyGame*			createGame(gdl::GameClock&, gdl::Input&);
+  void				initCamera(void);
+  bool				isResume();
+  bool				isStopGame();
+  void				setPause();
+  void				setEOG();
 };
 
 #endif		/* __MENU_MANAGEMENT_HPP__ */
