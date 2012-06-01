@@ -76,6 +76,16 @@
   return Serializer::Loader::token::ENDPLAYERS;
 }
 
+"#DEADS"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Loader::token::DEADS;
+}
+
+"#ENDDEADS"	{
+  yylval->sval = new std::string(yytext, yyleng);
+  return Serializer::Loader::token::ENDDEADS;
+}
+
 "\n"		{
   yylval->sval = new std::string(yytext, yyleng);
   yylloc->lines(1);

@@ -135,11 +135,6 @@ void		Profile::setAchievement(const std::vector<bool> & value)
   this->_achievement = value;
 }
 
-void		Profile::addAchievement(bool value)
-{
-  this->_achievement.push_back(value);
-}
-
 void		Profile::setSave(const std::vector<std::string> & value)
 {
   this->_save = value;
