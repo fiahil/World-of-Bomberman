@@ -52,6 +52,7 @@ void		Menu::updateIntro()
     cvReleaseCapture(&this->_capture);
     this->_intro = false;
     Sound::getMe()->stopLastSound();
+    Sound::getMe()->playMusic(Audio::MENU);
     this->_menu->initCamera();
   }
 }
@@ -87,7 +88,6 @@ void		Menu::updateMenu()
 {
   MyGame*	tmp;
 
-  //std::cout << "Game " << this->_game << std::endl;
   if (!this->_game || this->_pause)
     {
       this->_menu->update(this->gameClock_, this->input_);
@@ -100,6 +100,8 @@ void		Menu::updateMenu()
 	      this->_game->unload();
 	      delete this->_game;
 	    }
+	  Sound::getMe()->stopMusic();
+	  Sound::getMe()->playMusic(Audio::GAME);
 	  this->_game = tmp;
 	}
       else if (this->_menu->isResume())
@@ -113,12 +115,15 @@ void		Menu::updateMenu()
 	  this->_game->unload();
 	  delete this->_game;
 	  this->_game = 0;
+	  Sound::getMe()->stopMusic();
+	  Sound::getMe()->playMusic(Audio::MENU);
 	}
     }
 }
 
 void		Menu::update(void)
 {
+  Sound::getMe()->updateMusic();
   if (this->_intro)
     this->updateIntro();
   else if (this->_game && !this->_pause)
@@ -161,10 +166,11 @@ void		Menu::draw(void)
   else
   {
     if (this->_intro)
-    {       
+    {
       cvReleaseCapture(&this->_capture);
       this->_intro = false;
       Sound::getMe()->stopLastSound();
+      Sound::getMe()->playMusic(Audio::MENU);
       this->_menu->initCamera();
     }
     else if (this->_game && !this->_pause)

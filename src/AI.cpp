@@ -3,6 +3,7 @@
  * 12.05.2012
  */
 
+#include <cassert>
 #include <cstdlib>
 #include <iostream>
 #include "enum.hpp"
@@ -33,10 +34,12 @@ AI::AI(AIType::eAI type, Map& map)
   HARD.push_back(std::make_pair(&AI::nearEmpty, &AI::attackState));
   HALLU.push_back(std::make_pair(&AI::nearEmpty, &AI::moveState));
 
+  this->_table.reserve(5);
   this->_table.push_back(EASY);
-  this->_table.push_back(HALLU);
   this->_table.push_back(NORMAL);
   this->_table.push_back(HARD);
+  this->_table.push_back(HALLU);
+  this->_table.push_back(HALLU);
 
   if (type == AIType::HALLU)
     this->_dam = 0.0;
@@ -337,19 +340,6 @@ bool	AI::isBonus(size_t x, size_t y) const
   return this->_view->at(x, y).type == Elt::BONUS;
 }
 
-bool	AI::isBarrel(size_t x, size_t y) const
-{
-  return this->_view->at(x, y).type == Elt::WALL && this->_view->at(x, y).pp == 2;
-}
-
-size_t	AI::adjBarrel(size_t x, size_t y) const
-{
-  return isBarrel(x, y + 1) +
-    	 isBarrel(x, y - 1) +
-	 isBarrel(x + 1, y) +
-	 isBarrel(x - 1, y);
-}
-
 bool	AI::nearBomb(void)
 {
   int	x = 0;
@@ -566,6 +556,7 @@ void	AI::updateView(AIView const* v)
 
 void	AI::play(gdl::GameClock const& clock, gdl::Input&)
 {
+  assert(this->_view);
   if ((this->_start >= 0) && (this->_startTimer <= clock.getTotalGameTime()))
   {
     --this->_start;

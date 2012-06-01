@@ -8,7 +8,7 @@
 
 #include <vector>
 #include <string>
-#include <fmod.hpp>
+#include <fmod.h>
 #include "enum.hpp"
 
 class Sound
@@ -21,13 +21,20 @@ private:
   Sound&	operator=(Sound const&);
 
   void		loadSound(std::string const& soundName, Audio::eAudio);
+  void		loadPlaylist(std::string const& soundName, size_t, std::vector<FMOD_SOUND*>* container);
 
 private:
   static Sound*			_me;
 
   FMOD_SYSTEM*			_system;
   FMOD_CHANNEL*			_channel;
+  FMOD_CHANNEL*			_musicChannel;
   std::vector<FMOD_SOUND*>	_data;
+  std::vector<FMOD_SOUND*>	_playlist;
+  std::vector<FMOD_SOUND*>	_menu;
+  std::vector<FMOD_SOUND*>*	_current;
+  size_t			_index;
+  bool				_launched;
 
 public:
   static Sound*	getMe(void);
@@ -35,18 +42,9 @@ public:
 
   void		playBack(Audio::eAudio);
   void		stopLastSound();
-
-  /* TO DO */
-
-  /*
-    FMOD_RESULT F_API FMOD_Channel_SetVolume             (FMOD_CHANNEL *channel, float volume);
-  */
-  void		setVolume(bool);
-
-  /*
-    Stop + play
-  */
-  void		replaySound(void);
+  void		playMusic(Audio::eAudio);
+  void		updateMusic();
+  void		stopMusic();
 };
 
 #endif

@@ -8,9 +8,9 @@
 MenuMap::MenuMap(GameManager& game)
   : AMenu("menu/background/backgroundMap.jpg", "menu/background/backgroundMap.jpg", 0.0f, -1.0f, 3200.0f, game)
 {
-  this->_tags.push_back(new Tag("menu/tags/RandomNormal.png", "menu/tags/RandomHighlit.png", true, false, TokenMenu::CREATEGAME, 800.0f, 0.0f, 3800.0f));
-  this->_tags.push_back(new Tag("menu/tags/LoadNormal.png", "menu/tags/LoadHighlit.png", false, false, TokenMenu::LOADMAP, 800.0f, 0.0f, 3850.0f));
-  this->_tags.push_back(new Tag("menu/tags/BackNormal.png", "menu/tags/BackHighlit.png", false, false, TokenMenu::IA, 800.0f, 0.0f, 3900.0f));
+  this->_tags.push_back(new Tag("menu/tags/RandomNormal.png", "menu/tags/RandomHighlit.png", true, false, TokenMenu::CREATEGAME, 429.0f, 0.0f, 3600.0f));
+  this->_tags.push_back(new Tag("menu/tags/LoadMapNormal.png", "menu/tags/LoadMapHighlit.png", false, false, TokenMenu::LOADMAP, 429.0f, 0.0f, 3665.0f));
+  this->_tags.push_back(new Tag("menu/tags/BackNormal.png", "menu/tags/BackHighlit.png", false, false, TokenMenu::IA, 429.0f, 0.0f, 3730.0f));
 }
 
 MenuMap::~MenuMap(void)

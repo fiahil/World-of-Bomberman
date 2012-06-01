@@ -65,7 +65,7 @@ void		LoadMap::update(gdl::GameClock const& clock, gdl::Input& input)
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
-  if (this->_cursor == 0) // TODO
+  if (this->_cursor == 0) // TODO // FIXME que signifie le TODO ici ?
     this->changeMap(clock, input);
   else if (this->_cursor == 1)
     {

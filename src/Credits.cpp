@@ -8,7 +8,7 @@
 Credits::Credits(GameManager& game)
   : AMenu("menu/background/backgroundCredits.jpg", "menu/background/backgroundCredits.jpg", -1600.0f, -1.0f, 0.0f, game)
 {
-  this->_tags.push_back(new Tag("menu/BackNormal.png", "menu/BackHighlit.png", true, false, TokenMenu::MAINMENU, -460.0f, 0.0f, 700.0f));
+  this->_tags.push_back(new Tag("menu/tags/BackSmallNormal.png", "menu/tags/BackSmallHighlit.png", true, false, TokenMenu::MAINMENU, -460.0f, 0.0f, 700.0f));
 }
 
 Credits::~Credits(void)

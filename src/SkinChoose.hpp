@@ -12,6 +12,8 @@ class SkinChoose : public AMenu
 {
 private:
   std::vector<gdl::Model>	_model;
+  gdl::Model			_tp;
+  double	_rot;
   double	_timerL;
   double	_timerR;
   size_t	_indexSkin;
@@ -28,7 +30,9 @@ public:
 
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
+  virtual void		initialize();
   virtual void		update(gdl::GameClock const&, gdl::Input&);
+  virtual void		draw();
 };
 
 #else
