@@ -49,6 +49,7 @@ public:
   bool		isEOG(void) const;
   bool		isPause() const;
   void		resumeGame();
+  Match &	getMatch() const; // added
 
 private:
   template<typename T, typename U>

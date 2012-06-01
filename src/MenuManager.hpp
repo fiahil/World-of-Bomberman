@@ -46,6 +46,7 @@ private:
 private:
   typedef void	(MenuManager::*fInitGame)();
 
+private:
   void	initGameSolo();
   void	initGameCoop();
   void	initGameVersus();
@@ -58,6 +59,8 @@ public:
   virtual void		draw(void);
   virtual void		initialize(void);
   virtual void		update(gdl::GameClock const&, gdl::Input&);
+
+public:
   MyGame*		createGame(gdl::GameClock&, gdl::Input&);
   void			initCamera(void);
   bool			isResume();
