@@ -17,7 +17,7 @@ private:
   bool				_strStatus;
   double			_oneTime;
 
-  bool				alreadyExists(std::string);
+  void				updateStr(gdl::GameClock const&);
 
 public:
   NewProfile(GameManager&, std::vector<Profile *>&, std::vector<std::string>&);
