@@ -41,6 +41,7 @@ private:
   bool				_createGame;
   bool				_resume;
   bool				_stopGame;
+  Profile *			_guest;
 
 private:
   typedef void	(MenuManager::*fInitGame)();

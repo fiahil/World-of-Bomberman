@@ -59,8 +59,8 @@ Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
 				&Human::PAUSEFunction));
 
   this->_event.
-    _event.push_back(initStruct(gdl::Keys::Return,
-				HumGame::CHEAT,
+    _event.push_back(initStruct(conf.getConfig(HumGame::SKILL),
+				HumGame::SKILL,
 				static_cast<actionFunc>(&Human::SkillFunction))); // SKILL
 
   this->_bombAff[BombType::NORMAL] = &Human::affNormalBomb;

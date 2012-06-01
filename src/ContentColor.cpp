@@ -5,11 +5,14 @@
 
 #include "ContentColor.hpp"
 
-static const unsigned char g_refColor[4][3] = {
+static const unsigned char g_refColor[7][3] = {
   {255, 0, 0},
   {0, 255, 0},
   {0, 0, 255},
-  {255, 0, 255}
+  {255, 0, 255},
+  {0, 255, 255},
+  {255, 255, 0},
+  {127, 0, 0}
 };
 
 ContentColor::Color const	ContentColor::getColorFromId(size_t id)

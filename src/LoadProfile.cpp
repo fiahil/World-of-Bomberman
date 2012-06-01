@@ -37,18 +37,21 @@ double	LoadProfile::getCenterY() const
 
 void		LoadProfile::updateText() const
 {
-  std::stringstream	ss;
-
   if (this->_profiles.size())
     {
-      this->_tags[0]->createText(this->_names[this->_index], 20, 850, 315);
-      ss << " Skin : " << this->_profiles[this->_index]->getSkin();
-      this->_tags[1]->createText(ss.str(), 20, 500, 367);
+      this->_tags[0]->createText(this->_names[this->_index], 20, 750, 314);
+      std::stringstream	ss;
+      ss << " Skin : " << this->_profiles[this->_index]->getSkinName()
+	 << "        "
+	 << " Skill : " << this->_profiles[this->_index]->getSkillName()
+	 << "        "
+	 << " Score : " << this->_profiles[this->_index]->getStat().getScore();
+      this->_tags[1]->createText(ss.str(), 20, 500, 365);
     }
   else
     {
-      this->_tags[0]->createText("", 20, 950, 270);
-      this->_tags[1]->createText("", 20, 950, 310);
+      this->_tags[0]->createText("", 20, 750, 314);
+      this->_tags[1]->createText("", 20, 500, 365);
     }
 }
 
@@ -59,6 +62,12 @@ void		LoadProfile::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
       --this->_index;
       if (static_cast<int>(this->_index) < 0)
 	this->_index = this->_profiles.size() - 1;
+      if (this->_profiles[this->_index]->getName() == "Guest")
+	{
+	  --this->_index;
+	  if (static_cast<int>(this->_index) < 0)
+	    this->_index = this->_profiles.size() - 1;
+	}
       this->_timerL = clock.getTotalGameTime() + 0.15f;
     }
   else if (clock.getTotalGameTime() >= this->_timerR && input.isKeyDown(gdl::Keys::Right))
@@ -66,6 +75,12 @@ void		LoadProfile::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
       ++this->_index;
       if (this->_index >= this->_profiles.size())
 	this->_index = 0;
+      if (this->_profiles[this->_index]->getName() == "Guest")
+	{
+	  ++this->_index;
+	  if (this->_index >= this->_profiles.size())
+	    this->_index = 0;
+	}
       this->_timerR = clock.getTotalGameTime() + 0.15f;
     }
 }

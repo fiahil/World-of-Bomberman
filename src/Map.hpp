@@ -30,7 +30,7 @@ class Map : public AObj
 
 public:
   Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity);
-  Map(std::string const& file);
+  Map(std::string const& file, std::string const & name);
   Map(size_t x, size_t y, std::string const& map);
   virtual ~Map();
 
