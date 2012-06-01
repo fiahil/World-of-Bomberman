@@ -44,7 +44,7 @@ static const char*	g_refAnimName[State::LAST] = {
 APlayer::APlayer(Map & map, std::vector<bool>* success)
   : _map(map),
     _pv(100),
-    _id(0),
+    _id(-1),
     _teamId(0),
     _color(0),
     _attack(false),

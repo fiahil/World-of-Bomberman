@@ -63,6 +63,7 @@ public:
   bool			isStopGame();
   void			setPause();
   void			setEOG();
+  bool			operator()(size_t);
 };
 
 #endif		/* __MENU_MANAGEMENT_HPP__ */

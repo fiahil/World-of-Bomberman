@@ -3,6 +3,7 @@
  * 27.05.12
  */
 
+#include <iostream>
 #include <sstream>
 #include "SaveManager.hpp"
 #include "LoadSave.hpp"
@@ -32,16 +33,14 @@ double		LoadSave::getCenterY(void) const
   return (1200.0f);
 }
 
-#include <iostream>
-
 void		LoadSave::loadSave()
 {
   size_t		id;
   std::stringstream	ss;
 
-  ss << this->_save[this->_cursor - 1];
+  ss << this->_save[this->_index];
   ss >> id;
-  if (SaveManager::getSave(id, this->_gameManager._match))
+  if (!SaveManager::getSave(id, this->_gameManager._match))
     this->_curToken = TokenMenu::LAST;
 }
 
@@ -50,7 +49,7 @@ void		LoadSave::updateText() const
   if (this->_save.size())
     {
       this->_tags[0]->createText(this->_save[this->_index], 20, 850, 360);
-      this->_tags[0]->createText("info", 20, 500, 411);
+      this->_tags[1]->createText("info", 20, 500, 411);
     }
   else
     {
