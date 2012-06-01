@@ -32,14 +32,17 @@ double		LoadSave::getCenterY(void) const
   return (1200.0f);
 }
 
+#include <iostream>
+
 void		LoadSave::loadSave()
 {
   size_t		id;
   std::stringstream	ss;
 
-  ss << this->_save[this->_cursor];
+  ss << this->_save[this->_cursor - 1];
   ss >> id;
-  SaveManager::getSave(id);
+  if (SaveManager::getSave(id, this->_gameManager._match))
+    this->_curToken = TokenMenu::LAST;
 }
 
 void		LoadSave::updateText() const
