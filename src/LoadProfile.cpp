@@ -37,7 +37,7 @@ double	LoadProfile::getCenterY() const
 
 void		LoadProfile::updateText() const
 {
-  if (this->_profiles.size())
+  if (this->_profiles.size() > 1)
     {
       this->_tags[0]->createText(this->_names[this->_index], 20, 750, 314);
       std::stringstream	ss;
@@ -95,7 +95,7 @@ void	LoadProfile::update(gdl::GameClock const& clock, gdl::Input& input)
     this->changeProfile(clock, input);
   if (this->_curToken == TokenMenu::PROFILE)
     {
-      if (this->_profiles.size())
+      if (this->_profiles.size() > 1)
 	this->_gameManager._mainProfile = this->_profiles[this->_index];
       else
 	this->_curToken = TokenMenu::LAST;
