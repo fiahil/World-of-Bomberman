@@ -12,13 +12,14 @@
 
 AI::AI(AIType::eAI type, Map& map)
   : APlayer(map),
-    _type(type),
     _view(0),
     _start(4),
     _startTimer(-1.0f),
     _clock(0),
     _state(&AI::waitState)
 {
+  this->_type = type;
+
   std::vector<std::pair<gtFunc, stFunc> >	EASY;
   std::vector<std::pair<gtFunc, stFunc> >	NORMAL;
   std::vector<std::pair<gtFunc, stFunc> >	HARD;

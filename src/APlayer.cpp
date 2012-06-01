@@ -458,34 +458,14 @@ Dir::eDir	APlayer::getDir() const
   return this->_dir;
 }
 
-size_t		APlayer::getType() const
+AIType::eAI	APlayer::getType() const
 {
   return this->_type;
 }
 
-void		APlayer::setType(size_t t)
+void		APlayer::setType(AIType::eAI t)
 {
   this->_type = t;
-}
-
-void		APlayer::setName(std::string const& name)
-{
-  this->_name = name;
-}
-
-void		APlayer::setTeamName(std::string const& name)
-{
-  this->_teamName = name;
-}
-
-std::string const&	APlayer::getName() const
-{
-  return this->_name;
-}
-
-std::string const&	APlayer::getTeamName() const
-{
-  return this->_teamName;
 }
 
 void		APlayer::setPause(bool pause)
@@ -496,6 +476,46 @@ void		APlayer::setPause(bool pause)
 bool		APlayer::getPause() const
 {
   return this->_pause;
+}
+
+size_t		APlayer::getLust() const
+{
+  return this->_lustStack;
+}
+
+void		APlayer::setLust(size_t val)
+{
+  this->_lustStack = val;
+}
+
+size_t		APlayer::getPower() const
+{
+  return this->_powerStack;
+}
+
+void		APlayer::setPower(size_t val)
+{
+  this->_powerStack = val;
+}
+
+size_t		APlayer::getNbKills() const
+{
+  return this->_nbKills;
+}
+
+void		APlayer::setNbKills(size_t val)
+{
+  this->_nbKills = val;
+}
+
+double		APlayer::getSpeed() const
+{
+  return this->_speed;
+}
+
+void		APlayer::setSpeed(double val)
+{
+  this->_speed = val;
 }
 
 void		APlayer::setTimer(double)
