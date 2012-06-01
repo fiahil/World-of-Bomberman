@@ -35,11 +35,11 @@ void		MenuMap::update(gdl::GameClock const& clock, gdl::Input& input)
   if (this->_curToken == TokenMenu::CREATEGAME)
     {
       int	size =
-	((this->_gameManager._nbPlayers *  this->_gameManager._nbTeams) + 2) * 2;
+	((this->_gameManager._nbPlayers *  this->_gameManager._nbTeams) + 2);
 
       if (size < 10)
 	size = 10;
-      this->_gameManager._match._map = new Map(size, size, 2, 2);
+      this->_gameManager._match._map = new Map(size, size, 1, 2);
       this->_gameManager._originMap = new Map(this->_gameManager._match._map->getX(),
 					      this->_gameManager._match._map->getY(),
 					      this->_gameManager._match._map->getMap());
