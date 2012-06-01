@@ -20,7 +20,7 @@ public:
   Match &		_match;
 
 private:
-  std::vector<APlayer*>			_playerScore;
+  std::vector<APlayer*>	_playerScore;
 
 private:
   void			buildPlayerScore();

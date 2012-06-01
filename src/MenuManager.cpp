@@ -114,6 +114,15 @@ void	MenuManager::draw(void)
       (*it)->draw();
 }
 
+static void	deleteAPlayer(APlayer *obj)
+{
+  if (obj)
+    {
+      delete obj;
+      obj = 0;
+    }
+}
+
 void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   TokenMenu::eMenu	tmp;
@@ -131,6 +140,15 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 	this->_resume = true;
       else if (this->_curMenu == TokenMenu::PAUSE && tmp == TokenMenu::PROFILE)
 	this->_stopGame = true;
+      else if (this->_curMenu == TokenMenu::GAMERESULT)
+	{
+	  delete this->__map;
+	  for_each(this->_gameManager._match._players.begin(), this->_gameManager._match._players.end(), deleteAPlayer);
+	  for_each(this->_gameManager._match._dead.begin(), this->_gameManager._match._dead.end(), deleteAPlayer);
+	  for_each(this->_gameManager._match._cadaver.begin(), this->_gameManager._match._cadaver.end(), deleteAPlayer);
+
+	  tmp = TokenMenu::PROFILE;
+	}
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);

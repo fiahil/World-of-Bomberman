@@ -534,12 +534,6 @@ void		APlayer::setSpeed(size_t val)
   this->_speed = val / 10000;
 }
 
-size_t		APlayer::getNbKills() const
-{
-  return this->_nbKills;
-}
-
-
 void		APlayer::setTimer(double)
 {
 }
