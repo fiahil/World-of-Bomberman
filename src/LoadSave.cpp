@@ -48,12 +48,12 @@ void		LoadSave::updateText() const
 {
   if (this->_save.size())
     {
-      this->_tags[0]->createText(this->_save[this->_index], 20, 850, 360);
+      this->_tags[0]->createText(this->_save[this->_index], 20, 750, 360);
       this->_tags[1]->createText("info", 20, 500, 411);
     }
   else
     {
-      this->_tags[0]->createText("", 20, 850, 360);
+      this->_tags[0]->createText("", 20, 750, 360);
       this->_tags[1]->createText("", 20, 500, 411);
     }
 }
