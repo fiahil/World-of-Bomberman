@@ -26,8 +26,6 @@ private:
   APlayer*		_pl1;
   APlayer*		_pl2;
   AIView*		_view;
-  std::list<APlayer*>	_dead;
-  std::list<APlayer*>	_cadaver;
   bool			_EOG;
   double		_EOGTimer;
   size_t		_nb;
