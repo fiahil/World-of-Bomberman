@@ -39,7 +39,7 @@ void		LoadProfile::updateText() const
 {
   if (this->_profiles.size())
     {
-      this->_tags[0]->createText(this->_names[this->_index], 20, 800, 314);
+      this->_tags[0]->createText(this->_names[this->_index], 20, 750, 314);
       std::stringstream	ss;
       ss << " Skin : " << this->_profiles[this->_index]->getSkinName()
 	 << "        "
@@ -50,7 +50,7 @@ void		LoadProfile::updateText() const
     }
   else
     {
-      this->_tags[0]->createText("", 20, 800, 314);
+      this->_tags[0]->createText("", 20, 750, 314);
       this->_tags[1]->createText("", 20, 500, 365);
     }
 }
