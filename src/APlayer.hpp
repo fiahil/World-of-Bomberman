@@ -142,6 +142,10 @@ public:
   size_t		getId()		const;
   size_t		getTeamId()	const;
   size_t		getColor()	const;
+  size_t		getLust()	const;
+  size_t		getPower()	const;
+  size_t		getNbKills()	const;
+  double		getSpeed()	const;
   State::eState		getState()	const;
   Dir::eDir		getDir()	const;
   AIType::eAI		getType()	const;
@@ -154,6 +158,10 @@ public:
   void		setSkin(Skin::eSkin);
   void		setId(size_t);
   void		setTeamId(size_t);
+  void		setLust(size_t);
+  void		setPower(size_t);
+  void		setNbKills(size_t);
+  void		setSpeed(double);
   void		setColor(size_t);
   void		setState(State::eState);
   void		setDir(Dir::eDir);

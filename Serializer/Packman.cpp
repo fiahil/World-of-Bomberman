@@ -4,9 +4,11 @@
  */
 
 #include <string>
-#include <fstream>
 #include <cassert>
+#include <algorithm>
+#include <fstream>
 #include <ctime>
+#include "APlayer.hpp"
 #include "Profile.hpp"
 #include "Match.hpp"
 #include "Packman.hpp"
@@ -52,6 +54,26 @@ namespace Serializer
     this->_os	<< "#ENDCONFIG" << std::endl;
   }
 
+  void		Packman::operator()(APlayer const* p)
+  {
+    this->_os	<< p->getId()
+      << "\t:" << p->getTeamId()
+      << "\t:" << p->getType()
+      << "\t:" << p->getPv()
+      << "\t:" << p->getPos()._x
+      << "\t:" << p->getPos()._y
+      << "\t:" << p->getColor()
+      << "\t:" << p->getLust()
+      << "\t:" << p->getPower()
+      << "\t:" << p->getNbKills()
+      << "\t:" << p->getSpeed()
+      << "\t:" << p->getWeapon()
+      << "\t:" << p->getSkin()
+      << "\t:" << p->getState()
+      << "\t:" << p->getDir()
+      << std::endl;
+  }
+
   void		Packman::packMatch(Match const& m)
   {
     assert(m._map != 0);
@@ -62,25 +84,19 @@ namespace Serializer
     this->_os	<< "]" << std::endl;
     this->_os	<< "#ENDMAP" << std::endl << std::endl;
     this->_os	<< "#HEADER"
-		<< "\t:" << m._gameMode
-		<< "\t:" << time(0)
-		<< "\t:" << m._players.size()
-		<< std::endl << std::endl;
+      << "\t:" << m._gameMode
+      << "\t:" << time(0)
+      << "\t:" << m._players.size() + m._cadaver.size() + m._dead.size()
+      << std::endl << std::endl;
     this->_os	<< "#PLAYERS" << std::endl;
-    for (size_t i = 0; i < m._players.size(); ++i) {
-      this->_os	<< m._players[i]->getId()
-		<< "\t:" << m._players[i]->getTeamId()
-		<< "\t:" << m._players[i]->getType()
-		<< "\t:" << m._players[i]->getColor()
-		<< "\t:" << m._players[i]->getSkin()
-		<< "\t:" << m._players[i]->getState()
-		<< "\t:" << m._players[i]->getDir()
-		<< "\t:" << m._players[i]->getWeapon()
-		<< "\t:" << m._players[i]->getPos()._x
-		<< "\t:" << m._players[i]->getPos()._y
-		<< "\t:" << m._players[i]->getPv()
-		<< std::endl;
-    }
+    std::for_each<std::vector<APlayer*>::const_iterator, Packman&>(m._players.begin(),
+    m._players.end(), *this);
     this->_os	<< "#ENDPLAYERS" << std::endl;
+    this->_os	<< "#DEADS" << std::endl;
+    std::for_each<std::list<APlayer*>::const_iterator, Packman&>(m._dead.begin(),
+    m._dead.end(), *this);
+    std::for_each<std::list<APlayer*>::const_iterator, Packman&>(m._cadaver.begin(),
+    m._cadaver.end(), *this);
+    this->_os	<< "#ENDDEADS" << std::endl;
   }
 }

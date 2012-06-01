@@ -478,6 +478,46 @@ bool		APlayer::getPause() const
   return this->_pause;
 }
 
+size_t		APlayer::getLust() const
+{
+  return this->_lustStack;
+}
+
+void		APlayer::setLust(size_t val)
+{
+  this->_lustStack = val;
+}
+
+size_t		APlayer::getPower() const
+{
+  return this->_powerStack;
+}
+
+void		APlayer::setPower(size_t val)
+{
+  this->_powerStack = val;
+}
+
+size_t		APlayer::getNbKills() const
+{
+  return this->_nbKills;
+}
+
+void		APlayer::setNbKills(size_t val)
+{
+  this->_nbKills = val;
+}
+
+double		APlayer::getSpeed() const
+{
+  return this->_speed;
+}
+
+void		APlayer::setSpeed(double val)
+{
+  this->_speed = val;
+}
+
 void		APlayer::setTimer(double)
 {
 }

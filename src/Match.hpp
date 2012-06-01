@@ -8,6 +8,7 @@
 
 #include <string>
 #include <vector>
+#include <list>
 #include "Map.hpp"
 #include "Bonus.hpp"
 #include "Bomb.hpp"
