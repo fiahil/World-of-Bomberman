@@ -246,18 +246,25 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
 
   if (this->_createGame)
     {
+      std::cout << "Create game begin" << std::endl;
       this->_createGame = false;
       (this->*_refInitGame[this->_gameManager._match._gameMode])();
       for (std::vector<APlayer*>::const_iterator it = this->_gameManager._match._players.begin();
 	   it != this->_gameManager._match._players.end(); ++it)
-	
-	if (this->_gameManager._mainProfile->getId() == (*it)->getId())
-	  pl1 = (*it);
-	else if (this->_gameManager._match._gameMode != GameMode::SOLO &&
-		 this->_gameManager._secondProfile->getId() == (*it)->getId())
-	  pl2 = (*it);
+	{
+	  std::cout << "Id " << (*it)->getId() << std::endl;
+	  if (this->_gameManager._mainProfile->getId() == (*it)->getId())
+	    pl1 = (*it);
+	  else if (this->_gameManager._match._gameMode != GameMode::SOLO &&
+		   this->_gameManager._secondProfile->getId() == (*it)->getId())
+	    pl2 = (*it);
+	}
+      std::cout << "pl1 " << pl1 << " mainProfile" << this->_gameManager._mainProfile->getId() << std::endl;
+      if (this->_gameManager._secondProfile)
+	std::cout << "pl2 " << pl2 << " secondProfile " << this->_gameManager._secondProfile->getId() << std::endl;
       game = new MyGame(clock, input, this->_gameManager._match, pl1, pl2);
       game->initialize();
+      std::cout << "Create game end" << std::endl;
       return game;
     }
   return 0;
