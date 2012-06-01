@@ -62,6 +62,12 @@ void		LoadProfile::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
       --this->_index;
       if (static_cast<int>(this->_index) < 0)
 	this->_index = this->_profiles.size() - 1;
+      if (this->_profiles[this->_index]->getName() == "Guest")
+	{
+	  --this->_index;
+	  if (static_cast<int>(this->_index) < 0)
+	    this->_index = this->_profiles.size() - 1;
+	}
       this->_timerL = clock.getTotalGameTime() + 0.15f;
     }
   else if (clock.getTotalGameTime() >= this->_timerR && input.isKeyDown(gdl::Keys::Right))
@@ -69,6 +75,12 @@ void		LoadProfile::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
       ++this->_index;
       if (this->_index >= this->_profiles.size())
 	this->_index = 0;
+      if (this->_profiles[this->_index]->getName() == "Guest")
+	{
+	  ++this->_index;
+	  if (this->_index >= this->_profiles.size())
+	    this->_index = 0;
+	}
       this->_timerR = clock.getTotalGameTime() + 0.15f;
     }
 }

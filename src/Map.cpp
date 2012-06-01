@@ -140,7 +140,6 @@ void		Map::initialize(void)
   this->_modelBreak['2'] = gdl::Model::load("models/Set_barrel.FBX");
   this->_modelBreak['3'] = gdl::Model::load("models/Set_crate4.FBX");
 
-  this->_break = gdl::Image::load("textures/break.jpg");
   this->_unbreak = gdl::Image::load("textures/unbreak.jpg");
   this->_background = gdl::Image::load("textures/background.jpg");
   this->_landscape = gdl::Image::load("textures/landscape.jpg");
@@ -157,8 +156,6 @@ void		Map::initialize(void)
   p.setPos(-300, -100);
   this->landscape = new Plane(800.0f, 400.0f, p, this->_landscape);
   this->landscape->changeMode();
-
-
 }
 
 void		Map::draw(void)
