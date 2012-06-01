@@ -21,7 +21,7 @@ private:
   Sound&	operator=(Sound const&);
 
   void		loadSound(std::string const& soundName, Audio::eAudio);
-  void		loadPlaylist(std::string const& soundName, size_t);
+  void		loadPlaylist(std::string const& soundName, size_t, std::vector<FMOD_SOUND*>* container);
 
 private:
   static Sound*			_me;
@@ -31,6 +31,8 @@ private:
   FMOD_CHANNEL*			_musicChannel;
   std::vector<FMOD_SOUND*>	_data;
   std::vector<FMOD_SOUND*>	_playlist;
+  std::vector<FMOD_SOUND*>	_menu;
+  std::vector<FMOD_SOUND*>*	_current;
   size_t			_index;
   bool				_launched;
 
@@ -40,7 +42,7 @@ public:
 
   void		playBack(Audio::eAudio);
   void		stopLastSound();
-  void		playMusic();
+  void		playMusic(Audio::eAudio);
   void		updateMusic();
   void		stopMusic();
 };
