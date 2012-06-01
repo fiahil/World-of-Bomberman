@@ -54,10 +54,8 @@ void		MyGame::initialize(void)
   this->_HUD[HUD::LIFE] = gdl::Image::load("textures/pv.png");
 
   this->_HUD[HUD::SUCCESS_ONE_KILL] = gdl::Image::load("textures/one_kill_success.png");
-  this->_HUD[HUD::SUCCESS_TUTO] = gdl::Image::load("textures/tuto_success.png");
   this->_HUD[HUD::SUCCESS_BONUS] = gdl::Image::load("textures/bonus_success.png");
   this->_HUD[HUD::SUCCESS_FIVE_KILL] = gdl::Image::load("textures/five_kill_success.png");
-  this->_HUD[HUD::SUCCESS_HARD_AI] = gdl::Image::load("textures/ai_success.png");
   this->_HUD[HUD::SUCCESS_POWER] = gdl::Image::load("textures/power_success.png");
   this->_HUD[HUD::SUCCESS_LUST] = gdl::Image::load("textures/lust_success.png");
   this->_HUD[HUD::SUCCESS_TP] = gdl::Image::load("textures/tp_success.png");

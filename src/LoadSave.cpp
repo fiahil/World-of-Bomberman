@@ -51,8 +51,8 @@ void		LoadSave::updateText() const
     }
   else
     {
-      this->_tags[0]->createText("gg", 20, 850, 360);
-      this->_tags[1]->createText("gg", 20, 500, 411);
+      this->_tags[0]->createText("", 20, 850, 360);
+      this->_tags[1]->createText("", 20, 500, 411);
     }
 }
 
