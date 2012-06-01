@@ -205,6 +205,7 @@ void	MenuManager::initGameCoop()
   tmp->setTeamId(id);
   tmp->setSkin(this->_gameManager._mainProfile->getSkin());
   tmp->setColor(id);
+  this->_gameManager._match._players.push_back(tmp);
   tmp = new Human(*this->_gameManager._match._map,
 		  this->_gameManager._configJ2,
 		  &(this->_gameManager._secondProfile->getAchievement()));
@@ -278,7 +279,7 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
 		   this->_gameManager._secondProfile->getId() == (*it)->getId())
 	    pl2 = (*it);
 	}
-      std::cout << "pl1 " << pl1 << " mainProfile" << this->_gameManager._mainProfile->getId() << std::endl;
+      std::cout << "pl1 " << pl1 << " mainProfile " << this->_gameManager._mainProfile->getId() << std::endl;
       if (this->_gameManager._secondProfile)
 	std::cout << "pl2 " << pl2 << " secondProfile " << this->_gameManager._secondProfile->getId() << std::endl;
       game = new MyGame(clock, input, this->_gameManager._match, pl1, pl2);
