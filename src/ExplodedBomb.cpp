@@ -32,6 +32,7 @@ void		ExplodedBomb::update(gdl::GameClock const& clock, gdl::Input&)
 {
   if (!this->_EOE && this->_lastTime <= clock.getTotalGameTime())
     {
+      Sound::getMe()->playBack(Audio::EXPLODE_DIFFUSE);
       this->_EOE = true;
       if (this->_real._coefN < this->_final._coefN)
 	{
