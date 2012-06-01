@@ -41,11 +41,11 @@ private:
   bool				_createGame;
   bool				_resume;
   bool				_stopGame;
+  Profile *			_guest;
 
 private:
   typedef void	(MenuManager::*fInitGame)();
 
-  void	setGuest();
   void	initGameSolo();
   void	initGameCoop();
   void	initGameVersus();
