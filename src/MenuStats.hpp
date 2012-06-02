@@ -17,13 +17,13 @@ public:
   MenuStats(GameManager&);
   virtual ~MenuStats();
 
-  virtual double	getCenterX() const;
-  virtual double	getCenterY() const;
+  virtual double	getCenterX(void) const;
+  virtual double	getCenterY(void) const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);
-  virtual void		draw();
+  virtual void		draw(void);
 
 private:
-  void			drawText();
+  void			drawText(void);
 };
 
 #else
