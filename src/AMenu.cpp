@@ -68,6 +68,11 @@ TokenMenu::eMenu	AMenu::getContent() const
   return this->_curToken;
 }
 
+const GameManager &	AMenu::getGameManager() const
+{
+  return this->_gameManager;
+}
+
 void			AMenu::UpFunction(gdl::GameClock const& clock)
 {
   if (clock.getTotalGameTime() >= this->_timers[0])

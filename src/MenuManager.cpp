@@ -146,7 +146,17 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       else if (this->_curMenu == TokenMenu::PAUSE && tmp == TokenMenu::PROFILE)
 	this->_stopGame = true;
       else if (this->_curMenu == TokenMenu::GAMERESULT)
-	tmp = TokenMenu::PROFILE;
+	{
+	  std::vector<Map *>::iterator it = this->_map.begin();
+	  for (; it != this->_map.end() ; ++it)
+	    {
+	      if (*it == this->_menu[this->_curMenu]->getGameManager()._match._map)
+		{
+		  std::cout << "Map trouvee !!!!" << std::endl;
+		}
+	    }
+	  tmp = TokenMenu::PROFILE;
+	}
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
