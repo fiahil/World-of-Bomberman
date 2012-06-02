@@ -20,6 +20,7 @@ private:
   double	_h;
   gdl::Image&	_txt;
   bool		_mode;
+
 public:
   virtual void	initialize();
   virtual void	draw();

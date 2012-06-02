@@ -13,10 +13,9 @@ Point::Point(double scale, int x, int y)
   this->calcRealpos();
 }
 
-Point::Point(double x, double y, double z) // Pour MenuManager
+Point::Point(double x, double y, double z)
   : _scale(1.0),
     _pos(x, y, z)
-
 {
 }
 

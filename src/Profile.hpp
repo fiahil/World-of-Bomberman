@@ -22,12 +22,12 @@ private:
   const Profile & operator=(const Profile &);
 
 private:
-  size_t	_id;
-  Config	_config;
-  Stat		_stat;
-  Skin::eSkin	_skin;
-  Skill::eSkill	_skill;
-  std::string	_name;
+  size_t			_id;
+  Config			_config;
+  Stat				_stat;
+  Skin::eSkin			_skin;
+  Skill::eSkill			_skill;
+  std::string			_name;
 
   std::vector<bool>		_achievement;
   std::vector<std::string>	_save;

@@ -32,4 +32,8 @@ public:
     void			setNewProfile(void);
 };
 
+#else
+
+class NewProfile;
+
 #endif

@@ -18,9 +18,9 @@ private:
   std::vector<Profile *>	_profiles;
   std::vector<std::string>	_names;
 
-  bool	isNum(std::string) const;
-  int	idToInt(std::string);
-  void	checkSaves();
+  bool		isNum(std::string) const;
+  int		idToInt(std::string) const;
+  void		checkSaves();
 
 public:
   ProfileLoader(void);

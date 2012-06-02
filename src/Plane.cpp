@@ -22,11 +22,11 @@ Plane::~Plane()
 {
 }
 
-void	Plane::initialize()
+void		Plane::initialize()
 {
 }
 
-void	Plane::changeMode()
+void		Plane::changeMode()
 {
   if (this->_mode)
     this->_mode = false;
@@ -34,9 +34,7 @@ void	Plane::changeMode()
     this->_mode = true;
 }
 
-#include <iostream> // TODO
-
-void	Plane::draw()
+void		Plane::draw()
 {
   double x = static_cast<double>(this->_txt.getWidth()) / this->_w;
   double y = static_cast<double>(this->_txt.getHeight()) / this->_h;
@@ -48,9 +46,7 @@ void	Plane::draw()
   glPushMatrix();
   glTranslatef(this->_pos._pos.x, this->_pos._pos.y, this->_pos._pos.z);
   if (this->_mode)
-    {
-           glRotatef(45.0f, 1.0f, 0.0f, 0.0f);
-    }
+    glRotatef(45.0f, 1.0f, 0.0f, 0.0f);
   glScalef(this->_pos._scale, this->_pos._scale, this->_pos._scale);
   glColor3ub(255, 255, 255);
   glEnable(GL_TEXTURE_2D);
@@ -72,6 +68,6 @@ void	Plane::draw()
   glPopMatrix();
 }
 
-void	Plane::update(gdl::GameClock const&, gdl::Input&)
+void		Plane::update(gdl::GameClock const&, gdl::Input&)
 {
 }

@@ -12,7 +12,7 @@ class	Point
 {
 public:
   Point(double, int, int);
-  Point(double, double, double); // Pour MenuManager
+  Point(double, double, double);
   ~Point();
 
 public:
