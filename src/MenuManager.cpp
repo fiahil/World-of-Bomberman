@@ -150,6 +150,7 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
+      //std::cout << "Token " << this->_curMenu << std::endl;
       this->_camera.setPosScroll(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
 				 this->_menu[this->_curMenu]->getCenterY());
     }

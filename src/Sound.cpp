@@ -8,32 +8,27 @@
 #include <algorithm>
 #include "Sound.hpp"
 
+static void	predDestroySound(FMOD_SOUND* it)
+{
+  FMOD_Sound_Release(it);
+}
+
 Sound*		Sound::_me = 0;
 
-SoundElt::SoundElt()
-  : sound(0),
-  channel(0)
-{
-}
-
-SoundElt::~SoundElt()
-{
-  if (this->sound)
-    this->sound->release();
-}
-
 Sound::Sound()
-  : _system(0),
-  _bank(Audio::LAST),
-  _game(6),
-  _menu(5),
-  _mindex(0),
-  _gindex(0)
+  : _channel(0),
+    _musicChannel(0),
+    _data(Audio::LAST, 0),
+    _playlist(6u, 0),
+    _menu(5u, 0),
+    _current(0),
+    _index(0),
+    _launched(false)
 {
-  if (FMOD::System_Create(&(this->_system)) != FMOD_OK)
-    throw std::runtime_error("FMOD cannot be initialized.");
-  if (this->_system->init(32, FMOD_INIT_NORMAL, 0) != FMOD_OK)
-    throw std::runtime_error("FMOD cannot create runtime environnement.");
+  if (FMOD_System_Create(&(this->_system)) != FMOD_OK)
+    throw std::runtime_error("FMOD cannot create.");
+  if (FMOD_System_Init(this->_system, 32, FMOD_INIT_NORMAL, NULL) != FMOD_OK)
+    throw std::runtime_error("FMOD cannot create.");
   this->loadSound("Ressources/audio/SylvanasHurt.ogg", Audio::SYLVANAS_HURT);
   this->loadSound("Ressources/audio/SylvanasDeath.ogg", Audio::SYLVANAS_DEATH);
   this->loadSound("Ressources/audio/VarianHurt.ogg", Audio::VARIANT_HURT);
@@ -51,12 +46,12 @@ Sound::Sound()
   this->loadSound("Ressources/audio/Bonus.ogg", Audio::BONUS);
   this->loadSound("Ressources/audio/Achievement.ogg", Audio::SUCCESS);
   this->loadSound("Ressources/audio/intro.mp3", Audio::INTRO);
-  this->loadPlaylist("Ressources/audio/Game00.mp3", 0, &this->_game);
-  this->loadPlaylist("Ressources/audio/Game01.mp3", 1, &this->_game);
-  this->loadPlaylist("Ressources/audio/Game02.mp3", 2, &this->_game);
-  this->loadPlaylist("Ressources/audio/Game03.mp3", 3, &this->_game);
-  this->loadPlaylist("Ressources/audio/Game04.mp3", 4, &this->_game);
-  this->loadPlaylist("Ressources/audio/Game05.mp3", 5, &this->_game);
+  this->loadPlaylist("Ressources/audio/Game00.mp3", 0, &this->_playlist);
+  this->loadPlaylist("Ressources/audio/Game01.mp3", 1, &this->_playlist);
+  this->loadPlaylist("Ressources/audio/Game02.mp3", 2, &this->_playlist);
+  this->loadPlaylist("Ressources/audio/Game03.mp3", 3, &this->_playlist);
+  this->loadPlaylist("Ressources/audio/Game04.mp3", 4, &this->_playlist);
+  this->loadPlaylist("Ressources/audio/Game05.mp3", 5, &this->_playlist);
   this->loadPlaylist("Ressources/audio/Menu00.mp3", 0, &this->_menu);
   this->loadPlaylist("Ressources/audio/Menu01.mp3", 1, &this->_menu);
   this->loadPlaylist("Ressources/audio/Menu02.mp3", 2, &this->_menu);
@@ -66,8 +61,11 @@ Sound::Sound()
 
 Sound::~Sound()
 {
-  this->_system->close();
-  this->_system->release();
+  std::for_each(this->_data.begin(), this->_data.end(), predDestroySound);
+  std::for_each(this->_playlist.begin(), this->_playlist.end(), predDestroySound);
+  std::for_each(this->_menu.begin(), this->_menu.end(), predDestroySound);
+  FMOD_System_Close(this->_system);
+  FMOD_System_Release(this->_system);
 }
 
 Sound*	Sound::getMe(void)
@@ -83,111 +81,64 @@ void	Sound::delMe(void)
   Sound::_me = 0;
 }
 
-#include <iostream> //TODO
-
 void	Sound::loadSound(std::string const& soundName, Audio::eAudio index)
 {
-  this->_system->createSound(soundName.c_str(), FMOD_CREATESAMPLE, 0,
-      &(this->_bank.at(index).sound));
+  FMOD_System_CreateSound(this->_system,
+      soundName.c_str(),
+      FMOD_CREATESAMPLE,
+      0, &(this->_data[index]));
 }
 
-void	Sound::loadPlaylist(std::string const& soundName, size_t idx, std::vector<SoundElt>* bk)
+void	Sound::loadPlaylist(std::string const& soundName, size_t index, std::vector<FMOD_SOUND*>* container)
 {
-  this->_system->createSound(soundName.c_str(),
-      FMOD_CREATESTREAM,
-      0, &(bk->at(idx).sound));
+  FMOD_System_CreateSound(this->_system, soundName.c_str(),
+      FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM, 0, &container->at(index));
+}
+
+void	Sound::stopLastSound(void)
+{
+  FMOD_Channel_Stop(this->_channel);
 }
 
 void	Sound::playBack(Audio::eAudio index)
 {
-  bool	i = false;
-
-  if (this->_bank.at(index).channel)
-    this->_bank.at(index).channel->isPlaying(&i);
-  if (!i)
-    this->_system->playSound(FMOD_CHANNEL_FREE, this->_bank.at(index).sound,
-	0, &(this->_bank.at(index).channel));
+  FMOD_System_PlaySound(this->_system, FMOD_CHANNEL_FREE, this->_data[index],
+      0, &this->_channel);
 }
 
-void	Sound::stop(Audio::eAudio index)
+void	Sound::playMusic(AudioMode::eMode playlist)
 {
-  bool	i = false;
+  if (playlist == AudioMode::GAME)
+    this->_current = &this->_playlist;
+  else
+    this->_current = &this->_menu;
 
-  if (this->_bank.at(index).channel)
-    this->_bank.at(index).channel->isPlaying(&i);
-  if (i)
-    this->_bank.at(index).channel->stop();
+  std::random_shuffle((*this->_current).begin(), (*this->_current).end());
+  this->_index = 0;
+  this->_launched = true;
+  FMOD_System_PlaySound(this->_system, FMOD_CHANNEL_FREE,
+      (*this->_current)[this->_index], 0, &this->_musicChannel);
 }
 
-void	Sound::playGame()
+void	Sound::updateMusic()
 {
-  std::random_shuffle(this->_game.begin(), this->_game.end());
-  this->_gindex = 0;
-  this->_system->playSound(FMOD_CHANNEL_FREE, this->_game.at(this->_gindex).sound,
-      0, &(this->_game.at(this->_gindex).channel));
-}
+  if (!this->_launched || !this->_current)
+    return;
 
-void	Sound::playMenu()
-{
-  std::random_shuffle(this->_menu.begin(), this->_menu.end());
-  this->_mindex = 0;
- 
-  std::cout << this->_menu.at(this->_mindex).channel << std::endl;
- 
-  this->_system->playSound(FMOD_CHANNEL_FREE, this->_menu.at(this->_mindex).sound,
-      0, &(this->_menu.at(this->_mindex).channel));
- 
-  std::cout << this->_menu.at(this->_mindex).channel << std::endl;
-}
+  int				res;
 
-void	Sound::updateMenu()
-{
-  bool	i = false;
-
-  if (this->_menu.at(this->_mindex).channel)
-    this->_menu.at(this->_mindex).channel->isPlaying(&i);
-  if (!i)
+  FMOD_Channel_IsPlaying(this->_musicChannel, &res);
+  if (!res)
   {
-    this->_mindex++;
-    if (this->_mindex >= this->_menu.size())
-      this->_mindex = 0;
-    this->_system->playSound(FMOD_CHANNEL_FREE, this->_menu.at(this->_mindex).sound,
-	0, &(this->_menu.at(this->_mindex).channel));
+    this->_index = (this->_index < (*this->_current).size()-1 ? this->_index+1 : 0); 
+    FMOD_System_PlaySound(this->_system, FMOD_CHANNEL_FREE,
+	(*this->_current)[this->_index], 0, &this->_musicChannel);
   }
 }
 
-void	Sound::updateGame()
+void	Sound::stopMusic()
 {
-  bool  i = false;
-
-  if (this->_game.at(this->_gindex).channel)
-    this->_game.at(this->_gindex).channel->isPlaying(&i);
-  if (!i)
-  {
-    this->_gindex++;
-    if (this->_gindex >= this->_game.size())
-      this->_gindex = 0;
-    this->_system->playSound(FMOD_CHANNEL_FREE, this->_game.at(this->_gindex).sound,
-	0, &(this->_game.at(this->_gindex).channel));
-  }
-}
-
-void	Sound::stopMenu()
-{
-  bool	i = false;
-
-  if (this->_menu.at(this->_mindex).channel)
-    this->_menu.at(this->_mindex).channel->isPlaying(&i);
-  if (i)
-    this->_menu.at(this->_mindex).channel->stop();
-}
-
-void	Sound::stopGame()
-{
-  bool	i = false;
-
-  if (this->_game.at(this->_gindex).channel)
-    this->_game.at(this->_gindex).channel->isPlaying(&i);
-  if (i)
-    this->_game.at(this->_gindex).channel->stop();
+  this->_launched = false;
+  this->_current = 0;
+  FMOD_Channel_Stop(this->_musicChannel);
 }

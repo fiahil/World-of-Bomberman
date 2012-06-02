@@ -8,17 +8,8 @@
 
 #include <vector>
 #include <string>
-#include <fmod.hpp>
+#include <fmod.h>
 #include "enum.hpp"
-
-struct SoundElt
-{
-  SoundElt();
-  ~SoundElt();
-
-  FMOD::Sound*		sound;
-  FMOD::Channel*	channel;
-};
 
 class Sound
 {
@@ -30,30 +21,30 @@ private:
   Sound&	operator=(Sound const&);
 
   void		loadSound(std::string const& soundName, Audio::eAudio);
-  void		loadPlaylist(std::string const& soundName, size_t, std::vector<SoundElt>*);
+  void		loadPlaylist(std::string const& soundName, size_t, std::vector<FMOD_SOUND*>* container);
 
 private:
   static Sound*			_me;
 
-  FMOD::System*			_system;
-  std::vector<SoundElt>		_bank;
-  std::vector<SoundElt>		_game;
-  std::vector<SoundElt>		_menu;
-  size_t			_mindex;
-  size_t			_gindex;
+  FMOD_SYSTEM*			_system;
+  FMOD_CHANNEL*			_channel;
+  FMOD_CHANNEL*			_musicChannel;
+  std::vector<FMOD_SOUND*>	_data;
+  std::vector<FMOD_SOUND*>	_playlist;
+  std::vector<FMOD_SOUND*>	_menu;
+  std::vector<FMOD_SOUND*>*	_current;
+  size_t			_index;
+  bool				_launched;
 
 public:
   static Sound*	getMe(void);
   static void	delMe(void);
 
   void		playBack(Audio::eAudio);
-  void		stop(Audio::eAudio);
-  void		playGame();
-  void		stopGame();
-  void		updateGame();
-  void		playMenu();
-  void		stopMenu();
-  void		updateMenu();
+  void		stopLastSound();
+  void		playMusic(AudioMode::eMode);
+  void		updateMusic();
+  void		stopMusic();
 };
 
 #endif

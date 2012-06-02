@@ -5,9 +5,18 @@
 
 #include <iostream>
 #include <sstream>
+#include <algorithm>
+#include <ctime>
+#include <fstream>
 #include "Human.hpp"
 #include "SaveManager.hpp"
 #include "LoadSave.hpp"
+
+static const char*	g_refGameMode[GameMode::LAST] = {
+  "Solo",
+  "Coop",
+  "Versus"
+};
 
 LoadSave::LoadSave(GameManager& game, std::vector<Profile*>& profiles, Profile* guest)
   : AMenu("menu/background/backgroundLoadSave.jpg", "menu/background/backgroundLoadSave.jpg", 3200.0f, -1.0f, 800.0f, game),
@@ -89,12 +98,61 @@ void		LoadSave::loadSave()
     }
 }
 
+static bool	isPoint(int i)
+{
+  return (i == ':');
+}
+
+void		LoadSave::loadAllSaves()
+{
+  std::string		root("./Ressources/saves/");
+  std::string		line;
+  std::ifstream		input;
+
+  this->_infos.clear();
+  for (std::vector<std::string>::iterator it = this->_save.begin();
+       it != this->_save.end(); ++it)
+    {
+      input.open((root + (*it)).c_str());
+      
+      if (input.is_open())
+	{
+	  while (std::getline(input, line))
+	    {
+	      std::stringstream	ss;
+	      std::string	tmp;
+	      
+	      std::remove_if(line.begin(), line.end(), isPoint);
+	      ss << line;
+	      ss >> tmp;
+	      if (!tmp.compare("#HEADER"))
+		{
+		  std::stringstream	ret;
+		  int			type;
+		  size_t		time;
+		  std::string		timeStr;
+		  size_t		nbP;
+		  
+		  ss >> type >> time >> nbP;
+		  type %= GameMode::LAST;
+		  timeStr = ctime(reinterpret_cast<time_t const*>(&time));
+		  timeStr.resize(timeStr.size() - 1);
+		  ret << "Game Mode : " << g_refGameMode[type] << " Date : " << timeStr << " Nb players : " << nbP;
+		  this->_infos.push_back(ret.str());
+		  break;
+		}
+	    }
+	  input.close();
+	}
+    }
+}
+
 void		LoadSave::updateText() const
 {
   if (this->_save.size())
     {
-      this->_tags[0]->createText(this->_save[this->_index], 20, 750, 360);
-      this->_tags[1]->createText("info", 20, 500, 411);
+      this->_tags[0]->createText(this->_save[this->_index], 20, 750, 362);
+      this->_tags[1]->createText(this->_infos[this->_index], 18, 500, 413);
     }
   else
     {
@@ -124,7 +182,10 @@ void		LoadSave::changeSave(gdl::GameClock const& clock, gdl::Input& input)
 void		LoadSave::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   if (!this->_save.size())
-    this->_save = this->_gameManager._mainProfile->getSave();
+    {
+      this->_save = this->_gameManager._mainProfile->getSave();
+      this->loadAllSaves();
+    }
   this->updateText();
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
@@ -138,4 +199,11 @@ void		LoadSave::update(gdl::GameClock const& clock, gdl::Input& input)
       else
 	this->_curToken = TokenMenu::LAST;
     }
+}
+
+void		LoadSave::setTextDraw(bool flag)
+{
+  if (this->_save.size() && flag)
+    this->loadAllSaves();
+  AMenu::setTextDraw(flag);
 }

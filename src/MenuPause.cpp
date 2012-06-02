@@ -74,10 +74,15 @@ void	MenuPause::clearMatch()
 
 void	MenuPause::restartGame()
 {
-  this->clearMatch();
-  this->_gameManager._match._map = new Map(this->_gameManager._originMap->getX(),
-					   this->_gameManager._originMap->getY(),
-					   this->_gameManager._originMap->getMap());
+  if (this->_gameManager._nbTeams < 0)
+    this->_curToken = TokenMenu::LAST;
+  else
+    {
+      this->clearMatch();
+      this->_gameManager._match._map = new Map(this->_gameManager._originMap->getX(),
+					       this->_gameManager._originMap->getY(),
+					       this->_gameManager._originMap->getMap());
+    }
 }
 
 void		MenuPause::draw()

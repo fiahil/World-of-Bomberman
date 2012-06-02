@@ -15,6 +15,7 @@ public:
   virtual ~LoadSave(void);
 
 private:
+  std::vector<std::string>	_infos;
   std::vector<Profile*>&	_profiles;
   Profile*			_guest;
   std::vector<std::string>	_save;
@@ -24,6 +25,7 @@ private:
 
 public:
   virtual void		update(gdl::GameClock const&, gdl::Input&);
+  virtual void		setTextDraw(bool);
 
 public:
   virtual double	getCenterX() const;
@@ -34,6 +36,7 @@ public:
   */
 private:
   void			loadSave();
+  void			loadAllSaves();
   void			changeSave(gdl::GameClock const&, gdl::Input&);
   void			updateText() const;
 };

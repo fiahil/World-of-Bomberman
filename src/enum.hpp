@@ -30,6 +30,16 @@ struct Audio
   };
 };
 
+struct AudioMode
+{
+  enum eMode
+  {
+    GAME,
+    MENU,
+    LAST
+  };
+};
+
 struct Success
 {
   enum eSuccess {
