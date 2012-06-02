@@ -18,7 +18,7 @@ MenuPause::MenuPause(GameManager& game)
   this->_tags.push_back(new Tag("menu/tags/MainMenuNormal.png", "menu/tags/MainMenuHighlit.png", false, false, TokenMenu::PROFILE, 3629.0f, 0.0f, 445.0f));
   this->_tags.push_back(new Tag("menu/tags/QuitNormal.png", "menu/tags/QuitHighlit.png", false, false, TokenMenu::QUIT, 3629.0f, 0.0f, 510.0f));
   this->_text.setSize(20);
-  this->_text.setPosition(500, 200);
+  this->_text.setPosition(650, 200);
 }
 
 MenuPause::~MenuPause()
