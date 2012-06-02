@@ -70,14 +70,21 @@ void		GameResult::update(gdl::GameClock const& clock, gdl::Input& input)
 
 void		GameResult::draw()
 {
-  int	y = 358;
+  int		y = 358;
+  gdl::Text	text;
 
   AMenu::draw();
 
+  if (this->_textDraw == true)
+    {
+      text.setText("Bite");
+      text.setSize(20);
+      text.setPosition(810, 190);
+      text.draw();
+    }
   for (unsigned int i = 0 ; this->_textDraw == true && i < this->_playerScore.size() && i < 5; ++i)
     {
       int		x = 400;
-      gdl::Text		text;
       std::string	str;
       std::stringstream	sstrm;
       APlayer*		playerScore = this->_playerScore[i];
