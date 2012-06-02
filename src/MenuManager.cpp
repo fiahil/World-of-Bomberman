@@ -306,7 +306,10 @@ bool	MenuManager::isResume()
   bool	tmp = this->_resume;
 
   if (this->_resume)
-    this->_resume = false;
+    {
+      this->_menu[this->_curMenu]->setTextDraw(false);
+      this->_resume = false;
+    }
   return tmp;
 }
 
