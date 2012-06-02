@@ -51,7 +51,7 @@ void		Menu::updateIntro()
   {
     cvReleaseCapture(&this->_capture);
     this->_intro = false;
-    Sound::getMe()->stopLastSound();
+    Sound::getMe()->stopSound(Audio::INTRO);
     Sound::getMe()->playMusic(AudioMode::MENU);
     this->_menu->initCamera();
   }
@@ -159,7 +159,7 @@ void		Menu::draw(void)
     {
       cvReleaseCapture(&this->_capture);
       this->_intro = false;
-      Sound::getMe()->stopLastSound();
+      Sound::getMe()->stopSound(Audio::INTRO);
       Sound::getMe()->playMusic(AudioMode::MENU);
       this->_menu->initCamera();
     }
