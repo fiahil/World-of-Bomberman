@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include "DirWalker.hpp"
 #include "ProfileLoader.hpp"
+#include "SaveManager.hpp"
 
 ProfileLoader::ProfileLoader(void)
 {
@@ -28,6 +29,26 @@ int				ProfileLoader::idToInt(std::string str)
   return (id);
 }
 
+void				ProfileLoader::checkSaves(void)
+{
+  bool	isOk = true;
+
+  for (unsigned int i = 0; i < this->_profiles.back()->getSave().size(); ++i)
+    {
+      std::stringstream	ss(this->_profiles.back()->getSave()[i]);
+      size_t		id;
+
+      ss >> id;
+      if (!SaveManager::isHere(id))
+	{
+	  this->_profiles.back()->removeSave(i);
+	  isOk = false;
+	}
+    }
+  if (!isOk)
+    ProfileManager::setProfile(this->_profiles.back()->getId(), *this->_profiles.back());
+}
+
 void				ProfileLoader::setProfiles(void)
 {
   DirWalker	_texasRanger(this->_folder);
@@ -45,6 +66,7 @@ void				ProfileLoader::setProfiles(void)
 		  this->_profiles.push_back(this->_pm.getProfile((id = idToInt(*_texasRanger.current()))));
 		  this->_profiles.back()->setId(id);
 		  this->_names.push_back(this->_profiles.back()->getName());
+		  this->checkSaves();
 		}
 	    }
 	  catch (const std::runtime_error& e)

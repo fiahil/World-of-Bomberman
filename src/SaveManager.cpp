@@ -39,8 +39,22 @@ size_t		SaveManager::getMax()
   return max;
 }
 
-bool		SaveManager::isHere(size_t)
+bool		SaveManager::isHere(size_t id)
 {
+  std::stringstream	ss;
+  ss << id;
+  DirWalker		ranger("./Ressources/saves/");
+
+  while (!ranger.isEnd())
+    {
+      if (ranger.current() != 0 && *ranger.current() == ss.str())
+	{
+	  ranger.clean();
+	  return true;
+	}
+      ranger.clean();
+      ++ranger;
+    }
   return false;
 }
 

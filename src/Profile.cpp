@@ -145,3 +145,7 @@ void		Profile::addSave(const std::string & value)
   this->_save.push_back(value);
 }
 
+void		Profile::removeSave(unsigned int pos)
+{
+  this->_save.erase(this->_save.begin() + pos);
+}
