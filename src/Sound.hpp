@@ -30,7 +30,7 @@ private:
   Sound&	operator=(Sound const&);
 
   void		loadSound(std::string const& soundName, Audio::eAudio);
-  void		loadPlaylist(std::string const& soundName, size_t, std::vector<SoundElt>&);
+  void		loadPlaylist(std::string const& soundName, size_t, std::vector<SoundElt>*);
 
 private:
   static Sound*			_me;
@@ -47,8 +47,13 @@ public:
   static void	delMe(void);
 
   void		playBack(Audio::eAudio);
+  void		stop(Audio::eAudio);
   void		playGame();
+  void		stopGame();
+  void		updateGame();
   void		playMenu();
+  void		stopMenu();
+  void		updateMenu();
 };
 
 #endif
