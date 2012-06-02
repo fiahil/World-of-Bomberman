@@ -16,9 +16,9 @@ static void	predDestroySound(FMOD_SOUND* it)
 Sound*		Sound::_me = 0;
 
 Sound::Sound()
-  : _channel(0),
-    _musicChannel(0),
+  : _musicChannel(0),
     _data(Audio::LAST, 0),
+    _dataChannel(Audio::LAST, 0),
     _playlist(6u, 0),
     _menu(5u, 0),
     _current(0),
@@ -46,6 +46,7 @@ Sound::Sound()
   this->loadSound("Ressources/audio/Bonus.ogg", Audio::BONUS);
   this->loadSound("Ressources/audio/Achievement.ogg", Audio::SUCCESS);
   this->loadSound("Ressources/audio/intro.mp3", Audio::INTRO);
+  this->loadSound("Ressources/audio/Menu.ogg", Audio::MENU);
   this->loadPlaylist("Ressources/audio/Game00.mp3", 0, &this->_playlist);
   this->loadPlaylist("Ressources/audio/Game01.mp3", 1, &this->_playlist);
   this->loadPlaylist("Ressources/audio/Game02.mp3", 2, &this->_playlist);
@@ -95,15 +96,19 @@ void	Sound::loadPlaylist(std::string const& soundName, size_t index, std::vector
       FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM, 0, &container->at(index));
 }
 
-void	Sound::stopLastSound(void)
+void	Sound::stopSound(Audio::eAudio index)
 {
-  FMOD_Channel_Stop(this->_channel);
+  FMOD_Channel_Stop(this->_dataChannel.at(index));
 }
 
 void	Sound::playBack(Audio::eAudio index)
 {
-  FMOD_System_PlaySound(this->_system, FMOD_CHANNEL_FREE, this->_data[index],
-      0, &this->_channel);
+  int	play = 0;
+
+  FMOD_Channel_IsPlaying(this->_dataChannel.at(index), &play);
+  if (!play)
+    FMOD_System_PlaySound(this->_system, FMOD_CHANNEL_FREE, this->_data.at(index),
+	0, &(this->_dataChannel.at(index)));
 }
 
 void	Sound::playMusic(AudioMode::eMode playlist)
@@ -118,6 +123,7 @@ void	Sound::playMusic(AudioMode::eMode playlist)
   this->_launched = true;
   FMOD_System_PlaySound(this->_system, FMOD_CHANNEL_FREE,
       (*this->_current)[this->_index], 0, &this->_musicChannel);
+  FMOD_Channel_SetVolume(this->_musicChannel, 0.4f);
 }
 
 void	Sound::updateMusic()
