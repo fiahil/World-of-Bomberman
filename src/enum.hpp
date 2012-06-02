@@ -26,6 +26,7 @@ struct Audio
     BONUS,
     SUCCESS,
     INTRO,
+    MENU,
     LAST
   };
 };

@@ -123,7 +123,7 @@ void	Sound::playMusic(AudioMode::eMode playlist)
   this->_launched = true;
   FMOD_System_PlaySound(this->_system, FMOD_CHANNEL_FREE,
       (*this->_current)[this->_index], 0, &this->_musicChannel);
-  FMOD_Channel_SetVolume(this->_musicChannel, 0.5f);
+  FMOD_Channel_SetVolume(this->_musicChannel, 0.4f);
 }
 
 void	Sound::updateMusic()

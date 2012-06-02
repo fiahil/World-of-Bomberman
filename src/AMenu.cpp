@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include "Sound.hpp"
 #include "AMenu.hpp"
 
 AMenu::AMenu(std::string const& normal, std::string const select,
@@ -98,6 +99,7 @@ void			AMenu::SelectFunction(gdl::GameClock const& clock)
 {
   if (clock.getTotalGameTime() >= this->_timers[2])
     {
+      Sound::getMe()->playBack(Audio::MENU);
       if (!this->_changeMenu)
 	this->_curToken = this->_tags[this->_cursor]->getContent();
       else
