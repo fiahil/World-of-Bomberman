@@ -13,15 +13,15 @@
 
 static const std::string	g_refTeam[] = {
   "Red",
+  "Green",
+  "Blue",
+  "Cyan",
+  "Yellow",
+  "Brown",
+  "Purple",
+  "Black",
   "Red",
-  "Red",
-  "Red",
-  "Red",
-  "Red",
-  "Red",
-  "Red",
-  "Red",
-  "Red"
+  "Grey"
 };
 
 GameResult::GameResult(GameManager & game, Match & match)
