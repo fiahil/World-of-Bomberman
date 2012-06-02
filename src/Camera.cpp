@@ -50,6 +50,9 @@ void		Camera::draw() const
   glLoadIdentity();
   gluPerspective(70.0f, static_cast<double>(this->_w) / static_cast<double>(this->_h),
 		 1.0f, 10000.0f);
+  std::cout << "x = " << this->_pos.x
+	    << " y = " << this->_pos.y
+	    << " z = " << this->_pos.z << std::endl;
   gluLookAt(this->_pos.x, this->_pos.y, this->_pos.z,
 	    this->_target.x, this->_target.y, this->_target.z,
 	    0.0f, 1.0f, 0.0f);

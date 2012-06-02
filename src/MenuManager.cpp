@@ -170,7 +170,7 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 	  while (this->_gameManager._match._bonus.size())
 	    {
 	      delete this->_gameManager._match._bonus.back();
-      this->_gameManager._match._bonus.pop_back();
+	      this->_gameManager._match._bonus.pop_back();
 	    }
 	  while (this->_gameManager._match._explodedBombs.size())
 	    {

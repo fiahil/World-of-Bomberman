@@ -55,38 +55,32 @@ void		LoadSave::loadSave()
       this->_gameManager._nbPlayers = -1;
       this->_gameManager._nbTeams = -1;
       this->_gameManager._secondProfile = 0;
-      std::cout << "Load Save " << std::endl;
       for (std::vector<APlayer*>::iterator it = this->_gameManager._match._players.begin();
 	   it != this->_gameManager._match._players.end(); ++it)
-	if ((*it)->getId() == this->_gameManager._mainProfile->getId())
-	  pl1 = (*it);
-	else if ((*it)->getId() != static_cast<size_t>(-1))
-	  {
-	    for (std::vector<Profile*>::iterator it2 = this->_profiles.begin();
-		 it2 != this->_profiles.end(); ++it2)
-	      if ((*it2)->getId() == (*it)->getId())
-		{
-		  this->_gameManager._secondProfile = (*it2);
-		  pl2 = (*it);
-		  flag = true;
-		  break;
-		}
-	    if (!flag && this->_gameManager._match._gameMode != GameMode::SOLO)
-	      {
-		this->_gameManager._secondProfile = this->_guest;
-		(*it)->setId(this->_guest->getId());
-		pl2 = (*it);
-	      }
-	    break;
-	  }
-      if (this->_gameManager._match._gameMode == GameMode::SOLO)
 	{
-	  std::cout << "Set config J1" << std::endl;
-	  dynamic_cast<Human*>(pl1)->setConfig(this->_gameManager._mainProfile->getConfig());
-	  std::cout << "x = " << pl1->getPos()._pos.x
-		    << " y = " << pl1->getPos()._pos.y
-		    << " z = " << pl1->getPos()._pos.z << std::endl;
+	  if ((*it)->getId() == this->_gameManager._mainProfile->getId())
+	    pl1 = (*it);
+	  else if ((*it)->getId() != static_cast<size_t>(-1))
+	    {
+	      for (std::vector<Profile*>::iterator it2 = this->_profiles.begin();
+		   it2 != this->_profiles.end(); ++it2)
+		if ((*it2)->getId() == (*it)->getId())
+		  {
+		    this->_gameManager._secondProfile = (*it2);
+		    pl2 = (*it);
+		    flag = true;
+		    break;
+		  }
+	      if (!flag && this->_gameManager._match._gameMode != GameMode::SOLO)
+		{
+		  this->_gameManager._secondProfile = this->_guest;
+		  (*it)->setId(this->_guest->getId());
+		  pl2 = (*it);
+		}
+	    }
 	}
+      if (this->_gameManager._match._gameMode == GameMode::SOLO)
+	dynamic_cast<Human*>(pl1)->setConfig(this->_gameManager._mainProfile->getConfig());
       else
 	{
 	  dynamic_cast<Human*>(pl1)->setConfig(this->_gameManager._configJ1);
