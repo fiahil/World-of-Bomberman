@@ -8,7 +8,7 @@
 
 #include <vector>
 #include <string>
-#include <fmod.hpp>
+#include <fmod.h>
 #include "enum.hpp"
 
 struct SoundElt
@@ -16,8 +16,8 @@ struct SoundElt
   SoundElt();
   ~SoundElt();
 
-  FMOD::Sound*		sound;
-  FMOD::Channel*	channel;
+  FMOD_SOUND*		sound;
+  FMOD_CHANNEL*		channel;
 };
 
 class Sound
@@ -35,7 +35,7 @@ private:
 private:
   static Sound*			_me;
 
-  FMOD::System*			_system;
+  FMOD_SYSTEM*			_system;
   std::vector<SoundElt>		_bank;
   std::vector<SoundElt>		_game;
   std::vector<SoundElt>		_menu;
