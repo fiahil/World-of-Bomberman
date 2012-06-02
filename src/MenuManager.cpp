@@ -111,7 +111,7 @@ void		MenuManager::initialize(void)
   this->_menu.at(TokenMenu::SKINCHOOSE)->initialize();
   this->_menu.at(TokenMenu::STATS) = new MenuStats(this->_gameManager);
   this->_menu.at(TokenMenu::STATS)->initialize();
-  this->_menu.at(TokenMenu::PAUSE) = new MenuPause(this->_gameManager);
+  this->_menu.at(TokenMenu::PAUSE) = new MenuPause(this->_gameManager, this->_map);
   this->_menu.at(TokenMenu::PAUSE)->initialize();
   this->_menu.at(TokenMenu::GAMERESULT) = new GameResult(this->_gameManager, this->_gameManager._match);
   this->_menu.at(TokenMenu::GAMERESULT)->initialize();
@@ -150,11 +150,7 @@ void		MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       if (tmp == TokenMenu::PAUSE)
 	this->_resume = true;
       if (this->_curMenu == TokenMenu::PAUSE && tmp == TokenMenu::PROFILE)
-	{
-	  if (dynamic_cast<MenuPause *>(this->_menu[this->_curMenu]) != 0)
-	    dynamic_cast<MenuPause *>(this->_menu[this->_curMenu])->clearMatchMap(this->_map);
-	  this->_stopGame = true;
-	}
+	this->_stopGame = true;
       if (this->_curMenu == TokenMenu::GAMERESULT)
 	tmp = TokenMenu::PROFILE;
       this->_menu.at(this->_curMenu)->setTextDraw(false);
