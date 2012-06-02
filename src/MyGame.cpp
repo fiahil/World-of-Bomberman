@@ -287,7 +287,7 @@ void		MyGame::resumeGame()
     this->_pl2->setTimer(time);
 }
 
-Match &	MyGame::getMatch() const // added
+Match &	MyGame::getMatch() const
 {
   return this->_match;
 }
