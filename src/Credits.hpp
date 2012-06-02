@@ -14,15 +14,9 @@ public:
   Credits(GameManager&);
   virtual ~Credits(void);
 
-  /*
-    Heritance from AObj
-  */
 public:
   virtual void		update(gdl::GameClock const&, gdl::Input&);
 
-  /*
-    Pure virtual functions
-  */
 public:
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
