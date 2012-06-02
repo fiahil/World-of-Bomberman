@@ -60,6 +60,7 @@ SRC		= ./src/main.cpp	 \
 		./src/MenuStats.cpp	 \
 		./src/Stat.cpp		 \
 		./src/GameResult.cpp	 \
+		./src/Loading.cpp	 \
 		./src/Tag.cpp
 
 OBJ		= $(SRC:.cpp=.o)

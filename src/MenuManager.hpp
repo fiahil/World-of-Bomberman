@@ -42,6 +42,7 @@ private:
   bool				_resume;
   bool				_stopGame;
   Profile *			_guest;
+  double			_timerLoading;
 
 private:
   typedef void	(MenuManager::*fInitGame)();

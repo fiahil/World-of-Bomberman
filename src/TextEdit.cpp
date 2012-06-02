@@ -118,12 +118,17 @@ TextEdit::~TextEdit()
 void	TextEdit::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   int	nb = 0;
+  std::string	tmp;
 
   if (this->_str.size() < this->_sizeMax)
     for (std::map<gdl::Keys::Key, std::string>::iterator it = this->_ref.begin(); it != this->_ref.end(); ++it, ++nb)
       if (input.isKeyDown(it->first) && clock.getTotalGameTime() >= this->_timers[nb])
 	{
-	  this->_str += it->second;
+	  tmp = it->second;
+	  if ((input.isKeyDown(gdl::Keys::LShift) || input.isKeyDown(gdl::Keys::RShift)) &&
+	      it->first >= gdl::Keys::A && it->first <= gdl::Keys::Z)
+	    tmp= tmp[0] - 32;
+	  this->_str += tmp;
 	  this->_timers[nb] = clock.getTotalGameTime() + 0.15f;
 	}
   if (input.isKeyDown(gdl::Keys::Back) && !this->_str.empty() && clock.getTotalGameTime() >= this->_timers[47])
