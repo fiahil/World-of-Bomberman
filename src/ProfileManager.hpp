@@ -3,21 +3,21 @@
  * 21 Mai 2012
  */
 
-#ifndef __PROFILEMANAGER_HPP__
-#define __PROFILEMANAGER_HPP__
+#ifndef		__PROFILEMANAGER_HPP__
+#define		__PROFILEMANAGER_HPP__
 
 #include "Profile.hpp"
 
 class ProfileManager
 {
-  public:
+public:
   static size_t		maxId;
 
-  public:
+public:
   static bool		isHere(size_t);
   static size_t		getMax(void);
   static Profile*	getProfile(size_t);
   static void		setProfile(size_t, Profile const&);
 };
 
-#endif /* __PROFILEMANAGER_HPP__ */
+#endif		/* __PROFILEMANAGER_HPP__ */
