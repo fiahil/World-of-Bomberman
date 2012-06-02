@@ -203,7 +203,10 @@ void		LoadSave::update(gdl::GameClock const& clock, gdl::Input& input)
 
 void		LoadSave::setTextDraw(bool flag)
 {
-  if (this->_save.size() && flag)
-    this->loadAllSaves();
+  if (flag)
+    {
+      this->_save = this->_gameManager._mainProfile->getSave();
+      this->loadAllSaves();
+    }
   AMenu::setTextDraw(flag);
 }
