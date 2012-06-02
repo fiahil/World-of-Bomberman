@@ -157,7 +157,7 @@ static const char *	createPlayerName(APlayer* player, const GameManager &gameMan
       else if (gameManager._secondProfile && player->getId() == gameManager._secondProfile->getId())
 	return gameManager._secondProfile->getName().c_str();
     }
-  return "Enraged Chiken";
+  return "Furious Chiken";
 }
 
 void		GameResult::draw()
