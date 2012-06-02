@@ -647,3 +647,8 @@ void		Human::setSkill(Skill::eSkill s)
 {
   this->_skill = s;
 }
+
+Skill::eSkill	Human::getSkill() const
+{
+  return this->_skill;
+}

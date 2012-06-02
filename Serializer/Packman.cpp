@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <fstream>
 #include <ctime>
+#include "Human.hpp"
 #include "APlayer.hpp"
 #include "Profile.hpp"
 #include "Match.hpp"
@@ -71,6 +72,7 @@ namespace Serializer
       << "\t:" << p->getSkin()
       << "\t:" << p->getState()
       << "\t:" << p->getDir()
+      << "\t:" << (dynamic_cast<Human const*>(p) != 0 ? dynamic_cast<Human const*>(p)->getSkill() : 0) 
       << std::endl;
   }
 

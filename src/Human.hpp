@@ -97,6 +97,7 @@ private:
   bool		 eastJumpFunction();
   
 public:
+  Skill::eSkill	getSkill() const;
   void		setSkill(Skill::eSkill);
 };
 
