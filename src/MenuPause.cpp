@@ -111,6 +111,10 @@ void	MenuPause::saveCurGame()
 
 void	MenuPause::update(gdl::GameClock const& clock, gdl::Input& input)
 {
+  if (this->_cursor != 2)
+    {
+      this->_msg = "";
+    }
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
