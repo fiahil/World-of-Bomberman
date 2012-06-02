@@ -50,7 +50,7 @@ public:
   bool		isEOG(void) const;
   bool		isPause() const;
   void		resumeGame();
-  Match &	getMatch() const;
+  Match&	getMatch() const;
 
 private:
   template<typename T, typename U>
@@ -67,10 +67,10 @@ private:
       }
   }
 
-  bool	updateBomb(Bomb *);
-  bool	updateExplodedBomb(ExplodedBomb *);
-  bool	updatePlayer(APlayer *);
-  bool	updateDeadPlayer(APlayer* p);
+  bool		updateBomb(Bomb *);
+  bool		updateExplodedBomb(ExplodedBomb *);
+  bool		updatePlayer(APlayer *);
+  bool		updateDeadPlayer(APlayer* p);
 
 };
 
