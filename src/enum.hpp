@@ -54,7 +54,6 @@ struct Success
     FABULOUS,
     LAST
   };
-
 };
 
 struct Input
@@ -65,7 +64,6 @@ struct Input
     MENU,
     LAST
   };
-
 };
 
 struct HumGame
@@ -81,7 +79,6 @@ struct HumGame
     SKILL,
     LAST
   };
-
 };
 
 struct BombType
