@@ -47,13 +47,16 @@ gdl::Keys::Key		Config::getConfig(HumGame::eAction key) const
   return gdl::Keys::Count;
 }
 
+bool	Config::feIsAllSet(std::pair<HumGame::eAction, gdl::Keys::Key> _map)
+{
+  if (_map.second == gdl::Keys::Count)
+    return false;
+  return true;
+}
+
 bool	Config::isAllSet() const
 {
-  std::map<HumGame::eAction, gdl::Keys::Key>::const_iterator it2;
-  for (it2 = this->_conf.begin(); it2 != this->_conf.end(); ++it2)
-    if (it2->second == gdl::Keys::Count)
-      return false;
-  return true;
+  return (std::for_each(this->_conf.begin(), this->_conf.end(), feIsAllSet));
 }
 
 bool	Config::operator==(Config const & other) const

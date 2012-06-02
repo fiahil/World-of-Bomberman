@@ -6,6 +6,7 @@
 #ifndef		__CONFIG_HPP__
 #define		__CONFIG_HPP__
 
+#include <utility>
 #include <map>
 #include <GL/gl.h>
 #include <Input.hpp>
@@ -19,6 +20,7 @@ public:
 
 private:
   Config(Config &);
+  static bool	feIsAllSet(std::pair<HumGame::eAction, gdl::Keys::Key>);
 
 private:
   std::map<HumGame::eAction, gdl::Keys::Key> _conf;
