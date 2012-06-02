@@ -107,6 +107,29 @@ void            Human::drawSuccess(Success::eSuccess s)
 bool		Human::SkillFunction(gdl::GameClock const& clock)
 {
   return (this->*(this->_skillFunc[this->_skill]))(clock);
+
+}
+
+bool		Human::cheatLustFunction(gdl::GameClock const&)
+{
+  this->_lustStack = 6;
+  return true;
+}
+
+bool		Human::cheatPowerFunction(gdl::GameClock const&)
+{
+  this->_powerStack = 6;
+  return true;
+}
+
+bool		Human::cheatInvFunction(gdl::GameClock const&)
+{
+  this->_dam = 0.0f;
+}
+
+bool		Human::cheatHealFunction(gdl::GameClock const&)
+{
+  this->_pv = 100;
 }
 
 void		Human::draw()

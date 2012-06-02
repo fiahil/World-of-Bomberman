@@ -71,6 +71,10 @@ protected:
   virtual void	playBonusSound(void);
 private:
   bool		 SkillFunction(gdl::GameClock const&);
+  bool		 cheatLustFunction(gdl::GameClock const&);
+  bool		 cheatPowerFunction(gdl::GameClock const&);
+  bool		 cheatInvFunction(gdl::GameClock const&);
+  bool		 cheatHealFunction(gdl::GameClock const&);
   Human::eventSt initStruct(gdl::Keys::Key, HumGame::eAction, actionFunc) const;
   void		 drawStart(size_t, size_t, size_t);
   void		 drawEnd(size_t, size_t, bool, size_t);
