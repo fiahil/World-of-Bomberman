@@ -12,8 +12,7 @@ Sound*		Sound::_me = 0;
 
 SoundElt::SoundElt()
   : sound(0),
-  channel(0),
-  play(false)
+  channel(0)
 {
 }
 
@@ -107,7 +106,6 @@ void	Sound::playGame()
   this->_gindex = 0;
   this->_system->playSound(FMOD_CHANNEL_FREE, this->_game.at(this->_gindex).sound,
       0, &this->_game.at(this->_gindex).channel);
-  this->_game.at(this->_gindex).play = true;
 }
 
 void	Sound::playMenu()
@@ -116,6 +114,5 @@ void	Sound::playMenu()
   this->_mindex = 0;
   this->_system->playSound(FMOD_CHANNEL_FREE, this->_menu.at(this->_mindex).sound,
       0, &this->_menu.at(this->_mindex).channel);
-  this->_menu.at(this->_mindex).play = true;
 }
 

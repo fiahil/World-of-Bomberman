@@ -18,7 +18,6 @@ struct SoundElt
 
   FMOD::Sound*		sound;
   FMOD::Channel*	channel;
-  bool			play;
 };
 
 class Sound
