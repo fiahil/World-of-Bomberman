@@ -20,7 +20,6 @@ static const std::string	g_refTeam[] = {
   "Brown",
   "Purple",
   "Black",
-  "Red",
   "Grey"
 };
 
