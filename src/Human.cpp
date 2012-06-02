@@ -44,8 +44,6 @@ Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
   this->_jumpDir[Dir::WEST] = &Human::westJumpFunction;
   this->_jumpDir[Dir::EAST] = &Human::eastJumpFunction;
 
-  // review simplification mode de game
-
 }
 
 Human::~Human() {
@@ -212,7 +210,7 @@ void		Human::play(gdl::GameClock const& clock, gdl::Input& key)
   if (this->_start >= 0 && clock.getTotalGameTime() >= this->_startTimer)
     {
       --this->_start;
-      this->_startTimer = clock.getTotalGameTime() + 1.0f;
+      this->_startTimer = clock.getTotalGameTime() + 1.20f;
       if (!this->_start)
 	Sound::getMe()->playBack(Audio::START);
       else

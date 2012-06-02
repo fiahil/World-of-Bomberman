@@ -12,6 +12,7 @@ class Loading : public AMenu
 {
 private:
   double	_timer;
+  std::vector<gdl::Model>       _model;
   
 public:
   Loading(GameManager&);
@@ -20,6 +21,8 @@ public:
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);
+  virtual void          initialize();
+  virtual void          draw();
 };
 
 #else
