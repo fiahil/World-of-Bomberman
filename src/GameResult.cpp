@@ -54,6 +54,40 @@ void		GameResult::buildGameResult()
   this->_isBuilt = true;
 }
 
+void		GameResult::clearGame()
+{
+  while (this->_gameManager._match._players.size())
+    {
+      delete _gameManager._match._players.back();
+      this->_gameManager._match._players.pop_back();
+    }
+  while (this->_gameManager._match._dead.size())
+    {
+      delete _gameManager._match._dead.back();
+      this->_gameManager._match._dead.pop_back();
+    }
+  while (this->_gameManager._match._cadaver.size())
+    {
+      delete _gameManager._match._cadaver.back();
+      this->_gameManager._match._cadaver.pop_back();
+    }
+  while (this->_gameManager._match._bombs.size())
+    {
+      delete this->_gameManager._match._bombs.back();
+      this->_gameManager._match._bombs.pop_back();
+    }
+  while (this->_gameManager._match._bonus.size())
+    {
+      delete this->_gameManager._match._bonus.back();
+      this->_gameManager._match._bonus.pop_back();
+    }
+  while (this->_gameManager._match._explodedBombs.size())
+    {
+      delete this->_gameManager._match._explodedBombs.back();
+      this->_gameManager._match._explodedBombs.pop_back();
+    }
+}
+
 void		GameResult::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   if (this->_isBuilt)
