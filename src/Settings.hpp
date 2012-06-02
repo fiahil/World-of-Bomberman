@@ -3,8 +3,8 @@
  * 15.05.12
  */
 
-#ifndef		__SETTINGS_HPP__
-#define		__SETTINGS_HPP__
+#ifndef	__SETTINGS_HPP__
+#define	__SETTINGS_HPP__
 
 #include "AMenu.hpp"
 

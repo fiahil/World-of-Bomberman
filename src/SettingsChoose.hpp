@@ -3,8 +3,8 @@
  * 29.05.12
  */
 
-#ifndef		__SETTINGS_CHOOSE_HPP__
-#define		__SETTINGS_CHOOSE_HPP__
+#ifndef	__SETTINGS_CHOOSE_HPP__
+#define	__SETTINGS_CHOOSE_HPP__
 
 #include "AMenu.hpp"
 
