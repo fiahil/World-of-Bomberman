@@ -3,8 +3,8 @@
  * 27.05.12
  */
 
-#ifndef		__MENU_MAP_HPP__
-#define		__MENU_MAP_HPP__
+#ifndef	__MENU_MAP_HPP__
+#define	__MENU_MAP_HPP__
 
 #include "AMenu.hpp"
 
@@ -14,9 +14,9 @@ public:
   MenuMap(GameManager&);
   virtual ~MenuMap(void);
 
-  virtual double	getCenterX() const;
-  virtual double	getCenterY() const;
+  virtual double	getCenterX(void) const;
+  virtual double	getCenterY(void) const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);
 };
 
-#endif		/* __MENU_MAP_HPP__ */
+#endif	/* __MENU_MAP_HPP__ */

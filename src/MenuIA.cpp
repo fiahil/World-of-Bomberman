@@ -3,7 +3,6 @@
  * 27.05.12
  */
 
-#include <algorithm>
 #include "MenuIA.hpp"
 
 MenuIA::MenuIA(GameManager& game)
@@ -20,14 +19,8 @@ MenuIA::MenuIA(GameManager& game)
 				false, false, TokenMenu::GAMECHOOSE, 2029.0f, 0.0f, 2895.0f));
 }
 
-static void	deleteTag(Tag* elem)
-{
-  delete elem;
-}
-
 MenuIA::~MenuIA(void)
 {
-  std::for_each(this->_tags.begin(), this->_tags.end(), deleteTag);
 }
 
 double		MenuIA::getCenterX(void) const
