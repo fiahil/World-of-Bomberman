@@ -6,6 +6,7 @@
 #include <cassert>
 #include <cstdlib>
 #include <iostream>
+#include <algorithm>
 #include "enum.hpp"
 #include "AIView.hpp"
 #include "AI.hpp"
@@ -18,7 +19,7 @@ AI::AI(AIType::eAI type, Map& map)
     _clock(0),
     _AIstate(&AI::waitState)
 {
-  this->_type = type;
+  assert((this->_type = type) != AIType::HUMAN);
 
   std::vector<std::pair<gtFunc, stFunc> >	EASY;
   std::vector<std::pair<gtFunc, stFunc> >	NORMAL;
@@ -77,7 +78,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::UPFunction);
     p.func.push_front(&AI::RIGHTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -89,7 +90,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::UPFunction);
     p.func.push_front(&AI::RIGHTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -99,7 +100,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::RIGHTFunction);
     p.func.push_front(&AI::UPFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -111,7 +112,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::RIGHTFunction);
     p.func.push_front(&AI::UPFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -121,7 +122,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::RIGHTFunction);
     p.func.push_front(&AI::DOWNFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -133,7 +134,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::RIGHTFunction);
     p.func.push_front(&AI::DOWNFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -143,7 +144,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::DOWNFunction);
     p.func.push_front(&AI::RIGHTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -155,7 +156,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::DOWNFunction);
     p.func.push_front(&AI::RIGHTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -165,7 +166,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::DOWNFunction);
     p.func.push_front(&AI::LEFTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -177,7 +178,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::DOWNFunction);
     p.func.push_front(&AI::LEFTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -187,7 +188,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::LEFTFunction);
     p.func.push_front(&AI::DOWNFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -199,7 +200,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::LEFTFunction);
     p.func.push_front(&AI::DOWNFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -209,7 +210,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::LEFTFunction);
     p.func.push_front(&AI::UPFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -221,7 +222,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::LEFTFunction);
     p.func.push_front(&AI::UPFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -233,7 +234,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::UPFunction);
     p.func.push_front(&AI::UPFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -245,7 +246,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::DOWNFunction);
     p.func.push_front(&AI::DOWNFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -257,7 +258,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::RIGHTFunction);
     p.func.push_front(&AI::RIGHTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -269,7 +270,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::RIGHTFunction);
     p.func.push_front(&AI::RIGHTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -281,7 +282,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::LEFTFunction);
     p.func.push_front(&AI::LEFTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -293,7 +294,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::DOWNFunction);
     p.func.push_front(&AI::DOWNFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -305,7 +306,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::UPFunction);
     p.func.push_front(&AI::UPFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
   {
     Path	p;
@@ -317,7 +318,7 @@ AI::AI(AIType::eAI type, Map& map)
     p.func.push_front(&AI::LEFTFunction);
     p.func.push_front(&AI::LEFTFunction);
 
-    this->_paths.push_back(p); 
+    this->_paths.push_back(p);
   }
 }
 
@@ -347,46 +348,46 @@ bool	AI::nearBomb(void)
   int	y = -7;
 
   for (y = -7; y < 0; ++y)
-  {
-    if (isWall(this->_pos._x + x, this->_pos._y + y))
-      break;
-    if (isBomb(this->_pos._x + x, this->_pos._y + y))
     {
-      return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
-	  this->_pos._x, this->_pos._y);
+      if (isWall(this->_pos._x + x, this->_pos._y + y))
+	break;
+      if (isBomb(this->_pos._x + x, this->_pos._y + y))
+	{
+	  return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
+				 this->_pos._x, this->_pos._y);
+	}
     }
-  }
   for (y = 0; y < 7; ++y)
-  {
-    if (isWall(this->_pos._x + x, this->_pos._y + y))
-      break;
-    if (isBomb(this->_pos._x + x, this->_pos._y + y))
     {
-      return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
-	  this->_pos._x, this->_pos._y);
+      if (isWall(this->_pos._x + x, this->_pos._y + y))
+	break;
+      if (isBomb(this->_pos._x + x, this->_pos._y + y))
+	{
+	  return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
+				 this->_pos._x, this->_pos._y);
+	}
     }
-  }
   y = 0;
   for (x = -7; x < 0; ++x)
-  {
-    if (isWall(this->_pos._x + x, this->_pos._y + y))
-      break;
-    if (isBomb(this->_pos._x + x, this->_pos._y + y))
     {
-      return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
-	  this->_pos._x, this->_pos._y);
+      if (isWall(this->_pos._x + x, this->_pos._y + y))
+	break;
+      if (isBomb(this->_pos._x + x, this->_pos._y + y))
+	{
+	  return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
+				 this->_pos._x, this->_pos._y);
+	}
     }
-  }
   for (x = 0; x < 7; ++x)
-  {
-    if (isWall(this->_pos._x + x, this->_pos._y + y))
-      break;
-    if (isBomb(this->_pos._x + x, this->_pos._y + y))
     {
-      return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
-	  this->_pos._x, this->_pos._y);
+      if (isWall(this->_pos._x + x, this->_pos._y + y))
+	break;
+      if (isBomb(this->_pos._x + x, this->_pos._y + y))
+	{
+	  return this->dodgeBomb(this->_pos._x + x, this->_pos._y + y,
+				 this->_pos._x, this->_pos._y);
+	}
     }
-  }
   return false;
 }
 
@@ -395,27 +396,27 @@ bool	AI::nearBonus(void)
   std::vector<std::pair<int, int> >	tmp;
 
   for (int y = -4; y < 4; ++y)
-  {
-    for (int x = -4; x < 4; ++x)
     {
-      if (isBonus(this->_pos._x + x, this->_pos._y + y)) 
-      {
-	if (this->pathFind(this->_pos._x + x, this->_pos._y + y,
-	    	           this->_pos._x, this->_pos._y))
-	  tmp.push_back(std::make_pair(x, y));
-      }
+      for (int x = -4; x < 4; ++x)
+	{
+	  if (isBonus(this->_pos._x + x, this->_pos._y + y))
+	    {
+	      if (this->pathFind(this->_pos._x + x, this->_pos._y + y,
+				 this->_pos._x, this->_pos._y))
+		tmp.push_back(std::make_pair(x, y));
+	    }
+	}
     }
-  }
   this->_target.clear();
   if (tmp.size() > 0)
-  {
-    size_t	rander = random() % tmp.size();
+    {
+      size_t	rander = random() % tmp.size();
 
-    this->pathFind(this->_pos._x + tmp[rander].first,
-	           this->_pos._y + tmp[rander].second,
-		   this->_pos._x, this->_pos._y);
-    return true;
-  }
+      this->pathFind(this->_pos._x + tmp[rander].first,
+		     this->_pos._y + tmp[rander].second,
+		     this->_pos._x, this->_pos._y);
+      return true;
+    }
   return false;
 }
 
@@ -424,42 +425,44 @@ bool	AI::nearEmpty(void)
   std::vector<std::pair<int, int> >	tmp;
 
   for (int y = -4; y < 4; ++y)
-  {
-    for (int x = -4; x < 4; ++x)
     {
-      if (isEmpty(this->_pos._x + x, this->_pos._y + y)) 
-      {
-	if (this->pathFind(this->_pos._x + x, this->_pos._y + y,
-	    	           this->_pos._x, this->_pos._y))
-	  tmp.push_back(std::make_pair(x, y));
-      }
+      for (int x = -4; x < 4; ++x)
+	{
+	  if (isEmpty(this->_pos._x + x, this->_pos._y + y))
+	    {
+	      if (this->pathFind(this->_pos._x + x, this->_pos._y + y,
+				 this->_pos._x, this->_pos._y))
+		tmp.push_back(std::make_pair(x, y));
+	    }
+	}
     }
-  }
   this->_target.clear();
   if (tmp.size() > 0)
-  {
-    size_t	rander = random() % tmp.size();
+    {
+      size_t	rander = random() % tmp.size();
 
-    this->pathFind(this->_pos._x + tmp[rander].first,
-	           this->_pos._y + tmp[rander].second,
-		   this->_pos._x, this->_pos._y);
-    return true;
-  }
+      this->pathFind(this->_pos._x + tmp[rander].first,
+		     this->_pos._y + tmp[rander].second,
+		     this->_pos._x, this->_pos._y);
+      return true;
+    }
+  return false;
+}
+
+bool	AI::operator()(const std::pair<gtFunc, stFunc>& p)
+{
+  if ((this->*(p.first))())
+    {
+      this->_AIstate = p.second;
+      return true;
+    }
   return false;
 }
 
 void	AI::waitState(void)
 {
-  for (std::vector<std::pair<gtFunc, stFunc> >::iterator it = this->_table.at(this->_type).begin();
-      it != this->_table.at(this->_type).end();
-      ++it)
-  {
-    if ((this->*(it->first))())
-    {
-      this->_AIstate = it->second;
-      return;
-    }
-  }
+  std::for_each<std::vector<std::pair<gtFunc, stFunc> >::iterator, AI& >
+    (this->_table.at(this->_type).begin(), this->_table.at(this->_type).end(), *this);
 }
 
 void	AI::surviveState(void)
@@ -470,10 +473,10 @@ void	AI::surviveState(void)
 void	AI::moveState(void)
 {
   if (this->_target.size() == 0)
-  {
-    this->_AIstate = &AI::waitState;
-    return;
-  }
+    {
+      this->_AIstate = &AI::waitState;
+      return;
+    }
   if ((this->*(this->_target.back()))(*this->_clock))
     this->_target.pop_back();
 }
@@ -487,27 +490,23 @@ void	AI::attackState(void)
 bool	AI::pathDiscovery(size_t cx, size_t cy, Path const& p)
 {
   for (size_t i = 0; i < p.elt.size(); ++i)
-  {
-    if (isWall(cx + p.elt[i].first, cy + p.elt[i].second))
+    if (isWall(cx + p.elt.at(i).first, cy + p.elt.at(i).second))
       return false;
-  }
   return true;
 }
 
 bool	AI::pathFind(size_t x, size_t y, size_t cx, size_t cy)
 {
-  for (std::vector<Path>::iterator it = this->_paths.begin();
-      it != this->_paths.end();
-      ++it)
-  {
+  std::vector<Path>::iterator it = this->_paths.begin();
+
+  for ( ; it != this->_paths.end() ; ++it)
     if (pathDiscovery(cx, cy, *it) &&
-	cx + it->elt[it->elt.size() - 1].first == x &&
-	cy + it->elt[it->elt.size() - 1].second == y)
-    {
-      this->_target.insert(this->_target.begin(), it->func.begin(), it->func.end());
-      return true;
-    }
-  }
+	cx + it->elt.at(it->elt.size() - 1).first == x &&
+	cy + it->elt.at(it->elt.size() - 1).second == y)
+      {
+	this->_target.insert(this->_target.begin(), it->func.begin(), it->func.end());
+	return true;
+      }
   return false;
 }
 
@@ -523,30 +522,30 @@ bool	AI::dodgeBomb(size_t x, size_t y, size_t cx, size_t cy)
 bool	AI::dodgingX(size_t cx, size_t cy)
 {
   if (isEmpty(cx - 1, cy))
-  {
-    this->_target.push_back(&AI::LEFTFunction);
-    return true;
-  }
+    {
+      this->_target.push_back(&AI::LEFTFunction);
+      return true;
+    }
   if (isEmpty(cx + 1, cy))
-  {
-    this->_target.push_back(&AI::RIGHTFunction);
-    return true;
-  }
+    {
+      this->_target.push_back(&AI::RIGHTFunction);
+      return true;
+    }
   return false;
 }
 
 bool	AI::dodgingY(size_t cx, size_t cy)
 {
   if (isEmpty(cx, cy - 1))
-  {
-    this->_target.push_back(&AI::UPFunction);
-    return true;
-  }
+    {
+      this->_target.push_back(&AI::UPFunction);
+      return true;
+    }
   if (isEmpty(cx, cy + 1))
-  {
-    this->_target.push_back(&AI::DOWNFunction);
-    return true;
-  }
+    {
+      this->_target.push_back(&AI::DOWNFunction);
+      return true;
+    }
   return false;
 }
 
@@ -559,13 +558,13 @@ void	AI::play(gdl::GameClock const& clock, gdl::Input&)
 {
   assert(this->_view);
   if ((this->_start >= 0) && (this->_startTimer <= clock.getTotalGameTime()))
-  {
-    --this->_start;
-    this->_startTimer = clock.getTotalGameTime() + 1.0f;
-  }
+    {
+      --this->_start;
+      this->_startTimer = clock.getTotalGameTime() + 1.0f;
+    }
   else if (this->_start < 0)
-  {
-    this->_clock = &clock;
-    (this->*_AIstate)();
-  }
+    {
+      this->_clock = &clock;
+      (this->*_AIstate)();
+    }
 }

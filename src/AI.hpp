@@ -20,16 +20,16 @@ class AI : public APlayer
   typedef bool	(AI::*isFunc)(size_t x, size_t y);
   typedef void	(AI::*stFunc)(void);
   typedef bool	(AI::*gtFunc)(void);
-
+  
   struct Path
   {
     std::vector<std::pair<int, int> >	elt;
     std::deque<dirFunc>			func;
   };
-
+  
 public:
   AI(AIType::eAI, Map&);
-
+  
 private:
   AIView const*			_view;
   int				_start;
@@ -38,28 +38,29 @@ private:
   stFunc			_AIstate;
   std::deque<dirFunc>		_target;
   std::vector<Path>		_paths;
-
+  
   std::vector<std::vector<std::pair<gtFunc, stFunc> > >	_table;
-
+  
 public:
   void	updateView(AIView const*);
   void	play(gdl::GameClock const&, gdl::Input&);
-
+  bool	operator()(const std::pair<gtFunc, stFunc>&);
+  
 private:
   bool	isWall(size_t x, size_t y) const;
   bool	isBomb(size_t x, size_t y) const;
   bool	isEmpty(size_t x, size_t y) const;
   bool	isBonus(size_t x, size_t y) const;
-
+  
   bool	nearBomb(void);
   bool	nearBonus(void);
   bool	nearEmpty(void);
-
+  
   void	waitState(void);
   void	surviveState(void);
   void	attackState(void);
   void	moveState(void);
-
+  
   bool	pathFind(size_t x, size_t y, size_t cx, size_t cy);
   bool	pathDiscovery(size_t cx, size_t cy, Path const& p);
   bool	dodgeBomb(size_t x, size_t y, size_t cx, size_t cy);
