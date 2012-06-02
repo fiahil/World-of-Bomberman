@@ -3,7 +3,6 @@
  * 21.05.2012
  */
 
-#include <string>
 #include <stdexcept>
 #include <algorithm>
 #include "Sound.hpp"

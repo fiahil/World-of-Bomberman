@@ -7,7 +7,12 @@
 #include "TextEdit.hpp"
 
 TextEdit::TextEdit()
-  : _str(""), _x(0), _y(0), _size(20), _sizeMax(20), _timers(48, -1.0f)
+  : _str(""),
+    _x(0),
+    _y(0),
+    _size(20),
+    _sizeMax(20),
+    _timers(48, -1.0f)
 {
   this->_ref[gdl::Keys::A] = "a";
   this->_ref[gdl::Keys::B] = "b";
@@ -59,7 +64,12 @@ TextEdit::TextEdit()
 }
 
 TextEdit::TextEdit(int x, int y, std::string const& str)
-  : _str(str), _x(x), _y(y), _size(20), _sizeMax(20), _timers(47, -1.0f)
+  : _str(str),
+    _x(x),
+    _y(y),
+    _size(20),
+    _sizeMax(20),
+    _timers(48, -1.0f)
 {
   this->_ref[gdl::Keys::A] = "a";
   this->_ref[gdl::Keys::B] = "b";
@@ -112,33 +122,36 @@ TextEdit::TextEdit(int x, int y, std::string const& str)
 
 TextEdit::~TextEdit()
 {
-
 }
 
-void	TextEdit::update(gdl::GameClock const& clock, gdl::Input& input)
+#include <iostream>
+
+void		TextEdit::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   int	nb = 0;
   std::string	tmp;
 
   if (this->_str.size() < this->_sizeMax)
-    for (std::map<gdl::Keys::Key, std::string>::iterator it = this->_ref.begin(); it != this->_ref.end(); ++it, ++nb)
-      if (input.isKeyDown(it->first) && clock.getTotalGameTime() >= this->_timers[nb])
+    for (std::map<gdl::Keys::Key, std::string>::iterator it = this->_ref.begin();
+	 it != this->_ref.end(); ++it, ++nb)
+      if (input.isKeyDown(it->first) && clock.getTotalGameTime() >= this->_timers.at(nb))
 	{
 	  tmp = it->second;
 	  if ((input.isKeyDown(gdl::Keys::LShift) || input.isKeyDown(gdl::Keys::RShift)) &&
 	      it->first >= gdl::Keys::A && it->first <= gdl::Keys::Z)
-	    tmp= tmp[0] - 32;
+	    tmp = tmp.at(0) - 32;
 	  this->_str += tmp;
-	  this->_timers[nb] = clock.getTotalGameTime() + 0.15f;
+	  this->_timers.at(nb) = clock.getTotalGameTime() + 0.15f;
 	}
-  if (input.isKeyDown(gdl::Keys::Back) && !this->_str.empty() && clock.getTotalGameTime() >= this->_timers[47])
+  if (input.isKeyDown(gdl::Keys::Back) && !this->_str.empty() &&
+      clock.getTotalGameTime() >= this->_timers.at(47))
     {
       this->_str.resize(this->_str.size() - 1);
-      this->_timers[47] = clock.getTotalGameTime() + 0.08f;
+      this->_timers.at(47) = clock.getTotalGameTime() + 0.08f;
     }
 }
 
-void	TextEdit::draw()
+void		TextEdit::draw()
 {
   glMatrixMode(GL_PROJECTION);
   glPushMatrix();
@@ -154,7 +167,7 @@ void	TextEdit::draw()
   glPopMatrix();
 }
 
-void	TextEdit::setPos(int x, int y)
+void		TextEdit::setPos(int x, int y)
 {
   this->_x = x;
   this->_y = y;
@@ -165,22 +178,22 @@ std::string const&	TextEdit::getStr() const
   return this->_str;
 }
 
-void	TextEdit::setStr(std::string const& str)
+void		TextEdit::setStr(std::string const& str)
 {
   this->_str = str;
 }
 
-void	TextEdit::setSize(int size)
+void		TextEdit::setSize(int size)
 {
   this->_size = size;
 }
 
-int	TextEdit::getSize() const
+int		TextEdit::getSize() const
 {
   return this->_size;
 }
 
-void	TextEdit::setSizeMax(size_t nb)
+void		TextEdit::setSizeMax(size_t nb)
 {
   this->_sizeMax = nb;
 }

@@ -3,7 +3,6 @@
  * 03.05.12
  */
 
-#include <vector>
 #include <iostream>
 #include "enum.hpp"
 #include "Profile.hpp"
@@ -26,6 +25,7 @@ static const std::string	g_refSkill[Skill::LAST] = {
 Profile::Profile()
   : _id(0),
     _skin(Skin::VARIANT),
+    _skill(Skill::HALLU),
     _name("Default_Player"),
     _achievement(Success::LAST, false)
 {

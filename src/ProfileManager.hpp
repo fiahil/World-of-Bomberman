@@ -3,8 +3,8 @@
  * 21 Mai 2012
  */
 
-#ifndef		__PROFILEMANAGER_HPP__
-#define		__PROFILEMANAGER_HPP__
+#ifndef	__PROFILEMANAGER_HPP__
+#define	__PROFILEMANAGER_HPP__
 
 #include "Profile.hpp"
 

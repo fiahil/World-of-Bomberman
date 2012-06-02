@@ -16,12 +16,12 @@
 class TextEdit
 {
 private:
-  std::string	_str;
-  int		_x;
-  int		_y;
-  int		_size;
-  size_t	_sizeMax;
-  gdl::Text	_text;
+  std::string				_str;
+  int					_x;
+  int					_y;
+  int					_size;
+  size_t				_sizeMax;
+  gdl::Text				_text;
   std::map<gdl::Keys::Key, std::string>	_ref;
   std::vector<double>			_timers;
 

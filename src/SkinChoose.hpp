@@ -3,8 +3,8 @@
  * 29.05.12
  */
 
-#ifndef		__SKIN_CHOICE_HPP__
-#define		__SKIN_CHOICE_HPP__
+#ifndef	__SKIN_CHOICE_HPP__
+#define	__SKIN_CHOICE_HPP__
 
 #include "AMenu.hpp"
 
@@ -13,11 +13,11 @@ class SkinChoose : public AMenu
 private:
   std::vector<gdl::Model>	_model;
   gdl::Model			_tp;
-  double	_rot;
-  double	_timerL;
-  double	_timerR;
-  size_t	_indexSkin;
-  size_t	_indexSkill;
+  double		_rot;
+  double		_timerL;
+  double		_timerR;
+  size_t		_indexSkin;
+  size_t		_indexSkill;
 
 private:
   void		updateText();

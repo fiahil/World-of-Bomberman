@@ -14,8 +14,8 @@ class	TeamMenu : public AMenu
 {
 private:
   std::vector<Profile*>&	_profiles;
-  std::vector<int>	_nb;
-  std::vector<double>	_timersLR;
+  std::vector<int>		_nb;
+  std::vector<double>		_timersLR;
 
 private:
   void	updateText() const;

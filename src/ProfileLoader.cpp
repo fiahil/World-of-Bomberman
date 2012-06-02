@@ -1,7 +1,13 @@
-#include <algorithm>
+/*
+ * Texan
+ * 25.05.12
+ */
+
 #include <iostream>
+#include <algorithm>
 #include <sstream>
 #include <stdexcept>
+#include "Common.hpp"
 #include "DirWalker.hpp"
 #include "ProfileLoader.hpp"
 #include "SaveManager.hpp"
@@ -10,17 +16,18 @@ ProfileLoader::ProfileLoader(void)
 {
   this->_folder = "./Ressources/profiles/";
   this->setProfiles();
-}
+ }
 
-bool				ProfileLoader::isNum(std::string str) const
+bool				ProfileLoader::isNum(std::string const& str) const
 {
-  for (int i = 0; str[i]; ++i)
-    if ((str[i] < '0') ^ (str[i] > '9'))
+  for (std::string::const_iterator it = str.begin();
+       it != str.end(); ++it)
+    if (((*it) < '0') ^ ((*it) > '9'))
       return (false);
   return (true);
 }
 
-int				ProfileLoader::idToInt(std::string str)
+int				ProfileLoader::idToInt(std::string const& str) const
 {
   std::stringstream	os(str);
   int			id;
@@ -35,7 +42,7 @@ void				ProfileLoader::checkSaves(void)
 
   for (unsigned int i = 0; i < this->_profiles.back()->getSave().size(); ++i)
     {
-      std::stringstream	ss(this->_profiles.back()->getSave()[i]);
+      std::stringstream	ss(this->_profiles.back()->getSave().at(i));
       size_t		id;
 
       ss >> id;
@@ -81,16 +88,7 @@ void				ProfileLoader::setProfiles(void)
 
 const std::vector<Profile *>&	ProfileLoader::getProfiles(void) const
 {
-  return (this->_profiles);
-}
-
-static void	freeProfile(Profile *_profile)
-{
-  if (_profile)
-    {
-      delete (_profile);
-      _profile = 0;
-    }
+  return this->_profiles;
 }
 
 const std::vector<std::string>&	ProfileLoader::getNames(void) const
@@ -100,5 +98,5 @@ const std::vector<std::string>&	ProfileLoader::getNames(void) const
 
 void				ProfileLoader::unsetProfiles(void)
 {
-  for_each(this->_profiles.begin(), this->_profiles.end(), freeProfile);
+  std::for_each(this->_profiles.begin(), this->_profiles.end(), deleteItem<Profile*>);
 }
