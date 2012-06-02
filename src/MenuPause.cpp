@@ -18,7 +18,7 @@ MenuPause::MenuPause(GameManager& game)
   this->_tags.push_back(new Tag("menu/tags/MainMenuNormal.png", "menu/tags/MainMenuHighlit.png", false, false, TokenMenu::PROFILE, 3629.0f, 0.0f, 445.0f));
   this->_tags.push_back(new Tag("menu/tags/QuitNormal.png", "menu/tags/QuitHighlit.png", false, false, TokenMenu::QUIT, 3629.0f, 0.0f, 510.0f));
   this->_text.setSize(20);
-  this->_text.setPosition(500, 200);
+  this->_text.setPosition(650, 200);
 }
 
 MenuPause::~MenuPause()
@@ -111,6 +111,10 @@ void	MenuPause::saveCurGame()
 
 void	MenuPause::update(gdl::GameClock const& clock, gdl::Input& input)
 {
+  if (this->_cursor != 2)
+    {
+      this->_msg = "";
+    }
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
