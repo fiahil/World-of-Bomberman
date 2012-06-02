@@ -96,8 +96,12 @@ void	Sound::loadPlaylist(std::string const& soundName, size_t idx, std::vector<S
 
 void	Sound::playBack(Audio::eAudio index)
 {
-  this->_system->playSound(FMOD_CHANNEL_FREE, this->_bank.at(index).sound,
-      0, &this->_bank.at(index).channel);
+  bool	i = false;
+
+  this->_bank.at(index).channel->isPlaying(&i);
+  if (!i)
+    this->_system->playSound(FMOD_CHANNEL_FREE, this->_bank.at(index).sound,
+	0, &this->_bank.at(index).channel);
 }
 
 void	Sound::playGame()
