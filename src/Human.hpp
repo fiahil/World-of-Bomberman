@@ -46,6 +46,7 @@ public:
   virtual void	setTimer(double);
 
   void		setHalluView(AIView const*);
+  void		setConfig(Config const&);
 
 private:
   Input::eMode			_mode;

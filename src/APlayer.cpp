@@ -526,12 +526,12 @@ void		APlayer::setNbKills(size_t val)
 
 size_t		APlayer::getSpeed() const
 {
-  return this->_speed * 10000;
+  return this->_speed * 10000.0f;
 }
 
 void		APlayer::setSpeed(size_t val)
 {
-  this->_speed = val / 10000;
+  this->_speed = static_cast<double>(val) / 10000.0f;
 }
 
 void		APlayer::setTimer(double)
@@ -618,17 +618,17 @@ bool		APlayer::DOWNFunction(gdl::GameClock const& clock)
   this->_moving = true;
   if ((current = static_cast<double>(clock.getTotalGameTime())) >=
       this->_timers[HumGame::DOWN] && this->_realPos == this->_pos._pos)
-  {
-    this->_timers[HumGame::DOWN] = current + 0.15;
-    this->_dir = Dir::SOUTH;
-    if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
     {
-      this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
-      this->_state = State::RUN;
-      this->_model.play(g_refAnimName[this->_state]);
-      return true;
+      this->_timers[HumGame::DOWN] = current + 0.15;
+      this->_dir = Dir::SOUTH;
+      if (this->_map.canMoveAt(this->_pos._x, this->_pos._y + 1))
+	{
+	  this->_pos.setPos(this->_pos._x, this->_pos._y + 1);
+	  this->_state = State::RUN;
+	  this->_model.play(g_refAnimName[this->_state]);
+	  return true;
+	}
     }
-  }
   return false;
 }
 

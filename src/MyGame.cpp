@@ -12,7 +12,7 @@
 #include "Human.hpp"
 
 MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
-	       APlayer* pl1,  APlayer* pl2)
+	       bool loadGame, APlayer* pl1,  APlayer* pl2)
   : _clock(clock),
     _input(input),
     _match(match),
@@ -22,6 +22,7 @@ MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
     _view(0),
     _EOG(false),
     _EOGTimer(-1.0f),
+    _loadGame(loadGame),
     _HUD(HUD::LAST)
 {
 }
@@ -35,7 +36,8 @@ void		MyGame::drawer(T* val)
 void		MyGame::initialize(void)
 {
   this->_match._map->initialize();
-  this->_match._map->setSpawnTeam(this->_match._players);
+  if (!this->_loadGame)
+    this->_match._map->setSpawnTeam(this->_match._players);
   for (unsigned int i = 0; i < this->_match._players.size(); ++i)
     this->_match._players[i]->initialize();
   this->_HUD[HUD::LIFE_BAR] = gdl::Image::load("textures/life.png");
