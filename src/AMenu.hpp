@@ -53,7 +53,7 @@ public:
 
 public:
   void			setChangeMenu(bool);
-  void			setTextDraw(bool);
+  virtual void			setTextDraw(bool);
   TokenMenu::eMenu	getContent() const;
   const GameManager &	getGameManager() const;
 
