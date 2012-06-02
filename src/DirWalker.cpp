@@ -12,7 +12,8 @@
 #include "DirWalker.hpp"
 
 DirWalker::DirWalker(std::string const& name)
-  : _dir(0), _current(0)
+  : _dir(0),
+    _current(0)
 {
   this->_dir = opendir(name.c_str());
   if (this->_dir == 0)
