@@ -8,14 +8,13 @@
 
 Config::Config()
 {
-  this->_conf[HumGame::UP] = gdl::Keys::Up;
-  this->_conf[HumGame::LEFT] = gdl::Keys::Left;
-  this->_conf[HumGame::RIGHT] = gdl::Keys::Right;
-  this->_conf[HumGame::DOWN] = gdl::Keys::Down;
+  this->_conf[HumGame::UP] = gdl::Keys::W;
+  this->_conf[HumGame::LEFT] = gdl::Keys::A;
+  this->_conf[HumGame::RIGHT] = gdl::Keys::D;
+  this->_conf[HumGame::DOWN] = gdl::Keys::S;
   this->_conf[HumGame::ATTACK] = gdl::Keys::Space;
   this->_conf[HumGame::PAUSE] = gdl::Keys::Escape;
-  this->_conf[HumGame::CHEAT] = gdl::Keys::Tab;
-  this->_conf[HumGame::SKILL] = gdl::Keys::Return;
+  this->_conf[HumGame::SKILL] = gdl::Keys::E;
 }
 
 Config::~Config()
