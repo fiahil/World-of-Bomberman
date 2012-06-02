@@ -7,12 +7,14 @@
 #include "AIView.hpp"
 
 View::View(Elt::eElt elt, size_t i)
-  : type(elt), pp(i)
+  : type(elt),
+    pp(i)
 {
 }
 
 View::View()
-  : type(Elt::EMPTY), pp(0)
+  : type(Elt::EMPTY),
+    pp(0)
 {
 }
 
@@ -41,14 +43,14 @@ size_t		AIView::getY(void) const
 
 void		AIView::setBombAt(size_t x, size_t y)
 {
-  this->_view[AIPOS(x, y)].type = Elt::BOMB;
-  this->_view[AIPOS(x, y)].pp = 0;
+  this->_view.at(AIPOS(x, y)).type = Elt::BOMB;
+  this->_view.at(AIPOS(x, y)).pp = 0;
 }
 
 void		AIView::setBonusAt(size_t x, size_t y, BonusType::eBonus b)
 {
-  this->_view[AIPOS(x, y)].type = Elt::BONUS;
-  this->_view[AIPOS(x, y)].pp = b;
+  this->_view.at(AIPOS(x, y)).type = Elt::BONUS;
+  this->_view.at(AIPOS(x, y)).pp = b;
 }
 
 View const&	AIView::at(size_t x, size_t y) const
