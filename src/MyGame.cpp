@@ -22,6 +22,7 @@ MyGame::MyGame(gdl::GameClock& clock, gdl::Input& input, Match& match,
     _view(0),
     _EOG(false),
     _EOGTimer(-1.0f),
+    _nb(0),
     _loadGame(loadGame),
     _HUD(HUD::LAST)
 {
@@ -33,36 +34,39 @@ void		MyGame::drawer(T* val)
   val->draw();
 }
 
+static void	initPlayers(APlayer* elem)
+{
+  elem->initialize();
+}
+
 void		MyGame::initialize(void)
 {
   this->_match._map->initialize();
   if (!this->_loadGame)
     this->_match._map->setSpawnTeam(this->_match._players);
-  for (unsigned int i = 0; i < this->_match._players.size(); ++i)
-    this->_match._players[i]->initialize();
-  this->_HUD[HUD::LIFE_BAR] = gdl::Image::load("textures/life.png");
-  this->_HUD[HUD::SHIELD] = gdl::Image::load("textures/shield.png");
-  this->_HUD[HUD::SPRINT] = gdl::Image::load("textures/sprint.png");
-  this->_HUD[HUD::POWER] = gdl::Image::load("textures/power.png");
-  this->_HUD[HUD::LUST] = gdl::Image::load("textures/fury.png");
-  this->_HUD[HUD::BOMB_OK] = gdl::Image::load("textures/bombActive.png");
-  this->_HUD[HUD::BOMB_KO] = gdl::Image::load("textures/bombInactive.png");
-  this->_HUD[HUD::SKILL_OK] = gdl::Image::load("textures/skillActive.png");
-  this->_HUD[HUD::SKILL_KO] = gdl::Image::load("textures/skillInactive.png");
-  this->_HUD[HUD::BIGBOMB_OK] = gdl::Image::load("textures/bigbombActive.png");
-  this->_HUD[HUD::BIGBOMB_KO] = gdl::Image::load("textures/bigbombInactive.png");
-  this->_HUD[HUD::MEGABOMB_OK] = gdl::Image::load("textures/megabombActive.png");
-  this->_HUD[HUD::MEGABOMB_KO] = gdl::Image::load("textures/megabombInactive.png");
-  this->_HUD[HUD::LIFE] = gdl::Image::load("textures/pv.png");
-
-  this->_HUD[HUD::SUCCESS_ONE_KILL] = gdl::Image::load("textures/one_kill_success.png");
-  this->_HUD[HUD::SUCCESS_BONUS] = gdl::Image::load("textures/bonus_success.png");
-  this->_HUD[HUD::SUCCESS_FIVE_KILL] = gdl::Image::load("textures/five_kill_success.png");
-  this->_HUD[HUD::SUCCESS_POWER] = gdl::Image::load("textures/power_success.png");
-  this->_HUD[HUD::SUCCESS_LUST] = gdl::Image::load("textures/lust_success.png");
-  this->_HUD[HUD::SUCCESS_TP] = gdl::Image::load("textures/tp_success.png");
-  this->_HUD[HUD::SUCCESS_DIE] = gdl::Image::load("textures/die_success.png");
-  this->_HUD[HUD::SUCCESS_FABULOUS] = gdl::Image::load("textures/fabulous_success.png");
+  std::for_each(this->_match._players.begin(), this->_match._players.end(), initPlayers);
+  this->_HUD.at(HUD::LIFE_BAR) = gdl::Image::load("textures/life.png");
+  this->_HUD.at(HUD::SHIELD) = gdl::Image::load("textures/shield.png");
+  this->_HUD.at(HUD::SPRINT) = gdl::Image::load("textures/sprint.png");
+  this->_HUD.at(HUD::POWER) = gdl::Image::load("textures/power.png");
+  this->_HUD.at(HUD::LUST) = gdl::Image::load("textures/fury.png");
+  this->_HUD.at(HUD::BOMB_OK) = gdl::Image::load("textures/bombActive.png");
+  this->_HUD.at(HUD::BOMB_KO) = gdl::Image::load("textures/bombInactive.png");
+  this->_HUD.at(HUD::SKILL_OK) = gdl::Image::load("textures/skillActive.png");
+  this->_HUD.at(HUD::SKILL_KO) = gdl::Image::load("textures/skillInactive.png");
+  this->_HUD.at(HUD::BIGBOMB_OK) = gdl::Image::load("textures/bigbombActive.png");
+  this->_HUD.at(HUD::BIGBOMB_KO) = gdl::Image::load("textures/bigbombInactive.png");
+  this->_HUD.at(HUD::MEGABOMB_OK) = gdl::Image::load("textures/megabombActive.png");
+  this->_HUD.at(HUD::MEGABOMB_KO) = gdl::Image::load("textures/megabombInactive.png");
+  this->_HUD.at(HUD::LIFE) = gdl::Image::load("textures/pv.png");
+  this->_HUD.at(HUD::SUCCESS_ONE_KILL) = gdl::Image::load("textures/one_kill_success.png");
+  this->_HUD.at(HUD::SUCCESS_BONUS) = gdl::Image::load("textures/bonus_success.png");
+  this->_HUD.at(HUD::SUCCESS_FIVE_KILL) = gdl::Image::load("textures/five_kill_success.png");
+  this->_HUD.at(HUD::SUCCESS_POWER) = gdl::Image::load("textures/power_success.png");
+  this->_HUD.at(HUD::SUCCESS_LUST) = gdl::Image::load("textures/lust_success.png");
+  this->_HUD.at(HUD::SUCCESS_TP) = gdl::Image::load("textures/tp_success.png");
+  this->_HUD.at(HUD::SUCCESS_DIE) = gdl::Image::load("textures/die_success.png");
+  this->_HUD.at(HUD::SUCCESS_FABULOUS) = gdl::Image::load("textures/fabulous_success.png");
 }
 
 bool		MyGame::updateBomb(Bomb *b)
@@ -101,50 +105,49 @@ bool		MyGame::updateExplodedBomb(ExplodedBomb *b)
 bool		MyGame::updatePlayer(APlayer *p)
 {
   Human*	ph = dynamic_cast<Human*>(p);
-
+  
   if (ph)
     ph->setHalluView(this->_view);
-
+  
   std::for_each< std::list<ExplodedBomb*>::iterator, APlayer& >
-    (
-     this->_match._explodedBombs.begin(),
+    (this->_match._explodedBombs.begin(),
      this->_match._explodedBombs.end(),
      (*p));
-
-     if (p->getPv() == 0)
-       {
-	 if (p->getLastHitId() != p)
-	   p->getLastHitId()->incNbKills();
-	 this->_match._dead.push_back(p);
-	 return true;
-       }
-
-     for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
-	  it != this->_match._bonus.end();
-	  ++it)
-       {
-	 if (p->takeBonus((*it)))
-	   {
-	     delete (*it);
-	     this->_match._bonus.erase(it);
-	     break;
-	   }
-	 this->_view->setBonusAt((*it)->getPos()._x, (*it)->getPos()._y, (*it)->getType());
-       }
-
-     if (p->getTeamId() != this->_match._players.front()->getTeamId())
-       this->_EOG = false;
-
-     if (this->_pl1 == p || this->_pl2 == p)
-    	++this->_nb;
-
-     Bomb*		newBomb;
-
-     p->update(this->_clock, this->_input);
-     if ((newBomb = p->isAttack()))
-       this->_match._bombs.push_back(newBomb);
-     return false;
-  }
+  
+  if (p->getPv() == 0)
+    {
+      if (p->getLastHitId() != p)
+	p->getLastHitId()->incNbKills();
+      this->_match._dead.push_back(p);
+      return true;
+    }
+  
+  for (std::list<Bonus*>::iterator it = this->_match._bonus.begin();
+       it != this->_match._bonus.end();
+       ++it)
+    {
+      if (p->takeBonus((*it)))
+	{
+	  delete (*it);
+	  this->_match._bonus.erase(it);
+	  break;
+	}
+      this->_view->setBonusAt((*it)->getPos()._x, (*it)->getPos()._y, (*it)->getType());
+    }
+  
+  if (p->getTeamId() != this->_match._players.front()->getTeamId())
+    this->_EOG = false;
+  
+  if (this->_pl1 == p || this->_pl2 == p)
+    ++this->_nb;
+  
+  Bomb*		newBomb;
+  
+  p->update(this->_clock, this->_input);
+  if ((newBomb = p->isAttack()))
+    this->_match._bombs.push_back(newBomb);
+  return false;
+}
 
 bool		MyGame::updateDeadPlayer(APlayer* p)
 {
@@ -287,7 +290,7 @@ void		MyGame::resumeGame()
     this->_pl2->setTimer(time);
 }
 
-Match &	MyGame::getMatch() const
+Match&		MyGame::getMatch() const
 {
   return this->_match;
 }
