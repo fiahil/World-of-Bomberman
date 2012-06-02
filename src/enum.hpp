@@ -183,6 +183,7 @@ struct TokenMenu
       CREATEGAME,
       PAUSE,
       GAMERESULT,
+      LOADING,
       LAST
     };
 };

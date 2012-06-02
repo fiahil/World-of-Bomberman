@@ -30,6 +30,7 @@
 #include "TeamMenu.hpp"
 #include "MenuPause.hpp"
 #include "GameResult.hpp"
+#include "Loading.hpp"
 #include "MenuStats.hpp"
 #include "Human.hpp"
 #include "AI.hpp"
@@ -41,6 +42,7 @@ MenuManager::MenuManager(int w, int h)
     _camera(w, h, 0, 0),
     _createGame(false),
     _stopGame(false),
+    _timerLoading(-1.0f),
     _refInitGame(GameMode::LAST, 0)
 {
   MapManager	mapManager;
@@ -109,6 +111,8 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::PAUSE]->initialize();
   this->_menu[TokenMenu::GAMERESULT] = new GameResult(this->_gameManager, this->_gameManager._match);
   this->_menu[TokenMenu::GAMERESULT]->initialize();
+  this->_menu[TokenMenu::LOADING] = new Loading(this->_gameManager);
+  this->_menu[TokenMenu::LOADING]->initialize();
 
   this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
 		       this->_menu[this->_curMenu]->getCenterY());
@@ -134,7 +138,8 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       else if (tmp == TokenMenu::CREATEGAME)
 	{
 	  this->_createGame = true;
-	  tmp = TokenMenu::PROFILE;
+	  this->_timerLoading = clock.getTotalGameTime() + 3.0f;
+	  tmp = TokenMenu::LOADING; 
 	}
       else if (tmp == TokenMenu::PAUSE)
 	this->_resume = true;
@@ -165,7 +170,7 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 	  while (this->_gameManager._match._bonus.size())
 	    {
 	      delete this->_gameManager._match._bonus.back();
-	      this->_gameManager._match._bonus.pop_back();
+      this->_gameManager._match._bonus.pop_back();
 	    }
 	  while (this->_gameManager._match._explodedBombs.size())
 	    {
@@ -281,6 +286,8 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
   APlayer*	pl2 = 0;
   MyGame*	game = 0;
 
+  if (this->_createGame && clock.getTotalGameTime() < this->_timerLoading)
+      return 0;
   if (this->_createGame)
     {
       std::cout << "Create game begin" << std::endl;
