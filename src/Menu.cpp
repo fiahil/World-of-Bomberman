@@ -51,8 +51,8 @@ void		Menu::updateIntro()
   {
     cvReleaseCapture(&this->_capture);
     this->_intro = false;
-    Sound::getMe()->stop(Audio::INTRO);
-    Sound::getMe()->playMenu();
+    Sound::getMe()->stopLastSound();
+    Sound::getMe()->playMusic(AudioMode::MENU);
     this->_menu->initCamera();
   }
 }
@@ -73,7 +73,6 @@ void		Menu::updateGame()
     }
   else
     this->_game->update();
-  Sound::getMe()->updateGame();
 }
 
 void		Menu::updateMenu()
@@ -91,8 +90,8 @@ void		Menu::updateMenu()
 	      this->_game->unload();
 	      delete this->_game;
 	    }
-	  Sound::getMe()->stopMenu();
-	  Sound::getMe()->playGame();
+	  Sound::getMe()->stopMusic();
+	  Sound::getMe()->playMusic(AudioMode::GAME);
 	  this->_game = tmp;
 	}
       else if (this->_menu->isResume())
@@ -106,15 +105,15 @@ void		Menu::updateMenu()
 	  this->_game->unload();
 	  delete this->_game;
 	  this->_game = 0;
-	  Sound::getMe()->stopGame();
-	  Sound::getMe()->playMenu();
+	  Sound::getMe()->stopMusic();
+	  Sound::getMe()->playMusic(AudioMode::MENU);
 	}
-      Sound::getMe()->updateMenu();
     }
 }
 
 void		Menu::update(void)
 {
+  Sound::getMe()->updateMusic();
   if (this->_intro)
     this->updateIntro();
   else if (this->_game && !this->_pause)
@@ -160,8 +159,8 @@ void		Menu::draw(void)
     {
       cvReleaseCapture(&this->_capture);
       this->_intro = false;
-      Sound::getMe()->stop(Audio::INTRO);
-      Sound::getMe()->playMenu();
+      Sound::getMe()->stopLastSound();
+      Sound::getMe()->playMusic(AudioMode::MENU);
       this->_menu->initCamera();
     }
     else if (this->_game && !this->_pause)
