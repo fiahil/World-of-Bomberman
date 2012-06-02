@@ -16,17 +16,20 @@ private:
   bool				_selected;
   bool				_strStatus;
   double			_oneTime;
-
+  
+private:
   void				updateStr(gdl::GameClock const&);
-
+  
 public:
   NewProfile(GameManager&, std::vector<Profile *>&, std::vector<std::string>&);
   virtual ~NewProfile(void);
 
-  void			setNewProfile();
-  virtual double	getCenterX() const;
-  virtual double	getCenterY() const;
-  virtual void		update(gdl::GameClock const&, gdl::Input&);
+  virtual double		getCenterX(void) const;
+  virtual double		getCenterY(void) const;
+  virtual void			update(gdl::GameClock const&, gdl::Input&);
+
+public:
+    void			setNewProfile(void);
 };
 
 #endif
