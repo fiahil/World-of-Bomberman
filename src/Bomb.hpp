@@ -15,7 +15,6 @@
 
 class Bomb : public AObj
 {
-
 public:
   Bomb(BombType::eBomb,
        Point const &,
@@ -27,23 +26,21 @@ public:
 
 private:
   BombType::eBomb	_type;
-  APlayer*	_player;
-  double	_timer;
-  bool		_exploded;
-  gdl::Model&	_model;
-  gdl::Model&	_modelExploded;
-  Pattern	_pattern;
+  APlayer*		_player;
+  double		_timer;
+  bool			_exploded;
+  gdl::Model&		_model;
+  gdl::Model&		_modelExploded;
+  Pattern		_pattern;
 
 public:
   void			initialize(void);
   void			draw(void);
   void			update(gdl::GameClock const&, gdl::Input&);
 
-  BombType::eBomb	get_type(void) const;
   bool			explode() const;
   Pattern const&	getPattern() const;
   ExplodedBomb*		createExplodedBomb() const;
-
 };
 
 #else

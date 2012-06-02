@@ -37,6 +37,7 @@ class APlayer : public AObj
   typedef void	(APlayer::*fBonus)();
   typedef void	(APlayer::*t_rotFunc)();
   typedef std::vector< std::pair<Audio::eAudio, Audio::eAudio> > audioVect;
+
 public:
   APlayer(Map &, std::vector<bool>* = 0);
   virtual ~APlayer();
@@ -111,14 +112,6 @@ protected:
   bool		ATTACKFunction(gdl::GameClock const&);
   bool		PAUSEFunction(gdl::GameClock const&);
   virtual void	playBonusSound(void);
-  /*
-  ** TODO :
-  ** Cheat
-  ** pause/menu
-  ** virtual dans APlayer and specialise dans Human
-  ** TODO implementer + rajouter a la liste des bind a catch
-  */
-
   virtual void	drawSuccess(Success::eSuccess);
 
 public:

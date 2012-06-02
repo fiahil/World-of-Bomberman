@@ -5,7 +5,8 @@
 
 #include "AObj.hpp"
 
-AObj::AObj() : _pos(1.0f, 0, 0)
+AObj::AObj()
+  : _pos(1.0f, 0, 0)
 {
 }
 

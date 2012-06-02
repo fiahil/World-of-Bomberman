@@ -32,11 +32,6 @@ Bomb::~Bomb()
 {
 }
 
-BombType::eBomb	Bomb::get_type(void) const
-{
-  return _type;
-}
-
 void		Bomb::initialize(void)
 {
 }
