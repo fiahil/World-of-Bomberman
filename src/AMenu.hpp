@@ -35,17 +35,11 @@ protected:
   TokenMenu::eMenu		_curToken;
   bool				_changeMenu;
 
-  /*
-    Keys
-  */
 protected:
   void			UpFunction(gdl::GameClock const &);
   void			DownFunction(gdl::GameClock const &);
   void			SelectFunction(gdl::GameClock const &);
 
-  /*
-    Heritance from AObj
-  */
 public:
   virtual void		draw(void);
   virtual void		initialize(void);
@@ -59,6 +53,11 @@ public:
 public:
   virtual double	getCenterX(void) const = 0;
   virtual double	getCenterY(void) const = 0;
+
+private:
+  template <class T>
+  static void		feDraw(T);
+  static void		feInitialize(Tag *);
 };
 
 #endif		/* __AMENU_HPP__ */
