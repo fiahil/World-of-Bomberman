@@ -20,6 +20,7 @@ private:
 
   bool	isNum(std::string) const;
   int	idToInt(std::string);
+  void	checkSaves();
 
 public:
   ProfileLoader(void);
