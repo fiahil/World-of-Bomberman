@@ -55,6 +55,7 @@ void		LoadSave::loadSave()
       this->_gameManager._nbPlayers = -1;
       this->_gameManager._nbTeams = -1;
       this->_gameManager._secondProfile = 0;
+      std::cout << "Load Save " << std::endl;
       for (std::vector<APlayer*>::iterator it = this->_gameManager._match._players.begin();
 	   it != this->_gameManager._match._players.end(); ++it)
 	if ((*it)->getId() == this->_gameManager._mainProfile->getId())
