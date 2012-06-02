@@ -30,9 +30,6 @@ void		Cube::draw()
   this->_txt.bind();
   glBegin(GL_QUADS);
 
-  /*
-   * Front
-   */
   glNormal3f(0.0f, 0.0f, 1.0f);
   glTexCoord2d(0, 1);
   glVertex3f(-0.5f, -0.5f, 0.5f);
@@ -43,9 +40,6 @@ void		Cube::draw()
   glTexCoord2d(1, 1);
   glVertex3f(0.5f, -0.5f, 0.5f);
 
-  /*
-   * Right
-   */
   glNormal3f(1.0f, 0.0f, 0.0f);
   glTexCoord2d(0, 1);
   glVertex3f(0.5f, -0.5f, 0.5f);
@@ -56,9 +50,6 @@ void		Cube::draw()
   glTexCoord2d(1, 1);
   glVertex3f(0.5f, -0.5f, -0.5f);
 
-  /*
-   * Left
-   */
   glNormal3f(-1.0f, 0.0f, 0.0f);
   glTexCoord2d(0, 1);
   glVertex3f(-0.5f, -0.5f, -0.5f);
@@ -69,9 +60,6 @@ void		Cube::draw()
   glTexCoord2d(1, 1);
   glVertex3f(-0.5f, -0.5f, 0.5f);
 
-  /*
-   * Back
-   */
   glNormal3f(0.0f, 0.0f, -1.0f);
   glTexCoord2d(0, 1);
   glVertex3f(0.5f, -0.5f, -0.5f);
@@ -82,9 +70,6 @@ void		Cube::draw()
   glTexCoord2d(1, 1);
   glVertex3f(-0.5f, -0.5f, -0.5f);
 
-  /*
-   * Top
-   */
   glNormal3f(0.0f, 1.0f, 0.0f);
   glTexCoord2d(0, 1);
   glVertex3f(-0.5f, 0.5f, 0.5f);
@@ -95,9 +80,6 @@ void		Cube::draw()
   glTexCoord2d(1, 1);
   glVertex3f(0.5f, 0.5f, 0.5f);
 
-  /*
-   * Bottom
-   */
   glNormal3f(0.0f, -1.0f, 0.0f);
   glTexCoord2d(0, 1);
   glVertex3f(0.5f, -0.5f, 0.5f);
