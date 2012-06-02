@@ -54,7 +54,7 @@ protected:
   size_t		_teamId;
   size_t		_color;
   AIType::eAI		_type;
-  bool			_attack; 
+  bool			_attack;
   bool			_canAttack;
   bool			_shield;
   bool			_moving;
