@@ -54,8 +54,20 @@ void		GameResult::buildGameResult()
   this->_isBuilt = true;
 }
 
+/*void		GameResult::saveStats(APlayer* p, Profile* pr)
+{
+  
+}
+
 void		GameResult::clearGame()
 {
+  for (std::vector<APlayer*>::iterator it = this->_playerScore.begin();
+       it != this->_playerScore.end(); ++it)
+    if ((*it)->getId() == this->_gameManager._mainProfile->getId())
+      this->saveStats((*it), this->_gameManager._mainProfile);
+    else if ((*it)->getId() == this->_gameManager._secondProfile->getId())
+      this->saveStats((*it), this->_gameManager._secondProfile);
+      
   while (this->_gameManager._match._players.size())
     {
       delete _gameManager._match._players.back();
@@ -86,7 +98,7 @@ void		GameResult::clearGame()
       delete this->_gameManager._match._explodedBombs.back();
       this->_gameManager._match._explodedBombs.pop_back();
     }
-}
+    }*/
 
 void		GameResult::update(gdl::GameClock const& clock, gdl::Input& input)
 {
