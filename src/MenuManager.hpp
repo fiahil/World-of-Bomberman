@@ -3,18 +3,15 @@
  * 15.05.12
  */
 
-#ifndef		__MENU_MANAGER_HPP__
-#define		__MENU_MANAGER_HPP__
+#ifndef	__MENU_MANAGER_HPP__
+#define	__MENU_MANAGER_HPP__
 
 #include <string>
 #include <vector>
 #include "AMenu.hpp"
 #include "enum.hpp"
-#include "AObj.hpp"
-#include "Camera.hpp"
 #include "Profile.hpp"
 #include "MyGame.hpp"
-#include "MapManager.hpp"
 
 #define	CAM_DISTANCE	(570.4f)
 
@@ -33,7 +30,6 @@ private:
   std::vector<AMenu *>		_menu;
   TokenMenu::eMenu		_curMenu;
   Camera			_camera;
-
   std::vector<Profile *>	_profile;
   std::vector<std::string>	_names;
   std::vector<Map *>		_map;
@@ -49,26 +45,27 @@ private:
   std::vector<fInitGame>	_refInitGame;
 
 private:
-  void	initGameSolo();
-  void	initGameCoop();
-  void	initGameVersus();
-
-  /*
-    Heritance from AObj
-  */
-public:
-  virtual void		draw(void);
-  virtual void		initialize(void);
-  virtual void		update(gdl::GameClock const&, gdl::Input&);
+  void				initGameSolo(void);
+  void				initGameCoop(void);
+  void				initGameVersus(void);
 
 public:
-  MyGame*		createGame(gdl::GameClock&, gdl::Input&);
-  void			initCamera(void);
-  bool			isResume();
-  bool			isStopGame();
-  void			setPause();
-  void			setEOG();
-  bool			operator()(size_t);
+  virtual void			draw(void);
+  virtual void			initialize(void);
+  virtual void			update(gdl::GameClock const&, gdl::Input&);
+
+public:
+  MyGame*			createGame(gdl::GameClock&, gdl::Input&);
+  void				initCamera(void);
+  bool				isResume(void);
+  bool				isStopGame(void);
+  void				setPause(void);
+  void				setEOG(void);
+  bool				operator()(size_t);
 };
 
-#endif		/* __MENU_MANAGEMENT_HPP__ */
+#else
+
+class MenuManager;
+
+#endif	/* __MENU_MANAGEMENT_HPP__ */
