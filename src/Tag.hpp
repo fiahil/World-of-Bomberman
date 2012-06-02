@@ -41,17 +41,11 @@ private:
   void			pushMatrix(void) const;
   void			popMatrix(void) const;
 
-  /*
-    Heritance from AObj
-  */
 public:
   virtual void		draw(void);
   virtual void		initialize(void);
   virtual void		update(gdl::GameClock const&, gdl::Input&);
 
-  /*
-    Others
-  */
 public:
   TokenMenu::eMenu	getContent(void) const;
   bool			getStatus(void) const;
@@ -60,5 +54,9 @@ public:
   void			createText(const std::string &, int, int, int);
   void			drawText(void);
 };
+
+#else
+
+class Tag;
 
 #endif

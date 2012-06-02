@@ -6,7 +6,7 @@
 #ifndef __STAT_HPP__
 #define __STAT_HPP__
 
-#include <string>
+#include <cstdlib>
 
 class Stat
 {

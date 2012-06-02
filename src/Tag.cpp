@@ -88,10 +88,10 @@ void			Tag::drawText(void)
   this->popMatrix();
 }
 
-void		Tag::initialize(void)
+void			Tag::initialize(void)
 {
 }
 
-void		Tag::update(gdl::GameClock const&, gdl::Input&)
+void			Tag::update(gdl::GameClock const&, gdl::Input&)
 {
 }

@@ -7,9 +7,9 @@
 
 Stat::Stat()
   : _nbKills(0),
-  _nbDefeats(0),
-  _nbVictories(0),
-  _nbMaxKills(0)
+    _nbDefeats(0),
+    _nbVictories(0),
+    _nbMaxKills(0)
 {
 }
 
