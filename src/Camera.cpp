@@ -12,6 +12,9 @@
 Camera::Camera()
   : _height(600.0f),
     _width(800.0f),
+    _h(0),
+    _w(0),
+    _k(0.0f),
     _pl1(0),
     _pl2(0)
 {
@@ -20,6 +23,9 @@ Camera::Camera()
 Camera::Camera(int w, int h,  APlayer const* pl1, APlayer const* pl2)
   : _height(h),
     _width(w),
+    _h(0),
+    _w(0),
+    _k(0.0f),
     _pl1(pl1),
     _pl2(pl2)
 {
