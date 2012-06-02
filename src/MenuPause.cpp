@@ -18,6 +18,8 @@ MenuPause::MenuPause(GameManager& game)
   this->_tags.push_back(new Tag("menu/tags/SaveNormal.png", "menu/tags/SaveHighlit.png", false, false, TokenMenu::LOADSAVE, 3629.0f, 0.0f, 380.0f));
   this->_tags.push_back(new Tag("menu/tags/MainMenuNormal.png", "menu/tags/MainMenuHighlit.png", false, false, TokenMenu::PROFILE, 3629.0f, 0.0f, 445.0f));
   this->_tags.push_back(new Tag("menu/tags/QuitNormal.png", "menu/tags/QuitHighlit.png", false, false, TokenMenu::QUIT, 3629.0f, 0.0f, 510.0f));
+  this->_text.setSize(20);
+  this->_text.setPosition(650, 200);
 }
 
 MenuPause::~MenuPause()
@@ -86,6 +88,18 @@ void	MenuPause::restartGame()
     }
 }
 
+void		MenuPause::draw()
+{
+  AMenu::draw();
+  if (this->_textDraw)
+    {
+      this->_text.setText(this->_msg);
+      this->_text.draw();
+    }
+  else if (this->_msg != "")
+    this->_msg = "";
+}
+
 void	MenuPause::saveCurGame()
 {
   std::stringstream	ss;
@@ -100,13 +114,20 @@ void	MenuPause::saveCurGame()
 
 void	MenuPause::update(gdl::GameClock const& clock, gdl::Input& input)
 {
+  if (this->_cursor != 2)
+    {
+      this->_msg = "";
+    }
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
     if (input.isKeyDown(this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
-  if (this->_curToken == TokenMenu::CREATEGAME)
+  if (this->_curToken == TokenMenu::CREATEGAME) //TODO
     this->restartGame();
   else if (this->_curToken == TokenMenu::LOADSAVE)
-    this->saveCurGame();
+    {
+      this->_msg = "The game was successfully saved";
+      this->saveCurGame();
+    }
   else if (this->_curToken == TokenMenu::PROFILE)
     this->clearMatch();
 }

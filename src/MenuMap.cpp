@@ -35,7 +35,7 @@ void		MenuMap::update(gdl::GameClock const& clock, gdl::Input& input)
   if (this->_curToken == TokenMenu::CREATEGAME)
     {
       int	size =
-	((this->_gameManager._nbPlayers *  this->_gameManager._nbTeams) + 2);
+	((this->_gameManager._nbPlayers *  this->_gameManager._nbTeams) + 2) * 2;
 
       if (size < 10)
 	size = 10;

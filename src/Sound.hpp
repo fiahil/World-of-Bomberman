@@ -27,9 +27,9 @@ private:
   static Sound*			_me;
 
   FMOD_SYSTEM*			_system;
-  FMOD_CHANNEL*			_channel;
   FMOD_CHANNEL*			_musicChannel;
   std::vector<FMOD_SOUND*>	_data;
+  std::vector<FMOD_CHANNEL*>	_dataChannel;
   std::vector<FMOD_SOUND*>	_playlist;
   std::vector<FMOD_SOUND*>	_menu;
   std::vector<FMOD_SOUND*>*	_current;
@@ -41,7 +41,7 @@ public:
   static void	delMe(void);
 
   void		playBack(Audio::eAudio);
-  void		stopLastSound();
+  void		stopSound(Audio::eAudio);
   void		playMusic(AudioMode::eMode);
   void		updateMusic();
   void		stopMusic();

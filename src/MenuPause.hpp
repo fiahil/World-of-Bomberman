@@ -10,6 +10,10 @@
 
 class MenuPause : public AMenu
 {
+
+  gdl::Text	_text;
+  std::string	_msg;
+
 private:
   void	clearMatch();
   void	restartGame();
@@ -25,6 +29,7 @@ public:
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);
+  virtual void		draw();
 };
 
 #else

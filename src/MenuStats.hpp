@@ -16,7 +16,7 @@ private:
 public:
   MenuStats(GameManager&);
   virtual ~MenuStats();
-  
+
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);

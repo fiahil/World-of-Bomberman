@@ -167,7 +167,6 @@ void		GameResult::draw()
   std::stringstream	sstrm;
 
   AMenu::draw();
-
   if (this->_textDraw == true)
     {
       if (this->_match._players.size())

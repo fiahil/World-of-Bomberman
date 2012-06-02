@@ -63,6 +63,7 @@ private:
   std::vector<ptrJumpFunc>	_jumpDir;
   Success::eSuccess		_lastSuccess;
   double		        _successTimer;
+  double		        _cheatTimer;
   AI*				_hallu;
   double			_halluLifeTimer;
 
@@ -72,6 +73,11 @@ protected:
   virtual void	playBonusSound(void);
 private:
   bool		 SkillFunction(gdl::GameClock const&);
+  bool		 cheatLustFunction(gdl::GameClock const&);
+  bool		 cheatPowerFunction(gdl::GameClock const&);
+  bool		 cheatInvFunction(gdl::GameClock const&);
+  bool		 cheatHealFunction(gdl::GameClock const&);
+  bool		 cheatBombFunction(gdl::GameClock const&);
   Human::eventSt initStruct(gdl::Keys::Key, HumGame::eAction, actionFunc) const;
   void		 drawStart(size_t, size_t, size_t);
   void		 drawEnd(size_t, size_t, bool, size_t);
@@ -91,6 +97,7 @@ private:
   bool		 eastJumpFunction();
   
 public:
+  Skill::eSkill	getSkill() const;
   void		setSkill(Skill::eSkill);
 };
 

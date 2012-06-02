@@ -122,14 +122,17 @@ sequence
 
 players
 : ENDPLAYERS
-| NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL players
+| NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL players
 {
   assert(up.ma._map != 0);
 
   APlayer*	p = 0;
 
   if ($5 == AIType::HUMAN)
+  {
     p = new Human(*up.ma._map, Config());
+    dynamic_cast<Human*>(p)->setSkill(static_cast<Skill::eSkill>($31));
+  }
   else
     p = new AI(static_cast<AIType::eAI>($5), *up.ma._map);
 
@@ -153,14 +156,17 @@ players
 
 deads
 : ENDDEADS
-| NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL deads
+| NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER SEP NUMBER EOL deads
 {
   assert(up.ma._map != 0);
 
   APlayer*	p = 0;
 
   if ($5 == AIType::HUMAN)
+  {
     p = new Human(*up.ma._map, Config());
+    dynamic_cast<Human*>(p)->setSkill(static_cast<Skill::eSkill>($31));
+  }
   else
     p = new AI(static_cast<AIType::eAI>($5), *up.ma._map);
 

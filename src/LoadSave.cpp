@@ -114,14 +114,14 @@ void		LoadSave::loadAllSaves()
        it != this->_save.end(); ++it)
     {
       input.open((root + (*it)).c_str());
-      
+
       if (input.is_open())
 	{
 	  while (std::getline(input, line))
 	    {
 	      std::stringstream	ss;
 	      std::string	tmp;
-	      
+
 	      std::remove_if(line.begin(), line.end(), isPoint);
 	      ss << line;
 	      ss >> tmp;
@@ -151,13 +151,13 @@ void		LoadSave::updateText() const
 {
   if (this->_save.size())
     {
-      this->_tags[0]->createText(this->_save[this->_index], 20, 750, 362);
-      this->_tags[1]->createText(this->_infos[this->_index], 18, 500, 413);
+      this->_tags[0]->createText(this->_save[this->_index], 20, 750, 364);
+      this->_tags[1]->createText(this->_infos[this->_index], 18, 500, 415);
     }
   else
     {
-      this->_tags[0]->createText("", 20, 750, 360);
-      this->_tags[1]->createText("", 20, 500, 411);
+      this->_tags[0]->createText("", 20, 750, 364);
+      this->_tags[1]->createText("", 20, 500, 415);
     }
 }
 
@@ -203,7 +203,10 @@ void		LoadSave::update(gdl::GameClock const& clock, gdl::Input& input)
 
 void		LoadSave::setTextDraw(bool flag)
 {
-  if (this->_save.size() && flag)
-    this->loadAllSaves();
+  if (flag)
+    {
+      this->_save = this->_gameManager._mainProfile->getSave();
+      this->loadAllSaves();
+    }
   AMenu::setTextDraw(flag);
 }
