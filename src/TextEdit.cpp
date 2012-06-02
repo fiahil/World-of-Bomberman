@@ -69,7 +69,7 @@ TextEdit::TextEdit(int x, int y, std::string const& str)
     _y(y),
     _size(20),
     _sizeMax(20),
-    _timers(47, -1.0f)
+    _timers(48, -1.0f)
 {
   this->_ref[gdl::Keys::A] = "a";
   this->_ref[gdl::Keys::B] = "b";
@@ -124,6 +124,8 @@ TextEdit::~TextEdit()
 {
 }
 
+#include <iostream>
+
 void		TextEdit::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   int	nb = 0;
@@ -137,7 +139,7 @@ void		TextEdit::update(gdl::GameClock const& clock, gdl::Input& input)
 	  tmp = it->second;
 	  if ((input.isKeyDown(gdl::Keys::LShift) || input.isKeyDown(gdl::Keys::RShift)) &&
 	      it->first >= gdl::Keys::A && it->first <= gdl::Keys::Z)
-	    tmp= tmp.at(0) - 32;
+	    tmp = tmp.at(0) - 32;
 	  this->_str += tmp;
 	  this->_timers.at(nb) = clock.getTotalGameTime() + 0.15f;
 	}
