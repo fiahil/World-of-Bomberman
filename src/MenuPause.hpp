@@ -23,6 +23,9 @@ public:
   MenuPause(GameManager&);
   virtual ~MenuPause();
 
+public:
+  void			clearMatchMap(const std::vector<Map *> &);
+
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);

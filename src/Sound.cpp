@@ -109,6 +109,8 @@ void	Sound::playBack(Audio::eAudio index)
   if (!play)
     FMOD_System_PlaySound(this->_system, FMOD_CHANNEL_FREE, this->_data.at(index),
 	0, &(this->_dataChannel.at(index)));
+  if (index == Audio::INTRO)
+    FMOD_Channel_SetVolume(this->_dataChannel.at(index), 1.5f);
 }
 
 void	Sound::playMusic(AudioMode::eMode playlist)

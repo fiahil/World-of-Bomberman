@@ -75,19 +75,12 @@ void		GameResult::saveStats(APlayer* p, Profile* pr)
       if (kills > stat.getMaxKill())
 	stat.setMaxKills(kills);
       stat.addKills(kills);
-
       if (!this->_playerScore.empty())
 	{
 	  if (this->_match._players.front() == p)
-	    {
-	      std::cout << "Le joueur est gagnant" << std::endl;
-	      stat.addVictories(1);
-	    }
+	    stat.addVictories(1);
 	  else
-	    {
-	      std::cout << "Le joueur est perdant" << std::endl;
-	      stat.addDefeats(1);
-	    }
+	    stat.addDefeats(1);
 	}
       pr->setStat(stat);
       ProfileManager::setProfile(p->getId(), *pr);
@@ -98,12 +91,12 @@ void		GameResult::clearGame()
 {
   for (std::vector<APlayer*>::iterator it = this->_playerScore.begin();
        it != this->_playerScore.end(); ++it)
-    if ((*it)->getId() == this->_gameManager._mainProfile->getId())
-      this->saveStats((*it), this->_gameManager._mainProfile);
-  // else if ((*it)->getId() == this->_gameManager._secondProfile->getId())
-  //   {
-  // 	this->saveStats((*it), this->_gameManager._secondProfile);
-  //   }
+    {
+      if ((*it)->getId() == this->_gameManager._mainProfile->getId())
+	this->saveStats((*it), this->_gameManager._mainProfile);
+      // else if ((*it)->getId() == this->_gameManager._secondProfile->getId())
+      // 	this->saveStats((*it), this->_gameManager._secondProfile);
+    }
   while (this->_gameManager._match._players.size())
     {
       delete _gameManager._match._players.back();
@@ -134,6 +127,8 @@ void		GameResult::clearGame()
       delete this->_gameManager._match._explodedBombs.back();
       this->_gameManager._match._explodedBombs.pop_back();
     }
+  delete this->_gameManager._match._map;
+  this->_gameManager._match._map = 0;
 }
 
 void		GameResult::update(gdl::GameClock const& clock, gdl::Input& input)
@@ -153,19 +148,29 @@ void		GameResult::update(gdl::GameClock const& clock, gdl::Input& input)
     this->buildGameResult();
 }
 
+static const char *	createPlayerName(APlayer* player, const GameManager &gameManager)
+{
+  if (player->getType() == AIType::HUMAN)
+    {
+      if (gameManager._mainProfile && player->getId() == gameManager._mainProfile->getId())
+	return gameManager._mainProfile->getName().c_str();
+      else if (gameManager._secondProfile && player->getId() == gameManager._secondProfile->getId())
+	return gameManager._secondProfile->getName().c_str();
+    }
+  return "Furious Chiken";
+}
+
 void		GameResult::draw()
 {
-  int		y = 360;
-  gdl::Text	text;
+  int			y = 358;
+  gdl::Text		text;
+  std::stringstream	sstrm;
 
   AMenu::draw();
-
   if (this->_textDraw == true)
     {
       if (this->_match._players.size())
 	{
-	  gdl::Text		text;
-	  std::stringstream	sstrm;
 	  sstrm << this->_match._players.front()->getTeamId() + 1;
 	  text.setText("Team " + sstrm.str()
 		       + "  --  " + g_refTeam[this->_match._players.front()->getTeamId()]);
@@ -177,47 +182,49 @@ void		GameResult::draw()
 	{
 	  int		x = 400;
 	  std::string	str;
-	  std::stringstream	sstrm;
-	  APlayer*		playerScore = this->_playerScore[i];
+	  APlayer*	playerScore = this->_playerScore[i];
 
-	  if (playerScore->getType() == AIType::HUMAN)
-	    str.assign("PLAYER");
-	  else
-	    str.assign("Computer");
-
+	  sstrm.str("");
+	  str.assign(createPlayerName(playerScore, this->_gameManager));
 	  text.setText(str);
 	  text.setSize(20);
 	  text.setPosition(x, y);
 	  text.draw();
 
 	  x += 310;
-	  sstrm.clear();
+	  sstrm.str("");
 	  sstrm << playerScore->getTeamId() + 1; // MAJ +1 a tout les ID
-	  sstrm >> str;
-	  text.setText(str);
+	  text.setText(sstrm.str());
 	  text.setSize(20);
 	  text.setPosition(x, y);
 	  text.draw();
 
 	  x += 170;
-	  sstrm.clear();
+	  sstrm.str("");
 	  sstrm << playerScore->getNbKills();
-	  sstrm >> str;
-	  text.setText(str);
+	  text.setText(sstrm.str());
 	  text.setSize(20);
 	  text.setPosition(x, y);
 	  text.draw();
 
 	  x += 250;
-	  sstrm.clear();
+	  sstrm.str("");
 	  sstrm << playerScore->getNbKills() * 26;
-	  sstrm >> str;
-	  text.setText(str);
+	  text.setText(sstrm.str());
 	  text.setSize(20);
 	  text.setPosition(x, y);
 	  text.draw();
 
 	  y += 53;
 	}
+    }
+}
+
+void		GameResult::clearMatchMap(const std::vector<Map *> & loadedMap)
+{
+  if (std::find(loadedMap.begin(), loadedMap.end(), this->_gameManager._originMap) == loadedMap.end())
+    {
+      delete this->_gameManager._originMap;
+      this->_gameManager._originMap = 0;
     }
 }

@@ -5,6 +5,7 @@
 
 #include <sstream>
 #include <iostream>
+#include <algorithm>
 #include "SaveManager.hpp"
 #include "ProfileManager.hpp"
 #include "MenuPause.hpp"
@@ -70,6 +71,8 @@ void	MenuPause::clearMatch()
       delete this->_gameManager._match._explodedBombs.back();
       this->_gameManager._match._explodedBombs.pop_back();
     }
+  delete this->_gameManager._match._map;
+  this->_gameManager._match._map = 0;
 }
 
 void	MenuPause::restartGame()
@@ -127,4 +130,13 @@ void	MenuPause::update(gdl::GameClock const& clock, gdl::Input& input)
     }
   else if (this->_curToken == TokenMenu::PROFILE)
     this->clearMatch();
+}
+
+void		MenuPause::clearMatchMap(const std::vector<Map *> & loadedMap)
+{
+  if (std::find(loadedMap.begin(), loadedMap.end(), this->_gameManager._originMap) == loadedMap.end())
+    {
+      delete this->_gameManager._originMap;
+      this->_gameManager._originMap = 0;
+    }
 }

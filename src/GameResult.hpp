@@ -32,9 +32,13 @@ private:
   virtual void		draw();
 
 public:
+  void			clearMatchMap(const std::vector<Map *> &);
+
+public:
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);
+
 };
 
 #endif		/* __GAME_RESULT_HPP__ */

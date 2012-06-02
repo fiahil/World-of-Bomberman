@@ -46,12 +46,12 @@ private:
 
 private:
   typedef void	(MenuManager::*fInitGame)();
+  std::vector<fInitGame>	_refInitGame;
 
 private:
   void	initGameSolo();
   void	initGameCoop();
   void	initGameVersus();
-  std::vector<fInitGame>	_refInitGame;
 
   /*
     Heritance from AObj

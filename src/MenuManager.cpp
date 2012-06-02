@@ -144,9 +144,15 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
       else if (tmp == TokenMenu::PAUSE)
 	this->_resume = true;
       else if (this->_curMenu == TokenMenu::PAUSE && tmp == TokenMenu::PROFILE)
-	this->_stopGame = true;
+	{
+	  if (dynamic_cast<MenuPause *>(this->_menu[this->_curMenu]) != 0)
+	    dynamic_cast<MenuPause *>(this->_menu[this->_curMenu])->clearMatchMap(this->_map);
+	  this->_stopGame = true;
+	}
       else if (this->_curMenu == TokenMenu::GAMERESULT)
-	tmp = TokenMenu::PROFILE;
+	{
+	  tmp = TokenMenu::PROFILE;
+	}
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
