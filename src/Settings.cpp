@@ -50,17 +50,11 @@ Settings::Settings(GameManager& game)
     _selected(false)
 {
   this->_tags.push_back(new Tag("menu/tags/ForwardNormal.png", "menu/tags/ForwardHighlit.png", true, false, TokenMenu::SETTINGS, 3629.0f, 0.0f, 2550.0f));
-
   this->_tags.push_back(new Tag("menu/tags/BackConfNormal.png", "menu/tags/BackConfHighlit.png", false, false, TokenMenu::SETTINGS, 3629.0f, 0.0f, 2615.0f));
-
   this->_tags.push_back(new Tag("menu/tags/LeftNormal.png", "menu/tags/LeftHighlit.png", false, false, TokenMenu::SETTINGS, 3629.0f, 0.0f, 2680.0f));
-
   this->_tags.push_back(new Tag("menu/tags/RightNormal.png", "menu/tags/RightHighlit.png", false, false, TokenMenu::SETTINGS, 3629.0f, 0.0f, 2745.0f));
-
   this->_tags.push_back(new Tag("menu/tags/BombNormal.png", "menu/tags/BombHighlit.png", false, false, TokenMenu::SETTINGS, 3629.0f, 0.0f, 2810.0f));
-
   this->_tags.push_back(new Tag("menu/tags/SkillConfNormal.png", "menu/tags/SkillConfHighlit.png", false, false, TokenMenu::SETTINGS, 3629.0f, 0.0f, 2875.0f));
-
   this->_tags.push_back(new Tag("menu/tags/DoneNormal.png", "menu/tags/DoneHighlit.png", false, false, TokenMenu::SETTINGSCHOOSE, 3629.0f, 0.0f, 2940.0f));
 }
 

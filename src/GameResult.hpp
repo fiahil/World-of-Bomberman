@@ -24,6 +24,9 @@ private:
 
 private:
   void			buildPlayerScore();
+  void			clearGame();
+  void			buildGameResult();
+  void			saveStats(APlayer* p, Profile* pr);
 
 private:
   virtual void		draw();
@@ -32,7 +35,6 @@ public:
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);
-  void			buildGameResult();
 };
 
 #endif		/* __GAME_RESULT_HPP__ */
