@@ -16,17 +16,18 @@ ProfileLoader::ProfileLoader(void)
 {
   this->_folder = "./Ressources/profiles/";
   this->setProfiles();
-}
+ }
 
-bool				ProfileLoader::isNum(std::string str) const
+bool				ProfileLoader::isNum(std::string const& str) const
 {
-  for (int i = 0; str.at(i); ++i)
-    if ((str.at(i) < '0') ^ (str.at(i) > '9'))
+  for (std::string::const_iterator it = str.begin();
+       it != str.end(); ++it)
+    if (((*it) < '0') ^ ((*it) > '9'))
       return (false);
   return (true);
 }
 
-int				ProfileLoader::idToInt(std::string str) const
+int				ProfileLoader::idToInt(std::string const& str) const
 {
   std::stringstream	os(str);
   int			id;

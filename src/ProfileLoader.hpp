@@ -18,8 +18,8 @@ private:
   std::vector<Profile *>	_profiles;
   std::vector<std::string>	_names;
 
-  bool		isNum(std::string) const;
-  int		idToInt(std::string) const;
+  bool		isNum(std::string const&) const;
+  int		idToInt(std::string const&) const;
   void		checkSaves();
 
 public:

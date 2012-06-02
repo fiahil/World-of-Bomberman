@@ -27,6 +27,7 @@ void		Bomberman::initialize(void)
   this->window_.setHeight(800);
   this->window_.setWidth(1600);
   this->window_.create();
+  
   this->_menu = new MenuManager(1600, 800);
   this->_menu->initialize();
 
