@@ -22,12 +22,12 @@ Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
     _jumpDir(Dir::LAST, 0),
     _lastSuccess(Success::LAST),
     _successTimer(-1.0f),
+    _cheatTimer(-1.0f),
     _hallu(0),
     _halluLifeTimer(-1.0f)
 
 {
   this->_type = AIType::HUMAN;
-  this->_event._nb = 7;
   this->setConfig(conf);
 
   this->_bombAff[BombType::NORMAL] = &Human::affNormalBomb;
@@ -90,11 +90,33 @@ void		Human::setConfig(Config const& conf)
     _event.push_back(initStruct(gdl::Keys::Escape,
 				HumGame::PAUSE,
 				&Human::PAUSEFunction));
-
   this->_event.
     _event.push_back(initStruct(conf.getConfig(HumGame::SKILL),
 				HumGame::SKILL,
 				static_cast<actionFunc>(&Human::SkillFunction)));
+
+  this->_event.
+    _event.push_back(initStruct(gdl::Keys::F1,
+				HumGame::CHEAT,
+				static_cast<actionFunc>(&Human::cheatHealFunction)));
+  this->_event.
+    _event.push_back(initStruct(gdl::Keys::F2,
+				HumGame::CHEAT,
+				static_cast<actionFunc>(&Human::cheatLustFunction)));
+  this->_event.
+    _event.push_back(initStruct(gdl::Keys::F3,
+				HumGame::CHEAT,
+				static_cast<actionFunc>(&Human::cheatPowerFunction)));
+  this->_event.
+    _event.push_back(initStruct(gdl::Keys::F4,
+				HumGame::CHEAT,
+				static_cast<actionFunc>(&Human::cheatBombFunction)));
+  this->_event.
+    _event.push_back(initStruct(gdl::Keys::F5,
+				HumGame::CHEAT,
+				static_cast<actionFunc>(&Human::cheatInvFunction)));
+  this->_event._nb = this->_event._event.size();
+
 }
 
 Human::eventSt	Human::initStruct(gdl::Keys::Key key,
@@ -115,6 +137,48 @@ void            Human::drawSuccess(Success::eSuccess s)
 bool		Human::SkillFunction(gdl::GameClock const& clock)
 {
   return (this->*(this->_skillFunc[this->_skill]))(clock);
+
+}
+
+bool		Human::cheatLustFunction(gdl::GameClock const&)
+{
+  this->_lustStack = 6;
+  return true;
+}
+
+bool		Human::cheatPowerFunction(gdl::GameClock const&)
+{
+  this->_powerStack = 6;
+  return true;
+}
+
+bool		Human::cheatInvFunction(gdl::GameClock const& clock)
+{
+  double	current;
+
+  if ((current = clock.getTotalGameTime()) >= this->_cheatTimer)
+    {
+      this->_cheatTimer = current + 0.15f;
+      if (!this->_dam)
+	this->_dam = 1.0f;
+      else
+	this->_dam = 0.0f;
+      return true;
+    }
+  return false;
+}
+
+bool		Human::cheatHealFunction(gdl::GameClock const&)
+{
+  this->_pv = 100;
+  return true;
+}
+
+bool		Human::cheatBombFunction(gdl::GameClock const&)
+{
+  BombBonusEffect();
+  BombBonusEffect();
+  return true;
 }
 
 void		Human::draw()

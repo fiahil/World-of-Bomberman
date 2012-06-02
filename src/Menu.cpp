@@ -42,7 +42,6 @@ void		Menu::initialize(void)
   this->_capture = cvCaptureFromAVI("./Ressources/video/intro.avi");
   if (!this->_capture)
     throw std::runtime_error("Fail to load introduction.");
-  Sound::getMe()->playBack(Audio::INTRO);
 }
 
 void		Menu::updateIntro()

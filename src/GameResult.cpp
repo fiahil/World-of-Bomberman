@@ -155,7 +155,7 @@ void		GameResult::update(gdl::GameClock const& clock, gdl::Input& input)
 
 void		GameResult::draw()
 {
-  int		y = 358;
+  int		y = 360;
   gdl::Text	text;
 
   AMenu::draw();
