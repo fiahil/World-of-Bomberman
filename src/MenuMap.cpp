@@ -3,14 +3,19 @@
  * 27.05.12
  */
 
+#include "Common.hpp"
 #include "MenuMap.hpp"
 
 MenuMap::MenuMap(GameManager& game)
-  : AMenu("menu/background/backgroundMap.jpg", "menu/background/backgroundMap.jpg", 0.0f, -1.0f, 3200.0f, game)
+  : AMenu("menu/background/backgroundMap.jpg", "menu/background/backgroundMap.jpg",
+	  0.0f, -1.0f, 3200.0f, game)
 {
-  this->_tags.push_back(new Tag("menu/tags/RandomNormal.png", "menu/tags/RandomHighlit.png", true, false, TokenMenu::CREATEGAME, 429.0f, 0.0f, 3600.0f));
-  this->_tags.push_back(new Tag("menu/tags/LoadMapNormal.png", "menu/tags/LoadMapHighlit.png", false, false, TokenMenu::LOADMAP, 429.0f, 0.0f, 3665.0f));
-  this->_tags.push_back(new Tag("menu/tags/BackNormal.png", "menu/tags/BackHighlit.png", false, false, TokenMenu::IA, 429.0f, 0.0f, 3730.0f));
+  this->_tags.push_back(new Tag("menu/tags/RandomNormal.png", "menu/tags/RandomHighlit.png",
+				true, false, TokenMenu::CREATEGAME, 429.0f, 0.0f, 3600.0f));
+  this->_tags.push_back(new Tag("menu/tags/LoadMapNormal.png", "menu/tags/LoadMapHighlit.png",
+				false, false, TokenMenu::LOADMAP, 429.0f, 0.0f, 3665.0f));
+  this->_tags.push_back(new Tag("menu/tags/BackNormal.png", "menu/tags/BackHighlit.png",
+				false, false, TokenMenu::IA, 429.0f, 0.0f, 3730.0f));
 }
 
 MenuMap::~MenuMap(void)
@@ -19,19 +24,20 @@ MenuMap::~MenuMap(void)
 
 double		MenuMap::getCenterX(void) const
 {
-  return (800.0f);
+  return 800.0f;
 }
 
 double		MenuMap::getCenterY(void) const
 {
-  return (3600.0f);
+  return 3600.0f;
 }
 
 void		MenuMap::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-  for (size_t i = 0; i < this->_keyEvent.size(); ++i)
-    if (input.isKeyDown(this->_keyEvent[i].first))
-      (this->*_keyEvent[i].second)(clock);
+  for (vKeyEvent::const_iterator it = this->_keyEvent.begin();
+       it != this->_keyEvent.end(); ++it)
+    if (input.isKeyDown(it->first))
+      (this->*it->second)(clock);
   if (this->_curToken == TokenMenu::CREATEGAME)
     {
       int	size =

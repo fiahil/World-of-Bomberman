@@ -13,7 +13,7 @@ SRC		= ./src/main.cpp	 \
 		./src/Sound.cpp		 \
 		./src/AIView.cpp	 \
 		./src/Camera.cpp	 \
-		./src/Menu.cpp		 \
+		./src/Bomberman.cpp	 \
 		./src/MyGame.cpp	 \
 		./src/AObj.cpp		 \
 		./src/Point.cpp		 \

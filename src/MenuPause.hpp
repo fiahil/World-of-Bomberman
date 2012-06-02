@@ -10,26 +10,26 @@
 
 class MenuPause : public AMenu
 {
-
-  gdl::Text	_text;
-  std::string	_msg;
+private:
+  std::vector<Map*> const&	_maps;
+  gdl::Text			_text;
+  std::string			_msg;
 
 private:
-  void	clearMatch();
-  void	restartGame();
-  void	saveCurGame();
+  void			clearOriginMap(void);
+  void			clearMatch(void);
+  void			restartGame(void);
+  void			saveCurGame(void);
 
 public:
-  MenuPause(GameManager&);
+  MenuPause(GameManager&, std::vector<Map*> const&);
   virtual ~MenuPause();
 
 public:
-  void			clearMatchMap(const std::vector<Map *> &);
-
-  virtual double	getCenterX() const;
-  virtual double	getCenterY() const;
+  virtual double	getCenterX(void) const;
+  virtual double	getCenterY(void) const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);
-  virtual void		draw();
+  virtual void		draw(void);
 };
 
 #else

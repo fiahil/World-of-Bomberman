@@ -3,8 +3,8 @@
  * 07.05.12
  */
 
-#ifndef __MENU_HPP__
-#define __MENU_HPP__
+#ifndef __BOMBERMAN_HPP__
+#define __BOMBERMAN_HPP__
 
 #include <cv.h>
 #include <highgui.h>
@@ -12,11 +12,11 @@
 #include "MenuManager.hpp"
 #include "MyGame.hpp"
 
-class Menu : public gdl::Game
+class Bomberman : public gdl::Game
 {
 public:
-  Menu();
-  virtual ~Menu();
+  Bomberman();
+  virtual ~Bomberman();
 
 private:
   MyGame*	_game;
@@ -28,7 +28,7 @@ private:
 private:
   void			updateIntro(void);
   void			updateGame(void);
-  void			updateMenu(void);
+  void			updateBomberman(void);
 
 private:
   virtual void		initialize(void);
@@ -39,6 +39,6 @@ private:
 
 #else
 
-class Menu;
+class Bomberman;
 
-#endif /* __MENU_HPP__ */
+#endif /* __BOMBERMAN_HPP__ */

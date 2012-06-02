@@ -19,17 +19,17 @@ public:
   MyGame(gdl::GameClock&, gdl::Input&, Match&, bool, APlayer*, APlayer* pl2 = 0);
 
 private:
-  gdl::GameClock&	_clock;
-  gdl::Input&		_input;
-  Match&		_match;
-  Camera		_camera;
-  APlayer*		_pl1;
-  APlayer*		_pl2;
-  AIView*		_view;
-  bool			_EOG;
-  double		_EOGTimer;
-  size_t		_nb;
-  bool			_loadGame;
+  gdl::GameClock&		_clock;
+  gdl::Input&			_input;
+  Match&			_match;
+  Camera			_camera;
+  APlayer*			_pl1;
+  APlayer*			_pl2;
+  AIView*			_view;
+  bool				_EOG;
+  double			_EOGTimer;
+  size_t			_nb;
+  bool				_loadGame;
 
   std::vector<gdl::Image>	_HUD;
   gdl::Model			_Mbomb;
@@ -50,7 +50,7 @@ public:
   bool		isEOG(void) const;
   bool		isPause() const;
   void		resumeGame();
-  Match &	getMatch() const; // added
+  Match &	getMatch() const;
 
 private:
   template<typename T, typename U>

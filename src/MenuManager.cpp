@@ -3,14 +3,10 @@
  * 15.05.12
  */
 
-#include <string>
-#include <iostream>
-#include <vector>
 #include <algorithm>
+#include "Common.hpp"
 #include "Error.hpp"
-#include "ProfileManager.hpp"
 #include "MapManager.hpp"
-#include "MenuManager.hpp"
 #include "MainMenu.hpp"
 #include "Credits.hpp"
 #include "LoadProfile.hpp"
@@ -35,21 +31,24 @@
 #include "Human.hpp"
 #include "AI.hpp"
 #include "ProfileManager.hpp"
+#include "MenuManager.hpp"
 
 MenuManager::MenuManager(int w, int h)
   : _menu(TokenMenu::LAST, 0),
     _curMenu(TokenMenu::MAINMENU),
     _camera(w, h, 0, 0),
     _createGame(false),
+    _resume(false),
     _stopGame(false),
+    _guest(0),
     _timerLoading(-1.0f),
     _refInitGame(GameMode::LAST, 0)
 {
   MapManager	mapManager;
 
-  this->_refInitGame[GameMode::SOLO] = &MenuManager::initGameSolo;
-  this->_refInitGame[GameMode::COOP] = &MenuManager::initGameCoop;
-  this->_refInitGame[GameMode::VERSUS] = &MenuManager::initGameVersus;
+  this->_refInitGame.at(GameMode::SOLO) = &MenuManager::initGameSolo;
+  this->_refInitGame.at(GameMode::COOP) = &MenuManager::initGameCoop;
+  this->_refInitGame.at(GameMode::VERSUS) = &MenuManager::initGameVersus;
   this->_map = mapManager.getAll();
 
   ProfileLoader	profileLoader;
@@ -69,65 +68,72 @@ MenuManager::MenuManager(int w, int h)
 
 MenuManager::~MenuManager()
 {
+  std::for_each(this->_menu.begin(), this->_menu.end(), deleteItem<AMenu*>);
+  std::for_each(this->_profile.begin(), this->_profile.end(), deleteItem<Profile*>);
+  std::for_each(this->_map.begin(), this->_map.end(), deleteItem<Map*>);
+  delete this->_guest;
+  this->_guest = 0;
 }
 
-void	MenuManager::initialize(void)
+void		MenuManager::initialize(void)
 {
   MapManager	mapManager;
 
   this->_map = mapManager.getAll();
 
-  this->_menu[TokenMenu::MAINMENU] = new MainMenu(this->_gameManager);
-  this->_menu[TokenMenu::MAINMENU]->initialize();
-  this->_menu[TokenMenu::CREDITS] = new Credits(this->_gameManager);
-  this->_menu[TokenMenu::CREDITS]->initialize();
-  this->_menu[TokenMenu::LOADPROFILE] = new LoadProfile(this->_gameManager, this->_profile, this->_names);
-  this->_menu[TokenMenu::LOADPROFILE]->initialize();
-  this->_menu[TokenMenu::LOADSAVE] = new LoadSave(this->_gameManager, this->_profile, this->_guest);
-  this->_menu[TokenMenu::LOADSAVE]->initialize();
-  this->_menu[TokenMenu::LOADMAP] = new LoadMap(this->_gameManager, this->_map);
-  this->_menu[TokenMenu::LOADMAP]->initialize();
-  this->_menu[TokenMenu::GAMECHOOSE] = new GameChoose(this->_gameManager);
-  this->_menu[TokenMenu::GAMECHOOSE]->initialize();
-  this->_menu[TokenMenu::IA] = new MenuIA(this->_gameManager);
-  this->_menu[TokenMenu::IA]->initialize();
-  this->_menu[TokenMenu::TEAM] = new TeamMenu(this->_gameManager, this->_profile);
-  this->_menu[TokenMenu::TEAM]->initialize();
-  this->_menu[TokenMenu::MAP] = new MenuMap(this->_gameManager);
-  this->_menu[TokenMenu::MAP]->initialize();
-  this->_menu[TokenMenu::NEWPROFILE] = new NewProfile(this->_gameManager, this->_profile, this->_names);
-  this->_menu[TokenMenu::NEWPROFILE]->initialize();
-  this->_menu[TokenMenu::PROFILE] = new MenuProfile(this->_gameManager);
-  this->_menu[TokenMenu::PROFILE]->initialize();
-  this->_menu[TokenMenu::SETTINGSCHOOSE] = new SettingsChoose(this->_gameManager);
-  this->_menu[TokenMenu::SETTINGSCHOOSE]->initialize();
-  this->_menu[TokenMenu::SETTINGS] = new Settings(this->_gameManager);
-  this->_menu[TokenMenu::SETTINGS]->initialize();
-  this->_menu[TokenMenu::SKINCHOOSE] = new SkinChoose(this->_gameManager);
-  this->_menu[TokenMenu::SKINCHOOSE]->initialize();
-  this->_menu[TokenMenu::STATS] = new MenuStats(this->_gameManager);
-  this->_menu[TokenMenu::STATS]->initialize();
-  this->_menu[TokenMenu::PAUSE] = new MenuPause(this->_gameManager);
-  this->_menu[TokenMenu::PAUSE]->initialize();
-  this->_menu[TokenMenu::GAMERESULT] = new GameResult(this->_gameManager, this->_gameManager._match);
-  this->_menu[TokenMenu::GAMERESULT]->initialize();
-  this->_menu[TokenMenu::LOADING] = new Loading(this->_gameManager);
-  this->_menu[TokenMenu::LOADING]->initialize();
+  this->_menu.at(TokenMenu::MAINMENU) = new MainMenu(this->_gameManager);
+  this->_menu.at(TokenMenu::MAINMENU)->initialize();
+  this->_menu.at(TokenMenu::CREDITS) = new Credits(this->_gameManager);
+  this->_menu.at(TokenMenu::CREDITS)->initialize();
+  this->_menu.at(TokenMenu::LOADPROFILE) = new LoadProfile(this->_gameManager, this->_profile, this->_names);
+  this->_menu.at(TokenMenu::LOADPROFILE)->initialize();
+  this->_menu.at(TokenMenu::LOADSAVE) = new LoadSave(this->_gameManager, this->_profile, this->_guest);
+  this->_menu.at(TokenMenu::LOADSAVE)->initialize();
+  this->_menu.at(TokenMenu::LOADMAP) = new LoadMap(this->_gameManager, this->_map);
+  this->_menu.at(TokenMenu::LOADMAP)->initialize();
+  this->_menu.at(TokenMenu::GAMECHOOSE) = new GameChoose(this->_gameManager);
+  this->_menu.at(TokenMenu::GAMECHOOSE)->initialize();
+  this->_menu.at(TokenMenu::IA) = new MenuIA(this->_gameManager);
+  this->_menu.at(TokenMenu::IA)->initialize();
+  this->_menu.at(TokenMenu::TEAM) = new TeamMenu(this->_gameManager, this->_profile);
+  this->_menu.at(TokenMenu::TEAM)->initialize();
+  this->_menu.at(TokenMenu::MAP) = new MenuMap(this->_gameManager);
+  this->_menu.at(TokenMenu::MAP)->initialize();
+  this->_menu.at(TokenMenu::NEWPROFILE) = new NewProfile(this->_gameManager, this->_profile, this->_names);
+  this->_menu.at(TokenMenu::NEWPROFILE)->initialize();
+  this->_menu.at(TokenMenu::PROFILE) = new MenuProfile(this->_gameManager);
+  this->_menu.at(TokenMenu::PROFILE)->initialize();
+  this->_menu.at(TokenMenu::SETTINGSCHOOSE) = new SettingsChoose(this->_gameManager);
+  this->_menu.at(TokenMenu::SETTINGSCHOOSE)->initialize();
+  this->_menu.at(TokenMenu::SETTINGS) = new Settings(this->_gameManager);
+  this->_menu.at(TokenMenu::SETTINGS)->initialize();
+  this->_menu.at(TokenMenu::SKINCHOOSE) = new SkinChoose(this->_gameManager);
+  this->_menu.at(TokenMenu::SKINCHOOSE)->initialize();
+  this->_menu.at(TokenMenu::STATS) = new MenuStats(this->_gameManager);
+  this->_menu.at(TokenMenu::STATS)->initialize();
+  this->_menu.at(TokenMenu::PAUSE) = new MenuPause(this->_gameManager, this->_map);
+  this->_menu.at(TokenMenu::PAUSE)->initialize();
+  this->_menu.at(TokenMenu::GAMERESULT) = new GameResult(this->_gameManager, this->_gameManager._match);
+  this->_menu.at(TokenMenu::GAMERESULT)->initialize();
+  this->_menu.at(TokenMenu::LOADING) = new Loading(this->_gameManager);
+  this->_menu.at(TokenMenu::LOADING)->initialize();
 
-  this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-		       this->_menu[this->_curMenu]->getCenterY());
+  this->_camera.setPos(this->_menu.at(this->_curMenu)->getCenterX(), CAM_DISTANCE,
+		       this->_menu.at(this->_curMenu)->getCenterY());
 }
 
-void	MenuManager::draw(void)
+static void	drawMenu(AMenu* elem)
 {
-  std::vector<AMenu *>::iterator	it = this->_menu.begin();
-
-  for (; it != this->_menu.end() ; ++it)
-    if ((*it))
-      (*it)->draw();
+  if (elem)
+    elem->draw();
 }
 
-void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
+void		MenuManager::draw(void)
+{
+  std::for_each(this->_menu.begin(), this->_menu.end(), drawMenu);
+}
+
+void		MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   TokenMenu::eMenu	tmp;
 
@@ -135,39 +141,32 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
     {
       if (tmp == TokenMenu::QUIT)
 	throw EndOfGame();
-      else if (tmp == TokenMenu::CREATEGAME)
+      if (tmp == TokenMenu::CREATEGAME)
 	{
 	  this->_createGame = true;
 	  this->_timerLoading = clock.getTotalGameTime() + 3.0f;
 	  tmp = TokenMenu::LOADING;
 	}
-      else if (tmp == TokenMenu::PAUSE)
+      if (tmp == TokenMenu::PAUSE)
 	this->_resume = true;
-      else if (this->_curMenu == TokenMenu::PAUSE && tmp == TokenMenu::PROFILE)
-	{
-	  if (dynamic_cast<MenuPause *>(this->_menu[this->_curMenu]) != 0)
-	    dynamic_cast<MenuPause *>(this->_menu[this->_curMenu])->clearMatchMap(this->_map);
-	  this->_stopGame = true;
-	}
-      else if (this->_curMenu == TokenMenu::GAMERESULT)
-	{
-	  tmp = TokenMenu::PROFILE;
-	}
-      this->_menu[this->_curMenu]->setTextDraw(false);
+      if (this->_curMenu == TokenMenu::PAUSE && tmp == TokenMenu::PROFILE)
+	this->_stopGame = true;
+      if (this->_curMenu == TokenMenu::GAMERESULT)
+	tmp = TokenMenu::PROFILE;
+      this->_menu.at(this->_curMenu)->setTextDraw(false);
       this->_curMenu = tmp;
-      this->_menu[this->_curMenu]->setTextDraw(true);
-      //std::cout << "Token " << this->_curMenu << std::endl;
-      this->_camera.setPosScroll(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-				 this->_menu[this->_curMenu]->getCenterY());
+      this->_menu.at(this->_curMenu)->setTextDraw(true);
+      this->_camera.setPosScroll(this->_menu.at(this->_curMenu)->getCenterX(), CAM_DISTANCE,
+				 this->_menu.at(this->_curMenu)->getCenterY());
     }
   else
-    this->_menu[this->_curMenu]->update(clock, input);
+    this->_menu.at(this->_curMenu)->update(clock, input);
   this->_camera.update();
 }
 
-void	MenuManager::initGameSolo()
+void		MenuManager::initGameSolo()
 {
-  int	id = 0;
+  int		id = 0;
   Human*	tmp;
 
   tmp = new Human(*this->_gameManager._match._map,
@@ -189,9 +188,9 @@ void	MenuManager::initGameSolo()
       }
 }
 
-void	MenuManager::initGameCoop()
+void		MenuManager::initGameCoop()
 {
-  int	id = 0;
+  int		id = 0;
   Human*	tmp;
 
   tmp = new Human(*this->_gameManager._match._map,
@@ -222,9 +221,9 @@ void	MenuManager::initGameCoop()
       }
 }
 
-void	MenuManager::initGameVersus()
+void		MenuManager::initGameVersus()
 {
-  int	id = 0;
+  int		id = 0;
   Human*	tmp;
 
   tmp = new Human(*this->_gameManager._match._map,
@@ -255,7 +254,7 @@ void	MenuManager::initGameVersus()
       }
 }
 
-MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
+MyGame*		MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
 {
   APlayer*	pl1 = 0;
   APlayer*	pl2 = 0;
@@ -270,71 +269,66 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
 	loadGame = true;
       this->_createGame = false;
       if (!loadGame)
-	(this->*_refInitGame[this->_gameManager._match._gameMode])();
+	(this->*_refInitGame.at(this->_gameManager._match._gameMode))();
       for (std::vector<APlayer*>::const_iterator it = this->_gameManager._match._players.begin();
 	   it != this->_gameManager._match._players.end(); ++it)
 	{
-	  std::cout << "Id " << (*it)->getId() << std::endl;
 	  if (this->_gameManager._mainProfile->getId() == (*it)->getId())
 	    pl1 = (*it);
 	  else if (this->_gameManager._match._gameMode != GameMode::SOLO &&
 		   this->_gameManager._secondProfile->getId() == (*it)->getId())
 	    pl2 = (*it);
 	}
-      std::cout << "pl1 " << pl1 << " mainProfile " << this->_gameManager._mainProfile->getId() << std::endl;
-      if (this->_gameManager._secondProfile)
-	std::cout << "pl2 " << pl2 << " secondProfile " << this->_gameManager._secondProfile->getId() << std::endl;
       game = new MyGame(clock, input, this->_gameManager._match, loadGame, pl1, pl2);
       game->initialize();
-      std::cout << "Create game end" << std::endl;
       return game;
     }
   return 0;
 }
 
-void	MenuManager::initCamera(void)
+void		MenuManager::initCamera(void)
 {
-  this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-		       this->_menu[this->_curMenu]->getCenterY());
+  this->_camera.setPos(this->_menu.at(this->_curMenu)->getCenterX(), CAM_DISTANCE,
+		       this->_menu.at(this->_curMenu)->getCenterY());
 }
 
-bool	MenuManager::isStopGame()
+bool		MenuManager::isStopGame(void)
 {
   bool	tmp = this->_stopGame;
-
+  
   if (this->_stopGame)
     this->_stopGame = false;
   return tmp;
 }
 
-bool	MenuManager::isResume()
+bool		MenuManager::isResume(void)
 {
   bool	tmp = this->_resume;
 
   if (this->_resume)
     {
-      this->_menu[this->_curMenu]->setTextDraw(false);
+      this->_menu.at(this->_curMenu)->setTextDraw(false);
       this->_resume = false;
     }
   return tmp;
 }
 
-void	MenuManager::setPause()
+void		MenuManager::setPause(void)
 {
   this->_curMenu = TokenMenu::PAUSE;
   this->_resume = false;
   this->_stopGame = false;
-  this->_menu[this->_curMenu]->setTextDraw(true);
-  this->_menu[this->_curMenu]->setChangeMenu(false);
-  this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-		       this->_menu[this->_curMenu]->getCenterY());
+  this->_menu.at(this->_curMenu)->setTextDraw(true);
+  this->_menu.at(this->_curMenu)->setChangeMenu(false);
+  this->_camera.setPos(this->_menu.at(this->_curMenu)->getCenterX(), CAM_DISTANCE,
+		       this->_menu.at(this->_curMenu)->getCenterY());
 }
 
-void	MenuManager::setEOG()
+void		MenuManager::setEOG(void)
 {
-  this->_menu[this->_curMenu]->setTextDraw(false);
+  this->_menu.at(this->_curMenu)->setTextDraw(false);
   this->_curMenu = TokenMenu::GAMERESULT;
-  this->_menu[this->_curMenu]->setTextDraw(true);
-  this->_camera.setPos(this->_menu[this->_curMenu]->getCenterX(), CAM_DISTANCE,
-		       this->_menu[this->_curMenu]->getCenterY());
+  this->_menu.at(this->_curMenu)->setTextDraw(true);
+  this->_camera.setPos(this->_menu.at(this->_curMenu)->getCenterX(), CAM_DISTANCE,
+		       this->_menu.at(this->_curMenu)->getCenterY());
 }

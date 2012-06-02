@@ -3,20 +3,11 @@
  * 07.05.12
  */
 
-#include <iostream>
 #include <GL/gl.h>
-#include <cv.h>
-#include <highgui.h>
-#include "Map.hpp"
-#include "Human.hpp"
-#include "AI.hpp"
-#include "AIView.hpp"
-#include "MainMenu.hpp"
-#include "Menu.hpp"
 #include "Sound.hpp"
-#include "GameResult.hpp"
+#include "Bomberman.hpp"
 
-Menu::Menu()
+Bomberman::Bomberman()
   : _game(0),
     _menu(0),
     _intro(true),
@@ -26,13 +17,13 @@ Menu::Menu()
   this->setContentRoot("./Ressources/");
 }
 
-Menu::~Menu()
+Bomberman::~Bomberman()
 {
 }
 
-void		Menu::initialize(void)
+void		Bomberman::initialize(void)
 {
-  this->window_.setTitle("Bomberman v1.0");
+  this->window_.setTitle("World of Bomberman");
   this->window_.setHeight(800);
   this->window_.setWidth(1600);
   this->window_.create();
@@ -41,11 +32,12 @@ void		Menu::initialize(void)
 
   this->_capture = cvCaptureFromAVI("./Ressources/video/intro.avi");
   if (!this->_capture)
-    throw std::runtime_error("Fail to load introduction.");
-  Sound::getMe()->playBack(Audio::INTRO);
+    this->_intro = false;
+  else
+    Sound::getMe()->playBack(Audio::INTRO);
 }
 
-void		Menu::updateIntro()
+void		Bomberman::updateIntro(void)
 {
   if (this->input_.isKeyDown(gdl::Keys::Escape))
   {
@@ -57,7 +49,7 @@ void		Menu::updateIntro()
   }
 }
 
-void		Menu::updateGame()
+void		Bomberman::updateGame(void)
 {
   if (this->_game->isEOG())
     {
@@ -77,7 +69,7 @@ void		Menu::updateGame()
     this->_game->update();
 }
 
-void		Menu::updateMenu()
+void		Bomberman::updateBomberman(void)
 {
   MyGame*	tmp;
 
@@ -96,12 +88,12 @@ void		Menu::updateMenu()
 	  Sound::getMe()->playMusic(AudioMode::GAME);
 	  this->_game = tmp;
 	}
-      else if (this->_menu->isResume())
+      if (this->_menu->isResume())
 	{
 	  this->_pause = false;
 	  this->_game->resumeGame();
 	}
-      else if (this->_menu->isStopGame())
+      if (this->_menu->isStopGame())
 	{
 	  this->_pause = false;
 	  this->_game->unload();
@@ -113,7 +105,7 @@ void		Menu::updateMenu()
     }
 }
 
-void		Menu::update(void)
+void		Bomberman::update(void)
 {
   Sound::getMe()->updateMusic();
   if (this->_intro)
@@ -121,59 +113,59 @@ void		Menu::update(void)
   else if (this->_game && !this->_pause)
     this->updateGame();
   else
-    this->updateMenu();
+    this->updateBomberman();
 }
 
-void		Menu::draw(void)
+void		Bomberman::draw(void)
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
   glClearDepth(1.0f);
 
   if (this->_intro && cvGrabFrame(this->_capture))
-  {
-    IplImage*	image = cvRetrieveFrame(this->_capture);
-
-    cvCvtColor(image, image, CV_BGR2RGB);
-    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, image->width, image->height, GL_RGB, GL_UNSIGNED_BYTE, image->imageData);
-
-    glEnable(GL_TEXTURE_2D);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(0, 1600, 800, 0);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
-    glBegin(GL_QUADS);
-    glTexCoord2f(0.0f, 1.0f);
-    glVertex2f(0.0f, 0.0f);
-    glTexCoord2f(1.0f, 1.0f);
-    glVertex2f(1600, 0.0f);
-    glTexCoord2f(1.0f, 0.0f);
-    glVertex2f(1600, 800);
-    glTexCoord2f(0.0f, 0.0f);
-    glVertex2f(0.0f, 800);
-    glEnd();
-  }
-  else
-  {
-    if (this->_intro)
     {
-      cvReleaseCapture(&this->_capture);
-      this->_intro = false;
-      Sound::getMe()->stopSound(Audio::INTRO);
-      Sound::getMe()->playMusic(AudioMode::MENU);
-      this->_menu->initCamera();
+      IplImage*	image = cvRetrieveFrame(this->_capture);
+      
+      cvCvtColor(image, image, CV_BGR2RGB);
+      gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, image->width,
+			image->height, GL_RGB, GL_UNSIGNED_BYTE, image->imageData);
+      glEnable(GL_TEXTURE_2D);
+      glMatrixMode(GL_PROJECTION);
+      glLoadIdentity();
+      gluOrtho2D(0, 1600, 800, 0);
+      glMatrixMode(GL_MODELVIEW);
+      glLoadIdentity();
+      
+      glBegin(GL_QUADS);
+      glTexCoord2f(0.0f, 1.0f);
+      glVertex2f(0.0f, 0.0f);
+      glTexCoord2f(1.0f, 1.0f);
+      glVertex2f(1600, 0.0f);
+      glTexCoord2f(1.0f, 0.0f);
+      glVertex2f(1600, 800);
+      glTexCoord2f(0.0f, 0.0f);
+      glVertex2f(0.0f, 800);
+      glEnd();
     }
-    else if (this->_game && !this->_pause)
-      this->_game->draw();
-    else
-      this->_menu->draw();
-  }
+  else
+    {
+      if (this->_intro)
+	{
+	  cvReleaseCapture(&this->_capture);
+	  this->_intro = false;
+	  Sound::getMe()->stopSound(Audio::INTRO);
+	  Sound::getMe()->playMusic(AudioMode::MENU);
+	  this->_menu->initCamera();
+	}
+      else if (this->_game && !this->_pause)
+	this->_game->draw();
+      else
+	this->_menu->draw();
+    }
   this->window_.display();
 }
 
-void		Menu::unload(void)
+void		Bomberman::unload(void)
 {
   this->window_.close();
 }

@@ -14,8 +14,8 @@ public:
   MenuProfile(GameManager&);
   virtual ~MenuProfile();
   
-  virtual double	getCenterX() const;
-  virtual double	getCenterY() const;
+  virtual double	getCenterX(void) const;
+  virtual double	getCenterY(void) const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);
 };
 
