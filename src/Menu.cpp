@@ -42,7 +42,7 @@ void		Menu::initialize(void)
   this->_capture = cvCaptureFromAVI("./Ressources/video/intro.avi");
   if (!this->_capture)
     throw std::runtime_error("Fail to load introduction.");
-  Sound::getMe()->playBack(Audio::INTRO);
+  //Sound::getMe()->playBack(Audio::INTRO);
 }
 
 void		Menu::updateIntro()
@@ -51,8 +51,8 @@ void		Menu::updateIntro()
   {
     cvReleaseCapture(&this->_capture);
     this->_intro = false;
-    Sound::getMe()->stop(Audio::INTRO);
-    Sound::getMe()->playMenu();
+    //Sound::getMe()->stop(Audio::INTRO);
+    //Sound::getMe()->playMenu();
     this->_menu->initCamera();
   }
 }
@@ -73,7 +73,7 @@ void		Menu::updateGame()
     }
   else
     this->_game->update();
-  Sound::getMe()->updateGame();
+  //Sound::getMe()->updateGame();
 }
 
 void		Menu::updateMenu()
@@ -91,8 +91,8 @@ void		Menu::updateMenu()
 	      this->_game->unload();
 	      delete this->_game;
 	    }
-	  Sound::getMe()->stopMenu();
-	  Sound::getMe()->playGame();
+	  //Sound::getMe()->stopMenu();
+	  //Sound::getMe()->playGame();
 	  this->_game = tmp;
 	}
       else if (this->_menu->isResume())
@@ -109,7 +109,7 @@ void		Menu::updateMenu()
 	  Sound::getMe()->stopGame();
 	  Sound::getMe()->playMenu();
 	}
-      Sound::getMe()->updateMenu();
+      //Sound::getMe()->updateMenu();
     }
 }
 
