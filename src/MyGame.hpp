@@ -16,7 +16,7 @@
 class MyGame
 {
 public:
-  MyGame(gdl::GameClock&, gdl::Input&, Match&, APlayer*, APlayer* pl2 = 0);
+  MyGame(gdl::GameClock&, gdl::Input&, Match&, bool, APlayer*, APlayer* pl2 = 0);
 
 private:
   gdl::GameClock&	_clock;
@@ -29,6 +29,7 @@ private:
   bool			_EOG;
   double		_EOGTimer;
   size_t		_nb;
+  bool			_loadGame;
 
   std::vector<gdl::Image>	_HUD;
   gdl::Model			_Mbomb;

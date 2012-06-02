@@ -39,52 +39,59 @@ void	MenuStats::drawText()
 {
   std::stringstream	ss;
   Profile*	tmp = this->_gameManager._mainProfile;
-  
+
   this->_text.setSize(20);
   this->_text.setText(tmp->getName());
   this->_text.setPosition(400, 140);
   this->_text.draw();
+
   this->_text.setText(tmp->getSkinName());
   this->_text.setPosition(400, 195);
   this->_text.draw();
+
   this->_text.setText(tmp->getSkillName());
   this->_text.setPosition(400, 247);
   this->_text.draw();
+
   ss << tmp->getStat().getKills();
   this->_text.setText(ss.str());
   this->_text.setPosition(400, 300);
   this->_text.draw();
+
   ss.str("");
   ss.clear();
-  ss << tmp->getStat().getDefeats();
+  ss << tmp->getStat().getMaxKill();
   this->_text.setText(ss.str());
   this->_text.setPosition(400, 351);
   this->_text.draw();
+
   ss.str("");
   ss.clear();
   ss << tmp->getStat().getVictories();
   this->_text.setText(ss.str());
   this->_text.setPosition(400, 403);
   this->_text.draw();
+
   ss.str("");
   ss.clear();
-  ss << tmp->getStat().getMaxKill();
+  ss << tmp->getStat().getDefeats();
   this->_text.setText(ss.str());
   this->_text.setPosition(400, 456);
   this->_text.draw();
+
   ss.str("");
   ss.clear();
   ss << tmp->getStat().getScore();
   this->_text.setText(ss.str());
   this->_text.setPosition(400, 508);
   this->_text.draw();
+
   ss.str("");
   ss.clear();
 }
 
 void	MenuStats::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-  
   if (input.isKeyDown(this->_keyEvent[2].first))
     (this->*_keyEvent[2].second)(clock);
   this->_tags[1]->setStatus(!this->_gameManager._mainProfile->getAchievement()[Success::ONE_KILL]);

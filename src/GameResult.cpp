@@ -10,6 +10,7 @@
 #include "Match.hpp"
 #include "GameResult.hpp"
 #include "GameManager.hpp"
+#include "ProfileManager.hpp"
 
 static const std::string	g_refTeam[] = {
   "Red",
@@ -45,18 +46,16 @@ double		GameResult::getCenterY() const
   return 400.0f;
 }
 
-static bool		orderKill(APlayer *one, APlayer *two)
-{
-  return (one && two && one->getNbKills() > two->getNbKills());
-}
-
 void		GameResult::buildPlayerScore()
 {
   this->_playerScore = this->_match._players;
-  for (std::list<APlayer*>::iterator deadIt = this->_match._dead.begin() ; deadIt != this->_match._dead.end() ; ++deadIt)
-    this->_playerScore.push_back(*deadIt);
-  for (std::list<APlayer*>::iterator cadaverIt = this->_match._cadaver.begin() ; cadaverIt != this->_match._cadaver.end() ; ++cadaverIt)
-    this->_playerScore.push_back(*cadaverIt);
+  this->_playerScore.insert(this->_playerScore.begin(), this->_match._dead.begin(), this->_match._dead.end());
+  this->_playerScore.insert(this->_playerScore.begin(), this->_match._cadaver.begin(), this->_match._cadaver.end());
+}
+
+static bool		orderKill(APlayer *one, APlayer *two)
+{
+  return (one && two && one->getNbKills() > two->getNbKills());
 }
 
 void		GameResult::buildGameResult()
@@ -66,9 +65,33 @@ void		GameResult::buildGameResult()
   this->_isBuilt = true;
 }
 
-/*void		GameResult::saveStats(APlayer* p, Profile* pr)
+void		GameResult::saveStats(APlayer* p, Profile* pr)
 {
-  
+  if (p && pr)
+    {
+      Stat		stat = pr->getStat();
+      size_t		kills = p->getNbKills();
+
+      if (kills > stat.getMaxKill())
+	stat.setMaxKills(kills);
+      stat.addKills(kills);
+
+      if (!this->_playerScore.empty())
+	{
+	  if (this->_match._players.front() == p)
+	    {
+	      std::cout << "Le joueur est gagnant" << std::endl;
+	      stat.addVictories(1);
+	    }
+	  else
+	    {
+	      std::cout << "Le joueur est perdant" << std::endl;
+	      stat.addDefeats(1);
+	    }
+	}
+      pr->setStat(stat);
+      ProfileManager::setProfile(p->getId(), *pr);
+    }
 }
 
 void		GameResult::clearGame()
@@ -77,9 +100,10 @@ void		GameResult::clearGame()
        it != this->_playerScore.end(); ++it)
     if ((*it)->getId() == this->_gameManager._mainProfile->getId())
       this->saveStats((*it), this->_gameManager._mainProfile);
-    else if ((*it)->getId() == this->_gameManager._secondProfile->getId())
-      this->saveStats((*it), this->_gameManager._secondProfile);
-      
+  // else if ((*it)->getId() == this->_gameManager._secondProfile->getId())
+  //   {
+  // 	this->saveStats((*it), this->_gameManager._secondProfile);
+  //   }
   while (this->_gameManager._match._players.size())
     {
       delete _gameManager._match._players.back();
@@ -110,7 +134,7 @@ void		GameResult::clearGame()
       delete this->_gameManager._match._explodedBombs.back();
       this->_gameManager._match._explodedBombs.pop_back();
     }
-    }*/
+}
 
 void		GameResult::update(gdl::GameClock const& clock, gdl::Input& input)
 {
@@ -120,7 +144,10 @@ void		GameResult::update(gdl::GameClock const& clock, gdl::Input& input)
 	if (input.isKeyDown(this->_keyEvent[i].first))
 	  (this->*_keyEvent[i].second)(clock);
       if (this->_curToken == TokenMenu::GAMERESULT)
-	this->_isBuilt = false;
+	{
+	  this->_isBuilt = false;
+	  this->clearGame();
+	}
     }
   else
     this->buildGameResult();
@@ -128,68 +155,69 @@ void		GameResult::update(gdl::GameClock const& clock, gdl::Input& input)
 
 void		GameResult::draw()
 {
-  int	y = 358;
+  int		y = 358;
+  gdl::Text	text;
 
   AMenu::draw();
 
-  if (this->_match._players.size())
+  if (this->_textDraw == true)
     {
-      gdl::Text		text;
-      std::stringstream	sstrm;
-      sstrm << this->_match._players.front()->getTeamId() + 1;
-      text.setText("Team " + sstrm.str()
-		   + "  --  " + g_refTeam[this->_match._players.front()->getTeamId()]);
-      text.setSize(20);
-      text.setPosition(850, 196);
-      text.draw();
-    }
+      if (this->_match._players.size())
+	{
+	  gdl::Text		text;
+	  std::stringstream	sstrm;
+	  sstrm << this->_match._players.front()->getTeamId() + 1;
+	  text.setText("Team " + sstrm.str()
+		       + "  --  " + g_refTeam[this->_match._players.front()->getTeamId()]);
+	  text.setSize(20);
+	  text.setPosition(850, 196);
+	  text.draw();
+	}
+      for (unsigned int i = 0 ; i < this->_playerScore.size() && i < 5; ++i)
+	{
+	  int		x = 400;
+	  std::string	str;
+	  std::stringstream	sstrm;
+	  APlayer*		playerScore = this->_playerScore[i];
 
-  for (unsigned int i = 0 ; this->_textDraw == true && i < this->_playerScore.size() && i < 5; ++i)
-    {
-      int		x = 400;
-      gdl::Text		text;
-      std::string	str;
-      std::stringstream	sstrm;
-      APlayer*		playerScore = this->_playerScore[i];
+	  if (playerScore->getType() == AIType::HUMAN)
+	    str.assign("PLAYER");
+	  else
+	    str.assign("Computer");
 
-      if (playerScore->getType() == AIType::HUMAN)
-	str.assign("PLAYER");
-      else
-	str.assign("Computer");
+	  text.setText(str);
+	  text.setSize(20);
+	  text.setPosition(x, y);
+	  text.draw();
 
-      text.setText(str);
-      text.setSize(20);
-      text.setPosition(x, y);
-      text.draw();
+	  x += 310;
+	  sstrm.clear();
+	  sstrm << playerScore->getTeamId() + 1; // MAJ +1 a tout les ID
+	  sstrm >> str;
+	  text.setText(str);
+	  text.setSize(20);
+	  text.setPosition(x, y);
+	  text.draw();
 
-      x += 310;
-      sstrm.clear();
-      sstrm << playerScore->getTeamId() + 1; // MAJ +1 a tout les ID
-      sstrm >> str;
-      text.setText(str);
-      text.setSize(20);
-      text.setPosition(x, y);
-      text.draw();
+	  x += 170;
+	  sstrm.clear();
+	  sstrm << playerScore->getNbKills();
+	  sstrm >> str;
+	  text.setText(str);
+	  text.setSize(20);
+	  text.setPosition(x, y);
+	  text.draw();
 
-      x += 170;
-      sstrm.clear();
-      sstrm << playerScore->getNbKills();
-      sstrm >> str;
-      text.setText(str);
-      text.setSize(20);
-      text.setPosition(x, y);
-      text.draw();
+	  x += 250;
+	  sstrm.clear();
+	  sstrm << playerScore->getNbKills() * 26;
+	  sstrm >> str;
+	  text.setText(str);
+	  text.setSize(20);
+	  text.setPosition(x, y);
+	  text.draw();
 
-      x += 250;
-
-      sstrm.clear();
-      sstrm << playerScore->getNbKills() * 26;
-      sstrm >> str;
-      text.setText(str);
-      text.setSize(20);
-      text.setPosition(x, y);
-      text.draw();
-
-      y += 53;
+	  y += 53;
+	}
     }
 }

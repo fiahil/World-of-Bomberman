@@ -11,10 +11,12 @@
 class	LoadSave : public AMenu
 {
 public:
-  LoadSave(GameManager&);
+  LoadSave(GameManager&, std::vector<Profile*>&, Profile*);
   virtual ~LoadSave(void);
 
 private:
+  std::vector<Profile*>&	_profiles;
+  Profile*			_guest;
   std::vector<std::string>	_save;
   size_t			_index;
   double			_timerL;

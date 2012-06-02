@@ -28,6 +28,39 @@ Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
 {
   this->_type = AIType::HUMAN;
   this->_event._nb = 7;
+  this->setConfig(conf);
+
+  this->_bombAff[BombType::NORMAL] = &Human::affNormalBomb;
+  this->_bombAff[BombType::BIGBOMB] = &Human::affBigBomb;
+  this->_bombAff[BombType::MEGABOMB] = &Human::affMegaBomb;
+
+  this->_skillFunc[Skill::HALLU] = &Human::halluSkill;
+  this->_skillFunc[Skill::HEAL] = &Human::healSkill;
+  this->_skillFunc[Skill::BERSERK] = &Human::berserkSkill;
+  this->_skillFunc[Skill::JUMP] = &Human::jumpSkill;
+
+  this->_jumpDir[Dir::NORTH] = &Human::northJumpFunction;
+  this->_jumpDir[Dir::SOUTH] = &Human::southJumpFunction;
+  this->_jumpDir[Dir::WEST] = &Human::westJumpFunction;
+  this->_jumpDir[Dir::EAST] = &Human::eastJumpFunction;
+
+  // review simplification mode de game
+
+}
+
+Human::~Human() {
+  if (this->_hallu)
+  {
+    delete this->_hallu;
+    this->_hallu = 0;
+  }
+}
+
+#include <iostream>
+
+void		Human::setConfig(Config const& conf)
+{
+  this->_event._event.clear();
   this->_event.
     _event.push_back(initStruct(conf.getConfig(HumGame::UP),
 				HumGame::UP,
@@ -61,32 +94,7 @@ Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
   this->_event.
     _event.push_back(initStruct(conf.getConfig(HumGame::SKILL),
 				HumGame::SKILL,
-				static_cast<actionFunc>(&Human::SkillFunction))); // SKILL
-
-  this->_bombAff[BombType::NORMAL] = &Human::affNormalBomb;
-  this->_bombAff[BombType::BIGBOMB] = &Human::affBigBomb;
-  this->_bombAff[BombType::MEGABOMB] = &Human::affMegaBomb;
-
-  this->_skillFunc[Skill::HALLU] = &Human::halluSkill;
-  this->_skillFunc[Skill::HEAL] = &Human::healSkill;
-  this->_skillFunc[Skill::BERSERK] = &Human::berserkSkill;
-  this->_skillFunc[Skill::JUMP] = &Human::jumpSkill;
-
-  this->_jumpDir[Dir::NORTH] = &Human::northJumpFunction;
-  this->_jumpDir[Dir::SOUTH] = &Human::southJumpFunction;
-  this->_jumpDir[Dir::WEST] = &Human::westJumpFunction;
-  this->_jumpDir[Dir::EAST] = &Human::eastJumpFunction;
-
-  // review simplification mode de game
-
-}
-
-Human::~Human() {
-  if (this->_hallu)
-  {
-    delete this->_hallu;
-    this->_hallu = 0;
-  }
+				static_cast<actionFunc>(&Human::SkillFunction)));
 }
 
 Human::eventSt	Human::initStruct(gdl::Keys::Key key,

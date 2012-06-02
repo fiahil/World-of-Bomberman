@@ -83,7 +83,7 @@ void	MenuManager::initialize(void)
   this->_menu[TokenMenu::CREDITS]->initialize();
   this->_menu[TokenMenu::LOADPROFILE] = new LoadProfile(this->_gameManager, this->_profile, this->_names);
   this->_menu[TokenMenu::LOADPROFILE]->initialize();
-  this->_menu[TokenMenu::LOADSAVE] = new LoadSave(this->_gameManager);
+  this->_menu[TokenMenu::LOADSAVE] = new LoadSave(this->_gameManager, this->_profile, this->_guest);
   this->_menu[TokenMenu::LOADSAVE]->initialize();
   this->_menu[TokenMenu::LOADMAP] = new LoadMap(this->_gameManager, this->_map);
   this->_menu[TokenMenu::LOADMAP]->initialize();
@@ -139,46 +139,14 @@ void	MenuManager::update(gdl::GameClock const& clock, gdl::Input& input)
 	{
 	  this->_createGame = true;
 	  this->_timerLoading = clock.getTotalGameTime() + 3.0f;
-	  tmp = TokenMenu::LOADING; 
+	  tmp = TokenMenu::LOADING;
 	}
       else if (tmp == TokenMenu::PAUSE)
 	this->_resume = true;
       else if (this->_curMenu == TokenMenu::PAUSE && tmp == TokenMenu::PROFILE)
 	this->_stopGame = true;
       else if (this->_curMenu == TokenMenu::GAMERESULT)
-	{
-	  while (this->_gameManager._match._players.size())
-	    {
-	      delete _gameManager._match._players.back();
-	      this->_gameManager._match._players.pop_back();
-	    }
-	  while (this->_gameManager._match._dead.size())
-	    {
-	      delete _gameManager._match._dead.back();
-	      this->_gameManager._match._dead.pop_back();
-	    }
-	  while (this->_gameManager._match._cadaver.size())
-	    {
-	      delete _gameManager._match._cadaver.back();
-	      this->_gameManager._match._cadaver.pop_back();
-	    }
-	  while (this->_gameManager._match._bombs.size())
-	    {
-	      delete this->_gameManager._match._bombs.back();
-	      this->_gameManager._match._bombs.pop_back();
-	    }
-	  while (this->_gameManager._match._bonus.size())
-	    {
-	      delete this->_gameManager._match._bonus.back();
-      this->_gameManager._match._bonus.pop_back();
-	    }
-	  while (this->_gameManager._match._explodedBombs.size())
-	    {
-	      delete this->_gameManager._match._explodedBombs.back();
-	      this->_gameManager._match._explodedBombs.pop_back();
-	    }
-	  tmp = TokenMenu::PROFILE;
-	}
+	tmp = TokenMenu::PROFILE;
       this->_menu[this->_curMenu]->setTextDraw(false);
       this->_curMenu = tmp;
       this->_menu[this->_curMenu]->setTextDraw(true);
@@ -285,14 +253,17 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
   APlayer*	pl1 = 0;
   APlayer*	pl2 = 0;
   MyGame*	game = 0;
+  bool		loadGame = false;
 
   if (this->_createGame && clock.getTotalGameTime() < this->_timerLoading)
       return 0;
   if (this->_createGame)
     {
-      std::cout << "Create game begin" << std::endl;
+      if (this->_gameManager._nbTeams < 0)
+	loadGame = true;
       this->_createGame = false;
-      (this->*_refInitGame[this->_gameManager._match._gameMode])();
+      if (!loadGame)
+	(this->*_refInitGame[this->_gameManager._match._gameMode])();
       for (std::vector<APlayer*>::const_iterator it = this->_gameManager._match._players.begin();
 	   it != this->_gameManager._match._players.end(); ++it)
 	{
@@ -306,7 +277,7 @@ MyGame*	MenuManager::createGame(gdl::GameClock& clock, gdl::Input& input)
       std::cout << "pl1 " << pl1 << " mainProfile " << this->_gameManager._mainProfile->getId() << std::endl;
       if (this->_gameManager._secondProfile)
 	std::cout << "pl2 " << pl2 << " secondProfile " << this->_gameManager._secondProfile->getId() << std::endl;
-      game = new MyGame(clock, input, this->_gameManager._match, pl1, pl2);
+      game = new MyGame(clock, input, this->_gameManager._match, loadGame, pl1, pl2);
       game->initialize();
       std::cout << "Create game end" << std::endl;
       return game;
