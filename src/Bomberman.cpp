@@ -4,6 +4,7 @@
  */
 
 #include <GL/gl.h>
+#include <Joystick.hpp>
 #include "Sound.hpp"
 #include "Bomberman.hpp"
 
@@ -108,6 +109,7 @@ void		Bomberman::updateBomberman(void)
 
 void		Bomberman::update(void)
 {
+  sf::Joystick::update();
   Sound::getMe()->updateMusic();
   if (this->_intro)
     this->updateIntro();

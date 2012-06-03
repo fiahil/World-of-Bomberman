@@ -27,5 +27,6 @@ int		main()
     {
       std::cout << end.what() << std::endl;
     }
+  Sound::delMe();
   return 0;
 }
