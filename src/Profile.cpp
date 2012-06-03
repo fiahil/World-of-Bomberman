@@ -95,6 +95,11 @@ const std::vector<std::string> &	Profile::getSave(void) const
   return this->_save;
 }
 
+std::vector<std::string>&	Profile::getSave(void)
+{
+  return this->_save;
+}
+
 void		Profile::setId(size_t value)
 {
   this->_id = value;
@@ -143,9 +148,4 @@ void		Profile::setSave(const std::vector<std::string> & value)
 void		Profile::addSave(const std::string & value)
 {
   this->_save.push_back(value);
-}
-
-void		Profile::removeSave(unsigned int pos)
-{
-  this->_save.erase(this->_save.begin() + pos);
 }
