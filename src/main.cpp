@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <exception>
 #include "Sound.hpp"
+#include "JsManager.hpp"
 #include "Bomberman.hpp"
 #include "Error.hpp"
 
@@ -18,6 +19,7 @@ int		main()
   srandom(now);
 
   Sound::getMe();
+  JsManager::getMe();
 
   try
     {
@@ -28,5 +30,6 @@ int		main()
       std::cout << end.what() << std::endl;
     }
   Sound::delMe();
+  JsManager::delMe();
   return 0;
 }

@@ -5,6 +5,7 @@
 
 #include <sstream>
 #include "Human.hpp"
+#include "JsManager.hpp"
 #include "Sound.hpp"
 
 Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
@@ -53,8 +54,6 @@ Human::~Human() {
     this->_hallu = 0;
   }
 }
-
-#include <iostream>
 
 void		Human::setConfig(Config const& conf)
 {

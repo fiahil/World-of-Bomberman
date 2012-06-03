@@ -4,7 +4,7 @@
  */
 
 #include <GL/gl.h>
-#include <Joystick.hpp>
+#include "Joystick.hpp"
 #include "Sound.hpp"
 #include "Bomberman.hpp"
 

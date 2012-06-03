@@ -41,6 +41,18 @@ struct AudioMode
   };
 };
 
+struct JsInput
+{
+  enum eButton
+  {
+    A = 0, B = 1, X, Y,
+    START, SELECT,
+    UP, DOWN, LEFT, RIGHT,
+    RB, LB,
+    LAST
+  };
+};
+
 struct Success
 {
   enum eSuccess {

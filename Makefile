@@ -11,6 +11,7 @@ NAME		= bomberman
 
 SRC		= ./src/main.cpp	 \
 		./src/Sound.cpp		 \
+		./src/JsManager.cpp	 \
 		./src/AIView.cpp	 \
 		./src/Camera.cpp	 \
 		./src/Bomberman.cpp	 \
