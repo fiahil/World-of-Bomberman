@@ -43,7 +43,7 @@ private:
   size_t	_x;
   size_t	_y;
   std::string	_map;
-  std::string	_name;		// Ajoute
+  std::string	_name;
   gdl::Image	_unbreak;
   gdl::Image	_break;
   gdl::Image	_background;
@@ -53,7 +53,6 @@ private:
   Cube		*w_unbreak;
   Plane		*background;
   Plane		*landscape;
-
 
   std::vector<gdl::Model>	_modelBonus;
   std::map<char, gdl::Model>	_modelBreak;
@@ -77,7 +76,7 @@ public:
   std::string const&	getMap(void) const;
   size_t		getX(void) const;
   size_t		getY(void) const;
-  const std::string &	getName(void) const; // Ajoute
+  const std::string &	getName(void) const;
 };
 
 #else
