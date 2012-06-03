@@ -179,7 +179,7 @@ static std::string const	createPlayerName(APlayer* player,
 	       && (player->getId() == gameManager._secondProfile->getId()))
 	return gameManager._secondProfile->getName();
     }
-  return "Furious Chiken";
+  return "Furious Chicken";
 }
 
 void		GameResult::draw()

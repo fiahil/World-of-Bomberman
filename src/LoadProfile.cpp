@@ -3,6 +3,8 @@
  * 27.05.12
  */
 
+#include <algorithm>
+#include <iostream>
 #include <sstream>
 #include "LoadProfile.hpp"
 
@@ -33,9 +35,16 @@ double	LoadProfile::getCenterY() const
   return (1200.0f);
 }
 
-void		LoadProfile::updateText() const
+bool	LoadProfile::notGuest(const std::string& str)
 {
-  if (this->_profiles.size() > 1)
+  if (str == "Guest")
+    return false;
+  return true;
+}
+
+void		LoadProfile::updateText()
+{
+  if (this->_profiles.size() > 1 && this->_names.at(this->_index) != "Guest")
     {
       std::stringstream	ss;
 
@@ -51,6 +60,8 @@ void		LoadProfile::updateText() const
     {
       this->_tags.at(0)->createText("", 20, 750, 314);
       this->_tags.at(1)->createText("", 20, 500, 365);
+      if (this->_profiles.size() > 1)
+	this->_index = std::find_if(this->_names.begin(), this->_names.end(), notGuest) - this->_names.begin();
     }
 }
 

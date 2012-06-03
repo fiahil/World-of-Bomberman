@@ -28,7 +28,8 @@ public:
   virtual void		update(gdl::GameClock const&, gdl::Input&);
 
 private:
-  void			updateText() const;
+  static bool		notGuest(const std::string&);
+  void			updateText();
   void			changeProfile(gdl::GameClock const&, gdl::Input&);
 };
 
