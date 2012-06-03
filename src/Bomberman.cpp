@@ -41,7 +41,8 @@ void		Bomberman::initialize(void)
 
 void		Bomberman::updateIntro(void)
 {
-  if (this->input_.isKeyDown(gdl::Keys::Escape))
+  if (this->input_.isKeyDown(gdl::Keys::Escape) ||
+      JsManager::getMe()->isJsDown(JsMode::MENU, gdl::Keys::Escape))
   {
     cvReleaseCapture(&this->_capture);
     this->_intro = false;

@@ -111,7 +111,8 @@ void		NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)
     {
       for (vKeyEvent::const_iterator it = this->_keyEvent.begin();
 	   it != this->_keyEvent.end(); ++it)
-	if (input.isKeyDown(it->first))
+	if (input.isKeyDown(it->first) ||
+	    JsManager::getMe()->isJsDown(JsMode::MENU, it->first))
 	  (this->*(it->second))(clock);
 
       if (this->_curToken != TokenMenu::LAST)
@@ -119,7 +120,8 @@ void		NewProfile::update(gdl::GameClock const& clock, gdl::Input& input)
     }
   else
     {
-      if (input.isKeyDown(gdl::Keys::Return))
+      if (input.isKeyDown(gdl::Keys::Return) ||
+	  JsManager::getMe()->isJsDown(JsMode::MENU, gdl::Keys::Return))
 	{
 	  if (!this->_textEdit.at(0)->getStr().empty())
 	    this->_strStatus = true;

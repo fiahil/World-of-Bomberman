@@ -104,7 +104,8 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
 				    20, g_refPos[5][0], g_refPos[5][1]);
       for (vKeyEvent::const_iterator it = this->_keyEvent.begin();
 	   it != this->_keyEvent.end(); ++it)
-	if (input.isKeyDown(it->first))
+	if (input.isKeyDown(it->first) ||
+	    JsManager::getMe()->isJsDown(JsMode::MENU, it->first))
 	  (this->*it->second)(clock);
       if (this->_curToken == TokenMenu::SETTINGS)
 	{
@@ -121,7 +122,8 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
     }
   else
     for (size_t i = 0; i <= gdl::Keys::Count; ++i)
-      if (g_ref[i][0] && input.isKeyDown(static_cast<gdl::Keys::Key>(i)))
+      if (g_ref[i][0] && (input.isKeyDown(static_cast<gdl::Keys::Key>(i)) ||
+	  JsManager::getMe()->isJsDown(JsMode::MENU, static_cast<gdl::Keys::Key>(i))))
 	{
 	  this->_selected = false;
 	  conf.setConfig(g_refAction[(this->_cursor)], static_cast<gdl::Keys::Key>(i));

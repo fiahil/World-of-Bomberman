@@ -101,7 +101,8 @@ void		MenuStats::drawText(void)
 
 void		MenuStats::update(gdl::GameClock const& clock, gdl::Input& input)
 {
-  if (input.isKeyDown(this->_keyEvent.at(2).first))
+  if (input.isKeyDown(this->_keyEvent.at(2).first) ||
+      JsManager::getMe()->isJsDown(JsMode::MENU, this->_keyEvent.at(2).first))
     (this->*_keyEvent.at(2).second)(clock);
   this->_tags.at(1)->setStatus(!this->_gameManager._mainProfile->getAchievement().at(Success::ONE_KILL));
   this->_tags.at(2)->setStatus(!this->_gameManager._mainProfile->getAchievement().at(Success::BONUS));
