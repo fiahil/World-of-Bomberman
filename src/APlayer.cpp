@@ -3,9 +3,6 @@
  * 12.05.2012
  */
 
-/* TMP */
-#include <stdlib.h>
-#include <iostream>
 #include <utility>
 #include <vector>
 #include "Sound.hpp"
@@ -525,15 +522,11 @@ void		APlayer::setNbKills(size_t val)
 
 size_t		APlayer::getSpeed() const
 {
-  if (this->_type == AIType::HUMAN)
-    std::cout << this->_speed << std::endl;
   return this->_speed * 10000.0f;
 }
 
 void		APlayer::setSpeed(size_t val)
 {
-  if (this->_type == AIType::HUMAN)
-    std::cout << this->_speed << std::endl;
   this->_speed = static_cast<double>(val) / 10000.0f;
 }
 
