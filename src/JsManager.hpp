@@ -35,6 +35,7 @@ class JsManager
     JsButton			_mnb;
     JsMotion			_mnm;
     std::vector<confFunc>	_cf;
+    JsMode::eMode		_current;
 
   private:
     bool		kLeft(void) const;
@@ -51,6 +52,8 @@ class JsManager
     static void		delMe(void);
 
     bool		isJsDown(JsMode::eMode id, gdl::Keys::Key k) const;
+    JsMode::eMode	getCurrent();
+    void		resetCurrent();
 };
 
 #endif /* __JSMANAGER_HPP__ */

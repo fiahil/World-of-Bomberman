@@ -32,6 +32,7 @@ Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
 {
   this->_type = AIType::HUMAN;
   this->setConfig(conf);
+  this->_JsMode = JsManager::getMe()->getCurrent();
 
   this->_bombAff[BombType::NORMAL] = &Human::affNormalBomb;
   this->_bombAff[BombType::BIGBOMB] = &Human::affBigBomb;
@@ -55,6 +56,7 @@ Human::~Human() {
       delete this->_hallu;
       this->_hallu = 0;
     }
+  JsManager::getMe()->resetCurrent();
   std::for_each(this->_HUD.begin(), this->_HUD.end(), deleteItem<Surface *>);
 }
 
@@ -221,7 +223,7 @@ void		Human::play(gdl::GameClock const& clock, gdl::Input& key)
   else if (this->_start < 0)
     for (size_t i = 0; i < this->_event._nb; ++i) {
       if (key.isKeyDown(this->_event._event[i]._key) ||
-	  JsManager::getMe()->isJsDown(JsMode::P1, this->_event._event[i]._key))
+	  JsManager::getMe()->isJsDown(this->_JsMode, this->_event._event[i]._key))
 	(this->*(_event._event[i]._f))(clock);
     }
 }

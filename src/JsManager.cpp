@@ -131,3 +131,15 @@ bool		JsManager::isJsDown(JsMode::eMode idx, gdl::Keys::Key k) const
 {
   return (this->*_cf.at(idx))(k);
 }
+
+JsMode::eMode	JsManager::getCurrent()
+{
+  JsMode::eMode	tmp = this->_current;
+  this->_current = JsMode::P2;
+  return tmp;
+}
+
+void		JsManager::resetCurrent()
+{
+  this->_current = JsMode::P1;
+}

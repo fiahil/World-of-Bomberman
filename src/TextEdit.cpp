@@ -124,8 +124,6 @@ TextEdit::~TextEdit()
 {
 }
 
-#include <iostream>
-
 void		TextEdit::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   int	nb = 0;
