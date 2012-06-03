@@ -4,7 +4,9 @@
  */
 
 #include <sstream>
+#include <algorithm>
 #include "LoadMap.hpp"
+#include "Common.hpp"
 
 LoadMap::LoadMap(GameManager& game, std::vector<Map *> & map)
   : AMenu("menu/background/backgroundLoadMap.jpg", "menu/background/backgroundLoadMap.jpg", 1600.0f, -1.0f, 3200.0f, game),
@@ -20,6 +22,8 @@ LoadMap::LoadMap(GameManager& game, std::vector<Map *> & map)
 
 LoadMap::~LoadMap(void)
 {
+  std::for_each(this->_map.begin(), this->_map.end(), deleteItem<Map *>);
+  this->_map.clear();
 }
 
 double		LoadMap::getCenterX(void) const
@@ -36,17 +40,18 @@ void		LoadMap::updateText() const
 {
   if (this->_map.size())
     {
-      this->_tags[0]->createText(this->_map[this->_index]->getName(), 20, 750, 365);
       std::stringstream	ss;
-      ss << " Width : " << this->_map[this->_index]->getX()
+
+      this->_tags.at(0)->createText(this->_map.at(this->_index)->getName(), 20, 750, 365);
+      ss << " Width : " << this->_map.at(this->_index)->getX()
 	 << "        "
-	 << " Height : " << this->_map[this->_index]->getY();
-      this->_tags[1]->createText(ss.str(), 20, 670, 414);
+	 << " Height : " << this->_map.at(this->_index)->getY();
+      this->_tags.at(1)->createText(ss.str(), 20, 670, 414);
     }
   else
     {
-      this->_tags[0]->createText("", 20, 750, 365);
-      this->_tags[1]->createText("", 20, 670, 414);
+      this->_tags.at(0)->createText("", 20, 750, 365);
+      this->_tags.at(1)->createText("", 20, 670, 414);
     }
 }
 
@@ -72,15 +77,15 @@ void		LoadMap::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   this->updateText();
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
-    if (input.isKeyDown(this->_keyEvent[i].first))
-      (this->*_keyEvent[i].second)(clock);
+    if (input.isKeyDown(this->_keyEvent.at(i).first))
+      (this->*_keyEvent.at(i).second)(clock);
   if (this->_cursor == 0)
     this->changeMap(clock, input);
   if (this->_curToken == TokenMenu::CREATEGAME)
     {
-      this->_gameManager._originMap = this->_map[this->_cursor];
-      this->_gameManager._match._map = new Map(this->_map[this->_index]->getX(),
-					       this->_map[this->_index]->getY(),
-					       this->_map[this->_index]->getMap());
+      this->_gameManager._originMap = this->_map.at(this->_cursor);
+      this->_gameManager._match._map = new Map(this->_map.at(this->_index)->getX(),
+					       this->_map.at(this->_index)->getY(),
+					       this->_map.at(this->_index)->getMap());
     }
 }

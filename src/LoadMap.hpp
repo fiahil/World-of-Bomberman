@@ -15,21 +15,13 @@ public:
   virtual ~LoadMap(void);
 
 private:
-  std::vector<Map *> & _map;
+  std::vector<Map *> &	_map;
   double		_timerL;
   double		_timerR;
   size_t		_index;
 
-  /*
-    Heritance from AObj
-  */
 public:
   virtual void		update(gdl::GameClock const&, gdl::Input&);
-
-  /*
-    Pure virtual functions
-  */
-public:
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
 
