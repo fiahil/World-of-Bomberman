@@ -55,81 +55,81 @@ void		JsManager::delMe(void)
   JsManager::_me = 0;
 }
 
-bool		JsManager::kLeft(void) const
+bool		JsManager::kLeft(JsMode::eMode mode) const
 {
-  return sf::Joystick::getAxisPosition(1, sf::Joystick::PovX) < 0 ||
-    sf::Joystick::getAxisPosition(1, sf::Joystick::X) < -50;
+  return sf::Joystick::getAxisPosition(JSMODE(mode), sf::Joystick::PovX) < 0 ||
+    sf::Joystick::getAxisPosition(JSMODE(mode), sf::Joystick::X) < -50;
 }
 
-bool		JsManager::kRight(void) const
+bool		JsManager::kRight(JsMode::eMode mode) const
 {
-  return sf::Joystick::getAxisPosition(1, sf::Joystick::PovX) > 0 ||
-    sf::Joystick::getAxisPosition(1, sf::Joystick::X) > 50;
+  return sf::Joystick::getAxisPosition(JSMODE(mode), sf::Joystick::PovX) > 0 ||
+    sf::Joystick::getAxisPosition(JSMODE(mode), sf::Joystick::X) > 50;
 }
 
-bool		JsManager::kUp(void) const
+bool		JsManager::kUp(JsMode::eMode mode) const
 {
-  return sf::Joystick::getAxisPosition(1, sf::Joystick::PovY) < 0 ||
-    sf::Joystick::getAxisPosition(1, sf::Joystick::Y) < -50;
+  return sf::Joystick::getAxisPosition(JSMODE(mode), sf::Joystick::PovY) < 0 ||
+    sf::Joystick::getAxisPosition(JSMODE(mode), sf::Joystick::Y) < -50;
 }
 
-bool		JsManager::kDown(void) const
+bool		JsManager::kDown(JsMode::eMode mode) const
 {
-  return sf::Joystick::getAxisPosition(1, sf::Joystick::PovY) > 0 ||
-    sf::Joystick::getAxisPosition(1, sf::Joystick::Y) > 50;
+  return sf::Joystick::getAxisPosition(JSMODE(mode), sf::Joystick::PovY) > 0 ||
+    sf::Joystick::getAxisPosition(JSMODE(mode), sf::Joystick::Y) > 50;
 }
 
-bool		JsManager::P1(gdl::Keys::Key k) const
+bool		JsManager::P1(JsMode::eMode mode, gdl::Keys::Key k) const
 {
   {
     JsButton::const_iterator it = this->_p1b.find(k);
-    if (sf::Joystick::isConnected(1) && it != this->_p1b.end())
-      return sf::Joystick::isButtonPressed(1, it->second);
+    if (sf::Joystick::isConnected(JSMODE(mode)) && it != this->_p1b.end())
+      return sf::Joystick::isButtonPressed(JSMODE(mode), it->second);
   }
 
   {
     JsMotion::const_iterator it = this->_p1m.find(k);
-    if (sf::Joystick::isConnected(1) && it != this->_p1m.end())
-      return (this->*(this->_p1m.find(k)->second.second))();
+    if (sf::Joystick::isConnected(JSMODE(mode)) && it != this->_p1m.end())
+      return (this->*(this->_p1m.find(k)->second.second))(mode);
   }
   return false;
 }
 
-bool		JsManager::P2(gdl::Keys::Key k) const
+bool		JsManager::P2(JsMode::eMode mode, gdl::Keys::Key k) const
 {
   {
     JsButton::const_iterator it = this->_p2b.find(k);
-    if (sf::Joystick::isConnected(1) && it != this->_p2b.end())
-      return sf::Joystick::isButtonPressed(1, it->second);
+    if (sf::Joystick::isConnected(JSMODE(mode)) && it != this->_p2b.end())
+      return sf::Joystick::isButtonPressed(JSMODE(mode), it->second);
   }
 
   {
     JsMotion::const_iterator it = this->_p2m.find(k);
-    if (sf::Joystick::isConnected(1) && it != this->_p2m.end())
-      return (this->*(this->_p2m.find(k)->second.second))();
+    if (sf::Joystick::isConnected(JSMODE(mode)) && it != this->_p2m.end())
+      return (this->*(this->_p2m.find(k)->second.second))(mode);
   }
   return false;
 }
 
-bool		JsManager::Menu(gdl::Keys::Key k) const
+bool		JsManager::Menu(JsMode::eMode mode, gdl::Keys::Key k) const
 {
   {
     JsButton::const_iterator it = this->_mnb.find(k);
-    if (sf::Joystick::isConnected(1) && it != this->_mnb.end())
-      return sf::Joystick::isButtonPressed(1, it->second);
+    if (sf::Joystick::isConnected(JSMODE(mode)) && it != this->_mnb.end())
+      return sf::Joystick::isButtonPressed(JSMODE(mode), it->second);
   }
 
   {
     JsMotion::const_iterator it = this->_mnm.find(k);
-    if (sf::Joystick::isConnected(1) && it != this->_mnm.end())
-      return (this->*(this->_mnm.find(k)->second.second))();
+    if (sf::Joystick::isConnected(JSMODE(mode)) && it != this->_mnm.end())
+      return (this->*(this->_mnm.find(k)->second.second))(mode);
   }
   return false;
 }
 
 bool		JsManager::isJsDown(JsMode::eMode idx, gdl::Keys::Key k) const
 {
-  return (this->*_cf.at(idx))(k);
+  return (this->*_cf.at(idx))(idx, k);
 }
 
 JsMode::eMode	JsManager::getCurrent()
