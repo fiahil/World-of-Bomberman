@@ -12,19 +12,19 @@
 
 class DirWalker
 {
-  public:
+public:
   DirWalker(std::string const& name);
   ~DirWalker();
 
-  private:
+private:
   DirWalker(DirWalker const&);
   DirWalker&	operator=(DirWalker const&);
 
-  private:
+private:
   DIR*		_dir;
   std::string*	_current;
 
-  public:
+public:
   std::string*	current() const;
   void		next();
   void		clean();

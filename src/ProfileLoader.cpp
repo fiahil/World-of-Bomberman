@@ -38,19 +38,22 @@ int				ProfileLoader::idToInt(std::string const& str) const
 
 void				ProfileLoader::checkSaves(void)
 {
+  std::vector<std::string>&	_saves = this->_profiles.back()->getSave();
   bool	isOk = true;
 
-  for (unsigned int i = 0; i < this->_profiles.back()->getSave().size(); ++i)
+  for (std::vector<std::string>::iterator it = _saves.begin(); it != _saves.end();)
     {
-      std::stringstream	ss(this->_profiles.back()->getSave().at(i));
+      std::stringstream	ss(*it);
       size_t		id;
 
       ss >> id;
       if (!SaveManager::isHere(id))
-	{
-	  this->_profiles.back()->removeSave(i);
-	  isOk = false;
-	}
+      	{
+	  it = _saves.erase(it);
+      	  isOk = false;
+      	}
+      else
+	++it;
     }
   if (!isOk)
     ProfileManager::setProfile(this->_profiles.back()->getId(), *this->_profiles.back());

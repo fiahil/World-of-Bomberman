@@ -45,6 +45,7 @@ public:
   const std::vector<bool> &		getAchievement(void) const;
   std::vector<bool> &			getAchievement(void);
   const std::vector<std::string> &	getSave(void) const;
+  std::vector<std::string> &		getSave(void);
 
 public:
   void		setId(size_t);
@@ -57,7 +58,6 @@ public:
   void		setAchievement(const std::vector<bool> &);
   void		setSave(const std::vector<std::string> &);
   void		addSave(const std::string &);
-  void		removeSave(unsigned int);
 };
 
 #endif	 /*__PROFILE_HPP__ */
