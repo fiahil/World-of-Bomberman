@@ -45,10 +45,9 @@ struct JsInput
 {
   enum eButton
   {
-    A = 0, B = 1, X, Y,
-    START, SELECT,
+    A = 0, B = 1, X = 2, Y = 3,
+    SELECT = 6, START = 7,
     UP, DOWN, LEFT, RIGHT,
-    RB, LB,
     LAST
   };
 };

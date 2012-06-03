@@ -13,6 +13,8 @@
 
 class JsManager
 {
+  typedef bool		(JsManager::*keyFunc)(void) const;
+  
   private:
     JsManager();
     ~JsManager();
@@ -21,6 +23,13 @@ class JsManager
     static JsManager*	_me;
 
     std::map<gdl::Keys::Key, JsInput::eButton>	_tr;
+    std::map<gdl::Keys::Key, keyFunc>		_kf;
+
+  private:
+    bool		kLeft(void) const;
+    bool		kRight(void) const;
+    bool		kUp(void) const;
+    bool		kDown(void) const;
 
   public:
     static JsManager*	getMe(void);
