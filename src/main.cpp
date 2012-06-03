@@ -13,25 +13,32 @@
 
 int		main()
 {
-  Bomberman	bomberman;
-  time_t	now;
-
-  time(&now);
-  srandom(now);
-
-  Sound::getMe();
-  JsManager::getMe();
-
   try
-    {
-      bomberman.run();
-    }
-  catch (const std::exception & end)
-    {
-      std::cerr << end.what() << std::endl;
-    }
+  {
+    Bomberman	bomberman;
+    time_t	now;
 
-  Sound::delMe();
-  JsManager::delMe();
+    time(&now);
+    srandom(now);
+
+    Sound::getMe();
+    JsManager::getMe();
+
+    bomberman.run();
+
+    Sound::delMe();
+    JsManager::delMe();
+  }
+  catch (const EndOfGame & end)
+  {
+  }
+  catch (const std::exception & end)
+  {
+    std::cerr << end.what() << std::endl;
+  }
+  catch (...)
+  {
+    std::cerr << "Unknown error occured." << std::endl;
+  }
   return 0;
 }
