@@ -56,9 +56,9 @@ struct JsMode
 {
   enum eMode
   {
-    P1,
-    P2,
-    MENU,
+    MENU = 0,
+    P1 = 1,
+    P2 = 2,
     LAST
   };
 };

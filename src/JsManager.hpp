@@ -13,11 +13,12 @@
 #include "enum.hpp"
 #include "Joystick.hpp"
 
+#define JSMODE(x)	((x == JsMode::MENU) ? (1) : (x))
+
 class JsManager
 {
-  typedef bool		(JsManager::*keyFunc)(void) const;
-  typedef bool		(JsManager::*confFunc)(gdl::Keys::Key) const;
-
+  typedef bool		(JsManager::*keyFunc)(JsMode::eMode) const;
+  typedef bool		(JsManager::*confFunc)(JsMode::eMode, gdl::Keys::Key) const; 
   typedef std::map<gdl::Keys::Key, std::pair<JsInput::eButton, keyFunc> > JsMotion;
   typedef std::map<gdl::Keys::Key, JsInput::eButton>			  JsButton;
   
@@ -35,22 +36,25 @@ class JsManager
     JsButton			_mnb;
     JsMotion			_mnm;
     std::vector<confFunc>	_cf;
+    JsMode::eMode		_current;
 
   private:
-    bool		kLeft(void) const;
-    bool		kRight(void) const;
-    bool		kUp(void) const;
-    bool		kDown(void) const;
+    bool		kLeft(JsMode::eMode) const;
+    bool		kRight(JsMode::eMode) const;
+    bool		kUp(JsMode::eMode) const;
+    bool		kDown(JsMode::eMode) const;
 
-    bool		P1(gdl::Keys::Key k) const;
-    bool		P2(gdl::Keys::Key k) const;
-    bool		Menu(gdl::Keys::Key k) const;
+    bool		P1(JsMode::eMode, gdl::Keys::Key k) const;
+    bool		P2(JsMode::eMode, gdl::Keys::Key k) const;
+    bool		Menu(JsMode::eMode, gdl::Keys::Key k) const;
 
   public:
     static JsManager*	getMe(void);
     static void		delMe(void);
 
     bool		isJsDown(JsMode::eMode id, gdl::Keys::Key k) const;
+    JsMode::eMode	getCurrent();
+    void		resetCurrent();
 };
 
 #endif /* __JSMANAGER_HPP__ */

@@ -6,6 +6,7 @@
 #if !defined(__Bomberman_Human_h)
 #define __Bomberman_Human_h
 
+#include "JsManager.hpp"
 #include "Text.hpp"
 #include "Image.hpp"
 #include "APlayer.hpp"
@@ -35,7 +36,7 @@ class Human : public APlayer
 
 public:
   Human(Map &, const Config&, std::vector<bool>* = 0);
-  virtual ~Human(); // delete des surface
+  virtual ~Human();
 
   virtual void	play(gdl::GameClock const&, gdl::Input&);
   virtual void	drawHUD(std::vector<gdl::Image>&, size_t, size_t, size_t, bool);
@@ -62,6 +63,7 @@ private:
   double		        _cheatTimer;
   AI*				_hallu;
   double			_halluLifeTimer;
+  JsMode::eMode			_JsMode;
 
 protected:
   virtual void	draw(void);
