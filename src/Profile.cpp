@@ -3,7 +3,6 @@
  * 03.05.12
  */
 
-#include <iostream>
 #include "enum.hpp"
 #include "Profile.hpp"
 

@@ -10,6 +10,7 @@ JsManager*	JsManager::_me = 0;
 JsManager::JsManager()
   : _cf(JsMode::LAST, 0)
 {
+  this->_current = JsMode::P1;
   this->_p1m[gdl::Keys::W] = std::make_pair(JsInput::UP, &JsManager::kUp);
   this->_p1m[gdl::Keys::A] = std::make_pair(JsInput::LEFT, &JsManager::kLeft);
   this->_p1m[gdl::Keys::S] = std::make_pair(JsInput::DOWN, &JsManager::kDown);

@@ -5,7 +5,6 @@
 
 #include <cassert>
 #include <cstdlib>
-#include <iostream>
 #include <algorithm>
 #include "enum.hpp"
 #include "AIView.hpp"

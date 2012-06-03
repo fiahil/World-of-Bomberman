@@ -6,7 +6,6 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <cmath>
-#include <iostream>
 #include "Camera.hpp"
 
 Camera::Camera()
