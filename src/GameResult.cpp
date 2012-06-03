@@ -107,8 +107,9 @@ void		GameResult::clearGame()
     {
       if ((*it)->getId() == this->_gameManager._mainProfile->getId())
 	this->saveStats((*it), this->_gameManager._mainProfile);
-      // else if ((*it)->getId() == this->_gameManager._secondProfile->getId())
-      // 	this->saveStats((*it), this->_gameManager._secondProfile);
+      else if (this->_gameManager._secondProfile &&
+	       (*it)->getId() == this->_gameManager._secondProfile->getId())
+     	this->saveStats((*it), this->_gameManager._secondProfile);
     }
 
   std::for_each(this->_gameManager._match._players.begin(),
