@@ -3,7 +3,6 @@
  * 07.05.12
  */
 
-#include <iostream>
 #include <GL/gl.h>
 #include <utility>
 #include <algorithm>

@@ -3,7 +3,6 @@
  * 27.05.12
  */
 
-#include <iostream>
 #include <sstream>
 #include <algorithm>
 #include <ctime>

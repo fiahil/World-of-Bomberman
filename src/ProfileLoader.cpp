@@ -3,7 +3,6 @@
  * 25.05.12
  */
 
-#include <iostream>
 #include <algorithm>
 #include <sstream>
 #include <stdexcept>

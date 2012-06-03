@@ -3,7 +3,6 @@
  * 15.05.12
  */
 
-#include <iostream>
 #include "MainMenu.hpp"
 
 MainMenu::MainMenu(GameManager& game)

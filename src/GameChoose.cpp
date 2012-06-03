@@ -3,7 +3,6 @@
  * 27.05.12
  */
 
-#include <iostream>
 #include "GameChoose.hpp"
 
 GameChoose::GameChoose(GameManager& game)

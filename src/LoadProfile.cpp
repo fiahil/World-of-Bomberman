@@ -4,7 +4,6 @@
  */
 
 #include <algorithm>
-#include <iostream>
 #include <sstream>
 #include "LoadProfile.hpp"
 

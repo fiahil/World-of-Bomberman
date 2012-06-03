@@ -6,7 +6,6 @@
 #include <cassert>
 #include <fstream>
 #include <sstream>
-#include <iostream>
 #include <cstdlib>
 #include <stdexcept>
 #include "Map.hpp"

@@ -3,7 +3,6 @@
  * 31.05.12
  */
 
-#include <iostream>		// REMOVE
 #include <algorithm>
 #include <sstream>
 #include <vector>
