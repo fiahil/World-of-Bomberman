@@ -85,7 +85,8 @@ bool		JsManager::P1(JsMode::eMode mode, gdl::Keys::Key k) const
   {
     JsButton::const_iterator it = this->_p1b.find(k);
     if (sf::Joystick::isConnected(JSMODE(mode)) && it != this->_p1b.end())
-      return sf::Joystick::isButtonPressed(JSMODE(mode), it->second);
+      return sf::Joystick::isButtonPressed(JSMODE(mode), it->second) ||
+	sf::Joystick::isButtonPressed(JSMODE(mode), it->second + 2);
   }
 
   {
@@ -101,7 +102,8 @@ bool		JsManager::P2(JsMode::eMode mode, gdl::Keys::Key k) const
   {
     JsButton::const_iterator it = this->_p2b.find(k);
     if (sf::Joystick::isConnected(JSMODE(mode)) && it != this->_p2b.end())
-      return sf::Joystick::isButtonPressed(JSMODE(mode), it->second);
+      return sf::Joystick::isButtonPressed(JSMODE(mode), it->second) ||
+	sf::Joystick::isButtonPressed(JSMODE(mode), it->second + 2);
   }
 
   {
@@ -117,7 +119,8 @@ bool		JsManager::Menu(JsMode::eMode mode, gdl::Keys::Key k) const
   {
     JsButton::const_iterator it = this->_mnb.find(k);
     if (sf::Joystick::isConnected(JSMODE(mode)) && it != this->_mnb.end())
-      return sf::Joystick::isButtonPressed(JSMODE(mode), it->second);
+      return sf::Joystick::isButtonPressed(JSMODE(mode), it->second) ||
+	sf::Joystick::isButtonPressed(JSMODE(mode), it->second + 2);
   }
 
   {
