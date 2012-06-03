@@ -37,7 +37,8 @@ void		MenuIA::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   for (vKeyEvent::const_iterator it = this->_keyEvent.begin();
        it != this->_keyEvent.end(); ++it)
-    if (input.isKeyDown(it->first))
+    if (input.isKeyDown(it->first) ||
+	JsManager::getMe()->isJsDown(JsMode::MENU, it->first))
       (this->*(it->second))(clock);
   if (this->_curToken == TokenMenu::TEAM && this->_cursor <= 2)
     this->_gameManager._typeAI = static_cast<AIType::eAI>(this->_cursor);

@@ -3,6 +3,7 @@
  * 07.05.12
  */
 
+#include <iostream>
 #include <GL/gl.h>
 #include <utility>
 #include <algorithm>
@@ -116,7 +117,7 @@ bool		MyGame::updatePlayer(APlayer *p)
   
   if (p->getPv() == 0)
     {
-      if (p->getLastHitId() != p)
+      if (p->getLastHitId() && p->getLastHitId() != p)
 	p->getLastHitId()->incNbKills();
       this->_match._dead.push_back(p);
       return true;

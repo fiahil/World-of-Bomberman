@@ -52,6 +52,17 @@ struct JsInput
   };
 };
 
+struct JsMode
+{
+  enum eMode
+  {
+    P1,
+    P2,
+    MENU,
+    LAST
+  };
+};
+
 struct Success
 {
   enum eSuccess {
