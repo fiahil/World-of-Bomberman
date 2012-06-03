@@ -13,7 +13,6 @@
 class	LoadProfile : public AMenu
 {
 private:
-  //ProfileLoader			_profileLoader;
   std::vector<Profile *>&	_profiles;
   std::vector<std::string>&	_names;
   size_t			_index;

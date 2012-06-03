@@ -7,6 +7,7 @@
 #include <sstream>
 #include "Common.hpp"
 #include "Human.hpp"
+#include "JsManager.hpp"
 #include "Sound.hpp"
 
 Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
@@ -56,8 +57,6 @@ Human::~Human() {
     }
   std::for_each(this->_HUD.begin(), this->_HUD.end(), deleteItem<Surface *>);
 }
-
-#include <iostream>
 
 void		Human::setConfig(Config const& conf)
 {
