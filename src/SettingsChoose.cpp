@@ -35,6 +35,7 @@ void		SettingsChoose::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   for (vKeyEvent::const_iterator it = this->_keyEvent.begin();
        it != this->_keyEvent.end(); ++it)
-    if (input.isKeyDown(it->first))
+    if (input.isKeyDown(it->first) ||
+	JsManager::getMe()->isJsDown(JsMode::MENU, it->first))
       (this->*it->second)(clock);
 }

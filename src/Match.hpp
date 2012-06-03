@@ -20,7 +20,6 @@ class Match
 public:
   Match();
   Match(Map *, GameMode::eGameMode, const std::vector<APlayer *> &);
-  ~Match();
 
 private:
   Match(const Match &);

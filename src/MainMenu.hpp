@@ -13,7 +13,7 @@ class MainMenu : public AMenu
 public:
   MainMenu(GameManager&);
   virtual ~MainMenu();
-  
+
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
   virtual void		update(gdl::GameClock const&, gdl::Input&);

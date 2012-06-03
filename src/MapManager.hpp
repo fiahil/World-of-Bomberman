@@ -15,8 +15,6 @@ private:
   std::string		_folder;
   std::vector<Map *>	_maps;
 
-  bool				isNum(std::string) const;
-
 public:
   MapManager(void);
 

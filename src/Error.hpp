@@ -14,4 +14,16 @@ public:
   const char *what() const throw() { return ("The game finished"); }
 };
 
+class		InvalidMap : public Error
+{
+public:
+  const char *what() const throw() { return ("Invalid map"); }
+};
+
+class		BadOpenFile : public Error
+{
+public:
+  const char *what() const throw() { return ("Cannot open file"); }
+};
+
 #endif		/* __ERROR_HPP__ */

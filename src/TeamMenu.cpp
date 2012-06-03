@@ -59,7 +59,9 @@ void		TeamMenu::updateText() const
 
 void		TeamMenu::changeNumber(gdl::GameClock const& clock, gdl::Input& input)
 {
-  if (clock.getTotalGameTime() >= this->_timersLR.at(0) && input.isKeyDown(gdl::Keys::Left))
+  if (clock.getTotalGameTime() >= this->_timersLR.at(0) &&
+      (input.isKeyDown(gdl::Keys::Left) ||
+       JsManager::getMe()->isJsDown(JsMode::MENU, gdl::Keys::Left)))
     {
       --this->_nb.at(this->_cursor);
       if ((this->_gameManager._match._gameMode == GameMode::SOLO ||
@@ -70,7 +72,9 @@ void		TeamMenu::changeNumber(gdl::GameClock const& clock, gdl::Input& input)
 	this->_nb.at(this->_cursor) = 0;
       this->_timersLR.at(0) = clock.getTotalGameTime() + 0.15f;
     }
-  else if (clock.getTotalGameTime() >= this->_timersLR.at(1) && input.isKeyDown(gdl::Keys::Right))
+  else if (clock.getTotalGameTime() >= this->_timersLR.at(1) &&
+      (input.isKeyDown(gdl::Keys::Right) ||
+       JsManager::getMe()->isJsDown(JsMode::MENU, gdl::Keys::Right)))
     {
       ++this->_nb.at(this->_cursor);
       if (this->_nb.at(this->_cursor) > 5)
@@ -83,7 +87,9 @@ void		TeamMenu::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
 {
   if (this->_profiles.size() <= 2)
     return ;
-  if (clock.getTotalGameTime() >= this->_timersLR.at(0) && input.isKeyDown(gdl::Keys::Left))
+  if (clock.getTotalGameTime() >= this->_timersLR.at(0) &&
+      (input.isKeyDown(gdl::Keys::Left) ||
+       JsManager::getMe()->isJsDown(JsMode::MENU, gdl::Keys::Left)))
     {
       --this->_nb.at(2);
       if (this->_nb.at(2) < 0)
@@ -96,7 +102,9 @@ void		TeamMenu::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
 	}
       this->_timersLR.at(0) = clock.getTotalGameTime() + 0.15f;
     }
-  else if (clock.getTotalGameTime() >= this->_timersLR.at(1) && input.isKeyDown(gdl::Keys::Right))
+  else if (clock.getTotalGameTime() >= this->_timersLR.at(1) &&
+      (input.isKeyDown(gdl::Keys::Right) ||
+       JsManager::getMe()->isJsDown(JsMode::MENU, gdl::Keys::Right)))
     {
       ++this->_nb.at(2);
       if (static_cast<unsigned int>(this->_nb.at(2)) >= this->_profiles.size())
@@ -123,7 +131,8 @@ void		TeamMenu::update(gdl::GameClock const& clock, gdl::Input& input)
   this->updateText();
   for (vKeyEvent::const_iterator it = this->_keyEvent.begin();
        it != this->_keyEvent.end(); ++it)
-    if (input.isKeyDown(it->first))
+    if (input.isKeyDown(it->first) ||
+	JsManager::getMe()->isJsDown(JsMode::MENU, it->first))
       (this->*it->second)(clock);
   if (this->_cursor == 0 || this->_cursor == 1)
     this->changeNumber(clock, input);

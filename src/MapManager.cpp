@@ -7,10 +7,11 @@
 #include <algorithm>
 #include "DirWalker.hpp"
 #include "MapManager.hpp"
+#include "Common.hpp"
 
-MapManager::MapManager(void)
+MapManager::MapManager()
+ : _folder("./Ressources/maps/")
 {
-  this->_folder = "./Ressources/maps/";
   this->setMaps();
 }
 
@@ -43,9 +44,7 @@ Map*			MapManager::getMap(size_t idx)
 
 Map*			MapManager::getMap(const std::string& file)
 {
-  Map*	ret = new Map(this->_folder + file, file);
-
-  return (ret);
+  return new Map(this->_folder + file, file);
 }
 
 const std::vector<Map *>&	MapManager::getAll(void) const
@@ -53,16 +52,7 @@ const std::vector<Map *>&	MapManager::getAll(void) const
   return (this->_maps);
 }
 
-static void		freeMap(Map *obj)
-{
-  if (obj != 0)
-    {
-      delete (obj);
-      obj = 0;
-    }
-}
-
 void			MapManager::unsetMaps(void)
 {
-  for_each(this->_maps.begin(), this->_maps.end(), freeMap);
+  std::for_each(this->_maps.begin(), this->_maps.end(), deleteItem<Map *>);
 }

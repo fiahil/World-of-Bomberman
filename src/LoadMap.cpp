@@ -57,14 +57,15 @@ void		LoadMap::updateText() const
 
 void		LoadMap::changeMap(gdl::GameClock const& clock, gdl::Input& input)
 {
-  if (clock.getTotalGameTime() >= this->_timerL && input.isKeyDown(gdl::Keys::Left))
+  if (clock.getTotalGameTime() >= this->_timerL && (input.isKeyDown(gdl::Keys::Left) ||
+	JsManager::getMe()->isJsDown(JsMode::MENU, gdl::Keys::Left)))
     {
       --this->_index;
       if (static_cast<int>(this->_index) < 0)
 	this->_index = this->_map.size() - 1;
       this->_timerL = clock.getTotalGameTime() + 0.15f;
     }
-  else if (clock.getTotalGameTime() >= this->_timerR && input.isKeyDown(gdl::Keys::Right))
+  else if (clock.getTotalGameTime() >= this->_timerR && (input.isKeyDown(gdl::Keys::Right) || JsManager::getMe()->isJsDown(JsMode::MENU, gdl::Keys::Right)))
     {
       ++this->_index;
       if (this->_index >= this->_map.size())
@@ -77,7 +78,8 @@ void		LoadMap::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   this->updateText();
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
-    if (input.isKeyDown(this->_keyEvent.at(i).first))
+    if (input.isKeyDown(this->_keyEvent.at(i).first) ||
+	JsManager::getMe()->isJsDown(JsMode::MENU, this->_keyEvent[i].first))
       (this->*_keyEvent.at(i).second)(clock);
   if (this->_cursor == 0)
     this->changeMap(clock, input);

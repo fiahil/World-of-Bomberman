@@ -3,18 +3,20 @@
  * 10.05.12
  */
 
+#include <cassert>
 #include <fstream>
 #include <sstream>
 #include <iostream>
 #include <cstdlib>
 #include <stdexcept>
 #include "Map.hpp"
-
+#include "Error.hpp"
 
 Tp::Tp()
   : _pos1(2, 0, 0),
     _pos2(2, 0, 0)
-{}
+{
+}
 
 Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
   : _x(x),
@@ -22,11 +24,14 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
     _name("Generated Map"),
     w_unbreak(0),
     background(0),
+    landscape(0),
     _modelBonus(BonusType::LAST)
 {
+  assert(dwallDensity != 0);
+  assert(iwallDensity != 0);
 
   if (this->_x < 10 || this->_y < 10)
-    throw std::runtime_error("Invalid map");
+    throw InvalidMap();
 
   this->_expFunc['1'] = &Map::explodeUnBreakable;
   this->_expFunc['2'] = &Map::explodeBreakable;
@@ -36,23 +41,23 @@ Map::Map(size_t x, size_t y, size_t dwallDensity, size_t iwallDensity)
     this->_map += "0";
   for (size_t ty = 0; ty < y; ++ty) {
     for (size_t tx = 0; tx < x; ++tx) {
-      if ((tx == 0) || (ty == 0) ||
-          (tx == (x - 1)) || (ty == (y - 1)))
-        this->_map[POS(tx, ty)] = '1';
-      else if ((!(ty % 2) && !(tx % 2))) {
-	if (!dwallDensity || !(random() % dwallDensity))
-	  this->_map[POS(tx, ty)] = '1';
-	else
-	  this->_map[POS(tx, ty)] = ((random() % 2) + 2) + 48;
-      }
+      if ((!(ty % 2) && !(tx % 2)))
+	{
+	  if (!dwallDensity || !(random() % dwallDensity))
+	    this->_map.at(POS(tx, ty)) = '1';
+	  else
+	    this->_map.at(POS(tx, ty)) = ((random() % 2) + 2) + 48;
+	}
       else if (!iwallDensity || !(random() % iwallDensity))
-	this->_map[POS(tx, ty)] = ((random() % 2) + 2) + 48;
+	this->_map.at(POS(tx, ty)) = ((random() % 2) + 2) + 48;
+      if ((tx == 0) || (ty == 0) || (tx == (x - 1)) || (ty == (y - 1)))
+	this->_map.at(POS(tx, ty)) = '1';
     }
   }
   this->_tp._pos1.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
   this->_tp._pos2.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
-  this->_map[POS(this->_tp._pos1._x, this->_tp._pos1._y)] = '0';
-  this->_map[POS(this->_tp._pos2._x, this->_tp._pos2._y)] = '0';
+  this->_map.at(POS(this->_tp._pos1._x, this->_tp._pos1._y)) = '0';
+  this->_map.at(POS(this->_tp._pos2._x, this->_tp._pos2._y)) = '0';
 }
 
 Map::Map(std::string const& file, std::string const &name)
@@ -61,6 +66,7 @@ Map::Map(std::string const& file, std::string const &name)
     _name(name),
     w_unbreak(0),
     background(0),
+    landscape(0),
     _modelBonus(BonusType::LAST)
 {
   std::string swap;
@@ -71,28 +77,29 @@ Map::Map(std::string const& file, std::string const &name)
   this->_expFunc['2'] = &Map::explodeBreakable;
   this->_expFunc['3'] = &Map::explodeBreakable;
 
-  infile.open (file.c_str(), std::ifstream::in);
+  infile.open(file.c_str(), std::ifstream::in);
   if (!infile)
-    throw std::runtime_error("cannot open file");
+    throw BadOpenFile();
+
   std::getline(infile, swap);
   ss << swap;
   ss >> this->_x;
   ss >> this->_y;
 
   if (this->_x < 10 || this->_y < 10)
-    throw std::runtime_error("Invalid map");
+    throw InvalidMap();
 
   while (!infile.eof()) {
     std::getline(infile, swap);
     this->_map += swap;
   }
   if (this->_map.size() != (this->_x * this->_y))
-    throw std::runtime_error("Invalid map");
+    throw InvalidMap();
 
   this->_tp._pos1.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
   this->_tp._pos2.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
-  this->_map[POS(this->_tp._pos1._x, this->_tp._pos1._y)] = '0';
-  this->_map[POS(this->_tp._pos2._x, this->_tp._pos2._y)] = '0';
+  this->_map.at(POS(this->_tp._pos1._x, this->_tp._pos1._y)) = '0';
+  this->_map.at(POS(this->_tp._pos2._x, this->_tp._pos2._y)) = '0';
 }
 
 Map::Map(size_t x, size_t y, std::string const& map)
@@ -101,11 +108,12 @@ Map::Map(size_t x, size_t y, std::string const& map)
     _map(map),
     w_unbreak(0),
     background(0),
+    landscape(0),
     _modelBonus(BonusType::LAST)
 {
 
   if (this->_x < 10 || this->_y < 10)
-    throw std::runtime_error("Invalid map");
+    throw InvalidMap();
 
   this->_expFunc['1'] = &Map::explodeUnBreakable;
   this->_expFunc['2'] = &Map::explodeBreakable;
@@ -113,8 +121,8 @@ Map::Map(size_t x, size_t y, std::string const& map)
 
   this->_tp._pos1.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
   this->_tp._pos2.setPos(random() % (this->_x - 2) + 1, random() % (this->_y - 2) + 1);
-  this->_map[POS(this->_tp._pos1._x, this->_tp._pos1._y)] = '0';
-  this->_map[POS(this->_tp._pos2._x, this->_tp._pos2._y)] = '0';
+  this->_map.at(POS(this->_tp._pos1._x, this->_tp._pos1._y)) = '0';
+  this->_map.at(POS(this->_tp._pos2._x, this->_tp._pos2._y)) = '0';
 }
 
 Map::~Map()
@@ -143,6 +151,7 @@ void		Map::initialize(void)
   this->_unbreak = gdl::Image::load("textures/unbreak.jpg");
   this->_background = gdl::Image::load("textures/background.jpg");
   this->_landscape = gdl::Image::load("textures/landscape.jpg");
+
   this->_modelBonus[BonusType::LIFE] = gdl::Model::load("models/Bonus_life.FBX");
   this->_modelBonus[BonusType::BOMB] = gdl::Model::load("models/Bonus_bomb.FBX");
   this->_modelBonus[BonusType::LUST] = gdl::Model::load("models/Bonus_fury.FBX");
@@ -152,6 +161,7 @@ void		Map::initialize(void)
   this->w_unbreak = new Cube(this->_unbreak);
 
   Point		p(2.0f, 0, 0);
+
   this->background = new Plane(this->_x, this->_y, p, this->_background);
   p.setPos(-300, -100);
   this->landscape = new Plane(800.0f, 400.0f, p, this->_landscape);
@@ -189,44 +199,44 @@ void		Map::draw(void)
   for (size_t y = y0; y < yf; ++y)
     for (size_t x = x0; x < xf; ++x) {
       p.setPos(x, y);
-      if (this->_map[POS(x, y)] == '1')
+      if (this->_map.at(POS(x, y)) == '1')
 	this->w_unbreak->draw(p);
-      else if (this->_map[POS(x, y)] != '0')
+      else if (this->_map.at(POS(x, y)) != '0')
 	{
 	  glPushMatrix();
 	  glTranslatef(p._pos.x, p._pos.y - 1.0f, p._pos.z);
 	  glScalef(0.4f, 0.4f, 0.4f);
-	  this->_modelBreak[this->_map[POS(x, y)]].draw();
+	  this->_modelBreak.at(this->_map.at(POS(x, y))).draw();
 	  glPopMatrix();
 	}
     }
   glPushMatrix();
   glTranslatef(this->_tp._pos1._pos.x, this->_tp._pos1._pos.y - 1.0f, this->_tp._pos1._pos.z);
   glScalef(0.155f, 0.155f, 0.155f);
-  this->_modelBreak['t'].draw();
+  this->_modelBreak.at('t').draw();
   glPopMatrix();
 
   glPushMatrix();
   glTranslatef(this->_tp._pos2._pos.x, this->_tp._pos2._pos.y - 1.0f, this->_tp._pos2._pos.z);
   glScalef(0.155f, 0.155f, 0.155f);
-  this->_modelBreak['t'].draw();
+  this->_modelBreak.at('t').draw();
   glPopMatrix();
 }
 
 void		Map::update(gdl::GameClock const& clock, gdl::Input&)
 {
-  this->_modelBonus[BonusType::LIFE].play("Take 001");
-  this->_modelBonus[BonusType::LIFE].update(clock);
-  this->_modelBonus[BonusType::BOMB].play("Take 001");
-  this->_modelBonus[BonusType::BOMB].update(clock);
-  this->_modelBonus[BonusType::LUST].play("Take 001");
-  this->_modelBonus[BonusType::LUST].update(clock);
-  this->_modelBonus[BonusType::POWER].play("Take 001");
-  this->_modelBonus[BonusType::POWER].update(clock);
-  this->_modelBonus[BonusType::SHIELD].play("Take 001");
-  this->_modelBonus[BonusType::SHIELD].update(clock);
-  this->_modelBonus[BonusType::SPRINT].play("Take 001");
-  this->_modelBonus[BonusType::SPRINT].update(clock);
+  this->_modelBonus.at(BonusType::LIFE).play("Take 001");
+  this->_modelBonus.at(BonusType::LIFE).update(clock);
+  this->_modelBonus.at(BonusType::BOMB).play("Take 001");
+  this->_modelBonus.at(BonusType::BOMB).update(clock);
+  this->_modelBonus.at(BonusType::LUST).play("Take 001");
+  this->_modelBonus.at(BonusType::LUST).update(clock);
+  this->_modelBonus.at(BonusType::POWER).play("Take 001");
+  this->_modelBonus.at(BonusType::POWER).update(clock);
+  this->_modelBonus.at(BonusType::SHIELD).play("Take 001");
+  this->_modelBonus.at(BonusType::SHIELD).update(clock);
+  this->_modelBonus.at(BonusType::SPRINT).play("Take 001");
+  this->_modelBonus.at(BonusType::SPRINT).update(clock);
 }
 
 bool		Map::canMoveAt(size_t x, size_t y) const
@@ -238,7 +248,7 @@ bool Map::safeCanMoveAt(size_t x, size_t y) const
 {
   return ((x > 0) && (x < this->_x) && (y > 0)
 	  && (y < this->_y)
-	  && (this->_map[POS(x, y)] == '0'));
+	  && (this->_map.at(POS(x, y)) == '0'));
 }
 
 void		Map::setOptimization(Point const* p)
@@ -280,17 +290,20 @@ void		Map::explodeBreakable(size_t &r,
 				      std::list<Bonus*>& bonus)
 {
   f = r;
-  this->_map[pos] = '0';
+  this->_map.at(pos) = '0';
 
   int		rand = random() % (BonusType::LAST + 10);
 
   if (rand < BonusType::LAST)
     {
       Point	p(*this->_opti);
+
+      assert(this->_y != 0);
+
       p.setPos(pos % this->_y, pos / this->_y);
       bonus.push_back(new Bonus(static_cast<BonusType::eBonus>(rand),
 				p,
-				this->_modelBonus[rand]));
+				this->_modelBonus.at(rand)));
     }
 }
 
@@ -298,29 +311,25 @@ void		Map::explode(Pattern& real, Pattern& final, std::list<Bonus*>& bonus)
 {
   char		elem;
 
-  if ((elem = this->_map[POS(final._x, final._y - real._coefN)]) != '0')
-    (this->*(this->_expFunc[elem]))(real._coefN,
-				    final._coefN,
-				    POS(final._x, final._y - real._coefN),
-				    bonus);
+  if ((elem = this->_map.at(POS(final._x, final._y - real._coefN))) != '0')
+    (this->*(this->_expFunc.at(elem)))(real._coefN, final._coefN,
+				       POS(final._x, final._y - real._coefN),
+				       bonus);
 
-  if ((elem = this->_map[POS(final._x, final._y + real._coefS)]) != '0')
-    (this->*(this->_expFunc[elem]))(real._coefS,
-				    final._coefS,
-				    POS(final._x, final._y + real._coefS),
-				    bonus);
+  if ((elem = this->_map.at(POS(final._x, final._y + real._coefS))) != '0')
+    (this->*(this->_expFunc.at(elem)))(real._coefS, final._coefS,
+				       POS(final._x, final._y + real._coefS),
+				       bonus);
 
-  if ((elem = this->_map[POS(final._x + real._coefE, final._y)]) != '0')
-    (this->*(this->_expFunc[elem]))(real._coefE,
-				    final._coefE,
-				    POS(final._x + real._coefE, final._y),
-				    bonus);
+  if ((elem = this->_map.at(POS(final._x + real._coefE, final._y))) != '0')
+    (this->*(this->_expFunc.at(elem)))(real._coefE, final._coefE,
+				       POS(final._x + real._coefE, final._y),
+				       bonus);
 
-  if ((elem = this->_map[POS(final._x - real._coefW, final._y)]) != '0')
-    (this->*(this->_expFunc[elem]))(real._coefW,
-				    final._coefW,
-				    POS(final._x - real._coefW, final._y),
-				    bonus);
+  if ((elem = this->_map.at(POS(final._x - real._coefW, final._y))) != '0')
+    (this->*(this->_expFunc.at(elem)))(real._coefW, final._coefW,
+				       POS(final._x - real._coefW, final._y),
+				       bonus);
 }
 
 static void	clear_case(char &c)
@@ -338,31 +347,32 @@ void		Map::setSpawnTeam(std::vector<APlayer*>& players)
   size_t	pos;
 
   for (size_t i = 0; i < players.size(); ++i)
-    tmp[players[i]->getTeamId()] = std::make_pair(0, 0);
+    tmp[players.at(i)->getTeamId()] = std::make_pair(0, 0);
   for (std::map<size_t, std::pair<size_t, size_t> >::iterator it = tmp.begin();
        it != tmp.end();
        ++it)
     {
       pos = nb * size / tmp.size() + this->_x - 1;
-      while (this->_map[++pos] == '1');
+      while (this->_map.at(++pos) == '1');
+
+      assert(this->_x != 0);
+
       it->second.first = pos % this->_x;
       it->second.second = pos / this->_x;
-      this->_map[POS(it->second.first, it->second.second)] = '0';
-      clear_case(this->_map[POS(it->second.first + 1, it->second.second)]);
-      clear_case(this->_map[POS(it->second.first + 1, it->second.second + 1)]);
-      clear_case(this->_map[POS(it->second.first, it->second.second + 1)]);
-      clear_case(this->_map[POS(it->second.first - 1, it->second.second + 1)]);
-      clear_case(this->_map[POS(it->second.first - 1, it->second.second)]);
-      clear_case(this->_map[POS(it->second.first - 1, it->second.second - 1)]);
-      clear_case(this->_map[POS(it->second.first, it->second.second - 1)]);
+      this->_map.at(POS(it->second.first, it->second.second)) = '0';
+      clear_case(this->_map.at(POS(it->second.first + 1, it->second.second)));
+      clear_case(this->_map.at(POS(it->second.first + 1, it->second.second + 1)));
+      clear_case(this->_map.at(POS(it->second.first, it->second.second + 1)));
+      clear_case(this->_map.at(POS(it->second.first - 1, it->second.second + 1)));
+      clear_case(this->_map.at(POS(it->second.first - 1, it->second.second)));
+      clear_case(this->_map.at(POS(it->second.first - 1, it->second.second - 1)));
+      clear_case(this->_map.at(POS(it->second.first, it->second.second - 1)));
 
       ++nb;
     }
   for (std::vector<APlayer*>::iterator it = players.begin();
        it != players.end();
        ++it)
-    {
-      (*it)->setPos(tmp[(*it)->getTeamId()].first,
-		    tmp[(*it)->getTeamId()].second);
-    }
+    (*it)->setPos(tmp[(*it)->getTeamId()].first,
+		  tmp[(*it)->getTeamId()].second);
 }
