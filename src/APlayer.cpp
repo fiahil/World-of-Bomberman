@@ -39,7 +39,7 @@ static const char*	g_refAnimName[State::LAST] = {
 };
 
 APlayer::APlayer(Map & map, std::vector<bool>* success)
-  : _k(0.2f),
+  : _k(0.15f),
     _map(map),
     _pv(100),
     _id(-1),
@@ -527,7 +527,11 @@ size_t		APlayer::getSpeed() const
 
 void		APlayer::setSpeed(size_t val)
 {
-  this->_speed = static_cast<double>(val) / 10000.0f;
+  this->_speed = val;
+  if (val == 1500)
+    this->_speed = 0.15f;
+  else if (val == 2000)
+    this->_speed = 0.20f;
 }
 
 void		APlayer::setTimer(double)
