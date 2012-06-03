@@ -123,7 +123,7 @@ void	Settings::update(gdl::GameClock const& clock, gdl::Input& input)
   else
     for (size_t i = 0; i <= gdl::Keys::Count; ++i)
       if (g_ref[i][0] && (input.isKeyDown(static_cast<gdl::Keys::Key>(i)) ||
-	  JsManager::getMe()->isJsDown(JsMode::MENU, static_cast<gdl::Keys::Key>(i))))
+	  JsManager::getMe()->isJsDown(JsMode::P1, static_cast<gdl::Keys::Key>(i))))
 	{
 	  this->_selected = false;
 	  conf.setConfig(g_refAction[(this->_cursor)], static_cast<gdl::Keys::Key>(i));
