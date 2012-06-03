@@ -61,7 +61,7 @@ void		LoadProfile::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
       --this->_index;
       if (static_cast<int>(this->_index) < 0)
 	this->_index = this->_profiles.size() - 1;
-      if (this->_profiles.at(this->_index)->getName().compare(0, 5, "Guest") == 0)
+      if (this->_profiles.at(this->_index)->getName().compare("Guest") == 0)
 	{
 	  --this->_index;
 	  if (static_cast<int>(this->_index) < 0)
@@ -74,7 +74,7 @@ void		LoadProfile::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
       ++this->_index;
       if (this->_index >= this->_profiles.size())
 	this->_index = 0;
-      if (this->_profiles.at(this->_index)->getName().compare(0, 5, "Guest") == 0)
+      if (this->_profiles.at(this->_index)->getName().compare("Guest") == 0)
 	{
 	  ++this->_index;
 	  if (this->_index >= this->_profiles.size())

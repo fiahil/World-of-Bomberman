@@ -31,14 +31,13 @@ public:
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
 
-  /*
-    Others
-  */
 private:
   void			loadSave();
   void			loadAllSaves();
   void			changeSave(gdl::GameClock const&, gdl::Input&);
   void			updateText() const;
+  void			initGameManager(void);
+  void			setConfigs(APlayer *, APlayer *);
 };
 
 #endif		/* __LOAD_SAVE_HPP__ */
