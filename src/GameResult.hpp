@@ -12,14 +12,14 @@
 class	GameResult : public AMenu
 {
 public:
-  GameResult(GameManager &, Match &);
+  GameResult(GameManager &, Match &, std::vector<Map*> const &);
   virtual ~GameResult(void);
 
-public:
-  bool			_isBuilt;
-  Match &		_match;
-
 private:
+  bool				_isBuilt;
+  Match &			_match;
+  std::vector<Map*> const &	_maps;
+
   std::vector<APlayer*>	_playerScore;
 
 private:
@@ -30,9 +30,6 @@ private:
 
 private:
   virtual void		draw();
-
-public:
-  void			clearMatchMap(const std::vector<Map *> &);
 
 public:
   virtual double	getCenterX() const;

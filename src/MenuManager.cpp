@@ -85,9 +85,13 @@ void		MenuManager::initialize(void)
   this->_menu.at(TokenMenu::MAINMENU)->initialize();
   this->_menu.at(TokenMenu::CREDITS) = new Credits(this->_gameManager);
   this->_menu.at(TokenMenu::CREDITS)->initialize();
-  this->_menu.at(TokenMenu::LOADPROFILE) = new LoadProfile(this->_gameManager, this->_profile, this->_names);
+  this->_menu.at(TokenMenu::LOADPROFILE) = new LoadProfile(this->_gameManager,
+							   this->_profile,
+							   this->_names);
   this->_menu.at(TokenMenu::LOADPROFILE)->initialize();
-  this->_menu.at(TokenMenu::LOADSAVE) = new LoadSave(this->_gameManager, this->_profile, this->_guest);
+  this->_menu.at(TokenMenu::LOADSAVE) = new LoadSave(this->_gameManager,
+						     this->_profile,
+						     this->_guest);
   this->_menu.at(TokenMenu::LOADSAVE)->initialize();
   this->_menu.at(TokenMenu::LOADMAP) = new LoadMap(this->_gameManager, this->_map);
   this->_menu.at(TokenMenu::LOADMAP)->initialize();
@@ -99,7 +103,9 @@ void		MenuManager::initialize(void)
   this->_menu.at(TokenMenu::TEAM)->initialize();
   this->_menu.at(TokenMenu::MAP) = new MenuMap(this->_gameManager);
   this->_menu.at(TokenMenu::MAP)->initialize();
-  this->_menu.at(TokenMenu::NEWPROFILE) = new NewProfile(this->_gameManager, this->_profile, this->_names);
+  this->_menu.at(TokenMenu::NEWPROFILE) = new NewProfile(this->_gameManager,
+							 this->_profile,
+							 this->_names);
   this->_menu.at(TokenMenu::NEWPROFILE)->initialize();
   this->_menu.at(TokenMenu::PROFILE) = new MenuProfile(this->_gameManager);
   this->_menu.at(TokenMenu::PROFILE)->initialize();
@@ -113,7 +119,9 @@ void		MenuManager::initialize(void)
   this->_menu.at(TokenMenu::STATS)->initialize();
   this->_menu.at(TokenMenu::PAUSE) = new MenuPause(this->_gameManager, this->_map);
   this->_menu.at(TokenMenu::PAUSE)->initialize();
-  this->_menu.at(TokenMenu::GAMERESULT) = new GameResult(this->_gameManager, this->_gameManager._match);
+  this->_menu.at(TokenMenu::GAMERESULT) = new GameResult(this->_gameManager,
+							 this->_gameManager._match,
+							 this->_map);
   this->_menu.at(TokenMenu::GAMERESULT)->initialize();
   this->_menu.at(TokenMenu::LOADING) = new Loading(this->_gameManager);
   this->_menu.at(TokenMenu::LOADING)->initialize();
