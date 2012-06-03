@@ -19,7 +19,8 @@ AI::AI(AIType::eAI type, Map& map)
     _clock(0),
     _AIstate(&AI::waitState)
 {
-  assert((this->_type = type) != AIType::HUMAN);
+  assert(type != AIType::HUMAN);
+  this->_type = type;
 
   std::vector<std::pair<gtFunc, stFunc> >	EASY;
   std::vector<std::pair<gtFunc, stFunc> >	NORMAL;

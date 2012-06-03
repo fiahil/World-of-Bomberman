@@ -220,7 +220,8 @@ void		Human::play(gdl::GameClock const& clock, gdl::Input& key)
     }
   else if (this->_start < 0)
     for (size_t i = 0; i < this->_event._nb; ++i) {
-      if (key.isKeyDown(this->_event._event[i]._key))
+      if (key.isKeyDown(this->_event._event[i]._key) ||
+	  JsManager::getMe()->isJsDown(1, this->_event._event[i]._key))
 	(this->*(_event._event[i]._f))(clock);
     }
 }

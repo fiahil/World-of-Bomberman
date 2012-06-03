@@ -4,6 +4,7 @@
  */
 
 #include <cstdlib>
+#include <iostream>
 #include <exception>
 #include "Sound.hpp"
 #include "JsManager.hpp"
@@ -22,13 +23,14 @@ int		main()
   JsManager::getMe();
 
   try
-    {
-      bomberman.run();
-    }
+  {
+    bomberman.run();
+  }
   catch (std::exception & end)
-    {
-      std::cout << end.what() << std::endl;
-    }
+  {
+    std::cout << end.what() << std::endl;
+  }
+
   Sound::delMe();
   JsManager::delMe();
   return 0;
