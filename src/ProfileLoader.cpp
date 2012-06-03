@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <sstream>
+#include <iostream>
 #include <stdexcept>
 #include "Common.hpp"
 #include "DirWalker.hpp"

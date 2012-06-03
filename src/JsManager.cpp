@@ -145,9 +145,9 @@ void		JsManager::resetCurrent()
   this->_current = JsMode::P1;
 }
 
-gdl::Keys::Key	JsManager::getKey(HumGame::eActioni a) const
+gdl::Keys::Key	JsManager::getKey(HumGame::eAction a) const
 {
-  std::map	keyMapping;
+  std::map<HumGame::eAction, gdl::Keys::Key>	keyMapping;
 
   keyMapping[HumGame::UP] = gdl::Keys::W;
   keyMapping[HumGame::LEFT] = gdl::Keys::A;
@@ -157,5 +157,5 @@ gdl::Keys::Key	JsManager::getKey(HumGame::eActioni a) const
   keyMapping[HumGame::PAUSE] = gdl::Keys::Escape;
   keyMapping[HumGame::SKILL] = gdl::Keys::E;
   
-  return keyMapping->find(a)->second;
+  return keyMapping.find(a)->second;
 }

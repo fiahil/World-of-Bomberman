@@ -3,6 +3,7 @@
  * 25.05.2012
  */
 
+#include <iostream>
 #include <algorithm>
 #include "DirWalker.hpp"
 #include "MapManager.hpp"
