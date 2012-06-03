@@ -52,6 +52,7 @@ class JsManager
     static JsManager*	getMe(void);
     static void		delMe(void);
 
+    gdl::Keys::Key	getKey(HumGame::eAction) const;
     bool		isJsDown(JsMode::eMode id, gdl::Keys::Key k) const;
     JsMode::eMode	getCurrent();
     void		resetCurrent();
