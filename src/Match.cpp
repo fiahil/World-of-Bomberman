@@ -17,8 +17,3 @@ Match::Match(Map * map, GameMode::eGameMode game_mode, const std::vector<APlayer
     _players(players)
 {
 }
-
-Match::~Match()
-{
-}
-

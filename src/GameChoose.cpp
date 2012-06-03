@@ -32,7 +32,8 @@ double		GameChoose::getCenterY(void) const
 void		GameChoose::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
-    if (input.isKeyDown(this->_keyEvent[i].first))
+    if (input.isKeyDown(this->_keyEvent[i].first) ||
+	JsManager::getMe()->isJsDown(JsMode::MENU, this->_keyEvent[i].first))
       (this->*_keyEvent[i].second)(clock);
   if (this->_curToken == TokenMenu::IA)
     {

@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <utility>
+#include "JsManager.hpp"
 #include "enum.hpp"
 #include "AObj.hpp"
 #include "Tag.hpp"

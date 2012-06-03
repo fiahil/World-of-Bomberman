@@ -8,19 +8,34 @@
 JsManager*	JsManager::_me = 0;
 
 JsManager::JsManager()
+  : _cf(JsMode::LAST, 0)
 {
-  this->_tr[gdl::Keys::W] = JsInput::UP;
-  this->_tr[gdl::Keys::A] = JsInput::LEFT;
-  this->_tr[gdl::Keys::S] = JsInput::DOWN;
-  this->_tr[gdl::Keys::D] = JsInput::RIGHT;
-  this->_tr[gdl::Keys::E] = JsInput::B;
-  this->_tr[gdl::Keys::Space] = JsInput::A;
-  this->_tr[gdl::Keys::Escape] = JsInput::START;
+  this->_p1m[gdl::Keys::W] = std::make_pair(JsInput::UP, &JsManager::kUp);
+  this->_p1m[gdl::Keys::A] = std::make_pair(JsInput::LEFT, &JsManager::kLeft);
+  this->_p1m[gdl::Keys::S] = std::make_pair(JsInput::DOWN, &JsManager::kDown);
+  this->_p1m[gdl::Keys::D] = std::make_pair(JsInput::RIGHT, &JsManager::kRight);
+  this->_p1b[gdl::Keys::E] = JsInput::B;
+  this->_p1b[gdl::Keys::Space] = JsInput::A;
+  this->_p1b[gdl::Keys::Escape] = JsInput::START;
 
-  this->_kf[gdl::Keys::W] = &JsManager::kUp;
-  this->_kf[gdl::Keys::A] = &JsManager::kLeft;
-  this->_kf[gdl::Keys::S] = &JsManager::kDown;
-  this->_kf[gdl::Keys::D] = &JsManager::kRight;
+  this->_p2m[gdl::Keys::Up] = std::make_pair(JsInput::UP, &JsManager::kUp);
+  this->_p2m[gdl::Keys::Left] = std::make_pair(JsInput::LEFT, &JsManager::kLeft);
+  this->_p2m[gdl::Keys::Down] = std::make_pair(JsInput::DOWN, &JsManager::kDown);
+  this->_p2m[gdl::Keys::Right] = std::make_pair(JsInput::RIGHT, &JsManager::kRight);
+  this->_p2b[gdl::Keys::RShift] = JsInput::B;
+  this->_p2b[gdl::Keys::RControl] = JsInput::A;
+  this->_p2b[gdl::Keys::Escape] = JsInput::START;
+
+  this->_mnm[gdl::Keys::Up] = std::make_pair(JsInput::UP, &JsManager::kUp);
+  this->_mnm[gdl::Keys::Left] = std::make_pair(JsInput::LEFT, &JsManager::kLeft);
+  this->_mnm[gdl::Keys::Down] = std::make_pair(JsInput::DOWN, &JsManager::kDown);
+  this->_mnm[gdl::Keys::Right] = std::make_pair(JsInput::RIGHT, &JsManager::kRight);
+  this->_mnb[gdl::Keys::Return] = JsInput::A;
+  this->_mnb[gdl::Keys::Escape] = JsInput::START;
+  
+  this->_cf.at(JsMode::P1) = &JsManager::P1;
+  this->_cf.at(JsMode::P2) = &JsManager::P2;
+  this->_cf.at(JsMode::MENU) = &JsManager::Menu;
 }
 
 JsManager::~JsManager()
@@ -64,16 +79,55 @@ bool		JsManager::kDown(void) const
     sf::Joystick::getAxisPosition(1, sf::Joystick::Y) > 50;
 }
 
-bool		JsManager::isJsDown(size_t, gdl::Keys::Key k) const
+bool		JsManager::P1(gdl::Keys::Key k) const
 {
-  std::map<gdl::Keys::Key, JsInput::eButton>::const_iterator it = this->_tr.find(k);
-  if (sf::Joystick::isConnected(1) && it != this->_tr.end() &&
-      k != gdl::Keys::W && k != gdl::Keys::A && k != gdl::Keys::S && k != gdl::Keys::D)
-    return sf::Joystick::isButtonPressed(1, it->second);
-  else if (k == gdl::Keys::W ||
-      k == gdl::Keys::A ||
-      k == gdl::Keys::S ||
-      k == gdl::Keys::D)
-    return (this->*(this->_kf.find(k)->second))();
+  {
+    JsButton::const_iterator it = this->_p1b.find(k);
+    if (sf::Joystick::isConnected(1) && it != this->_p1b.end())
+      return sf::Joystick::isButtonPressed(1, it->second);
+  }
+
+  {
+    JsMotion::const_iterator it = this->_p1m.find(k);
+    if (sf::Joystick::isConnected(1) && it != this->_p1m.end())
+      return (this->*(this->_p1m.find(k)->second.second))();
+  }
   return false;
+}
+
+bool		JsManager::P2(gdl::Keys::Key k) const
+{
+  {
+    JsButton::const_iterator it = this->_p2b.find(k);
+    if (sf::Joystick::isConnected(1) && it != this->_p2b.end())
+      return sf::Joystick::isButtonPressed(1, it->second);
+  }
+
+  {
+    JsMotion::const_iterator it = this->_p2m.find(k);
+    if (sf::Joystick::isConnected(1) && it != this->_p2m.end())
+      return (this->*(this->_p2m.find(k)->second.second))();
+  }
+  return false;
+}
+
+bool		JsManager::Menu(gdl::Keys::Key k) const
+{
+  {
+    JsButton::const_iterator it = this->_mnb.find(k);
+    if (sf::Joystick::isConnected(1) && it != this->_mnb.end())
+      return sf::Joystick::isButtonPressed(1, it->second);
+  }
+
+  {
+    JsMotion::const_iterator it = this->_mnm.find(k);
+    if (sf::Joystick::isConnected(1) && it != this->_mnm.end())
+      return (this->*(this->_mnm.find(k)->second.second))();
+  }
+  return false;
+}
+
+bool		JsManager::isJsDown(JsMode::eMode idx, gdl::Keys::Key k) const
+{
+  return (this->*_cf.at(idx))(k);
 }

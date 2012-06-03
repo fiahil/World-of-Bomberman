@@ -78,14 +78,17 @@ void		SkinChoose::updateText()
 
 void		SkinChoose::changeSkin(gdl::GameClock const& clock, gdl::Input& input)
 {
-  if (clock.getTotalGameTime() >= this->_timerL && input.isKeyDown(gdl::Keys::Left))
+  if (clock.getTotalGameTime() >= this->_timerL && (input.isKeyDown(gdl::Keys::Left)||
+	JsManager::getMe()->isJsDown(JsMode::MENU, gdl::Keys::Left)))
     {
       --this->_indexSkin;
       if (static_cast<int>(this->_indexSkin) < 0)
 	this->_indexSkin = Skin::LAST - 2;
       this->_timerL = clock.getTotalGameTime() + 0.15f;
     }
-  else if (clock.getTotalGameTime() >= this->_timerR && input.isKeyDown(gdl::Keys::Right))
+  else if (clock.getTotalGameTime() >= this->_timerR &&
+      (input.isKeyDown(gdl::Keys::Right) ||
+       JsManager::getMe()->isJsDown(JsMode::MENU, gdl::Keys::Right)))
     {
       ++this->_indexSkin;
       if (this->_indexSkin >= Skin::LAST - 1)
@@ -96,14 +99,18 @@ void		SkinChoose::changeSkin(gdl::GameClock const& clock, gdl::Input& input)
 
 void		SkinChoose::changeSkill(gdl::GameClock const& clock, gdl::Input& input)
 {
-  if (clock.getTotalGameTime() >= this->_timerL && input.isKeyDown(gdl::Keys::Left))
+  if (clock.getTotalGameTime() >= this->_timerL &&
+      ((input.isKeyDown(gdl::Keys::Left)) ||
+      JsManager::getMe()->isJsDown(JsMode::MENU, gdl::Keys::Left)))
     {
       --this->_indexSkill;
       if (static_cast<int>(this->_indexSkill) < 0)
 	this->_indexSkill = Skill::LAST - 1;
       this->_timerL = clock.getTotalGameTime() + 0.15f;
     }
-  else if (clock.getTotalGameTime() >= this->_timerR && input.isKeyDown(gdl::Keys::Right))
+  else if (clock.getTotalGameTime() >= this->_timerR &&
+      (input.isKeyDown(gdl::Keys::Right) ||
+       JsManager::getMe()->isJsDown(JsMode::MENU, gdl::Keys::Right)))
     {
       ++this->_indexSkill;
       if (this->_indexSkill >= Skill::LAST)
@@ -123,7 +130,8 @@ void		SkinChoose::update(gdl::GameClock const& clock, gdl::Input& input)
   this->updateText();
   for (vKeyEvent::const_iterator it = this->_keyEvent.begin();
        it != this->_keyEvent.end(); ++it)
-    if (input.isKeyDown(it->first))
+    if (input.isKeyDown(it->first) ||
+	JsManager::getMe()->isJsDown(JsMode::MENU, it->first))
       (this->*it->second)(clock);
   if (this->_cursor == 0)
     this->changeSkin(clock, input);

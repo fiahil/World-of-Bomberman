@@ -23,13 +23,13 @@ int		main()
   JsManager::getMe();
 
   try
-  {
-    bomberman.run();
-  }
-  catch (std::exception & end)
-  {
-    std::cout << end.what() << std::endl;
-  }
+    {
+      bomberman.run();
+    }
+  catch (const std::exception & end)
+    {
+      std::cerr << end.what() << std::endl;
+    }
 
   Sound::delMe();
   JsManager::delMe();

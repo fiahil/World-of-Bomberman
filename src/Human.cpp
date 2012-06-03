@@ -158,7 +158,7 @@ bool		Human::cheatInvFunction(gdl::GameClock const& clock)
 
   if ((current = clock.getTotalGameTime()) >= this->_cheatTimer)
     {
-      this->_cheatTimer = current + 0.15f;
+      this->_cheatTimer = current + 0.30f;
       if (!this->_dam)
 	this->_dam = 1.0f;
       else
@@ -221,7 +221,7 @@ void		Human::play(gdl::GameClock const& clock, gdl::Input& key)
   else if (this->_start < 0)
     for (size_t i = 0; i < this->_event._nb; ++i) {
       if (key.isKeyDown(this->_event._event[i]._key) ||
-	  JsManager::getMe()->isJsDown(1, this->_event._event[i]._key))
+	  JsManager::getMe()->isJsDown(JsMode::P1, this->_event._event[i]._key))
 	(this->*(_event._event[i]._f))(clock);
     }
 }
