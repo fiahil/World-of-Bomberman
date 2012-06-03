@@ -6,20 +6,22 @@
 #ifndef __LOADING_HPP__
 #define __LOADING_HPP__
 
+#include <vector>
 #include "AMenu.hpp"
 
 class Loading : public AMenu
 {
 private:
-  double	_timer;
+  double			_timer;
   std::vector<gdl::Model>       _model;
-  
+
 public:
   Loading(GameManager&);
   virtual ~Loading();
-  
+
   virtual double	getCenterX() const;
   virtual double	getCenterY() const;
+
   virtual void		update(gdl::GameClock const&, gdl::Input&);
   virtual void          initialize();
   virtual void          draw();

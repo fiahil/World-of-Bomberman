@@ -3,7 +3,6 @@
  * 27.05.12
  */
 
-#include <iostream>
 #include <sstream>
 #include "LoadProfile.hpp"
 
@@ -38,19 +37,20 @@ void		LoadProfile::updateText() const
 {
   if (this->_profiles.size() > 1)
     {
-      this->_tags[0]->createText(this->_names[this->_index], 20, 750, 314);
       std::stringstream	ss;
-      ss << " Skin : " << this->_profiles[this->_index]->getSkinName()
+
+      this->_tags.at(0)->createText(this->_names.at(this->_index), 20, 750, 314);
+      ss << " Skin : " << this->_profiles.at(this->_index)->getSkinName()
 	 << "        "
-	 << " Skill : " << this->_profiles[this->_index]->getSkillName()
+	 << " Skill : " << this->_profiles.at(this->_index)->getSkillName()
 	 << "        "
-	 << " Score : " << this->_profiles[this->_index]->getStat().getScore();
-      this->_tags[1]->createText(ss.str(), 20, 500, 365);
+	 << " Score : " << this->_profiles.at(this->_index)->getStat().getScore();
+      this->_tags.at(1)->createText(ss.str(), 20, 500, 365);
     }
   else
     {
-      this->_tags[0]->createText("", 20, 750, 314);
-      this->_tags[1]->createText("", 20, 500, 365);
+      this->_tags.at(0)->createText("", 20, 750, 314);
+      this->_tags.at(1)->createText("", 20, 500, 365);
     }
 }
 
@@ -61,7 +61,7 @@ void		LoadProfile::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
       --this->_index;
       if (static_cast<int>(this->_index) < 0)
 	this->_index = this->_profiles.size() - 1;
-      if (this->_profiles[this->_index]->getName() == "Guest")
+      if (this->_profiles.at(this->_index)->getName().compare("Guest") == 0)
 	{
 	  --this->_index;
 	  if (static_cast<int>(this->_index) < 0)
@@ -74,7 +74,7 @@ void		LoadProfile::changeProfile(gdl::GameClock const& clock, gdl::Input& input)
       ++this->_index;
       if (this->_index >= this->_profiles.size())
 	this->_index = 0;
-      if (this->_profiles[this->_index]->getName() == "Guest")
+      if (this->_profiles.at(this->_index)->getName().compare("Guest") == 0)
 	{
 	  ++this->_index;
 	  if (this->_index >= this->_profiles.size())
@@ -88,14 +88,14 @@ void	LoadProfile::update(gdl::GameClock const& clock, gdl::Input& input)
 {
   this->updateText();
   for (size_t i = 0; i < this->_keyEvent.size(); ++i)
-    if (input.isKeyDown(this->_keyEvent[i].first))
-      (this->*_keyEvent[i].second)(clock);
+    if (input.isKeyDown(this->_keyEvent.at(i).first))
+      (this->*_keyEvent.at(i).second)(clock);
   if (this->_cursor == 0)
     this->changeProfile(clock, input);
   if (this->_curToken == TokenMenu::PROFILE)
     {
       if (this->_profiles.size() > 1)
-	this->_gameManager._mainProfile = this->_profiles[this->_index];
+	this->_gameManager._mainProfile = this->_profiles.at(this->_index);
       else
 	this->_curToken = TokenMenu::LAST;
     }
