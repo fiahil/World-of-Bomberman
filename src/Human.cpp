@@ -3,7 +3,9 @@
  * 12.05.2012
  */
 
+#include <algorithm>
 #include <sstream>
+#include "Common.hpp"
 #include "Human.hpp"
 #include "Sound.hpp"
 
@@ -48,10 +50,11 @@ Human::Human(Map & map, const Config& conf, std::vector<bool>* success)
 
 Human::~Human() {
   if (this->_hallu)
-  {
-    delete this->_hallu;
-    this->_hallu = 0;
-  }
+    {
+      delete this->_hallu;
+      this->_hallu = 0;
+    }
+  std::for_each(this->_HUD.begin(), this->_HUD.end(), deleteItem<Surface *>);
 }
 
 #include <iostream>
@@ -134,7 +137,7 @@ void            Human::drawSuccess(Success::eSuccess s)
 
 bool		Human::SkillFunction(gdl::GameClock const& clock)
 {
-  return (this->*(this->_skillFunc[this->_skill]))(clock);
+  return (this->*(this->_skillFunc.at(this->_skill)))(clock);
 
 }
 
@@ -288,25 +291,25 @@ void		Human::playBonusSound()
 void		Human::affNormalBomb() const
 {
   if (this->_canAttack)
-    this->_HUD[HUD::BOMB_OK]->draw();
+    this->_HUD.at(HUD::BOMB_OK)->draw();
   else
-    this->_HUD[HUD::BOMB_KO]->draw();
+    this->_HUD.at(HUD::BOMB_KO)->draw();
 }
 
 void		Human::affBigBomb() const
 {
   if (this->_canAttack)
-    this->_HUD[HUD::BIGBOMB_OK]->draw();
+    this->_HUD.at(HUD::BIGBOMB_OK)->draw();
   else
-    this->_HUD[HUD::BIGBOMB_KO]->draw();
+    this->_HUD.at(HUD::BIGBOMB_KO)->draw();
 }
 
 void		Human::affMegaBomb() const
 {
   if (this->_canAttack)
-    this->_HUD[HUD::MEGABOMB_OK]->draw();
+    this->_HUD.at(HUD::MEGABOMB_OK)->draw();
   else
-    this->_HUD[HUD::MEGABOMB_KO]->draw();
+    this->_HUD.at(HUD::MEGABOMB_KO)->draw();
 }
 
 bool		Human::halluSkill(gdl::GameClock const& clock)
@@ -406,7 +409,7 @@ bool		Human::jumpSkill(gdl::GameClock const& clock)
   double current;
 
   if ((current = clock.getTotalGameTime()) >= this->_skillTimer)
-    if ((this->*(this->_jumpDir[this->_dir]))())
+    if ((this->*(this->_jumpDir.at(this->_dir)))())
       {
 	this->_skillUp = false;
 	this->_skillTimer = current + 30.0;
@@ -424,167 +427,167 @@ void		Human::drawHUD(std::vector<gdl::Image>& img,
 
   std::stringstream ss;
 
-  if (!this->_HUD[0])
+  if (!this->_HUD.at(0))
     {
-      this->_HUD[HUD::LIFE_BAR] = new Surface(310.0f,
+      this->_HUD.at(HUD::LIFE_BAR) = new Surface(310.0f,
 					      40.0f,
 					      10.0f,
 					      10.0f,
-					      img[HUD::LIFE_BAR]);
+						 img.at(HUD::LIFE_BAR));
 
-      this->_HUD[HUD::SHIELD] = new Surface(40.0f,
+      this->_HUD.at(HUD::SHIELD) = new Surface(40.0f,
 					    40.0f,
 					    30.0f,
 					    60.0f,
-					    img[HUD::SHIELD]);
+					       img.at(HUD::SHIELD));
 
-      this->_HUD[HUD::LUST] = new Surface(40.0f,
+      this->_HUD.at(HUD::LUST) = new Surface(40.0f,
 					  40.0f,
 					  80.0f,
 					  60.0f,
-					  img[HUD::LUST]);
+					     img.at(HUD::LUST));
 
-      this->_HUD[HUD::POWER] = new Surface(40.0f,
+      this->_HUD.at(HUD::POWER) = new Surface(40.0f,
 					   40.0f,
 					   130.0f,
 					   60.0f,
-					   img[HUD::POWER]);
+					      img.at(HUD::POWER));
 
-      this->_HUD[HUD::SPRINT] = new Surface(40.0f,
+      this->_HUD.at(HUD::SPRINT) = new Surface(40.0f,
 					    40.0f,
 					    180.0f,
 					    60.0f,
-					    img[HUD::SPRINT]);
+					       img.at(HUD::SPRINT));
 
-      this->_HUD[HUD::SKILL_OK] = new Surface(50.0f,
+      this->_HUD.at(HUD::SKILL_OK) = new Surface(50.0f,
 					      50.0f,
 					      90.0f,
 					      hi - 60.0f,
-					      img[HUD::SKILL_OK]);
+						 img.at(HUD::SKILL_OK));
 
-      this->_HUD[HUD::SKILL_KO] = new Surface(50.0f,
+      this->_HUD.at(HUD::SKILL_KO) = new Surface(50.0f,
 					      50.0f,
 					      90.0f,
 					      hi - 60.0f,
-					      img[HUD::SKILL_KO]);
+						 img.at(HUD::SKILL_KO));
 
-      this->_HUD[HUD::BOMB_OK] = new Surface(70.0f,
+      this->_HUD.at(HUD::BOMB_OK) = new Surface(70.0f,
 					     70.0f,
 					     10.0f,
 					     hi - 80.0f,
-					     img[HUD::BOMB_OK]);
+						img.at(HUD::BOMB_OK));
 
-      this->_HUD[HUD::BOMB_KO] = new Surface(70.0f,
+      this->_HUD.at(HUD::BOMB_KO) = new Surface(70.0f,
 					     70.0f,
 					     10.0f,
 					     hi - 80.0f,
-					     img[HUD::BOMB_KO]);
+						img.at(HUD::BOMB_KO));
 
-      this->_HUD[HUD::BIGBOMB_OK] = new Surface(70.0f,
+      this->_HUD.at(HUD::BIGBOMB_OK) = new Surface(70.0f,
 						70.0f,
 						10.0f,
 						hi - 80.0f,
-						img[HUD::BIGBOMB_OK]);
+						   img.at(HUD::BIGBOMB_OK));
 
-      this->_HUD[HUD::BIGBOMB_KO] = new Surface(70.0f,
+      this->_HUD.at(HUD::BIGBOMB_KO) = new Surface(70.0f,
 						70.0f,
 						10.0f,
 						hi - 80.0f,
-						img[HUD::BIGBOMB_KO]);
+						   img.at(HUD::BIGBOMB_KO));
 
-      this->_HUD[HUD::MEGABOMB_OK] = new Surface(70.0f,
+      this->_HUD.at(HUD::MEGABOMB_OK) = new Surface(70.0f,
 						 70.0f,
 						 10.0f,
 						 hi - 80.0f,
-						 img[HUD::MEGABOMB_OK]);
+						    img.at(HUD::MEGABOMB_OK));
 
-      this->_HUD[HUD::MEGABOMB_KO] = new Surface(70.0f,
+      this->_HUD.at(HUD::MEGABOMB_KO) = new Surface(70.0f,
 						 70.0f,
 						 10.0f,
 						 hi - 80.0f,
-						 img[HUD::MEGABOMB_KO]);
+						    img.at(HUD::MEGABOMB_KO));
 
-      this->_HUD[HUD::SUCCESS_ONE_KILL] = new Surface(300.0f,
+      this->_HUD.at(HUD::SUCCESS_ONE_KILL) = new Surface(300.0f,
 						      81.0f,
 						      300.0f + mode,
 						      hi - 90.0f,
-						      img[HUD::SUCCESS_ONE_KILL]);
+							 img.at(HUD::SUCCESS_ONE_KILL));
 
 
-      this->_HUD[HUD::SUCCESS_BONUS] = new Surface(300.0f,
+      this->_HUD.at(HUD::SUCCESS_BONUS) = new Surface(300.0f,
 						   81.0f,
 						   300.0f + mode,
 						   hi - 90.0f,
-						   img[HUD::SUCCESS_BONUS]);
+						      img.at(HUD::SUCCESS_BONUS));
 
-      this->_HUD[HUD::SUCCESS_FIVE_KILL] = new Surface(300.0f,
+      this->_HUD.at(HUD::SUCCESS_FIVE_KILL) = new Surface(300.0f,
 						       81.0f,
 						       300.0f + mode,
 						       hi - 90.0f,
-						       img[HUD::SUCCESS_FIVE_KILL]);
+							  img.at(HUD::SUCCESS_FIVE_KILL));
 
 
-      this->_HUD[HUD::SUCCESS_POWER] = new Surface(300.0f,
+      this->_HUD.at(HUD::SUCCESS_POWER) = new Surface(300.0f,
 						   81.0f,
 						   300.0f + mode,
 						   hi - 90.0f,
-						   img[HUD::SUCCESS_POWER]);
+						      img.at(HUD::SUCCESS_POWER));
 
-      this->_HUD[HUD::SUCCESS_LUST] = new Surface(300.0f,
+      this->_HUD.at(HUD::SUCCESS_LUST) = new Surface(300.0f,
 						  81.0f,
 						  300.0f + mode,
 						  hi - 90.0f,
-						  img[HUD::SUCCESS_LUST]);
+						     img.at(HUD::SUCCESS_LUST));
 
-      this->_HUD[HUD::SUCCESS_TP] = new Surface(300.0f,
+      this->_HUD.at(HUD::SUCCESS_TP) = new Surface(300.0f,
 						81.0f,
 						300.0f + mode,
 						hi - 90.0f,
-						img[HUD::SUCCESS_TP]);
+						   img.at(HUD::SUCCESS_TP));
 
-      this->_HUD[HUD::SUCCESS_DIE] = new Surface(300.0f,
+      this->_HUD.at(HUD::SUCCESS_DIE) = new Surface(300.0f,
 						 81.0f,
 						 300.0f + mode,
 						 hi - 90.0f,
-						 img[HUD::SUCCESS_DIE]);
+						    img.at(HUD::SUCCESS_DIE));
 
-      this->_HUD[HUD::SUCCESS_FABULOUS] = new Surface(300.0f,
+      this->_HUD.at(HUD::SUCCESS_FABULOUS) = new Surface(300.0f,
 						      81.0f,
 						      300.0f + mode,
 						      hi - 90.0f,
-						      img[HUD::SUCCESS_FABULOUS]);
+							 img.at(HUD::SUCCESS_FABULOUS));
     }
 
   if (this->_lastSuccess != Success::LAST)
-    this->_HUD[this->_lastSuccess + HUD::SUCCESS_ONE_KILL]->draw();
+    this->_HUD.at(this->_lastSuccess + HUD::SUCCESS_ONE_KILL)->draw();
 
-  this->_HUD[HUD::LIFE_BAR]->draw();
+  this->_HUD.at(HUD::LIFE_BAR)->draw();
 
   double	size = (this->_pv / 100.0f * 250.0f);
 
-  (this->*(this->_bombAff[this->_weapon]))();
+  (this->*(this->_bombAff.at(this->_weapon)))();
 
   if (this->_skillUp)
-    this->_HUD[HUD::SKILL_OK]->draw();
+    this->_HUD.at(HUD::SKILL_OK)->draw();
   else
-    this->_HUD[HUD::SKILL_KO]->draw();
+    this->_HUD.at(HUD::SKILL_KO)->draw();
 
   if (size > 250.0f)
     size = 250.0f;
 
-  Surface	pvIndic(size, 20.0f, 40.0f, 20.0f, img[HUD::LIFE]);
+  Surface	pvIndic(size, 20.0f, 40.0f, 20.0f, img.at(HUD::LIFE));
 
   pvIndic.draw();
 
   if (this->_shield)
-    this->_HUD[HUD::SHIELD]->draw();
+    this->_HUD.at(HUD::SHIELD)->draw();
 
   if (this->_speed >= 0.20f)
-    this->_HUD[HUD::SPRINT]->draw();
+    this->_HUD.at(HUD::SPRINT)->draw();
   if (this->_lustStack)
-    this->_HUD[HUD::LUST]->draw();
+    this->_HUD.at(HUD::LUST)->draw();
   if (this->_powerStack)
-    this->_HUD[HUD::POWER]->draw();
+    this->_HUD.at(HUD::POWER)->draw();
   this->_text.setSize(30);
 
   if (this->_lustStack)

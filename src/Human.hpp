@@ -34,10 +34,6 @@ class Human : public APlayer
   };
 
 public:
-  /*
-   * TODO: implement enum skill
-   * TODO: implement std::vector<bool> achievements
-   */
   Human(Map &, const Config&, std::vector<bool>* = 0);
   virtual ~Human(); // delete des surface
 
